@@ -10,6 +10,7 @@
 
 export type TableName =
   | "leads"
+  | "leads_partial"  // captura incremental do form progressivo (drop-offs)
   | "site_content"
   | "segments"
   | "hero_variants"
