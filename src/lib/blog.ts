@@ -55,11 +55,26 @@ export function slugify(s: string): string {
     .slice(0, 80);
 }
 
+/**
+ * Merge stored posts with seed posts. Em SSR (Cloudflare Worker) o
+ * `dataStore` lê de localStorage e devolve `[]`, então caímos no seed —
+ * isso garante que páginas-semente do blog tenham HTML pré-renderizado
+ * para SEO/compartilhamento. No browser, posts criados/editados via admin
+ * sobrescrevem o seed pelo mesmo slug.
+ */
+function mergeWithSeed(stored: BlogPost[]): BlogPost[] {
+  const bySlug = new Map<string, BlogPost>();
+  for (const p of SEED_POSTS) bySlug.set(p.slug, p);
+  for (const p of stored) bySlug.set(p.slug, p); // stored vence
+  return Array.from(bySlug.values()).sort((a, b) =>
+    (b.data_publicacao || "").localeCompare(a.data_publicacao || ""),
+  );
+}
+
 export async function listAllPosts(): Promise<BlogPost[]> {
   await ensureSeed();
-  const all = await list<BlogPost>("blog_posts");
-  // ordena por data desc
-  return all.sort((a, b) => (b.data_publicacao || "").localeCompare(a.data_publicacao || ""));
+  const stored = await list<BlogPost>("blog_posts");
+  return mergeWithSeed(stored);
 }
 
 export async function listPublishedPosts(): Promise<BlogPost[]> {
@@ -69,7 +84,9 @@ export async function listPublishedPosts(): Promise<BlogPost[]> {
 
 export async function getPost(slug: string): Promise<BlogPost | null> {
   await ensureSeed();
-  return get<BlogPost>("blog_posts", slug);
+  const stored = await get<BlogPost>("blog_posts", slug);
+  if (stored) return stored;
+  return SEED_POSTS.find((p) => p.slug === slug) ?? null;
 }
 
 export async function savePost(post: BlogPost): Promise<void> {
