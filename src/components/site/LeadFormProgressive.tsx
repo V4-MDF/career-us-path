@@ -211,6 +211,7 @@ export function LeadFormProgressive({
     try {
       const id = newId("lead");
       const origin = getOrigin(currentPath);
+      const qual = evaluateQualification(data);
       const lead = {
         ...data,
         id,
@@ -220,6 +221,8 @@ export function LeadFormProgressive({
         segmento: segmentId,
         variante_ab: segmentId ? getAssignedVariantId(segmentId) : null,
         status: "novo" as const,
+        qualification: qual.result,
+        qualification_reasons: qual.reasons,
       };
       await set("leads", id, lead);
       if (segmentId) await registerConversion(segmentId);
@@ -228,7 +231,7 @@ export function LeadFormProgressive({
         await remove("leads_partial", partialIdRef.current);
         try { window.sessionStorage.removeItem(SS_PARTIAL_ID); } catch { /* ignore */ }
       }
-      if (onSubmitted) onSubmitted({ id });
+      if (onSubmitted) onSubmitted({ id, qualification: qual.result });
       else setDone(true);
     } catch {
       setError("Não foi possível enviar agora. Tente novamente.");
