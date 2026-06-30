@@ -137,9 +137,24 @@ function LeadsPage() {
           pontuacao: l._calc.score, faixa: l._calc.band.label,
           status: l.status ?? "novo",
           segmento: l.segmento ?? "", variante_ab: l.variante_ab ?? "",
-          utm_source: l.utm?.utm_source ?? "", utm_medium: l.utm?.utm_medium ?? "",
-          utm_campaign: l.utm?.utm_campaign ?? "", utm_content: l.utm?.utm_content ?? "",
-          utm_term: l.utm?.utm_term ?? "",
+          utm_source: l.utm?.utm_source ?? l.origin?.utm.utm_source ?? "",
+          utm_medium: l.utm?.utm_medium ?? l.origin?.utm.utm_medium ?? "",
+          utm_campaign: l.utm?.utm_campaign ?? l.origin?.utm.utm_campaign ?? "",
+          utm_content: l.utm?.utm_content ?? l.origin?.utm.utm_content ?? "",
+          utm_term: l.utm?.utm_term ?? l.origin?.utm.utm_term ?? "",
+          gclid: l.utm?.gclid ?? l.origin?.utm.gclid ?? "",
+          fbclid: l.utm?.fbclid ?? l.origin?.utm.fbclid ?? "",
+          origem_resumo: originSummary(l),
+          origem_referrer: l.origin?.internal.referrer ?? "",
+          origem_referrer_host: (() => {
+            const r = l.origin?.internal.referrer;
+            if (!r) return "";
+            try { return new URL(r).host; } catch { return r; }
+          })(),
+          origem_pagina_interna: l.origin?.internal.from_path ?? "",
+          origem_pagina_interna_titulo: l.origin?.internal.from_title ?? "",
+          origem_landing_path: l.origin?.internal.landing_path ?? "",
+          origem_landing_ts: l.origin?.internal.landing_ts ?? "",
           ...comp,
         };
       }));
