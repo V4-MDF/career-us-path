@@ -1,8 +1,10 @@
 /**
  * Template único de Landing Page de conversão.
  *
- * Recebe o segmento (conteúdo compartilhado) e a variante de Hero ativa
- * (ou null para usar o hero_default do segmento). Dobras na ordem do briefing.
+ * Prompt 5: formulário inline REMOVIDO. Os CTAs navegam para a LP dedicada
+ * /avaliacao com `seg` e `src` preenchidos, preservando UTMs (avaliacaoHref).
+ * Hero A/B segue intacto; abEngine.registerConversion é disparado no submit
+ * do form em /avaliacao (LeadForm já trata via segmentId).
  */
 
 import { useEffect, useState } from "react";
@@ -19,20 +21,15 @@ import {
   TrendingUp, Users, XCircle,
 } from "lucide-react";
 import type { Segment, HeroVariant } from "@/lib/segments";
-import { LeadForm } from "@/components/site/LeadForm";
+import { avaliacaoHref } from "@/lib/ctaLinks";
 
 interface Props {
   segment: Segment;
   variant: HeroVariant | null;
 }
 
-function scrollToForm(e: React.MouseEvent) {
-  e.preventDefault();
-  document.getElementById("avaliacao")?.scrollIntoView({ behavior: "smooth" });
-}
-
 /* Header de conversão enxuto — sem menu para não vazar tráfego pago */
-function ConversionHeader() {
+function ConversionHeader({ segmentId }: { segmentId: string }) {
   return (
     <header className="fixed top-0 inset-x-0 z-50 border-b border-border/40 bg-background/85 backdrop-blur">
       <div className="container-x flex h-16 items-center justify-between">
@@ -41,14 +38,14 @@ function ConversionHeader() {
         </Link>
         <div className="flex items-center gap-2">
           <a
-            href="https://wa.me/5500000000000"
+            href="https://wa.me/16892209714"
             target="_blank"
             rel="noopener noreferrer"
             className="hidden sm:inline-flex items-center gap-1.5 text-sm text-foreground/80 hover:text-gold"
           >
             <MessageCircle className="h-4 w-4" /> WhatsApp
           </a>
-          <a href="#avaliacao" onClick={scrollToForm}>
+          <a href={avaliacaoHref(`lp_${segmentId}_header`, segmentId)}>
             <Button size="sm">Avaliação gratuita</Button>
           </a>
         </div>
@@ -61,11 +58,14 @@ function LpFooter() {
   return (
     <footer className="border-t border-border/40 bg-surface py-10">
       <div className="container-x flex flex-col sm:flex-row gap-4 items-center justify-between text-xs text-muted-foreground">
-        <p>© {new Date().getFullYear()} Status na América. Todos os direitos reservados.</p>
-        <div className="flex gap-5">
+        <p className="max-w-2xl leading-relaxed">
+          © {new Date().getFullYear()} Status na América. A Status na América atua na preparação
+          e organização de documentos imigratórios. Não somos advogados licenciados e não
+          prestamos consultoria jurídica nem representação legal em processos de imigração.
+        </p>
+        <div className="flex gap-5 shrink-0">
           <Link to="/sobre" className="hover:text-gold">Sobre</Link>
           <Link to="/contato" className="hover:text-gold">Contato</Link>
-          <a href="#" className="hover:text-gold">Privacidade</a>
         </div>
       </div>
     </footer>
