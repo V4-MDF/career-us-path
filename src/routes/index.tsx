@@ -4,7 +4,7 @@ import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import {
   ContrastBrasilEUA, CtaBanner, FAQ, Hero, LegacySection,
-  NiwSection, ProcessSteps, SalaryCompare, Testimonials,
+  NiwSection, PreQualPromo, ProcessSteps, SalaryCompare, Testimonials,
   VisaCards, WhyUs,
 } from "@/components/site/sections";
 import { OrganizationJsonLd } from "@/components/site/Seo";
