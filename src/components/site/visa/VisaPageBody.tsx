@@ -93,7 +93,7 @@ export function VisaPageBody({ page }: { page: VisaPage }) {
           <SectionHead num="03" eyebrow="PROCESSO" variant="parchment" title={page.process.title} />
           <ol className="mt-12 grid gap-6 md:grid-cols-3">
             {page.process.steps.map((s) => (
-              <li key={s.num} className="border border-ink-text/15 bg-white p-7">
+              <li key={s.num} className="rounded-2xl border border-ink-text/15 bg-white p-7 shadow-soft">
                 <div className="font-mono-label text-gold">ETAPA {s.num}</div>
                 <h3 className="mt-3 font-display text-2xl text-ink-text">{s.title}</h3>
                 <p className="mt-3 text-ink-text/75 leading-relaxed">{s.body}</p>
