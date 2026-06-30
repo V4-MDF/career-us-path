@@ -35,6 +35,7 @@ type StoredLead = LeadInput & {
   id: string;
   createdAt: string;
   utm?: Record<string, string>;
+  origin?: LeadOrigin;
   segmento?: string;
   variante_ab?: string | null;
   status?: FunnelStatus;
