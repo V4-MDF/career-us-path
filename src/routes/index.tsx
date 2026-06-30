@@ -8,7 +8,6 @@ import {
 } from "@/components/site/sections";
 import { OrganizationJsonLd } from "@/components/site/Seo";
 import { DynamicSectionHead } from "@/components/site/DynamicSectionHead";
-import { SectionTOC } from "@/components/site/SectionTOC";
 import { HOME_SECTIONS } from "@/lib/sectionMap";
 import { BlogStrip } from "@/components/site/BlogStrip";
 import { ConstellationCanvas } from "@/components/site/visuals/ConstellationCanvas";
@@ -52,7 +51,6 @@ function Home() {
         <ConstellationCanvas />
       </div>
       <Header />
-      <SectionTOC sections={HOME_SECTIONS} />
       <main>
         <Hero />
         <HeroAssessment />

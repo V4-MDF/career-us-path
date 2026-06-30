@@ -16,7 +16,6 @@ import {
 import { VISA_PAGES, type VisaSlug, type VisaPage } from "@/lib/visaPages";
 import { VisaPageBody } from "@/components/site/visa/VisaPageBody";
 import { DynamicSectionHead } from "@/components/site/DynamicSectionHead";
-import { SectionTOC } from "@/components/site/SectionTOC";
 import { VISA_SECTIONS } from "@/lib/sectionMap";
 
 export const Route = createFileRoute("/vistos/$slug/")({
@@ -73,7 +72,6 @@ function VisaPageIndex() {
 
       {/* URL por dobra: sticky TOC + scroll-spy + title/canonical dinâmicos. */}
       <DynamicSectionHead sections={VISA_SECTIONS} baseTitle={page.h1} />
-      <SectionTOC sections={VISA_SECTIONS} variant="ink" />
 
       <VisaPageBody page={page} />
 
