@@ -352,7 +352,7 @@ export function NiwSection() {
         </div>
 
         <div className="relative">
-          <div className="aspect-video overflow-hidden border border-gold/40 bg-ink-deep relative">
+          <div className="aspect-video overflow-hidden rounded-2xl border border-gold/40 bg-ink-deep relative shadow-elevated">
             {/* Foto editorial — passaporte brasileiro + documentos sobre mesa de madeira. */}
             <img
               src={passportDocuments}
@@ -363,7 +363,7 @@ export function NiwSection() {
               className="absolute inset-0 h-full w-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-tr from-ink-deep/80 via-ink-deep/30 to-transparent" />
-            <div className="absolute inset-3 border border-gold/30 pointer-events-none" />
+            <div className="absolute inset-3 rounded-xl border border-gold/30 pointer-events-none" />
             <div className="absolute bottom-0 left-0 right-0 p-6 flex items-end justify-between gap-4">
               <div>
                 <p className="font-mono-label text-gold/80">DOSSIÊ EB-2 NIW</p>
