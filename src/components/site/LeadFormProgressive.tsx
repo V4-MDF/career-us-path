@@ -124,18 +124,38 @@ export function LeadFormProgressive({
   const [loading, setLoading] = useState(false);
   const [done, setDone] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [restored, setRestored] = useState(false);
   const partialIdRef = useRef<string>("");
   const containerRef = useRef<HTMLDivElement | null>(null);
   const reduce = useReducedMotion();
 
-  useEffect(() => { partialIdRef.current = getOrCreatePartialId(); }, []);
-
-  // Se profissao já veio pré-preenchida (segment LP), pula esse passo.
+  // Mount: garante um partial id estável e tenta restaurar respostas anteriores
+  // do dataStore (localStorage) — para que o lead não precise refazer o form
+  // ao revisitar /avaliacao. Salta o stepIndex para a primeira pergunta ainda
+  // pendente.
   useEffect(() => {
-    if (defaultProfissao && stepIndex === 0) {
-      // ainda começa do nome — só não bloqueia profissao depois
-    }
-  }, [defaultProfissao, stepIndex]);
+    partialIdRef.current = getOrCreatePartialId();
+    let cancelled = false;
+    (async () => {
+      try {
+        const prev = await get<PartialLead>("leads_partial", partialIdRef.current);
+        if (cancelled || !prev || !prev.data) { setRestored(true); return; }
+        setData((d) => ({
+          ...d,
+          ...prev.data,
+          // preserva profissao default da LP de segmento se ainda vazia
+          profissao: prev.data.profissao || d.profissao,
+        }));
+        // posiciona na primeira pergunta ainda inválida (ou no resumo final).
+        const merged = { ...empty, ...prev.data } as LeadInput;
+        const firstPending = PROGRESSIVE_FIELDS.findIndex((f) => !isFieldValid(f.key, merged));
+        setStepIndex(firstPending === -1 ? PROGRESSIVE_FIELDS.length : firstPending);
+      } catch { /* ignore */ }
+      finally { if (!cancelled) setRestored(true); }
+    })();
+    return () => { cancelled = true; };
+  }, []);
+
 
   const update = <K extends keyof LeadInput>(k: K, v: LeadInput[K]) =>
     setData((d) => ({ ...d, [k]: v }));
