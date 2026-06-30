@@ -38,7 +38,7 @@ export function VisaPageBody({ page }: { page: VisaPage }) {
             <span aria-hidden className="h-px w-10 bg-gold/70" />
             <span className="font-mono-label text-gold">{page.eyebrow}</span>
             {page.badge && (
-              <span className="border border-gold/60 px-2 py-0.5 font-mono-label text-[9px] text-gold">
+              <span className="rounded-md border border-gold/60 px-2 py-0.5 font-mono-label text-[9px] text-gold">
                 {page.badge}
               </span>
             )}
