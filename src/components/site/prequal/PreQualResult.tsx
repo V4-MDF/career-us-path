@@ -149,7 +149,7 @@ export function PreQualResult({ record, variant }: Props) {
 
       {/* CTA WhatsApp (apenas para qualificados — apto ou parcial sem blocker) */}
       {qualified && (
-        <section className="border border-gold/30 bg-ink-raise/60 p-6 sm:p-7">
+        <section className="rounded-2xl border border-gold/30 bg-ink-raise/60 p-6 sm:p-7 shadow-soft">
           <p className="font-mono-label text-gold/80">PRÓXIMO PASSO</p>
           <h2 className="mt-2 font-display text-2xl text-foreground">
             Converse com um consultor pelo WhatsApp
