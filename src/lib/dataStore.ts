@@ -8,7 +8,12 @@
  * NENHUM componente deve acessar localStorage diretamente.
  */
 
-export type TableName = "leads" | "site_content";
+export type TableName =
+  | "leads"
+  | "site_content"
+  | "segments"
+  | "hero_variants"
+  | "ab_stats";
 
 const PREFIX = "status_";
 
