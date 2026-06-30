@@ -585,3 +585,31 @@
   .reveal { opacity: 1; transform: none; transition: none; }
 }
 
+
+/* ----------------------------------------------------------------
+ * [data-admin-shell] — isola o admin do tema dossiê (dark) do site
+ * público. Reescreve os tokens shadcn para uma paleta clara slate+amber
+ * para que <Button>, <Card>, <Input> etc. renderizem coerentes com o
+ * resto do admin (escrito em Tailwind palette).
+ * ---------------------------------------------------------------- */
+[data-admin-shell] {
+  --background: #ffffff;
+  --foreground: #0f172a;
+  --card: #ffffff;
+  --card-foreground: #0f172a;
+  --popover: #ffffff;
+  --popover-foreground: #0f172a;
+  --primary: #f59e0b;
+  --primary-foreground: #0f172a;
+  --secondary: #f1f5f9;
+  --secondary-foreground: #0f172a;
+  --muted: #f1f5f9;
+  --muted-foreground: #475569;
+  --accent: #fef3c7;
+  --accent-foreground: #92400e;
+  --destructive: #dc2626;
+  --destructive-foreground: #ffffff;
+  --border: #e2e8f0;
+  --input: #cbd5e1;
+  --ring: #f59e0b;
+}
