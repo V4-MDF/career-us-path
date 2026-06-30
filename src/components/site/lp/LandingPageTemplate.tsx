@@ -17,7 +17,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import {
   AlertTriangle, Award, CheckCircle2, Clock, DollarSign, Heart,
-  MapPin, MessageCircle, PlayCircle, ShieldCheck, Sparkles, Star,
+  MapPin, PlayCircle, ShieldCheck, Sparkles, Star,
   TrendingUp, Users, XCircle,
 } from "lucide-react";
 import type { Segment, HeroVariant } from "@/lib/segments";
@@ -379,7 +379,7 @@ export function LandingPageTemplate({ segment, variant }: Props) {
               <ul className="mt-8 space-y-3 text-sm text-foreground/80">
                 {[
                   "Análise estratégica do seu perfil",
-                  "Resposta em até 48h pelo WhatsApp",
+                  "Resposta em até 48h por e-mail",
                   "Confidencial e sem compromisso",
                   "Equipe especializada em vistos EB",
                 ].map((i) => (
@@ -398,7 +398,7 @@ export function LandingPageTemplate({ segment, variant }: Props) {
               </h3>
               <p className="mt-3 text-foreground/75 text-[15px] leading-relaxed">
                 Em poucos minutos você envia seus dados. Nossa equipe responde
-                em até 48h pelo WhatsApp.
+                em até 48h por e-mail.
               </p>
               <a href={avaliacaoHref(`lp_${segment.id}_cta`, segment.id)} className="mt-7 inline-block">
                 <Button size="lg" className="text-base">Fazer minha avaliação gratuita</Button>

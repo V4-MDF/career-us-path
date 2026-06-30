@@ -706,7 +706,7 @@ export function CtaBanner() {
           <ul className="grid sm:grid-cols-2 gap-3 text-[15px] text-foreground/80">
             {[
               "Análise estratégica gratuita do seu perfil",
-              "Resposta em até 48h pelo WhatsApp",
+              "Resposta em até 48h por e-mail",
               "Confidencial e sem compromisso",
               "Equipe especializada em vistos EB",
             ].map((i) => (
@@ -723,7 +723,7 @@ export function CtaBanner() {
             </h3>
             <p className="mt-3 text-foreground/75 text-[15px] leading-relaxed">
               Em poucos minutos você envia seus dados. Nossa equipe responde em até 48h
-              pelo WhatsApp com a indicação do caminho mais coerente.
+              por e-mail com a indicação do caminho mais coerente.
             </p>
             <a href={avaliacaoHref("home_cta_final")} className="mt-7 inline-block">
               <Button size="lg" className="btn-sweep h-12 px-7">Fazer minha avaliação gratuita</Button>

@@ -15,7 +15,7 @@ export const Route = createFileRoute("/contato")({
     <StubPage
       eyebrow="Fale conosco"
       title="Vamos conversar sobre o seu caso"
-      description="Use o formulário da página inicial para iniciar sua avaliação gratuita ou nos contate pelo WhatsApp."
+      description="Use o formulário da página inicial para iniciar sua avaliação gratuita ou nos contate por e-mail."
     />
   ),
 });

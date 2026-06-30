@@ -242,7 +242,7 @@ export function LeadFormProgressive({
         <CheckCircle2 className="mx-auto h-12 w-12 text-gold" />
         <h3 className="mt-4 font-serif text-2xl">Recebemos seu perfil.</h3>
         <p className="mt-2 text-muted-foreground">
-          Nossa equipe vai analisar e entrar em contato em até 48h pelo WhatsApp informado.
+          Nossa equipe vai analisar e entrar em contato em até 48h pelo canal informado.
         </p>
       </div>
     );
