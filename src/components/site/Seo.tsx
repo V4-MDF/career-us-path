@@ -13,8 +13,8 @@
  *  - BreadcrumbJsonLd     → posts do blog e páginas profundas
  *  - ArticleJsonLd        → posts do blog
  *
- * Observação: usamos LegalService (assessoria jurídica/migratória) como
- * @type principal — mais preciso que "Organization" genérico para nosso ramo.
+ * Observação: usamos LegalService como @type principal — mais preciso
+ * que "Organization" genérico para nosso ramo de atuação documental.
  */
 
 function ldScript(data: object) {
@@ -32,7 +32,7 @@ const ORG_BASE = {
   name: "Status na América",
   alternateName: "Status na América — Imigração EB",
   description:
-    "Assessoria de mobilidade migratória para profissionais brasileiros — vistos EB (EB-2 NIW, EB-1, EB-3) e Green Card.",
+    "Preparação documental especializada para profissionais brasileiros — vistos EB (EB-2 NIW, EB-1, EB-3) e Green Card por mérito profissional.",
   url: "/",
   logo: "/og-image.jpg",
   image: "/og-image.jpg",

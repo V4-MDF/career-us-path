@@ -53,7 +53,7 @@ function LpFooter() {
         <p className="max-w-2xl leading-relaxed">
           © {new Date().getFullYear()} Status na América. A Status na América atua na preparação
           e organização de documentos imigratórios. Não somos advogados licenciados e não
-          prestamos consultoria jurídica nem representação legal em processos de imigração.
+          prestamos orientação jurídica nem representação legal em processos de imigração.
         </p>
         <div className="flex gap-5 shrink-0">
           <Link to="/sobre" className="hover:text-gold">Sobre</Link>
@@ -431,7 +431,7 @@ const BASE_FAQ = [
   },
   {
     q: "Quanto custa?",
-    a: "A avaliação inicial é gratuita. O investimento da assessoria depende do perfil, da complexidade do caso e da composição familiar — apresentado de forma transparente antes de qualquer contratação.",
+    a: "A avaliação inicial é gratuita. O investimento da preparação documental depende do perfil, da complexidade do caso e da composição familiar — apresentado de forma transparente antes de qualquer contratação.",
   },
 ];
 

@@ -5,7 +5,7 @@ export const Route = createFileRoute("/sobre")({
   head: () => ({
     meta: [
       { title: "Sobre a Status na América | Imigração para os EUA" },
-      { name: "description", content: "Conheça a Status na América, assessoria de mobilidade migratória sediada em Orlando, FL." },
+      { name: "description", content: "Conheça a Status na América — especialistas em preparação documental para mobilidade migratória, com sede em Orlando, FL." },
       { property: "og:title", content: "Sobre a Status na América" },
       { property: "og:url", content: "/sobre" },
     ],

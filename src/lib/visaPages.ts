@@ -165,7 +165,7 @@ const eb2niw: VisaPage = {
     {
       q: "Inglês fluente é obrigatório para começar?",
       a:
-        "Não é requisito para a petição EB-2 NIW. O caso é instruído em inglês pela assessoria jurídica; o profissional não precisa ser fluente para iniciar. A fluência, no entanto, é um diferencial relevante para a vida e a carreira nos EUA.",
+        "Não é requisito para a petição EB-2 NIW. A petição é instruída em inglês pela equipe jurídica parceira; o profissional não precisa ser fluente para iniciar. A fluência, no entanto, é um diferencial relevante para a vida e a carreira nos EUA.",
     },
     {
       q: "Quanto tempo leva o processo?",
@@ -180,7 +180,7 @@ const eb2niw: VisaPage = {
     {
       q: "Quanto custa?",
       a:
-        "A avaliação inicial do perfil é gratuita. O investimento da assessoria varia conforme a composição da família, a complexidade da documentação e o estágio do caso. Apresentamos a proposta após o diagnóstico.",
+        "A avaliação inicial do perfil é gratuita. O investimento da preparação documental varia conforme a composição da família, a complexidade da documentação e o estágio do caso. Apresentamos a proposta após o diagnóstico.",
     },
   ],
   ctaTitle: "Descubra se você já tem perfil para o EB-2 NIW.",
@@ -246,7 +246,7 @@ const eb1: VisaPage = {
     },
     {
       q: "Quanto custa?",
-      a: "A avaliação inicial é gratuita. A proposta de assessoria varia conforme complexidade do caso e composição da família.",
+      a: "A avaliação inicial é gratuita. A proposta de preparação documental varia conforme complexidade do caso e composição da família.",
     },
   ],
   ctaTitle: "Tem reconhecimento internacional? Avalie o EB-1.",

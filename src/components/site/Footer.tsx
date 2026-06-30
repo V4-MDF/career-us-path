@@ -37,8 +37,8 @@ export function Footer() {
             </span>
           </div>
           <p className="mt-6 max-w-sm text-sm text-foreground/65 leading-relaxed">
-            Assessoria de mobilidade migratória para profissionais brasileiros que escolheram
-            construir o próximo capítulo nos Estados Unidos.
+            Especialistas em preparação documental para mobilidade migratória — para
+            profissionais brasileiros que escolheram construir o próximo capítulo nos Estados Unidos.
           </p>
           <div className="mt-7 flex gap-3 text-foreground/55">
             {[
@@ -110,7 +110,7 @@ export function Footer() {
         <div className="container-x py-6 space-y-4">
           <p className="text-[11px] text-foreground/55 leading-relaxed max-w-4xl">
             A Status na América atua na preparação e organização de documentos imigratórios.
-            Não somos advogados licenciados e não prestamos consultoria jurídica nem
+            Não somos advogados licenciados e não prestamos orientação jurídica nem
             representação legal em processos de imigração.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 items-start sm:items-center justify-between">

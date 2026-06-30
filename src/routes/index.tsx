@@ -19,7 +19,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Imigração legal para os EUA por mérito profissional. Assessoria EB-2 NIW, EB-1 e EB-3 para profissionais brasileiros consolidados, com Green Card para cônjuge e filhos.",
+          "Imigração legal para os EUA por mérito profissional. Preparação documental especializada para vistos EB-2 NIW, EB-1 e EB-3 — profissionais brasileiros consolidados, com Green Card para cônjuge e filhos.",
       },
       { name: "robots", content: "index,follow" },
       { property: "og:title", content: "Status na América | Green Card EB-2 NIW" },

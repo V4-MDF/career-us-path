@@ -28,7 +28,7 @@ const PAGES: Array<{ slug: string; label: string; defaults: PageSeo }> = [
   { slug: "home", label: "Home", defaults: {
     id: "home",
     meta_title: "Status na América | Green Card EB-2 NIW para profissionais brasileiros",
-    meta_description: "Imigração legal para os EUA por mérito profissional. Assessoria EB-2 NIW, EB-1 e EB-3 para profissionais brasileiros consolidados.",
+    meta_description: "Imigração legal para os EUA por mérito profissional. Preparação documental especializada para vistos EB-2 NIW, EB-1 e EB-3 — profissionais brasileiros consolidados.",
     og_title: "Status na América | Green Card EB-2 NIW",
     og_description: "Conquiste o Green Card americano pelo mérito da sua carreira.",
     og_image: "/og-image.jpg", canonical: "/", robots: "index,follow",

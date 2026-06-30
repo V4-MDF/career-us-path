@@ -76,7 +76,7 @@ function Obrigado() {
         <div className="container-x py-8 text-xs text-foreground/55 leading-relaxed max-w-4xl">
           <p>
             A Status na América atua na preparação e organização de documentos imigratórios.
-            Não somos advogados licenciados e não prestamos consultoria jurídica nem
+            Não somos advogados licenciados e não prestamos orientação jurídica nem
             representação legal em processos de imigração.
           </p>
           <p className="mt-3 font-mono-label text-foreground/40">

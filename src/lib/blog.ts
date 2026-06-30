@@ -222,7 +222,7 @@ EXIGE empregador americano patrocinador e processo de PERM. É o caminho indicad
 
 ## Como decidir
 
-A pergunta não é "qual é o melhor visto?" — é "qual é o melhor visto **para este perfil e este momento**?". A definição correta da categoria é a primeira etapa de uma assessoria séria.
+A pergunta não é "qual é o melhor visto?" — é "qual é o melhor visto **para este perfil e este momento**?". A definição correta da categoria é a primeira etapa de um processo bem estruturado.
 
 <!-- expandir conteúdo -->
 `,
