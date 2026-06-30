@@ -181,18 +181,24 @@ export function Hero() {
           style={enableParallax ? { y: imgY, willChange: "transform" } : undefined}
         >
           <div className="relative aspect-[4/5] overflow-hidden border border-gold/30 bg-ink-raise">
-
-            <div className="absolute inset-0 bg-gradient-to-br from-ink-deep via-ink-raise to-ink" />
-            <div className="absolute inset-0 bg-gradient-to-t from-ink-deep via-transparent to-transparent" />
+            {/* Fotografia editorial — família multigeracional em paisagem americana. */}
+            <img
+              src={familyPortrait}
+              alt="Família brasileira em paisagem americana ao amanhecer"
+              width={1280}
+              height={1600}
+              loading="eager"
+              className="absolute inset-0 h-full w-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-ink-deep via-ink-deep/30 to-transparent" />
             <div className="absolute inset-3 border border-gold/30 pointer-events-none" />
             <div className="absolute bottom-0 left-0 right-0 p-7">
-              <p className="font-mono-label text-gold/80">RETRATO EDITORIAL</p>
-              <p className="mt-2 font-display text-2xl leading-tight text-foreground">
-                Família brasileira em paisagem americana
-              </p>
-              <p className="mt-2 text-xs text-foreground/55 leading-relaxed">
-                {/* Substituir por fotografia real art-direcionada — duotone navy + grão sutil. Nunca ilustração ou imagem genérica de IA. */}
-                Substituir por fotografia real art-direcionada (duotone navy + grão).
+              <div className="flex items-center gap-3 mb-3">
+                <FlagsBRUS size={14} />
+                <span className="font-mono-label text-gold/80">RETRATO EDITORIAL</span>
+              </div>
+              <p className="font-display text-2xl leading-tight text-foreground">
+                Uma família. Um Green Card. Um novo capítulo.
               </p>
             </div>
           </div>
