@@ -53,7 +53,7 @@ function LpFooter() {
         <p className="max-w-2xl leading-relaxed">
           © {new Date().getFullYear()} Status na América. A Status na América atua na preparação
           e organização de documentos imigratórios. Não somos advogados licenciados e não
-          prestamos consultoria jurídica nem representação legal em processos de imigração.
+          prestamos orientação jurídica nem representação legal em processos de imigração.
         </p>
         <div className="flex gap-5 shrink-0">
           <Link to="/sobre" className="hover:text-gold">Sobre</Link>
