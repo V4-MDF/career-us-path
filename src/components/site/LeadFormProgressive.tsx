@@ -428,6 +428,11 @@ function ActiveQuestion({
   const onKey = (e: React.KeyboardEvent) => {
     if (e.key === "Enter") { e.preventDefault(); onEnter(); }
   };
+  // Auto-advance ao escolher em <Select> — UX typeform.
+  const selectAndAdvance = <K extends keyof LeadInput>(k: K) => (v: string) => {
+    update(k, v as LeadInput[K]);
+    setTimeout(() => onEnter(), 180);
+  };
   return (
     <div className="py-3">
       <Label className="font-display text-[22px] md:text-[26px] leading-snug text-foreground block mb-1">
@@ -445,7 +450,7 @@ function ActiveQuestion({
           <Input autoFocus value={data.whatsapp} onChange={(e) => update("whatsapp", maskPhone(e.target.value))} placeholder="(11) 99999-9999" />
         )}
         {field.key === "profissao" && (
-          <Select value={data.profissao} onValueChange={(v) => update("profissao", v)}>
+          <Select value={data.profissao} onValueChange={selectAndAdvance("profissao")}>
             <SelectTrigger><SelectValue placeholder="Selecione" /></SelectTrigger>
             <SelectContent>
               {Object.entries(LABELS.profissao).map(([k, v]) => <SelectItem key={k} value={k}>{v}</SelectItem>)}
@@ -453,7 +458,7 @@ function ActiveQuestion({
           </Select>
         )}
         {field.key === "formacao" && (
-          <Select value={data.formacao} onValueChange={(v) => update("formacao", v)}>
+          <Select value={data.formacao} onValueChange={selectAndAdvance("formacao")}>
             <SelectTrigger><SelectValue placeholder="Selecione" /></SelectTrigger>
             <SelectContent>
               {Object.entries(LABELS.formacao).map(([k, v]) => <SelectItem key={k} value={k}>{v}</SelectItem>)}
@@ -461,7 +466,7 @@ function ActiveQuestion({
           </Select>
         )}
         {field.key === "faixaEtaria" && (
-          <Select value={data.faixaEtaria} onValueChange={(v) => update("faixaEtaria", v)}>
+          <Select value={data.faixaEtaria} onValueChange={selectAndAdvance("faixaEtaria")}>
             <SelectTrigger><SelectValue placeholder="Selecione" /></SelectTrigger>
             <SelectContent>
               {Object.entries(LABELS.faixaEtaria).map(([k, v]) => <SelectItem key={k} value={k}>{v}</SelectItem>)}
@@ -478,7 +483,7 @@ function ActiveQuestion({
           </div>
         )}
         {field.key === "renda" && (
-          <Select value={data.renda} onValueChange={(v) => update("renda", v)}>
+          <Select value={data.renda} onValueChange={selectAndAdvance("renda")}>
             <SelectTrigger><SelectValue placeholder="Selecione" /></SelectTrigger>
             <SelectContent>
               {Object.entries(LABELS.renda).map(([k, v]) => <SelectItem key={k} value={k}>{v}</SelectItem>)}
@@ -486,7 +491,7 @@ function ActiveQuestion({
           </Select>
         )}
         {field.key === "momento" && (
-          <Select value={data.momento} onValueChange={(v) => update("momento", v)}>
+          <Select value={data.momento} onValueChange={selectAndAdvance("momento")}>
             <SelectTrigger><SelectValue placeholder="Selecione" /></SelectTrigger>
             <SelectContent>
               {Object.entries(LABELS.momento).map(([k, v]) => <SelectItem key={k} value={k}>{v}</SelectItem>)}

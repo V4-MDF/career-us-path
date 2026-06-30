@@ -2,7 +2,7 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { ChevronRight, Clock, Link as LinkIcon, MessageCircle } from "lucide-react";
+import { ChevronRight, Clock, Link as LinkIcon } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { Badge } from "@/components/ui/badge";
@@ -216,9 +216,7 @@ function ShareRow({ url, title }: { url: string; title: string }) {
     <div className="mt-10 flex flex-wrap items-center gap-3 border-t border-gold/15 pt-6">
       <span className="font-mono-label text-foreground/55">COMPARTILHAR</span>
       <a className="text-sm underline hover:text-gold" target="_blank" rel="noopener noreferrer"
-        href={`https://wa.me/?text=${enc(`${title} ${full}`)}`}>
-        <span className="inline-flex items-center gap-1.5"><MessageCircle className="h-3.5 w-3.5" /> WhatsApp</span>
-      </a>
+        href={`mailto:?subject=${enc(title)}&body=${enc(full)}`}>E-mail</a>
       <a className="text-sm underline hover:text-gold" target="_blank" rel="noopener noreferrer"
         href={`https://www.linkedin.com/sharing/share-offsite/?url=${enc(full)}`}>LinkedIn</a>
       <a className="text-sm underline hover:text-gold" target="_blank" rel="noopener noreferrer"

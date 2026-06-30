@@ -1,6 +1,12 @@
 @import "tailwindcss" source(none);
 @source "../src";
 @import "tw-animate-css";
+/* Fontes auto-hospedadas (legibilidade superior, sem FOUT de CDN). */
+@import "@fontsource/montserrat/400.css";
+@import "@fontsource/montserrat/600.css";
+@import "@fontsource/montserrat/700.css";
+@import "@fontsource/montserrat/800.css";
+@import "@fontsource-variable/inter";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -66,10 +72,14 @@
   --color-ink-text: var(--ink-text);
   --color-success: var(--success);
 
-  --font-display: "Bodoni Moda", "Bodoni Moda Variable", "Didot", Georgia, serif;
-  --font-sans: "Hanken Grotesk", "Hanken Grotesk Variable", system-ui, sans-serif;
+  /* Tipografia (atualizada): Montserrat para títulos (uppercase, 700/800)
+   * e Inter para corpo. Trocada de Bodoni+Hanken por demanda de
+   * legibilidade — a identidade "Dossiê" agora vive em estrutura
+   * (ink + parchment + gold + filetes), não na serifa. */
+  --font-display: "Montserrat", "Inter Variable", system-ui, sans-serif;
+  --font-sans: "Inter Variable", "Inter", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", "JetBrains Mono Variable", ui-monospace, monospace;
-  --font-serif: "Bodoni Moda", "Didot", Georgia, serif;
+  --font-serif: "Montserrat", "Inter Variable", system-ui, sans-serif;
 }
 
 :root {
@@ -161,20 +171,22 @@
     color: var(--color-foreground);
     font-family: var(--font-sans);
     font-feature-settings: "ss01", "cv11";
-    font-size: 17px;
-    line-height: 1.65;
+    font-size: 16px;
+    line-height: 1.7;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
   }
-  p { max-width: 70ch; }
+  p { max-width: 72ch; }
 
   h1, h2, h3, h4 {
     font-family: var(--font-display);
-    letter-spacing: -0.01em;
-    line-height: 1.08;
-    font-weight: 500;
+    letter-spacing: 0.005em;
+    line-height: 1.15;
+    font-weight: 700;
+    text-transform: uppercase;
   }
+  h1 { font-weight: 800; }
   /* Foco de teclado — premium, dourado, com halo para contraste AA em
      superfícies escuras (ink) e claras (parchment). Outline garante o
      anel dourado; o box-shadow cria um halo escuro que eleva o contraste
@@ -280,40 +292,62 @@
 }
 
 
-/* Escala tipográfica fluida — usar como utilities ao invés de text-[..]. */
+/* Escala tipográfica fluida — Montserrat bold em uppercase nos displays
+ * (titles). Tamanho ligeiramente reduzido vs Bodoni: Montserrat 800 ocupa
+ * mais peso óptico que Bodoni 500, então diminuímos para preservar ritmo. */
 @utility display-1 {
   font-family: var(--font-display);
-  font-size: clamp(2.5rem, 7vw, 5.25rem);
-  line-height: 1.03;
-  letter-spacing: -0.02em;
-  font-weight: 500;
+  font-size: clamp(2.25rem, 6vw, 4.5rem);
+  line-height: 1.05;
+  letter-spacing: 0.002em;
+  font-weight: 800;
+  text-transform: uppercase;
 }
 @utility display-2 {
   font-family: var(--font-display);
-  font-size: clamp(1.875rem, 4.5vw, 3.25rem);
-  line-height: 1.08;
-  letter-spacing: -0.015em;
-  font-weight: 500;
+  font-size: clamp(1.625rem, 4vw, 2.75rem);
+  line-height: 1.12;
+  letter-spacing: 0.005em;
+  font-weight: 700;
+  text-transform: uppercase;
 }
 @utility display-3 {
   font-family: var(--font-display);
-  font-size: clamp(1.5rem, 2.6vw, 2rem);
-  line-height: 1.15;
-  letter-spacing: -0.01em;
-  font-weight: 500;
+  font-size: clamp(1.25rem, 2.4vw, 1.75rem);
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+  font-weight: 700;
+  text-transform: uppercase;
 }
 @utility lead {
   font-family: var(--font-sans);
-  font-size: clamp(1.125rem, 1.5vw, 1.375rem);
-  line-height: 1.5;
-  color: color-mix(in oklab, var(--foreground) 82%, transparent);
+  font-size: clamp(1.0625rem, 1.4vw, 1.25rem);
+  line-height: 1.6;
+  font-weight: 400;
+  color: color-mix(in oklab, var(--foreground) 85%, transparent);
 }
 @utility stat-num {
   font-family: var(--font-display);
-  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-size: clamp(2.25rem, 5.5vw, 4rem);
   line-height: 1;
-  letter-spacing: -0.02em;
-  font-weight: 500;
+  letter-spacing: 0.002em;
+  font-weight: 800;
+}
+
+/* Motivos visuais (mapa/silhuetas/passaporte/etc.) — opacidade baixa
+ * e blend mode para fundir-se ao fundo sem competir com o conteúdo. */
+@utility motif-soft {
+  opacity: 0.08;
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+.section-parchment .motif-soft,
+[data-surface="parchment"] .motif-soft {
+  opacity: 0.07;
+  mix-blend-mode: multiply;
+}
+@media (prefers-reduced-motion: reduce) {
+  .motif-soft [data-motion-anim] { animation: none !important; }
 }
 
 

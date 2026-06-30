@@ -28,6 +28,9 @@ import {
 import { useContent } from "@/lib/siteContent";
 import { avaliacaoHref } from "@/lib/ctaLinks";
 import { SectionHead } from "./SectionHead";
+import { BrUsRouteBackdrop } from "./visuals/BrUsRouteBackdrop";
+import { FamilySealBackdrop } from "./visuals/FamilySealBackdrop";
+import { ProcessIconStrip } from "./visuals/ProcessIconStrip";
 
 /* ============================================================
  * 1. HERO
@@ -71,6 +74,10 @@ export function Hero() {
     >
       {/* Hero limpo — sem guilloché (reservado ao NIW). Apenas gradiente sutil. */}
       <div className="absolute inset-0 -z-10 bg-gradient-to-b from-ink-deep/40 via-transparent to-ink" />
+      {/* Motivo geográfico BR→USA — dot-grid + rota tracejada animada. */}
+      <div aria-hidden className="absolute inset-0 -z-10 text-gold">
+        <BrUsRouteBackdrop />
+      </div>
 
       <div className="container-x grid lg:grid-cols-[1.1fr_0.9fr] gap-16 lg:gap-20 items-center">
         <div>
@@ -433,8 +440,9 @@ export function ProcessSteps() {
       d: "Organização impecável da Petition nos critérios exigidos pelo USCIS." },
   ];
   return (
-    <Reveal as="section" id="processo-eb-2-niw" className="section-parchment section-pad">
-      <div className="container-x">
+    <Reveal as="section" id="processo-eb-2-niw" className="section-parchment section-pad relative overflow-hidden">
+      <div aria-hidden className="absolute inset-0 text-ink-text"><ProcessIconStrip /></div>
+      <div className="container-x relative">
         <SectionHead num="05" eyebrow="PROCESSO EB-2 NIW" title="Quatro etapas. Conduzidas com rigor." variant="parchment" />
         <div className="mt-14 grid md:grid-cols-2 lg:grid-cols-4 gap-5">
           {steps.map(({ n, icon: Icon, t, d }) => (
@@ -521,8 +529,9 @@ export function LegacySection() {
       d: "Controle do seu futuro imigratório, sem loterias e sem depender de empresas." },
   ];
   return (
-    <Reveal as="section" id="legado" className="section-ink-deep section-pad border-y border-gold/10">
-      <div className="container-x">
+    <Reveal as="section" id="legado" className="section-ink-deep section-pad border-y border-gold/10 relative overflow-hidden">
+      <div aria-hidden className="absolute inset-0 text-gold"><FamilySealBackdrop /></div>
+      <div className="container-x relative">
         <SectionHead
           num="07"
           eyebrow="O QUE VOCÊ CONQUISTA"

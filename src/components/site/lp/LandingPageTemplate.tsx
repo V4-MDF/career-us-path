@@ -37,14 +37,6 @@ function ConversionHeader({ segmentId }: { segmentId: string }) {
           Status<span className="text-gold">.</span> na América
         </Link>
         <div className="flex items-center gap-2">
-          <a
-            href="https://wa.me/16892209714"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hidden sm:inline-flex items-center gap-1.5 text-sm text-foreground/80 hover:text-gold"
-          >
-            <MessageCircle className="h-4 w-4" /> WhatsApp
-          </a>
           <a href={avaliacaoHref(`lp_${segmentId}_header`, segmentId)}>
             <Button size="sm">Avaliação gratuita</Button>
           </a>
