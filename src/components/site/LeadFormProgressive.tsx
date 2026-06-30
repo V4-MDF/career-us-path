@@ -129,6 +129,12 @@ export function LeadFormProgressive({
   const partialIdRef = useRef<string>("");
   const containerRef = useRef<HTMLDivElement | null>(null);
   const reduce = useReducedMotion();
+  // Ref sempre apontando para o `data` mais recente — evita closures stale
+  // quando o auto-advance dos <Select> dispara via setTimeout antes do
+  // próximo render propagar o novo state. Sem isso, `advance()` lê um `data`
+  // antigo onde o campo recém-selecionado ainda está vazio, e o form trava.
+  const dataRef = useRef<LeadInput>(data);
+  useEffect(() => { dataRef.current = data; }, [data]);
 
   // Mount: garante um partial id estável e tenta restaurar respostas anteriores
   // do dataStore (localStorage) — para que o lead não precise refazer o form
