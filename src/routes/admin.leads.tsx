@@ -82,8 +82,19 @@ function LeadsPage() {
     return rows.map((r) => ({ ...r, _calc: computeScore(r, model) }));
   }, [rows, model]);
 
+  /** Helpers para ler campos de UTM/origem com fallback entre `utm` (legado) e `origin.utm`. */
+  const utmOf = (r: StoredLead, k: string): string =>
+    (r.utm?.[k] ?? r.origin?.utm?.[k] ?? "") as string;
+  const referrerHostOf = (r: StoredLead): string => {
+    const ref = r.origin?.internal.referrer ?? "";
+    if (!ref) return "";
+    try { return new URL(ref).host; } catch { return ref; }
+  };
+
   const segments = useMemo(() => Array.from(new Set(rows.map((r) => r.segmento).filter(Boolean))) as string[], [rows]);
-  const utms = useMemo(() => Array.from(new Set(rows.map((r) => r.utm?.utm_source).filter(Boolean))) as string[], [rows]);
+  const utms = useMemo(() => Array.from(new Set(rows.map((r) => utmOf(r, "utm_source")).filter(Boolean))), [rows]);
+  const utmMediums = useMemo(() => Array.from(new Set(rows.map((r) => utmOf(r, "utm_medium")).filter(Boolean))), [rows]);
+  const utmCampaigns = useMemo(() => Array.from(new Set(rows.map((r) => utmOf(r, "utm_campaign")).filter(Boolean))), [rows]);
   const profs = useMemo(() => Array.from(new Set(rows.map((r) => r.profissao).filter(Boolean))), [rows]);
 
   const filtered = useMemo(() => {
@@ -92,7 +103,20 @@ function LeadsPage() {
       if (s < scoreRange[0] || s > scoreRange[1]) return false;
       if (fStatus !== "all" && (r.status ?? "novo") !== fStatus) return false;
       if (fSeg !== "all" && (r.segmento ?? "") !== fSeg) return false;
-      if (fUtm !== "all" && (r.utm?.utm_source ?? "") !== fUtm) return false;
+      if (fUtm !== "all" && utmOf(r, "utm_source") !== fUtm) return false;
+      if (fUtmMedium !== "all" && utmOf(r, "utm_medium") !== fUtmMedium) return false;
+      if (fUtmCampaign !== "all" && utmOf(r, "utm_campaign") !== fUtmCampaign) return false;
+      if (fGclid !== "all") {
+        const hasGclid = !!utmOf(r, "gclid");
+        if (fGclid === "with" && !hasGclid) return false;
+        if (fGclid === "without" && hasGclid) return false;
+      }
+      if (fReferrer) {
+        const needle = fReferrer.toLowerCase();
+        const ref = (r.origin?.internal.referrer ?? "").toLowerCase();
+        const host = referrerHostOf(r).toLowerCase();
+        if (!ref.includes(needle) && !host.includes(needle)) return false;
+      }
       if (fProf !== "all" && r.profissao !== fProf) return false;
       if (fFrom && new Date(r.createdAt) < new Date(fFrom)) return false;
       if (fTo) { const end = new Date(fTo); end.setHours(23,59,59,999); if (new Date(r.createdAt) > end) return false; }
@@ -106,7 +130,7 @@ function LeadsPage() {
     else if (sortBy === "date") out.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
     else out.sort((a, b) => (a.status ?? "novo").localeCompare(b.status ?? "novo"));
     return out;
-  }, [scored, scoreRange, fStatus, fSeg, fUtm, fProf, fFrom, fTo, q, sortBy]);
+  }, [scored, scoreRange, fStatus, fSeg, fUtm, fUtmMedium, fUtmCampaign, fGclid, fReferrer, fProf, fFrom, fTo, q, sortBy]);
 
   const stats = useMemo(() => {
     const total = filtered.length;
