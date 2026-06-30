@@ -79,8 +79,18 @@ export function Hero() {
       aria-label="Abertura"
       className="section-anchor relative overflow-hidden pt-32 md:pt-44 pb-24 md:pb-36"
     >
-      {/* Hero limpo — sem guilloché (reservado ao NIW). Apenas gradiente sutil. */}
-      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-ink-deep/40 via-transparent to-ink" />
+      {/* Skyline NYC ao amanhecer — atmosfera EUA. Overlay forte preserva legibilidade. */}
+      <div aria-hidden className="absolute inset-0 -z-20">
+        <img
+          src={heroSkyline}
+          alt=""
+          width={1600}
+          height={1024}
+          fetchPriority="high"
+          className="h-full w-full object-cover object-bottom opacity-[0.22] motion-safe:[mask-image:linear-gradient(to_bottom,black_40%,transparent_100%)]"
+        />
+      </div>
+      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-ink/85 via-ink/80 to-ink" />
       {/* Motivo geográfico BR→USA — dot-grid + rota tracejada animada. */}
       <div aria-hidden className="absolute inset-0 -z-10 text-gold">
         <BrUsRouteBackdrop />
