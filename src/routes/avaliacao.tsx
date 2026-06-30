@@ -12,7 +12,7 @@
  * SEO: noindex,nofollow e fora do sitemap.
  */
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo } from "react";
 import { createFileRoute, Link, useNavigate, useSearch } from "@tanstack/react-router";
 import { ChevronLeft, ShieldCheck, MapPin } from "lucide-react";
 import { LeadFormProgressive } from "@/components/site/LeadFormProgressive";
