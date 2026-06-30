@@ -1,27 +1,33 @@
 /**
  * /admin/origens — resumo de métricas por canal.
  *
- * Agrega leads completos + parciais por:
- *   - utm_source
- *   - utm_medium
- *   - utm_campaign
+ * Agrega SESSÕES (visitantes do site), leads completos + parciais por:
+ *   - utm_source, utm_medium, utm_campaign
  *   - referrer externo (host)
  *   - página interna anterior (from_path) / landing_path
  *
- * Para cada bucket calcula: iniciados, completados, taxa de conversão,
- * pontuação média (modelo ao vivo) e participação no total.
+ * Métricas por bucket:
+ *   - Sessões (visitantes únicos por aba)
+ *   - Iniciados (sessões que começaram o form OU leads sem sessão histórica)
+ *   - Completos
+ *   - Conv. sessão→lead = completos ÷ sessões
+ *   - Conv. lead→completo = completos ÷ iniciados
+ *   - Qualificados = leads com qualification="qualificado" OU score ≥ 70
+ *   - Taxa de qualidade = qualificados ÷ sessões
+ *   - Score médio (modelo ao vivo)
  *
- * Tudo derivado em runtime do dataStore (localStorage). Nenhuma escrita.
+ * Tudo derivado em runtime do dataStore (localStorage).
  */
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
-import { Download, Compass } from "lucide-react";
+import { Download, Compass, Info } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { PageHeader, StatCard, SectionCard } from "@/components/admin/ui";
 import { list } from "@/lib/dataStore";
 import type { LeadInput } from "@/lib/leadScoring";
 import type { LeadOrigin } from "@/lib/origin";
 import type { PartialLead } from "@/components/site/LeadFormProgressive";
+import type { SessionRecord } from "@/lib/sessions";
 import { loadModel, computeScore, type ScoringModel } from "@/lib/scoring";
 import { downloadCsv } from "@/lib/admin/csv";
 
@@ -33,6 +39,7 @@ type StoredLead = LeadInput & {
   utm?: Record<string, string>;
   origin?: LeadOrigin;
   segmento?: string;
+  qualification?: "qualificado" | "nao_qualificado";
 };
 
 type Dim = "utm_source" | "utm_medium" | "utm_campaign" | "referrer" | "from_path";
@@ -47,7 +54,6 @@ const DIM_LABEL: Record<Dim, string> = {
 
 const DIRECT = "(direto / sem origem)";
 
-/** Normaliza um lead/partial para um objeto de origem unificado. */
 function unifyOrigin(o?: LeadOrigin, fallbackUtm?: Record<string, string>): LeadOrigin {
   if (o) return o;
   return {
@@ -73,15 +79,24 @@ function bucketValue(dim: Dim, origin: LeadOrigin): string {
 
 interface Row {
   bucket: string;
+  sessions: number;
   started: number;
   completed: number;
+  qualified: number;
   avgScore: number | null;
-  rate: number; // 0..1
+  rateSessionToLead: number; // completed / sessions
+  rateStartToLead: number;   // completed / started
+  qualityRate: number;       // qualified / sessions
+}
+
+function pct(n: number): string {
+  return `${Math.round(n * 100)}%`;
 }
 
 function OrigensPage() {
   const [leads, setLeads] = useState<StoredLead[]>([]);
   const [partials, setPartials] = useState<PartialLead[]>([]);
+  const [sessions, setSessions] = useState<SessionRecord[]>([]);
   const [model, setModel] = useState<ScoringModel | null>(null);
   const [dim, setDim] = useState<Dim>("utm_source");
 
@@ -89,53 +104,78 @@ function OrigensPage() {
     (async () => {
       setLeads(await list<StoredLead>("leads"));
       setPartials(await list<PartialLead>("leads_partial"));
+      setSessions(await list<SessionRecord>("sessions"));
       setModel(await loadModel());
     })();
   }, []);
 
-  // Cada "iniciado" é UM lead único: completos OU parciais (sem dupla contagem,
-  // já que LeadFormProgressive remove o parcial ao concluir).
+  // Totais
+  const sessionsTotal = sessions.length;
   const startedTotal = leads.length + partials.length;
   const completedTotal = leads.length;
-  const convTotal = startedTotal ? completedTotal / startedTotal : 0;
+  const qualifiedTotal = useMemo(() => {
+    if (!model) return 0;
+    return leads.filter((l) => {
+      const s = computeScore(l, model).score;
+      return l.qualification === "qualificado" || s >= 70;
+    }).length;
+  }, [leads, model]);
+
+  const convSessionToLead = sessionsTotal ? completedTotal / sessionsTotal : 0;
+  const convStartToLead = startedTotal ? completedTotal / startedTotal : 0;
+  const qualityRateTotal = sessionsTotal ? qualifiedTotal / sessionsTotal : 0;
 
   const rowsByDim = useMemo<Row[]>(() => {
     if (!model) return [];
-    const buckets = new Map<string, { started: number; completed: number; scoreSum: number; scoreN: number }>();
-    const bump = (key: string, isCompleted: boolean, score: number | null) => {
-      const cur = buckets.get(key) ?? { started: 0, completed: 0, scoreSum: 0, scoreN: 0 };
-      cur.started += 1;
-      if (isCompleted) cur.completed += 1;
-      if (score != null) { cur.scoreSum += score; cur.scoreN += 1; }
+    interface Bucket {
+      sessions: number;
+      started: number;
+      completed: number;
+      qualified: number;
+      scoreSum: number;
+      scoreN: number;
+    }
+    const buckets = new Map<string, Bucket>();
+    const ensure = (key: string): Bucket => {
+      const cur = buckets.get(key) ?? { sessions: 0, started: 0, completed: 0, qualified: 0, scoreSum: 0, scoreN: 0 };
       buckets.set(key, cur);
+      return cur;
     };
+    sessions.forEach((s) => {
+      ensure(bucketValue(dim, s.origin)).sessions += 1;
+    });
     leads.forEach((l) => {
       const o = unifyOrigin(l.origin, l.utm);
-      const s = computeScore(l, model).score;
-      bump(bucketValue(dim, o), true, s);
+      const score = computeScore(l, model).score;
+      const isQual = l.qualification === "qualificado" || score >= 70;
+      const b = ensure(bucketValue(dim, o));
+      b.started += 1;
+      b.completed += 1;
+      if (isQual) b.qualified += 1;
+      b.scoreSum += score;
+      b.scoreN += 1;
     });
     partials.forEach((p) => {
-      bump(bucketValue(dim, p.origin), false, null);
+      ensure(bucketValue(dim, p.origin)).started += 1;
     });
     return Array.from(buckets.entries())
       .map(([bucket, v]) => ({
         bucket,
+        sessions: v.sessions,
         started: v.started,
         completed: v.completed,
+        qualified: v.qualified,
         avgScore: v.scoreN ? Math.round(v.scoreSum / v.scoreN) : null,
-        rate: v.started ? v.completed / v.started : 0,
+        rateSessionToLead: v.sessions ? v.completed / v.sessions : 0,
+        rateStartToLead: v.started ? v.completed / v.started : 0,
+        qualityRate: v.sessions ? v.qualified / v.sessions : 0,
       }))
-      .sort((a, b) => b.completed - a.completed || b.started - a.started);
-  }, [leads, partials, model, dim]);
-
-  // KPIs auxiliares: melhor canal por taxa (min 3 iniciados).
-  const bestRate = useMemo(() => {
-    const eligible = rowsByDim.filter((r) => r.started >= 3);
-    if (!eligible.length) return null;
-    return [...eligible].sort((a, b) => b.rate - a.rate)[0];
-  }, [rowsByDim]);
+      .sort((a, b) => b.completed - a.completed || b.sessions - a.sessions);
+  }, [sessions, leads, partials, model, dim]);
 
   const distinctChannels = rowsByDim.filter((r) => r.bucket !== DIRECT).length;
+
+  const historyWarn = sessionsTotal > 0 && sessionsTotal < completedTotal;
 
   const exportCsv = () => {
     downloadCsv(
@@ -143,9 +183,13 @@ function OrigensPage() {
       rowsByDim.map((r) => ({
         dimensao: DIM_LABEL[dim],
         valor: r.bucket,
+        sessoes: r.sessions,
         iniciados: r.started,
         completados: r.completed,
-        taxa_conversao_pct: (r.rate * 100).toFixed(1),
+        qualificados: r.qualified,
+        conv_sessao_para_lead_pct: (r.rateSessionToLead * 100).toFixed(1),
+        conv_inicio_para_lead_pct: (r.rateStartToLead * 100).toFixed(1),
+        taxa_qualidade_pct: (r.qualityRate * 100).toFixed(1),
         score_medio: r.avgScore ?? "",
       })),
     );
@@ -155,7 +199,7 @@ function OrigensPage() {
     <>
       <PageHeader
         title="Origens & Canais"
-        description="Comparativo de conversão por UTM, referrer e página interna de origem."
+        description="Sessões, conversão e qualidade por UTM, referrer e página interna de origem."
         actions={
           <Button variant="outline" size="sm" onClick={exportCsv} className="gap-1.5">
             <Download className="h-3.5 w-3.5" /> Exportar CSV
@@ -164,25 +208,40 @@ function OrigensPage() {
       />
 
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
-        <StatCard label="Iniciados (total)" value={startedTotal} accent="blue" />
+        <StatCard label="Sessões (total)" value={sessionsTotal} accent="blue" hint="Visitantes únicos por aba" />
         <StatCard
-          label="Completados"
-          value={`${completedTotal}${startedTotal ? ` · ${Math.round(convTotal * 100)}%` : ""}`}
+          label="Conv. sessão → lead"
+          value={sessionsTotal ? pct(convSessionToLead) : "—"}
           accent="green"
-          hint="Conversão geral"
+          hint={`${completedTotal} leads completos`}
         />
-        <StatCard label="Canais distintos" value={distinctChannels} accent="gold" hint={`Dimensão: ${DIM_LABEL[dim]}`} />
         <StatCard
-          label="Melhor canal"
-          value={bestRate ? `${(bestRate.rate * 100).toFixed(0)}%` : "—"}
+          label="Conv. início → completo"
+          value={startedTotal ? pct(convStartToLead) : "—"}
+          accent="gold"
+          hint={`${startedTotal} formulários iniciados`}
+        />
+        <StatCard
+          label="Taxa de qualidade"
+          value={sessionsTotal ? pct(qualityRateTotal) : "—"}
           accent="yellow"
-          hint={bestRate ? bestRate.bucket : "Min. 3 iniciados"}
+          hint={`${qualifiedTotal} qualificados ÷ sessões`}
         />
       </div>
 
+      {historyWarn && (
+        <div className="mb-4 flex items-start gap-2 rounded-md border border-amber-300/60 bg-amber-50 px-3 py-2 text-xs text-amber-900">
+          <Info className="h-3.5 w-3.5 mt-0.5" />
+          <span>
+            Há mais leads do que sessões rastreadas — o rastreio de sessões começa a partir
+            do deploy deste módulo. Leads antigos aparecem como "sem sessão".
+          </span>
+        </div>
+      )}
+
       <SectionCard
         title="Comparativo por dimensão"
-        description="Inclui leads completos e parciais. Conversão = completados ÷ iniciados."
+        description={`Canais distintos: ${distinctChannels} · Qualificado = qualification "qualificado" OU score ≥ 70.`}
       >
         <div className="mb-4 flex flex-wrap items-center gap-2">
           <span className="text-xs uppercase tracking-wider text-slate-500">Agrupar por:</span>
@@ -204,7 +263,7 @@ function OrigensPage() {
         {rowsByDim.length === 0 ? (
           <div className="py-12 text-center text-sm text-slate-500">
             <Compass className="mx-auto mb-2 h-6 w-6 text-slate-400" />
-            Sem leads suficientes para esta dimensão ainda.
+            Sem dados suficientes para esta dimensão ainda.
           </div>
         ) : (
           <div className="overflow-x-auto -mx-5">
@@ -212,32 +271,44 @@ function OrigensPage() {
               <thead className="text-left text-xs uppercase text-slate-500 border-b border-slate-200">
                 <tr>
                   <th className="px-5 py-2">{DIM_LABEL[dim]}</th>
+                  <th className="py-2 text-right">Sessões</th>
                   <th className="py-2 text-right">Iniciados</th>
-                  <th className="py-2 text-right">Completados</th>
-                  <th className="py-2 w-[220px]">Conversão</th>
+                  <th className="py-2 text-right">Completos</th>
+                  <th className="py-2 text-right">Qualif.</th>
+                  <th className="py-2 w-[180px]">Conv. sessão→lead</th>
+                  <th className="py-2 text-right">Conv. início→lead</th>
+                  <th className="py-2 text-right">Taxa qualidade</th>
                   <th className="py-2 text-right pr-5">Score médio</th>
                 </tr>
               </thead>
               <tbody>
                 {rowsByDim.map((r) => {
-                  const pct = Math.round(r.rate * 100);
+                  const pSL = Math.round(r.rateSessionToLead * 100);
                   return (
                     <tr key={r.bucket} className="border-b border-slate-100">
-                      <td className="px-5 py-2.5 font-medium text-slate-800 max-w-[280px] truncate" title={r.bucket}>
+                      <td className="px-5 py-2.5 font-medium text-slate-800 max-w-[240px] truncate" title={r.bucket}>
                         {r.bucket}
                       </td>
+                      <td className="py-2.5 text-right tabular-nums">{r.sessions}</td>
                       <td className="py-2.5 text-right tabular-nums">{r.started}</td>
                       <td className="py-2.5 text-right tabular-nums">{r.completed}</td>
+                      <td className="py-2.5 text-right tabular-nums text-emerald-700 font-medium">{r.qualified}</td>
                       <td className="py-2.5">
                         <div className="flex items-center gap-2">
                           <div className="flex-1 h-1.5 bg-slate-100 rounded overflow-hidden">
                             <div
                               className="h-full bg-emerald-500"
-                              style={{ width: `${pct}%` }}
+                              style={{ width: `${Math.min(pSL, 100)}%` }}
                             />
                           </div>
-                          <span className="text-xs tabular-nums w-10 text-right">{pct}%</span>
+                          <span className="text-xs tabular-nums w-10 text-right">{r.sessions ? `${pSL}%` : "—"}</span>
                         </div>
+                      </td>
+                      <td className="py-2.5 text-right tabular-nums">
+                        {r.started ? `${Math.round(r.rateStartToLead * 100)}%` : "—"}
+                      </td>
+                      <td className="py-2.5 text-right tabular-nums">
+                        {r.sessions ? `${Math.round(r.qualityRate * 100)}%` : "—"}
                       </td>
                       <td className="py-2.5 text-right pr-5 tabular-nums text-slate-700">
                         {r.avgScore ?? "—"}

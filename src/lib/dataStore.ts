@@ -11,6 +11,7 @@
 export type TableName =
   | "leads"
   | "leads_partial"  // captura incremental do form progressivo (drop-offs)
+  | "sessions"      // sessões do site (uma por aba) com origem + conversão
   | "site_content"
   | "segments"
   | "hero_variants"
