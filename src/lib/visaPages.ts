@@ -180,7 +180,7 @@ const eb2niw: VisaPage = {
     {
       q: "Quanto custa?",
       a:
-        "A avaliação inicial do perfil é gratuita. O investimento da assessoria varia conforme a composição da família, a complexidade da documentação e o estágio do caso. Apresentamos a proposta após o diagnóstico.",
+        "A avaliação inicial do perfil é gratuita. O investimento da preparação documental varia conforme a composição da família, a complexidade da documentação e o estágio do caso. Apresentamos a proposta após o diagnóstico.",
     },
   ],
   ctaTitle: "Descubra se você já tem perfil para o EB-2 NIW.",
