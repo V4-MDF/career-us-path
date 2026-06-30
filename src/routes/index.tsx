@@ -47,7 +47,7 @@ function Home() {
       {/* URL por dobra: scroll-spy atualiza #hash + title + canonical ao vivo. */}
       <DynamicSectionHead
         sections={HOME_SECTIONS}
-        baseTitle="Status na América"
+        baseTitle="Green Card EB-2 NIW"
       />
       <Header />
       <SectionTOC sections={HOME_SECTIONS} />
