@@ -475,7 +475,7 @@ export function ProcessSteps() {
   ];
   return (
     <Reveal as="section" id="processo-eb-2-niw" className="section-parchment section-pad relative overflow-hidden">
-      <div aria-hidden className="absolute inset-0 text-ink-text"><ProcessIconStrip /></div>
+      <div aria-hidden className="absolute inset-0 text-gold/15"><ProcessIconStrip /></div>
       <div className="container-x relative">
         <SectionHead num="05" eyebrow="PROCESSO EB-2 NIW" title="Quatro etapas. Conduzidas com rigor." variant="parchment" />
         <div className="mt-14 grid md:grid-cols-2 lg:grid-cols-4 gap-5">
