@@ -56,10 +56,10 @@ export const Route = createFileRoute("/vistos/$slug")({
       <Footer />
     </>
   ),
-  component: VisaPage,
+  component: VisaPageRoute,
 });
 
-function VisaPage() {
+function VisaPageRoute() {
   const { page } = Route.useLoaderData() as { page: VisaPage };
 
   return (
