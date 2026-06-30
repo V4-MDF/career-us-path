@@ -29,8 +29,8 @@ export function StubPage({
             Página em construção — conteúdo completo será adicionado nos próximos passos.
           </p>
           <div className="mt-10 flex gap-3">
-            <a href={ctaHref}><Button size="lg">Avaliação gratuita</Button></a>
-            <Link to="/"><Button size="lg" variant="outline"><ArrowLeft className="mr-2 h-4 w-4" /> Voltar à home</Button></Link>
+            <a href={ctaHref}><Button className="btn-label" size="lg">Avaliação gratuita</Button></a>
+            <Link to="/"><Button className="btn-label" size="lg" variant="outline"><ArrowLeft className="mr-2 h-4 w-4" /> Voltar à home</Button></Link>
           </div>
         </div>
       </main>

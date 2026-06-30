@@ -391,11 +391,11 @@ export function LeadFormProgressive({
 
         <div className="pt-2 flex items-center justify-end">
           {stepIndex < totalFields ? (
-            <Button onClick={advance} size="lg" className="gap-1">
+            <Button onClick={advance} size="lg" className="btn-label gap-1">
               Continuar <ChevronRight className="h-4 w-4" />
             </Button>
           ) : (
-            <Button onClick={submit} disabled={loading} size="lg">
+            <Button className="btn-label" onClick={submit} disabled={loading} size="lg">
               {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : (submitLabel ?? "Enviar para análise")}
             </Button>
           )}

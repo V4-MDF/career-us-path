@@ -145,7 +145,7 @@ export function Hero() {
             className="mt-10 flex flex-wrap gap-3"
           >
             <Link to={avaliacaoHref("home_hero")} aria-label="Ir para o formulário de avaliação gratuita">
-              <Button size="lg" className="btn-sweep h-12 px-7 text-[15px] active:scale-[0.98]">
+              <Button size="lg" className="btn-label btn-sweep h-12 px-7 text-[15px] active:scale-[0.98]">
                 {cta}
               </Button>
             </Link>
@@ -153,7 +153,7 @@ export function Hero() {
             <a href="#eb-2-niw">
               <Button
                 size="lg" variant="outline"
-                className="h-12 px-6 text-[15px] border-gold/40 text-foreground hover:border-gold hover:bg-gold/5"
+                className="btn-label h-12 px-6 text-[15px] border-gold/40 text-foreground hover:border-gold hover:bg-gold/5"
               >
                 <PlayCircle className="mr-2 h-4 w-4" /> Entenda o EB-2 NIW
               </Button>
@@ -347,7 +347,7 @@ export function NiwSection() {
             ))}
           </ul>
           <a href={avaliacaoHref("home_niw")} className="inline-block mt-10">
-            <Button size="lg" className="btn-sweep h-12 px-7">Quero saber se tenho perfil</Button>
+            <Button size="lg" className="btn-label btn-sweep h-12 px-7">Quero saber se tenho perfil</Button>
           </a>
         </div>
 
@@ -475,7 +475,7 @@ export function ProcessSteps() {
   ];
   return (
     <Reveal as="section" id="processo-eb-2-niw" className="section-parchment section-pad relative overflow-hidden">
-      <div aria-hidden className="absolute inset-0 text-ink-text"><ProcessIconStrip /></div>
+      <div aria-hidden className="absolute inset-0 text-ink-text/10"><ProcessIconStrip /></div>
       <div className="container-x relative">
         <SectionHead num="05" eyebrow="PROCESSO EB-2 NIW" title="Quatro etapas. Conduzidas com rigor." variant="parchment" />
         <div className="mt-14 grid md:grid-cols-2 lg:grid-cols-4 gap-5">
@@ -771,7 +771,7 @@ export function CtaBanner() {
               por e-mail com a indicação do caminho mais coerente.
             </p>
             <a href={avaliacaoHref("home_cta_final")} className="mt-7 inline-block">
-              <Button size="lg" className="btn-sweep h-12 px-7">Fazer minha avaliação gratuita</Button>
+              <Button size="lg" className="btn-label btn-sweep h-12 px-7">Fazer minha avaliação gratuita</Button>
             </a>
           </div>
         </div>

@@ -38,7 +38,7 @@ function ConversionHeader({ segmentId }: { segmentId: string }) {
         </Link>
         <div className="flex items-center gap-2">
           <a href={avaliacaoHref(`lp_${segmentId}_header`, segmentId)}>
-            <Button size="sm">Avaliação gratuita</Button>
+            <Button className="btn-label" size="sm">Avaliação gratuita</Button>
           </a>
         </div>
       </div>
@@ -96,7 +96,7 @@ export function LandingPageTemplate({ segment, variant }: Props) {
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <a href={ctaHref}>
-                  <Button size="lg" className="text-base">{hero.cta_texto}</Button>
+                  <Button size="lg" className="btn-label text-base">{hero.cta_texto}</Button>
                 </a>
               </div>
               <div className="mt-10 flex items-start gap-3 text-sm text-muted-foreground border-l-2 border-gold/40 pl-4">
@@ -401,7 +401,7 @@ export function LandingPageTemplate({ segment, variant }: Props) {
                 em até 48h por e-mail.
               </p>
               <a href={avaliacaoHref(`lp_${segment.id}_cta`, segment.id)} className="mt-7 inline-block">
-                <Button size="lg" className="text-base">Fazer minha avaliação gratuita</Button>
+                <Button size="lg" className="btn-label text-base">Fazer minha avaliação gratuita</Button>
               </a>
             </div>
           </div>
