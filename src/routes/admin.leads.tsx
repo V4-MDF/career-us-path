@@ -10,7 +10,7 @@
  */
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
-import { Download, Search, Flame } from "lucide-react";
+import { Download, Search, Flame, AlertTriangle } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -61,6 +61,7 @@ function LeadsPage() {
   const [fUtmCampaign, setFUtmCampaign] = useState<string>("all");
   const [fGclid, setFGclid] = useState<string>("all"); // all | with | without
   const [fReferrer, setFReferrer] = useState<string>(""); // busca por host/url do referrer
+  const [fOrigin, setFOrigin] = useState<string>("all"); // all | complete | incomplete
   const [fProf, setFProf] = useState<string>("all");
   const [fFrom, setFFrom] = useState<string>("");
   const [fTo, setFTo] = useState<string>("");
@@ -90,6 +91,13 @@ function LeadsPage() {
     if (!ref) return "";
     try { return new URL(ref).host; } catch { return ref; }
   };
+  /** Verifica se o lead não tem nenhum rastreamento de origem (UTMs, referrer ou landing). */
+  const isOriginIncomplete = (r: StoredLead): boolean => {
+    const hasUtm = !!(r.utm?.utm_source || r.origin?.utm?.utm_source);
+    const hasRef = !!(r.origin?.internal.referrer);
+    const hasLanding = !!(r.origin?.internal.landing_path);
+    return !hasUtm && !hasRef && !hasLanding;
+  };
 
   const segments = useMemo(() => Array.from(new Set(rows.map((r) => r.segmento).filter(Boolean))) as string[], [rows]);
   const utms = useMemo(() => Array.from(new Set(rows.map((r) => utmOf(r, "utm_source")).filter(Boolean))), [rows]);
@@ -118,6 +126,8 @@ function LeadsPage() {
         if (!ref.includes(needle) && !host.includes(needle)) return false;
       }
       if (fProf !== "all" && r.profissao !== fProf) return false;
+      if (fOrigin === "incomplete" && !isOriginIncomplete(r)) return false;
+      if (fOrigin === "complete" && isOriginIncomplete(r)) return false;
       if (fFrom && new Date(r.createdAt) < new Date(fFrom)) return false;
       if (fTo) { const end = new Date(fTo); end.setHours(23,59,59,999); if (new Date(r.createdAt) > end) return false; }
       if (q) {
@@ -130,15 +140,16 @@ function LeadsPage() {
     else if (sortBy === "date") out.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
     else out.sort((a, b) => (a.status ?? "novo").localeCompare(b.status ?? "novo"));
     return out;
-  }, [scored, scoreRange, fStatus, fSeg, fUtm, fUtmMedium, fUtmCampaign, fGclid, fReferrer, fProf, fFrom, fTo, q, sortBy]);
+  }, [scored, scoreRange, fStatus, fSeg, fUtm, fUtmMedium, fUtmCampaign, fGclid, fReferrer, fOrigin, fProf, fFrom, fTo, q, sortBy]);
 
   const stats = useMemo(() => {
     const total = filtered.length;
     const prio = filtered.filter((r) => r._calc.band.id === "prioritario").length;
+    const incomplete = filtered.filter((r) => isOriginIncomplete(r)).length;
     const byStatus: Record<string, number> = {};
     FUNNEL_STATUSES.forEach((s) => (byStatus[s] = 0));
     filtered.forEach((r) => { byStatus[r.status ?? "novo"]++; });
-    return { total, prio, pctPrio: total > 0 ? Math.round((prio / total) * 100) : 0, byStatus };
+    return { total, prio, pctPrio: total > 0 ? Math.round((prio / total) * 100) : 0, incomplete, byStatus };
   }, [filtered]);
 
   /**
@@ -229,11 +240,12 @@ function LeadsPage() {
         }
       />
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-5">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-3 mb-5">
         <StatCard label="Total filtrado" value={stats.total} accent="blue" />
         <StatCard label="% Prioritários" value={`${stats.pctPrio}%`} accent="green" />
         <StatCard label="Novos" value={stats.byStatus.novo ?? 0} accent="gray" />
         <StatCard label="Em contato + Qualificados" value={(stats.byStatus.em_contato ?? 0) + (stats.byStatus.qualificado ?? 0)} accent="gold" />
+        <StatCard label="Origem incompleta" value={stats.incomplete} accent="red" />
       </div>
 
       <div className="grid lg:grid-cols-2 gap-3 mb-5">
@@ -277,6 +289,8 @@ function LeadsPage() {
             options={[["all","Todas"], ...utmCampaigns.map((s) => [s, s] as [string,string])]} />
           <FilterSelect label="gclid (Google Ads)" value={fGclid} onChange={setFGclid}
             options={[["all","Todos"],["with","Com gclid"],["without","Sem gclid"]]} />
+          <FilterSelect label="Origem rastreada" value={fOrigin} onChange={setFOrigin}
+            options={[["all","Todas"],["complete","Completa (UTM/referrer/landing)"],["incomplete","Incompleta (direto)"]]} />
           <div>
             <label className="text-xs text-slate-500">Referrer (host ou URL)</label>
             <Input className="mt-1" placeholder="ex.: instagram.com" value={fReferrer} onChange={(e) => setFReferrer(e.target.value)} />
@@ -295,7 +309,7 @@ function LeadsPage() {
             options={[["score","Pontuação ↓"],["date","Data ↓"],["status","Status"]]} />
           <div className="flex items-end">
             <Button variant="ghost" className="text-slate-600"
-              onClick={() => { setScoreRange([0,100]); setFStatus("all"); setFSeg("all"); setFUtm("all"); setFUtmMedium("all"); setFUtmCampaign("all"); setFGclid("all"); setFReferrer(""); setFProf("all"); setFFrom(""); setFTo(""); setQ(""); }}>
+              onClick={() => { setScoreRange([0,100]); setFStatus("all"); setFSeg("all"); setFUtm("all"); setFUtmMedium("all"); setFUtmCampaign("all"); setFGclid("all"); setFReferrer(""); setFProf("all"); setFFrom(""); setFTo(""); setQ(""); setFOrigin("all"); }}>
               Limpar filtros
             </Button>
           </div>
@@ -329,7 +343,16 @@ function LeadsPage() {
                     <td className="px-5 py-3 cursor-pointer" onClick={() => setOpen(l)}>
                       <ScoreCell calc={l._calc} />
                     </td>
-                    <td className="py-3 font-medium cursor-pointer" onClick={() => setOpen(l)}>{l.nome}</td>
+                    <td className="py-3 font-medium cursor-pointer" onClick={() => setOpen(l)}>
+                      <div className="flex items-center gap-2">
+                        {l.nome}
+                        {isOriginIncomplete(l) && (
+                          <Badge variant="outline" className="text-[10px] border-red-300 text-red-600 bg-red-50 gap-1">
+                            <AlertTriangle className="h-3 w-3" /> Origem incompleta
+                          </Badge>
+                        )}
+                      </div>
+                    </td>
                     <td className="py-3 text-slate-600">{l.profissao}</td>
                     <td className="py-3 text-slate-600">{l.segmento ?? "—"}</td>
                     <td className="py-3 text-slate-600 text-xs">{l.variante_ab ?? "—"}</td>
@@ -450,6 +473,15 @@ function LeadsPage() {
                   </div>
 
                   {/* Origem (referrer + página interna) */}
+                  {isOriginIncomplete(open) && (
+                    <div className="rounded-md border border-red-200 bg-red-50 p-3 flex items-start gap-2 text-xs">
+                      <AlertTriangle className="h-4 w-4 text-red-600 shrink-0 mt-0.5" />
+                      <div>
+                        <div className="font-semibold text-red-800">Origem incompleta</div>
+                        <div className="text-red-700 mt-0.5">Nenhum UTM, referrer externo ou página interna foi capturado para este lead. Verifique o script de tracking na página de origem.</div>
+                      </div>
+                    </div>
+                  )}
                   <div className="rounded-md border border-slate-200">
                     <div className="px-4 py-2 bg-slate-50 text-xs uppercase tracking-wider text-slate-500">Origem do tráfego</div>
                     <div className="p-4 grid grid-cols-1 gap-2 text-xs">
