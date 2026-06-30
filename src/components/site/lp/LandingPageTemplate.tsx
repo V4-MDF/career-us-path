@@ -431,7 +431,7 @@ const BASE_FAQ = [
   },
   {
     q: "Quanto custa?",
-    a: "A avaliação inicial é gratuita. O investimento da assessoria depende do perfil, da complexidade do caso e da composição familiar — apresentado de forma transparente antes de qualquer contratação.",
+    a: "A avaliação inicial é gratuita. O investimento da preparação documental depende do perfil, da complexidade do caso e da composição familiar — apresentado de forma transparente antes de qualquer contratação.",
   },
 ];
 
