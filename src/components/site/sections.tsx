@@ -44,14 +44,17 @@ export function Hero() {
   const easeSig = [0.16, 1, 0.3, 1] as const;
   const t = (d: number) => (reduce ? 0 : d);
 
-  // Parallax sutil ligado ao scroll do hero (≤8% — discreto).
+  // Parallax sutil ligado ao scroll do hero (≤8%). Desligado em mobile e quando
+  // o usuário pede menos movimento — evita jank/composite por frame.
   const heroRef = useRef<HTMLElement>(null);
+  const isDesktop = useMediaQuery("(min-width: 1024px)");
+  const enableParallax = isDesktop && !reduce;
   const { scrollYProgress } = useScroll({
     target: heroRef,
     offset: ["start start", "end start"],
   });
-  const imgY = useTransform(scrollYProgress, [0, 1], ["0%", reduce ? "0%" : "8%"]);
-  const imgScale = useTransform(scrollYProgress, [0, 1], [1, reduce ? 1 : 1.04]);
+  const imgY = useTransform(scrollYProgress, [0, 1], ["0%", enableParallax ? "6%" : "0%"]);
+
 
   return (
     <section
