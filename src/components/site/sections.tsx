@@ -671,8 +671,9 @@ export function CtaBanner() {
   const title = useContent("cta.title");
   const sub = useContent("cta.subtitle");
   return (
-    <section className="section-ink-deep py-24 md:py-32 relative border-t border-gold/15">
-      <div className="absolute inset-0 guilloche -z-10" />
+    <section className="section-ink-deep section-pad relative border-t border-gold/15">
+      {/* Sem guilloché aqui — reservado ao NIW (regra Chanel: tire um acessório). */}
+
       <div className="container-x">
         <div className="max-w-3xl">
           <SectionHead num="11" eyebrow="AVALIAÇÃO GRATUITA" title={title} kicker={sub} />
