@@ -133,24 +133,18 @@ export async function savePageSections(page: PageSlug, items: SectionItem[]) {
  * ============================================================ */
 
 export function useOrderedSections(page: PageSlug): SectionItem[] {
-  // Leitura síncrona do localStorage no primeiro render — evita "flash"
-  // com a ordem default quando o componente monta após edição no admin.
-  const [items, setItems] = useState<SectionItem[]>(() => {
-    if (typeof window === "undefined") return reconcile(page, null);
-    try {
-      const raw = window.localStorage.getItem("status_page_sections");
-      const parsed = raw ? (JSON.parse(raw) as Record<string, PageSectionsRow>) : null;
-      return reconcile(page, parsed?.[page]?.items);
-    } catch {
-      return reconcile(page, null);
-    }
-  });
+  const [items, setItems] = useState<SectionItem[]>(() => reconcile(page, null));
 
   useEffect(() => {
     let cancelled = false;
     const refresh = async () => {
       const next = await loadPageSections(page);
-      if (!cancelled) setItems(next);
+      if (cancelled) return;
+      if (typeof window !== "undefined") {
+        (window as any).__layoutDebug = next.map((n) => n.id);
+        (window as any).__layoutDebugCount = ((window as any).__layoutDebugCount ?? 0) + 1;
+      }
+      setItems(next);
     };
     refresh();
     const onChange = () => refresh();
@@ -168,4 +162,5 @@ export function useOrderedSections(page: PageSlug): SectionItem[] {
 
   return items;
 }
+
 
