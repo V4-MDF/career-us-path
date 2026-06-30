@@ -811,7 +811,7 @@ function CountUp({ value, className }: { value: string; className?: string }) {
     const [, pre, num, post] = match;
     const target = parseFloat(num.replace(/\./g, "").replace(",", "."));
     if (!isFinite(target)) { setDisplay(value); return; }
-    const decimals = (num.split(/[.,]/)[1] || "").length;
+    const decimals = num.includes(",") ? (num.split(",")[1] || "").length : 0;
     const start = performance.now();
     const dur = 1100;
     let raf = 0;
