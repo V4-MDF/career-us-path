@@ -309,7 +309,7 @@ function LeadsPage() {
             options={[["score","Pontuação ↓"],["date","Data ↓"],["status","Status"]]} />
           <div className="flex items-end">
             <Button variant="ghost" className="text-slate-600"
-              onClick={() => { setScoreRange([0,100]); setFStatus("all"); setFSeg("all"); setFUtm("all"); setFUtmMedium("all"); setFUtmCampaign("all"); setFGclid("all"); setFReferrer(""); setFProf("all"); setFFrom(""); setFTo(""); setQ(""); }}>
+              onClick={() => { setScoreRange([0,100]); setFStatus("all"); setFSeg("all"); setFUtm("all"); setFUtmMedium("all"); setFUtmCampaign("all"); setFGclid("all"); setFReferrer(""); setFProf("all"); setFFrom(""); setFTo(""); setQ(""); setFOrigin("all"); }}>
               Limpar filtros
             </Button>
           </div>
