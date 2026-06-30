@@ -353,16 +353,26 @@ export function NiwSection() {
 
         <div className="relative">
           <div className="aspect-video overflow-hidden border border-gold/40 bg-ink-deep relative">
-            <div className="absolute inset-0 bg-gradient-to-br from-ink-raise via-ink to-ink-deep" />
-            <div className="absolute inset-0 guilloche" />
+            {/* Foto editorial — passaporte brasileiro + documentos sobre mesa de madeira. */}
+            <img
+              src={passportDocuments}
+              alt="Passaporte brasileiro, documentos e mapa dos Estados Unidos sobre mesa de madeira"
+              width={1600}
+              height={1024}
+              loading="lazy"
+              className="absolute inset-0 h-full w-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-tr from-ink-deep/80 via-ink-deep/30 to-transparent" />
             <div className="absolute inset-3 border border-gold/30 pointer-events-none" />
-            <button className="absolute inset-0 group flex flex-col items-center justify-center gap-4 text-foreground/90">
-              <span className="grid h-20 w-20 place-items-center rounded-full bg-gold text-gold-foreground transition-transform group-hover:scale-105">
-                <PlayCircle className="h-10 w-10" />
-              </span>
-              <span className="font-display text-xl">Entenda o EB-2 NIW em 4 minutos</span>
-              <span className="font-mono-label text-foreground/55">VÍDEO PLACEHOLDER</span>
-            </button>
+            <div className="absolute bottom-0 left-0 right-0 p-6 flex items-end justify-between gap-4">
+              <div>
+                <p className="font-mono-label text-gold/80">DOSSIÊ EB-2 NIW</p>
+                <p className="mt-1 font-display text-lg text-foreground">
+                  Documentação preparada com rigor de petição americana.
+                </p>
+              </div>
+              <FlagsBRUS size={16} />
+            </div>
           </div>
         </div>
       </div>
