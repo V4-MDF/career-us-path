@@ -735,6 +735,66 @@ export function FAQ() {
  * 12. CTA FINAL — sem form inline (Prompt 5).
  * Substitui a antiga CtaForm; navega para /avaliacao com src.
  * ============================================================ */
+/* ============================================================
+ * PRÉ-QUALIFICAÇÃO — dobra promocional do teste rápido
+ * ============================================================ */
+export function PreQualPromo() {
+  return (
+    <section
+      id="pre-qualificacao"
+      aria-label="Pré-qualificação"
+      className="section-anchor section-pad relative border-t border-gold/15 bg-ink"
+    >
+      <div className="container-x">
+        <div className="grid lg:grid-cols-[1.1fr_1fr] gap-10 items-center">
+          <div>
+            <SectionHead
+              num="10"
+              eyebrow="TESTE DE PRÉ-QUALIFICAÇÃO"
+              title="Descubra em 2 minutos qual visto se encaixa no seu perfil."
+              kicker="Um teste rápido e gratuito que indica, na hora, se você tem perfil para EB-1A, EB-2 NIW, O-1 ou EB-3 — e qual caminho faz mais sentido começar."
+            />
+            <ul className="mt-8 grid sm:grid-cols-2 gap-3 text-[15px] text-foreground/80">
+              {[
+                "Resultado imediato na tela",
+                "Indicação do visto mais adequado",
+                "Sem custo e sem compromisso",
+                "Dados protegidos e confidenciais",
+              ].map((i) => (
+                <li key={i} className="flex gap-3 rounded-lg border border-gold/15 bg-ink-raise/40 p-4">
+                  <CheckCircle2 className="h-4 w-4 text-gold mt-1 shrink-0" /> {i}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="rounded-2xl border border-gold/30 bg-ink-raise/50 p-7 lg:p-8 shadow-elevated">
+            <div className="flex items-center gap-2 text-gold">
+              <Sparkles className="h-4 w-4" />
+              <p className="font-mono-label text-gold/80">RESPOSTA NA HORA</p>
+            </div>
+            <h3 className="mt-3 font-display text-2xl leading-tight">
+              Faça o teste agora e veja seu encaixe.
+            </h3>
+            <p className="mt-3 text-foreground/75 text-[15px] leading-relaxed">
+              São poucas perguntas objetivas sobre formação, experiência e
+              conquistas. Ao final, mostramos o visto mais compatível e o próximo passo.
+            </p>
+            <Link to="/pre-qualificacao" className="mt-7 inline-block">
+              <Button size="lg" className="btn-label btn-sweep h-12 px-7">
+                Iniciar pré-qualificação
+              </Button>
+            </Link>
+            <p className="mt-3 text-[13px] text-foreground/55">
+              Leva cerca de 2 minutos. Sem cadastro inicial.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export function CtaBanner() {
   const title = useContent("cta.title");
   const sub = useContent("cta.subtitle");
