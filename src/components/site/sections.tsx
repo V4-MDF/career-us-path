@@ -755,7 +755,7 @@ export function CtaBanner() {
               "Confidencial e sem compromisso",
               "Equipe especializada em vistos EB",
             ].map((i) => (
-              <li key={i} className="flex gap-3 border border-gold/15 bg-ink-raise/40 p-4">
+              <li key={i} className="flex gap-3 rounded-lg border border-gold/15 bg-ink-raise/40 p-4">
                 <CheckCircle2 className="h-4 w-4 text-gold mt-1 shrink-0" /> {i}
               </li>
             ))}
