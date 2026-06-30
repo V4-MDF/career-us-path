@@ -78,7 +78,7 @@ function IncompletePage() {
 
   // Funil: para cada pergunta, conta leads cujo ÚLTIMO campo válido é essa.
   // Concluído = lead em `leads`.
-  const funnel = useMemo(() => {
+  const funnel = useMemo<Array<{ key: string; label: string; count: number; max: number }>>(() => {
     const counts: Record<string, number> = {};
     PROGRESSIVE_FIELDS.forEach((f) => { counts[f.key] = 0; });
     partials.forEach((p) => {
@@ -86,10 +86,12 @@ function IncompletePage() {
       if (last && counts[last] !== undefined) counts[last] += 1;
     });
     const max = Math.max(completed.length, ...Object.values(counts), 1);
-    return PROGRESSIVE_FIELDS.map((f) => ({
-      key: f.key, label: FIELD_LABEL[f.key] ?? f.key,
+    const rows: Array<{ key: string; label: string; count: number; max: number }> = PROGRESSIVE_FIELDS.map((f) => ({
+      key: f.key as string, label: FIELD_LABEL[f.key] ?? f.key,
       count: counts[f.key] ?? 0, max,
-    })).concat([{ key: "__done__", label: "Enviou o formulário", count: completed.length, max }]);
+    }));
+    rows.push({ key: "__done__", label: "Enviou o formulário", count: completed.length, max });
+    return rows;
   }, [partials, completed]);
 
   const purgeAll = async () => {
