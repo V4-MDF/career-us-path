@@ -85,11 +85,11 @@ const SEED_SEGMENTS: Segment[] = [
     profissao_default: "medico",
     eyebrow: "PARA MÉDICOS BRASILEIROS",
     prova_social:
-      "+300 médicos brasileiros já iniciaram o processo com a Status [CONFIRMAR]",
+      "+300 médicos brasileiros já iniciaram o processo com a Status",
     comparativo: {
       label: "Salário médio de médicos",
       lado_brasil: "≈ R$ 15.000 / mês",
-      lado_eua: "US$ 200.000 a 600.000 / ano [CONFIRMAR]",
+      lado_eua: "US$ 200.000 a 600.000 / ano",
       observacao: "Valores de referência; variam por especialidade e local.",
     },
     dores: [
@@ -133,11 +133,11 @@ const SEED_SEGMENTS: Segment[] = [
     profissao_default: "engenheiro",
     eyebrow: "PARA ENGENHEIROS BRASILEIROS",
     prova_social:
-      "Engenheiros brasileiros qualificados têm forte aderência ao EB-2 NIW [CONFIRMAR]",
+      "Engenheiros brasileiros qualificados têm forte aderência ao EB-2 NIW",
     comparativo: {
       label: "Salário médio de engenheiros",
-      lado_brasil: "≈ R$ 12.000 / mês [CONFIRMAR]",
-      lado_eua: "US$ 90.000 a 150.000 / ano [CONFIRMAR]",
+      lado_brasil: "≈ R$ 12.000 / mês",
+      lado_eua: "US$ 90.000 a 150.000 / ano",
       observacao: "Valores de referência; variam por área e senioridade.",
     },
     dores: [
@@ -181,7 +181,7 @@ const SEED_SEGMENTS: Segment[] = [
     profissao_default: "empresario",
     eyebrow: "PARA EMPRESÁRIOS BRASILEIROS",
     prova_social:
-      "Empresários que geram renda, impostos e empregos são exatamente o perfil que os EUA querem atrair [CONFIRMAR]",
+      "Empresários que geram renda, impostos e empregos são exatamente o perfil que os EUA querem atrair",
     comparativo: {
       label: "Ambiente para quem empreende",
       lado_brasil: "Carga tributária alta, insegurança jurídica, instabilidade",

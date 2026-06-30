@@ -304,12 +304,12 @@ export function LandingPageTemplate({ segment, variant }: Props) {
               {[
                 { icon: MapPin, t: "Sede própria em Orlando, Flórida" },
                 { icon: Users, t: "Equipe dedicada por especialidade" },
-                { icon: Award, t: "+25 anos de experiência [CONFIRMAR]" },
-                { icon: Star, t: "Nota 5,0 no Google · Selo BBB [CONFIRMAR]" },
-                { icon: Heart, t: "+1.000 famílias atendidas [CONFIRMAR]" },
+                { icon: Award, t: "+25 anos de experiência" },
+                { icon: Star, t: "Nota 5,0 no Google · Selo BBB" },
+                { icon: Heart, t: "+1.000 famílias atendidas" },
                 { icon: ShieldCheck, t: "Documentação, tradução, mudança, bancos, escolas" },
               ].map(({ icon: Icon, t }) => (
-                <li key={t} className="rounded-xl border border-border bg-surface p-5 flex gap-3">
+                <li key={t} className="rounded-xl border border-gold/25 bg-ink-raise/60 p-5 flex gap-3">
                   <Icon className="h-5 w-5 text-gold shrink-0 mt-0.5" />
                   <span className="leading-snug">{t}</span>
                 </li>

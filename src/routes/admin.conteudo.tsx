@@ -9,6 +9,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { PageHeader, SectionCard } from "@/components/admin/ui";
 import { get, set } from "@/lib/dataStore";
 import { defaultContent } from "@/lib/siteContent";
+import { isPending } from "@/lib/pendingValidation";
 import { broadcast } from "@/lib/admin/settings";
 
 export const Route = createFileRoute("/admin/conteudo")({ component: ContentPage });
@@ -123,7 +124,17 @@ function ContentPage() {
                 <div className="space-y-3">
                   {sec.keys.map((f) => (
                     <div key={f.k}>
-                      <label className="text-xs text-slate-500">{f.label}</label>
+                      <div className="flex items-center justify-between">
+                        <label className="text-xs text-slate-500">{f.label}</label>
+                        {isPending(f.k) && (
+                          <span
+                            title="Valor exibido no site público, mas pendente de validação pelo cliente."
+                            className="inline-flex items-center gap-1 rounded border border-amber-300 bg-amber-50 px-1.5 py-0.5 text-[10px] font-medium uppercase tracking-wider text-amber-700"
+                          >
+                            ● Pendente de validação
+                          </span>
+                        )}
+                      </div>
                       {f.multiline ? (
                         <Textarea rows={2} value={values[f.k] ?? ""} className="mt-1"
                           onChange={(e) => setValues({ ...values, [f.k]: e.target.value })}

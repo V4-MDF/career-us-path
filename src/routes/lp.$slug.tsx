@@ -42,6 +42,9 @@ export const Route = createFileRoute("/lp/$slug")({
       meta: [
         { title: d.title },
         { name: "description", content: d.description },
+        // LPs são SEMPRE privadas (apenas tráfego pago / URL direta).
+        // O toggle por segmento no admin pode reforçar; aqui o padrão já é noindex,nofollow.
+        { name: "robots", content: "noindex,nofollow" },
         { property: "og:title", content: d.title },
         { property: "og:description", content: d.description },
         { property: "og:url", content: `/lp/${params.slug}` },

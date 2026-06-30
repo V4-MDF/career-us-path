@@ -14,7 +14,7 @@ export function OrganizationJsonLd() {
       "Assessoria de mobilidade migratória para profissionais brasileiros — EB-2 NIW, EB-1 e EB-3.",
     image: "/og-image.jpg",
     url: "/",
-    telephone: "[CONFIRMAR]",
+    // telephone omitido até validação do número oficial (gerenciar no admin).
     address: {
       "@type": "PostalAddress",
       addressLocality: "Orlando",

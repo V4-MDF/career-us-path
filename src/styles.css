@@ -5,11 +5,21 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * Status na América — Design System
- * Dark navy base + dourado (champagne gold) accent.
- * Estética: confiança premium americana, sóbria, editorial.
+ * Status na América — Design System "DOSSIÊ / CREDENCIAL"
+ * ----------------------------------------------------------------
+ * Estética de documento oficial / passaporte / private banking.
+ * Navy meia-noite + parchment + ouro antigo (champagne).
+ * Oxblood como "lacre" — usado com extrema parcimônia (~5%).
  *
- * Tokens definidos como CSS vars + mapeados via @theme inline para o Tailwind.
+ * Tipografia:
+ *  - Display: Bodoni Moda (headlines, números de stat)
+ *  - Corpo:   Hanken Grotesk (body, UI)
+ *  - Dados:   JetBrains Mono (eyebrows, labels, captions, números de seção)
+ *
+ * Profundidade vem de CAMADAS e filetes dourados, NÃO de drop-shadows
+ * padronizados em tudo. Movimento serve à sobriedade.
+ *
+ * Tokens são CSS vars + mapeados via @theme inline para o Tailwind.
  * NUNCA usar cores hardcoded em componentes — sempre via tokens semânticos.
  */
 
@@ -42,82 +52,99 @@
   --color-ring: var(--ring);
   --color-ring-offset-background: var(--background);
 
-  /* Tokens específicos da marca */
-  --color-surface: var(--surface);
-  --color-surface-alt: var(--surface-alt);
-  --color-cream: var(--cream);
-  --color-cream-foreground: var(--cream-foreground);
+  /* Tokens da marca — Dossiê */
+  --color-ink: var(--ink);
+  --color-ink-deep: var(--ink-deep);
+  --color-ink-raise: var(--ink-raise);
+  --color-parchment: var(--parchment);
+  --color-parchment-deep: var(--parchment-deep);
   --color-gold: var(--gold);
   --color-gold-soft: var(--gold-soft);
   --color-gold-foreground: var(--gold-foreground);
-  --color-navy: var(--navy);
-  --color-navy-foreground: var(--navy-foreground);
+  --color-oxblood: var(--oxblood);
+  --color-slate: var(--slate);
+  --color-ink-text: var(--ink-text);
   --color-success: var(--success);
 
-  --font-serif: "Fraunces", "Playfair Display", Georgia, serif;
-  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
-
-  --shadow-elegant: 0 18px 40px -20px color-mix(in oklab, var(--gold) 35%, transparent);
-  --shadow-soft: 0 8px 24px -12px oklch(0 0 0 / 0.35);
+  --font-display: "Bodoni Moda", "Bodoni Moda Variable", "Didot", Georgia, serif;
+  --font-sans: "Hanken Grotesk", "Hanken Grotesk Variable", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", "JetBrains Mono Variable", ui-monospace, monospace;
+  --font-serif: "Bodoni Moda", "Didot", Georgia, serif;
 }
 
 :root {
-  --radius: 0.875rem;
+  --radius: 0.5rem; /* radius mais sóbrio para a marca dossiê */
 
-  /* Dark-first: o site usa tema escuro como padrão (a home renderiza dark) */
-  --background: oklch(0.17 0.03 256);   /* #0B1120 navy quase preto */
-  --foreground: oklch(0.96 0.012 85);   /* #F5F3EF off-white quente */
+  /* Paleta Dossiê — valores exatos do briefing */
+  --ink:           #0E1726;
+  --ink-deep:      #0A111C;
+  --ink-raise:     #16223A;
+  --parchment:     #EFE9DA;
+  --parchment-deep:#E4DCC8;
+  --gold:          #B7975A;
+  --gold-soft:     rgba(183, 151, 90, 0.22);
+  --gold-foreground: #0A111C;
+  --oxblood:       #6E2233;
+  --slate:         #AEB7C4;
+  --ink-text:      #1B2435;
+  --success:       #3F8A5F;
 
-  --surface: oklch(0.22 0.035 258);     /* #111A2E superfície escura */
-  --surface-alt: oklch(0.26 0.04 258);
+  /* Mapeamento shadcn — DARK por padrão (site é dark-first) */
+  --background: var(--ink);
+  --foreground: #ECE6D6;
 
-  --cream: oklch(0.965 0.018 85);       /* #F7F4ED creme claro p/ alternância */
-  --cream-foreground: oklch(0.22 0.035 258);
+  --card: var(--ink-raise);
+  --card-foreground: #ECE6D6;
+  --popover: var(--ink-raise);
+  --popover-foreground: #ECE6D6;
 
-  --gold: oklch(0.76 0.13 80);          /* #C9A24B dourado champagne */
-  --gold-soft: oklch(0.84 0.09 85);
-  --gold-foreground: oklch(0.17 0.03 256);
+  --primary: var(--gold);
+  --primary-foreground: var(--ink-deep);
 
-  --navy: oklch(0.33 0.07 258);         /* #1E3A5F navy americano */
-  --navy-foreground: oklch(0.96 0.012 85);
+  --secondary: var(--ink-raise);
+  --secondary-foreground: #ECE6D6;
 
-  --success: oklch(0.66 0.13 150);      /* #3FA66A */
+  --muted: #1A263F;
+  --muted-foreground: var(--slate);
 
-  --card: oklch(0.22 0.035 258);
-  --card-foreground: oklch(0.96 0.012 85);
-  --popover: oklch(0.22 0.035 258);
-  --popover-foreground: oklch(0.96 0.012 85);
+  --accent: var(--gold);
+  --accent-foreground: var(--ink-deep);
 
-  --primary: oklch(0.76 0.13 80);       /* gold */
-  --primary-foreground: oklch(0.17 0.03 256);
+  --destructive: var(--oxblood);
+  --destructive-foreground: #F7EFE0;
 
-  --secondary: oklch(0.33 0.07 258);
-  --secondary-foreground: oklch(0.96 0.012 85);
-
-  --muted: oklch(0.26 0.04 258);
-  --muted-foreground: oklch(0.72 0.02 85);
-
-  --accent: oklch(0.76 0.13 80);
-  --accent-foreground: oklch(0.17 0.03 256);
-
-  --destructive: oklch(0.62 0.22 27);
-  --destructive-foreground: oklch(0.98 0.003 85);
-
-  --border: oklch(0.96 0.012 85 / 0.12);
-  --input: oklch(0.96 0.012 85 / 0.14);
-  --ring: oklch(0.76 0.13 80 / 0.6);
+  --border: var(--gold-soft);
+  --input: rgba(236, 230, 214, 0.14);
+  --ring: rgba(183, 151, 90, 0.65);
 }
 
-/* Variante creme p/ seções claras alternadas */
+/* ----------------------------------------------------------------
+ * Variante PARCHMENT — seções claras alternadas (papel oficial).
+ * Aplicar em <section className="section-parchment">.
+ * Mantida a classe legada `.section-cream` como alias para compat.
+ * ---------------------------------------------------------------- */
+.section-parchment,
 .section-cream {
-  --background: oklch(0.965 0.018 85);
-  --foreground: oklch(0.22 0.035 258);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.22 0.035 258);
-  --muted: oklch(0.93 0.015 85);
-  --muted-foreground: oklch(0.42 0.03 258);
-  --border: oklch(0.22 0.035 258 / 0.12);
-  --input: oklch(0.22 0.035 258 / 0.14);
+  --background: var(--parchment);
+  --foreground: var(--ink-text);
+  --card: #FFFFFF;
+  --card-foreground: var(--ink-text);
+  --popover: #FFFFFF;
+  --popover-foreground: var(--ink-text);
+  --muted: var(--parchment-deep);
+  --muted-foreground: #4A5567;
+  --secondary: var(--parchment-deep);
+  --secondary-foreground: var(--ink-text);
+  --border: rgba(14, 23, 38, 0.12);
+  --input: rgba(14, 23, 38, 0.16);
+  --ring: rgba(183, 151, 90, 0.6);
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+/* Camada mais profunda — divisor entre dobras escuras */
+.section-ink-deep {
+  --background: var(--ink-deep);
   background-color: var(--background);
   color: var(--foreground);
 }
@@ -134,41 +161,152 @@
     color: var(--color-foreground);
     font-family: var(--font-sans);
     font-feature-settings: "ss01", "cv11";
+    font-size: 16px;
+    line-height: 1.65;
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
   h1, h2, h3, h4 {
-    font-family: var(--font-serif);
+    font-family: var(--font-display);
     letter-spacing: -0.01em;
+    line-height: 1.08;
+    font-weight: 500;
+  }
+  /* Foco de teclado visível e dourado em qualquer elemento interativo */
+  :where(a, button, [role="button"], input, select, textarea):focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+  /* Respeito a prefers-reduced-motion */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
   }
 }
 
-@utility font-serif {
-  font-family: var(--font-serif);
-}
+/* ----------------------------------------------------------------
+ * Utilitários assinatura — eyebrow, filete, container
+ * ---------------------------------------------------------------- */
+
 @utility font-display {
-  font-family: var(--font-serif);
+  font-family: var(--font-display);
   font-optical-sizing: auto;
-  font-variation-settings: "SOFT" 50, "WONK" 0;
+}
+
+@utility font-mono-label {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 11px;
 }
 
 @utility container-x {
   width: 100%;
   margin-inline: auto;
-  padding-inline: 1.25rem;
-  max-width: 80rem;
+  padding-inline: 1.5rem;
+  max-width: 78rem;
 }
 
-@utility gold-divider {
+/* Filete dourado fino — 1px linha gravada */
+@utility gold-rule {
   height: 1px;
-  width: 4rem;
-  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  background: var(--gold);
+  opacity: 0.7;
 }
 
-@utility stars-pattern {
-  background-image: radial-gradient(
-      circle at 1px 1px,
-      color-mix(in oklab, var(--gold) 40%, transparent) 1px,
-      transparent 0
-    );
-  background-size: 28px 28px;
+/* Filete decorativo curto no topo de cards */
+@utility gold-tick {
+  position: relative;
+}
+@utility gold-tick::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 42px;
+  height: 3px;
+  background: var(--gold);
+}
+
+/* Padrão guilloché (linhas finas de certificado) — usar com opacidade ≤6% */
+@utility guilloche {
+  background-image:
+    repeating-linear-gradient(45deg,
+      var(--gold) 0,
+      var(--gold) 0.5px,
+      transparent 0.5px,
+      transparent 12px),
+    repeating-linear-gradient(-45deg,
+      var(--gold) 0,
+      var(--gold) 0.5px,
+      transparent 0.5px,
+      transparent 12px);
+  background-size: 24px 24px;
+  opacity: 0.05;
+}
+
+/* Sweep do botão dourado (esquerda → direita) */
+@utility btn-sweep {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+@utility btn-sweep::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.18), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.55s ease;
+  z-index: -1;
+}
+@utility btn-sweep:hover::after {
+  transform: translateX(100%);
+}
+
+/* Link com underline dourado animado (nav) */
+@utility nav-link {
+  position: relative;
+  display: inline-block;
+  padding-block: 2px;
+}
+@utility nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 1px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: right center;
+  transition: transform 0.35s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+@utility nav-link:hover::after,
+@utility nav-link[data-status="active"]::after {
+  transform: scaleX(1);
+  transform-origin: left center;
+}
+
+/* Alias de compat com componentes antigos que ainda usam bg-surface etc. */
+@theme inline {
+  --color-surface: var(--ink-raise);
+  --color-surface-alt: var(--muted);
+  --color-cream: var(--parchment);
+  --color-cream-foreground: var(--ink-text);
+  --color-navy: var(--ink);
+  --color-navy-foreground: #ECE6D6;
+}
+
+/* Sombra "elegante" mantida só para casos específicos (selo). Profundidade
+ * geral deve vir de camadas/borders, não de sombras genéricas. */
+@theme inline {
+  --shadow-elegant: 0 18px 40px -24px rgba(0, 0, 0, 0.55);
+  --shadow-soft: 0 8px 24px -16px rgba(0, 0, 0, 0.45);
 }
