@@ -140,7 +140,7 @@ function LeadsPage() {
     else if (sortBy === "date") out.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
     else out.sort((a, b) => (a.status ?? "novo").localeCompare(b.status ?? "novo"));
     return out;
-  }, [scored, scoreRange, fStatus, fSeg, fUtm, fUtmMedium, fUtmCampaign, fGclid, fReferrer, fProf, fFrom, fTo, q, sortBy]);
+  }, [scored, scoreRange, fStatus, fSeg, fUtm, fUtmMedium, fUtmCampaign, fGclid, fReferrer, fOrigin, fProf, fFrom, fTo, q, sortBy]);
 
   const stats = useMemo(() => {
     const total = filtered.length;
