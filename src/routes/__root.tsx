@@ -108,6 +108,7 @@ function RootShell({ children }: { children: ReactNode }) {
         <HeadContent />
       </head>
       <body>
+        <a href="#conteudo" className="skip-link">Pular para o conteúdo</a>
         {children}
         <Scripts />
       </body>
