@@ -83,7 +83,7 @@
 }
 
 :root {
-  --radius: 0.5rem; /* radius mais sóbrio para a marca dossiê */
+  --radius: 0.875rem; /* squircle suave — cascateia para todos os shadcn (button, card, input, dropdown, dialog) */
 
   /* Paleta Dossiê — preto carvão + ouro (sem navy) */
   --ink:           #0B0B0C;
