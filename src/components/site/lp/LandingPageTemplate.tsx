@@ -110,7 +110,7 @@ export function LandingPageTemplate({ segment, variant }: Props) {
                 {variant?.imagem ? (
                   <img src={variant.imagem} alt="" width={800} height={1000} loading="lazy" decoding="async" className="h-full w-full object-cover" />
                 ) : (
-                  <div className="h-full w-full bg-gradient-to-br from-navy via-surface to-background flex items-end p-6">
+                  <div className="h-full w-full bg-gradient-to-br from-ink via-ink-raise to-ink-deep flex items-end p-6">
                     <div className="text-xs uppercase tracking-[0.2em] text-gold/80">
                       Imagem placeholder<br />
                       <span className="text-foreground/60 normal-case tracking-normal text-sm">
@@ -221,7 +221,7 @@ export function LandingPageTemplate({ segment, variant }: Props) {
             </div>
 
             <div className="relative">
-              <div className="aspect-video rounded-2xl overflow-hidden border border-gold/30 bg-gradient-to-br from-navy via-surface to-background grid place-items-center shadow-elegant">
+              <div className="aspect-video rounded-2xl overflow-hidden border border-gold/30 bg-gradient-to-br from-ink via-ink-raise to-ink-deep grid place-items-center shadow-elegant">
                 <button type="button" className="group flex flex-col items-center gap-3 text-foreground/90">
                   <span className="grid h-20 w-20 place-items-center rounded-full bg-gold text-gold-foreground transition-transform group-hover:scale-105">
                     <PlayCircle className="h-10 w-10" />
