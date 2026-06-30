@@ -70,6 +70,8 @@ const HOME_REGISTRY: Record<string, ComponentType> = {
 
 function Home() {
   const layout = useOrderedSections("home");
+  if (typeof window !== "undefined") (window as any).__layoutDebug = layout.map(l => l.id);
+
 
   return (
     <>
