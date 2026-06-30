@@ -1,52 +1,79 @@
-## Objetivo
+## Diagnóstico
 
-1. Tirar o tom azulado/navy do site e aproximar a identidade de **preto profundo + ouro** (mantendo o ouro `#B7975A` como único acento cromático).
-2. Padronizar a tipografia dos botões/CTAs para o mesmo registro do resto do site (Montserrat uppercase tracked), eliminando o look "mono" do exemplo `VER TODOS OS ARTIGOS →`.
+A repaleta passou `--background` (ink) para `#0B0B0C` (quase preto) e `--ink-text` para `#141416`. Em qualquer lugar onde um botão/título já usava esses tokens **e** estava sobre uma superfície com a mesma cor, o contraste sumiu. Pontos críticos identificados:
 
-## 1. Repaleta — de navy para preto
+1. **Admin (`bg-slate-100` claro) usando botões shadcn**
+   - `variant="outline"` e `variant="secondary"` usam `bg-background`/`bg-secondary` (tokens dark do site público). No fundo claro do admin viram blocos quase pretos com hover ouro — fora de padrão e em alguns casos o texto fica `text-foreground` (cinza claro) sobre fundo escuro novo demais pelo contexto. Ainda mais grave: o admin foi escrito com Tailwind palette (slate/amber) e o `<Button>` agora puxa cor da paleta dossiê.
+   - `<Button variant="outline">` no header do admin (linha 145 `admin.tsx`) → fundo escuro inesperado.
+   - `<Button variant="ghost">` "Sair" (linha 151) → hover ouro com `text-accent-foreground` = preto sobre ouro, ok, mas idle herda do site público.
 
-Editar **`src/styles.css`** (os tokens são a fonte única; tudo no site puxa daí):
+2. **Site público: `text-ink-text` (#141416) usado fora de seções parchment**
+   - `sections.tsx` linha 478 — overlay `<ProcessIconStrip />` com `text-ink-text` cobre uma seção **escura** (CTA flow). Hoje o ícone é praticamente invisível (preto sobre preto).
+   - Demais usos de `text-ink-text` em `sections.tsx`, `visa/VisaPageBody.tsx`, `blog.tsx` estão dentro de seções/cards parchment (fundo creme) — seguem legíveis.
 
-| Token | Antes (navy) | Depois (preto carvão) |
-|---|---|---|
-| `--ink` (background) | `#0E1726` | `#0B0B0C` |
-| `--ink-deep` | `#0A111C` | `#050506` |
-| `--ink-raise` (cards/surface) | `#16223A` | `#16161A` |
-| `--ink-text` (texto em parchment) | `#1B2435` | `#141416` |
-| `--muted` (dark) | `#1A263F` | `#1B1B1F` |
-| `--slate` (muted-foreground) | `#AEB7C4` | `#B8B2A4` (cinza com leve ouro) |
-| `--gold-soft` (border default) | `rgba(183,151,90,0.22)` | manter |
+3. **Botões/links com `bg-foreground/30`, `bg-primary-foreground`, ou usando `bg-ink`/`bg-ink-deep` em cima de `bg-ink`**
+   - `avaliacao.obrigado.tsx` linhas 150/152: separador `bg-foreground/30` — fundo é ink (quase preto), foreground é claro — visível, ok.
+   - Cards `bg-ink-raise` sobre `bg-ink` agora têm diferença mínima (`#16161A` vs `#0B0B0C`) — visível mas sutil; aceitável.
 
-Resultado: superfícies escuras passam de navy frio para preto neutro/carvão; ouro fica como único brilho.
+4. **Tipografia de botão**: novo `btn-label` é `12px uppercase tracked` — em alguns botões longos do admin (ex.: "Salvar configurações") pode comprimir/quebrar; é uma queixa de identidade, não de contraste, mas vou verificar.
 
-Também:
-- Em `src/lib/admin/settings.ts`, mudar o default `accent_color: "#1E3A5F"` (navy) para `"#0B0B0C"` (preto), e renomear o label em `src/routes/admin.configuracoes.tsx` de "Cor de destaque (navy)" para "Cor de destaque (ink)".
-- Em **`src/components/site/lp/LandingPageTemplate.tsx`** trocar os usos hardcoded de `text-navy`, `border-navy/*`, `bg-gradient-to-br from-navy via-surface to-background` por tokens equivalentes (`text-ink-text`, `border-ink/20`, `bg-gradient-to-br from-ink via-ink-raise to-ink-deep`) para que a LP também siga a nova paleta.
-- Os aliases `--color-navy` em `styles.css` continuam apontando para `--ink` (já é o caso), então classes legadas `bg-navy`/`text-navy-foreground` automaticamente passam a renderizar preto sem quebrar nada.
+## Plano de correção
 
-Não mexer no ouro nem no parchment — a relação preto/ouro/papel é o ponto da identidade.
+### A) Restaurar o admin como tema próprio (independente do site público)
 
-## 2. Tipografia dos botões
+O admin foi escrito com a paleta Tailwind direta (slate/amber/white). Botões shadcn estão puxando tokens dossiê e poluindo. Corrigir reescrevendo apenas os botões nas páginas/admin para variantes neutras:
 
-Hoje o componente `Button` (`src/components/ui/button.tsx`) usa `text-sm font-medium` (Inter), enquanto vários CTAs/links do site (ex. `VER TODOS OS ARTIGOS →` no `BlogStrip.tsx`) usam `font-mono-label` (JetBrains Mono uppercase). Isso cria três registros tipográficos diferentes (Inter / Montserrat / Mono) competindo na mesma página.
+1. **Em `src/routes/admin.tsx`** trocar o `<Button variant="outline">` "Ver site" e `<Button variant="ghost">` "Sair" por botões nativos com classes slate (`<a className="inline-flex …border border-slate-300 bg-white hover:bg-slate-50 text-slate-700 …">`), removendo a dependência do componente shadcn no shell do admin.
+2. Em todas as outras páginas `admin.*.tsx` que usam `<Button>` shadcn, **manter o componente**, mas adicionar uma classe wrapper na main do admin que reescreve os tokens shadcn para a paleta clara:
+   ```css
+   /* styles.css */
+   [data-admin-shell] {
+     --background: #ffffff;
+     --foreground: #0f172a;        /* slate-900 */
+     --primary: #f59e0b;            /* amber-500 */
+     --primary-foreground: #0f172a;
+     --secondary: #f1f5f9;          /* slate-100 */
+     --secondary-foreground: #0f172a;
+     --muted: #f1f5f9;
+     --muted-foreground: #475569;
+     --accent: #fef3c7;             /* amber-100 */
+     --accent-foreground: #92400e;
+     --border: #e2e8f0;
+     --input: #cbd5e1;
+     --ring: #f59e0b;
+     --card: #ffffff;
+     --card-foreground: #0f172a;
+     --popover: #ffffff;
+     --popover-foreground: #0f172a;
+   }
+   ```
+   E adicionar `data-admin-shell` no wrapper do `admin.tsx` (`<div className="min-h-screen flex bg-slate-100 text-slate-900" data-admin-shell>`). Isso isola o admin sem reescrever cada uso de `<Button>`.
 
-Ações:
-- Atualizar **`src/components/ui/button.tsx`** para que o estilo base use a mesma assinatura tipográfica do resto do site: `font-display uppercase tracking-[0.14em] text-[12px] font-semibold` (Montserrat 600, uppercase, tracked) — alinhado aos `display-*` e eyebrows. Tamanhos `sm`/`lg` mantêm a mesma família, ajustando apenas a `font-size` (11px / 13px).
-- Criar uma classe utilitária `.btn-label` em `src/styles.css` com o mesmo recipe (Montserrat uppercase tracked) para reaproveitar em CTAs `<a>`/`<Link>` que hoje usam `font-mono-label`.
-- Substituir `font-mono-label` por `btn-label` **apenas em elementos que são CTAs/botões**, não em eyebrows/labels informativos:
-  - `BlogStrip.tsx` (link "VER TODOS OS ARTIGOS →")
-  - `Header.tsx` (CTA do header, se houver `font-mono-label` no botão de avaliação)
-  - `LeadFormProgressive.tsx` (link "Recuperar progresso" e botão de etapa, linhas 325 e similares)
-  - Qualquer outro `font-mono-label` que esteja dentro de `<Button>`, `<a className="… cta">`, etc.
-- **Manter `font-mono-label`** nos eyebrows de seção (`SectionHead`, `sections.tsx`), credenciais, breadcrumbs, métricas — ali o mono é proposital ("dados oficiais de dossiê") e não compete com o título.
+3. **Voltar `btn-label` para o site público apenas**: o `Button` base não deve forçar uppercase no admin (relatórios, filtros, "Salvar", "Excluir" ficam estranhos em uppercase). Trocar abordagem:
+   - Reverter `Button` base para `text-sm font-medium` (Inter).
+   - Criar uma variante específica `cta` ou aplicar `btn-label` apenas por className nos CTAs do site público (Hero, Footer, formulários). Os botões públicos críticos hoje já recebem `variant="default"` em hero/footer; vou listar os pontos e aplicar `className="btn-label"` neles.
+   - Esse caminho preserva o admin natural e devolve a tipografia premium nos CTAs reais do site.
 
-## 3. Verificação
+### B) Corrigir os pontos `text-ink-text` invisíveis no público
 
-- Rodar Playwright em `/`, `/avaliacao`, `/lp/medicos` e `/blog`: tirar screenshots para confirmar (a) ausência de azul perceptível em hero/cards/footer, (b) CTAs com a mesma "voz" do título (Montserrat tracked) e não mais com aparência de código mono.
-- Conferir que parchment (seções claras) e o ouro continuam intactos — só o frio do navy sai.
+- `sections.tsx` linha 478: trocar `text-ink-text` → `text-gold/15` (overlay decorativo sutil sobre seção escura).
+- Auditar os demais `text-ink-text` para garantir que estão sempre dentro de `.section-parchment` (já estão, conforme grep).
+
+### C) Garantir contraste mínimo nos cards escuros
+
+- `--ink-raise` `#16161A` sobre `--ink` `#0B0B0C` → diferença visual fraca. Subir `--ink-raise` para `#1C1C20` para devolver elevação visível em cards `bg-ink-raise/50` (FAQ, scoring, blog cards).
+
+### D) Validação
+
+- Rodar Playwright em `/`, `/avaliacao`, `/admin`, `/admin/leads`, `/admin/scoring`. Tirar screenshots desktop 1280 e validar:
+  - botões do admin com aparência clara/slate, texto legível
+  - títulos `H1/H2` visíveis em todas as seções
+  - CTAs do site público em Montserrat uppercase
+  - cards escuros com elevação perceptível
+- Se algum botão crítico ainda ficar invisível, ajustar pontualmente.
 
 ## O que NÃO muda
 
-- Estrutura de componentes, rotas, copy, lead scoring, dataStore, admin.
-- Paleta parchment, ouro, oxblood e successo.
-- Eyebrows, números de seção e dados em `font-mono` (intencional na identidade dossiê).
+- Paleta dossiê do site público (preto + ouro + parchment) continua igual.
+- Estrutura de rotas, copy, lógica.
+- Tipografia das seções/headlines do site público.
