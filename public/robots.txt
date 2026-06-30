@@ -1,2 +1,10 @@
 User-agent: *
 Allow: /
+Disallow: /admin
+Disallow: /admin/
+Disallow: /lp
+Disallow: /lp/
+
+# Sitemap (sem domínio absoluto até o domínio final ser definido —
+# o crawler resolve a partir do host atual).
+Sitemap: /sitemap.xml
