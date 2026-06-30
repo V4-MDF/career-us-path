@@ -128,7 +128,7 @@ export function VisaPageBody({ page }: { page: VisaPage }) {
             title="EB-2 NIW vs EB-1 vs EB-3"
             kicker="Três caminhos legítimos, três perfis distintos."
           />
-          <div className="mt-10 overflow-x-auto border border-ink-text/15 bg-white">
+          <div className="mt-10 overflow-x-auto rounded-2xl border border-ink-text/15 bg-white shadow-soft">
             <table className="w-full text-sm">
               <thead>
                 <tr className="bg-ink text-foreground">
