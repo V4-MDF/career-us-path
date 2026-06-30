@@ -1,11 +1,16 @@
 /**
  * BlogStrip — faixa de conteúdo do blog logo abaixo do hero da Home.
- * Lê posts publicados via listPublishedPosts; se vazio, mostra placeholders.
+ * Mobile: carrossel horizontal com scroll-snap (cards "espiando" o próximo).
+ * Desktop (md+): grid 3 colunas.
+ * Cada card exibe a foto de capa do post no topo.
  */
 import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, BookOpen, Clock } from "lucide-react";
 import { listPublishedPosts, type BlogPost } from "@/lib/blog";
+import coverSkyline from "@/assets/hero-skyline.jpg";
+import coverFamily from "@/assets/family-portrait.jpg";
+import coverPassport from "@/assets/passport-documents.jpg";
 
 interface Card {
   slug: string;
@@ -13,20 +18,30 @@ interface Card {
   resumo: string;
   categoria: string;
   tempo_leitura: number;
+  capa: string;
   placeholder?: boolean;
 }
+
+const FALLBACK_COVERS = [coverSkyline, coverPassport, coverFamily];
 
 const PLACEHOLDERS: Card[] = [
   { slug: "#", titulo: "Como o EB-2 NIW avalia o seu impacto profissional",
     resumo: "Os três pilares Dhanasar e como construir evidências de mérito.",
-    categoria: "Vistos e Green Card", tempo_leitura: 6, placeholder: true },
+    categoria: "Vistos e Green Card", tempo_leitura: 6, capa: coverPassport, placeholder: true },
   { slug: "#", titulo: "Vida em Orlando: o que ninguém te conta no primeiro ano",
     resumo: "Custos reais, escolas, healthcare e a curva de adaptação de famílias brasileiras.",
-    categoria: "Vida nos EUA", tempo_leitura: 8, placeholder: true },
+    categoria: "Vida nos EUA", tempo_leitura: 8, capa: coverFamily, placeholder: true },
   { slug: "#", titulo: "Médicos brasileiros nos EUA: caminhos sem refazer residência",
     resumo: "Estratégias EB-2 NIW para perfis clínicos com atuação reconhecida.",
-    categoria: "Carreira e Mercado", tempo_leitura: 7, placeholder: true },
+    categoria: "Carreira e Mercado", tempo_leitura: 7, capa: coverSkyline, placeholder: true },
 ];
+
+function isUsableCover(src?: string): boolean {
+  if (!src) return false;
+  // Ignora SVG-placeholder embutido em data: usado em blog.ts.
+  if (src.startsWith("data:image/svg+xml")) return false;
+  return true;
+}
 
 export function BlogStrip() {
   const [posts, setPosts] = useState<Card[] | null>(null);
@@ -36,9 +51,10 @@ export function BlogStrip() {
       .then((all) => {
         if (!alive) return;
         if (!all || all.length === 0) { setPosts(PLACEHOLDERS); return; }
-        setPosts(all.slice(0, 3).map((p: BlogPost) => ({
+        setPosts(all.slice(0, 3).map((p: BlogPost, i: number) => ({
           slug: p.slug, titulo: p.titulo, resumo: p.resumo,
           categoria: p.categoria, tempo_leitura: p.tempo_leitura,
+          capa: isUsableCover(p.capa) ? p.capa : FALLBACK_COVERS[i % FALLBACK_COVERS.length],
         })));
       })
       .catch(() => { if (alive) setPosts(PLACEHOLDERS); });
@@ -72,7 +88,22 @@ export function BlogStrip() {
           </Link>
         </div>
 
-        <div className="mt-10 grid md:grid-cols-3 gap-5">
+        {/*
+          Mobile: trilho horizontal com snap. Usa margem negativa para sangrar
+          até a borda da tela (compensando container-x) e padding para deixar
+          o próximo card "espiando". Desktop: grid 3 colunas tradicional.
+        */}
+        <div
+          role="list"
+          aria-label="Artigos em destaque"
+          className="
+            mt-10 flex gap-4 overflow-x-auto snap-x snap-mandatory
+            -mx-4 px-4 pb-2
+            [scrollbar-width:none] [&::-webkit-scrollbar]:hidden
+            md:mx-0 md:px-0 md:pb-0 md:overflow-visible
+            md:grid md:grid-cols-3 md:gap-5 md:snap-none
+          "
+        >
           {items.map((p) => {
             const Wrapper: React.ElementType = p.placeholder ? "article" : Link;
             const props: Record<string, unknown> = p.placeholder
@@ -81,34 +112,69 @@ export function BlogStrip() {
             return (
               <Wrapper
                 key={p.slug + p.titulo}
+                role="listitem"
                 {...props}
-                className="group block relative gold-tick border border-gold/20 bg-ink-raise/60 p-7 h-full hover:border-gold/60 transition-colors"
+                className="
+                  group relative gold-tick border border-gold/20 bg-ink-raise/60
+                  hover:border-gold/60 transition-colors
+                  flex flex-col overflow-hidden
+                  w-[80vw] max-w-[340px] shrink-0 snap-start
+                  md:w-auto md:max-w-none md:shrink md:snap-align-none
+                "
               >
-                <div className="flex items-center gap-2 font-mono-label text-gold/80">
-                  <BookOpen className="h-3 w-3" /> {p.categoria}
+                {/* Capa */}
+                <div className="relative aspect-[16/10] w-full overflow-hidden bg-ink-deep">
+                  <img
+                    src={p.capa}
+                    alt=""
+                    loading="lazy"
+                    decoding="async"
+                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                  />
+                  <div
+                    aria-hidden
+                    className="absolute inset-0 bg-gradient-to-t from-ink-deep/85 via-ink-deep/15 to-transparent"
+                  />
                 </div>
-                <h3 className="mt-4 font-display text-lg leading-snug text-foreground group-hover:text-gold transition-colors">
-                  {p.titulo}
-                </h3>
-                <p className="mt-3 text-sm text-foreground/70 leading-relaxed line-clamp-3">
-                  {p.resumo}
-                </p>
-                <div className="mt-6 flex items-center justify-between text-xs font-mono-label text-foreground/55">
-                  <span className="inline-flex items-center gap-1.5">
-                    <Clock className="h-3 w-3" /> {p.tempo_leitura} min
-                  </span>
-                  {!p.placeholder && (
-                    <span className="text-gold inline-flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
-                      Ler <ArrowRight className="h-3 w-3" />
+
+                {/* Conteúdo */}
+                <div className="flex flex-1 flex-col p-6">
+                  <div className="flex items-center gap-2 font-mono-label text-gold/80">
+                    <BookOpen className="h-3 w-3" /> {p.categoria}
+                  </div>
+                  <h3 className="mt-3 font-display text-lg leading-snug text-foreground group-hover:text-gold transition-colors">
+                    {p.titulo}
+                  </h3>
+                  <p className="mt-3 text-sm text-foreground/70 leading-relaxed line-clamp-2 md:line-clamp-3">
+                    {p.resumo}
+                  </p>
+                  <div className="mt-auto pt-5 flex items-center justify-between text-xs font-mono-label text-foreground/55">
+                    <span className="inline-flex items-center gap-1.5">
+                      <Clock className="h-3 w-3" /> {p.tempo_leitura} min
                     </span>
-                  )}
-                  {p.placeholder && (
-                    <span className="text-foreground/40">EM BREVE</span>
-                  )}
+                    {!p.placeholder && (
+                      <span className="text-gold inline-flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
+                        Ler <ArrowRight className="h-3 w-3" />
+                      </span>
+                    )}
+                    {p.placeholder && (
+                      <span className="text-foreground/40">EM BREVE</span>
+                    )}
+                  </div>
                 </div>
               </Wrapper>
             );
           })}
+        </div>
+
+        {/* Indicador discreto de carrossel (mobile only) */}
+        <div
+          aria-hidden
+          className="md:hidden mt-4 flex justify-center gap-1.5"
+        >
+          {items.map((_, i) => (
+            <span key={i} className="h-1 w-6 rounded-full bg-gold/25" />
+          ))}
         </div>
       </div>
     </section>
