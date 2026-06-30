@@ -270,14 +270,23 @@ Se sua decisão de mudar para os EUA é firme, a recomendação é objetiva: com
   },
 ];
 
-/** Insere os posts-semente apenas uma vez. */
+/** Insere os posts-semente apenas uma vez; migra capas antigas (placeholder) para as novas. */
 export async function ensureSeed(): Promise<void> {
-  const flag = await get<{ done: true }>("blog_posts", SEED_FLAG_KEY);
-  if (flag?.done) return;
   for (const p of SEED_POSTS) {
     const existing = await get<BlogPost>("blog_posts", p.slug);
     if (!existing) {
       await set("blog_posts", p.slug, { ...p, tempo_leitura: calcReadingTime(p.corpo) });
+      continue;
+    }
+    // Migração: se a capa armazenada é o placeholder antigo (SVG inline) ou
+    // está vazia, troca pela capa real do seed atual.
+    const stale = !existing.capa || existing.capa.startsWith("data:image/svg+xml");
+    if (stale) {
+      await set("blog_posts", p.slug, {
+        ...existing,
+        capa: p.capa,
+        og_image: existing.og_image && !existing.og_image.startsWith("data:image/svg+xml") ? existing.og_image : p.og_image,
+      });
     }
   }
   await set("blog_posts", SEED_FLAG_KEY, { done: true });
