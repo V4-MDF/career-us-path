@@ -12,8 +12,14 @@ import {
 import { CheckCircle2, ChevronRight, Loader2 } from "lucide-react";
 import { newId, set } from "@/lib/dataStore";
 import { captureUtms, computeScore, type LeadInput, type ScoredLead } from "@/lib/leadScoring";
+import { getAssignedVariantId, registerConversion } from "@/lib/abEngine";
 
-const ufs = ["AC","AL","AM","AP","BA","CE","DF","ES","GO","MA","MG","MS","MT","PA","PB","PE","PI","PR","RJ","RN","RO","RR","RS","SC","SE","SP","TO"];
+export interface LeadFormProps {
+  /** Slug do segmento da LP (medicos, engenheiros, empresarios). */
+  segmentId?: string;
+  /** Pré-seleciona profissão (chave do select). */
+  defaultProfissao?: string;
+}
 
 const empty: LeadInput = {
   nome: "", email: "", whatsapp: "",
