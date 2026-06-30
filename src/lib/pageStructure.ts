@@ -132,35 +132,60 @@ export async function savePageSections(page: PageSlug, items: SectionItem[]) {
  * em tempo real (mesma aba) sem reload.
  * ============================================================ */
 
-export function useOrderedSections(page: PageSlug): SectionItem[] {
-  const [items, setItems] = useState<SectionItem[]>(() => reconcile(page, null));
-
-  useEffect(() => {
-    let cancelled = false;
-    const refresh = async () => {
-      const next = await loadPageSections(page);
-      if (cancelled) return;
-      if (typeof window !== "undefined") {
-        (window as any).__layoutDebug = next.map((n) => n.id);
-        (window as any).__layoutDebugCount = ((window as any).__layoutDebugCount ?? 0) + 1;
-      }
-      setItems(next);
-    };
-    refresh();
-    const onChange = () => refresh();
-    const onStorage = (e: StorageEvent) => {
-      if (e.key === "status_page_sections" || e.key === "status_admin_change") refresh();
-    };
-    window.addEventListener("status:admin-change", onChange);
-    window.addEventListener("storage", onStorage);
-    return () => {
-      cancelled = true;
-      window.removeEventListener("status:admin-change", onChange);
-      window.removeEventListener("storage", onStorage);
-    };
-  }, [page]);
-
-  return items;
+/**
+ * Subscribe a snapshot pattern via `useSyncExternalStore`.
+ *
+ * Por que não `useState + useEffect`: o preview com SSR + injeção
+ * de query-string da Lovable causa hydration mismatch, e React 18
+ * pode descartar atualizações pós-hydration em subárvores afetadas.
+ * `useSyncExternalStore` integra com o sistema de stores externos e
+ * garante consistência entre SSR (snapshot do servidor = defaults)
+ * e cliente (snapshot real do localStorage).
+ */
+function getSnapshot(page: PageSlug): SectionItem[] {
+  if (typeof window === "undefined") return reconcile(page, null);
+  try {
+    const raw = window.localStorage.getItem("status_page_sections");
+    const parsed = raw ? (JSON.parse(raw) as Record<string, PageSectionsRow>) : null;
+    return reconcile(page, parsed?.[page]?.items);
+  } catch {
+    return reconcile(page, null);
+  }
 }
+
+// Cache de snapshot por page para manter referência estável entre renders
+// quando os dados não mudam (requisito de useSyncExternalStore).
+const snapshotCache = new Map<PageSlug, { key: string; value: SectionItem[] }>();
+
+function getCachedSnapshot(page: PageSlug): SectionItem[] {
+  const next = getSnapshot(page);
+  const key = next.map((s) => `${s.id}:${s.active ? 1 : 0}`).join("|");
+  const prev = snapshotCache.get(page);
+  if (prev && prev.key === key) return prev.value;
+  snapshotCache.set(page, { key, value: next });
+  return next;
+}
+
+function subscribe(callback: () => void): () => void {
+  if (typeof window === "undefined") return () => {};
+  const onStorage = (e: StorageEvent) => {
+    if (e.key === "status_page_sections" || e.key === "status_admin_change") callback();
+  };
+  window.addEventListener("status:admin-change", callback);
+  window.addEventListener("storage", onStorage);
+  return () => {
+    window.removeEventListener("status:admin-change", callback);
+    window.removeEventListener("storage", onStorage);
+  };
+}
+
+export function useOrderedSections(page: PageSlug): SectionItem[] {
+  return useSyncExternalStore(
+    subscribe,
+    () => getCachedSnapshot(page),
+    () => reconcile(page, null), // server snapshot — sem localStorage
+  );
+}
+
 
 
