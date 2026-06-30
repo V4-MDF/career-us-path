@@ -29,7 +29,7 @@ export interface SectionDef {
 // ============================================================
 export const HOME_SECTIONS: SectionDef[] = [
   { id: "abertura",             label: "Abertura" },
-  
+  { id: "blog-em-destaque",     label: "Blog em destaque" },
   { id: "credenciais",          label: "Credenciais" },
   { id: "brasil-vs-eua",        label: "Brasil vs EUA" },
   { id: "eb-2-niw",             label: "EB-2 NIW" },
