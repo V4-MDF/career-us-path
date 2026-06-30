@@ -2,20 +2,25 @@
  * Conteúdo editável da home — defaults consumidos pelos componentes.
  *
  * Os componentes leem via `useContent(key)` que tenta primeiro o dataStore
- * (tabela `site_content`) e cai para o default abaixo. Assim o admin futuro
- * pode espelhar/sobrescrever sem alterar componentes.
+ * (tabela `site_content`) e cai para o default abaixo. Assim o admin pode
+ * espelhar/sobrescrever sem alterar componentes.
+ *
+ * Prompt 3.1: removido o sufixo "[CONFIRMAR]" — o site público nunca renderiza
+ * esse marcador. Itens pendentes de validação ficam em
+ * src/lib/pendingValidation.ts (visível só no admin).
  */
 
 import { useEffect, useState } from "react";
 import { get } from "./dataStore";
 
 export const defaultContent = {
-  "hero.eyebrow": "IMIGRAÇÃO PARA OS ESTADOS UNIDOS • EB-2 NIW",
+  "hero.eyebrow": "IMIGRAÇÃO PARA OS ESTADOS UNIDOS — EB-2 NIW",
   "hero.title": "Seu Green Card americano baseado no mérito da sua carreira.",
   "hero.subtitle":
     "A Status na América ajuda profissionais brasileiros consolidados a conquistar a residência permanente nos EUA pelo EB-2 NIW — sem patrocinador, sem loteria, com Green Card para o cônjuge e os filhos.",
   "hero.cta": "Fazer minha avaliação gratuita",
-  "hero.proof": "+1.000 famílias atendidas [CONFIRMAR] · Nota 5,0 no Google · Sede em Orlando, Flórida",
+  "hero.proof":
+    "+1.000 famílias atendidas · Nota 5,0 no Google · Sede em Orlando, Flórida",
 
   "contrast.title": "Você não precisa recomeçar do zero.",
   "contrast.subtitle": "Precisa de um novo cenário para a carreira que você já construiu.",
@@ -44,9 +49,7 @@ export function useContent(key: ContentKey): string {
     get<{ value: string }>("site_content", key).then((row) => {
       if (active && row?.value) setValue(row.value);
     });
-    return () => {
-      active = false;
-    };
+    return () => { active = false; };
   }, [key]);
   return value;
 }
