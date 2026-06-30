@@ -340,7 +340,7 @@ export function NiwSection() {
           <p className="mt-6 text-[17px] text-foreground/80 leading-relaxed max-w-xl">{lead}</p>
           <ul className="mt-9 grid sm:grid-cols-2 gap-3">
             {bullets.map(({ icon: Icon, t }) => (
-              <li key={t} className="relative gold-tick border border-gold/25 bg-ink-raise/50 p-5">
+              <li key={t} className="relative gold-tick rounded-xl border border-gold/25 bg-ink-raise/50 p-5">
                 <Icon className="h-5 w-5 text-gold mb-3" />
                 <span className="text-sm leading-snug text-foreground/90">{t}</span>
               </li>
