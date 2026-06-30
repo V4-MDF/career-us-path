@@ -148,22 +148,23 @@ export function Header() {
           </a>
           <button
             type="button"
-            className="lg:hidden grid h-10 w-10 place-items-center border border-gold/40 text-gold"
+            className="lg:hidden grid h-11 w-11 place-items-center border border-gold/40 text-gold"
             onClick={() => setOpen((o) => !o)}
-            aria-label="Menu"
+            aria-label={open ? "Fechar menu" : "Abrir menu"}
             aria-expanded={open}
+            aria-controls="mobile-menu"
           >
-            {open ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
+            {open ? <X aria-hidden className="h-4 w-4" /> : <Menu aria-hidden className="h-4 w-4" />}
           </button>
         </div>
       </div>
 
       {/* Menu mobile */}
       {open && (
-        <div className="lg:hidden border-t border-gold/20 bg-ink">
+        <nav id="mobile-menu" aria-label="Navegação móvel" className="lg:hidden border-t border-gold/20 bg-ink">
           <div className="container-x flex flex-col py-5 gap-1">
             {NAV.slice(0, 1).map((n) => (
-              <Link key={n.to} to={n.to} onClick={() => setOpen(false)} className="py-3 text-foreground/90 border-b border-gold/10">
+              <Link key={n.to} to={n.to} onClick={() => setOpen(false)} className="min-h-11 flex items-center text-foreground border-b border-gold/10" activeProps={{ "aria-current": "page" }}>
                 {n.label}
               </Link>
             ))}
@@ -172,18 +173,19 @@ export function Header() {
             <div className="border-b border-gold/10">
               <button
                 type="button"
-                className="w-full flex items-center justify-between py-3 text-foreground/90"
+                className="w-full min-h-11 flex items-center justify-between text-foreground"
                 onClick={() => setVistosMobileOpen((v) => !v)}
                 aria-expanded={vistosMobileOpen}
+                aria-controls="mobile-vistos"
               >
-                Vistos <ChevronDown className={`h-4 w-4 transition-transform ${vistosMobileOpen ? "rotate-180" : ""}`} />
+                Vistos <ChevronDown aria-hidden className={`h-4 w-4 transition-transform ${vistosMobileOpen ? "rotate-180" : ""}`} />
               </button>
               {vistosMobileOpen && (
-                <div className="pl-3 pb-3 space-y-2 border-l border-gold/30 ml-1">
+                <div id="mobile-vistos" className="pl-3 pb-3 space-y-2 border-l border-gold/30 ml-1">
                   {VISTOS.map((v) => (
-                    <Link key={v.to} to={v.to} onClick={() => setOpen(false)} className="block py-1.5">
-                      <span className="font-display text-base">{v.label}</span>
-                      <span className="block font-mono-label text-[10px] text-foreground/55">{v.hint}</span>
+                    <Link key={v.to} to={v.to} onClick={() => setOpen(false)} className="block py-2 min-h-11" activeProps={{ "aria-current": "page" }}>
+                      <span className="font-display text-base text-foreground">{v.label}</span>
+                      <span className="block font-mono-label text-[10px] text-foreground/70">{v.hint}</span>
                     </Link>
                   ))}
                 </div>
@@ -191,16 +193,17 @@ export function Header() {
             </div>
 
             {NAV.slice(1).map((n) => (
-              <Link key={n.to} to={n.to} onClick={() => setOpen(false)} className="py-3 text-foreground/90 border-b border-gold/10">
+              <Link key={n.to} to={n.to} onClick={() => setOpen(false)} className="min-h-11 flex items-center text-foreground border-b border-gold/10" activeProps={{ "aria-current": "page" }}>
                 {n.label}
               </Link>
             ))}
             <a href={avaliacaoHref("header_mobile_cta")} onClick={() => setOpen(false)} className="mt-4">
-              <Button className="w-full btn-sweep">Avaliação gratuita</Button>
+              <Button className="w-full btn-sweep min-h-11">Avaliação gratuita</Button>
             </a>
           </div>
-        </div>
+        </nav>
       )}
     </header>
   );
 }
+
