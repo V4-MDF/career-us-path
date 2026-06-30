@@ -240,11 +240,12 @@ function LeadsPage() {
         }
       />
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-5">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-3 mb-5">
         <StatCard label="Total filtrado" value={stats.total} accent="blue" />
         <StatCard label="% Prioritários" value={`${stats.pctPrio}%`} accent="green" />
         <StatCard label="Novos" value={stats.byStatus.novo ?? 0} accent="gray" />
         <StatCard label="Em contato + Qualificados" value={(stats.byStatus.em_contato ?? 0) + (stats.byStatus.qualificado ?? 0)} accent="gold" />
+        <StatCard label="Origem incompleta" value={stats.incomplete} accent="red" />
       </div>
 
       <div className="grid lg:grid-cols-2 gap-3 mb-5">
