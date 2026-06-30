@@ -87,7 +87,7 @@ function VisaPageRoute() {
         {/* 1 — Hero */}
         <section className="bg-ink relative overflow-hidden">
           <div aria-hidden className="absolute inset-0 guilloche" />
-          <div className="container-x py-16 md:py-24 relative">
+          <div className="container-x section-pad relative">
             <nav aria-label="Breadcrumb" className="font-mono-label text-foreground/55 flex items-center gap-2">
               <Link to="/" className="hover:text-gold">Início</Link>
               <ChevronRight className="h-3 w-3" />
@@ -122,7 +122,7 @@ function VisaPageRoute() {
 
         {/* 2 — O que é */}
         <section className="section-parchment">
-          <div className="container-x py-20 md:py-28 grid md:grid-cols-12 gap-10">
+          <div className="container-x section-pad grid md:grid-cols-12 gap-10">
             <div className="md:col-span-5">
               <SectionHead num="01" eyebrow="DEFINIÇÃO" variant="parchment" title={page.whatIs.title} />
             </div>
@@ -134,7 +134,7 @@ function VisaPageRoute() {
 
         {/* 3 — Quem se qualifica */}
         <section className="bg-ink">
-          <div className="container-x py-20 md:py-28">
+          <div className="container-x section-pad">
             <SectionHead num="02" eyebrow="ELEGIBILIDADE" title={page.qualifies.title} kicker={page.qualifies.intro} />
             <ul className="mt-12 grid gap-5 md:grid-cols-2">
               {page.qualifies.items.map((it) => (
@@ -149,7 +149,7 @@ function VisaPageRoute() {
 
         {/* 4 — Processo */}
         <section className="section-parchment">
-          <div className="container-x py-20 md:py-28">
+          <div className="container-x section-pad">
             <SectionHead num="03" eyebrow="PROCESSO" variant="parchment" title={page.process.title} />
             <ol className="mt-12 grid gap-6 md:grid-cols-3">
               {page.process.steps.map((s) => (
@@ -168,7 +168,7 @@ function VisaPageRoute() {
 
         {/* 5 — Família */}
         <section className="bg-ink-deep">
-          <div className="container-x py-20 md:py-28 grid md:grid-cols-12 gap-10 items-start">
+          <div className="container-x section-pad grid md:grid-cols-12 gap-10 items-start">
             <div className="md:col-span-5">
               <SectionHead num="04" eyebrow="FAMÍLIA" title={page.family.title} />
             </div>
@@ -180,7 +180,7 @@ function VisaPageRoute() {
 
         {/* 6 — Comparativo */}
         <section className="section-parchment">
-          <div className="container-x py-20 md:py-28">
+          <div className="container-x section-pad">
             <SectionHead
               num="05"
               eyebrow="COMPARATIVO"
@@ -237,7 +237,7 @@ function VisaPageRoute() {
 
         {/* 7 — FAQ */}
         <section className="bg-ink">
-          <div className="container-x py-20 md:py-28 max-w-4xl">
+          <div className="container-x section-pad max-w-4xl">
             <SectionHead num="06" eyebrow="PERGUNTAS FREQUENTES" title="O que mais perguntam sobre este visto" />
             <Accordion type="single" collapsible className="mt-10 border-t border-gold/20">
               {page.faq.map((f, i) => (
@@ -256,7 +256,7 @@ function VisaPageRoute() {
 
         {/* 8 — CTA forte para a LP de avaliação */}
         <section id="avaliacao" className="section-parchment">
-          <div className="container-x py-20 md:py-28 grid lg:grid-cols-12 gap-10 items-start">
+          <div className="container-x section-pad grid lg:grid-cols-12 gap-10 items-start">
             <div className="lg:col-span-7">
               <SectionHead num="07" eyebrow="AVALIAÇÃO GRATUITA" variant="parchment" title={page.ctaTitle} kicker={page.ctaSubtitle} />
               <ul className="mt-8 space-y-3 text-ink-text/80">

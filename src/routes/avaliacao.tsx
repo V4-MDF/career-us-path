@@ -136,7 +136,7 @@ function AvaliacaoPage() {
       <main>
         <section className="relative">
           <div aria-hidden className="absolute inset-0 guilloche opacity-60" />
-          <div className="container-x relative py-16 md:py-24 grid lg:grid-cols-[1.05fr_1fr] gap-14 items-start">
+          <div className="container-x relative section-pad grid lg:grid-cols-[1.05fr_1fr] gap-14 items-start">
             {/* Coluna esquerda — headline + microprova */}
             <div className="lg:pt-4 max-w-xl">
               <div className="flex items-center gap-3">
