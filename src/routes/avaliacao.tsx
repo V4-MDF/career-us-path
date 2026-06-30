@@ -149,14 +149,8 @@ function AvaliacaoPage() {
             </p>
           </div>
 
-          {/* Chip origem (discreto) */}
-          {originLabel && (
-            <div className="mt-8 flex justify-center">
-              <span className="inline-flex items-center gap-2 border border-border bg-ink-deep/50 px-3 py-1.5 text-[11px] font-mono-label text-foreground/55 rounded">
-                <MapPin className="h-3 w-3" /> {originLabel}
-              </span>
-            </div>
-          )}
+          {/* Origem capturada silenciosamente — visível apenas no admin/tracking de cada lead */}
+
 
           {/* Formulário */}
           <div className="mt-6">
