@@ -253,11 +253,11 @@ export function LeadFormProgressive({
   }
 
   return (
-    <div className="rounded-2xl border border-border bg-surface shadow-soft" ref={containerRef}>
-      {/* progresso */}
-      <div className="px-6 md:px-8 pt-6">
+    <div className="rounded-2xl border border-gold/25 bg-ink-raise shadow-soft overflow-hidden" ref={containerRef}>
+      {/* progresso — sticky no topo do card */}
+      <div className="sticky top-0 z-10 px-6 md:px-8 pt-5 pb-4 bg-ink-raise/95 backdrop-blur border-b border-border/40">
         <div className="flex items-center justify-between mb-2">
-          <span className="font-mono-label text-xs text-foreground/55">
+          <span className="font-mono-label text-xs text-foreground/70">
             {completedCount}/{totalFields} preenchidos
           </span>
           <span className="font-mono-label text-xs text-gold">{progressPct}%</span>
@@ -267,7 +267,7 @@ export function LeadFormProgressive({
         </div>
       </div>
 
-      <div className="px-6 md:px-8 py-8 space-y-4">
+      <div className="px-6 md:px-8 py-8 space-y-5">
         {PROGRESSIVE_FIELDS.map((f, i) => {
           const visible = i <= stepIndex;
           const active = i === stepIndex;
