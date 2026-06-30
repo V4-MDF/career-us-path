@@ -15,7 +15,7 @@
 
 import { Link } from "@tanstack/react-router";
 import { motion, useInView, useReducedMotion, useScroll, useTransform } from "motion/react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   AlertTriangle, Award, Briefcase, Building2, CheckCircle2, FileText,
   GraduationCap, Heart, Layers, MapPin, PlayCircle, ShieldCheck,
@@ -908,34 +908,45 @@ function Reveal({
 
 
 function CountUp({ value, className }: { value: string; className?: string }) {
-  const match = value.match(/^([^\d-]*)([\d.,]+)(.*)$/);
+  const parsed = useMemo(() => {
+    const match = value.match(/^([^\d-]*)([\d.,]+)(.*)$/);
+    if (!match) return null;
+    const [, pre, num, post] = match;
+    const target = parseFloat(num.replace(/\./g, "").replace(",", "."));
+    if (!isFinite(target)) return null;
+    return {
+      pre,
+      post,
+      target,
+      decimals: num.includes(",") ? (num.split(",")[1] || "").length : 0,
+    };
+  }, [value]);
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
   const reduce = useReducedMotion();
-  const [display, setDisplay] = useState(reduce ? value : match ? `${match[1]}0${match[3]}` : value);
+  const [display, setDisplay] = useState(value);
 
   useEffect(() => {
-    if (!inView || reduce || !match) { setDisplay(value); return; }
-    const [, pre, num, post] = match;
-    const target = parseFloat(num.replace(/\./g, "").replace(",", "."));
-    if (!isFinite(target)) { setDisplay(value); return; }
-    const decimals = num.includes(",") ? (num.split(",")[1] || "").length : 0;
+    if (!inView || reduce || !parsed) {
+      setDisplay(value);
+      return;
+    }
     const start = performance.now();
     const dur = 1100;
     let raf = 0;
     const tick = (now: number) => {
       const p = Math.min(1, (now - start) / dur);
       const eased = 1 - Math.pow(1 - p, 3);
-      const v = target * eased;
-      const formatted = decimals
-        ? v.toFixed(decimals).replace(".", ",")
+      const v = parsed.target * eased;
+      const formatted = parsed.decimals
+        ? v.toFixed(parsed.decimals).replace(".", ",")
         : Math.round(v).toLocaleString("pt-BR");
-      setDisplay(`${pre}${formatted}${post}`);
+      setDisplay(p === 1 ? value : `${parsed.pre}${formatted}${parsed.post}`);
       if (p < 1) raf = requestAnimationFrame(tick);
     };
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
-  }, [inView, reduce, value, match]);
+  }, [inView, reduce, value, parsed]);
 
   return <span ref={ref} className={className}>{display}</span>;
 }
