@@ -19,6 +19,7 @@ import { LeadFormProgressive } from "@/components/site/LeadFormProgressive";
 import { trackFormView } from "@/lib/tracking";
 import { getOrigin } from "@/lib/origin";
 import type { QualResult } from "@/lib/leadQualification";
+import avaliacaoBg from "@/assets/avaliacao-bg.jpg";
 
 type SegKey = "medicos" | "engenheiros" | "empresarios";
 
