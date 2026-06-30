@@ -75,11 +75,15 @@ export function isAuthenticated(): boolean {
   return !!readSession();
 }
 
-/** Sem usuários no LS? semeia o admin do .env no PRIMEIRO login válido. */
+/**
+ * Sem usuários no LS? semeia o admin do .env no PRIMEIRO login válido.
+ * Fallback de DEV: admin@statusnaamerica.com / status123 (apenas para validação).
+ * SUBSTITUIR antes de qualquer uso real.
+ */
 async function ensureEnvAdmin(email: string, password: string): Promise<void> {
-  const envEmail = import.meta.env.VITE_ADMIN_EMAIL as string | undefined;
-  const envPass = import.meta.env.VITE_ADMIN_PASSWORD as string | undefined;
-  if (!envEmail || !envPass) return;
+  const envEmail = (import.meta.env.VITE_ADMIN_EMAIL as string | undefined) ?? "admin@statusnaamerica.com";
+  const envPass = (import.meta.env.VITE_ADMIN_PASSWORD as string | undefined) ?? "status123";
+
   if (email.trim().toLowerCase() !== envEmail.trim().toLowerCase()) return;
   if (password !== envPass) return;
 
