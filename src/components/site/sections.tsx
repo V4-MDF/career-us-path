@@ -158,7 +158,8 @@ export function Hero() {
                 Substituir por fotografia real art-direcionada (duotone navy + grão).
               </p>
             </div>
-          </motion.div>
+          </div>
+
           <div className="absolute -bottom-6 -left-6 border border-gold bg-ink-deep/95 backdrop-blur p-4 max-w-[200px]">
             <div className="absolute top-0 left-0 h-[3px] w-10 bg-gold" />
             <div className="flex items-center gap-1 text-gold">
