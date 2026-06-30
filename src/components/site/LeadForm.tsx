@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/select";
 import { CheckCircle2, ChevronRight, Loader2 } from "lucide-react";
 import { newId, set } from "@/lib/dataStore";
-import { captureUtms, computeScore, type LeadInput, type ScoredLead } from "@/lib/leadScoring";
+import { captureUtms, type LeadInput } from "@/lib/leadScoring";
 import { getAssignedVariantId, registerConversion } from "@/lib/abEngine";
 
 export interface LeadFormProps {

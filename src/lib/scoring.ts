@@ -205,7 +205,7 @@ export function bandForScore(score: number, model: ScoringModel): PriorityBand {
 export function computeScore(lead: LeadInput, model: ScoringModel = DEFAULT_MODEL): ComputedScore {
   const total = weightSum(model) || 1;
   const composicao: FactorContribution[] = model.factors.map((f) => {
-    const raw = String((lead as Record<string, unknown>)[f.field] ?? "");
+    const raw = String((lead as unknown as Record<string, unknown>)[f.field] ?? "");
     const aderencia = f.valores[raw] ?? 0;
     const pesoNorm = (Math.max(0, f.peso) / total) * 100;
     const pontos = pesoNorm * aderencia;
