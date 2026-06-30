@@ -123,7 +123,7 @@ export function Header() {
                         <div className="font-mono-label mt-1 text-[10px] text-foreground/70">{v.hint}</div>
                       </div>
                       {v.badge && (
-                        <span className="shrink-0 border border-gold/60 px-2 py-0.5 font-mono-label text-[9px] text-gold">
+                        <span className="shrink-0 rounded-md border border-gold/60 px-2 py-0.5 font-mono-label text-[9px] text-gold">
                           {v.badge}
                         </span>
                       )}
