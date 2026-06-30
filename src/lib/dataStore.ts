@@ -21,7 +21,8 @@ export type TableName =
   | "page_seo"      // SEO por página (id = slug da página)
   | "media"         // imagens/logos/og (id = slot)
   | "page_sections" // ordem/ativação das dobras por página
-  | "blog_posts";   // posts do blog (id = slug)
+  | "blog_posts"    // posts do blog (id = slug)
+  | "prequal_responses"; // respostas do teste de pré-qualificação (id = token público)
 
 const PREFIX = "status_";
 

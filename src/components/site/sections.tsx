@@ -773,6 +773,12 @@ export function CtaBanner() {
             <a href={avaliacaoHref("home_cta_final")} className="mt-7 inline-block">
               <Button size="lg" className="btn-label btn-sweep h-12 px-7">Fazer minha avaliação gratuita</Button>
             </a>
+            <a
+              href="/pre-qualificacao"
+              className="mt-3 block text-[13px] text-gold/85 hover:text-gold underline underline-offset-4"
+            >
+              Prefere um teste rápido com resultado na hora? Faça a pré-qualificação →
+            </a>
           </div>
         </div>
       </div>

@@ -34,6 +34,7 @@ const NAV: NavItem[] = [
   { to: "/admin", label: "Dashboard", icon: LayoutDashboard, exact: true },
   { to: "/admin/leads", label: "Leads", icon: Users, badge: "crítico" },
   { to: "/admin/leads-incompletos", label: "Leads incompletos", icon: UserX },
+  { to: "/admin/pre-qualificacao", label: "Pré-qualificação", icon: ShieldCheck },
   { to: "/admin/scoring", label: "Pontuação", icon: Target },
   { to: "/admin/origens", label: "Origens & Canais", icon: Compass },
   { to: "/admin/segmentos", label: "Segmentos / LPs", icon: Tag, badge: "crítico" },
