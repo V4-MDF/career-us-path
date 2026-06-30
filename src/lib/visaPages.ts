@@ -165,7 +165,7 @@ const eb2niw: VisaPage = {
     {
       q: "Inglês fluente é obrigatório para começar?",
       a:
-        "Não é requisito para a petição EB-2 NIW. O caso é instruído em inglês pela assessoria jurídica; o profissional não precisa ser fluente para iniciar. A fluência, no entanto, é um diferencial relevante para a vida e a carreira nos EUA.",
+        "Não é requisito para a petição EB-2 NIW. A petição é instruída em inglês pela equipe jurídica parceira; o profissional não precisa ser fluente para iniciar. A fluência, no entanto, é um diferencial relevante para a vida e a carreira nos EUA.",
     },
     {
       q: "Quanto tempo leva o processo?",
