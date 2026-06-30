@@ -174,7 +174,7 @@ function PostPage() {
                       <Link
                         to="/blog/$slug"
                         params={{ slug: r.slug }}
-                        className="block group border border-ink-text/15 bg-white h-full"
+                        className="block group rounded-2xl border border-ink-text/15 bg-white h-full overflow-hidden shadow-soft transition-[border-color,box-shadow] hover:border-ink-text/35 hover:shadow-elevated"
                       >
                         <div className="aspect-[16/10] overflow-hidden">
                           <img src={r.capa} alt={r.titulo} width={600} height={375} loading="lazy"
