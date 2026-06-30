@@ -14,10 +14,10 @@
 
 import { useEffect, useMemo } from "react";
 import { createFileRoute, Link, useNavigate, useSearch } from "@tanstack/react-router";
-import { ChevronLeft, ShieldCheck, MapPin } from "lucide-react";
+import { ChevronLeft, ShieldCheck } from "lucide-react";
 import { LeadFormProgressive } from "@/components/site/LeadFormProgressive";
 import { trackFormView } from "@/lib/tracking";
-import { getOrigin, describeOrigin } from "@/lib/origin";
+import { getOrigin } from "@/lib/origin";
 import type { QualResult } from "@/lib/leadQualification";
 
 type SegKey = "medicos" | "engenheiros" | "empresarios";
