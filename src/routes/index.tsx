@@ -64,6 +64,7 @@ const HOME_REGISTRY: Record<string, ComponentType> = {
   "renda-em-dolar": SalaryCompare,
   "depoimentos": Testimonials,
   "duvidas-frequentes": FAQ,
+  "pre-qualificacao": PreQualPromo,
   "avaliacao-gratuita": CtaBanner,
 };
 
