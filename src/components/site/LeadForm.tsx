@@ -275,14 +275,14 @@ export function LeadForm({ segmentId, defaultProfissao, onSubmitted, submitLabel
 
       <div className="mt-6 flex items-center justify-between gap-3">
         {step > 0 ? (
-          <Button variant="ghost" onClick={() => setStep((s) => s - 1)}>Voltar</Button>
+          <Button variant="ghost" className="btn-label" onClick={() => setStep((s) => s - 1)}>Voltar</Button>
         ) : <span />}
         {step < 2 ? (
-          <Button onClick={next}>
+          <Button className="btn-label" onClick={next}>
             Continuar <ChevronRight className="ml-1 h-4 w-4" />
           </Button>
         ) : (
-          <Button onClick={submit} disabled={loading}>
+          <Button className="btn-label" onClick={submit} disabled={loading}>
             {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : (submitLabel ?? "Enviar perfil")}
           </Button>
         )}
