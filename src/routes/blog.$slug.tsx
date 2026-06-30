@@ -131,7 +131,7 @@ function PostPage() {
                   width={1200}
                   height={630}
                   loading="eager"
-                  className="w-full aspect-[16/9] object-cover border border-gold/20"
+                  className="w-full aspect-[16/9] object-cover rounded-3xl border border-gold/20 shadow-elevated"
                 />
               </div>
             </div>
