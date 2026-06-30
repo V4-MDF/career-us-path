@@ -61,8 +61,10 @@ function LoginPage() {
           <ShieldCheck className="h-3.5 w-3.5 text-amber-500 mt-0.5 shrink-0" />
           <p>
             Modo validação (client-side). Primeiro admin via <code className="bg-slate-200 px-1 rounded">VITE_ADMIN_EMAIL</code> /
-            <code className="bg-slate-200 px-1 rounded ml-1">VITE_ADMIN_PASSWORD</code>. Não há auto-cadastro — novos usuários
-            apenas dentro de <em>/admin/usuarios</em>.
+            <code className="bg-slate-200 px-1 rounded ml-1">VITE_ADMIN_PASSWORD</code>. Padrão de dev:
+            <code className="bg-slate-200 px-1 rounded ml-1">admin@statusnaamerica.com</code> /
+            <code className="bg-slate-200 px-1 rounded ml-1">status123</code> — TROQUE antes de qualquer uso.
+            Não há auto-cadastro: novos usuários apenas em <em>/admin/usuarios</em>.
           </p>
         </div>
       </div>
