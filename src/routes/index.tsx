@@ -3,7 +3,7 @@ import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import {
   AuthorityStrip, ContrastBrasilEUA, CtaBanner, FAQ, Hero, LegacySection,
-  NiwSection, PersonaCards, ProcessSteps, SalaryCompare, Testimonials,
+  NiwSection, ProcessSteps, SalaryCompare, Testimonials,
   VisaCards, WhyUs,
 } from "@/components/site/sections";
 import { OrganizationJsonLd } from "@/components/site/Seo";
@@ -59,7 +59,6 @@ function Home() {
         <ContrastBrasilEUA />
         <NiwSection />
         <VisaCards />
-        <PersonaCards />
         <ProcessSteps />
         <WhyUs />
         <LegacySection />

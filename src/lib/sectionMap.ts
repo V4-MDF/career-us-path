@@ -34,7 +34,6 @@ export const HOME_SECTIONS: SectionDef[] = [
   { id: "brasil-vs-eua",        label: "Brasil vs EUA" },
   { id: "eb-2-niw",             label: "EB-2 NIW" },
   { id: "vistos-eb",            label: "Vistos EB" },
-  { id: "perfis-atendidos",     label: "Perfis atendidos" },
   { id: "processo-eb-2-niw",    label: "Processo" },
   { id: "por-que-status",       label: "Por que a Status" },
   { id: "legado",               label: "Legado" },
