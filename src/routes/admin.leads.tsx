@@ -355,6 +355,19 @@ function LeadsPage() {
                       {(["utm_source","utm_medium","utm_campaign","utm_content","utm_term"] as const).map((k) => (
                         <div key={k}><span className="text-slate-500">{k}:</span> {open.utm?.[k] ?? "—"}</div>
                       ))}
+                      {open.utm?.gclid && <div><span className="text-slate-500">gclid:</span> {open.utm.gclid}</div>}
+                      {open.utm?.fbclid && <div><span className="text-slate-500">fbclid:</span> {open.utm.fbclid}</div>}
+                    </div>
+                  </div>
+
+                  {/* Origem (referrer + página interna) */}
+                  <div className="rounded-md border border-slate-200">
+                    <div className="px-4 py-2 bg-slate-50 text-xs uppercase tracking-wider text-slate-500">Origem do tráfego</div>
+                    <div className="p-4 grid grid-cols-1 gap-2 text-xs">
+                      <div><span className="text-slate-500">Referrer externo:</span> {open.origin?.internal.referrer ?? "—"}</div>
+                      <div><span className="text-slate-500">Página interna anterior:</span> {open.origin?.internal.from_path ?? "—"}{open.origin?.internal.from_title ? ` · ${open.origin.internal.from_title}` : ""}</div>
+                      <div><span className="text-slate-500">Landing (1ª página da sessão):</span> {open.origin?.internal.landing_path ?? "—"}</div>
+                      <div><span className="text-slate-500">Início da sessão:</span> {open.origin?.internal.landing_ts ? new Date(open.origin.internal.landing_ts).toLocaleString("pt-BR") : "—"}</div>
                     </div>
                   </div>
                 </div>
