@@ -1,50 +1,289 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { StubPage } from "@/components/site/StubPage";
-
-const map: Record<string, { eyebrow: string; title: string; description: string }> = {
-  "eb2-niw": {
-    eyebrow: "EB-2 NIW",
-    title: "Green Card por mérito profissional",
-    description:
-      "O National Interest Waiver dispensa o patrocinador para profissionais cuja atuação é de interesse nacional americano. Esta página detalhará critérios, evidências aceitas e o método da Status na América.",
-  },
-  eb1: {
-    eyebrow: "EB-1",
-    title: "Habilidade extraordinária",
-    description:
-      "Caminho para profissionais com reconhecimento internacional comprovado em sua área. Esta página detalhará os critérios e o passo-a-passo da petição.",
-  },
-  eb3: {
-    eyebrow: "EB-3 • exige patrocinador",
-    title: "Trabalhadores qualificados",
-    description:
-      "Categoria que exige oferta formal de emprego nos EUA. Esta página detalhará o fluxo de patrocínio, prazos e elegibilidade.",
-  },
-};
+import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { Check, ChevronRight, Minus } from "lucide-react";
+import { Header } from "@/components/site/Header";
+import { Footer } from "@/components/site/Footer";
+import { SectionHead } from "@/components/site/SectionHead";
+import { Button } from "@/components/ui/button";
+import {
+  Accordion, AccordionContent, AccordionItem, AccordionTrigger,
+} from "@/components/ui/accordion";
+import {
+  OrganizationJsonLd, ServiceJsonLd, FAQJsonLd, BreadcrumbJsonLd,
+} from "@/components/site/Seo";
+import { LeadForm } from "@/components/site/LeadForm";
+import { VISA_PAGES, COMPARISON, type VisaSlug } from "@/lib/visaPages";
 
 export const Route = createFileRoute("/vistos/$slug")({
-  head: ({ params }) => {
-    const info = map[params.slug] ?? { eyebrow: "Vistos EB", title: "Visto EB", description: "Página em construção." };
+  loader: ({ params }) => {
+    const page = VISA_PAGES[params.slug as VisaSlug];
+    if (!page) throw notFound();
+    return { page };
+  },
+  head: ({ params, loaderData }) => {
+    const page = loaderData?.page ?? VISA_PAGES[params.slug as VisaSlug];
+    if (!page) {
+      return { meta: [{ title: "Visto não encontrado | Status na América" }] };
+    }
     return {
       meta: [
-        { title: `${info.title} | Status na América` },
-        { name: "description", content: info.description },
-        { property: "og:title", content: `${info.title} | Status na América` },
-        { property: "og:description", content: info.description },
-        { property: "og:url", content: `/vistos/${params.slug}` },
+        { title: page.metaTitle },
+        { name: "description", content: page.metaDescription },
+        { name: "robots", content: "index,follow" },
+        { property: "og:title", content: page.metaTitle },
+        { property: "og:description", content: page.metaDescription },
+        { property: "og:url", content: `/vistos/${page.slug}` },
+        { property: "og:type", content: "article" },
+        { property: "og:locale", content: "pt_BR" },
+        { name: "twitter:card", content: "summary_large_image" },
+        { name: "twitter:title", content: page.metaTitle },
+        { name: "twitter:description", content: page.metaDescription },
       ],
-      links: [{ rel: "canonical", href: `/vistos/${params.slug}` }],
+      links: [{ rel: "canonical", href: `/vistos/${page.slug}` }],
     };
   },
+  notFoundComponent: () => (
+    <>
+      <Header />
+      <main className="pt-32 pb-24 min-h-[60vh] container-x">
+        <h1 className="font-display text-4xl">Visto não encontrado</h1>
+        <p className="mt-4 text-foreground/70">Conheça os vistos disponíveis:</p>
+        <ul className="mt-4 space-y-2">
+          <li><Link to="/vistos/$slug" params={{ slug: "eb2-niw" }} className="text-gold underline">EB-2 NIW</Link></li>
+          <li><Link to="/vistos/$slug" params={{ slug: "eb1" }} className="text-gold underline">EB-1</Link></li>
+          <li><Link to="/vistos/$slug" params={{ slug: "eb3" }} className="text-gold underline">EB-3</Link></li>
+        </ul>
+      </main>
+      <Footer />
+    </>
+  ),
   component: VisaPage,
 });
 
 function VisaPage() {
-  const { slug } = Route.useParams();
-  const info = map[slug] ?? {
-    eyebrow: "Vistos EB",
-    title: "Visto não encontrado",
-    description: "Conheça os vistos EB-2 NIW, EB-1 e EB-3.",
-  };
-  return <StubPage {...info} />;
+  const { page } = Route.useLoaderData();
+
+  return (
+    <>
+      <Header />
+
+      {/* JSON-LD global + Service + FAQPage + Breadcrumb */}
+      <OrganizationJsonLd />
+      <ServiceJsonLd
+        name={page.h1}
+        description={page.metaDescription}
+        url={`/vistos/${page.slug}`}
+        serviceType={page.eyebrow.replace(/^VISTO\s+/, "")}
+      />
+      <FAQJsonLd items={page.faq} />
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Início", url: "/" },
+          { name: "Vistos", url: "/" },
+          { name: page.h1, url: `/vistos/${page.slug}` },
+        ]}
+      />
+
+      <main className="pt-28">
+        {/* 1 — Hero */}
+        <section className="bg-ink relative overflow-hidden">
+          <div aria-hidden className="absolute inset-0 guilloche" />
+          <div className="container-x py-16 md:py-24 relative">
+            <nav aria-label="Breadcrumb" className="font-mono-label text-foreground/55 flex items-center gap-2">
+              <Link to="/" className="hover:text-gold">Início</Link>
+              <ChevronRight className="h-3 w-3" />
+              <span className="text-gold">{page.eyebrow}</span>
+            </nav>
+
+            <div className="mt-6 flex items-center gap-3">
+              <span aria-hidden className="h-px w-10 bg-gold/70" />
+              <span className="font-mono-label text-gold">{page.eyebrow}</span>
+              {page.badge && (
+                <span className="border border-gold/60 px-2 py-0.5 font-mono-label text-[9px] text-gold">
+                  {page.badge}
+                </span>
+              )}
+            </div>
+
+            <h1 className="mt-5 font-display text-[40px] md:text-[64px] leading-[1.04] max-w-4xl">
+              {page.h1}
+            </h1>
+            <p className="mt-6 text-lg md:text-xl text-foreground/80 leading-relaxed max-w-3xl">
+              {page.intro}
+            </p>
+            <div className="mt-10">
+              <a href="#avaliacao">
+                <Button size="lg" className="btn-sweep h-12 px-7 text-base">
+                  Avaliação gratuita
+                </Button>
+              </a>
+            </div>
+          </div>
+        </section>
+
+        {/* 2 — O que é */}
+        <section className="section-parchment">
+          <div className="container-x py-20 md:py-28 grid md:grid-cols-12 gap-10">
+            <div className="md:col-span-5">
+              <SectionHead num="01" eyebrow="DEFINIÇÃO" variant="parchment" title={page.whatIs.title} />
+            </div>
+            <div className="md:col-span-7">
+              <p className="text-lg leading-relaxed text-ink-text/85">{page.whatIs.body}</p>
+            </div>
+          </div>
+        </section>
+
+        {/* 3 — Quem se qualifica */}
+        <section className="bg-ink">
+          <div className="container-x py-20 md:py-28">
+            <SectionHead num="02" eyebrow="ELEGIBILIDADE" title={page.qualifies.title} kicker={page.qualifies.intro} />
+            <ul className="mt-12 grid gap-5 md:grid-cols-2">
+              {page.qualifies.items.map((it) => (
+                <li key={it.title} className="gold-tick border border-gold/20 bg-ink-raise/60 p-7 pt-9">
+                  <h3 className="font-display text-2xl text-foreground">{it.title}</h3>
+                  <p className="mt-3 text-foreground/75 leading-relaxed">{it.body}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+
+        {/* 4 — Processo */}
+        <section className="section-parchment">
+          <div className="container-x py-20 md:py-28">
+            <SectionHead num="03" eyebrow="PROCESSO" variant="parchment" title={page.process.title} />
+            <ol className="mt-12 grid gap-6 md:grid-cols-3">
+              {page.process.steps.map((s) => (
+                <li key={s.num} className="border border-ink-text/15 bg-white p-7">
+                  <div className="font-mono-label text-gold">ETAPA {s.num}</div>
+                  <h3 className="mt-3 font-display text-2xl text-ink-text">{s.title}</h3>
+                  <p className="mt-3 text-ink-text/75 leading-relaxed">{s.body}</p>
+                </li>
+              ))}
+            </ol>
+            {page.process.note && (
+              <p className="mt-8 text-sm text-ink-text/70 italic max-w-3xl">{page.process.note}</p>
+            )}
+          </div>
+        </section>
+
+        {/* 5 — Família */}
+        <section className="bg-ink-deep">
+          <div className="container-x py-20 md:py-28 grid md:grid-cols-12 gap-10 items-start">
+            <div className="md:col-span-5">
+              <SectionHead num="04" eyebrow="FAMÍLIA" title={page.family.title} />
+            </div>
+            <div className="md:col-span-7">
+              <p className="text-lg leading-relaxed text-foreground/80">{page.family.body}</p>
+            </div>
+          </div>
+        </section>
+
+        {/* 6 — Comparativo */}
+        <section className="section-parchment">
+          <div className="container-x py-20 md:py-28">
+            <SectionHead
+              num="05"
+              eyebrow="COMPARATIVO"
+              variant="parchment"
+              title="EB-2 NIW vs EB-1 vs EB-3"
+              kicker="Três caminhos legítimos, três perfis distintos."
+            />
+            <div className="mt-10 overflow-x-auto border border-ink-text/15 bg-white">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="bg-ink text-foreground">
+                    {COMPARISON.headers.map((h, i) => (
+                      <th key={i} className="px-5 py-4 text-left font-mono-label">
+                        {h}
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {COMPARISON.rows.map((row) => (
+                    <tr key={row.label} className="border-t border-ink-text/10 align-top">
+                      <th className="px-5 py-4 text-left font-mono-label text-ink-text/70 w-[28%]">
+                        {row.label}
+                      </th>
+                      {row.cells.map((c, i) => (
+                        <td key={i} className="px-5 py-4 text-ink-text/85">
+                          {c}
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <div className="mt-6 flex flex-wrap gap-3 text-sm">
+              {page.slug !== "eb2-niw" && (
+                <Link to="/vistos/$slug" params={{ slug: "eb2-niw" }} className="underline text-ink-text hover:text-gold">
+                  → Página completa EB-2 NIW
+                </Link>
+              )}
+              {page.slug !== "eb1" && (
+                <Link to="/vistos/$slug" params={{ slug: "eb1" }} className="underline text-ink-text hover:text-gold">
+                  → Página EB-1
+                </Link>
+              )}
+              {page.slug !== "eb3" && (
+                <Link to="/vistos/$slug" params={{ slug: "eb3" }} className="underline text-ink-text hover:text-gold">
+                  → Página EB-3
+                </Link>
+              )}
+            </div>
+          </div>
+        </section>
+
+        {/* 7 — FAQ */}
+        <section className="bg-ink">
+          <div className="container-x py-20 md:py-28 max-w-4xl">
+            <SectionHead num="06" eyebrow="PERGUNTAS FREQUENTES" title="O que mais perguntam sobre este visto" />
+            <Accordion type="single" collapsible className="mt-10 border-t border-gold/20">
+              {page.faq.map((f, i) => (
+                <AccordionItem key={i} value={`f-${i}`} className="border-b border-gold/20">
+                  <AccordionTrigger className="py-5 text-left font-display text-lg md:text-xl text-foreground hover:no-underline hover:text-gold">
+                    {f.q}
+                  </AccordionTrigger>
+                  <AccordionContent className="pb-6 text-foreground/80 leading-relaxed">
+                    {f.a}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </div>
+        </section>
+
+        {/* 8 — CTA + formulário */}
+        <section id="avaliacao" className="section-parchment">
+          <div className="container-x py-20 md:py-28 grid lg:grid-cols-12 gap-10 items-start">
+            <div className="lg:col-span-5">
+              <SectionHead num="07" eyebrow="AVALIAÇÃO GRATUITA" variant="parchment" title={page.ctaTitle} kicker={page.ctaSubtitle} />
+              <div className="mt-8 hidden lg:block">
+                <ul className="space-y-3 text-ink-text/80">
+                  {[
+                    "Análise individual do perfil em até 48h",
+                    "Indicação da categoria EB mais coerente",
+                    "Sem custo · 100% confidencial",
+                  ].map((t) => (
+                    <li key={t} className="flex items-start gap-2">
+                      <Check className="h-4 w-4 text-gold shrink-0 mt-1" /> {t}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+            <div className="lg:col-span-7">
+              <LeadForm />
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <Footer />
+    </>
+  );
 }
+
+// utilitários não usados nesta página — apenas referências para futuras dobras
+void Minus;
