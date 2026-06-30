@@ -87,15 +87,23 @@ export function LeadForm({ segmentId, defaultProfissao }: LeadFormProps = {}) {
       const { score, classificacao } = computeScore(data);
       const id = newId("lead");
       const utm = typeof window !== "undefined" ? captureUtms(window.location.search) : {};
-      const lead: ScoredLead = {
+      const lead: ScoredLead & {
+        segmento?: string;
+        variante_ab?: string | null;
+      } = {
         ...data,
         id,
         createdAt: new Date().toISOString(),
         score,
         classificacao,
         utm,
+        segmento: segmentId,
+        variante_ab: segmentId ? getAssignedVariantId(segmentId) : null,
       };
       await set("leads", id, lead);
+      if (segmentId) {
+        await registerConversion(segmentId);
+      }
       setDone(true);
     } catch (e) {
       setError("Não foi possível enviar agora. Tente novamente.");
