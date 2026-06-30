@@ -615,7 +615,7 @@ export function SalaryCompare() {
           title="A mesma carreira. Outro patamar de remuneração."
           kicker="Estimativas de mercado mensais médias. Valores variam por especialidade, cidade e senioridade."
         />
-        <div className="mt-14 border border-gold/25 overflow-hidden">
+        <div className="mt-14 rounded-2xl border border-gold/25 overflow-hidden shadow-soft">
           <div className="grid grid-cols-[1.4fr_1fr_1fr] font-mono-label text-foreground/60 bg-ink-deep px-6 py-4 border-b border-gold/20">
             <span>PROFISSÃO</span><span>BRASIL</span><span className="text-gold">ESTADOS UNIDOS</span>
           </div>
