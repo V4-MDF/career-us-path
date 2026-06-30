@@ -125,6 +125,7 @@ export function LeadFormProgressive({
   const [done, setDone] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [restored, setRestored] = useState(false);
+  const [restoredCount, setRestoredCount] = useState(0);
   const partialIdRef = useRef<string>("");
   const containerRef = useRef<HTMLDivElement | null>(null);
   const reduce = useReducedMotion();
