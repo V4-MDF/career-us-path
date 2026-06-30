@@ -96,7 +96,8 @@ export function SectionTOC({
         <div
           className="lg:hidden fixed inset-0 z-50"
           role="dialog"
-          aria-label="Sumário da página"
+          aria-modal="true"
+          aria-labelledby="toc-sheet-title"
           onClick={() => setSheetOpen(false)}
         >
           <div className="absolute inset-0 bg-ink-deep/70 backdrop-blur-sm" />
@@ -105,13 +106,13 @@ export function SectionTOC({
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center justify-between mb-4">
-              <p className="font-mono-label text-gold">NESTA PÁGINA</p>
+              <p id="toc-sheet-title" className="font-mono-label text-gold">NESTA PÁGINA</p>
               <button
                 onClick={() => setSheetOpen(false)}
-                className="text-foreground/60 hover:text-gold p-1"
+                className="min-h-11 min-w-11 grid place-items-center text-foreground/80 hover:text-gold"
                 aria-label="Fechar sumário"
               >
-                <ChevronUp className="h-4 w-4" />
+                <ChevronUp aria-hidden className="h-4 w-4" />
               </button>
             </div>
             <ul className="space-y-1">
@@ -122,8 +123,9 @@ export function SectionTOC({
                     <a
                       href={`#${s.id}`}
                       onClick={handleClick(s.id)}
-                      className={`block py-3 text-base border-b border-gold/10 transition-colors ${
-                        isActive ? "text-gold" : "text-foreground/80 hover:text-gold"
+                      aria-current={isActive ? "location" : undefined}
+                      className={`block min-h-11 py-3 text-base border-b border-gold/10 transition-colors ${
+                        isActive ? "text-gold" : "text-foreground hover:text-gold"
                       }`}
                     >
                       {s.label}
@@ -135,6 +137,7 @@ export function SectionTOC({
           </div>
         </div>
       )}
+
     </>
   );
 }
