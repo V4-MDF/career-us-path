@@ -203,7 +203,7 @@ export function Hero() {
             </div>
           </div>
 
-          <div className="absolute -bottom-6 -left-6 rounded-xl border border-gold bg-ink-deep/95 backdrop-blur p-4 max-w-[200px] shadow-elevated">
+          <div className="absolute -top-5 -right-5 rounded-xl border border-gold bg-ink-deep/95 backdrop-blur p-4 max-w-[200px] shadow-elevated">
             <div className="absolute top-0 left-0 h-[3px] w-10 bg-gold" />
             <div className="flex items-center gap-1 text-gold">
               {[...Array(5)].map((_, i) => <Star key={i} className="h-3.5 w-3.5 fill-gold" />)}
