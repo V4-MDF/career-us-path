@@ -114,7 +114,7 @@
   --secondary: var(--ink-raise);
   --secondary-foreground: #ECE6D6;
 
-  --muted: #1A263F;
+  --muted: #1B1B1F;
   --muted-foreground: var(--slate);
 
   --accent: var(--gold);
