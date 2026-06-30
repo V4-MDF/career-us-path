@@ -1,47 +1,57 @@
-# Sessões, Conversão e Qualidade em /admin/origens
+## Objetivo
 
-Hoje a aba só conta leads (completos + parciais). O usuário pediu três métricas novas baseadas em **sessões** (visitantes do site, não só quem abriu o formulário).
+Permitir que o admin reordene e oculte/exiba qualquer dobra do site, com a página pública renderizando na ordem definida — em vez da ordem fixa hoje hardcoded em `routes/index.tsx`.
 
-## 1. Rastrear sessões no site
+## Estado atual (auditado)
 
-Criar `src/lib/sessions.ts`:
-- `ensureSession()` — gera um `session_id` (UUID) em `sessionStorage` na primeira pageview da aba. Persiste 1 registro em `dataStore["sessions"]` com:
-  - `id`, `createdAt`
-  - `origin: LeadOrigin` (captura UTM + referrer + landing_path no mesmo padrão de `origin.ts`)
-  - `converted: false` (atualizado depois)
-  - `qualified: false`
-- Chamado uma vez no `__root.tsx` (mesmo ponto onde já chamamos o tracker de origem).
+- `src/lib/sectionMap.ts` já é a fonte de verdade dos ids/labels de dobra (`HOME_SECTIONS`, `VISA_SECTIONS`).
+- `src/routes/admin.conteudo.tsx` tem um stub `PageSections` com **lista desatualizada** (ids errados, inclui `persona-cards` que foi removido) e fica escondido dentro da aba “Home” de Textos. Os toggles não afetam nada — `routes/index.tsx` renderiza as `<Section />` em ordem fixa.
+- `dataStore` já tem o slot `page_sections` registrado.
+- `HOME_SECTIONS` reais hoje: `abertura, credenciais, brasil-vs-eua, eb-2-niw, vistos-eb, processo-eb-2-niw, por-que-status, legado, renda-em-dolar, depoimentos, duvidas-frequentes, avaliacao-gratuita` (mais `BlogStrip` que vive entre `Hero` e `ContrastBrasilEUA`).
 
-Atualizar `LeadFormProgressive.tsx`:
-- Ao salvar parcial → marcar `converted_partial=true` na sessão atual.
-- Ao concluir lead → marcar `converted=true` e `qualified` (usando `leadQualification` + score ≥ 70 do modelo ao vivo).
-- Vincular `session_id` no lead salvo (`leads` e `leads_partial`) para evitar dupla contagem.
+## Entregável
 
-## 2. Estender /admin/origens
+### 1. Nova rota `/admin/estrutura` (aba "Estrutura de Páginas")
 
-Em `src/routes/admin.origens.tsx`:
+Lista de páginas no topo (segmented control): **Home**, **EB-2 NIW**, **EB-1**, **EB-3** (as três páginas-pilar de visto). Para a página selecionada:
 
-**Novos StatCards (topo, substituem layout atual de 4):**
-- Sessões (total)
-- Leads iniciados / Conversão sessão→lead (%)
-- Leads completos / Conversão lead→completo (%)
-- Qualificados / Taxa de qualidade sobre sessões (%)
+- Lista vertical das dobras com:
+  - número da posição
+  - ícone de arrastar + label da dobra (vindo do `sectionMap`)
+  - toggle **Ativa/Oculta**
+  - botões ↑ ↓ como fallback acessível ao drag
+  - botão "Restaurar padrão" no topo, com confirmação
+- Drag-and-drop por reorder (HTML5 nativo — sem nova dependência; já temos toda a UI shadcn).
+- Indicador de dobras "fixas" (Hero/Abertura não pode ser ocultada nem movida da posição 1 — regra de UX para não quebrar a página).
+- Salvamento automático em `dataStore["page_sections"][pageSlug] = { items: [{id, active}], updatedAt }` + `broadcast()` para refletir em outras abas abertas.
 
-**Tabela "Comparativo por dimensão" — novas colunas:**
-| Dim | Sessões | Iniciados | Completos | Conv. sessão→lead | Conv. lead→completo | Qualificados | Taxa qualidade | Score médio |
+### 2. Hook `useOrderedSections(pageSlug, defaults)`
 
-Agrupamento das sessões pelo mesmo `bucketValue(dim, session.origin)` já existente.
+`src/lib/usePageSections.ts` — lê o slot, faz merge com defaults (adiciona novas dobras que apareceram no código depois da última edição; remove ids que não existem mais), retorna `Array<{id, active}>` ordenado. Reativo via subscribe do `dataStore`.
 
-**Definição de "qualificado":** lead completo com `qualified === true` (critérios de `leadQualification.ts`) **ou** `score ≥ 70` no modelo ativo — o que for mais permissivo. Documentar no header da seção.
+### 3. Refatorar Home para consumir a ordem
 
-## 3. Detalhes técnicos
-- Nova coleção `dataStore["sessions"]` — sem migração; vazia até o primeiro acesso.
-- Sessões antigas (pré-deploy) ficam como "não rastreadas"; a aba mostra aviso quando `sessions.length < leads.length` indicando que o histórico de sessões começa a partir do deploy.
-- Export CSV passa a incluir as novas colunas.
-- Zero mudança visual no resto do admin; só essa rota e o hook no `__root`.
+`src/routes/index.tsx`: substituir o JSX fixo por um map sobre `useOrderedSections("home", HOME_SECTIONS)`, com um `SECTION_REGISTRY: Record<string, React.FC>` que mapeia id → componente. Dobras com `active: false` não renderizam. `Hero` permanece sempre em posição 1.
 
-## Arquivos tocados
-- `src/lib/sessions.ts` (novo)
-- `src/routes/__root.tsx` (chamar `ensureSession`)
-- `src/components/site/LeadFormProgressive.tsx` (marcar conversão/qualificação na sessão)
-- `src/routes/admin.origens.tsx` (KPIs + colunas + CSV)
+### 4. Refatorar `VisaPageBody` da mesma forma
+
+Mesmo padrão para as páginas-pilar, usando `VISA_SECTIONS` como default e `pageSlug = "vistos:eb-2-niw"` etc.
+
+### 5. Limpeza
+
+- Remover o `PageSections` stub de `admin.conteudo.tsx` e a lista hardcoded local errada.
+- Adicionar link "Estrutura" na sidebar do admin (entre "Textos & Conteúdo" e "Mídia").
+
+## Detalhes técnicos
+
+- Sem novas dependências: drag-and-drop via `draggable` + `onDragOver/onDrop` nativos (suficiente para uma lista curta de 10–13 itens).
+- Persistência segue o padrão atual (`get`/`set` do `dataStore`, `localStorage`); pronto para virar tabela Supabase depois (`page_structure(page_slug, items jsonb, updated_at)`).
+- Merge defensivo: se o código adicionar/remover dobras, o admin reconcilia automaticamente (novas entram no fim como ativas; órfãs somem).
+- Acessível: cada item tem `role="listitem"`, drag handle com `aria-label`, e setas ↑↓ funcionam por teclado.
+- Mobile: drag desabilitado < md, só setas ↑↓.
+
+## Fora de escopo (proposital)
+
+- Páginas Sobre/Contato continuam stubs.
+- Blog index e posts já são dinâmicos por natureza (lista de posts), não precisam de reorder de dobra.
+- Nenhuma mudança em SEO/sitemap (os ids de dobra continuam os mesmos).

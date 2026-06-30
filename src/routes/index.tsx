@@ -1,8 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
+import type { ComponentType } from "react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import {
-  AuthorityStrip, ContrastBrasilEUA, CtaBanner, FAQ, Hero, LegacySection,
+  ContrastBrasilEUA, CtaBanner, FAQ, Hero, LegacySection,
   NiwSection, ProcessSteps, SalaryCompare, Testimonials,
   VisaCards, WhyUs,
 } from "@/components/site/sections";
@@ -11,6 +12,7 @@ import { DynamicSectionHead } from "@/components/site/DynamicSectionHead";
 import { HOME_SECTIONS } from "@/lib/sectionMap";
 import { BlogStrip } from "@/components/site/BlogStrip";
 import { ConstellationCanvas } from "@/components/site/visuals/ConstellationCanvas";
+import { useOrderedSections } from "@/lib/pageStructure";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -41,7 +43,33 @@ export const Route = createFileRoute("/")({
   component: Home,
 });
 
+/**
+ * Registry de dobras da Home: cada id do `sectionMap` mapeia para o componente.
+ * A ordem efetiva e a visibilidade vêm de `useOrderedSections("home")`, que lê
+ * de dataStore["page_sections"]["home"] — editado em /admin/estrutura.
+ *
+ * Ao criar uma dobra nova: adicionar componente exportado em `sections.tsx`,
+ * registrar o id em HOME_SECTIONS (sectionMap.ts), em DEFAULT_LAYOUTS.home
+ * (pageStructure.ts) e neste registry.
+ */
+const HOME_REGISTRY: Record<string, ComponentType> = {
+  "abertura": Hero,
+  "blog-em-destaque": BlogStrip,
+  "brasil-vs-eua": ContrastBrasilEUA,
+  "eb-2-niw": NiwSection,
+  "vistos-eb": VisaCards,
+  "processo-eb-2-niw": ProcessSteps,
+  "por-que-status": WhyUs,
+  "legado": LegacySection,
+  "renda-em-dolar": SalaryCompare,
+  "depoimentos": Testimonials,
+  "duvidas-frequentes": FAQ,
+  "avaliacao-gratuita": CtaBanner,
+};
+
 function Home() {
+  const layout = useOrderedSections("home");
+
   return (
     <>
       <OrganizationJsonLd />
@@ -52,18 +80,12 @@ function Home() {
       </div>
       <Header />
       <main>
-        <Hero />
-        <BlogStrip />
-        <ContrastBrasilEUA />
-        <NiwSection />
-        <VisaCards />
-        <ProcessSteps />
-        <WhyUs />
-        <LegacySection />
-        <SalaryCompare />
-        <Testimonials />
-        <FAQ />
-        <CtaBanner />
+        {layout
+          .filter((s) => s.active)
+          .map((s) => {
+            const Cmp = HOME_REGISTRY[s.id];
+            return Cmp ? <Cmp key={s.id} /> : null;
+          })}
       </main>
       <Footer />
     </>

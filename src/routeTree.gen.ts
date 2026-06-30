@@ -33,6 +33,7 @@ import { Route as AdminLoginRouteImport } from './routes/admin.login'
 import { Route as AdminLinksRouteImport } from './routes/admin.links'
 import { Route as AdminLeadsIncompletosRouteImport } from './routes/admin.leads-incompletos'
 import { Route as AdminLeadsRouteImport } from './routes/admin.leads'
+import { Route as AdminEstruturaRouteImport } from './routes/admin.estrutura'
 import { Route as AdminConteudoRouteImport } from './routes/admin.conteudo'
 import { Route as AdminConfiguracoesRouteImport } from './routes/admin.configuracoes'
 import { Route as AdminBlogRouteImport } from './routes/admin.blog'
@@ -160,6 +161,11 @@ const AdminLeadsRoute = AdminLeadsRouteImport.update({
   path: '/leads',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminEstruturaRoute = AdminEstruturaRouteImport.update({
+  id: '/estrutura',
+  path: '/estrutura',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminConteudoRoute = AdminConteudoRouteImport.update({
   id: '/conteudo',
   path: '/conteudo',
@@ -204,6 +210,7 @@ export interface FileRoutesByFullPath {
   '/admin/blog': typeof AdminBlogRoute
   '/admin/configuracoes': typeof AdminConfiguracoesRoute
   '/admin/conteudo': typeof AdminConteudoRoute
+  '/admin/estrutura': typeof AdminEstruturaRoute
   '/admin/leads': typeof AdminLeadsRoute
   '/admin/leads-incompletos': typeof AdminLeadsIncompletosRoute
   '/admin/links': typeof AdminLinksRoute
@@ -235,6 +242,7 @@ export interface FileRoutesByTo {
   '/admin/blog': typeof AdminBlogRoute
   '/admin/configuracoes': typeof AdminConfiguracoesRoute
   '/admin/conteudo': typeof AdminConteudoRoute
+  '/admin/estrutura': typeof AdminEstruturaRoute
   '/admin/leads': typeof AdminLeadsRoute
   '/admin/leads-incompletos': typeof AdminLeadsIncompletosRoute
   '/admin/links': typeof AdminLinksRoute
@@ -267,6 +275,7 @@ export interface FileRoutesById {
   '/admin/blog': typeof AdminBlogRoute
   '/admin/configuracoes': typeof AdminConfiguracoesRoute
   '/admin/conteudo': typeof AdminConteudoRoute
+  '/admin/estrutura': typeof AdminEstruturaRoute
   '/admin/leads': typeof AdminLeadsRoute
   '/admin/leads-incompletos': typeof AdminLeadsIncompletosRoute
   '/admin/links': typeof AdminLinksRoute
@@ -301,6 +310,7 @@ export interface FileRouteTypes {
     | '/admin/blog'
     | '/admin/configuracoes'
     | '/admin/conteudo'
+    | '/admin/estrutura'
     | '/admin/leads'
     | '/admin/leads-incompletos'
     | '/admin/links'
@@ -332,6 +342,7 @@ export interface FileRouteTypes {
     | '/admin/blog'
     | '/admin/configuracoes'
     | '/admin/conteudo'
+    | '/admin/estrutura'
     | '/admin/leads'
     | '/admin/leads-incompletos'
     | '/admin/links'
@@ -363,6 +374,7 @@ export interface FileRouteTypes {
     | '/admin/blog'
     | '/admin/configuracoes'
     | '/admin/conteudo'
+    | '/admin/estrutura'
     | '/admin/leads'
     | '/admin/leads-incompletos'
     | '/admin/links'
@@ -566,6 +578,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminLeadsRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/estrutura': {
+      id: '/admin/estrutura'
+      path: '/estrutura'
+      fullPath: '/admin/estrutura'
+      preLoaderRoute: typeof AdminEstruturaRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/conteudo': {
       id: '/admin/conteudo'
       path: '/conteudo'
@@ -616,6 +635,7 @@ interface AdminRouteChildren {
   AdminBlogRoute: typeof AdminBlogRoute
   AdminConfiguracoesRoute: typeof AdminConfiguracoesRoute
   AdminConteudoRoute: typeof AdminConteudoRoute
+  AdminEstruturaRoute: typeof AdminEstruturaRoute
   AdminLeadsRoute: typeof AdminLeadsRoute
   AdminLeadsIncompletosRoute: typeof AdminLeadsIncompletosRoute
   AdminLinksRoute: typeof AdminLinksRoute
@@ -635,6 +655,7 @@ const AdminRouteChildren: AdminRouteChildren = {
   AdminBlogRoute: AdminBlogRoute,
   AdminConfiguracoesRoute: AdminConfiguracoesRoute,
   AdminConteudoRoute: AdminConteudoRoute,
+  AdminEstruturaRoute: AdminEstruturaRoute,
   AdminLeadsRoute: AdminLeadsRoute,
   AdminLeadsIncompletosRoute: AdminLeadsIncompletosRoute,
   AdminLinksRoute: AdminLinksRoute,
