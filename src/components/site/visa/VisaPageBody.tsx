@@ -78,7 +78,7 @@ export function VisaPageBody({ page }: { page: VisaPage }) {
           <SectionHead num="02" eyebrow="ELEGIBILIDADE" title={page.qualifies.title} kicker={page.qualifies.intro} />
           <ul className="mt-12 grid gap-5 md:grid-cols-2">
             {page.qualifies.items.map((it) => (
-              <li key={it.title} className="gold-tick border border-gold/20 bg-ink-raise/60 p-7 pt-9">
+              <li key={it.title} className="gold-tick rounded-2xl border border-gold/20 bg-ink-raise/60 p-7 pt-9 shadow-soft transition-[border-color,box-shadow] hover:border-gold/45 hover:shadow-elevated">
                 <h3 className="font-display text-2xl text-foreground">{it.title}</h3>
                 <p className="mt-3 text-foreground/75 leading-relaxed">{it.body}</p>
               </li>
