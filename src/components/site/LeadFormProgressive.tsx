@@ -325,7 +325,7 @@ export function LeadFormProgressive({
 
       {restored && restoredCount > 0 && stepIndex < totalFields && (
         <div role="status" aria-live="polite" className="px-6 md:px-8 pt-4">
-          <div className="flex flex-wrap items-center justify-between gap-3 border border-gold/30 bg-gold/5 px-4 py-3 text-sm">
+          <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-gold/30 bg-gold/5 px-4 py-3 text-sm">
             <span className="text-foreground/85">
               Retomamos suas respostas anteriores ({restoredCount}/{totalFields}). Continue de onde parou.
             </span>
