@@ -480,7 +480,7 @@ export function ProcessSteps() {
         <SectionHead num="05" eyebrow="PROCESSO EB-2 NIW" title="Quatro etapas. Conduzidas com rigor." variant="parchment" />
         <div className="mt-14 grid md:grid-cols-2 lg:grid-cols-4 gap-5">
           {steps.map(({ n, icon: Icon, t, d }) => (
-            <div key={n} className="relative gold-tick bg-white border border-ink-text/10 p-7 flex flex-col h-full">
+            <div key={n} className="relative gold-tick rounded-2xl bg-white border border-ink-text/10 p-7 flex flex-col h-full shadow-soft">
               <span className="font-display text-[48px] leading-none text-gold">{n}</span>
               <Icon className="h-5 w-5 text-ink-text/60 mt-5" />
               <h3 className="mt-3 font-display text-lg text-ink-text">{t}</h3>
