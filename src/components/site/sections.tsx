@@ -287,7 +287,7 @@ export function NiwSection() {
     { icon: Sparkles, t: "Caminho para a cidadania americana após 5 anos" },
   ];
   return (
-    <Reveal as="section" id="niw" className="py-24 md:py-32 relative">
+    <Reveal as="section" id="niw" className="section-pad relative">
       <div className="absolute inset-0 -z-10 guilloche" />
       <div className="container-x grid lg:grid-cols-2 gap-14 items-center">
         <div>
