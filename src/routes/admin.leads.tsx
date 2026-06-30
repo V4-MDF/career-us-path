@@ -141,6 +141,35 @@ function LeadsPage() {
     return { total, prio, pctPrio: total > 0 ? Math.round((prio / total) * 100) : 0, byStatus };
   }, [filtered]);
 
+  /**
+   * Distribuição + taxa de conversão por dimensão de origem.
+   * Conversão = status === "convertido" / total do grupo.
+   * Inclui "(direto)" para leads sem o campo (utm_source vazio / sem referrer externo).
+   */
+  type Bucket = { key: string; total: number; convertidos: number; qualificados: number; pctTotal: number; convRate: number };
+  function bucketBy(getKey: (r: ScoredRow) => string, emptyLabel: string): Bucket[] {
+    const map = new Map<string, { total: number; convertidos: number; qualificados: number }>();
+    filtered.forEach((r) => {
+      const k = (getKey(r) || "").trim() || emptyLabel;
+      const cur = map.get(k) ?? { total: 0, convertidos: 0, qualificados: 0 };
+      cur.total++;
+      if (r.status === "convertido") cur.convertidos++;
+      if (r.status === "qualificado" || r.status === "proposta" || r.status === "convertido") cur.qualificados++;
+      map.set(k, cur);
+    });
+    const totalAll = filtered.length || 1;
+    return Array.from(map.entries())
+      .map(([key, v]) => ({
+        key, total: v.total, convertidos: v.convertidos, qualificados: v.qualificados,
+        pctTotal: Math.round((v.total / totalAll) * 100),
+        convRate: v.total > 0 ? Math.round((v.convertidos / v.total) * 100) : 0,
+      }))
+      .sort((a, b) => b.total - a.total);
+  }
+
+  const bySource = useMemo(() => bucketBy((r) => utmOf(r, "utm_source"), "(direto)"), [filtered]);
+  const byRefHost = useMemo(() => bucketBy((r) => referrerHostOf(r), "(sem referrer externo)"), [filtered]);
+
   async function setStatus(lead: StoredLead, status: FunnelStatus) {
     const next: StoredLead = { ...lead, status };
     await set("leads", lead.id, next);
@@ -206,6 +235,13 @@ function LeadsPage() {
         <StatCard label="Novos" value={stats.byStatus.novo ?? 0} accent="gray" />
         <StatCard label="Em contato + Qualificados" value={(stats.byStatus.em_contato ?? 0) + (stats.byStatus.qualificado ?? 0)} accent="gold" />
       </div>
+
+      <div className="grid lg:grid-cols-2 gap-3 mb-5">
+        <OriginBreakdown title="Distribuição por utm_source" rows={bySource} emptyHint="Nenhum lead no filtro atual." />
+        <OriginBreakdown title="Distribuição por referrer externo" rows={byRefHost} emptyHint="Nenhum lead no filtro atual." />
+      </div>
+
+
 
       <SectionCard title="Filtros">
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
@@ -485,5 +521,54 @@ function FilterSelect({ label, value, onChange, options }: {
         </SelectContent>
       </Select>
     </div>
+  );
+}
+
+/**
+ * Cartão de breakdown de origem com barra de % e taxa de conversão por bucket.
+ * Conversão = leads com status "convertido" / total do bucket.
+ */
+function OriginBreakdown({
+  title, rows, emptyHint,
+}: {
+  title: string;
+  rows: { key: string; total: number; convertidos: number; qualificados: number; pctTotal: number; convRate: number }[];
+  emptyHint: string;
+}) {
+  const top = rows.slice(0, 8);
+  const maxTotal = Math.max(1, ...top.map((r) => r.total));
+  return (
+    <SectionCard title={title}>
+      {top.length === 0 ? (
+        <p className="text-sm text-slate-500">{emptyHint}</p>
+      ) : (
+        <div className="space-y-2">
+          <div className="grid grid-cols-12 gap-2 text-[10px] uppercase tracking-wide text-slate-500 px-1">
+            <div className="col-span-5">Origem</div>
+            <div className="col-span-3 text-right">Leads</div>
+            <div className="col-span-2 text-right">Qualif.</div>
+            <div className="col-span-2 text-right">Conv.</div>
+          </div>
+          {top.map((r) => (
+            <div key={r.key} className="grid grid-cols-12 gap-2 items-center text-sm">
+              <div className="col-span-5 truncate font-medium text-slate-800" title={r.key}>{r.key}</div>
+              <div className="col-span-3">
+                <div className="flex items-center gap-2 justify-end">
+                  <div className="h-1.5 flex-1 bg-slate-100 rounded overflow-hidden">
+                    <div className="h-full bg-blue-500" style={{ width: `${(r.total / maxTotal) * 100}%` }} />
+                  </div>
+                  <span className="font-mono text-xs text-slate-700 w-14 text-right">{r.total} · {r.pctTotal}%</span>
+                </div>
+              </div>
+              <div className="col-span-2 text-right font-mono text-xs text-slate-600">{r.qualificados}</div>
+              <div className="col-span-2 text-right font-mono text-xs font-semibold text-emerald-700">{r.convRate}%</div>
+            </div>
+          ))}
+          {rows.length > top.length && (
+            <p className="text-xs text-slate-400 pt-1">+ {rows.length - top.length} outras origens</p>
+          )}
+        </div>
+      )}
+    </SectionCard>
   );
 }
