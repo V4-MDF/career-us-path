@@ -140,7 +140,7 @@ export function Hero() {
         {/* Bloco editorial — parallax sutil (apenas desktop). */}
         <motion.div
           className="relative hidden lg:block"
-          initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+          initial={reduce ? false : { opacity: 0 }} animate={{ opacity: 1 }}
           transition={{ duration: t(1.0), ease: easeSig, delay: t(0.25) }}
           style={enableParallax ? { y: imgY, willChange: "transform" } : undefined}
         >
