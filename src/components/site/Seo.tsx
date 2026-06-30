@@ -13,8 +13,8 @@
  *  - BreadcrumbJsonLd     → posts do blog e páginas profundas
  *  - ArticleJsonLd        → posts do blog
  *
- * Observação: usamos LegalService (assessoria jurídica/migratória) como
- * @type principal — mais preciso que "Organization" genérico para nosso ramo.
+ * Observação: usamos LegalService como @type principal — mais preciso
+ * que "Organization" genérico para nosso ramo de atuação documental.
  */
 
 function ldScript(data: object) {
