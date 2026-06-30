@@ -908,36 +908,7 @@ function Reveal({
 
 
 function CountUp({ value, className }: { value: string; className?: string }) {
-  const match = value.match(/^([^\d-]*)([\d.,]+)(.*)$/);
-  const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
-  const reduce = useReducedMotion();
-  const [display, setDisplay] = useState(reduce ? value : match ? `${match[1]}0${match[3]}` : value);
-
-  useEffect(() => {
-    if (!inView || reduce || !match) { setDisplay(value); return; }
-    const [, pre, num, post] = match;
-    const target = parseFloat(num.replace(/\./g, "").replace(",", "."));
-    if (!isFinite(target)) { setDisplay(value); return; }
-    const decimals = num.includes(",") ? (num.split(",")[1] || "").length : 0;
-    const start = performance.now();
-    const dur = 1100;
-    let raf = 0;
-    const tick = (now: number) => {
-      const p = Math.min(1, (now - start) / dur);
-      const eased = 1 - Math.pow(1 - p, 3);
-      const v = target * eased;
-      const formatted = decimals
-        ? v.toFixed(decimals).replace(".", ",")
-        : Math.round(v).toLocaleString("pt-BR");
-      setDisplay(`${pre}${formatted}${post}`);
-      if (p < 1) raf = requestAnimationFrame(tick);
-    };
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-  }, [inView, reduce, value, match]);
-
-  return <span ref={ref} className={className}>{display}</span>;
+  return <span className={className}>{value}</span>;
 }
 
 // ──────────────────────────────────────────────────────────────────────────────
