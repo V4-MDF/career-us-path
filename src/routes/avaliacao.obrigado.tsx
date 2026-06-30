@@ -6,12 +6,11 @@
  *
  * SEO: noindex,nofollow e fora do sitemap.
  */
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { CheckCircle2, MessageCircle } from "lucide-react";
+import { CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { trackLead } from "@/lib/tracking";
-import { getSiteSettings } from "@/lib/admin/settings";
 
 export const Route = createFileRoute("/avaliacao/obrigado")({
   head: () => ({
@@ -24,16 +23,8 @@ export const Route = createFileRoute("/avaliacao/obrigado")({
 });
 
 function Obrigado() {
-  const [wa, setWa] = useState<string>("16892209714");
-
   // Público B — Lead (Pixel) + generate_lead (GA4). No-op se desativado.
-  useEffect(() => {
-    trackLead();
-  }, []);
-
-  useEffect(() => {
-    getSiteSettings().then((s) => { if (s.whatsapp_br) setWa(s.whatsapp_br); });
-  }, []);
+  useEffect(() => { trackLead(); }, []);
 
   return (
     <div className="min-h-screen bg-ink text-foreground flex flex-col">
@@ -64,16 +55,10 @@ function Obrigado() {
 
           <p className="mt-6 text-lg text-foreground/80 leading-relaxed">
             Nossa equipe vai analisar o seu perfil com atenção e entrar em contato em
-            até 48h pelo WhatsApp informado. Se preferir adiantar a conversa, é só
-            chamar pelo botão abaixo.
+            até 48h pelo canal informado.
           </p>
 
           <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
-            <a href={`https://wa.me/${wa}`} target="_blank" rel="noopener noreferrer">
-              <Button size="lg" className="btn-sweep h-12 px-7">
-                <MessageCircle className="mr-2 h-4 w-4" /> Falar agora no WhatsApp
-              </Button>
-            </a>
             <Link to="/">
               <Button size="lg" variant="outline" className="h-12 px-6 border-gold/40 text-foreground hover:border-gold hover:bg-gold/5">
                 Voltar para o site
