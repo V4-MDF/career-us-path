@@ -236,6 +236,13 @@ function LeadsPage() {
         <StatCard label="Em contato + Qualificados" value={(stats.byStatus.em_contato ?? 0) + (stats.byStatus.qualificado ?? 0)} accent="gold" />
       </div>
 
+      <div className="grid lg:grid-cols-2 gap-3 mb-5">
+        <OriginBreakdown title="Distribuição por utm_source" rows={bySource} emptyHint="Nenhum lead no filtro atual." />
+        <OriginBreakdown title="Distribuição por referrer externo" rows={byRefHost} emptyHint="Nenhum lead no filtro atual." />
+      </div>
+
+
+
       <SectionCard title="Filtros">
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
           <div className="lg:col-span-2">
