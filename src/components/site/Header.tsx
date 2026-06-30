@@ -1,82 +1,204 @@
+/**
+ * Header — site público "Dossiê / Credencial".
+ *
+ * Mudanças (Prompt 3.1):
+ *  - Removidos os itens soltos EB-2 NIW / EB-1 / EB-3: agora vivem dentro de
+ *    UM dropdown "Vistos" (acessível por teclado + tap mobile).
+ *  - Removidos os links públicos de segmento (Médicos/Engenheiros/Empresários):
+ *    as LPs /lp/:slug são privadas (apenas via URL direta vinda de anúncio).
+ *  - Estilo de filete dourado + nav-link com underline animado.
+ */
+
 import { Link } from "@tanstack/react-router";
-import { Menu, MessageCircle, X } from "lucide-react";
-import { useState } from "react";
+import { ChevronDown, Menu, MessageCircle, X } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 
-const nav = [
-  { label: "Início", to: "/" },
-  { label: "EB-2 NIW", to: "/vistos/eb2-niw" },
-  { label: "EB-1", to: "/vistos/eb1" },
-  { label: "EB-3", to: "/vistos/eb3" },
-  { label: "Médicos", to: "/lp/medicos" },
-  { label: "Engenheiros", to: "/lp/engenheiros" },
-  { label: "Empresários", to: "/lp/empresarios" },
-  { label: "Sobre", to: "/sobre" },
-  { label: "Conteúdo", to: "/blog" },
-  { label: "Contato", to: "/contato" },
+interface VistoItem {
+  label: string;
+  hint: string;
+  badge?: string;
+  to: string;
+}
+
+const VISTOS: VistoItem[] = [
+  { label: "Visto EB-2 NIW", hint: "Sem patrocinador", badge: "Principal", to: "/vistos/eb2-niw" },
+  { label: "Visto EB-1", hint: "Habilidade extraordinária", to: "/vistos/eb1" },
+  { label: "Visto EB-3", hint: "Exige patrocinador", to: "/vistos/eb3" },
+];
+
+const NAV = [
+  { label: "Início", to: "/" as const },
+  { label: "Sobre", to: "/sobre" as const },
+  { label: "Conteúdo", to: "/blog" as const },
+  { label: "Contato", to: "/contato" as const },
 ];
 
 export function Header() {
   const [open, setOpen] = useState(false);
+  const [vistosOpen, setVistosOpen] = useState(false);
+  const [vistosMobileOpen, setVistosMobileOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  // Fecha dropdown ao clicar fora ou ao pressionar Esc
+  useEffect(() => {
+    if (!vistosOpen) return;
+    const onClick = (e: MouseEvent) => {
+      if (!dropdownRef.current?.contains(e.target as Node)) setVistosOpen(false);
+    };
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setVistosOpen(false); };
+    document.addEventListener("mousedown", onClick);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("mousedown", onClick);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [vistosOpen]);
+
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-border/40 bg-background/80 backdrop-blur-md">
-      <div className="container-x flex h-16 items-center justify-between gap-4">
-        <Link to="/" className="flex items-center gap-2">
-          <span className="grid h-9 w-9 place-items-center rounded-md bg-gold text-gold-foreground font-serif text-lg font-bold">
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-gold/20 bg-ink/85 backdrop-blur-md">
+      {/* Filete dourado superior — assinatura do dossiê */}
+      <div className="h-px w-full bg-gold/40" />
+
+      <div className="container-x flex h-[68px] items-center justify-between gap-6">
+        {/* Logo */}
+        <Link to="/" className="flex items-center gap-3 group">
+          <span className="grid h-10 w-10 place-items-center border border-gold/60 text-gold font-display text-xl">
             S
           </span>
-          <span className="font-serif text-lg leading-none">
-            Status<span className="text-gold">.</span>
-            <span className="block text-[10px] tracking-[0.2em] text-muted-foreground">NA AMÉRICA</span>
+          <span className="leading-tight">
+            <span className="font-display text-[19px] tracking-tight">
+              Status<span className="text-gold">.</span>
+            </span>
+            <span className="block font-mono-label text-gold/80">NA AMÉRICA</span>
           </span>
         </Link>
 
-        <nav className="hidden xl:flex items-center gap-6 text-sm text-foreground/80">
-          {nav.slice(0, 7).map((n) => (
-            <Link key={n.to} to={n.to} className="hover:text-gold transition-colors">
+        {/* Nav desktop */}
+        <nav className="hidden lg:flex items-center gap-8 text-sm">
+          <Link to="/" className="nav-link text-foreground/85 hover:text-foreground" activeOptions={{ exact: true }}>
+            Início
+          </Link>
+
+          {/* Dropdown Vistos */}
+          <div ref={dropdownRef} className="relative" onMouseEnter={() => setVistosOpen(true)} onMouseLeave={() => setVistosOpen(false)}>
+            <button
+              type="button"
+              className="nav-link inline-flex items-center gap-1 text-foreground/85 hover:text-foreground"
+              aria-haspopup="menu"
+              aria-expanded={vistosOpen}
+              onClick={() => setVistosOpen((v) => !v)}
+            >
+              Vistos
+              <ChevronDown className={`h-3.5 w-3.5 transition-transform ${vistosOpen ? "rotate-180" : ""}`} />
+            </button>
+
+            {vistosOpen && (
+              <div
+                role="menu"
+                className="absolute left-1/2 top-full -translate-x-1/2 pt-3 animate-in fade-in slide-in-from-top-2 duration-200"
+              >
+                <div className="w-[340px] border border-gold/30 bg-ink-deep/95 backdrop-blur-md p-2 shadow-elegant">
+                  {/* Filete superior dourado */}
+                  <div className="absolute left-6 right-6 top-0 h-[3px] w-10 bg-gold" />
+                  {VISTOS.map((v) => (
+                    <Link
+                      key={v.to}
+                      to={v.to}
+                      role="menuitem"
+                      className="group flex items-start justify-between gap-3 px-4 py-3 hover:bg-gold/5 transition-colors"
+                      onClick={() => setVistosOpen(false)}
+                    >
+                      <div>
+                        <div className="font-display text-base text-foreground group-hover:text-gold">
+                          {v.label}
+                        </div>
+                        <div className="font-mono-label mt-1 text-[10px] text-foreground/55">{v.hint}</div>
+                      </div>
+                      {v.badge && (
+                        <span className="shrink-0 border border-gold/60 px-2 py-0.5 font-mono-label text-[9px] text-gold">
+                          {v.badge}
+                        </span>
+                      )}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+
+          {NAV.slice(1).map((n) => (
+            <Link key={n.to} to={n.to} className="nav-link text-foreground/85 hover:text-foreground">
               {n.label}
             </Link>
           ))}
         </nav>
 
-        <div className="flex items-center gap-2">
+        {/* CTA */}
+        <div className="flex items-center gap-3">
           <a
             href="https://wa.me/5500000000000"
             target="_blank"
-            rel="noopener"
-            className="hidden sm:grid h-9 w-9 place-items-center rounded-full border border-border text-gold hover:bg-gold/10"
+            rel="noopener noreferrer"
+            className="hidden sm:grid h-10 w-10 place-items-center border border-gold/40 text-gold hover:bg-gold/10 transition-colors"
             aria-label="WhatsApp"
           >
             <MessageCircle className="h-4 w-4" />
           </a>
           <a href="#avaliacao" className="hidden sm:block">
-            <Button variant="default" size="sm">Avaliação gratuita</Button>
+            <Button size="sm" className="btn-sweep h-10 px-5">Avaliação gratuita</Button>
           </a>
           <button
-            className="xl:hidden grid h-9 w-9 place-items-center rounded-md border border-border"
+            type="button"
+            className="lg:hidden grid h-10 w-10 place-items-center border border-gold/40 text-gold"
             onClick={() => setOpen((o) => !o)}
             aria-label="Menu"
+            aria-expanded={open}
           >
             {open ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
           </button>
         </div>
       </div>
 
+      {/* Menu mobile */}
       {open && (
-        <div className="xl:hidden border-t border-border/40 bg-background">
-          <div className="container-x flex flex-col py-4 gap-3">
-            {nav.map((n) => (
-              <Link
-                key={n.to}
-                to={n.to}
-                onClick={() => setOpen(false)}
-                className="text-sm py-1 text-foreground/85 hover:text-gold"
-              >
+        <div className="lg:hidden border-t border-gold/20 bg-ink">
+          <div className="container-x flex flex-col py-5 gap-1">
+            {NAV.slice(0, 1).map((n) => (
+              <Link key={n.to} to={n.to} onClick={() => setOpen(false)} className="py-3 text-foreground/90 border-b border-gold/10">
                 {n.label}
               </Link>
             ))}
-            <a href="#avaliacao" onClick={() => setOpen(false)}>
-              <Button className="w-full mt-2">Avaliação gratuita</Button>
+
+            {/* Acordeão Vistos */}
+            <div className="border-b border-gold/10">
+              <button
+                type="button"
+                className="w-full flex items-center justify-between py-3 text-foreground/90"
+                onClick={() => setVistosMobileOpen((v) => !v)}
+                aria-expanded={vistosMobileOpen}
+              >
+                Vistos <ChevronDown className={`h-4 w-4 transition-transform ${vistosMobileOpen ? "rotate-180" : ""}`} />
+              </button>
+              {vistosMobileOpen && (
+                <div className="pl-3 pb-3 space-y-2 border-l border-gold/30 ml-1">
+                  {VISTOS.map((v) => (
+                    <Link key={v.to} to={v.to} onClick={() => setOpen(false)} className="block py-1.5">
+                      <span className="font-display text-base">{v.label}</span>
+                      <span className="block font-mono-label text-[10px] text-foreground/55">{v.hint}</span>
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {NAV.slice(1).map((n) => (
+              <Link key={n.to} to={n.to} onClick={() => setOpen(false)} className="py-3 text-foreground/90 border-b border-gold/10">
+                {n.label}
+              </Link>
+            ))}
+            <a href="#avaliacao" onClick={() => setOpen(false)} className="mt-4">
+              <Button className="w-full btn-sweep">Avaliação gratuita</Button>
             </a>
           </div>
         </div>
