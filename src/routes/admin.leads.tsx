@@ -473,6 +473,15 @@ function LeadsPage() {
                   </div>
 
                   {/* Origem (referrer + página interna) */}
+                  {isOriginIncomplete(open) && (
+                    <div className="rounded-md border border-red-200 bg-red-50 p-3 flex items-start gap-2 text-xs">
+                      <AlertTriangle className="h-4 w-4 text-red-600 shrink-0 mt-0.5" />
+                      <div>
+                        <div className="font-semibold text-red-800">Origem incompleta</div>
+                        <div className="text-red-700 mt-0.5">Nenhum UTM, referrer externo ou página interna foi capturado para este lead. Verifique o script de tracking na página de origem.</div>
+                      </div>
+                    </div>
+                  )}
                   <div className="rounded-md border border-slate-200">
                     <div className="px-4 py-2 bg-slate-50 text-xs uppercase tracking-wider text-slate-500">Origem do tráfego</div>
                     <div className="p-4 grid grid-cols-1 gap-2 text-xs">
