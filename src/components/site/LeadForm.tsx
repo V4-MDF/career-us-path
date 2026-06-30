@@ -1,0 +1,256 @@
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { CheckCircle2, ChevronRight, Loader2 } from "lucide-react";
+import { newId, set } from "@/lib/dataStore";
+import { captureUtms, computeScore, type LeadInput, type ScoredLead } from "@/lib/leadScoring";
+
+const ufs = ["AC","AL","AM","AP","BA","CE","DF","ES","GO","MA","MG","MS","MT","PA","PB","PE","PI","PR","RJ","RN","RO","RR","RS","SC","SE","SP","TO"];
+
+const empty: LeadInput = {
+  nome: "", email: "", whatsapp: "",
+  profissao: "", faixaEtaria: "", formacao: "",
+  cidade: "", uf: "", renda: "", momento: "",
+};
+
+function maskPhone(v: string) {
+  const d = v.replace(/\D/g, "").slice(0, 11);
+  if (d.length <= 2) return d;
+  if (d.length <= 7) return `(${d.slice(0, 2)}) ${d.slice(2)}`;
+  return `(${d.slice(0, 2)}) ${d.slice(2, 7)}-${d.slice(7)}`;
+}
+
+export function LeadForm() {
+  const [step, setStep] = useState(0);
+  const [data, setData] = useState<LeadInput>(empty);
+  const [loading, setLoading] = useState(false);
+  const [done, setDone] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const update = <K extends keyof LeadInput>(k: K, v: LeadInput[K]) =>
+    setData((d) => ({ ...d, [k]: v }));
+
+  const validateStep = (): string | null => {
+    if (step === 0) {
+      if (!data.nome.trim()) return "Informe seu nome.";
+      if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(data.email)) return "E-mail inválido.";
+      if (data.whatsapp.replace(/\D/g, "").length < 10) return "WhatsApp inválido.";
+    }
+    if (step === 1) {
+      if (!data.profissao) return "Selecione sua profissão.";
+      if (!data.formacao) return "Selecione sua formação.";
+      if (!data.faixaEtaria) return "Selecione sua faixa etária.";
+    }
+    if (step === 2) {
+      if (!data.cidade.trim()) return "Informe sua cidade.";
+      if (!data.uf) return "Selecione a UF.";
+      if (!data.renda) return "Selecione a faixa de renda.";
+      if (!data.momento) return "Selecione o momento da decisão.";
+    }
+    return null;
+  };
+
+  const next = () => {
+    const err = validateStep();
+    if (err) { setError(err); return; }
+    setError(null);
+    setStep((s) => s + 1);
+  };
+
+  const submit = async () => {
+    const err = validateStep();
+    if (err) { setError(err); return; }
+    setError(null);
+    setLoading(true);
+    try {
+      const { score, classificacao } = computeScore(data);
+      const id = newId("lead");
+      const utm = typeof window !== "undefined" ? captureUtms(window.location.search) : {};
+      const lead: ScoredLead = {
+        ...data,
+        id,
+        createdAt: new Date().toISOString(),
+        score,
+        classificacao,
+        utm,
+      };
+      await set("leads", id, lead);
+      setDone(true);
+    } catch (e) {
+      setError("Não foi possível enviar agora. Tente novamente.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (done) {
+    return (
+      <div className="rounded-2xl border border-gold/30 bg-surface p-8 text-center">
+        <CheckCircle2 className="mx-auto h-12 w-12 text-gold" />
+        <h3 className="mt-4 font-serif text-2xl">Recebemos seu perfil.</h3>
+        <p className="mt-2 text-muted-foreground">
+          Nossa equipe vai analisar e entrar em contato em até 48h pelo WhatsApp informado.
+        </p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="rounded-2xl border border-border bg-surface p-6 md:p-8 shadow-soft">
+      {/* Stepper */}
+      <div className="flex items-center gap-2 mb-6">
+        {[0, 1, 2].map((i) => (
+          <div
+            key={i}
+            className={`h-1.5 flex-1 rounded-full transition-colors ${
+              i <= step ? "bg-gold" : "bg-border"
+            }`}
+          />
+        ))}
+      </div>
+      <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground mb-1">
+        Etapa {step + 1} de 3
+      </p>
+
+      {step === 0 && (
+        <div className="space-y-4">
+          <h3 className="font-serif text-2xl">Vamos começar pelo básico</h3>
+          <div>
+            <Label htmlFor="nome">Nome completo</Label>
+            <Input id="nome" value={data.nome} onChange={(e) => update("nome", e.target.value)} placeholder="Como devemos te chamar" />
+          </div>
+          <div className="grid sm:grid-cols-2 gap-4">
+            <div>
+              <Label htmlFor="email">E-mail</Label>
+              <Input id="email" type="email" value={data.email} onChange={(e) => update("email", e.target.value)} placeholder="voce@exemplo.com" />
+            </div>
+            <div>
+              <Label htmlFor="whats">WhatsApp</Label>
+              <Input id="whats" value={data.whatsapp} onChange={(e) => update("whatsapp", maskPhone(e.target.value))} placeholder="(11) 99999-9999" />
+            </div>
+          </div>
+        </div>
+      )}
+
+      {step === 1 && (
+        <div className="space-y-4">
+          <h3 className="font-serif text-2xl">Sua trajetória profissional</h3>
+          <div>
+            <Label>Profissão / área de atuação</Label>
+            <Select value={data.profissao} onValueChange={(v) => update("profissao", v)}>
+              <SelectTrigger><SelectValue placeholder="Selecione" /></SelectTrigger>
+              <SelectContent>
+                <SelectItem value="medico">Médico</SelectItem>
+                <SelectItem value="dentista">Dentista</SelectItem>
+                <SelectItem value="engenheiro">Engenheiro</SelectItem>
+                <SelectItem value="advogado">Advogado</SelectItem>
+                <SelectItem value="empresario">Empresário</SelectItem>
+                <SelectItem value="ti">Tecnologia / TI</SelectItem>
+                <SelectItem value="outra_qualificada">Outra área qualificada</SelectItem>
+                <SelectItem value="outra">Outra</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+          <div className="grid sm:grid-cols-2 gap-4">
+            <div>
+              <Label>Formação</Label>
+              <Select value={data.formacao} onValueChange={(v) => update("formacao", v)}>
+                <SelectTrigger><SelectValue placeholder="Selecione" /></SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="doutorado">Doutorado</SelectItem>
+                  <SelectItem value="mestrado">Mestrado</SelectItem>
+                  <SelectItem value="pos">Pós-graduação</SelectItem>
+                  <SelectItem value="superior">Ensino superior</SelectItem>
+                  <SelectItem value="sem_superior">Sem ensino superior</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div>
+              <Label>Faixa etária</Label>
+              <Select value={data.faixaEtaria} onValueChange={(v) => update("faixaEtaria", v)}>
+                <SelectTrigger><SelectValue placeholder="Selecione" /></SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="ate_29">Até 29 anos</SelectItem>
+                  <SelectItem value="30_39">30 a 39 anos</SelectItem>
+                  <SelectItem value="40_49">40 a 49 anos</SelectItem>
+                  <SelectItem value="50_mais">50 anos ou mais</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {step === 2 && (
+        <div className="space-y-4">
+          <h3 className="font-serif text-2xl">Contexto e momento</h3>
+          <div className="grid sm:grid-cols-[1fr_120px] gap-4">
+            <div>
+              <Label htmlFor="cidade">Cidade</Label>
+              <Input id="cidade" value={data.cidade} onChange={(e) => update("cidade", e.target.value)} />
+            </div>
+            <div>
+              <Label>UF</Label>
+              <Select value={data.uf} onValueChange={(v) => update("uf", v)}>
+                <SelectTrigger><SelectValue placeholder="UF" /></SelectTrigger>
+                <SelectContent>{ufs.map((u) => <SelectItem key={u} value={u}>{u}</SelectItem>)}</SelectContent>
+              </Select>
+            </div>
+          </div>
+          <div>
+            <Label>Renda mensal aproximada</Label>
+            <Select value={data.renda} onValueChange={(v) => update("renda", v)}>
+              <SelectTrigger><SelectValue placeholder="Selecione" /></SelectTrigger>
+              <SelectContent>
+                <SelectItem value="ate_10">Até R$ 10 mil</SelectItem>
+                <SelectItem value="10_20">R$ 10 mil a R$ 20 mil</SelectItem>
+                <SelectItem value="20_40">R$ 20 mil a R$ 40 mil</SelectItem>
+                <SelectItem value="40_mais">Acima de R$ 40 mil</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+          <div>
+            <Label>Momento da decisão</Label>
+            <Select value={data.momento} onValueChange={(v) => update("momento", v)}>
+              <SelectTrigger><SelectValue placeholder="Selecione" /></SelectTrigger>
+              <SelectContent>
+                <SelectItem value="ja_decidi">Já decidi, quero ir o quanto antes</SelectItem>
+                <SelectItem value="proximos_1_2">Pretendo nos próximos 1 a 2 anos</SelectItem>
+                <SelectItem value="sonho">Ainda é um sonho / estou pesquisando</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+        </div>
+      )}
+
+      {error && <p className="mt-4 text-sm text-destructive">{error}</p>}
+
+      <div className="mt-6 flex items-center justify-between gap-3">
+        {step > 0 ? (
+          <Button variant="ghost" onClick={() => setStep((s) => s - 1)}>Voltar</Button>
+        ) : <span />}
+        {step < 2 ? (
+          <Button onClick={next}>
+            Continuar <ChevronRight className="ml-1 h-4 w-4" />
+          </Button>
+        ) : (
+          <Button onClick={submit} disabled={loading}>
+            {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : "Enviar perfil"}
+          </Button>
+        )}
+      </div>
+
+      <p className="mt-4 text-xs text-muted-foreground">
+        Seus dados são tratados de forma confidencial. Não enviamos spam.
+      </p>
+    </div>
+  );
+}
