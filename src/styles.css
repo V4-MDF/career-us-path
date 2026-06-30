@@ -455,11 +455,60 @@
   --color-navy-foreground: #ECE6D6;
 }
 
-/* Sombra "elegante" mantida só para casos específicos (selo). Profundidade
- * geral deve vir de camadas/borders, não de sombras genéricas. */
+/* Sombras — calibradas para os raios maiores (radius 0.875rem).
+ * Hierarquia: hairline (borda gold) → soft (cards) → elevated (hero/featured)
+ * → elegant (selos, modais). Sempre combinar com 1px de border-gold/15-25
+ * para evitar "card flutuando sem ancoragem" em fundos escuros. */
 @theme inline {
-  --shadow-elegant: 0 18px 40px -24px rgba(0, 0, 0, 0.55);
-  --shadow-soft: 0 8px 24px -16px rgba(0, 0, 0, 0.45);
+  --shadow-soft: 0 6px 18px -12px rgba(0, 0, 0, 0.45), 0 1px 0 0 rgba(183, 151, 90, 0.06) inset;
+  --shadow-elevated: 0 18px 40px -22px rgba(0, 0, 0, 0.55), 0 2px 6px -3px rgba(0, 0, 0, 0.35);
+  --shadow-elegant: 0 28px 60px -28px rgba(0, 0, 0, 0.65), 0 2px 8px -4px rgba(0, 0, 0, 0.4);
+}
+
+/* media-frame — wrapper padrão para qualquer imagem/banner/thumb do site
+ * público. Cantos arredondados consistentes com --radius, hairline gold
+ * sutil e overflow-hidden para clipar a imagem. Use as variantes -sm/-lg
+ * para thumbs compactos ou heros amplos. */
+@utility media-frame {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-xl);
+  border: 1px solid color-mix(in oklab, var(--gold) 22%, transparent);
+  background-color: var(--ink-deep);
+  isolation: isolate;
+}
+@utility media-frame-sm {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  border: 1px solid color-mix(in oklab, var(--gold) 18%, transparent);
+  background-color: var(--ink-deep);
+}
+@utility media-frame-lg {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-2xl);
+  border: 1px solid color-mix(in oklab, var(--gold) 28%, transparent);
+  background-color: var(--ink-deep);
+  box-shadow: var(--shadow-elevated);
+}
+.section-parchment .media-frame,
+.section-parchment .media-frame-sm,
+.section-parchment .media-frame-lg,
+[data-surface="parchment"] .media-frame,
+[data-surface="parchment"] .media-frame-sm,
+[data-surface="parchment"] .media-frame-lg {
+  border-color: color-mix(in oklab, var(--ink-deep) 14%, transparent);
+  background-color: var(--parchment-deep);
+}
+
+/* surface-card — bloco genérico (não-shadcn) usado em LP/sections.
+ * Garante cantos arredondados consistentes em qualquer wrapper que
+ * antes usava border puro sem radius. */
+@utility surface-card {
+  border-radius: var(--radius-xl);
+  border: 1px solid color-mix(in oklab, var(--gold) 22%, transparent);
+  background-color: color-mix(in oklab, var(--ink-raise) 92%, transparent);
 }
 
 /* ----------------------------------------------------------------
