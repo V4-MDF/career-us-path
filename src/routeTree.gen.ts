@@ -18,9 +18,16 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as VistosSlugRouteImport } from './routes/vistos.$slug'
 import { Route as LpSlugRouteImport } from './routes/lp.$slug'
+import { Route as AdminUsuariosRouteImport } from './routes/admin.usuarios'
+import { Route as AdminTrackingRouteImport } from './routes/admin.tracking'
+import { Route as AdminSeoRouteImport } from './routes/admin.seo'
 import { Route as AdminSegmentosRouteImport } from './routes/admin.segmentos'
+import { Route as AdminMidiaRouteImport } from './routes/admin.midia'
 import { Route as AdminLoginRouteImport } from './routes/admin.login'
+import { Route as AdminLinksRouteImport } from './routes/admin.links'
 import { Route as AdminLeadsRouteImport } from './routes/admin.leads'
+import { Route as AdminConteudoRouteImport } from './routes/admin.conteudo'
+import { Route as AdminConfiguracoesRouteImport } from './routes/admin.configuracoes'
 import { Route as AdminAbRouteImport } from './routes/admin.ab'
 
 const SobreRoute = SobreRouteImport.update({
@@ -68,9 +75,29 @@ const LpSlugRoute = LpSlugRouteImport.update({
   path: '/lp/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminUsuariosRoute = AdminUsuariosRouteImport.update({
+  id: '/usuarios',
+  path: '/usuarios',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminTrackingRoute = AdminTrackingRouteImport.update({
+  id: '/tracking',
+  path: '/tracking',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminSeoRoute = AdminSeoRouteImport.update({
+  id: '/seo',
+  path: '/seo',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminSegmentosRoute = AdminSegmentosRouteImport.update({
   id: '/segmentos',
   path: '/segmentos',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminMidiaRoute = AdminMidiaRouteImport.update({
+  id: '/midia',
+  path: '/midia',
   getParentRoute: () => AdminRoute,
 } as any)
 const AdminLoginRoute = AdminLoginRouteImport.update({
@@ -78,9 +105,24 @@ const AdminLoginRoute = AdminLoginRouteImport.update({
   path: '/login',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminLinksRoute = AdminLinksRouteImport.update({
+  id: '/links',
+  path: '/links',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminLeadsRoute = AdminLeadsRouteImport.update({
   id: '/leads',
   path: '/leads',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminConteudoRoute = AdminConteudoRouteImport.update({
+  id: '/conteudo',
+  path: '/conteudo',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminConfiguracoesRoute = AdminConfiguracoesRouteImport.update({
+  id: '/configuracoes',
+  path: '/configuracoes',
   getParentRoute: () => AdminRoute,
 } as any)
 const AdminAbRoute = AdminAbRouteImport.update({
@@ -97,9 +139,16 @@ export interface FileRoutesByFullPath {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sobre': typeof SobreRoute
   '/admin/ab': typeof AdminAbRoute
+  '/admin/configuracoes': typeof AdminConfiguracoesRoute
+  '/admin/conteudo': typeof AdminConteudoRoute
   '/admin/leads': typeof AdminLeadsRoute
+  '/admin/links': typeof AdminLinksRoute
   '/admin/login': typeof AdminLoginRoute
+  '/admin/midia': typeof AdminMidiaRoute
   '/admin/segmentos': typeof AdminSegmentosRoute
+  '/admin/seo': typeof AdminSeoRoute
+  '/admin/tracking': typeof AdminTrackingRoute
+  '/admin/usuarios': typeof AdminUsuariosRoute
   '/lp/$slug': typeof LpSlugRoute
   '/vistos/$slug': typeof VistosSlugRoute
   '/admin/': typeof AdminIndexRoute
@@ -111,9 +160,16 @@ export interface FileRoutesByTo {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sobre': typeof SobreRoute
   '/admin/ab': typeof AdminAbRoute
+  '/admin/configuracoes': typeof AdminConfiguracoesRoute
+  '/admin/conteudo': typeof AdminConteudoRoute
   '/admin/leads': typeof AdminLeadsRoute
+  '/admin/links': typeof AdminLinksRoute
   '/admin/login': typeof AdminLoginRoute
+  '/admin/midia': typeof AdminMidiaRoute
   '/admin/segmentos': typeof AdminSegmentosRoute
+  '/admin/seo': typeof AdminSeoRoute
+  '/admin/tracking': typeof AdminTrackingRoute
+  '/admin/usuarios': typeof AdminUsuariosRoute
   '/lp/$slug': typeof LpSlugRoute
   '/vistos/$slug': typeof VistosSlugRoute
   '/admin': typeof AdminIndexRoute
@@ -127,9 +183,16 @@ export interface FileRoutesById {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sobre': typeof SobreRoute
   '/admin/ab': typeof AdminAbRoute
+  '/admin/configuracoes': typeof AdminConfiguracoesRoute
+  '/admin/conteudo': typeof AdminConteudoRoute
   '/admin/leads': typeof AdminLeadsRoute
+  '/admin/links': typeof AdminLinksRoute
   '/admin/login': typeof AdminLoginRoute
+  '/admin/midia': typeof AdminMidiaRoute
   '/admin/segmentos': typeof AdminSegmentosRoute
+  '/admin/seo': typeof AdminSeoRoute
+  '/admin/tracking': typeof AdminTrackingRoute
+  '/admin/usuarios': typeof AdminUsuariosRoute
   '/lp/$slug': typeof LpSlugRoute
   '/vistos/$slug': typeof VistosSlugRoute
   '/admin/': typeof AdminIndexRoute
@@ -144,9 +207,16 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/sobre'
     | '/admin/ab'
+    | '/admin/configuracoes'
+    | '/admin/conteudo'
     | '/admin/leads'
+    | '/admin/links'
     | '/admin/login'
+    | '/admin/midia'
     | '/admin/segmentos'
+    | '/admin/seo'
+    | '/admin/tracking'
+    | '/admin/usuarios'
     | '/lp/$slug'
     | '/vistos/$slug'
     | '/admin/'
@@ -158,9 +228,16 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/sobre'
     | '/admin/ab'
+    | '/admin/configuracoes'
+    | '/admin/conteudo'
     | '/admin/leads'
+    | '/admin/links'
     | '/admin/login'
+    | '/admin/midia'
     | '/admin/segmentos'
+    | '/admin/seo'
+    | '/admin/tracking'
+    | '/admin/usuarios'
     | '/lp/$slug'
     | '/vistos/$slug'
     | '/admin'
@@ -173,9 +250,16 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/sobre'
     | '/admin/ab'
+    | '/admin/configuracoes'
+    | '/admin/conteudo'
     | '/admin/leads'
+    | '/admin/links'
     | '/admin/login'
+    | '/admin/midia'
     | '/admin/segmentos'
+    | '/admin/seo'
+    | '/admin/tracking'
+    | '/admin/usuarios'
     | '/lp/$slug'
     | '/vistos/$slug'
     | '/admin/'
@@ -257,11 +341,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LpSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/usuarios': {
+      id: '/admin/usuarios'
+      path: '/usuarios'
+      fullPath: '/admin/usuarios'
+      preLoaderRoute: typeof AdminUsuariosRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/tracking': {
+      id: '/admin/tracking'
+      path: '/tracking'
+      fullPath: '/admin/tracking'
+      preLoaderRoute: typeof AdminTrackingRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/seo': {
+      id: '/admin/seo'
+      path: '/seo'
+      fullPath: '/admin/seo'
+      preLoaderRoute: typeof AdminSeoRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/segmentos': {
       id: '/admin/segmentos'
       path: '/segmentos'
       fullPath: '/admin/segmentos'
       preLoaderRoute: typeof AdminSegmentosRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/midia': {
+      id: '/admin/midia'
+      path: '/midia'
+      fullPath: '/admin/midia'
+      preLoaderRoute: typeof AdminMidiaRouteImport
       parentRoute: typeof AdminRoute
     }
     '/admin/login': {
@@ -271,11 +383,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminLoginRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/links': {
+      id: '/admin/links'
+      path: '/links'
+      fullPath: '/admin/links'
+      preLoaderRoute: typeof AdminLinksRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/leads': {
       id: '/admin/leads'
       path: '/leads'
       fullPath: '/admin/leads'
       preLoaderRoute: typeof AdminLeadsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/conteudo': {
+      id: '/admin/conteudo'
+      path: '/conteudo'
+      fullPath: '/admin/conteudo'
+      preLoaderRoute: typeof AdminConteudoRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/configuracoes': {
+      id: '/admin/configuracoes'
+      path: '/configuracoes'
+      fullPath: '/admin/configuracoes'
+      preLoaderRoute: typeof AdminConfiguracoesRouteImport
       parentRoute: typeof AdminRoute
     }
     '/admin/ab': {
@@ -290,17 +423,31 @@ declare module '@tanstack/react-router' {
 
 interface AdminRouteChildren {
   AdminAbRoute: typeof AdminAbRoute
+  AdminConfiguracoesRoute: typeof AdminConfiguracoesRoute
+  AdminConteudoRoute: typeof AdminConteudoRoute
   AdminLeadsRoute: typeof AdminLeadsRoute
+  AdminLinksRoute: typeof AdminLinksRoute
   AdminLoginRoute: typeof AdminLoginRoute
+  AdminMidiaRoute: typeof AdminMidiaRoute
   AdminSegmentosRoute: typeof AdminSegmentosRoute
+  AdminSeoRoute: typeof AdminSeoRoute
+  AdminTrackingRoute: typeof AdminTrackingRoute
+  AdminUsuariosRoute: typeof AdminUsuariosRoute
   AdminIndexRoute: typeof AdminIndexRoute
 }
 
 const AdminRouteChildren: AdminRouteChildren = {
   AdminAbRoute: AdminAbRoute,
+  AdminConfiguracoesRoute: AdminConfiguracoesRoute,
+  AdminConteudoRoute: AdminConteudoRoute,
   AdminLeadsRoute: AdminLeadsRoute,
+  AdminLinksRoute: AdminLinksRoute,
   AdminLoginRoute: AdminLoginRoute,
+  AdminMidiaRoute: AdminMidiaRoute,
   AdminSegmentosRoute: AdminSegmentosRoute,
+  AdminSeoRoute: AdminSeoRoute,
+  AdminTrackingRoute: AdminTrackingRoute,
+  AdminUsuariosRoute: AdminUsuariosRoute,
   AdminIndexRoute: AdminIndexRoute,
 }
 
