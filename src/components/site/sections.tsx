@@ -717,6 +717,25 @@ export function CtaBanner() {
 /* ============================================================
  * Helpers
  * ============================================================ */
+function useMediaQuery(query: string): boolean {
+  const [matches, setMatches] = useState(false);
+  useEffect(() => {
+    if (typeof window === "undefined" || !window.matchMedia) return;
+    const mql = window.matchMedia(query);
+    const update = () => setMatches(mql.matches);
+    update();
+    mql.addEventListener("change", update);
+    return () => mql.removeEventListener("change", update);
+  }, [query]);
+  return matches;
+}
+
+/**
+ * Reveal — fade+slide leve via IntersectionObserver + classe CSS.
+ * Substitui o `motion.div` por bloco com `content-visibility: auto`,
+ * eliminando trabalho de animação JS por seção e reduzindo paint/layout
+ * fora da viewport. Mantém o efeito visual quando entra na tela.
+ */
 function Reveal({
   children, className, as: As = "section", id,
 }: {
@@ -726,21 +745,34 @@ function Reveal({
   id?: string;
 }) {
   const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
-  const reduce = useReducedMotion();
+  const [shown, setShown] = useState(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el || typeof IntersectionObserver === "undefined") { setShown(true); return; }
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          setShown(true);
+          io.disconnect();
+        }
+      },
+      { rootMargin: "-80px" },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
   const Comp = As as any;
   return (
-    <Comp ref={ref} id={id} className={className}>
-      <motion.div
-        initial={reduce ? false : { opacity: 0, y: 16 }}
-        animate={inView ? { opacity: 1, y: 0 } : undefined}
-        transition={{ duration: 0.55, ease: [0.22, 0.61, 0.36, 1] }}
-      >
-        {children}
-      </motion.div>
+    <Comp
+      ref={ref as any}
+      id={id}
+      className={`cv-auto reveal ${shown ? "reveal-in" : ""} ${className ?? ""}`}
+    >
+      {children}
     </Comp>
   );
 }
+
 
 function CountUp({ value, className }: { value: string; className?: string }) {
   const match = value.match(/^([^\d-]*)([\d.,]+)(.*)$/);
