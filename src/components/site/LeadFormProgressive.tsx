@@ -213,6 +213,8 @@ export function LeadFormProgressive({
       segmento: segmentId,
     };
     void set("leads_partial", partialIdRef.current, partial);
+    // Marca a sessão como "iniciou o formulário" assim que o 1º campo é válido.
+    void markSessionStartedForm();
   }, [data, done, segmentId, currentPath, restored]);
 
   const advance = () => {
@@ -267,6 +269,12 @@ export function LeadFormProgressive({
         qualification_reasons: qual.reasons,
       };
       await set("leads", id, lead);
+      // Marca a sessão como convertida + calcula qualificação para o admin.
+      try {
+        const model = await loadModel();
+        const score = computeScore(current, model).score;
+        await markSessionConverted({ qualified: qual.result === "qualificado" || score >= 70, score });
+      } catch (e) { console.warn("[avaliacao] session mark failed", e); }
       // efeitos colaterais isolados — se falharem, NÃO bloqueiam o redirect
       if (segmentId) {
         try { await registerConversion(segmentId); }
