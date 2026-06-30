@@ -136,17 +136,15 @@ export function Hero() {
           </motion.div>
         </div>
 
-        {/* Bloco editorial — parallax sutil ligado ao scroll. */}
+        {/* Bloco editorial — parallax sutil (apenas desktop). */}
         <motion.div
           className="relative hidden lg:block"
           initial={{ opacity: 0 }} animate={{ opacity: 1 }}
           transition={{ duration: t(1.0), ease: easeSig, delay: t(0.25) }}
-          style={{ y: imgY }}
+          style={enableParallax ? { y: imgY, willChange: "transform" } : undefined}
         >
-          <motion.div
-            className="relative aspect-[4/5] overflow-hidden border border-gold/30 bg-ink-raise"
-            style={{ scale: imgScale }}
-          >
+          <div className="relative aspect-[4/5] overflow-hidden border border-gold/30 bg-ink-raise">
+
             <div className="absolute inset-0 bg-gradient-to-br from-ink-deep via-ink-raise to-ink" />
             <div className="absolute inset-0 bg-gradient-to-t from-ink-deep via-transparent to-transparent" />
             <div className="absolute inset-3 border border-gold/30 pointer-events-none" />
