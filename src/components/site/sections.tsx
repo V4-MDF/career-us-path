@@ -458,9 +458,9 @@ export function WhyUs() {
     { icon: Star, t: "130+ avaliações 5★ no Google e Facebook" },
   ];
   return (
-    <Reveal as="section" className="py-24 md:py-32 relative">
-      <div className="absolute inset-0 -z-10 guilloche" />
+    <Reveal as="section" className="section-pad relative">
       <div className="container-x">
+
         <div className="grid lg:grid-cols-[0.9fr_1.1fr] gap-12">
           <div>
             <SectionHead num="06" eyebrow="POR QUE A STATUS" title={title} />
