@@ -48,7 +48,7 @@ export const defaultSettings: SiteSettings = {
   site_name: "Status na América",
   site_tagline: "Green Card EB-2 NIW para profissionais brasileiros",
   primary_color: "#C9A24B",
-  accent_color: "#1E3A5F",
+  accent_color: "#0B0B0C",
 
   // Contatos reais (Prompt 5). WhatsApp Brasil ainda pendente de validação.
   whatsapp_br: "16892209714",
