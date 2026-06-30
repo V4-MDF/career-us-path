@@ -440,3 +440,16 @@
   background: rgba(183, 151, 90, 0.3);
   margin: 2.2em 0;
 }
+
+/* ----------------------------------------------------------------
+ * Transição de rota — fade + translateY 8px, 0.4s ease-out-expo.
+ * Aplicado no shell raiz para suavizar mudanças de página.
+ * Respeita prefers-reduced-motion via @layer base acima.
+ * ---------------------------------------------------------------- */
+@keyframes route-fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.route-fade {
+  animation: route-fade-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
