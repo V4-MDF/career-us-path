@@ -190,7 +190,9 @@
 }
 
 /* ----------------------------------------------------------------
- * Utilitários assinatura — eyebrow, filete, container
+ * Utilitários assinatura — eyebrow, filete, container, sistema espacial
+ * "Luxo silencioso" (Prompt 6): tipografia fluida, respiro generoso,
+ * easing premium. Ritmo vertical base 8px → 8/16/24/40/64/96/128.
  * ---------------------------------------------------------------- */
 
 @utility font-display {
@@ -206,12 +208,64 @@
   font-size: 11px;
 }
 
+/* Container com gutters fluidos clamp(20px, 6vw, 120px). */
 @utility container-x {
   width: 100%;
   margin-inline: auto;
-  padding-inline: 1.5rem;
-  max-width: 78rem;
+  padding-inline: clamp(1.25rem, 6vw, 7.5rem);
+  max-width: 84rem;
 }
+
+/* Container estreito para conteúdo de leitura (FAQ, texto longo). */
+@utility container-read {
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 6vw, 7.5rem);
+  max-width: 56rem;
+}
+
+/* Padding vertical de seção: clamp(96px, 12vh, 176px) desktop / 64-80 mobile. */
+@utility section-pad {
+  padding-block: clamp(4rem, 9vw, 11rem);
+}
+
+/* Escala tipográfica fluida — usar como utilities ao invés de text-[..]. */
+@utility display-1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 7vw, 5.25rem);
+  line-height: 1.03;
+  letter-spacing: -0.02em;
+  font-weight: 500;
+}
+@utility display-2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.875rem, 4.5vw, 3.25rem);
+  line-height: 1.08;
+  letter-spacing: -0.015em;
+  font-weight: 500;
+}
+@utility display-3 {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 2.6vw, 2rem);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  font-weight: 500;
+}
+@utility lead {
+  font-family: var(--font-sans);
+  font-size: clamp(1.125rem, 1.5vw, 1.375rem);
+  line-height: 1.5;
+  color: color-mix(in oklab, var(--foreground) 82%, transparent);
+}
+@utility stat-num {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-weight: 500;
+}
+
+
 
 /* Filete dourado fino — 1px linha gravada */
 @utility gold-rule {
