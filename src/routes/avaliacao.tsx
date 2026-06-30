@@ -68,15 +68,16 @@ export const Route = createFileRoute("/avaliacao")({
 function AvaliacaoPage() {
   const search = useSearch({ from: "/avaliacao" });
   const navigate = useNavigate();
-  const [originLabel, setOriginLabel] = useState<string | null>(null);
 
   useEffect(() => {
     trackFormView({ seg: search.seg ?? null, src: search.src ?? null });
   }, [search.seg, search.src]);
 
+  // Captura origem silenciosamente — fica disponível no payload do lead (admin/tracking)
   useEffect(() => {
-    setOriginLabel(describeOrigin(getOrigin("/avaliacao")));
+    getOrigin("/avaliacao");
   }, []);
+
 
   const segKey = useMemo<SegKey | null>(() => {
     const s = search.seg as SegKey | undefined;
