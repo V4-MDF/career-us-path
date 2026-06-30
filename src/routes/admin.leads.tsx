@@ -343,7 +343,16 @@ function LeadsPage() {
                     <td className="px-5 py-3 cursor-pointer" onClick={() => setOpen(l)}>
                       <ScoreCell calc={l._calc} />
                     </td>
-                    <td className="py-3 font-medium cursor-pointer" onClick={() => setOpen(l)}>{l.nome}</td>
+                    <td className="py-3 font-medium cursor-pointer" onClick={() => setOpen(l)}>
+                      <div className="flex items-center gap-2">
+                        {l.nome}
+                        {isOriginIncomplete(l) && (
+                          <Badge variant="outline" className="text-[10px] border-red-300 text-red-600 bg-red-50 gap-1">
+                            <AlertTriangle className="h-3 w-3" /> Origem incompleta
+                          </Badge>
+                        )}
+                      </div>
+                    </td>
                     <td className="py-3 text-slate-600">{l.profissao}</td>
                     <td className="py-3 text-slate-600">{l.segmento ?? "—"}</td>
                     <td className="py-3 text-slate-600 text-xs">{l.variante_ab ?? "—"}</td>
