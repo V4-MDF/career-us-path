@@ -77,8 +77,8 @@ export function Header() {
         </Link>
 
         {/* Nav desktop */}
-        <nav className="hidden lg:flex items-center gap-8 text-sm">
-          <Link to="/" className="nav-link text-foreground/85 hover:text-foreground" activeOptions={{ exact: true }}>
+        <nav aria-label="Navegação principal" className="hidden lg:flex items-center gap-8 text-sm">
+          <Link to="/" className="nav-link text-foreground/85 hover:text-foreground" activeOptions={{ exact: true }} activeProps={{ "aria-current": "page" }}>
             Início
           </Link>
 
@@ -89,20 +89,23 @@ export function Header() {
               className="nav-link inline-flex items-center gap-1 text-foreground/85 hover:text-foreground"
               aria-haspopup="menu"
               aria-expanded={vistosOpen}
+              aria-controls="vistos-menu"
               onClick={() => setVistosOpen((v) => !v)}
             >
               Vistos
-              <ChevronDown className={`h-3.5 w-3.5 transition-transform ${vistosOpen ? "rotate-180" : ""}`} />
+              <ChevronDown aria-hidden className={`h-3.5 w-3.5 transition-transform ${vistosOpen ? "rotate-180" : ""}`} />
             </button>
 
             {vistosOpen && (
               <div
+                id="vistos-menu"
                 role="menu"
+                aria-label="Tipos de visto"
                 className="absolute left-1/2 top-full -translate-x-1/2 pt-3 animate-in fade-in slide-in-from-top-2 duration-200"
               >
                 <div className="w-[340px] border border-gold/30 bg-ink-deep/95 backdrop-blur-md p-2 shadow-elegant">
                   {/* Filete superior dourado */}
-                  <div className="absolute left-6 right-6 top-0 h-[3px] w-10 bg-gold" />
+                  <div aria-hidden className="absolute left-6 right-6 top-0 h-[3px] w-10 bg-gold" />
                   {VISTOS.map((v) => (
                     <Link
                       key={v.to}
@@ -110,12 +113,13 @@ export function Header() {
                       role="menuitem"
                       className="group flex items-start justify-between gap-3 px-4 py-3 hover:bg-gold/5 transition-colors"
                       onClick={() => setVistosOpen(false)}
+                      activeProps={{ "aria-current": "page" }}
                     >
                       <div>
                         <div className="font-display text-base text-foreground group-hover:text-gold">
                           {v.label}
                         </div>
-                        <div className="font-mono-label mt-1 text-[10px] text-foreground/55">{v.hint}</div>
+                        <div className="font-mono-label mt-1 text-[10px] text-foreground/70">{v.hint}</div>
                       </div>
                       {v.badge && (
                         <span className="shrink-0 border border-gold/60 px-2 py-0.5 font-mono-label text-[9px] text-gold">
@@ -130,11 +134,12 @@ export function Header() {
           </div>
 
           {NAV.slice(1).map((n) => (
-            <Link key={n.to} to={n.to} className="nav-link text-foreground/85 hover:text-foreground">
+            <Link key={n.to} to={n.to} className="nav-link text-foreground/85 hover:text-foreground" activeProps={{ "aria-current": "page" }}>
               {n.label}
             </Link>
           ))}
         </nav>
+
 
         {/* CTA */}
         <div className="flex items-center gap-3">
