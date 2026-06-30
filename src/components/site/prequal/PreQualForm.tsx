@@ -132,7 +132,7 @@ export function PreQualForm({ onSubmit, submitting }: Props) {
   return (
     <form onSubmit={handleSubmit} className="space-y-7" noValidate>
       {restored && (
-        <div className="border border-gold/25 bg-gold/5 px-4 py-3 text-[13px] text-foreground/80">
+        <div className="rounded-xl border border-gold/25 bg-gold/5 px-4 py-3 text-[13px] text-foreground/80">
           Recuperamos as respostas que você havia começado. Pode continuar de onde parou.
         </div>
       )}
