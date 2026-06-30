@@ -373,8 +373,12 @@ const LABELS: Record<string, Record<string, string>> = {
     "ate_29": "Até 29 anos", "30_39": "30 a 39", "40_49": "40 a 49", "50_mais": "50+",
   },
   renda: {
-    "ate_10": "Até R$ 10 mil", "10_20": "R$ 10–20 mil",
-    "20_40": "R$ 20–40 mil", "40_mais": "Acima de R$ 40 mil",
+    "ate_10": "Até R$ 10 mil",
+    "10_20": "R$ 10–20 mil",
+    "20_40": "R$ 20–40 mil",
+    "40_80": "R$ 40–80 mil",
+    "80_150": "R$ 80–150 mil",
+    "150_mais": "Acima de R$ 150 mil",
   },
   momento: {
     ja_decidi: "Já decidi", proximos_1_2: "Próximos 1–2 anos", sonho: "Pesquisando / sonho",
