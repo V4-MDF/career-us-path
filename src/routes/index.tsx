@@ -55,6 +55,7 @@ function Home() {
       <SectionTOC sections={HOME_SECTIONS} />
       <main>
         <Hero />
+        <HeroAssessment />
         <AuthorityStrip />
         <BlogStrip />
         <ContrastBrasilEUA />
