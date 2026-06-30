@@ -43,15 +43,16 @@ export function SectionHead({
         </span>
       </div>
       {title && (
-        <h2 className={`mt-5 font-display text-[32px] md:text-[44px] leading-[1.06] ${titleClass}`}>
+        <h2 className={`display-2 mt-6 ${titleClass}`}>
           {title}
         </h2>
       )}
       {kicker && (
-        <p className={`mt-5 text-[17px] leading-relaxed max-w-2xl ${variant === "parchment" ? "text-ink-text/75" : "text-foreground/75"}`}>
+        <p className={`mt-6 lead max-w-2xl ${variant === "parchment" ? "text-ink-text/75" : ""}`}>
           {kicker}
         </p>
       )}
+
     </div>
   );
 }
