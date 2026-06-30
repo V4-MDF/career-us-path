@@ -761,7 +761,7 @@ export function CtaBanner() {
             ))}
           </ul>
 
-          <div className="border border-gold/30 bg-ink-raise/50 p-7 lg:p-8">
+          <div className="rounded-2xl border border-gold/30 bg-ink-raise/50 p-7 lg:p-8 shadow-elevated">
             <p className="font-mono-label text-gold/80">PRÓXIMO PASSO</p>
             <h3 className="mt-3 font-display text-2xl leading-tight">
               Comece pela análise gratuita do seu perfil.
