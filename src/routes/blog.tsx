@@ -101,7 +101,7 @@ function BlogIndex() {
               <Link
                 to="/blog/$slug"
                 params={{ slug: featured.slug }}
-                className="grid lg:grid-cols-12 gap-8 group border border-gold/20 bg-ink-raise/40 overflow-hidden"
+                className="grid lg:grid-cols-12 gap-8 group rounded-3xl border border-gold/20 bg-ink-raise/40 overflow-hidden shadow-elevated transition-[border-color,box-shadow] hover:border-gold/45"
               >
                 <div className="lg:col-span-7 aspect-[16/10] lg:aspect-auto bg-ink-deep overflow-hidden">
                   <img
