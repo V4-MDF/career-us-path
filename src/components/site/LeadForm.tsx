@@ -38,9 +38,12 @@ function maskPhone(v: string) {
   return `(${d.slice(0, 2)}) ${d.slice(2, 7)}-${d.slice(7)}`;
 }
 
-export function LeadForm() {
+export function LeadForm({ segmentId, defaultProfissao }: LeadFormProps = {}) {
   const [step, setStep] = useState(0);
-  const [data, setData] = useState<LeadInput>(empty);
+  const [data, setData] = useState<LeadInput>(() => ({
+    ...empty,
+    profissao: defaultProfissao ?? "",
+  }));
   const [loading, setLoading] = useState(false);
   const [done, setDone] = useState(false);
   const [error, setError] = useState<string | null>(null);
