@@ -225,6 +225,7 @@ function LeadsPage() {
                   <th className="py-2">Segmento</th>
                   <th className="py-2">Variante</th>
                   <th className="py-2">utm_source</th>
+                  <th className="py-2">Origem</th>
                   <th className="py-2 w-[180px]">Status</th>
                   <th className="py-2 text-right whitespace-nowrap">Data</th>
                 </tr>
