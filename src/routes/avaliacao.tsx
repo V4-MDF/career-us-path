@@ -12,12 +12,12 @@
  * SEO: noindex,nofollow e fora do sitemap.
  */
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo } from "react";
 import { createFileRoute, Link, useNavigate, useSearch } from "@tanstack/react-router";
-import { ChevronLeft, ShieldCheck, MapPin } from "lucide-react";
+import { ChevronLeft, ShieldCheck } from "lucide-react";
 import { LeadFormProgressive } from "@/components/site/LeadFormProgressive";
 import { trackFormView } from "@/lib/tracking";
-import { getOrigin, describeOrigin } from "@/lib/origin";
+import { getOrigin } from "@/lib/origin";
 import type { QualResult } from "@/lib/leadQualification";
 
 type SegKey = "medicos" | "engenheiros" | "empresarios";
@@ -68,15 +68,16 @@ export const Route = createFileRoute("/avaliacao")({
 function AvaliacaoPage() {
   const search = useSearch({ from: "/avaliacao" });
   const navigate = useNavigate();
-  const [originLabel, setOriginLabel] = useState<string | null>(null);
 
   useEffect(() => {
     trackFormView({ seg: search.seg ?? null, src: search.src ?? null });
   }, [search.seg, search.src]);
 
+  // Captura origem silenciosamente — fica disponível no payload do lead (admin/tracking)
   useEffect(() => {
-    setOriginLabel(describeOrigin(getOrigin("/avaliacao")));
+    getOrigin("/avaliacao");
   }, []);
+
 
   const segKey = useMemo<SegKey | null>(() => {
     const s = search.seg as SegKey | undefined;
@@ -149,14 +150,8 @@ function AvaliacaoPage() {
             </p>
           </div>
 
-          {/* Chip origem (discreto) */}
-          {originLabel && (
-            <div className="mt-8 flex justify-center">
-              <span className="inline-flex items-center gap-2 border border-border bg-ink-deep/50 px-3 py-1.5 text-[11px] font-mono-label text-foreground/55 rounded">
-                <MapPin className="h-3 w-3" /> {originLabel}
-              </span>
-            </div>
-          )}
+          {/* Origem capturada silenciosamente — visível apenas no admin/tracking de cada lead */}
+
 
           {/* Formulário */}
           <div className="mt-6">
