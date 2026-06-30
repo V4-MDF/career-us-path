@@ -85,7 +85,7 @@ function PostPage() {
       <BreadcrumbJsonLd
         items={[
           { name: "Início", url: "/" },
-          { name: "Conteúdo", url: "/blog" },
+          { name: "Blog", url: "/blog" },
           { name: post.titulo, url: `/blog/${post.slug}` },
         ]}
       />
@@ -98,7 +98,7 @@ function PostPage() {
               <nav aria-label="Breadcrumb" className="font-mono-label text-foreground/55 flex items-center gap-2 flex-wrap">
                 <Link to="/" className="hover:text-gold">Início</Link>
                 <ChevronRight className="h-3 w-3" />
-                <Link to="/blog" className="hover:text-gold">Conteúdo</Link>
+                <Link to="/blog" className="hover:text-gold">Blog</Link>
                 <ChevronRight className="h-3 w-3" />
                 <span className="text-gold truncate">{post.categoria}</span>
               </nav>
