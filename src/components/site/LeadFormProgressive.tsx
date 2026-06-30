@@ -129,6 +129,12 @@ export function LeadFormProgressive({
   const partialIdRef = useRef<string>("");
   const containerRef = useRef<HTMLDivElement | null>(null);
   const reduce = useReducedMotion();
+  // Ref sempre apontando para o `data` mais recente — evita closures stale
+  // quando o auto-advance dos <Select> dispara via setTimeout antes do
+  // próximo render propagar o novo state. Sem isso, `advance()` lê um `data`
+  // antigo onde o campo recém-selecionado ainda está vazio, e o form trava.
+  const dataRef = useRef<LeadInput>(data);
+  useEffect(() => { dataRef.current = data; }, [data]);
 
   // Mount: garante um partial id estável e tenta restaurar respostas anteriores
   // do dataStore (localStorage) — para que o lead não precise refazer o form
@@ -210,7 +216,8 @@ export function LeadFormProgressive({
   const advance = () => {
     const f = PROGRESSIVE_FIELDS[stepIndex];
     if (!f) return;
-    if (!isFieldValid(f.key, data)) {
+    // lê do ref para enxergar o valor recém-setado pelo <Select>
+    if (!isFieldValid(f.key, dataRef.current)) {
       setError(errorFor(f.key));
       return;
     }
@@ -234,7 +241,8 @@ export function LeadFormProgressive({
   };
 
   const submit = async () => {
-    if (PROGRESSIVE_FIELDS.some((f) => !isFieldValid(f.key, data))) {
+    const current = dataRef.current;
+    if (PROGRESSIVE_FIELDS.some((f) => !isFieldValid(f.key, current))) {
       setError("Complete todas as perguntas antes de enviar.");
       return;
     }
@@ -243,9 +251,9 @@ export function LeadFormProgressive({
     try {
       const id = newId("lead");
       const origin = getOrigin(currentPath);
-      const qual = evaluateQualification(data);
+      const qual = evaluateQualification(current);
       const lead = {
-        ...data,
+        ...current,
         id,
         createdAt: new Date().toISOString(),
         utm: origin.utm,        // compat com tooling existente
@@ -257,15 +265,21 @@ export function LeadFormProgressive({
         qualification_reasons: qual.reasons,
       };
       await set("leads", id, lead);
-      if (segmentId) await registerConversion(segmentId);
-      // limpa parcial após conversão
+      // efeitos colaterais isolados — se falharem, NÃO bloqueiam o redirect
+      if (segmentId) {
+        try { await registerConversion(segmentId); }
+        catch (e) { console.warn("[avaliacao] registerConversion failed", e); }
+      }
       if (partialIdRef.current) {
-        await remove("leads_partial", partialIdRef.current);
-        try { window.sessionStorage.removeItem(SS_PARTIAL_ID); } catch { /* ignore */ }
+        try {
+          await remove("leads_partial", partialIdRef.current);
+          window.sessionStorage.removeItem(SS_PARTIAL_ID);
+        } catch (e) { console.warn("[avaliacao] partial cleanup failed", e); }
       }
       if (onSubmitted) onSubmitted({ id, qualification: qual.result });
       else setDone(true);
-    } catch {
+    } catch (err) {
+      console.error("[avaliacao] submit failed", err);
       setError("Não foi possível enviar agora. Tente novamente.");
     } finally {
       setLoading(false);
