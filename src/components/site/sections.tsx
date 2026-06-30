@@ -31,6 +31,8 @@ import { SectionHead } from "./SectionHead";
 import { BrUsRouteBackdrop } from "./visuals/BrUsRouteBackdrop";
 import { FamilySealBackdrop } from "./visuals/FamilySealBackdrop";
 import { ProcessIconStrip } from "./visuals/ProcessIconStrip";
+import { LeadFormProgressive } from "./LeadFormProgressive";
+import { useLocation } from "@tanstack/react-router";
 
 /* ============================================================
  * 1. HERO
