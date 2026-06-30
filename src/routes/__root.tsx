@@ -11,6 +11,7 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { TrackingInjector } from "../components/site/TrackingInjector";
 
 function NotFoundComponent() {
   return (
@@ -117,6 +118,8 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
+      {/* Injeta GA4 / GTM / Pixel etc. lidos do dataStore (admin → Tracking) */}
+      <TrackingInjector />
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <Outlet />
     </QueryClientProvider>

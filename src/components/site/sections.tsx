@@ -263,7 +263,7 @@ export function VisaCards() {
         </div>
         <div className="grid md:grid-cols-3 gap-5">
           {visas.map((v) => (
-            <Link key={v.slug} to={`/vistos/${v.slug}`}>
+            <Link key={v.slug} to="/vistos/$slug" params={{ slug: v.slug }}>
               <Card
                 className={`h-full transition-all hover:-translate-y-1 ${
                   v.featured
@@ -336,7 +336,7 @@ export function PersonaCards() {
                   </span>
                   <h3 className="mt-5 font-display text-2xl">{p.title}</h3>
                   <p className="mt-3 text-foreground/75 leading-relaxed">{p.headline}</p>
-                  <Link to={`/lp/${p.slug}`} className="mt-6 inline-flex items-center text-sm text-gold">
+                  <Link to="/lp/$slug" params={{ slug: p.slug }} className="mt-6 inline-flex items-center text-sm text-gold">
                     Ver caminho para {p.title.toLowerCase()} →
                   </Link>
                 </CardContent>

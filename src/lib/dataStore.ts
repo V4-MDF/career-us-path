@@ -13,7 +13,12 @@ export type TableName =
   | "site_content"
   | "segments"
   | "hero_variants"
-  | "ab_stats";
+  | "ab_stats"
+  | "admin_users"
+  | "settings"      // chave/valor: branding, contatos, links, tracking
+  | "page_seo"      // SEO por página (id = slug da página)
+  | "media"         // imagens/logos/og (id = slot)
+  | "page_sections"; // ordem/ativação das dobras por página
 
 const PREFIX = "status_";
 
