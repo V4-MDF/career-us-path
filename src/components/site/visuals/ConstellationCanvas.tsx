@@ -15,8 +15,8 @@ interface Point { x: number; y: number; vx: number; vy: number; }
 
 export function ConstellationCanvas({
   className = "",
-  density = 0.00008,
-  linkDistance = 130,
+  density = 0.00005,
+  linkDistance = 110,
   color = "rgba(183, 151, 90, 0.55)",
 }: {
   className?: string;
@@ -105,27 +105,34 @@ export function ConstellationCanvas({
       raf = requestAnimationFrame(tick);
     };
 
-    const start = () => { if (!running) { running = true; tick(); } };
+    const start = () => { if (!running) { running = true; raf = requestAnimationFrame(tick); } };
     const stop = () => { running = false; cancelAnimationFrame(raf); };
 
+    // Pausa durante scroll — o canvas é fixed inset-0, então rolar reflow não o
+    // tira da tela, mas redesenhar a 60fps enquanto o usuário rola é o que mais
+    // engasga o site. Pausa imediata + retoma 200ms após o último scroll.
+    let scrollIdle = 0;
+    const onScroll = () => {
+      stop();
+      window.clearTimeout(scrollIdle);
+      scrollIdle = window.setTimeout(start, 200);
+    };
+
     const onVis = () => (document.hidden ? stop() : start());
-    const io = new IntersectionObserver(
-      (ents) => ents[0]?.isIntersecting ? start() : stop(),
-      { threshold: 0 },
-    );
 
     resize();
-    tick();
-    io.observe(canvas);
+    raf = requestAnimationFrame(tick);
     window.addEventListener("resize", resize);
+    window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("mousemove", onMouse);
     window.addEventListener("mouseout", onLeave);
     document.addEventListener("visibilitychange", onVis);
 
     return () => {
       stop();
-      io.disconnect();
+      window.clearTimeout(scrollIdle);
       window.removeEventListener("resize", resize);
+      window.removeEventListener("scroll", onScroll);
       window.removeEventListener("mousemove", onMouse);
       window.removeEventListener("mouseout", onLeave);
       document.removeEventListener("visibilitychange", onVis);

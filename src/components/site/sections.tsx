@@ -26,7 +26,7 @@ import {
   Accordion, AccordionContent, AccordionItem, AccordionTrigger,
 } from "@/components/ui/accordion";
 import { useContent } from "@/lib/siteContent";
-import { avaliacaoHref } from "@/lib/ctaLinks";
+import { avaliacaoHref, useAvaliacaoHref } from "@/lib/ctaLinks";
 import { SectionHead } from "./SectionHead";
 import { BrUsRouteBackdrop } from "./visuals/BrUsRouteBackdrop";
 import { FamilySealBackdrop } from "./visuals/FamilySealBackdrop";
@@ -144,7 +144,7 @@ export function Hero() {
             transition={{ duration: t(0.7), ease: easeSig, delay: dly(0.85) }}
             className="mt-10 flex flex-wrap gap-3"
           >
-            <Link to={avaliacaoHref("home_hero")} aria-label="Ir para o formulário de avaliação gratuita">
+            <Link to={useAvaliacaoHref("home_hero")} aria-label="Ir para o formulário de avaliação gratuita">
               <Button size="lg" className="btn-label btn-sweep h-12 px-7 text-[15px] active:scale-[0.98]">
                 {cta}
               </Button>
@@ -346,7 +346,7 @@ export function NiwSection() {
               </li>
             ))}
           </ul>
-          <a href={avaliacaoHref("home_niw")} className="inline-block mt-10">
+          <a href={useAvaliacaoHref("home_niw")} className="inline-block mt-10">
             <Button size="lg" className="btn-label btn-sweep h-12 px-7">Quero saber se tenho perfil</Button>
           </a>
         </div>
@@ -830,7 +830,7 @@ export function CtaBanner() {
               Em poucos minutos você envia seus dados. Nossa equipe responde em até 48h
               por e-mail com a indicação do caminho mais coerente.
             </p>
-            <a href={avaliacaoHref("home_cta_final")} className="mt-7 inline-block">
+            <a href={useAvaliacaoHref("home_cta_final")} className="mt-7 inline-block">
               <Button size="lg" className="btn-label btn-sweep h-12 px-7">Fazer minha avaliação gratuita</Button>
             </a>
             <a

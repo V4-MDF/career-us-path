@@ -179,11 +179,24 @@ function subscribe(callback: () => void): () => void {
   };
 }
 
+// Server snapshot precisa ser estável (mesma referência) entre chamadas, senão
+// useSyncExternalStore detecta "novo" snapshot a cada render e entra em loop
+// (warning: "The result of getServerSnapshot should be cached…").
+const serverSnapshotCache = new Map<PageSlug, SectionItem[]>();
+function getServerSnapshot(page: PageSlug): SectionItem[] {
+  let cached = serverSnapshotCache.get(page);
+  if (!cached) {
+    cached = reconcile(page, null);
+    serverSnapshotCache.set(page, cached);
+  }
+  return cached;
+}
+
 export function useOrderedSections(page: PageSlug): SectionItem[] {
   return useSyncExternalStore(
     subscribe,
     () => getCachedSnapshot(page),
-    () => reconcile(page, null), // server snapshot — sem localStorage
+    () => getServerSnapshot(page),
   );
 }
 
