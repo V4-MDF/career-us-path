@@ -33,6 +33,11 @@ import { FamilySealBackdrop } from "./visuals/FamilySealBackdrop";
 import { ProcessIconStrip } from "./visuals/ProcessIconStrip";
 import { LeadFormProgressive } from "./LeadFormProgressive";
 import { useLocation } from "@tanstack/react-router";
+import { FlagsBRUS } from "./flags";
+import heroSkyline from "@/assets/hero-skyline.jpg";
+import familyPortrait from "@/assets/family-portrait.jpg";
+import passportDocuments from "@/assets/passport-documents.jpg";
+import usMapEngraving from "@/assets/us-map-engraving.png";
 
 /* ============================================================
  * 1. HERO
