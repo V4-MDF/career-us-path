@@ -14,6 +14,17 @@
 
 import { useEffect, useRef, useState } from "react";
 
+// Estado compartilhado entre `scrollToSection` e o hook `useScrollSpy`.
+// Durante um scroll programático, suspendemos atualizações de activeId/hash
+// para evitar "flicker" do título e da URL passando por todas as dobras
+// intermediárias durante a animação smooth-scroll.
+const programmaticScroll = {
+  /** timestamp (performance.now) até quando ignorar updates do observer */
+  until: 0,
+  /** id-alvo do scroll programático — vira activeId imediatamente */
+  targetId: null as string | null,
+};
+
 export interface ScrollSpyOptions {
   /** Lista de ids a observar. Quando muda, o observer é recriado. */
   ids: string[];
