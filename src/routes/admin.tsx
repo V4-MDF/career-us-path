@@ -10,7 +10,7 @@
 import { Outlet, Link, createFileRoute, useNavigate, useRouterState } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import {
-  BarChart3, BookText, ExternalLink, FileText, Image as ImageIcon, LayoutDashboard,
+  BarChart3, BookText, Compass, ExternalLink, FileText, Image as ImageIcon, LayoutDashboard,
   Link as LinkIcon, LogOut, Menu, Search, Settings, ShieldCheck,
   Sparkles, Tag, Target, Users, Users2, UserX, X,
 } from "lucide-react";
@@ -35,6 +35,7 @@ const NAV: NavItem[] = [
   { to: "/admin/leads", label: "Leads", icon: Users, badge: "crítico" },
   { to: "/admin/leads-incompletos", label: "Leads incompletos", icon: UserX },
   { to: "/admin/scoring", label: "Pontuação", icon: Target },
+  { to: "/admin/origens", label: "Origens & Canais", icon: Compass },
   { to: "/admin/segmentos", label: "Segmentos / LPs", icon: Tag, badge: "crítico" },
 
   { to: "/admin/ab", label: "Teste A/B", icon: BarChart3, badge: "crítico" },
