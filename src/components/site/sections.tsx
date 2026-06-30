@@ -481,7 +481,7 @@ export function WhyUs() {
             {stats.map((s, i) => (
               <div key={s.label} className={`relative py-10 px-6 ${i > 0 ? "md:border-l border-gold/15" : ""}`}>
                 <div className="absolute top-0 left-6 h-[2px] w-8 bg-gold" />
-                <CountUp value={s.value} className="font-display text-[52px] md:text-[64px] leading-none text-foreground" />
+                <CountUp value={s.value} className="stat-num text-foreground" />
                 <p className="mt-3 font-mono-label text-gold/85">{s.label}</p>
               </div>
             ))}
