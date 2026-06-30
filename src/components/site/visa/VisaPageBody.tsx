@@ -208,7 +208,7 @@ export function VisaPageBody({ page }: { page: VisaPage }) {
             </ul>
           </div>
           <div className="lg:col-span-5">
-            <div className="border border-ink-text/15 bg-white p-8">
+            <div className="rounded-2xl border border-ink-text/15 bg-white p-8 shadow-elevated">
               <p className="font-mono-label text-gold">PRÓXIMO PASSO</p>
               <h3 className="mt-3 font-display text-2xl text-ink-text">
                 Comece pela análise gratuita do seu perfil.
