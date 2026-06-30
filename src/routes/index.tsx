@@ -2,8 +2,9 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import {
-  AuthorityStrip, ContrastBrasilEUA, CtaForm, FAQ, Hero, NiwSection,
-  PersonaCards, ProcessSteps, SalaryCompare, Testimonials, VisaCards, WhyUs,
+  AuthorityStrip, ContrastBrasilEUA, CtaBanner, FAQ, Hero, LegacySection,
+  NiwSection, PersonaCards, ProcessSteps, SalaryCompare, Testimonials,
+  VisaCards, WhyUs,
 } from "@/components/site/sections";
 import { OrganizationJsonLd } from "@/components/site/Seo";
 
@@ -50,10 +51,11 @@ function Home() {
         <PersonaCards />
         <ProcessSteps />
         <WhyUs />
+        <LegacySection />
         <SalaryCompare />
         <Testimonials />
         <FAQ />
-        <CtaForm />
+        <CtaBanner />
       </main>
       <Footer />
     </>
