@@ -14,14 +14,14 @@ import {
 export const Route = createFileRoute("/blog")({
   head: () => ({
     meta: [
-      { title: "Conteúdo | Status na América" },
+      { title: "Blog | Status na América" },
       {
         name: "description",
         content:
           "Artigos sobre vistos EB (EB-2 NIW, EB-1, EB-3), Green Card e vida nos EUA para profissionais brasileiros.",
       },
       { name: "robots", content: "index,follow" },
-      { property: "og:title", content: "Conteúdo | Status na América" },
+      { property: "og:title", content: "Blog | Status na América" },
       {
         property: "og:description",
         content:
@@ -57,13 +57,13 @@ function BlogIndex() {
     <>
       <Header />
       <OrganizationJsonLd />
-      <BreadcrumbJsonLd items={[{ name: "Início", url: "/" }, { name: "Conteúdo", url: "/blog" }]} />
+      <BreadcrumbJsonLd items={[{ name: "Início", url: "/" }, { name: "Blog", url: "/blog" }]} />
 
       <main className="pt-28">
         <section className="bg-ink">
           <div className="container-x py-16 md:py-20">
             <SectionHead
-              eyebrow="CONTEÚDO"
+              eyebrow="BLOG"
               title="Artigos para quem está construindo um plano sério de imigração."
               kicker="Análises sóbrias sobre vistos EB, Green Card e vida nos EUA. Sem fantasia, sem promessa."
             />

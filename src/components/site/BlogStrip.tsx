@@ -50,7 +50,7 @@ export function BlogStrip() {
   return (
     <section
       id="blog-em-destaque"
-      aria-label="Conteúdo em destaque"
+      aria-label="Blog em destaque"
       className="section-anchor section-ink-deep border-t border-gold/15"
     >
       <div className="container-x py-16 md:py-20">

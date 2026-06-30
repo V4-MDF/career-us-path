@@ -31,7 +31,7 @@ const VISTOS: VistoItem[] = [
 const NAV = [
   { label: "Início", to: "/" as const },
   { label: "Sobre", to: "/sobre" as const },
-  { label: "Conteúdo", to: "/blog" as const },
+  { label: "Blog", to: "/blog" as const },
   { label: "Contato", to: "/contato" as const },
 ];
 
