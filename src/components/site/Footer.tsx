@@ -10,14 +10,13 @@
 
 import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { Facebook, Instagram, MessageCircle, Youtube } from "lucide-react";
+import { Facebook, Instagram, Youtube } from "lucide-react";
 import { getSiteSettings, type SiteSettings } from "@/lib/admin/settings";
 
 export function Footer() {
   const [s, setS] = useState<SiteSettings | null>(null);
   useEffect(() => { getSiteSettings().then(setS); }, []);
 
-  const wa = s?.whatsapp_br || "16892209714";
   const email = s?.email?.trim() || "";
   const fb = s?.facebook_url || "https://facebook.com/statusnaamerica";
   const ig = s?.instagram_url || "https://instagram.com/status_america";
@@ -46,7 +45,6 @@ export function Footer() {
               { Icon: Youtube, href: yt, label: "YouTube" },
               { Icon: Facebook, href: fb, label: "Facebook" },
               { Icon: TikTokGlyph, href: "https://www.tiktok.com/@status.america", label: "TikTok" },
-              { Icon: MessageCircle, href: `https://wa.me/${wa}`, label: "WhatsApp" },
             ].map(({ Icon, href, label }) => (
               <a
                 key={label}
@@ -83,12 +81,7 @@ export function Footer() {
             <p>Alameda Araguaia, 2104</p>
             <p>Barueri/SP · CEP 06455-000</p>
             <p className="font-mono text-xs text-foreground/60 mt-2">CNPJ 62.917.376/0001-21</p>
-            <p className="mt-3">
-              WhatsApp:{" "}
-              <a className="hover:text-gold" href={`https://wa.me/${wa}`} target="_blank" rel="noopener noreferrer">
-                +1 689 220-9714
-              </a>
-            </p>
+            <p className="mt-3">Tel.: +1 689 220-9714</p>
             {email && (
               <p>
                 <a className="hover:text-gold" href={`mailto:${email}`}>{email}</a>

@@ -74,7 +74,7 @@ const QA: { q: string; a: string }[] = [
   {
     q: "Como entrar em contato?",
     a:
-      "Pelo formulário de avaliação gratuita em https://statusnaamerica.com ou pelos canais de WhatsApp e e-mail informados no site (contato@statusnaamerica.com).",
+      "Pelo formulário de avaliação gratuita em https://statusnaamerica.com ou pelo canal de e-mail informados no site (contato@statusnaamerica.com).",
   },
 ];
 

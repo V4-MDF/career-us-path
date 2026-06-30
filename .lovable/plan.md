@@ -1,121 +1,103 @@
-## Objetivo
+## Escopo
 
-Cada dobra do site público passa a ter uma URL própria, de forma híbrida:
+Seis correções pedidas, todas em código de apresentação (sem mexer em scoring, A/B, dataStore ou rotas de admin).
 
-- **Home, Sobre, Contato, Blog index, Blog post**: hash anchors (`/#processo-eb-2-niw`). UX de scroll-spy atualiza a URL ao rolar; deep-link abre na dobra; `title`/`canonical`/`og:url` se ajustam ao hash ativo. SEO indexa como *passage* da página pai (estratégia que o Google já usa nativamente para conteúdo bem estruturado).
-- **Pilares de visto (`/vistos/*`)**: cada dobra ganha **sub-rota real** (`/vistos/eb-2-niw-green-card-por-merito/processo`), com `head()` próprio, canonical próprio, entrada no `sitemap.xml`. Aqui SEO importa mais — é onde o tráfego de busca decide.
+---
 
-Tudo data-driven, reaproveitando `slugifyAEO` do `aeoSlug.ts` da Fase 2 do skill.
+### 1. Tipografia legível (Montserrat + Inter)
 
-## Arquitetura
+Trocar globalmente Bodoni Moda + Hanken Grotesk pela combinação solicitada:
 
-### 1. Catálogo de dobras (`src/lib/sectionMap.ts` — novo)
+- **Display/Títulos**: `Montserrat` (700/800), com `text-transform: uppercase` e `letter-spacing` levemente positivo (tracking-wide) — ativado por padrão em `h1/h2` e nos utilitários `display-1/2/3`.
+- **Corpo**: `Inter` 400/500 (já adequado para leitura confortável).
+- **Dados/labels**: manter `JetBrains Mono` (não é problema de legibilidade).
 
-Fonte única de verdade. Para cada rota, lista as dobras com:
-```ts
-{
-  id: "processo-eb-2-niw",       // slug AEO, vira id do <section> e #hash
-  label: "Processo EB-2 NIW",    // usado no scroll-spy, TOC e <title> dinâmico
-  intent: string,                // 1 frase p/ <meta description> ao deep-link
-  indexable?: boolean,           // true → entra no sitemap (só pilares)
-}
-```
-A Home tem ~14 dobras já existentes em `sections.tsx` — o map só nomeia cada uma com slug AEO. Pilares e blog idem.
+Implementação:
+- `bun add @fontsource/montserrat @fontsource-variable/inter`
+- Atualizar `src/styles.css`: trocar `--font-display` e `--font-sans`, ajustar `@utility display-1/2/3` para incluir `text-transform: uppercase` e `font-weight: 800`, reduzir `letter-spacing` negativo herdado de Bodoni (que comprime texto e prejudica leitura).
+- Aumentar `line-height` do corpo de `1.55` para `1.65` e `font-size` base de 15px para 16px.
+- Remover `<link>` do Google Fonts antigo em `__root.tsx`.
 
-### 2. `<SectionAnchor>` (`src/components/site/SectionAnchor.tsx` — novo)
+Comentário no CSS marcando que a identidade "Dossiê" agora é expressa por estrutura/cor (ink + parchment + gold), não por serifa.
 
-Wrapper de `<section>` que aplica `id`, `aria-labelledby`, `scroll-margin-top` (compensa header fixo) e registra a section no contexto de scroll-spy. Substitui os `<section>` atuais em `sections.tsx`, `vistos.$slug.tsx`, `sobre.tsx`, `contato.tsx`, `blog.$slug.tsx`.
+---
 
-### 3. Hook `useScrollSpy` (`src/hooks/useScrollSpy.ts` — novo)
+### 2. Motivos visuais EUA / Brasil / família / processo
 
-- `IntersectionObserver` com `rootMargin: "-30% 0px -55% 0px"` (dispara quando a dobra está realmente em foco visual).
-- Debounce 250ms via `requestAnimationFrame` + `setTimeout` antes de chamar `history.replaceState`.
-- **Não** empurra entrada no histórico (replaceState, não pushState) — botão voltar continua limpo.
-- Respeita `prefers-reduced-motion`: desabilita o smooth-scroll programático mas mantém a atualização de URL.
-- Expõe `activeId` para o componente raiz da rota atualizar `<title>` e canonical dinâmicos.
+Quatro componentes SVG novos em `src/components/site/visuals/`, todos `aria-hidden`, leves, com `prefers-reduced-motion` respeitado e fallback estático no mobile:
 
-### 4. Atualização dinâmica de `<title>` e canonical
+| Componente | Onde | O que faz |
+|---|---|---|
+| `BrUsRouteBackdrop.tsx` | Hero da Home (atrás do `<h1>`) | SVG inline com silhuetas estilizadas de BR e USA conectadas por uma rota pontilhada animada (dash-offset). Opacity 0.08, cor gold. |
+| `FamilySealBackdrop.tsx` | Dobra família/legado (`#familia` no sections.tsx) | Silhuetas lineares de família (4 figuras) + selo circular com águia estilizada à direita. |
+| `ProcessIconStrip.tsx` | Dobra do processo (`#processo`) | Tira de ícones SVG sobre a timeline: passaporte → formulário I-140 → carimbo USCIS → Green Card. Anima em sequência ao entrar na viewport (uma vez). |
+| `ConstellationCanvas.tsx` | Fundo global da Home (atrás de tudo, mix-blend overlay) | Canvas 2D com ~80 pontos formando constelação reativa ao mouse (linhas até 120px de distância). Pausa quando aba inativa; desativado em `prefers-reduced-motion` e em viewport < 768px (substituído por gradient estático). |
 
-Componente `<DynamicSectionHead>` montado no shell de cada rota pública (apenas client-side). Quando `activeId` muda:
-- `document.title` = `"<label da dobra> · <título da página> · Status na América"`.
-- `<link rel="canonical">` reescrito para `currentPath#<id>` (mantém o canonical da página-mãe; a fragmento sinaliza contexto ao crawler sem fragmentar autoridade).
-- `og:url` igualmente.
+Tokens novos em `styles.css`: `--motif-opacity` e utilitário `.motif-soft` para padronizar opacidade/blend.
 
-Importante: o canonical "duro" do SSR continua sendo a página-mãe (sem hash). A atualização é client-only; crawlers SSR pegam a versão íntegra da página, browsers/social-share atualizam ao navegar entre dobras.
+---
 
-### 5. Sub-rotas canônicas dos pilares (`/vistos/*/...`)
+### 3. Carrossel do blog na hero
 
-Criar:
-- `src/routes/vistos.$slug.tsx` continua sendo o layout/index (devolve a página inteira).
-- `src/routes/vistos.$slug.$secao.tsx` (nova) — rota leaf que renderiza **a mesma página** mas com:
-  - `<title>`, `og:title`, `og:description` derivados da dobra (`sectionMap[slug][secao]`).
-  - `canonical` apontando para `/vistos/<slug>/<secao>` (não para a página-mãe — Google indexa como página separada).
-  - Loader que valida `secao` contra o catálogo; `notFound()` se inválida.
-  - JSON-LD `WebPage` + `BreadcrumbList` (Home → Pilar → Seção).
-  - Scroll automático até a `<section id={secao}>` no mount.
-- Sitemap (`src/routes/sitemap[.]xml.ts`) passa a iterar `sectionMap` e emitir uma entrada por dobra indexável dos pilares.
+Nova dobra `BlogStrip.tsx` colocada logo abaixo do hero (antes de "Credenciais"), lendo `getPublishedPosts()` do `src/lib/blog.ts`. Mostra os 3 posts mais recentes em cards horizontais (título, categoria, lead, tempo de leitura). Link "Ver todos →" para `/blog`. Se não houver posts publicados, renderiza placeholder enxuto com 3 títulos sugeridos (sem quebrar layout).
 
-A página-mãe `/vistos/<slug>` mantém canonical próprio (sem hash). A sub-rota da seção tem canonical próprio (`/vistos/<slug>/<secao>`). Não há conflito porque os títulos e descrições são distintos.
+---
 
-### 6. Redirects e legados
+### 4. Remover botão de WhatsApp do site público
 
-Adicionar entradas em `LEGACY_REDIRECTS` (do `aeoSlug.ts`) caso alguém já compartilhe `/vistos/eb-2-niw#processo` — o client-side detecta o hash legado e redireciona para a sub-rota canônica `/vistos/eb-2-niw-green-card-por-merito/processo`.
+Remover **todos** os CTAs/links de WhatsApp do site público:
+- `src/routes/avaliacao.tsx` — botão no header e qualquer menção secundária.
+- `src/routes/avaliacao.obrigado.tsx` — bloco "Falar agora no WhatsApp".
+- `src/routes/blog.$slug.tsx` — botão de share WhatsApp (manter X/Twitter e LinkedIn).
+- `src/components/site/Footer.tsx` e Header — se houver link/FAB.
+- `src/components/site/sections.tsx` — qualquer CTA secundário "fale conosco no WhatsApp".
 
-### 7. UX visível (sem mexer em conteúdo)
+Manter no `/admin` (campo `whatsapp_br/us` em admin/links e coluna `whatsapp` em leads — é dado operacional do time, não CTA público). Manter `whatsapp` como campo coletado no formulário (continua sendo canal de retorno informado pelo lead).
 
-- TOC sticky aparece em mobile como bottom-sheet acionado por um chip "Nesta página" — só nas páginas com 4+ dobras (pilares e posts longos).
-- Em desktop, TOC vertical discreto na lateral direita dos pilares (igual MDN/Stripe docs), 16px from edge, hover-only com fade.
-- Active item destacado em `gold`; click rola com `behavior: 'smooth'` (ou `instant` se `reduced-motion`).
+Substituir CTAs secundários por "Enviar e-mail" (mailto) onde fizer sentido.
 
-### 8. Acessibilidade
+---
 
-- `<section>` ganha `aria-labelledby` apontando para o `<h2 id=…>` interno.
-- TOC é `<nav aria-label="Nesta página">`.
-- Skip-link existente continua intacto (`#conteudo`).
+### 5. Fundo interativo global
 
-## Arquivos tocados
+Coberto pelo `ConstellationCanvas` acima (item 2, fundo global). Adicionalmente:
+- Hero ganha parallax sutil já existente + camada nova de "ruído cinético" (grain animado em CSS, 60fps via `transform: translate3d`).
+- Respeita `prefers-reduced-motion` e mobile.
 
-**Novos:**
-- `src/lib/sectionMap.ts` — catálogo de dobras por rota.
-- `src/components/site/SectionAnchor.tsx` — wrapper de `<section>`.
-- `src/components/site/SectionTOC.tsx` — TOC sticky/bottom-sheet.
-- `src/components/site/DynamicSectionHead.tsx` — atualiza title/canonical ao rolar.
-- `src/hooks/useScrollSpy.ts` — IntersectionObserver + debounce.
-- `src/routes/vistos.$slug.$secao.tsx` — sub-rota canônica de dobra.
+---
 
-**Editados (cirurgicamente, só wrap e id):**
-- `src/components/site/sections.tsx` — cada section vira `<SectionAnchor id=… label=…>`.
-- `src/routes/index.tsx` — monta `DynamicSectionHead` e `SectionTOC` (mobile).
-- `src/routes/vistos.$slug.tsx` — idem + canonical/og dinâmicos quando há hash; passa para layout/Outlet quando sub-rota.
-- `src/routes/sobre.tsx`, `src/routes/contato.tsx`, `src/routes/blog.$slug.tsx` — wrap das sections + TOC.
-- `src/routes/sitemap[.]xml.ts` — emite entradas para sub-rotas dos pilares.
-- `src/lib/aeoSlug.ts` — adiciona helpers `sectionPath(slug, secao)` e mais entradas em `LEGACY_REDIRECTS` para hashes antigos.
+### 6. Fix da /avaliacao
 
-**Não tocado:** scoring, A/B, formulário, dataStore, admin, design tokens, conteúdo textual.
+Sem repro do usuário, mas auditoria do código + sessão revela problemas prováveis:
 
-## Performance e quirks
+- O header da `/avaliacao` tem botão de WhatsApp que será removido (item 4).
+- `LeadFormProgressive` (499 linhas) será verificado para: avanço entre perguntas, validação, persistência de `leads_partial` e fallback quando `segmentId` é `undefined`. Vou rodar Playwright contra `localhost:8080/avaliacao` em build mode para reproduzir o fluxo completo (todas as perguntas até "Enviar para análise") e identificar o ponto de travamento.
+- Garantir que `goToThanks` recebe `search` válido (hoje o cast `as never` pode estar disparando warning de tipo).
+- Confirmar que o `originLabel` aparece quando há UTM mas não bloqueia render quando ausente.
 
-- `IntersectionObserver` único por rota (não um por section).
-- `scroll-margin-top: calc(var(--header-h) + 16px)` no CSS global em vez de JS.
-- `history.replaceState` é barato; debounce evita >4 chamadas/s.
-- TOC desktop usa `position: sticky`, sem JS de layout.
-- Pré-fetch das sub-rotas de pilar com `preload="intent"` no TOC.
+Se o Playwright revelar bug específico (ex: pergunta X não avança, botão desabilitado), corrijo no mesmo passo. Se estiver "lento/visualmente confuso", refino UX: barra de progresso mais visível, foco automático no próximo campo, mensagens de erro inline.
 
-## Validação
+---
 
-Após implementar, rodo Playwright headless em `/`, `/vistos/eb-2-niw-green-card-por-merito` e `/vistos/eb-2-niw-green-card-por-merito/processo`:
-1. Confirmo que rolar atualiza o hash (sem entrar no histórico).
-2. Deep-link `/...#faq` abre na dobra correta.
-3. Sub-rota da seção tem `<title>` e `canonical` próprios distintos da página-mãe.
-4. Sitemap inclui as novas URLs.
-5. `prefers-reduced-motion` desliga o smooth-scroll mas mantém a URL ativa.
+## Ordem de execução
 
-## Fora do escopo
+1. Instalar fontes + atualizar `styles.css` (item 1).
+2. Criar componentes de motivos visuais (item 2) e `BlogStrip` (item 3).
+3. Wire-in nos sections/hero da Home.
+4. Remover WhatsApp do público (item 4).
+5. Reproduzir `/avaliacao` com Playwright, corrigir bug encontrado (item 6).
+6. Build + smoke test visual (screenshots desktop + mobile).
 
-- Sub-rotas por seção em Home, Sobre, Contato, Blog (decisão: ali o ganho SEO real é via passages do Google, e o custo de criar 14 rotas para a Home não compensa).
-- Mudança de design ou conteúdo das dobras existentes.
-- Tradução/conteúdo novo.
+## Detalhes técnicos
 
-## Notas
+- **Fontes**: `@fontsource/montserrat` (pesos 400/600/700/800) e `@fontsource-variable/inter` importados em `src/styles.css` no bloco superior de imports. Sem `<link>` Google Fonts.
+- **SVGs**: inline (não asset CDN) — são pequenos (<5KB cada) e precisam responder a CSS vars de cor.
+- **Canvas**: `requestAnimationFrame` com `IntersectionObserver` para pausar quando hero sai da tela; `useReducedMotion` desliga; `matchMedia("(max-width: 767px)")` força fallback.
+- **Tipografia uppercase**: aplicada via `@utility display-1/2/3` e em `h1/h2`, não no body — preserva legibilidade de parágrafos.
+- **Não mexer**: `dataStore`, `scoring.ts`, `abEngine.ts`, rotas `/admin/*`, sitemap, lógica de leads.
 
-O erro "Temporary infrastructure issue while preparing the build environment" da última build é transitório de infra (não do código). Vou apenas rodar a build na primeira etapa da execução para confirmar que está limpo antes de começar.
+## O que NÃO está no escopo
+
+- Refatoração de URL por dobra (já entregue em turno anterior).
+- Mudanças em copywriting (só remoção de menções a WhatsApp em CTAs).
+- Novos campos no formulário.

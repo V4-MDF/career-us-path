@@ -215,7 +215,7 @@ export function VisaPageBody({ page }: { page: VisaPage }) {
               </h3>
               <p className="mt-3 text-ink-text/70 text-[15px] leading-relaxed">
                 Em poucos minutos enviamos sua avaliação para a equipe especializada
-                em vistos EB. Resposta em até 48h pelo WhatsApp.
+                em vistos EB. Resposta em até 48h por e-mail.
               </p>
               <a href={avaliacaoHref(`visto_${page.slug}_cta`)} className="mt-7 inline-block">
                 <Button size="lg" className="btn-sweep h-12 px-7">Fazer minha avaliação gratuita</Button>

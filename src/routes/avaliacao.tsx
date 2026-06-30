@@ -17,10 +17,9 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { createFileRoute, Link, useNavigate, useSearch } from "@tanstack/react-router";
-import { ChevronLeft, MessageCircle, ShieldCheck, Star, MapPin } from "lucide-react";
+import { ChevronLeft, ShieldCheck, Star, MapPin } from "lucide-react";
 import { LeadFormProgressive } from "@/components/site/LeadFormProgressive";
 import { trackFormView } from "@/lib/tracking";
-import { getSiteSettings } from "@/lib/admin/settings";
 import { getOrigin, describeOrigin } from "@/lib/origin";
 
 type SegKey = "medicos" | "engenheiros" | "empresarios";
@@ -72,21 +71,15 @@ export const Route = createFileRoute("/avaliacao")({
 function AvaliacaoPage() {
   const search = useSearch({ from: "/avaliacao" });
   const navigate = useNavigate();
-  const [waMsisdn, setWaMsisdn] = useState<string>("16892209714");
   const [originLabel, setOriginLabel] = useState<string | null>(null);
 
   // Dispara evento de remarketing ao montar (Público A).
-  // Re-disparo seguro: trackFormView é no-op se Pixel/GA4 não carregados.
   useEffect(() => {
     trackFormView({ seg: search.seg ?? null, src: search.src ?? null });
   }, [search.seg, search.src]);
 
   useEffect(() => {
-    getSiteSettings().then((s) => {
-      if (s.whatsapp_br) setWaMsisdn(s.whatsapp_br);
-    });
     // Snapshot da origem (utm + página interna anterior).
-    // Lê sessionStorage gravado pelo listener em __root.tsx.
     setOriginLabel(describeOrigin(getOrigin("/avaliacao")));
   }, []);
 
@@ -100,14 +93,13 @@ function AvaliacaoPage() {
     : "Descubra se você tem perfil para o Green Card americano por mérito.";
 
   const goToThanks = () => {
-    // Preserva params na transição: o admin pode usar src para filtrar leads.
     navigate({ to: "/avaliacao/obrigado", search: search as never, replace: true });
   };
 
   return (
     <div className="min-h-screen bg-ink text-foreground">
       {/* Header minimalista — sem menu completo (LP de conversão) */}
-      <header className="border-b border-gold/20">
+      <header className="border-b border-gold/20 relative z-10">
         <div className="container-x flex h-[68px] items-center justify-between">
           <Link to="/" className="flex items-center gap-3 group" aria-label="Voltar ao site">
             <span className="grid h-9 w-9 place-items-center border border-gold/60 text-gold font-display text-lg">
@@ -119,28 +111,19 @@ function AvaliacaoPage() {
               </span>
             </span>
           </Link>
-          <div className="flex items-center gap-2">
-            <Link
-              to="/"
-              className="hidden sm:inline-flex items-center gap-1 text-xs font-mono-label text-foreground/55 hover:text-gold"
-            >
-              <ChevronLeft className="h-3.5 w-3.5" /> Voltar ao site
-            </Link>
-            <a
-              href={`https://wa.me/${waMsisdn}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 border border-gold/40 px-3 h-9 text-gold text-sm hover:bg-gold/10 transition-colors"
-            >
-              <MessageCircle className="h-4 w-4" /> WhatsApp
-            </a>
-          </div>
+          <Link
+            to="/"
+            className="hidden sm:inline-flex items-center gap-1 text-xs font-mono-label text-foreground/55 hover:text-gold"
+          >
+            <ChevronLeft className="h-3.5 w-3.5" /> Voltar ao site
+          </Link>
         </div>
       </header>
 
       <main>
         <section className="relative">
-          <div aria-hidden className="absolute inset-0 guilloche opacity-60" />
+          {/* Guilloché em opacidade muito baixa para não competir com o form. */}
+          <div aria-hidden className="absolute inset-0 guilloche opacity-20 pointer-events-none" />
           <div className="container-x relative section-pad grid lg:grid-cols-[1.05fr_1fr] gap-14 items-start">
             {/* Coluna esquerda — headline + microprova */}
             <div className="lg:pt-4 max-w-xl">
@@ -149,13 +132,13 @@ function AvaliacaoPage() {
                 <span className="font-mono-label text-gold">AVALIAÇÃO GRATUITA · 100% CONFIDENCIAL</span>
               </div>
 
-              <h1 className="mt-6 font-display text-[40px] md:text-[56px] leading-[1.04] tracking-[-0.015em]">
+              <h1 className="mt-6 display-1">
                 {headline}
               </h1>
 
-              <p className="mt-7 text-lg leading-relaxed text-foreground/80">
+              <p className="mt-7 lead">
                 Análise gratuita e sem compromisso. Nossa equipe analisa o seu perfil e
-                responde em até 48h pelo WhatsApp informado.
+                responde em até 48h pelo canal informado.
               </p>
 
               {/* Microprova social */}
@@ -176,7 +159,7 @@ function AvaliacaoPage() {
             </div>
 
             {/* Coluna direita — formulário progressivo (Typeform-style) */}
-            <div>
+            <div className="relative z-10">
               {originLabel && (
                 <div className="mb-3 inline-flex items-center gap-2 border border-gold/30 bg-ink-deep/40 px-3 py-1.5 text-[11px] font-mono-label text-gold/90">
                   <MapPin className="h-3 w-3" /> {originLabel}
@@ -194,7 +177,7 @@ function AvaliacaoPage() {
         </section>
       </main>
 
-      {/* Rodapé minimalista — sem links que tirem foco; disclaimer obrigatório */}
+      {/* Rodapé minimalista — disclaimer obrigatório */}
       <footer className="border-t border-gold/15 bg-ink-deep">
         <div className="container-x py-8 text-xs text-foreground/55 leading-relaxed max-w-4xl">
           <p>

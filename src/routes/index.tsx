@@ -10,6 +10,8 @@ import { OrganizationJsonLd } from "@/components/site/Seo";
 import { DynamicSectionHead } from "@/components/site/DynamicSectionHead";
 import { SectionTOC } from "@/components/site/SectionTOC";
 import { HOME_SECTIONS } from "@/lib/sectionMap";
+import { BlogStrip } from "@/components/site/BlogStrip";
+import { ConstellationCanvas } from "@/components/site/visuals/ConstellationCanvas";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -44,16 +46,17 @@ function Home() {
   return (
     <>
       <OrganizationJsonLd />
-      {/* URL por dobra: scroll-spy atualiza #hash + title + canonical ao vivo. */}
-      <DynamicSectionHead
-        sections={HOME_SECTIONS}
-        baseTitle="Green Card EB-2 NIW"
-      />
+      <DynamicSectionHead sections={HOME_SECTIONS} baseTitle="Green Card EB-2 NIW" />
+      {/* Fundo interativo global — constellation reativa ao mouse. */}
+      <div aria-hidden className="fixed inset-0 -z-20 pointer-events-none">
+        <ConstellationCanvas />
+      </div>
       <Header />
       <SectionTOC sections={HOME_SECTIONS} />
       <main>
         <Hero />
         <AuthorityStrip />
+        <BlogStrip />
         <ContrastBrasilEUA />
         <NiwSection />
         <VisaCards />
