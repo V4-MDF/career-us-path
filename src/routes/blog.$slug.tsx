@@ -131,7 +131,7 @@ function PostPage() {
                   width={1200}
                   height={630}
                   loading="eager"
-                  className="w-full aspect-[16/9] object-cover border border-gold/20"
+                  className="w-full aspect-[16/9] object-cover rounded-3xl border border-gold/20 shadow-elevated"
                 />
               </div>
             </div>
@@ -150,7 +150,7 @@ function PostPage() {
               <ShareRow url={`/blog/${post.slug}`} title={post.titulo} />
 
               {/* CTA final */}
-              <div className="mt-12 border border-gold/30 bg-ink-raise/50 p-8">
+              <div className="mt-12 rounded-2xl border border-gold/30 bg-ink-raise/50 p-8 shadow-soft">
                 <h2 className="font-display text-2xl">Pronto para avaliar o seu perfil?</h2>
                 <p className="mt-2 text-foreground/75">Análise individual e gratuita em até 48h.</p>
                 <a href={avaliacaoHref(`blog_${post.slug}`)} className="mt-5 inline-block">
@@ -174,7 +174,7 @@ function PostPage() {
                       <Link
                         to="/blog/$slug"
                         params={{ slug: r.slug }}
-                        className="block group border border-ink-text/15 bg-white h-full"
+                        className="block group rounded-2xl border border-ink-text/15 bg-white h-full overflow-hidden shadow-soft transition-[border-color,box-shadow] hover:border-ink-text/35 hover:shadow-elevated"
                       >
                         <div className="aspect-[16/10] overflow-hidden">
                           <img src={r.capa} alt={r.titulo} width={600} height={375} loading="lazy"

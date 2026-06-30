@@ -103,7 +103,7 @@ function AvaliacaoPage() {
       <header className="sticky top-0 z-20 border-b border-gold/15 bg-ink/85 backdrop-blur">
         <div className="container-x flex h-[64px] items-center justify-between">
           <Link to="/" className="flex items-center gap-3" aria-label="Voltar ao site">
-            <span className="grid h-9 w-9 place-items-center border border-gold/60 text-gold font-display text-lg">
+            <span className="grid h-9 w-9 place-items-center rounded-lg border border-gold/60 text-gold font-display text-lg">
               S
             </span>
             <span className="font-display text-[16px]">

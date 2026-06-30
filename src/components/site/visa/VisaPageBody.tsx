@@ -38,7 +38,7 @@ export function VisaPageBody({ page }: { page: VisaPage }) {
             <span aria-hidden className="h-px w-10 bg-gold/70" />
             <span className="font-mono-label text-gold">{page.eyebrow}</span>
             {page.badge && (
-              <span className="border border-gold/60 px-2 py-0.5 font-mono-label text-[9px] text-gold">
+              <span className="rounded-md border border-gold/60 px-2 py-0.5 font-mono-label text-[9px] text-gold">
                 {page.badge}
               </span>
             )}
@@ -78,7 +78,7 @@ export function VisaPageBody({ page }: { page: VisaPage }) {
           <SectionHead num="02" eyebrow="ELEGIBILIDADE" title={page.qualifies.title} kicker={page.qualifies.intro} />
           <ul className="mt-12 grid gap-5 md:grid-cols-2">
             {page.qualifies.items.map((it) => (
-              <li key={it.title} className="gold-tick border border-gold/20 bg-ink-raise/60 p-7 pt-9">
+              <li key={it.title} className="gold-tick rounded-2xl border border-gold/20 bg-ink-raise/60 p-7 pt-9 shadow-soft transition-[border-color,box-shadow] hover:border-gold/45 hover:shadow-elevated">
                 <h3 className="font-display text-2xl text-foreground">{it.title}</h3>
                 <p className="mt-3 text-foreground/75 leading-relaxed">{it.body}</p>
               </li>
@@ -93,7 +93,7 @@ export function VisaPageBody({ page }: { page: VisaPage }) {
           <SectionHead num="03" eyebrow="PROCESSO" variant="parchment" title={page.process.title} />
           <ol className="mt-12 grid gap-6 md:grid-cols-3">
             {page.process.steps.map((s) => (
-              <li key={s.num} className="border border-ink-text/15 bg-white p-7">
+              <li key={s.num} className="rounded-2xl border border-ink-text/15 bg-white p-7 shadow-soft">
                 <div className="font-mono-label text-gold">ETAPA {s.num}</div>
                 <h3 className="mt-3 font-display text-2xl text-ink-text">{s.title}</h3>
                 <p className="mt-3 text-ink-text/75 leading-relaxed">{s.body}</p>
@@ -128,7 +128,7 @@ export function VisaPageBody({ page }: { page: VisaPage }) {
             title="EB-2 NIW vs EB-1 vs EB-3"
             kicker="Três caminhos legítimos, três perfis distintos."
           />
-          <div className="mt-10 overflow-x-auto border border-ink-text/15 bg-white">
+          <div className="mt-10 overflow-x-auto rounded-2xl border border-ink-text/15 bg-white shadow-soft">
             <table className="w-full text-sm">
               <thead>
                 <tr className="bg-ink text-foreground">
@@ -208,7 +208,7 @@ export function VisaPageBody({ page }: { page: VisaPage }) {
             </ul>
           </div>
           <div className="lg:col-span-5">
-            <div className="border border-ink-text/15 bg-white p-8">
+            <div className="rounded-2xl border border-ink-text/15 bg-white p-8 shadow-elevated">
               <p className="font-mono-label text-gold">PRÓXIMO PASSO</p>
               <h3 className="mt-3 font-display text-2xl text-ink-text">
                 Comece pela análise gratuita do seu perfil.

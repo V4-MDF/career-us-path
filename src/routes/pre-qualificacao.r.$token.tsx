@@ -55,7 +55,7 @@ function PublicResultPage() {
         )}
 
         {!loading && !record && (
-          <div className="border border-gold/20 bg-ink-raise/40 p-8 text-center">
+          <div className="rounded-2xl border border-gold/20 bg-ink-raise/40 p-8 text-center shadow-soft">
             <h1 className="font-display text-2xl text-foreground">Resultado não encontrado</h1>
             <p className="mt-3 text-foreground/70">
               O link pode ter expirado ou ter sido aberto em outro dispositivo. Faça novamente o

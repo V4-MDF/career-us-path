@@ -104,7 +104,7 @@ export function Header() {
                 aria-label="Tipos de visto"
                 className="absolute left-1/2 top-full -translate-x-1/2 pt-3 animate-in fade-in slide-in-from-top-2 duration-200"
               >
-                <div className="w-[340px] border border-gold/30 bg-ink-deep/95 backdrop-blur-md p-2 shadow-elegant">
+                <div className="w-[340px] rounded-xl border border-gold/30 bg-ink-deep/95 backdrop-blur-md p-2 shadow-elegant">
                   {/* Filete superior dourado */}
                   <div aria-hidden className="absolute left-6 right-6 top-0 h-[3px] w-10 bg-gold" />
                   {VISTOS.map((v) => (
@@ -123,7 +123,7 @@ export function Header() {
                         <div className="font-mono-label mt-1 text-[10px] text-foreground/70">{v.hint}</div>
                       </div>
                       {v.badge && (
-                        <span className="shrink-0 border border-gold/60 px-2 py-0.5 font-mono-label text-[9px] text-gold">
+                        <span className="shrink-0 rounded-md border border-gold/60 px-2 py-0.5 font-mono-label text-[9px] text-gold">
                           {v.badge}
                         </span>
                       )}
@@ -149,7 +149,7 @@ export function Header() {
           </a>
           <button
             type="button"
-            className="lg:hidden grid h-11 w-11 place-items-center border border-gold/40 text-gold"
+            className="lg:hidden grid h-11 w-11 place-items-center rounded-lg border border-gold/40 text-gold"
             onClick={() => setOpen((o) => !o)}
             aria-label={open ? "Fechar menu" : "Abrir menu"}
             aria-expanded={open}

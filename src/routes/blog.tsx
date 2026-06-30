@@ -101,7 +101,7 @@ function BlogIndex() {
               <Link
                 to="/blog/$slug"
                 params={{ slug: featured.slug }}
-                className="grid lg:grid-cols-12 gap-8 group border border-gold/20 bg-ink-raise/40 overflow-hidden"
+                className="grid lg:grid-cols-12 gap-8 group rounded-3xl border border-gold/20 bg-ink-raise/40 overflow-hidden shadow-elevated transition-[border-color,box-shadow] hover:border-gold/45"
               >
                 <div className="lg:col-span-7 aspect-[16/10] lg:aspect-auto bg-ink-deep overflow-hidden">
                   <img
@@ -147,7 +147,7 @@ function BlogIndex() {
                     <Link
                       to="/blog/$slug"
                       params={{ slug: p.slug }}
-                      className="block group border border-gold/15 bg-ink-raise/40 h-full overflow-hidden"
+                      className="block group rounded-2xl border border-gold/15 bg-ink-raise/40 h-full overflow-hidden shadow-soft transition-[border-color,box-shadow,transform] hover:border-gold/45 hover:shadow-elevated"
                     >
                       <div className="aspect-[16/10] bg-ink-deep overflow-hidden">
                         <img

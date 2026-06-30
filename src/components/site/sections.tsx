@@ -180,7 +180,7 @@ export function Hero() {
           transition={{ duration: t(1.0), ease: easeSig, delay: t(0.25) }}
           style={enableParallax ? { y: imgY, willChange: "transform" } : undefined}
         >
-          <div className="relative aspect-[4/5] overflow-hidden border border-gold/30 bg-ink-raise">
+          <div className="relative aspect-[4/5] overflow-hidden rounded-3xl border border-gold/30 bg-ink-raise shadow-elevated">
             {/* Fotografia editorial — família multigeracional em paisagem americana. */}
             <img
               src={familyPortrait}
@@ -191,7 +191,7 @@ export function Hero() {
               className="absolute inset-0 h-full w-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-ink-deep via-ink-deep/30 to-transparent" />
-            <div className="absolute inset-3 border border-gold/30 pointer-events-none" />
+            <div className="absolute inset-3 rounded-2xl border border-gold/30 pointer-events-none" />
             <div className="absolute bottom-0 left-0 right-0 p-7">
               <div className="flex items-center gap-3 mb-3">
                 <FlagsBRUS size={14} />
@@ -203,7 +203,7 @@ export function Hero() {
             </div>
           </div>
 
-          <div className="absolute -bottom-6 -left-6 border border-gold bg-ink-deep/95 backdrop-blur p-4 max-w-[200px]">
+          <div className="absolute -bottom-6 -left-6 rounded-xl border border-gold bg-ink-deep/95 backdrop-blur p-4 max-w-[200px] shadow-elevated">
             <div className="absolute top-0 left-0 h-[3px] w-10 bg-gold" />
             <div className="flex items-center gap-1 text-gold">
               {[...Array(5)].map((_, i) => <Star key={i} className="h-3.5 w-3.5 fill-gold" />)}
@@ -282,7 +282,7 @@ export function ContrastBrasilEUA() {
       <div className="container-x">
         <SectionHead num="01" eyebrow="POR QUE MIGRAR AGORA" title="Duas realidades. Uma decisão." variant="parchment" />
         <div className="mt-14 grid md:grid-cols-2 gap-6">
-          <div className="relative gold-tick bg-white border border-ink-text/10 p-8">
+          <div className="relative gold-tick rounded-2xl bg-white border border-ink-text/10 p-8 shadow-soft">
             <div className="flex items-center gap-3 text-oxblood">
               <AlertTriangle className="h-5 w-5" />
               <h3 className="font-display text-xl text-ink-text m-0">A realidade que você já conhece no Brasil</h3>
@@ -296,7 +296,7 @@ export function ContrastBrasilEUA() {
               ))}
             </ul>
           </div>
-          <div className="relative gold-tick bg-white border border-gold/40 p-8">
+          <div className="relative gold-tick rounded-2xl bg-white border border-gold/40 p-8 shadow-soft">
             <div className="flex items-center gap-3 text-success">
               <CheckCircle2 className="h-5 w-5" />
               <h3 className="font-display text-xl text-ink-text m-0">O que os EUA oferecem a quem é qualificado</h3>
@@ -340,7 +340,7 @@ export function NiwSection() {
           <p className="mt-6 text-[17px] text-foreground/80 leading-relaxed max-w-xl">{lead}</p>
           <ul className="mt-9 grid sm:grid-cols-2 gap-3">
             {bullets.map(({ icon: Icon, t }) => (
-              <li key={t} className="relative gold-tick border border-gold/25 bg-ink-raise/50 p-5">
+              <li key={t} className="relative gold-tick rounded-xl border border-gold/25 bg-ink-raise/50 p-5">
                 <Icon className="h-5 w-5 text-gold mb-3" />
                 <span className="text-sm leading-snug text-foreground/90">{t}</span>
               </li>
@@ -352,7 +352,7 @@ export function NiwSection() {
         </div>
 
         <div className="relative">
-          <div className="aspect-video overflow-hidden border border-gold/40 bg-ink-deep relative">
+          <div className="aspect-video overflow-hidden rounded-2xl border border-gold/40 bg-ink-deep relative shadow-elevated">
             {/* Foto editorial — passaporte brasileiro + documentos sobre mesa de madeira. */}
             <img
               src={passportDocuments}
@@ -363,7 +363,7 @@ export function NiwSection() {
               className="absolute inset-0 h-full w-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-tr from-ink-deep/80 via-ink-deep/30 to-transparent" />
-            <div className="absolute inset-3 border border-gold/30 pointer-events-none" />
+            <div className="absolute inset-3 rounded-xl border border-gold/30 pointer-events-none" />
             <div className="absolute bottom-0 left-0 right-0 p-6 flex items-end justify-between gap-4">
               <div>
                 <p className="font-mono-label text-gold/80">DOSSIÊ EB-2 NIW</p>
@@ -437,8 +437,8 @@ export function PersonaCards() {
           {personas.map((p) => {
             const Icon = p.icon;
             return (
-              <article key={p.title} className="relative gold-tick border border-gold/25 bg-ink-raise/60 p-8 transition-colors hover:border-gold/60">
-                <span className="grid h-12 w-12 place-items-center border border-gold/50 text-gold">
+              <article key={p.title} className="relative gold-tick rounded-2xl border border-gold/25 bg-ink-raise/60 p-8 shadow-soft transition-[border-color,box-shadow] hover:border-gold/60 hover:shadow-elevated">
+                <span className="grid h-12 w-12 place-items-center rounded-lg border border-gold/50 text-gold">
                   <Icon className="h-6 w-6" />
                 </span>
                 <h3 className="mt-6 font-display text-2xl">{p.title}</h3>
@@ -480,7 +480,7 @@ export function ProcessSteps() {
         <SectionHead num="05" eyebrow="PROCESSO EB-2 NIW" title="Quatro etapas. Conduzidas com rigor." variant="parchment" />
         <div className="mt-14 grid md:grid-cols-2 lg:grid-cols-4 gap-5">
           {steps.map(({ n, icon: Icon, t, d }) => (
-            <div key={n} className="relative gold-tick bg-white border border-ink-text/10 p-7 flex flex-col h-full">
+            <div key={n} className="relative gold-tick rounded-2xl bg-white border border-ink-text/10 p-7 flex flex-col h-full shadow-soft">
               <span className="font-display text-[48px] leading-none text-gold">{n}</span>
               <Icon className="h-5 w-5 text-ink-text/60 mt-5" />
               <h3 className="mt-3 font-display text-lg text-ink-text">{t}</h3>
@@ -524,7 +524,7 @@ export function WhyUs() {
           </div>
           <ul className="grid sm:grid-cols-2 gap-3 self-end">
             {items.map(({ icon: Icon, t }) => (
-              <li key={t} className="border border-gold/20 bg-ink-raise/50 p-5 flex gap-3">
+              <li key={t} className="rounded-xl border border-gold/20 bg-ink-raise/50 p-5 flex gap-3">
                 <Icon className="h-5 w-5 text-gold shrink-0 mt-0.5" />
                 <span className="leading-snug text-foreground/85">{t}</span>
               </li>
@@ -585,7 +585,7 @@ export function LegacySection() {
         />
         <div className="mt-14 grid md:grid-cols-2 lg:grid-cols-4 gap-5">
           {pillars.map(({ icon: Icon, t, d }) => (
-            <article key={t} className="relative gold-tick border border-gold/25 bg-ink-raise/50 p-7 h-full">
+            <article key={t} className="relative gold-tick rounded-2xl border border-gold/25 bg-ink-raise/50 p-7 h-full shadow-soft transition-[border-color,box-shadow] hover:border-gold/55 hover:shadow-elevated">
               <Icon className="h-6 w-6 text-gold" />
               <h3 className="mt-5 font-display text-xl">{t}</h3>
               <p className="mt-3 text-foreground/75 leading-relaxed text-[15px]">{d}</p>
@@ -615,7 +615,7 @@ export function SalaryCompare() {
           title="A mesma carreira. Outro patamar de remuneração."
           kicker="Estimativas de mercado mensais médias. Valores variam por especialidade, cidade e senioridade."
         />
-        <div className="mt-14 border border-gold/25 overflow-hidden">
+        <div className="mt-14 rounded-2xl border border-gold/25 overflow-hidden shadow-soft">
           <div className="grid grid-cols-[1.4fr_1fr_1fr] font-mono-label text-foreground/60 bg-ink-deep px-6 py-4 border-b border-gold/20">
             <span>PROFISSÃO</span><span>BRASIL</span><span className="text-gold">ESTADOS UNIDOS</span>
           </div>
@@ -663,7 +663,7 @@ export function Testimonials() {
         />
         <div className="mt-14 grid md:grid-cols-2 gap-5 max-w-4xl">
           {items.map((i) => (
-            <article key={i.name} className="relative gold-tick bg-white border border-ink-text/10 p-7 flex flex-col h-full">
+            <article key={i.name} className="relative gold-tick rounded-2xl bg-white border border-ink-text/10 p-7 flex flex-col h-full shadow-soft">
               <div className="flex gap-0.5 text-gold">
                 {[...Array(5)].map((_, k) => <Star key={k} className="h-3.5 w-3.5 fill-gold" />)}
               </div>
@@ -755,13 +755,13 @@ export function CtaBanner() {
               "Confidencial e sem compromisso",
               "Equipe especializada em vistos EB",
             ].map((i) => (
-              <li key={i} className="flex gap-3 border border-gold/15 bg-ink-raise/40 p-4">
+              <li key={i} className="flex gap-3 rounded-lg border border-gold/15 bg-ink-raise/40 p-4">
                 <CheckCircle2 className="h-4 w-4 text-gold mt-1 shrink-0" /> {i}
               </li>
             ))}
           </ul>
 
-          <div className="border border-gold/30 bg-ink-raise/50 p-7 lg:p-8">
+          <div className="rounded-2xl border border-gold/30 bg-ink-raise/50 p-7 lg:p-8 shadow-elevated">
             <p className="font-mono-label text-gold/80">PRÓXIMO PASSO</p>
             <h3 className="mt-3 font-display text-2xl leading-tight">
               Comece pela análise gratuita do seu perfil.
