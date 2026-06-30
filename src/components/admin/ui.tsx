@@ -16,10 +16,11 @@ export function PageHeader({
 
 export function StatCard({
   label, value, hint, accent,
-}: { label: string; value: ReactNode; hint?: string; accent?: "gold" | "green" | "blue" | "yellow" | "gray" }) {
+}: { label: string; value: ReactNode; hint?: string; accent?: "gold" | "green" | "blue" | "yellow" | "gray" | "red" }) {
   const ring: Record<NonNullable<typeof accent>, string> = {
     gold: "border-l-amber-400", green: "border-l-emerald-500",
     blue: "border-l-sky-500", yellow: "border-l-yellow-400", gray: "border-l-slate-300",
+    red: "border-l-red-500",
   };
   return (
     <div className={`rounded-lg border border-slate-200 bg-white p-4 border-l-4 ${ring[accent ?? "gold"]}`}>
