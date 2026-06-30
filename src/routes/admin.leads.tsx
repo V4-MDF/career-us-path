@@ -245,6 +245,7 @@ function LeadsPage() {
                     <td className="py-3 text-slate-600">{l.segmento ?? "—"}</td>
                     <td className="py-3 text-slate-600 text-xs">{l.variante_ab ?? "—"}</td>
                     <td className="py-3 text-slate-600">{l.utm?.utm_source ?? "—"}</td>
+                    <td className="py-3 text-slate-600 text-xs max-w-[220px] truncate" title={originSummary(l)}>{originSummary(l)}</td>
                     <td className="py-3">
                       <Select value={l.status ?? "novo"} onValueChange={(v) => setStatus(l, v as FunnelStatus)}>
                         <SelectTrigger className="h-8 text-xs"><SelectValue /></SelectTrigger>
