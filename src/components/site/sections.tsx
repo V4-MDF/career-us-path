@@ -663,7 +663,7 @@ export function Testimonials() {
         />
         <div className="mt-14 grid md:grid-cols-2 gap-5 max-w-4xl">
           {items.map((i) => (
-            <article key={i.name} className="relative gold-tick bg-white border border-ink-text/10 p-7 flex flex-col h-full">
+            <article key={i.name} className="relative gold-tick rounded-2xl bg-white border border-ink-text/10 p-7 flex flex-col h-full shadow-soft">
               <div className="flex gap-0.5 text-gold">
                 {[...Array(5)].map((_, k) => <Star key={k} className="h-3.5 w-3.5 fill-gold" />)}
               </div>
