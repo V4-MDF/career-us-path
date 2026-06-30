@@ -1,35 +1,52 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { StubPage } from "@/components/site/StubPage";
+import { useEffect } from "react";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { LandingPageTemplate, useLpState } from "@/components/site/lp/LandingPageTemplate";
 
-// Landing pages segmentadas — serão geradas pelo motor de LPs do Prompt 2.
-const map: Record<string, { eyebrow: string; title: string; description: string }> = {
+/**
+ * Rota dinâmica /lp/:slug — motor de Landing Pages.
+ *
+ * Segmentos e variantes A/B vivem no dataStore (seed em src/lib/segments.ts).
+ * Hero é A/B (sticky via abEngine); restante da LP vem do segmento.
+ * Se o slug não existir ou o segmento estiver inativo → redireciona para Home.
+ *
+ * SEO: meta_title/meta_description do segmento; noindex opcional.
+ * Como segmentos vivem no client (localStorage), o head() usa o slug como
+ * fallback e o admin pode complementar metas server-side no próximo prompt.
+ */
+
+const slugDefaults: Record<string, { title: string; description: string }> = {
   medicos: {
-    eyebrow: "Para médicos",
-    title: "O caminho do médico brasileiro para o Green Card",
-    description: "Estratégia EB-2 NIW para médicos consolidados — especialidades, residência e adaptação clínica nos EUA.",
+    title: "Green Card para médicos brasileiros | EB-2 NIW | Status na América",
+    description:
+      "Médico e quer construir carreira nos EUA? Veja como conquistar o Green Card por mérito pelo EB-2 NIW, sem patrocinador. Avaliação gratuita.",
   },
   engenheiros: {
-    eyebrow: "Para engenheiros",
-    title: "O caminho do engenheiro brasileiro para o Green Card",
-    description: "Estratégia EB-2 NIW para engenheiros sêniores em infraestrutura, energia, tecnologia e mais.",
+    title: "Green Card para engenheiros brasileiros | EB-2 NIW | Status na América",
+    description:
+      "Engenheiro e quer carreira nos EUA? Conquiste o Green Card por mérito pelo EB-2 NIW, sem patrocinador. Avaliação gratuita do seu perfil.",
   },
   empresarios: {
-    eyebrow: "Para empresários",
-    title: "O caminho do empresário brasileiro para o Green Card",
-    description: "Geração de empregos, impostos e impacto setorial como pilares da sua petição EB-2 NIW.",
+    title: "Green Card para empresários brasileiros | EB-2 NIW | Status na América",
+    description:
+      "Empresário e quer migrar com a família para os EUA? Green Card por mérito pelo EB-2 NIW. Avaliação gratuita do seu perfil.",
   },
 };
 
 export const Route = createFileRoute("/lp/$slug")({
   head: ({ params }) => {
-    const info = map[params.slug] ?? { eyebrow: "LP", title: "Landing page", description: "Página em construção." };
+    const d = slugDefaults[params.slug] ?? {
+      title: "Landing page | Status na América",
+      description: "Conquiste o Green Card americano pelo mérito da sua carreira.",
+    };
     return {
       meta: [
-        { title: `${info.title} | Status na América` },
-        { name: "description", content: info.description },
-        { property: "og:title", content: info.title },
-        { property: "og:description", content: info.description },
+        { title: d.title },
+        { name: "description", content: d.description },
+        { property: "og:title", content: d.title },
+        { property: "og:description", content: d.description },
         { property: "og:url", content: `/lp/${params.slug}` },
+        { property: "og:type", content: "website" },
+        { name: "twitter:card", content: "summary_large_image" },
       ],
       links: [{ rel: "canonical", href: `/lp/${params.slug}` }],
     };
@@ -39,6 +56,30 @@ export const Route = createFileRoute("/lp/$slug")({
 
 function LpPage() {
   const { slug } = Route.useParams();
-  const info = map[slug] ?? { eyebrow: "Landing page", title: "Em breve", description: "Conteúdo segmentado em produção." };
-  return <StubPage {...info} />;
+  const navigate = useNavigate();
+  const { loading, segment, variant, notFound } = useLpState(slug);
+
+  // noindex dinâmico se o admin desligar a indexação do segmento.
+  useEffect(() => {
+    if (!segment?.noindex) return;
+    const tag = document.createElement("meta");
+    tag.name = "robots";
+    tag.content = "noindex,nofollow";
+    document.head.appendChild(tag);
+    return () => { document.head.removeChild(tag); };
+  }, [segment?.noindex]);
+
+  useEffect(() => {
+    if (notFound) navigate({ to: "/", replace: true });
+  }, [notFound, navigate]);
+
+  if (loading || !segment) {
+    return (
+      <div className="min-h-screen grid place-items-center text-muted-foreground">
+        Carregando…
+      </div>
+    );
+  }
+
+  return <LandingPageTemplate segment={segment} variant={variant} />;
 }
