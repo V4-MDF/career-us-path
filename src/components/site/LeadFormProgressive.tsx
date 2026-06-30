@@ -296,7 +296,7 @@ export function LeadFormProgressive({
         {/* Resumo final + envio */}
         {stepIndex >= totalFields && (
           <motion.div
-            initial={reduce ? false : { opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
             transition={{ duration: reduce ? 0 : 0.4 }}
             data-step={totalFields}
             className="rounded-xl border border-gold/30 bg-ink-deep/40 p-5"
