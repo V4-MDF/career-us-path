@@ -108,6 +108,7 @@ function RootShell({ children }: { children: ReactNode }) {
         <HeadContent />
       </head>
       <body>
+        <a href="#conteudo" className="skip-link">Pular para o conteúdo</a>
         {children}
         <Scripts />
       </body>
@@ -130,7 +131,7 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <TrackingInjector />
-      <div key={pathname} className="route-fade">
+      <div key={pathname} id="conteudo" tabIndex={-1} className="route-fade focus:outline-none">
         <Outlet />
       </div>
     </QueryClientProvider>

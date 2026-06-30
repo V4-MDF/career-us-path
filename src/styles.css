@@ -175,12 +175,46 @@
     line-height: 1.08;
     font-weight: 500;
   }
-  /* Foco de teclado visível e dourado em qualquer elemento interativo */
-  :where(a, button, [role="button"], input, select, textarea):focus-visible {
+  /* Foco de teclado — premium, dourado, com halo para contraste AA em
+     superfícies escuras (ink) e claras (parchment). Outline garante o
+     anel dourado; o box-shadow cria um halo escuro que eleva o contraste
+     do anel a >=3:1 em qualquer fundo. */
+  :where(a, button, [role="button"], [role="link"], [role="menuitem"], [role="tab"], [role="option"], input, select, textarea, summary, [tabindex]:not([tabindex="-1"])):focus-visible {
     outline: 2px solid var(--gold);
-    outline-offset: 2px;
-    border-radius: 4px;
+    outline-offset: 3px;
+    box-shadow: 0 0 0 1px color-mix(in oklab, var(--ink-deep) 75%, transparent);
+    border-radius: 6px;
+    transition: outline-offset 160ms cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 160ms cubic-bezier(0.16, 1, 0.3, 1);
   }
+  /* Em superfícies claras (parchment), reforça o halo para tom escuro */
+  .section-parchment :where(a, button, [role="button"], input, select, textarea, summary, [tabindex]:not([tabindex="-1"])):focus-visible,
+  [data-surface="parchment"] :where(a, button, [role="button"], input, select, textarea, summary, [tabindex]:not([tabindex="-1"])):focus-visible {
+    box-shadow: 0 0 0 1px color-mix(in oklab, var(--ink-deep) 90%, transparent);
+  }
+  /* Remove outline default no :focus mouse-only. focus-visible cuida. */
+  :where(a, button, [role="button"], input, select, textarea):focus:not(:focus-visible) {
+    outline: none;
+  }
+  /* Skip-to-content link — invisível até receber foco por teclado. */
+  .skip-link {
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    z-index: 9999;
+    padding: 10px 16px;
+    background: var(--ink-deep);
+    color: var(--gold);
+    border: 1px solid var(--gold);
+    border-radius: 8px;
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    transform: translateY(-200%);
+    transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .skip-link:focus { transform: translateY(0); }
   /* Respeito a prefers-reduced-motion */
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
