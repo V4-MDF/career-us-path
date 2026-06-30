@@ -247,7 +247,7 @@ A pergunta não é "qual é o melhor visto?" — é "qual é o melhor visto **pa
       "Vistos para brasileiros em 2026: o que considerar antes de começar",
     meta_description:
       "Como estão a agenda consular e os prazos do USCIS para brasileiros em 2026, e por que planejar com antecedência é o que diferencia projetos sérios de imigração.",
-    og_image: PLACEHOLDER_COVER,
+    og_image: coverVistos2026,
     tempo_leitura: 0,
     corpo: `## O que está realmente acontecendo
 
