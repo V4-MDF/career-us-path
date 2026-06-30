@@ -19,6 +19,7 @@ import { LeadFormProgressive } from "@/components/site/LeadFormProgressive";
 import { trackFormView } from "@/lib/tracking";
 import { getOrigin } from "@/lib/origin";
 import type { QualResult } from "@/lib/leadQualification";
+import avaliacaoBg from "@/assets/avaliacao-bg.jpg";
 
 type SegKey = "medicos" | "engenheiros" | "empresarios";
 
@@ -119,15 +120,28 @@ function AvaliacaoPage() {
       </header>
 
       <main className="flex-1 relative">
-        {/* Glow gold suave no topo, sem padronagem */}
+        {/* Imagem de fundo: bairro americano ao crepúsculo, baixa opacidade */}
         <div
           aria-hidden
-          className="absolute inset-x-0 top-0 h-[420px] pointer-events-none"
-          style={{
-            background:
-              "radial-gradient(ellipse at 50% 0%, color-mix(in oklab, var(--gold) 8%, transparent) 0%, transparent 70%)",
-          }}
-        />
+          className="absolute inset-x-0 top-0 h-[720px] pointer-events-none overflow-hidden"
+        >
+          <img
+            src={avaliacaoBg}
+            alt=""
+            width={1920}
+            height={1280}
+            className="w-full h-full object-cover opacity-[0.22]"
+          />
+          {/* Vinheta + fade para o ink sólido abaixo */}
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(to bottom, color-mix(in oklab, var(--ink) 55%, transparent) 0%, color-mix(in oklab, var(--ink) 75%, transparent) 45%, var(--ink) 100%), radial-gradient(ellipse at 50% 0%, color-mix(in oklab, var(--gold) 10%, transparent) 0%, transparent 65%)",
+            }}
+          />
+        </div>
+
 
         <div className="relative mx-auto w-full max-w-[680px] px-5 md:px-6 py-10 md:py-14">
           {/* Intro */}
