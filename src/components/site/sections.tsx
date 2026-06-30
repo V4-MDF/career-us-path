@@ -180,7 +180,7 @@ export function Hero() {
           transition={{ duration: t(1.0), ease: easeSig, delay: t(0.25) }}
           style={enableParallax ? { y: imgY, willChange: "transform" } : undefined}
         >
-          <div className="relative aspect-[4/5] overflow-hidden border border-gold/30 bg-ink-raise">
+          <div className="relative aspect-[4/5] overflow-hidden rounded-3xl border border-gold/30 bg-ink-raise shadow-elevated">
             {/* Fotografia editorial — família multigeracional em paisagem americana. */}
             <img
               src={familyPortrait}
@@ -191,7 +191,7 @@ export function Hero() {
               className="absolute inset-0 h-full w-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-ink-deep via-ink-deep/30 to-transparent" />
-            <div className="absolute inset-3 border border-gold/30 pointer-events-none" />
+            <div className="absolute inset-3 rounded-2xl border border-gold/30 pointer-events-none" />
             <div className="absolute bottom-0 left-0 right-0 p-7">
               <div className="flex items-center gap-3 mb-3">
                 <FlagsBRUS size={14} />
