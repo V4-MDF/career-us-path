@@ -37,8 +37,8 @@ export function Footer() {
             </span>
           </div>
           <p className="mt-6 max-w-sm text-sm text-foreground/65 leading-relaxed">
-            Assessoria de mobilidade migratória para profissionais brasileiros que escolheram
-            construir o próximo capítulo nos Estados Unidos.
+            Especialistas em preparação documental para mobilidade migratória — para
+            profissionais brasileiros que escolheram construir o próximo capítulo nos Estados Unidos.
           </p>
           <div className="mt-7 flex gap-3 text-foreground/55">
             {[
