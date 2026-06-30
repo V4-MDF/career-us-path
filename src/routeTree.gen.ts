@@ -15,8 +15,10 @@ import { Route as ContatoRouteImport } from './routes/contato'
 import { Route as BlogRouteImport } from './routes/blog'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as VistosSlugRouteImport } from './routes/vistos.$slug'
 import { Route as LpSlugRouteImport } from './routes/lp.$slug'
+import { Route as AdminLoginRouteImport } from './routes/admin.login'
 
 const SobreRoute = SobreRouteImport.update({
   id: '/sobre',
@@ -48,6 +50,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminRoute,
+} as any)
 const VistosSlugRoute = VistosSlugRouteImport.update({
   id: '/vistos/$slug',
   path: '/vistos/$slug',
@@ -58,37 +65,47 @@ const LpSlugRoute = LpSlugRouteImport.update({
   path: '/lp/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminLoginRoute = AdminLoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => AdminRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/admin': typeof AdminRoute
+  '/admin': typeof AdminRouteWithChildren
   '/blog': typeof BlogRoute
   '/contato': typeof ContatoRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sobre': typeof SobreRoute
+  '/admin/login': typeof AdminLoginRoute
   '/lp/$slug': typeof LpSlugRoute
   '/vistos/$slug': typeof VistosSlugRoute
+  '/admin/': typeof AdminIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/admin': typeof AdminRoute
   '/blog': typeof BlogRoute
   '/contato': typeof ContatoRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sobre': typeof SobreRoute
+  '/admin/login': typeof AdminLoginRoute
   '/lp/$slug': typeof LpSlugRoute
   '/vistos/$slug': typeof VistosSlugRoute
+  '/admin': typeof AdminIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/admin': typeof AdminRoute
+  '/admin': typeof AdminRouteWithChildren
   '/blog': typeof BlogRoute
   '/contato': typeof ContatoRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sobre': typeof SobreRoute
+  '/admin/login': typeof AdminLoginRoute
   '/lp/$slug': typeof LpSlugRoute
   '/vistos/$slug': typeof VistosSlugRoute
+  '/admin/': typeof AdminIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -99,18 +116,21 @@ export interface FileRouteTypes {
     | '/contato'
     | '/sitemap.xml'
     | '/sobre'
+    | '/admin/login'
     | '/lp/$slug'
     | '/vistos/$slug'
+    | '/admin/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/admin'
     | '/blog'
     | '/contato'
     | '/sitemap.xml'
     | '/sobre'
+    | '/admin/login'
     | '/lp/$slug'
     | '/vistos/$slug'
+    | '/admin'
   id:
     | '__root__'
     | '/'
@@ -119,13 +139,15 @@ export interface FileRouteTypes {
     | '/contato'
     | '/sitemap.xml'
     | '/sobre'
+    | '/admin/login'
     | '/lp/$slug'
     | '/vistos/$slug'
+    | '/admin/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AdminRoute: typeof AdminRoute
+  AdminRoute: typeof AdminRouteWithChildren
   BlogRoute: typeof BlogRoute
   ContatoRoute: typeof ContatoRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
@@ -178,6 +200,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/': {
+      id: '/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/vistos/$slug': {
       id: '/vistos/$slug'
       path: '/vistos/$slug'
@@ -192,12 +221,31 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LpSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/login': {
+      id: '/admin/login'
+      path: '/login'
+      fullPath: '/admin/login'
+      preLoaderRoute: typeof AdminLoginRouteImport
+      parentRoute: typeof AdminRoute
+    }
   }
 }
 
+interface AdminRouteChildren {
+  AdminLoginRoute: typeof AdminLoginRoute
+  AdminIndexRoute: typeof AdminIndexRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminLoginRoute: AdminLoginRoute,
+  AdminIndexRoute: AdminIndexRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AdminRoute: AdminRoute,
+  AdminRoute: AdminRouteWithChildren,
   BlogRoute: BlogRoute,
   ContatoRoute: ContatoRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
