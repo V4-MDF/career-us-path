@@ -11,10 +11,10 @@ import {
   OrganizationJsonLd, ServiceJsonLd, FAQJsonLd, BreadcrumbJsonLd,
 } from "@/components/site/Seo";
 import { LeadForm } from "@/components/site/LeadForm";
-import { VISA_PAGES, COMPARISON, type VisaSlug } from "@/lib/visaPages";
+import { VISA_PAGES, COMPARISON, type VisaSlug, type VisaPage } from "@/lib/visaPages";
 
 export const Route = createFileRoute("/vistos/$slug")({
-  loader: ({ params }) => {
+  loader: ({ params }): { page: VisaPage } => {
     const page = VISA_PAGES[params.slug as VisaSlug];
     if (!page) throw notFound();
     return { page };
