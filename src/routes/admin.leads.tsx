@@ -523,3 +523,52 @@ function FilterSelect({ label, value, onChange, options }: {
     </div>
   );
 }
+
+/**
+ * Cartão de breakdown de origem com barra de % e taxa de conversão por bucket.
+ * Conversão = leads com status "convertido" / total do bucket.
+ */
+function OriginBreakdown({
+  title, rows, emptyHint,
+}: {
+  title: string;
+  rows: { key: string; total: number; convertidos: number; qualificados: number; pctTotal: number; convRate: number }[];
+  emptyHint: string;
+}) {
+  const top = rows.slice(0, 8);
+  const maxTotal = Math.max(1, ...top.map((r) => r.total));
+  return (
+    <SectionCard title={title}>
+      {top.length === 0 ? (
+        <p className="text-sm text-slate-500">{emptyHint}</p>
+      ) : (
+        <div className="space-y-2">
+          <div className="grid grid-cols-12 gap-2 text-[10px] uppercase tracking-wide text-slate-500 px-1">
+            <div className="col-span-5">Origem</div>
+            <div className="col-span-3 text-right">Leads</div>
+            <div className="col-span-2 text-right">Qualif.</div>
+            <div className="col-span-2 text-right">Conv.</div>
+          </div>
+          {top.map((r) => (
+            <div key={r.key} className="grid grid-cols-12 gap-2 items-center text-sm">
+              <div className="col-span-5 truncate font-medium text-slate-800" title={r.key}>{r.key}</div>
+              <div className="col-span-3">
+                <div className="flex items-center gap-2 justify-end">
+                  <div className="h-1.5 flex-1 bg-slate-100 rounded overflow-hidden">
+                    <div className="h-full bg-blue-500" style={{ width: `${(r.total / maxTotal) * 100}%` }} />
+                  </div>
+                  <span className="font-mono text-xs text-slate-700 w-14 text-right">{r.total} · {r.pctTotal}%</span>
+                </div>
+              </div>
+              <div className="col-span-2 text-right font-mono text-xs text-slate-600">{r.qualificados}</div>
+              <div className="col-span-2 text-right font-mono text-xs font-semibold text-emerald-700">{r.convRate}%</div>
+            </div>
+          ))}
+          {rows.length > top.length && (
+            <p className="text-xs text-slate-400 pt-1">+ {rows.length - top.length} outras origens</p>
+          )}
+        </div>
+      )}
+    </SectionCard>
+  );
+}
