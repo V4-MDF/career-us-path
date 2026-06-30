@@ -98,7 +98,7 @@ function AdminLayout() {
             return (
               <Link
                 key={item.to}
-                to={item.to}
+                to={item.to as string}
                 onClick={() => setOpenMobile(false)}
                 className={`flex items-center gap-3 px-3 py-2 rounded-md text-sm transition-colors ${
                   active
@@ -108,7 +108,7 @@ function AdminLayout() {
               >
                 <Icon className="h-4 w-4 shrink-0" />
                 <span className="flex-1">{item.label}</span>
-                {"badge" in item && item.badge && !active && (
+                {item.badge && !active && (
                   <span className="text-[9px] uppercase tracking-wider text-amber-400/80">{item.badge}</span>
                 )}
               </Link>
