@@ -1,29 +1,61 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Header } from "@/components/site/Header";
+import { Footer } from "@/components/site/Footer";
+import {
+  AuthorityStrip, ContrastBrasilEUA, CtaForm, FAQ, Hero, NiwSection,
+  PersonaCards, ProcessSteps, SalaryCompare, Testimonials, VisaCards, WhyUs,
+} from "@/components/site/sections";
+import { OrganizationJsonLd } from "@/components/site/Seo";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Your App" },
-      { name: "description", content: "Replace this with a one-sentence description of your app." },
-      { property: "og:title", content: "Your App" },
-      { property: "og:description", content: "Replace this with a one-sentence description of your app." },
+      { title: "Status na América | Green Card EB-2 NIW para profissionais brasileiros" },
+      {
+        name: "description",
+        content:
+          "Imigração legal para os EUA por mérito profissional. Assessoria EB-2 NIW, EB-1 e EB-3 para profissionais brasileiros consolidados, com Green Card para cônjuge e filhos.",
+      },
+      { name: "robots", content: "index,follow" },
+      { property: "og:title", content: "Status na América | Green Card EB-2 NIW" },
+      {
+        property: "og:description",
+        content:
+          "Conquiste o Green Card americano pelo mérito da sua carreira. Avaliação gratuita do seu perfil EB-2 NIW.",
+      },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "/" },
+      { property: "og:image", content: "/og-image.jpg" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Status na América | Green Card EB-2 NIW" },
+      { name: "twitter:description", content: "Imigração para os EUA por mérito profissional." },
+      { name: "twitter:image", content: "/og-image.jpg" },
     ],
+    links: [{ rel: "canonical", href: "/" }],
   }),
-  component: Index,
+  component: Home,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
+function Home() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
+    <>
+      <OrganizationJsonLd />
+      <Header />
+      <main>
+        <Hero />
+        <AuthorityStrip />
+        <ContrastBrasilEUA />
+        <NiwSection />
+        <VisaCards />
+        <PersonaCards />
+        <ProcessSteps />
+        <WhyUs />
+        <SalaryCompare />
+        <Testimonials />
+        <FAQ />
+        <CtaForm />
+      </main>
+      <Footer />
+    </>
   );
 }
