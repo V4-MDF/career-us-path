@@ -232,9 +232,9 @@ function LeadsPage() {
               </thead>
               <tbody>
                 {loading ? (
-                  <tr><td colSpan={8} className="px-5 py-8 text-center text-slate-400">Carregando…</td></tr>
+                  <tr><td colSpan={9} className="px-5 py-8 text-center text-slate-400">Carregando…</td></tr>
                 ) : filtered.length === 0 ? (
-                  <tr><td colSpan={8} className="px-5 py-8 text-center text-slate-400">Nenhum lead com esses filtros.</td></tr>
+                  <tr><td colSpan={9} className="px-5 py-8 text-center text-slate-400">Nenhum lead com esses filtros.</td></tr>
                 ) : filtered.map((l) => (
                   <tr key={l.id} className="border-b border-slate-100 hover:bg-slate-50">
                     <td className="px-5 py-3 cursor-pointer" onClick={() => setOpen(l)}>
