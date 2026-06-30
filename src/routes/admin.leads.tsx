@@ -61,6 +61,7 @@ function LeadsPage() {
   const [fUtmCampaign, setFUtmCampaign] = useState<string>("all");
   const [fGclid, setFGclid] = useState<string>("all"); // all | with | without
   const [fReferrer, setFReferrer] = useState<string>(""); // busca por host/url do referrer
+  const [fOrigin, setFOrigin] = useState<string>("all"); // all | complete | incomplete
   const [fProf, setFProf] = useState<string>("all");
   const [fFrom, setFFrom] = useState<string>("");
   const [fTo, setFTo] = useState<string>("");
