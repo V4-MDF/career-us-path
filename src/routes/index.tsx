@@ -7,6 +7,9 @@ import {
   VisaCards, WhyUs,
 } from "@/components/site/sections";
 import { OrganizationJsonLd } from "@/components/site/Seo";
+import { DynamicSectionHead } from "@/components/site/DynamicSectionHead";
+import { SectionTOC } from "@/components/site/SectionTOC";
+import { HOME_SECTIONS } from "@/lib/sectionMap";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -41,7 +44,13 @@ function Home() {
   return (
     <>
       <OrganizationJsonLd />
+      {/* URL por dobra: scroll-spy atualiza #hash + title + canonical ao vivo. */}
+      <DynamicSectionHead
+        sections={HOME_SECTIONS}
+        baseTitle="Green Card EB-2 NIW"
+      />
       <Header />
+      <SectionTOC sections={HOME_SECTIONS} />
       <main>
         <Hero />
         <AuthorityStrip />

@@ -65,7 +65,9 @@ export function Hero() {
   return (
     <section
       ref={heroRef}
-      className="relative overflow-hidden pt-32 md:pt-44 pb-24 md:pb-36"
+      id="abertura"
+      aria-label="Abertura"
+      className="section-anchor relative overflow-hidden pt-32 md:pt-44 pb-24 md:pb-36"
     >
       {/* Hero limpo — sem guilloché (reservado ao NIW). Apenas gradiente sutil. */}
       <div className="absolute inset-0 -z-10 bg-gradient-to-b from-ink-deep/40 via-transparent to-ink" />
@@ -123,7 +125,7 @@ export function Hero() {
                 {cta}
               </Button>
             </a>
-            <a href="#niw">
+            <a href="#eb-2-niw">
               <Button
                 size="lg" variant="outline"
                 className="h-12 px-6 text-[15px] border-gold/40 text-foreground hover:border-gold hover:bg-gold/5"
@@ -212,7 +214,7 @@ export function AuthorityStrip() {
     "25+ ANOS DE EXPERIÊNCIA",
   ];
   return (
-    <section className="section-ink-deep border-y border-gold/15">
+    <section id="credenciais" aria-label="Credenciais" className="section-anchor section-ink-deep border-y border-gold/15">
       <div className="container-x py-7 flex flex-wrap items-center justify-center gap-x-10 gap-y-3">
         <span className="font-mono-label text-gold">CREDENCIAIS</span>
         {items.map((i) => (
@@ -245,7 +247,7 @@ export function ContrastBrasilEUA() {
   const subtitle = useContent("contrast.subtitle");
 
   return (
-    <Reveal as="section" className="section-parchment section-pad">
+    <Reveal as="section" id="brasil-vs-eua" className="section-parchment section-pad">
       <div className="container-x">
         <SectionHead num="01" eyebrow="POR QUE MIGRAR AGORA" title="Duas realidades. Uma decisão." variant="parchment" />
         <div className="mt-14 grid md:grid-cols-2 gap-6">
@@ -299,7 +301,7 @@ export function NiwSection() {
     { icon: Sparkles, t: "Caminho para a cidadania americana após 5 anos" },
   ];
   return (
-    <Reveal as="section" id="niw" className="section-pad relative">
+    <Reveal as="section" id="eb-2-niw" className="section-pad relative">
       <div className="absolute inset-0 -z-10 guilloche" />
       <div className="container-x grid lg:grid-cols-2 gap-14 items-center">
         <div>
@@ -350,7 +352,7 @@ export function VisaCards() {
       desc: "Caminho para profissionais qualificados com oferta formal de emprego nos EUA." },
   ];
   return (
-    <Reveal as="section" className="section-ink-deep section-pad border-y border-gold/10">
+    <Reveal as="section" id="vistos-eb" className="section-ink-deep section-pad border-y border-gold/10">
       <div className="container-x">
         <SectionHead num="03" eyebrow="VISTOS EB" title="Três caminhos. Uma estratégia para cada perfil." />
         <div className="mt-14 grid md:grid-cols-3 gap-5">
@@ -387,7 +389,7 @@ export function PersonaCards() {
       headline: "Geração de empregos e impostos pesa positivamente na sua petição." },
   ];
   return (
-    <Reveal as="section" className="section-pad">
+    <Reveal as="section" id="perfis-atendidos" className="section-pad">
       <div className="container-x">
         <SectionHead num="04" eyebrow="PERFIS QUE ATENDEMOS" title="Profissões consolidadas têm caminho mais curto pelo EB-2 NIW." />
         <div className="mt-14 grid md:grid-cols-3 gap-5">
@@ -431,7 +433,7 @@ export function ProcessSteps() {
       d: "Organização impecável da Petition nos critérios exigidos pelo USCIS." },
   ];
   return (
-    <Reveal as="section" className="section-parchment section-pad">
+    <Reveal as="section" id="processo-eb-2-niw" className="section-parchment section-pad">
       <div className="container-x">
         <SectionHead num="05" eyebrow="PROCESSO EB-2 NIW" title="Quatro etapas. Conduzidas com rigor." variant="parchment" />
         <div className="mt-14 grid md:grid-cols-2 lg:grid-cols-4 gap-5">
@@ -470,7 +472,7 @@ export function WhyUs() {
     { icon: Star, t: "130+ avaliações 5★ no Google e Facebook" },
   ];
   return (
-    <Reveal as="section" className="section-pad relative">
+    <Reveal as="section" id="por-que-status" className="section-pad relative">
       <div className="container-x">
 
         <div className="grid lg:grid-cols-[0.9fr_1.1fr] gap-12">
@@ -519,7 +521,7 @@ export function LegacySection() {
       d: "Controle do seu futuro imigratório, sem loterias e sem depender de empresas." },
   ];
   return (
-    <Reveal as="section" className="section-ink-deep section-pad border-y border-gold/10">
+    <Reveal as="section" id="legado" className="section-ink-deep section-pad border-y border-gold/10">
       <div className="container-x">
         <SectionHead
           num="07"
@@ -551,7 +553,7 @@ export function SalaryCompare() {
     { p: "Profissional de TI sênior", br: "R$ 20.000 / mês", us: "US$ 14.000 / mês" },
   ];
   return (
-    <Reveal as="section" className="section-pad">
+    <Reveal as="section" id="renda-em-dolar" className="section-pad">
       <div className="container-x">
         <SectionHead
           num="08"
@@ -596,7 +598,7 @@ export function Testimonials() {
     },
   ];
   return (
-    <Reveal as="section" className="section-parchment section-pad">
+    <Reveal as="section" id="depoimentos" className="section-parchment section-pad">
       <div className="container-x">
         <SectionHead
           num="09"
@@ -655,7 +657,7 @@ export function FAQ() {
     },
   ];
   return (
-    <Reveal as="section" className="section-pad">
+    <Reveal as="section" id="duvidas-frequentes" className="section-pad">
       <div className="container-x max-w-3xl">
         <SectionHead num="10" eyebrow="DÚVIDAS FREQUENTES" title="Antes que você pergunte." />
         <Accordion type="single" collapsible className="mt-12">
@@ -683,7 +685,7 @@ export function CtaBanner() {
   const title = useContent("cta.title");
   const sub = useContent("cta.subtitle");
   return (
-    <section className="section-ink-deep section-pad relative border-t border-gold/15">
+    <section id="avaliacao-gratuita" aria-label="Avaliação gratuita" className="section-anchor section-ink-deep section-pad relative border-t border-gold/15">
       {/* Sem guilloché aqui — reservado ao NIW (regra Chanel: tire um acessório). */}
 
       <div className="container-x">
@@ -776,7 +778,8 @@ function Reveal({
     <Comp
       ref={ref as any}
       id={id}
-      className={`cv-auto reveal ${shown ? "reveal-in" : ""} ${className ?? ""}`}
+      aria-label={id ? id.replace(/-/g, " ") : undefined}
+      className={`section-anchor cv-auto reveal ${shown ? "reveal-in" : ""} ${className ?? ""}`}
     >
       {children}
     </Comp>

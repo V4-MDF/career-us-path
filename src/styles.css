@@ -266,6 +266,20 @@
   padding-block: clamp(4rem, 9vw, 11rem);
 }
 
+/*
+ * section-anchor — usado pelo <SectionAnchor>. Compensa o header fixo
+ * (~96px no desktop, ~80px no mobile) ao usar deep-link #hash ou ao
+ * disparar scrollToSection programaticamente. Sem isso, a dobra-alvo
+ * fica oculta atrás do header. Não afeta layout visual.
+ */
+@utility section-anchor {
+  scroll-margin-top: 96px;
+}
+@media (max-width: 767px) {
+  .section-anchor { scroll-margin-top: 80px; }
+}
+
+
 /* Escala tipográfica fluida — usar como utilities ao invés de text-[..]. */
 @utility display-1 {
   font-family: var(--font-display);
