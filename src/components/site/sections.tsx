@@ -524,7 +524,7 @@ export function WhyUs() {
           </div>
           <ul className="grid sm:grid-cols-2 gap-3 self-end">
             {items.map(({ icon: Icon, t }) => (
-              <li key={t} className="border border-gold/20 bg-ink-raise/50 p-5 flex gap-3">
+              <li key={t} className="rounded-xl border border-gold/20 bg-ink-raise/50 p-5 flex gap-3">
                 <Icon className="h-5 w-5 text-gold shrink-0 mt-0.5" />
                 <span className="leading-snug text-foreground/85">{t}</span>
               </li>
