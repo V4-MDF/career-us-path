@@ -22,7 +22,6 @@ import {
 import { VISA_PAGES, type VisaSlug, type VisaPage } from "@/lib/visaPages";
 import { VisaPageBody } from "@/components/site/visa/VisaPageBody";
 import { DynamicSectionHead } from "@/components/site/DynamicSectionHead";
-import { SectionTOC } from "@/components/site/SectionTOC";
 import { VISA_SECTIONS, getVisaSection, type SectionDef } from "@/lib/sectionMap";
 import { scrollToSection } from "@/hooks/useScrollSpy";
 
@@ -120,7 +119,6 @@ function VisaSectionRoute() {
         baseTitle={page.h1}
         freezeHash
       />
-      <SectionTOC sections={VISA_SECTIONS} variant="ink" />
 
       <VisaPageBody page={page} />
 
