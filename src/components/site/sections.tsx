@@ -33,6 +33,11 @@ import { FamilySealBackdrop } from "./visuals/FamilySealBackdrop";
 import { ProcessIconStrip } from "./visuals/ProcessIconStrip";
 import { LeadFormProgressive } from "./LeadFormProgressive";
 import { useLocation } from "@tanstack/react-router";
+import { FlagsBRUS } from "./flags";
+import heroSkyline from "@/assets/hero-skyline.jpg";
+import familyPortrait from "@/assets/family-portrait.jpg";
+import passportDocuments from "@/assets/passport-documents.jpg";
+import usMapEngraving from "@/assets/us-map-engraving.png";
 
 /* ============================================================
  * 1. HERO
@@ -74,8 +79,18 @@ export function Hero() {
       aria-label="Abertura"
       className="section-anchor relative overflow-hidden pt-32 md:pt-44 pb-24 md:pb-36"
     >
-      {/* Hero limpo — sem guilloché (reservado ao NIW). Apenas gradiente sutil. */}
-      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-ink-deep/40 via-transparent to-ink" />
+      {/* Skyline NYC ao amanhecer — atmosfera EUA. Overlay forte preserva legibilidade. */}
+      <div aria-hidden className="absolute inset-0 -z-20">
+        <img
+          src={heroSkyline}
+          alt=""
+          width={1600}
+          height={1024}
+          fetchPriority="high"
+          className="h-full w-full object-cover object-bottom opacity-[0.22] motion-safe:[mask-image:linear-gradient(to_bottom,black_40%,transparent_100%)]"
+        />
+      </div>
+      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-ink/85 via-ink/80 to-ink" />
       {/* Motivo geográfico BR→USA — dot-grid + rota tracejada animada. */}
       <div aria-hidden className="absolute inset-0 -z-10 text-gold">
         <BrUsRouteBackdrop />
@@ -166,18 +181,24 @@ export function Hero() {
           style={enableParallax ? { y: imgY, willChange: "transform" } : undefined}
         >
           <div className="relative aspect-[4/5] overflow-hidden border border-gold/30 bg-ink-raise">
-
-            <div className="absolute inset-0 bg-gradient-to-br from-ink-deep via-ink-raise to-ink" />
-            <div className="absolute inset-0 bg-gradient-to-t from-ink-deep via-transparent to-transparent" />
+            {/* Fotografia editorial — família multigeracional em paisagem americana. */}
+            <img
+              src={familyPortrait}
+              alt="Família brasileira em paisagem americana ao amanhecer"
+              width={1280}
+              height={1600}
+              loading="eager"
+              className="absolute inset-0 h-full w-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-ink-deep via-ink-deep/30 to-transparent" />
             <div className="absolute inset-3 border border-gold/30 pointer-events-none" />
             <div className="absolute bottom-0 left-0 right-0 p-7">
-              <p className="font-mono-label text-gold/80">RETRATO EDITORIAL</p>
-              <p className="mt-2 font-display text-2xl leading-tight text-foreground">
-                Família brasileira em paisagem americana
-              </p>
-              <p className="mt-2 text-xs text-foreground/55 leading-relaxed">
-                {/* Substituir por fotografia real art-direcionada — duotone navy + grão sutil. Nunca ilustração ou imagem genérica de IA. */}
-                Substituir por fotografia real art-direcionada (duotone navy + grão).
+              <div className="flex items-center gap-3 mb-3">
+                <FlagsBRUS size={14} />
+                <span className="font-mono-label text-gold/80">RETRATO EDITORIAL</span>
+              </div>
+              <p className="font-display text-2xl leading-tight text-foreground">
+                Uma família. Um Green Card. Um novo capítulo.
               </p>
             </div>
           </div>
@@ -332,16 +353,26 @@ export function NiwSection() {
 
         <div className="relative">
           <div className="aspect-video overflow-hidden border border-gold/40 bg-ink-deep relative">
-            <div className="absolute inset-0 bg-gradient-to-br from-ink-raise via-ink to-ink-deep" />
-            <div className="absolute inset-0 guilloche" />
+            {/* Foto editorial — passaporte brasileiro + documentos sobre mesa de madeira. */}
+            <img
+              src={passportDocuments}
+              alt="Passaporte brasileiro, documentos e mapa dos Estados Unidos sobre mesa de madeira"
+              width={1600}
+              height={1024}
+              loading="lazy"
+              className="absolute inset-0 h-full w-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-tr from-ink-deep/80 via-ink-deep/30 to-transparent" />
             <div className="absolute inset-3 border border-gold/30 pointer-events-none" />
-            <button className="absolute inset-0 group flex flex-col items-center justify-center gap-4 text-foreground/90">
-              <span className="grid h-20 w-20 place-items-center rounded-full bg-gold text-gold-foreground transition-transform group-hover:scale-105">
-                <PlayCircle className="h-10 w-10" />
-              </span>
-              <span className="font-display text-xl">Entenda o EB-2 NIW em 4 minutos</span>
-              <span className="font-mono-label text-foreground/55">VÍDEO PLACEHOLDER</span>
-            </button>
+            <div className="absolute bottom-0 left-0 right-0 p-6 flex items-end justify-between gap-4">
+              <div>
+                <p className="font-mono-label text-gold/80">DOSSIÊ EB-2 NIW</p>
+                <p className="mt-1 font-display text-lg text-foreground">
+                  Documentação preparada com rigor de petição americana.
+                </p>
+              </div>
+              <FlagsBRUS size={16} />
+            </div>
           </div>
         </div>
       </div>
@@ -533,6 +564,17 @@ export function LegacySection() {
   ];
   return (
     <Reveal as="section" id="legado" className="section-ink-deep section-pad border-y border-gold/10 relative overflow-hidden">
+      {/* Backdrops sobrepostos: mapa dos EUA gravado + selo de família. */}
+      <div aria-hidden className="absolute inset-0 flex items-center justify-center pointer-events-none">
+        <img
+          src={usMapEngraving}
+          alt=""
+          width={1600}
+          height={1024}
+          loading="lazy"
+          className="w-[120%] max-w-none opacity-[0.07] mix-blend-screen select-none"
+        />
+      </div>
       <div aria-hidden className="absolute inset-0 text-gold"><FamilySealBackdrop /></div>
       <div className="container-x relative">
         <SectionHead

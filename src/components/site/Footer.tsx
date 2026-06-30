@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { Facebook, Instagram, Youtube } from "lucide-react";
 import { getSiteSettings, type SiteSettings } from "@/lib/admin/settings";
+import { FlagBR, FlagUS } from "./flags";
 
 export function Footer() {
   const [s, setS] = useState<SiteSettings | null>(null);
@@ -62,7 +63,10 @@ export function Footer() {
 
         {/* Matriz EUA */}
         <div className="md:col-span-4">
-          <h4 className="font-mono-label text-gold/80">Matriz · Estados Unidos</h4>
+          <h4 className="font-mono-label text-gold/80 flex items-center gap-2">
+            <FlagUS style={{ width: 18, height: 13 }} className="ring-1 ring-white/20" />
+            Matriz · Estados Unidos
+          </h4>
           <div className="mt-4 space-y-1.5 text-sm text-foreground/75 leading-relaxed">
             <p className="font-display text-foreground">Status na America LLC</p>
             <p>7575 KingsPointe Pkwy #4</p>
@@ -75,7 +79,10 @@ export function Footer() {
 
         {/* Filial Brasil */}
         <div className="md:col-span-4">
-          <h4 className="font-mono-label text-gold/80">Filial · Brasil</h4>
+          <h4 className="font-mono-label text-gold/80 flex items-center gap-2">
+            <FlagBR style={{ width: 18, height: 13 }} className="ring-1 ring-white/20" />
+            Filial · Brasil
+          </h4>
           <div className="mt-4 space-y-1.5 text-sm text-foreground/75 leading-relaxed">
             <p className="font-display text-foreground">Alphaville — CEA Corporate</p>
             <p>Alameda Araguaia, 2104</p>
