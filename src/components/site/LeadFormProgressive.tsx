@@ -125,6 +125,7 @@ export function LeadFormProgressive({
   const [error, setError] = useState<string | null>(null);
   const partialIdRef = useRef<string>("");
   const containerRef = useRef<HTMLDivElement | null>(null);
+  const reduce = useReducedMotion();
 
   useEffect(() => { partialIdRef.current = getOrCreatePartialId(); }, []);
 
