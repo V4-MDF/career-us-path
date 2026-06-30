@@ -396,7 +396,7 @@ function CollapsedAnswer({
       case "faixaEtaria": return LABELS.faixaEtaria[data.faixaEtaria] ?? data.faixaEtaria;
       case "renda": return LABELS.renda[data.renda] ?? data.renda;
       case "momento": return LABELS.momento[data.momento] ?? data.momento;
-      default: return (data as Record<string, string>)[field.key as string] ?? "";
+      default: return (data as unknown as Record<string, string>)[field.key as string] ?? "";
     }
   })();
   return (
