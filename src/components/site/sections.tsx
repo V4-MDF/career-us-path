@@ -44,14 +44,17 @@ export function Hero() {
   const easeSig = [0.16, 1, 0.3, 1] as const;
   const t = (d: number) => (reduce ? 0 : d);
 
-  // Parallax sutil ligado ao scroll do hero (≤8% — discreto).
+  // Parallax sutil ligado ao scroll do hero (≤8%). Desligado em mobile e quando
+  // o usuário pede menos movimento — evita jank/composite por frame.
   const heroRef = useRef<HTMLElement>(null);
+  const isDesktop = useMediaQuery("(min-width: 1024px)");
+  const enableParallax = isDesktop && !reduce;
   const { scrollYProgress } = useScroll({
     target: heroRef,
     offset: ["start start", "end start"],
   });
-  const imgY = useTransform(scrollYProgress, [0, 1], ["0%", reduce ? "0%" : "8%"]);
-  const imgScale = useTransform(scrollYProgress, [0, 1], [1, reduce ? 1 : 1.04]);
+  const imgY = useTransform(scrollYProgress, [0, 1], ["0%", enableParallax ? "6%" : "0%"]);
+
 
   return (
     <section
@@ -133,17 +136,15 @@ export function Hero() {
           </motion.div>
         </div>
 
-        {/* Bloco editorial — parallax sutil ligado ao scroll. */}
+        {/* Bloco editorial — parallax sutil (apenas desktop). */}
         <motion.div
           className="relative hidden lg:block"
           initial={{ opacity: 0 }} animate={{ opacity: 1 }}
           transition={{ duration: t(1.0), ease: easeSig, delay: t(0.25) }}
-          style={{ y: imgY }}
+          style={enableParallax ? { y: imgY, willChange: "transform" } : undefined}
         >
-          <motion.div
-            className="relative aspect-[4/5] overflow-hidden border border-gold/30 bg-ink-raise"
-            style={{ scale: imgScale }}
-          >
+          <div className="relative aspect-[4/5] overflow-hidden border border-gold/30 bg-ink-raise">
+
             <div className="absolute inset-0 bg-gradient-to-br from-ink-deep via-ink-raise to-ink" />
             <div className="absolute inset-0 bg-gradient-to-t from-ink-deep via-transparent to-transparent" />
             <div className="absolute inset-3 border border-gold/30 pointer-events-none" />
@@ -157,7 +158,8 @@ export function Hero() {
                 Substituir por fotografia real art-direcionada (duotone navy + grão).
               </p>
             </div>
-          </motion.div>
+          </div>
+
           <div className="absolute -bottom-6 -left-6 border border-gold bg-ink-deep/95 backdrop-blur p-4 max-w-[200px]">
             <div className="absolute top-0 left-0 h-[3px] w-10 bg-gold" />
             <div className="flex items-center gap-1 text-gold">
@@ -715,6 +717,25 @@ export function CtaBanner() {
 /* ============================================================
  * Helpers
  * ============================================================ */
+function useMediaQuery(query: string): boolean {
+  const [matches, setMatches] = useState(false);
+  useEffect(() => {
+    if (typeof window === "undefined" || !window.matchMedia) return;
+    const mql = window.matchMedia(query);
+    const update = () => setMatches(mql.matches);
+    update();
+    mql.addEventListener("change", update);
+    return () => mql.removeEventListener("change", update);
+  }, [query]);
+  return matches;
+}
+
+/**
+ * Reveal — fade+slide leve via IntersectionObserver + classe CSS.
+ * Substitui o `motion.div` por bloco com `content-visibility: auto`,
+ * eliminando trabalho de animação JS por seção e reduzindo paint/layout
+ * fora da viewport. Mantém o efeito visual quando entra na tela.
+ */
 function Reveal({
   children, className, as: As = "section", id,
 }: {
@@ -724,21 +745,34 @@ function Reveal({
   id?: string;
 }) {
   const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
-  const reduce = useReducedMotion();
+  const [shown, setShown] = useState(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el || typeof IntersectionObserver === "undefined") { setShown(true); return; }
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          setShown(true);
+          io.disconnect();
+        }
+      },
+      { rootMargin: "-80px" },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
   const Comp = As as any;
   return (
-    <Comp ref={ref} id={id} className={className}>
-      <motion.div
-        initial={reduce ? false : { opacity: 0, y: 16 }}
-        animate={inView ? { opacity: 1, y: 0 } : undefined}
-        transition={{ duration: 0.55, ease: [0.22, 0.61, 0.36, 1] }}
-      >
-        {children}
-      </motion.div>
+    <Comp
+      ref={ref as any}
+      id={id}
+      className={`cv-auto reveal ${shown ? "reveal-in" : ""} ${className ?? ""}`}
+    >
+      {children}
     </Comp>
   );
 }
+
 
 function CountUp({ value, className }: { value: string; className?: string }) {
   const match = value.match(/^([^\d-]*)([\d.,]+)(.*)$/);
