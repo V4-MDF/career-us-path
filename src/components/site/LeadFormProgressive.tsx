@@ -163,6 +163,15 @@ export function LeadFormProgressive({
   const update = <K extends keyof LeadInput>(k: K, v: LeadInput[K]) =>
     setData((d) => ({ ...d, [k]: v }));
 
+  const resetForm = async () => {
+    try { if (partialIdRef.current) await remove("leads_partial", partialIdRef.current); } catch { /* ignore */ }
+    setData({ ...empty, profissao: defaultProfissao ?? "" });
+    setStepIndex(0);
+    setRestoredCount(0);
+    setError(null);
+  };
+
+
   const totalFields = PROGRESSIVE_FIELDS.length;
   const completedCount = useMemo(
     () => PROGRESSIVE_FIELDS.filter((f) => isFieldValid(f.key, data)).length,
