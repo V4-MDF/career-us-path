@@ -112,10 +112,10 @@ function Qualificado() {
 
       <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
         <Link to="/vistos/$slug" params={{ slug: "eb2-niw" }}>
-          <Button size="lg" className="h-12 px-6">Conhecer o EB-2 NIW</Button>
+          <Button size="lg" className="btn-label h-12 px-6">Conhecer o EB-2 NIW</Button>
         </Link>
         <Link to="/">
-          <Button size="lg" variant="outline" className="h-12 px-6 border-gold/40 text-foreground hover:border-gold hover:bg-gold/5">
+          <Button size="lg" variant="outline" className="btn-label h-12 px-6 border-gold/40 text-foreground hover:border-gold hover:bg-gold/5">
             Voltar para o site
           </Button>
         </Link>
@@ -213,7 +213,7 @@ function NaoQualificado() {
 
       <div className="mt-10 text-center">
         <Link to="/">
-          <Button size="lg" variant="outline" className="h-12 px-6 border-gold/40 text-foreground hover:border-gold hover:bg-gold/5">
+          <Button size="lg" variant="outline" className="btn-label h-12 px-6 border-gold/40 text-foreground hover:border-gold hover:bg-gold/5">
             Voltar para o site
           </Button>
         </Link>
