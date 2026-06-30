@@ -85,7 +85,7 @@ const SEED_SEGMENTS: Segment[] = [
     profissao_default: "medico",
     eyebrow: "PARA MÉDICOS BRASILEIROS",
     prova_social:
-      "+300 médicos brasileiros já iniciaram o processo com a Status",
+      "Atendimento especializado para médicos brasileiros",
     comparativo: {
       label: "Salário médio de médicos",
       lado_brasil: "≈ R$ 15.000 / mês",
