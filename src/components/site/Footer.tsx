@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { Facebook, Instagram, Youtube } from "lucide-react";
 import { getSiteSettings, type SiteSettings } from "@/lib/admin/settings";
+import { FlagBR, FlagUS } from "./flags";
 
 export function Footer() {
   const [s, setS] = useState<SiteSettings | null>(null);
