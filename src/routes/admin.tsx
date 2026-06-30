@@ -69,14 +69,14 @@ function AdminLayout() {
 
   if (isLogin) {
     return (
-      <div className="min-h-screen bg-slate-100">
+      <div data-admin-shell className="min-h-screen bg-slate-100">
         <Outlet />
         <Toaster richColors position="top-right" />
       </div>
     );
   }
   if (authed === null) {
-    return <div className="min-h-screen grid place-items-center bg-slate-50 text-slate-500">Carregando…</div>;
+    return <div data-admin-shell className="min-h-screen grid place-items-center bg-slate-50 text-slate-500">Carregando…</div>;
   }
   if (!authed) return null;
 
