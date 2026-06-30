@@ -25,7 +25,7 @@ import { Label } from "@/components/ui/label";
 import {
   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
 } from "@/components/ui/select";
-import { newId, set, remove } from "@/lib/dataStore";
+import { newId, set, get, remove } from "@/lib/dataStore";
 import { type LeadInput } from "@/lib/leadScoring";
 import { evaluateQualification, type QualResult } from "@/lib/leadQualification";
 import { getAssignedVariantId, registerConversion } from "@/lib/abEngine";
