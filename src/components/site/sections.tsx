@@ -14,7 +14,7 @@
  */
 
 import { Link } from "@tanstack/react-router";
-import { motion, useInView, useReducedMotion } from "motion/react";
+import { motion, useInView, useReducedMotion, useScroll, useTransform } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 import {
   AlertTriangle, Award, Briefcase, Building2, CheckCircle2, FileText,
