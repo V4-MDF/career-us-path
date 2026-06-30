@@ -115,15 +115,15 @@ export function BlogStrip() {
                 role="listitem"
                 {...props}
                 className="
-                  group relative gold-tick border border-gold/20 bg-ink-raise/60
-                  hover:border-gold/60 transition-colors
+                  group relative gold-tick rounded-2xl border border-gold/20 bg-ink-raise/60 shadow-soft
+                  hover:border-gold/60 hover:shadow-elevated transition-[border-color,box-shadow]
                   flex flex-col overflow-hidden
                   w-[80vw] max-w-[340px] shrink-0 snap-start
                   md:w-auto md:max-w-none md:shrink md:snap-align-none
                 "
               >
                 {/* Capa */}
-                <div className="relative aspect-[16/10] w-full overflow-hidden bg-ink-deep">
+                <div className="relative aspect-[16/10] w-full overflow-hidden bg-ink-deep rounded-t-2xl">
                   <img
                     src={p.capa}
                     alt=""
