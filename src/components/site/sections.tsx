@@ -40,70 +40,124 @@ export function Hero() {
   const proof = useContent("hero.proof");
   const reduce = useReducedMotion();
   const lines = splitHeadline(title);
-  const easeOut = [0.22, 0.61, 0.36, 1] as const;
+  // Easing assinatura — cubic-bezier(0.16, 1, 0.3, 1) (expo-out premium).
+  const easeSig = [0.16, 1, 0.3, 1] as const;
   const t = (d: number) => (reduce ? 0 : d);
 
-  return (
-    <section className="relative overflow-hidden pt-28 md:pt-36 pb-20 md:pb-28">
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute inset-0 guilloche" />
-        <div className="absolute inset-0 bg-gradient-to-b from-ink-deep/30 via-transparent to-ink" />
-      </div>
+  // Parallax sutil ligado ao scroll do hero (≤8% — discreto).
+  const heroRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+  const imgY = useTransform(scrollYProgress, [0, 1], ["0%", reduce ? "0%" : "8%"]);
+  const imgScale = useTransform(scrollYProgress, [0, 1], [1, reduce ? 1 : 1.04]);
 
-      <div className="container-x grid lg:grid-cols-[1.1fr_0.9fr] gap-14 items-center">
+  return (
+    <section
+      ref={heroRef}
+      className="relative overflow-hidden pt-32 md:pt-44 pb-24 md:pb-36"
+    >
+      {/* Hero limpo — sem guilloché (reservado ao NIW). Apenas gradiente sutil. */}
+      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-ink-deep/40 via-transparent to-ink" />
+
+      <div className="container-x grid lg:grid-cols-[1.1fr_0.9fr] gap-16 lg:gap-20 items-center">
         <div>
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: t(0.45), ease: easeOut }} className="flex items-center gap-3">
+          <motion.div
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+            transition={{ duration: t(0.5), ease: easeSig }}
+            className="flex items-center gap-3"
+          >
             <span aria-hidden className="h-px w-10 bg-gold" />
             <span className="font-mono-label text-gold">{eyebrow}</span>
           </motion.div>
 
-          <h1 className="mt-7 font-display text-[42px] md:text-[64px] leading-[1.02] tracking-[-0.015em]">
+          {/* H1: tipo fluido grande e confiante (display-1). Reveal linha-a-linha com máscara. */}
+          <h1 className="display-1 mt-8">
             {lines.map((ln, i) => (
               <span key={i} className="block overflow-hidden pb-1">
-                <motion.span className="block" initial={{ y: "110%" }} animate={{ y: "0%" }} transition={{ duration: t(0.7), ease: easeOut, delay: t(0.15 + i * 0.12) }}>
+                <motion.span
+                  className="block"
+                  initial={{ y: "110%" }} animate={{ y: "0%" }}
+                  transition={{ duration: t(0.85), ease: easeSig, delay: t(0.15 + i * 0.1) }}
+                >
                   {renderEmphasis(ln)}
                 </motion.span>
               </span>
             ))}
           </h1>
 
-          <motion.div initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ duration: t(0.8), ease: easeOut, delay: t(0.55) }} style={{ transformOrigin: "left center" }} className="mt-8 h-px w-24 bg-gold" />
+          {/* Filete dourado que se desenha da esquerda → direita. */}
+          <motion.div
+            initial={{ scaleX: 0 }} animate={{ scaleX: 1 }}
+            transition={{ duration: t(0.9), ease: easeSig, delay: t(0.55) }}
+            style={{ transformOrigin: "left center" }}
+            className="mt-10 h-px w-28 bg-gold"
+          />
 
-          <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: t(0.55), ease: easeOut, delay: t(0.7) }} className="mt-6 text-[17px] leading-relaxed text-foreground/80 max-w-xl">
+          <motion.p
+            initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: t(0.7), ease: easeSig, delay: t(0.7) }}
+            className="lead mt-7 max-w-xl"
+          >
             {sub}
           </motion.p>
 
-          <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: t(0.55), ease: easeOut, delay: t(0.85) }} className="mt-9 flex flex-wrap gap-3">
+          <motion.div
+            initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: t(0.7), ease: easeSig, delay: t(0.85) }}
+            className="mt-10 flex flex-wrap gap-3"
+          >
             <a href={avaliacaoHref("home_hero")}>
-              <Button size="lg" className="btn-sweep h-12 px-7 text-[15px]">{cta}</Button>
+              <Button size="lg" className="btn-sweep h-12 px-7 text-[15px] active:scale-[0.98]">
+                {cta}
+              </Button>
             </a>
             <a href="#niw">
-              <Button size="lg" variant="outline" className="h-12 px-6 text-[15px] border-gold/40 text-foreground hover:border-gold hover:bg-gold/5">
+              <Button
+                size="lg" variant="outline"
+                className="h-12 px-6 text-[15px] border-gold/40 text-foreground hover:border-gold hover:bg-gold/5"
+              >
                 <PlayCircle className="mr-2 h-4 w-4" /> Entenda o EB-2 NIW
               </Button>
             </a>
           </motion.div>
 
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: t(0.5), delay: t(1.1) }} className="mt-12 flex items-start gap-3 text-sm text-foreground/65 border-l border-gold/50 pl-4">
+          <motion.div
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+            transition={{ duration: t(0.6), delay: t(1.1) }}
+            className="mt-14 flex items-start gap-3 text-sm text-foreground/60 border-l border-gold/50 pl-4 max-w-md"
+          >
             <Star className="h-4 w-4 text-gold mt-0.5 shrink-0 fill-gold" />
             <span>{proof}</span>
           </motion.div>
         </div>
 
-        <motion.div className="relative hidden lg:block" initial={{ opacity: 0, scale: 1.04 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: t(1.1), ease: easeOut, delay: t(0.25) }}>
-          <div className="relative aspect-[4/5] overflow-hidden border border-gold/30 bg-ink-raise">
+        {/* Bloco editorial — parallax sutil ligado ao scroll. */}
+        <motion.div
+          className="relative hidden lg:block"
+          initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+          transition={{ duration: t(1.0), ease: easeSig, delay: t(0.25) }}
+          style={{ y: imgY }}
+        >
+          <motion.div
+            className="relative aspect-[4/5] overflow-hidden border border-gold/30 bg-ink-raise"
+            style={{ scale: imgScale }}
+          >
             <div className="absolute inset-0 bg-gradient-to-br from-ink-deep via-ink-raise to-ink" />
-            <div className="absolute inset-0 guilloche" />
             <div className="absolute inset-0 bg-gradient-to-t from-ink-deep via-transparent to-transparent" />
             <div className="absolute inset-3 border border-gold/30 pointer-events-none" />
             <div className="absolute bottom-0 left-0 right-0 p-7">
               <p className="font-mono-label text-gold/80">RETRATO EDITORIAL</p>
-              <p className="mt-2 font-display text-2xl leading-tight text-foreground">Família brasileira em paisagem americana</p>
+              <p className="mt-2 font-display text-2xl leading-tight text-foreground">
+                Família brasileira em paisagem americana
+              </p>
               <p className="mt-2 text-xs text-foreground/55 leading-relaxed">
+                {/* Substituir por fotografia real art-direcionada — duotone navy + grão sutil. Nunca ilustração ou imagem genérica de IA. */}
                 Substituir por fotografia real art-direcionada (duotone navy + grão).
               </p>
             </div>
-          </div>
+          </motion.div>
           <div className="absolute -bottom-6 -left-6 border border-gold bg-ink-deep/95 backdrop-blur p-4 max-w-[200px]">
             <div className="absolute top-0 left-0 h-[3px] w-10 bg-gold" />
             <div className="flex items-center gap-1 text-gold">
@@ -116,6 +170,7 @@ export function Hero() {
     </section>
   );
 }
+
 
 function splitHeadline(t: string): string[] {
   const words = t.split(/\s+/);
