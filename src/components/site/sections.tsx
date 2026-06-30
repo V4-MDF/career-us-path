@@ -564,6 +564,17 @@ export function LegacySection() {
   ];
   return (
     <Reveal as="section" id="legado" className="section-ink-deep section-pad border-y border-gold/10 relative overflow-hidden">
+      {/* Backdrops sobrepostos: mapa dos EUA gravado + selo de família. */}
+      <div aria-hidden className="absolute inset-0 flex items-center justify-center pointer-events-none">
+        <img
+          src={usMapEngraving}
+          alt=""
+          width={1600}
+          height={1024}
+          loading="lazy"
+          className="w-[120%] max-w-none opacity-[0.07] mix-blend-screen select-none"
+        />
+      </div>
       <div aria-hidden className="absolute inset-0 text-gold"><FamilySealBackdrop /></div>
       <div className="container-x relative">
         <SectionHead
