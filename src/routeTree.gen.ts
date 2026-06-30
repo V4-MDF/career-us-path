@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SobreRouteImport } from './routes/sobre'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as PreQualificacaoRouteImport } from './routes/pre-qualificacao'
 import { Route as LlmInfoRouteImport } from './routes/llm-info'
 import { Route as ContatoRouteImport } from './routes/contato'
 import { Route as BlogRouteImport } from './routes/blog'
@@ -27,6 +28,7 @@ import { Route as AdminTrackingRouteImport } from './routes/admin.tracking'
 import { Route as AdminSeoRouteImport } from './routes/admin.seo'
 import { Route as AdminSegmentosRouteImport } from './routes/admin.segmentos'
 import { Route as AdminScoringRouteImport } from './routes/admin.scoring'
+import { Route as AdminPreQualificacaoRouteImport } from './routes/admin.pre-qualificacao'
 import { Route as AdminOrigensRouteImport } from './routes/admin.origens'
 import { Route as AdminMidiaRouteImport } from './routes/admin.midia'
 import { Route as AdminLoginRouteImport } from './routes/admin.login'
@@ -40,6 +42,7 @@ import { Route as AdminBlogRouteImport } from './routes/admin.blog'
 import { Route as AdminAbRouteImport } from './routes/admin.ab'
 import { Route as VistosSlugIndexRouteImport } from './routes/vistos.$slug.index'
 import { Route as VistosSlugSecaoRouteImport } from './routes/vistos.$slug.$secao'
+import { Route as PreQualificacaoRTokenRouteImport } from './routes/pre-qualificacao.r.$token'
 
 const SobreRoute = SobreRouteImport.update({
   id: '/sobre',
@@ -49,6 +52,11 @@ const SobreRoute = SobreRouteImport.update({
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PreQualificacaoRoute = PreQualificacaoRouteImport.update({
+  id: '/pre-qualificacao',
+  path: '/pre-qualificacao',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LlmInfoRoute = LlmInfoRouteImport.update({
@@ -131,6 +139,11 @@ const AdminScoringRoute = AdminScoringRouteImport.update({
   path: '/scoring',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminPreQualificacaoRoute = AdminPreQualificacaoRouteImport.update({
+  id: '/pre-qualificacao',
+  path: '/pre-qualificacao',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminOrigensRoute = AdminOrigensRouteImport.update({
   id: '/origens',
   path: '/origens',
@@ -196,6 +209,11 @@ const VistosSlugSecaoRoute = VistosSlugSecaoRouteImport.update({
   path: '/$secao',
   getParentRoute: () => VistosSlugRoute,
 } as any)
+const PreQualificacaoRTokenRoute = PreQualificacaoRTokenRouteImport.update({
+  id: '/r/$token',
+  path: '/r/$token',
+  getParentRoute: () => PreQualificacaoRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -204,6 +222,7 @@ export interface FileRoutesByFullPath {
   '/blog': typeof BlogRouteWithChildren
   '/contato': typeof ContatoRoute
   '/llm-info': typeof LlmInfoRoute
+  '/pre-qualificacao': typeof PreQualificacaoRouteWithChildren
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sobre': typeof SobreRoute
   '/admin/ab': typeof AdminAbRoute
@@ -217,6 +236,7 @@ export interface FileRoutesByFullPath {
   '/admin/login': typeof AdminLoginRoute
   '/admin/midia': typeof AdminMidiaRoute
   '/admin/origens': typeof AdminOrigensRoute
+  '/admin/pre-qualificacao': typeof AdminPreQualificacaoRoute
   '/admin/scoring': typeof AdminScoringRoute
   '/admin/segmentos': typeof AdminSegmentosRoute
   '/admin/seo': typeof AdminSeoRoute
@@ -227,6 +247,7 @@ export interface FileRoutesByFullPath {
   '/lp/$slug': typeof LpSlugRoute
   '/vistos/$slug': typeof VistosSlugRouteWithChildren
   '/admin/': typeof AdminIndexRoute
+  '/pre-qualificacao/r/$token': typeof PreQualificacaoRTokenRoute
   '/vistos/$slug/$secao': typeof VistosSlugSecaoRoute
   '/vistos/$slug/': typeof VistosSlugIndexRoute
 }
@@ -236,6 +257,7 @@ export interface FileRoutesByTo {
   '/blog': typeof BlogRouteWithChildren
   '/contato': typeof ContatoRoute
   '/llm-info': typeof LlmInfoRoute
+  '/pre-qualificacao': typeof PreQualificacaoRouteWithChildren
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sobre': typeof SobreRoute
   '/admin/ab': typeof AdminAbRoute
@@ -249,6 +271,7 @@ export interface FileRoutesByTo {
   '/admin/login': typeof AdminLoginRoute
   '/admin/midia': typeof AdminMidiaRoute
   '/admin/origens': typeof AdminOrigensRoute
+  '/admin/pre-qualificacao': typeof AdminPreQualificacaoRoute
   '/admin/scoring': typeof AdminScoringRoute
   '/admin/segmentos': typeof AdminSegmentosRoute
   '/admin/seo': typeof AdminSeoRoute
@@ -258,6 +281,7 @@ export interface FileRoutesByTo {
   '/blog/$slug': typeof BlogSlugRoute
   '/lp/$slug': typeof LpSlugRoute
   '/admin': typeof AdminIndexRoute
+  '/pre-qualificacao/r/$token': typeof PreQualificacaoRTokenRoute
   '/vistos/$slug/$secao': typeof VistosSlugSecaoRoute
   '/vistos/$slug': typeof VistosSlugIndexRoute
 }
@@ -269,6 +293,7 @@ export interface FileRoutesById {
   '/blog': typeof BlogRouteWithChildren
   '/contato': typeof ContatoRoute
   '/llm-info': typeof LlmInfoRoute
+  '/pre-qualificacao': typeof PreQualificacaoRouteWithChildren
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sobre': typeof SobreRoute
   '/admin/ab': typeof AdminAbRoute
@@ -282,6 +307,7 @@ export interface FileRoutesById {
   '/admin/login': typeof AdminLoginRoute
   '/admin/midia': typeof AdminMidiaRoute
   '/admin/origens': typeof AdminOrigensRoute
+  '/admin/pre-qualificacao': typeof AdminPreQualificacaoRoute
   '/admin/scoring': typeof AdminScoringRoute
   '/admin/segmentos': typeof AdminSegmentosRoute
   '/admin/seo': typeof AdminSeoRoute
@@ -292,6 +318,7 @@ export interface FileRoutesById {
   '/lp/$slug': typeof LpSlugRoute
   '/vistos/$slug': typeof VistosSlugRouteWithChildren
   '/admin/': typeof AdminIndexRoute
+  '/pre-qualificacao/r/$token': typeof PreQualificacaoRTokenRoute
   '/vistos/$slug/$secao': typeof VistosSlugSecaoRoute
   '/vistos/$slug/': typeof VistosSlugIndexRoute
 }
@@ -304,6 +331,7 @@ export interface FileRouteTypes {
     | '/blog'
     | '/contato'
     | '/llm-info'
+    | '/pre-qualificacao'
     | '/sitemap.xml'
     | '/sobre'
     | '/admin/ab'
@@ -317,6 +345,7 @@ export interface FileRouteTypes {
     | '/admin/login'
     | '/admin/midia'
     | '/admin/origens'
+    | '/admin/pre-qualificacao'
     | '/admin/scoring'
     | '/admin/segmentos'
     | '/admin/seo'
@@ -327,6 +356,7 @@ export interface FileRouteTypes {
     | '/lp/$slug'
     | '/vistos/$slug'
     | '/admin/'
+    | '/pre-qualificacao/r/$token'
     | '/vistos/$slug/$secao'
     | '/vistos/$slug/'
   fileRoutesByTo: FileRoutesByTo
@@ -336,6 +366,7 @@ export interface FileRouteTypes {
     | '/blog'
     | '/contato'
     | '/llm-info'
+    | '/pre-qualificacao'
     | '/sitemap.xml'
     | '/sobre'
     | '/admin/ab'
@@ -349,6 +380,7 @@ export interface FileRouteTypes {
     | '/admin/login'
     | '/admin/midia'
     | '/admin/origens'
+    | '/admin/pre-qualificacao'
     | '/admin/scoring'
     | '/admin/segmentos'
     | '/admin/seo'
@@ -358,6 +390,7 @@ export interface FileRouteTypes {
     | '/blog/$slug'
     | '/lp/$slug'
     | '/admin'
+    | '/pre-qualificacao/r/$token'
     | '/vistos/$slug/$secao'
     | '/vistos/$slug'
   id:
@@ -368,6 +401,7 @@ export interface FileRouteTypes {
     | '/blog'
     | '/contato'
     | '/llm-info'
+    | '/pre-qualificacao'
     | '/sitemap.xml'
     | '/sobre'
     | '/admin/ab'
@@ -381,6 +415,7 @@ export interface FileRouteTypes {
     | '/admin/login'
     | '/admin/midia'
     | '/admin/origens'
+    | '/admin/pre-qualificacao'
     | '/admin/scoring'
     | '/admin/segmentos'
     | '/admin/seo'
@@ -391,6 +426,7 @@ export interface FileRouteTypes {
     | '/lp/$slug'
     | '/vistos/$slug'
     | '/admin/'
+    | '/pre-qualificacao/r/$token'
     | '/vistos/$slug/$secao'
     | '/vistos/$slug/'
   fileRoutesById: FileRoutesById
@@ -402,6 +438,7 @@ export interface RootRouteChildren {
   BlogRoute: typeof BlogRouteWithChildren
   ContatoRoute: typeof ContatoRoute
   LlmInfoRoute: typeof LlmInfoRoute
+  PreQualificacaoRoute: typeof PreQualificacaoRouteWithChildren
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   SobreRoute: typeof SobreRoute
   LpSlugRoute: typeof LpSlugRoute
@@ -422,6 +459,13 @@ declare module '@tanstack/react-router' {
       path: '/sitemap.xml'
       fullPath: '/sitemap.xml'
       preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pre-qualificacao': {
+      id: '/pre-qualificacao'
+      path: '/pre-qualificacao'
+      fullPath: '/pre-qualificacao'
+      preLoaderRoute: typeof PreQualificacaoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/llm-info': {
@@ -536,6 +580,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminScoringRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/pre-qualificacao': {
+      id: '/admin/pre-qualificacao'
+      path: '/pre-qualificacao'
+      fullPath: '/admin/pre-qualificacao'
+      preLoaderRoute: typeof AdminPreQualificacaoRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/origens': {
       id: '/admin/origens'
       path: '/origens'
@@ -627,6 +678,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof VistosSlugSecaoRouteImport
       parentRoute: typeof VistosSlugRoute
     }
+    '/pre-qualificacao/r/$token': {
+      id: '/pre-qualificacao/r/$token'
+      path: '/r/$token'
+      fullPath: '/pre-qualificacao/r/$token'
+      preLoaderRoute: typeof PreQualificacaoRTokenRouteImport
+      parentRoute: typeof PreQualificacaoRoute
+    }
   }
 }
 
@@ -642,6 +700,7 @@ interface AdminRouteChildren {
   AdminLoginRoute: typeof AdminLoginRoute
   AdminMidiaRoute: typeof AdminMidiaRoute
   AdminOrigensRoute: typeof AdminOrigensRoute
+  AdminPreQualificacaoRoute: typeof AdminPreQualificacaoRoute
   AdminScoringRoute: typeof AdminScoringRoute
   AdminSegmentosRoute: typeof AdminSegmentosRoute
   AdminSeoRoute: typeof AdminSeoRoute
@@ -662,6 +721,7 @@ const AdminRouteChildren: AdminRouteChildren = {
   AdminLoginRoute: AdminLoginRoute,
   AdminMidiaRoute: AdminMidiaRoute,
   AdminOrigensRoute: AdminOrigensRoute,
+  AdminPreQualificacaoRoute: AdminPreQualificacaoRoute,
   AdminScoringRoute: AdminScoringRoute,
   AdminSegmentosRoute: AdminSegmentosRoute,
   AdminSeoRoute: AdminSeoRoute,
@@ -694,6 +754,18 @@ const BlogRouteChildren: BlogRouteChildren = {
 
 const BlogRouteWithChildren = BlogRoute._addFileChildren(BlogRouteChildren)
 
+interface PreQualificacaoRouteChildren {
+  PreQualificacaoRTokenRoute: typeof PreQualificacaoRTokenRoute
+}
+
+const PreQualificacaoRouteChildren: PreQualificacaoRouteChildren = {
+  PreQualificacaoRTokenRoute: PreQualificacaoRTokenRoute,
+}
+
+const PreQualificacaoRouteWithChildren = PreQualificacaoRoute._addFileChildren(
+  PreQualificacaoRouteChildren,
+)
+
 interface VistosSlugRouteChildren {
   VistosSlugSecaoRoute: typeof VistosSlugSecaoRoute
   VistosSlugIndexRoute: typeof VistosSlugIndexRoute
@@ -715,6 +787,7 @@ const rootRouteChildren: RootRouteChildren = {
   BlogRoute: BlogRouteWithChildren,
   ContatoRoute: ContatoRoute,
   LlmInfoRoute: LlmInfoRoute,
+  PreQualificacaoRoute: PreQualificacaoRouteWithChildren,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   SobreRoute: SobreRoute,
   LpSlugRoute: LpSlugRoute,
