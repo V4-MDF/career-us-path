@@ -149,7 +149,7 @@ export function Header() {
           </a>
           <button
             type="button"
-            className="lg:hidden grid h-11 w-11 place-items-center border border-gold/40 text-gold"
+            className="lg:hidden grid h-11 w-11 place-items-center rounded-lg border border-gold/40 text-gold"
             onClick={() => setOpen((o) => !o)}
             aria-label={open ? "Fechar menu" : "Abrir menu"}
             aria-expanded={open}
