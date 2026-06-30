@@ -66,7 +66,7 @@ export function BlogStrip() {
           </div>
           <Link
             to="/blog"
-            className="inline-flex items-center gap-2 font-mono-label text-gold hover:translate-x-1 transition-transform"
+            className="inline-flex items-center gap-2 btn-label text-gold hover:translate-x-1 transition-transform"
           >
             Ver todos os artigos <ArrowRight className="h-3.5 w-3.5" />
           </Link>
