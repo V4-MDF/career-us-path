@@ -20,6 +20,7 @@ import { Badge } from "@/components/ui/badge";
 import { Slider } from "@/components/ui/slider";
 import { PageHeader, StatCard, SectionCard } from "@/components/admin/ui";
 import { list, set } from "@/lib/dataStore";
+import type { LeadOrigin } from "@/lib/origin";
 import type { LeadInput } from "@/lib/leadScoring";
 import {
   loadModel, computeScore, TONE_CLASS, TONE_BAR, FUNNEL_STATUSES, FUNNEL_LABEL,
@@ -34,6 +35,7 @@ type StoredLead = LeadInput & {
   id: string;
   createdAt: string;
   utm?: Record<string, string>;
+  origin?: LeadOrigin;
   segmento?: string;
   variante_ab?: string | null;
   status?: FunnelStatus;
@@ -223,15 +225,16 @@ function LeadsPage() {
                   <th className="py-2">Segmento</th>
                   <th className="py-2">Variante</th>
                   <th className="py-2">utm_source</th>
+                  <th className="py-2">Origem</th>
                   <th className="py-2 w-[180px]">Status</th>
                   <th className="py-2 text-right whitespace-nowrap">Data</th>
                 </tr>
               </thead>
               <tbody>
                 {loading ? (
-                  <tr><td colSpan={8} className="px-5 py-8 text-center text-slate-400">Carregando…</td></tr>
+                  <tr><td colSpan={9} className="px-5 py-8 text-center text-slate-400">Carregando…</td></tr>
                 ) : filtered.length === 0 ? (
-                  <tr><td colSpan={8} className="px-5 py-8 text-center text-slate-400">Nenhum lead com esses filtros.</td></tr>
+                  <tr><td colSpan={9} className="px-5 py-8 text-center text-slate-400">Nenhum lead com esses filtros.</td></tr>
                 ) : filtered.map((l) => (
                   <tr key={l.id} className="border-b border-slate-100 hover:bg-slate-50">
                     <td className="px-5 py-3 cursor-pointer" onClick={() => setOpen(l)}>
@@ -242,6 +245,7 @@ function LeadsPage() {
                     <td className="py-3 text-slate-600">{l.segmento ?? "—"}</td>
                     <td className="py-3 text-slate-600 text-xs">{l.variante_ab ?? "—"}</td>
                     <td className="py-3 text-slate-600">{l.utm?.utm_source ?? "—"}</td>
+                    <td className="py-3 text-slate-600 text-xs max-w-[220px] truncate" title={originSummary(l)}>{originSummary(l)}</td>
                     <td className="py-3">
                       <Select value={l.status ?? "novo"} onValueChange={(v) => setStatus(l, v as FunnelStatus)}>
                         <SelectTrigger className="h-8 text-xs"><SelectValue /></SelectTrigger>
@@ -351,6 +355,19 @@ function LeadsPage() {
                       {(["utm_source","utm_medium","utm_campaign","utm_content","utm_term"] as const).map((k) => (
                         <div key={k}><span className="text-slate-500">{k}:</span> {open.utm?.[k] ?? "—"}</div>
                       ))}
+                      {open.utm?.gclid && <div><span className="text-slate-500">gclid:</span> {open.utm.gclid}</div>}
+                      {open.utm?.fbclid && <div><span className="text-slate-500">fbclid:</span> {open.utm.fbclid}</div>}
+                    </div>
+                  </div>
+
+                  {/* Origem (referrer + página interna) */}
+                  <div className="rounded-md border border-slate-200">
+                    <div className="px-4 py-2 bg-slate-50 text-xs uppercase tracking-wider text-slate-500">Origem do tráfego</div>
+                    <div className="p-4 grid grid-cols-1 gap-2 text-xs">
+                      <div><span className="text-slate-500">Referrer externo:</span> {open.origin?.internal.referrer ?? "—"}</div>
+                      <div><span className="text-slate-500">Página interna anterior:</span> {open.origin?.internal.from_path ?? "—"}{open.origin?.internal.from_title ? ` · ${open.origin.internal.from_title}` : ""}</div>
+                      <div><span className="text-slate-500">Landing (1ª página da sessão):</span> {open.origin?.internal.landing_path ?? "—"}</div>
+                      <div><span className="text-slate-500">Início da sessão:</span> {open.origin?.internal.landing_ts ? new Date(open.origin.internal.landing_ts).toLocaleString("pt-BR") : "—"}</div>
                     </div>
                   </div>
                 </div>
@@ -386,6 +403,20 @@ function Field({ k, v }: { k: string; v: string }) {
       <div className="text-slate-800">{v}</div>
     </div>
   );
+}
+
+/** Resumo compacto de origem para a coluna da tabela. */
+function originSummary(l: { utm?: Record<string, string>; origin?: LeadOrigin }): string {
+  const src = l.utm?.utm_source || l.origin?.utm.utm_source;
+  const med = l.utm?.utm_medium || l.origin?.utm.utm_medium;
+  if (src) return med ? `${src} / ${med}` : src;
+  const ref = l.origin?.internal.referrer;
+  if (ref) {
+    try { return `ref: ${new URL(ref).host}`; } catch { return `ref: ${ref}`; }
+  }
+  const fp = l.origin?.internal.from_path || l.origin?.internal.landing_path;
+  if (fp) return `interno: ${fp}`;
+  return "direto";
 }
 
 function FilterSelect({ label, value, onChange, options }: {
