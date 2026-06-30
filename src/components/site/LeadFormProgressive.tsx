@@ -17,7 +17,7 @@
  * Não altera scoring (sempre derivado ao vivo em /admin) nem A/B.
  */
 import { useEffect, useMemo, useRef, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { CheckCircle2, ChevronRight, Loader2, Pencil } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -125,6 +125,7 @@ export function LeadFormProgressive({
   const [error, setError] = useState<string | null>(null);
   const partialIdRef = useRef<string>("");
   const containerRef = useRef<HTMLDivElement | null>(null);
+  const reduce = useReducedMotion();
 
   useEffect(() => { partialIdRef.current = getOrCreatePartialId(); }, []);
 
@@ -273,7 +274,7 @@ export function LeadFormProgressive({
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ duration: reduce ? 0 : 0.35, ease: [0.16, 1, 0.3, 1] }}
                 data-step={i}
               >
                 {active ? (
@@ -296,7 +297,7 @@ export function LeadFormProgressive({
         {stepIndex >= totalFields && (
           <motion.div
             initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4 }}
+            transition={{ duration: reduce ? 0 : 0.4 }}
             data-step={totalFields}
             className="rounded-xl border border-gold/30 bg-ink-deep/40 p-5"
           >

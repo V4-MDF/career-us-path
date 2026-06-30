@@ -75,7 +75,7 @@ export function Hero() {
             <span className="font-mono-label text-gold">{eyebrow}</span>
           </motion.div>
 
-          {/* H1: tipo fluido grande e confiante (display-1). Reveal linha-a-linha com máscara. */}
+          {/* H1: tipo fluido grande e confiante (display-1). Reveal linha-a-linha com máscara — em reduced-motion entra instantâneo (sem y-mask). */}
           <h1 className="display-1 mt-8">
             {lines.map((ln, i) => (
               <span key={i} className="block overflow-hidden pb-1">
@@ -134,6 +134,8 @@ export function Hero() {
             <Star className="h-4 w-4 text-gold mt-0.5 shrink-0 fill-gold" />
             <span>{proof}</span>
           </motion.div>
+
+
         </div>
 
         {/* Bloco editorial — parallax sutil (apenas desktop). */}
