@@ -72,13 +72,11 @@ function LpFooter() {
   );
 }
 
-export function LandingPageTemplate({ segment, variant }: Props) {
-  // Hero: usa variante A/B ativa; fallback no hero_default do segmento.
-  const hero = variant ?? { ...segment.hero_default, segment_id: segment.id } as Pick<HeroVariant, "eyebrow" | "h1" | "sub" | "cta_texto">;
+  const ctaHref = avaliacaoHref(`lp_${segment.id}`, segment.id);
 
   return (
     <div className="bg-background text-foreground">
-      <ConversionHeader />
+      <ConversionHeader segmentId={segment.id} />
       <main className="pt-16">
         {/* 1. HERO */}
         <section className="relative overflow-hidden pt-16 md:pt-24 pb-20">
@@ -101,7 +99,7 @@ export function LandingPageTemplate({ segment, variant }: Props) {
                 {hero.sub}
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
-                <a href="#avaliacao" onClick={scrollToForm}>
+                <a href={ctaHref}>
                   <Button size="lg" className="text-base">{hero.cta_texto}</Button>
                 </a>
               </div>
