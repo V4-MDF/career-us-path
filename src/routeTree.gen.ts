@@ -26,6 +26,7 @@ import { Route as AdminUsuariosRouteImport } from './routes/admin.usuarios'
 import { Route as AdminTrackingRouteImport } from './routes/admin.tracking'
 import { Route as AdminSeoRouteImport } from './routes/admin.seo'
 import { Route as AdminSegmentosRouteImport } from './routes/admin.segmentos'
+import { Route as AdminScoringRouteImport } from './routes/admin.scoring'
 import { Route as AdminMidiaRouteImport } from './routes/admin.midia'
 import { Route as AdminLoginRouteImport } from './routes/admin.login'
 import { Route as AdminLinksRouteImport } from './routes/admin.links'
@@ -120,6 +121,11 @@ const AdminSegmentosRoute = AdminSegmentosRouteImport.update({
   path: '/segmentos',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminScoringRoute = AdminScoringRouteImport.update({
+  id: '/scoring',
+  path: '/scoring',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminMidiaRoute = AdminMidiaRouteImport.update({
   id: '/midia',
   path: '/midia',
@@ -178,6 +184,7 @@ export interface FileRoutesByFullPath {
   '/admin/links': typeof AdminLinksRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin/midia': typeof AdminMidiaRoute
+  '/admin/scoring': typeof AdminScoringRoute
   '/admin/segmentos': typeof AdminSegmentosRoute
   '/admin/seo': typeof AdminSeoRoute
   '/admin/tracking': typeof AdminTrackingRoute
@@ -204,6 +211,7 @@ export interface FileRoutesByTo {
   '/admin/links': typeof AdminLinksRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin/midia': typeof AdminMidiaRoute
+  '/admin/scoring': typeof AdminScoringRoute
   '/admin/segmentos': typeof AdminSegmentosRoute
   '/admin/seo': typeof AdminSeoRoute
   '/admin/tracking': typeof AdminTrackingRoute
@@ -232,6 +240,7 @@ export interface FileRoutesById {
   '/admin/links': typeof AdminLinksRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin/midia': typeof AdminMidiaRoute
+  '/admin/scoring': typeof AdminScoringRoute
   '/admin/segmentos': typeof AdminSegmentosRoute
   '/admin/seo': typeof AdminSeoRoute
   '/admin/tracking': typeof AdminTrackingRoute
@@ -261,6 +270,7 @@ export interface FileRouteTypes {
     | '/admin/links'
     | '/admin/login'
     | '/admin/midia'
+    | '/admin/scoring'
     | '/admin/segmentos'
     | '/admin/seo'
     | '/admin/tracking'
@@ -287,6 +297,7 @@ export interface FileRouteTypes {
     | '/admin/links'
     | '/admin/login'
     | '/admin/midia'
+    | '/admin/scoring'
     | '/admin/segmentos'
     | '/admin/seo'
     | '/admin/tracking'
@@ -314,6 +325,7 @@ export interface FileRouteTypes {
     | '/admin/links'
     | '/admin/login'
     | '/admin/midia'
+    | '/admin/scoring'
     | '/admin/segmentos'
     | '/admin/seo'
     | '/admin/tracking'
@@ -459,6 +471,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminSegmentosRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/scoring': {
+      id: '/admin/scoring'
+      path: '/scoring'
+      fullPath: '/admin/scoring'
+      preLoaderRoute: typeof AdminScoringRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/midia': {
       id: '/admin/midia'
       path: '/midia'
@@ -527,6 +546,7 @@ interface AdminRouteChildren {
   AdminLinksRoute: typeof AdminLinksRoute
   AdminLoginRoute: typeof AdminLoginRoute
   AdminMidiaRoute: typeof AdminMidiaRoute
+  AdminScoringRoute: typeof AdminScoringRoute
   AdminSegmentosRoute: typeof AdminSegmentosRoute
   AdminSeoRoute: typeof AdminSeoRoute
   AdminTrackingRoute: typeof AdminTrackingRoute
@@ -543,6 +563,7 @@ const AdminRouteChildren: AdminRouteChildren = {
   AdminLinksRoute: AdminLinksRoute,
   AdminLoginRoute: AdminLoginRoute,
   AdminMidiaRoute: AdminMidiaRoute,
+  AdminScoringRoute: AdminScoringRoute,
   AdminSegmentosRoute: AdminSegmentosRoute,
   AdminSeoRoute: AdminSeoRoute,
   AdminTrackingRoute: AdminTrackingRoute,
