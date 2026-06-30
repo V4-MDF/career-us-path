@@ -141,6 +141,35 @@ function LeadsPage() {
     return { total, prio, pctPrio: total > 0 ? Math.round((prio / total) * 100) : 0, byStatus };
   }, [filtered]);
 
+  /**
+   * Distribuição + taxa de conversão por dimensão de origem.
+   * Conversão = status === "convertido" / total do grupo.
+   * Inclui "(direto)" para leads sem o campo (utm_source vazio / sem referrer externo).
+   */
+  type Bucket = { key: string; total: number; convertidos: number; qualificados: number; pctTotal: number; convRate: number };
+  function bucketBy(getKey: (r: ScoredRow) => string, emptyLabel: string): Bucket[] {
+    const map = new Map<string, { total: number; convertidos: number; qualificados: number }>();
+    filtered.forEach((r) => {
+      const k = (getKey(r) || "").trim() || emptyLabel;
+      const cur = map.get(k) ?? { total: 0, convertidos: 0, qualificados: 0 };
+      cur.total++;
+      if (r.status === "convertido") cur.convertidos++;
+      if (r.status === "qualificado" || r.status === "proposta" || r.status === "convertido") cur.qualificados++;
+      map.set(k, cur);
+    });
+    const totalAll = filtered.length || 1;
+    return Array.from(map.entries())
+      .map(([key, v]) => ({
+        key, total: v.total, convertidos: v.convertidos, qualificados: v.qualificados,
+        pctTotal: Math.round((v.total / totalAll) * 100),
+        convRate: v.total > 0 ? Math.round((v.convertidos / v.total) * 100) : 0,
+      }))
+      .sort((a, b) => b.total - a.total);
+  }
+
+  const bySource = useMemo(() => bucketBy((r) => utmOf(r, "utm_source"), "(direto)"), [filtered]);
+  const byRefHost = useMemo(() => bucketBy((r) => referrerHostOf(r), "(sem referrer externo)"), [filtered]);
+
   async function setStatus(lead: StoredLead, status: FunnelStatus) {
     const next: StoredLead = { ...lead, status };
     await set("leads", lead.id, next);
