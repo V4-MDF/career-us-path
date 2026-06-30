@@ -25,7 +25,7 @@ import { Label } from "@/components/ui/label";
 import {
   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
 } from "@/components/ui/select";
-import { newId, set, remove } from "@/lib/dataStore";
+import { newId, set, get, remove } from "@/lib/dataStore";
 import { type LeadInput } from "@/lib/leadScoring";
 import { evaluateQualification, type QualResult } from "@/lib/leadQualification";
 import { getAssignedVariantId, registerConversion } from "@/lib/abEngine";
@@ -124,21 +124,53 @@ export function LeadFormProgressive({
   const [loading, setLoading] = useState(false);
   const [done, setDone] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [restored, setRestored] = useState(false);
+  const [restoredCount, setRestoredCount] = useState(0);
   const partialIdRef = useRef<string>("");
   const containerRef = useRef<HTMLDivElement | null>(null);
   const reduce = useReducedMotion();
 
-  useEffect(() => { partialIdRef.current = getOrCreatePartialId(); }, []);
-
-  // Se profissao já veio pré-preenchida (segment LP), pula esse passo.
+  // Mount: garante um partial id estável e tenta restaurar respostas anteriores
+  // do dataStore (localStorage) — para que o lead não precise refazer o form
+  // ao revisitar /avaliacao. Salta o stepIndex para a primeira pergunta ainda
+  // pendente.
   useEffect(() => {
-    if (defaultProfissao && stepIndex === 0) {
-      // ainda começa do nome — só não bloqueia profissao depois
-    }
-  }, [defaultProfissao, stepIndex]);
+    partialIdRef.current = getOrCreatePartialId();
+    let cancelled = false;
+    (async () => {
+      try {
+        const prev = await get<PartialLead>("leads_partial", partialIdRef.current);
+        if (cancelled || !prev || !prev.data) { setRestored(true); return; }
+        setData((d) => ({
+          ...d,
+          ...prev.data,
+          // preserva profissao default da LP de segmento se ainda vazia
+          profissao: prev.data.profissao || d.profissao,
+        }));
+        // posiciona na primeira pergunta ainda inválida (ou no resumo final).
+        const merged = { ...empty, ...prev.data } as LeadInput;
+        const firstPending = PROGRESSIVE_FIELDS.findIndex((f) => !isFieldValid(f.key, merged));
+        const count = PROGRESSIVE_FIELDS.filter((f) => isFieldValid(f.key, merged)).length;
+        setRestoredCount(count);
+        setStepIndex(firstPending === -1 ? PROGRESSIVE_FIELDS.length : firstPending);
+      } catch { /* ignore */ }
+      finally { if (!cancelled) setRestored(true); }
+    })();
+    return () => { cancelled = true; };
+  }, []);
+
 
   const update = <K extends keyof LeadInput>(k: K, v: LeadInput[K]) =>
     setData((d) => ({ ...d, [k]: v }));
+
+  const resetForm = async () => {
+    try { if (partialIdRef.current) await remove("leads_partial", partialIdRef.current); } catch { /* ignore */ }
+    setData({ ...empty, profissao: defaultProfissao ?? "" });
+    setStepIndex(0);
+    setRestoredCount(0);
+    setError(null);
+  };
+
 
   const totalFields = PROGRESSIVE_FIELDS.length;
   const completedCount = useMemo(
@@ -149,7 +181,7 @@ export function LeadFormProgressive({
 
   // Salva snapshot parcial sempre que um campo se torna válido / muda.
   useEffect(() => {
-    if (done || !partialIdRef.current) return;
+    if (done || !partialIdRef.current || !restored) return;
     const completed = PROGRESSIVE_FIELDS.filter((f) => isFieldValid(f.key, data)).map((f) => f.key);
     if (completed.length === 0) return; // não polui store com leads vazios
     const last = completed[completed.length - 1] ?? null;
@@ -173,7 +205,7 @@ export function LeadFormProgressive({
       segmento: segmentId,
     };
     void set("leads_partial", partialIdRef.current, partial);
-  }, [data, done, segmentId, currentPath]);
+  }, [data, done, segmentId, currentPath, restored]);
 
   const advance = () => {
     const f = PROGRESSIVE_FIELDS[stepIndex];
@@ -267,7 +299,25 @@ export function LeadFormProgressive({
         </div>
       </div>
 
+      {restored && restoredCount > 0 && stepIndex < totalFields && (
+        <div role="status" aria-live="polite" className="px-6 md:px-8 pt-4">
+          <div className="flex flex-wrap items-center justify-between gap-3 border border-gold/30 bg-gold/5 px-4 py-3 text-sm">
+            <span className="text-foreground/85">
+              Retomamos suas respostas anteriores ({restoredCount}/{totalFields}). Continue de onde parou.
+            </span>
+            <button
+              type="button"
+              onClick={resetForm}
+              className="font-mono-label text-[11px] text-gold underline underline-offset-4 hover:text-gold/80"
+            >
+              Recomeçar
+            </button>
+          </div>
+        </div>
+      )}
+
       <div className="px-6 md:px-8 py-8 space-y-5">
+
         {PROGRESSIVE_FIELDS.map((f, i) => {
           const visible = i <= stepIndex;
           const active = i === stepIndex;
@@ -441,25 +491,27 @@ function ActiveQuestion({
     update(k, v as LeadInput[K]);
     setTimeout(() => onEnter(), 180);
   };
+  const fieldId = `lead-${field.key}`;
+  const hintId = field.hint ? `${fieldId}-hint` : undefined;
   return (
     <div className="py-4">
-      <Label className="font-display text-[24px] md:text-[28px] leading-snug text-foreground block mb-2">
+      <Label htmlFor={fieldId} className="font-display text-[24px] md:text-[28px] leading-snug text-foreground block mb-2">
         {field.label}
       </Label>
-      {field.hint && <p className="text-sm text-foreground/65 mb-4">{field.hint}</p>}
+      {field.hint && <p id={hintId} className="text-sm text-foreground/75 mb-4">{field.hint}</p>}
       <div className="mt-4 [&_input]:text-base [&_input]:h-12 [&_[role=combobox]]:h-12 [&_[role=combobox]]:text-base" onKeyDown={onKey}>
         {field.key === "nome" && (
-          <Input autoFocus value={data.nome} onChange={(e) => update("nome", e.target.value)} placeholder="Nome completo" />
+          <Input id={fieldId} autoFocus value={data.nome} onChange={(e) => update("nome", e.target.value)} placeholder="Nome completo" aria-describedby={hintId} autoComplete="name" />
         )}
         {field.key === "email" && (
-          <Input autoFocus type="email" value={data.email} onChange={(e) => update("email", e.target.value)} placeholder="voce@exemplo.com" />
+          <Input id={fieldId} autoFocus type="email" value={data.email} onChange={(e) => update("email", e.target.value)} placeholder="voce@exemplo.com" aria-describedby={hintId} autoComplete="email" inputMode="email" />
         )}
         {field.key === "whatsapp" && (
-          <Input autoFocus value={data.whatsapp} onChange={(e) => update("whatsapp", maskPhone(e.target.value))} placeholder="(11) 99999-9999" />
+          <Input id={fieldId} autoFocus value={data.whatsapp} onChange={(e) => update("whatsapp", maskPhone(e.target.value))} placeholder="(11) 99999-9999" aria-describedby={hintId} autoComplete="tel" inputMode="tel" />
         )}
         {field.key === "profissao" && (
           <Select value={data.profissao} onValueChange={selectAndAdvance("profissao")}>
-            <SelectTrigger><SelectValue placeholder="Selecione" /></SelectTrigger>
+            <SelectTrigger id={fieldId} aria-describedby={hintId}><SelectValue placeholder="Selecione" /></SelectTrigger>
             <SelectContent>
               {Object.entries(LABELS.profissao).map(([k, v]) => <SelectItem key={k} value={k}>{v}</SelectItem>)}
             </SelectContent>
@@ -467,7 +519,7 @@ function ActiveQuestion({
         )}
         {field.key === "formacao" && (
           <Select value={data.formacao} onValueChange={selectAndAdvance("formacao")}>
-            <SelectTrigger><SelectValue placeholder="Selecione" /></SelectTrigger>
+            <SelectTrigger id={fieldId} aria-describedby={hintId}><SelectValue placeholder="Selecione" /></SelectTrigger>
             <SelectContent>
               {Object.entries(LABELS.formacao).map(([k, v]) => <SelectItem key={k} value={k}>{v}</SelectItem>)}
             </SelectContent>
@@ -475,7 +527,7 @@ function ActiveQuestion({
         )}
         {field.key === "faixaEtaria" && (
           <Select value={data.faixaEtaria} onValueChange={selectAndAdvance("faixaEtaria")}>
-            <SelectTrigger><SelectValue placeholder="Selecione" /></SelectTrigger>
+            <SelectTrigger id={fieldId} aria-describedby={hintId}><SelectValue placeholder="Selecione" /></SelectTrigger>
             <SelectContent>
               {Object.entries(LABELS.faixaEtaria).map(([k, v]) => <SelectItem key={k} value={k}>{v}</SelectItem>)}
             </SelectContent>
@@ -483,16 +535,16 @@ function ActiveQuestion({
         )}
         {field.key === "cidade_uf" && (
           <div className="grid grid-cols-[1fr_110px] gap-3">
-            <Input autoFocus placeholder="Cidade" value={data.cidade} onChange={(e) => update("cidade", e.target.value)} />
+            <Input id={fieldId} autoFocus placeholder="Cidade" value={data.cidade} onChange={(e) => update("cidade", e.target.value)} aria-label="Cidade" autoComplete="address-level2" />
             <Select value={data.uf} onValueChange={(v) => update("uf", v)}>
-              <SelectTrigger><SelectValue placeholder="UF" /></SelectTrigger>
+              <SelectTrigger aria-label="Estado (UF)"><SelectValue placeholder="UF" /></SelectTrigger>
               <SelectContent>{ufs.map((u) => <SelectItem key={u} value={u}>{u}</SelectItem>)}</SelectContent>
             </Select>
           </div>
         )}
         {field.key === "renda" && (
           <Select value={data.renda} onValueChange={selectAndAdvance("renda")}>
-            <SelectTrigger><SelectValue placeholder="Selecione" /></SelectTrigger>
+            <SelectTrigger id={fieldId} aria-describedby={hintId}><SelectValue placeholder="Selecione" /></SelectTrigger>
             <SelectContent>
               {Object.entries(LABELS.renda).map(([k, v]) => <SelectItem key={k} value={k}>{v}</SelectItem>)}
             </SelectContent>
@@ -500,7 +552,7 @@ function ActiveQuestion({
         )}
         {field.key === "momento" && (
           <Select value={data.momento} onValueChange={selectAndAdvance("momento")}>
-            <SelectTrigger><SelectValue placeholder="Selecione" /></SelectTrigger>
+            <SelectTrigger id={fieldId} aria-describedby={hintId}><SelectValue placeholder="Selecione" /></SelectTrigger>
             <SelectContent>
               {Object.entries(LABELS.momento).map(([k, v]) => <SelectItem key={k} value={k}>{v}</SelectItem>)}
             </SelectContent>
@@ -510,3 +562,4 @@ function ActiveQuestion({
     </div>
   );
 }
+

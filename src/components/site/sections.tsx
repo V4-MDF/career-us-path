@@ -31,6 +31,8 @@ import { SectionHead } from "./SectionHead";
 import { BrUsRouteBackdrop } from "./visuals/BrUsRouteBackdrop";
 import { FamilySealBackdrop } from "./visuals/FamilySealBackdrop";
 import { ProcessIconStrip } from "./visuals/ProcessIconStrip";
+import { LeadFormProgressive } from "./LeadFormProgressive";
+import { useLocation } from "@tanstack/react-router";
 
 /* ============================================================
  * 1. HERO
@@ -127,11 +129,12 @@ export function Hero() {
             transition={{ duration: t(0.7), ease: easeSig, delay: dly(0.85) }}
             className="mt-10 flex flex-wrap gap-3"
           >
-            <a href={avaliacaoHref("home_hero")}>
+            <a href="#avaliacao-rapida" aria-label="Ir para o formulário de avaliação gratuita">
               <Button size="lg" className="btn-sweep h-12 px-7 text-[15px] active:scale-[0.98]">
                 {cta}
               </Button>
             </a>
+
             <a href="#eb-2-niw">
               <Button
                 size="lg" variant="outline"
@@ -828,3 +831,53 @@ function CountUp({ value, className }: { value: string; className?: string }) {
 
   return <span ref={ref} className={className}>{display}</span>;
 }
+
+// ──────────────────────────────────────────────────────────────────────────────
+// HeroAssessment: bloco "Avaliação gratuita" embutido logo após o Hero, com
+// o formulário progressivo (LeadFormProgressive) inline — sem mandar o usuário
+// para outra página. A CTA principal do Hero ancora para #avaliacao-rapida.
+// ──────────────────────────────────────────────────────────────────────────────
+export function HeroAssessment() {
+  const loc = useLocation();
+  return (
+    <section
+      id="avaliacao-rapida"
+      aria-label="Avaliação gratuita do seu perfil"
+      className="section-anchor section-pad relative border-t border-gold/15"
+    >
+      <div className="container-x grid lg:grid-cols-[0.9fr_1.1fr] gap-10 lg:gap-14 items-start">
+        <div>
+          <p className="font-mono-label text-gold">AVALIAÇÃO GRATUITA</p>
+          <h2 className="mt-4 font-display text-[clamp(1.75rem,3.4vw,2.6rem)] leading-tight">
+            Comece sua avaliação aqui mesmo.
+          </h2>
+          <p className="mt-5 text-foreground/80 max-w-md leading-relaxed">
+            Responda algumas perguntas curtas sobre o seu perfil. Suas respostas
+            ficam salvas no seu dispositivo — se sair, retoma de onde parou. Nossa
+            equipe responde por e-mail em até 48h.
+          </p>
+          <ul className="mt-7 space-y-3 text-sm text-foreground/80">
+            {[
+              "Sem compromisso, 100% confidencial",
+              "Indicação do visto mais coerente (EB-2 NIW, EB-1, EB-3)",
+              "Análise feita por equipe especializada em vistos EB",
+            ].map((i) => (
+              <li key={i} className="flex gap-3 border-l border-gold/40 pl-3">
+                <CheckCircle2 aria-hidden className="h-4 w-4 text-gold mt-0.5 shrink-0" />
+                <span>{i}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <LeadFormProgressive
+            segmentId={undefined}
+            currentPath={loc.pathname}
+            submitLabel="Enviar para análise"
+          />
+        </div>
+      </div>
+    </section>
+  );
+}
+

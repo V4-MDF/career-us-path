@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import {
-  AuthorityStrip, ContrastBrasilEUA, CtaBanner, FAQ, Hero, LegacySection,
+  AuthorityStrip, ContrastBrasilEUA, CtaBanner, FAQ, Hero, HeroAssessment, LegacySection,
   NiwSection, PersonaCards, ProcessSteps, SalaryCompare, Testimonials,
   VisaCards, WhyUs,
 } from "@/components/site/sections";
@@ -55,6 +55,7 @@ function Home() {
       <SectionTOC sections={HOME_SECTIONS} />
       <main>
         <Hero />
+        <HeroAssessment />
         <AuthorityStrip />
         <BlogStrip />
         <ContrastBrasilEUA />

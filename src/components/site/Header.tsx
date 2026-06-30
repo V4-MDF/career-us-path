@@ -77,8 +77,8 @@ export function Header() {
         </Link>
 
         {/* Nav desktop */}
-        <nav className="hidden lg:flex items-center gap-8 text-sm">
-          <Link to="/" className="nav-link text-foreground/85 hover:text-foreground" activeOptions={{ exact: true }}>
+        <nav aria-label="Navegação principal" className="hidden lg:flex items-center gap-8 text-sm">
+          <Link to="/" className="nav-link text-foreground/85 hover:text-foreground" activeOptions={{ exact: true }} activeProps={{ "aria-current": "page" }}>
             Início
           </Link>
 
@@ -89,20 +89,23 @@ export function Header() {
               className="nav-link inline-flex items-center gap-1 text-foreground/85 hover:text-foreground"
               aria-haspopup="menu"
               aria-expanded={vistosOpen}
+              aria-controls="vistos-menu"
               onClick={() => setVistosOpen((v) => !v)}
             >
               Vistos
-              <ChevronDown className={`h-3.5 w-3.5 transition-transform ${vistosOpen ? "rotate-180" : ""}`} />
+              <ChevronDown aria-hidden className={`h-3.5 w-3.5 transition-transform ${vistosOpen ? "rotate-180" : ""}`} />
             </button>
 
             {vistosOpen && (
               <div
+                id="vistos-menu"
                 role="menu"
+                aria-label="Tipos de visto"
                 className="absolute left-1/2 top-full -translate-x-1/2 pt-3 animate-in fade-in slide-in-from-top-2 duration-200"
               >
                 <div className="w-[340px] border border-gold/30 bg-ink-deep/95 backdrop-blur-md p-2 shadow-elegant">
                   {/* Filete superior dourado */}
-                  <div className="absolute left-6 right-6 top-0 h-[3px] w-10 bg-gold" />
+                  <div aria-hidden className="absolute left-6 right-6 top-0 h-[3px] w-10 bg-gold" />
                   {VISTOS.map((v) => (
                     <Link
                       key={v.to}
@@ -110,12 +113,13 @@ export function Header() {
                       role="menuitem"
                       className="group flex items-start justify-between gap-3 px-4 py-3 hover:bg-gold/5 transition-colors"
                       onClick={() => setVistosOpen(false)}
+                      activeProps={{ "aria-current": "page" }}
                     >
                       <div>
                         <div className="font-display text-base text-foreground group-hover:text-gold">
                           {v.label}
                         </div>
-                        <div className="font-mono-label mt-1 text-[10px] text-foreground/55">{v.hint}</div>
+                        <div className="font-mono-label mt-1 text-[10px] text-foreground/70">{v.hint}</div>
                       </div>
                       {v.badge && (
                         <span className="shrink-0 border border-gold/60 px-2 py-0.5 font-mono-label text-[9px] text-gold">
@@ -130,11 +134,12 @@ export function Header() {
           </div>
 
           {NAV.slice(1).map((n) => (
-            <Link key={n.to} to={n.to} className="nav-link text-foreground/85 hover:text-foreground">
+            <Link key={n.to} to={n.to} className="nav-link text-foreground/85 hover:text-foreground" activeProps={{ "aria-current": "page" }}>
               {n.label}
             </Link>
           ))}
         </nav>
+
 
         {/* CTA */}
         <div className="flex items-center gap-3">
@@ -143,22 +148,23 @@ export function Header() {
           </a>
           <button
             type="button"
-            className="lg:hidden grid h-10 w-10 place-items-center border border-gold/40 text-gold"
+            className="lg:hidden grid h-11 w-11 place-items-center border border-gold/40 text-gold"
             onClick={() => setOpen((o) => !o)}
-            aria-label="Menu"
+            aria-label={open ? "Fechar menu" : "Abrir menu"}
             aria-expanded={open}
+            aria-controls="mobile-menu"
           >
-            {open ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
+            {open ? <X aria-hidden className="h-4 w-4" /> : <Menu aria-hidden className="h-4 w-4" />}
           </button>
         </div>
       </div>
 
       {/* Menu mobile */}
       {open && (
-        <div className="lg:hidden border-t border-gold/20 bg-ink">
+        <nav id="mobile-menu" aria-label="Navegação móvel" className="lg:hidden border-t border-gold/20 bg-ink">
           <div className="container-x flex flex-col py-5 gap-1">
             {NAV.slice(0, 1).map((n) => (
-              <Link key={n.to} to={n.to} onClick={() => setOpen(false)} className="py-3 text-foreground/90 border-b border-gold/10">
+              <Link key={n.to} to={n.to} onClick={() => setOpen(false)} className="min-h-11 flex items-center text-foreground border-b border-gold/10" activeProps={{ "aria-current": "page" }}>
                 {n.label}
               </Link>
             ))}
@@ -167,18 +173,19 @@ export function Header() {
             <div className="border-b border-gold/10">
               <button
                 type="button"
-                className="w-full flex items-center justify-between py-3 text-foreground/90"
+                className="w-full min-h-11 flex items-center justify-between text-foreground"
                 onClick={() => setVistosMobileOpen((v) => !v)}
                 aria-expanded={vistosMobileOpen}
+                aria-controls="mobile-vistos"
               >
-                Vistos <ChevronDown className={`h-4 w-4 transition-transform ${vistosMobileOpen ? "rotate-180" : ""}`} />
+                Vistos <ChevronDown aria-hidden className={`h-4 w-4 transition-transform ${vistosMobileOpen ? "rotate-180" : ""}`} />
               </button>
               {vistosMobileOpen && (
-                <div className="pl-3 pb-3 space-y-2 border-l border-gold/30 ml-1">
+                <div id="mobile-vistos" className="pl-3 pb-3 space-y-2 border-l border-gold/30 ml-1">
                   {VISTOS.map((v) => (
-                    <Link key={v.to} to={v.to} onClick={() => setOpen(false)} className="block py-1.5">
-                      <span className="font-display text-base">{v.label}</span>
-                      <span className="block font-mono-label text-[10px] text-foreground/55">{v.hint}</span>
+                    <Link key={v.to} to={v.to} onClick={() => setOpen(false)} className="block py-2 min-h-11" activeProps={{ "aria-current": "page" }}>
+                      <span className="font-display text-base text-foreground">{v.label}</span>
+                      <span className="block font-mono-label text-[10px] text-foreground/70">{v.hint}</span>
                     </Link>
                   ))}
                 </div>
@@ -186,16 +193,17 @@ export function Header() {
             </div>
 
             {NAV.slice(1).map((n) => (
-              <Link key={n.to} to={n.to} onClick={() => setOpen(false)} className="py-3 text-foreground/90 border-b border-gold/10">
+              <Link key={n.to} to={n.to} onClick={() => setOpen(false)} className="min-h-11 flex items-center text-foreground border-b border-gold/10" activeProps={{ "aria-current": "page" }}>
                 {n.label}
               </Link>
             ))}
             <a href={avaliacaoHref("header_mobile_cta")} onClick={() => setOpen(false)} className="mt-4">
-              <Button className="w-full btn-sweep">Avaliação gratuita</Button>
+              <Button className="w-full btn-sweep min-h-11">Avaliação gratuita</Button>
             </a>
           </div>
-        </div>
+        </nav>
       )}
     </header>
   );
 }
+

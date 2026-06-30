@@ -45,8 +45,8 @@ export function SectionTOC({
 
   const railColor =
     variant === "parchment"
-      ? "text-ink-text/55 hover:text-ink-text"
-      : "text-foreground/55 hover:text-foreground";
+      ? "text-ink-text/70 hover:text-ink-text"
+      : "text-foreground/70 hover:text-foreground";
   const activeColor = variant === "parchment" ? "text-ink-text" : "text-foreground";
 
   return (
@@ -57,8 +57,8 @@ export function SectionTOC({
           aria-label="Nesta página"
           className="hidden lg:block fixed top-[140px] right-5 z-30 w-[200px] max-h-[calc(100vh-200px)] overflow-y-auto pr-1"
         >
-          <p className="font-mono-label text-[9px] text-gold/80 mb-3 px-2">NESTA PÁGINA</p>
-          <ul className="space-y-0.5">
+          <p id="toc-rail-title" className="font-mono-label text-[9px] text-gold mb-3 px-2">NESTA PÁGINA</p>
+          <ul className="space-y-0.5" aria-labelledby="toc-rail-title">
             {sections.map((s) => {
               const isActive = s.id === activeId;
               return (
@@ -66,7 +66,8 @@ export function SectionTOC({
                   <a
                     href={`#${s.id}`}
                     onClick={handleClick(s.id)}
-                    className={`group flex items-center gap-2 py-1.5 px-2 text-[12px] leading-tight border-l-2 transition-colors ${
+                    aria-current={isActive ? "location" : undefined}
+                    className={`group flex items-center gap-2 py-2 px-2 text-[12px] leading-tight border-l-2 transition-colors ${
                       isActive
                         ? `border-gold ${activeColor}`
                         : `border-transparent ${railColor} hover:border-gold/50`
@@ -81,6 +82,7 @@ export function SectionTOC({
         </nav>
       )}
 
+
       {/* Mobile chip — aparece após scroll inicial */}
       {!hideOnMobile && (
         <MobileChip
@@ -94,7 +96,8 @@ export function SectionTOC({
         <div
           className="lg:hidden fixed inset-0 z-50"
           role="dialog"
-          aria-label="Sumário da página"
+          aria-modal="true"
+          aria-labelledby="toc-sheet-title"
           onClick={() => setSheetOpen(false)}
         >
           <div className="absolute inset-0 bg-ink-deep/70 backdrop-blur-sm" />
@@ -103,13 +106,13 @@ export function SectionTOC({
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center justify-between mb-4">
-              <p className="font-mono-label text-gold">NESTA PÁGINA</p>
+              <p id="toc-sheet-title" className="font-mono-label text-gold">NESTA PÁGINA</p>
               <button
                 onClick={() => setSheetOpen(false)}
-                className="text-foreground/60 hover:text-gold p-1"
+                className="min-h-11 min-w-11 grid place-items-center text-foreground/80 hover:text-gold"
                 aria-label="Fechar sumário"
               >
-                <ChevronUp className="h-4 w-4" />
+                <ChevronUp aria-hidden className="h-4 w-4" />
               </button>
             </div>
             <ul className="space-y-1">
@@ -120,8 +123,9 @@ export function SectionTOC({
                     <a
                       href={`#${s.id}`}
                       onClick={handleClick(s.id)}
-                      className={`block py-3 text-base border-b border-gold/10 transition-colors ${
-                        isActive ? "text-gold" : "text-foreground/80 hover:text-gold"
+                      aria-current={isActive ? "location" : undefined}
+                      className={`block min-h-11 py-3 text-base border-b border-gold/10 transition-colors ${
+                        isActive ? "text-gold" : "text-foreground hover:text-gold"
                       }`}
                     >
                       {s.label}
@@ -133,6 +137,7 @@ export function SectionTOC({
           </div>
         </div>
       )}
+
     </>
   );
 }
