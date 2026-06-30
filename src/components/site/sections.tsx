@@ -67,7 +67,7 @@ export function Hero() {
       <div className="container-x grid lg:grid-cols-[1.1fr_0.9fr] gap-16 lg:gap-20 items-center">
         <div>
           <motion.div
-            initial={reduce ? false : { opacity: 0 }} animate={{ opacity: 1 }}
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }}
             transition={{ duration: t(0.5), ease: easeSig }}
             className="flex items-center gap-3"
           >
@@ -75,13 +75,13 @@ export function Hero() {
             <span className="font-mono-label text-gold">{eyebrow}</span>
           </motion.div>
 
-          {/* H1: tipo fluido grande e confiante (display-1). Reveal linha-a-linha com máscara — desativada em reduced-motion. */}
+          {/* H1: tipo fluido grande e confiante (display-1). Reveal linha-a-linha com máscara — em reduced-motion entra instantâneo (sem y-mask). */}
           <h1 className="display-1 mt-8">
             {lines.map((ln, i) => (
-              <span key={i} className={reduce ? "block" : "block overflow-hidden pb-1"}>
+              <span key={i} className="block overflow-hidden pb-1">
                 <motion.span
                   className="block"
-                  initial={reduce ? false : { y: "110%" }} animate={{ y: "0%" }}
+                  initial={{ y: "110%" }} animate={{ y: "0%" }}
                   transition={{ duration: t(0.85), ease: easeSig, delay: t(0.15 + i * 0.1) }}
                 >
                   {renderEmphasis(ln)}
@@ -90,16 +90,16 @@ export function Hero() {
             ))}
           </h1>
 
-          {/* Filete dourado — desenho da esquerda → direita; em reduced-motion entra fixo. */}
+          {/* Filete dourado que se desenha da esquerda → direita. */}
           <motion.div
-            initial={reduce ? false : { scaleX: 0 }} animate={{ scaleX: 1 }}
+            initial={{ scaleX: 0 }} animate={{ scaleX: 1 }}
             transition={{ duration: t(0.9), ease: easeSig, delay: t(0.55) }}
             style={{ transformOrigin: "left center" }}
             className="mt-10 h-px w-28 bg-gold"
           />
 
           <motion.p
-            initial={reduce ? false : { opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
             transition={{ duration: t(0.7), ease: easeSig, delay: t(0.7) }}
             className="lead mt-7 max-w-xl"
           >
@@ -107,7 +107,7 @@ export function Hero() {
           </motion.p>
 
           <motion.div
-            initial={reduce ? false : { opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
             transition={{ duration: t(0.7), ease: easeSig, delay: t(0.85) }}
             className="mt-10 flex flex-wrap gap-3"
           >
@@ -127,13 +127,14 @@ export function Hero() {
           </motion.div>
 
           <motion.div
-            initial={reduce ? false : { opacity: 0 }} animate={{ opacity: 1 }}
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }}
             transition={{ duration: t(0.6), delay: t(1.1) }}
             className="mt-14 flex items-start gap-3 text-sm text-foreground/60 border-l border-gold/50 pl-4 max-w-md"
           >
             <Star className="h-4 w-4 text-gold mt-0.5 shrink-0 fill-gold" />
             <span>{proof}</span>
           </motion.div>
+
 
         </div>
 
