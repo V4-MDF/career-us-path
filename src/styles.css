@@ -85,18 +85,18 @@
 :root {
   --radius: 0.5rem; /* radius mais sóbrio para a marca dossiê */
 
-  /* Paleta Dossiê — valores exatos do briefing */
-  --ink:           #0E1726;
-  --ink-deep:      #0A111C;
-  --ink-raise:     #16223A;
+  /* Paleta Dossiê — preto carvão + ouro (sem navy) */
+  --ink:           #0B0B0C;
+  --ink-deep:      #050506;
+  --ink-raise:     #16161A;
   --parchment:     #EFE9DA;
   --parchment-deep:#E4DCC8;
   --gold:          #B7975A;
   --gold-soft:     rgba(183, 151, 90, 0.22);
-  --gold-foreground: #0A111C;
+  --gold-foreground: #050506;
   --oxblood:       #6E2233;
-  --slate:         #AEB7C4;
-  --ink-text:      #1B2435;
+  --slate:         #B8B2A4;
+  --ink-text:      #141416;
   --success:       #3F8A5F;
 
   /* Mapeamento shadcn — DARK por padrão (site é dark-first) */
@@ -114,7 +114,7 @@
   --secondary: var(--ink-raise);
   --secondary-foreground: #ECE6D6;
 
-  --muted: #1A263F;
+  --muted: #1B1B1F;
   --muted-foreground: var(--slate);
 
   --accent: var(--gold);
@@ -255,6 +255,18 @@
   text-transform: uppercase;
   letter-spacing: 0.2em;
   font-size: 11px;
+}
+
+/* btn-label — tipografia padrão para CTAs/botões.
+ * Mesmo registro de Montserrat uppercase tracked dos displays/eyebrows,
+ * para que botões não destoem do resto do site (substitui usos de
+ * font-mono-label em elementos clicáveis). */
+@utility btn-label {
+  font-family: var(--font-display);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 12px;
 }
 
 /* Container com gutters fluidos clamp(20px, 6vw, 120px). */

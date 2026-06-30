@@ -322,7 +322,7 @@ export function LeadFormProgressive({
             <button
               type="button"
               onClick={resetForm}
-              className="font-mono-label text-[11px] text-gold underline underline-offset-4 hover:text-gold/80"
+              className="btn-label text-[11px] text-gold underline underline-offset-4 hover:text-gold/80"
             >
               Recomeçar
             </button>

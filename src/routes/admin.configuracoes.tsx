@@ -33,7 +33,7 @@ function ConfigPage() {
             <Field label="Tagline"><Input value={s.site_tagline} onChange={(e) => upd("site_tagline", e.target.value)} /></Field>
             <div className="grid grid-cols-2 gap-3">
               <Field label="Cor primária (dourado)"><Input type="color" value={s.primary_color} onChange={(e) => upd("primary_color", e.target.value)} /></Field>
-              <Field label="Cor de destaque (navy)"><Input type="color" value={s.accent_color} onChange={(e) => upd("accent_color", e.target.value)} /></Field>
+              <Field label="Cor de destaque (ink)"><Input type="color" value={s.accent_color} onChange={(e) => upd("accent_color", e.target.value)} /></Field>
             </div>
             <p className="text-xs text-slate-500">
               As cores ficam salvas e poderão ser aplicadas via tokens CSS — recomendado validar contraste antes de mudar a paleta principal do site.
