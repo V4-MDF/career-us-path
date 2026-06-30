@@ -9,7 +9,7 @@
  * ativas; órfãs somem.
  */
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import { get, set } from "@/lib/dataStore";
 import { broadcast } from "@/lib/admin/settings";
 import { HOME_SECTIONS, type SectionDef } from "@/lib/sectionMap";
