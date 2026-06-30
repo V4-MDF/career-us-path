@@ -299,7 +299,25 @@ export function LeadFormProgressive({
         </div>
       </div>
 
+      {restored && restoredCount > 0 && stepIndex < totalFields && (
+        <div role="status" aria-live="polite" className="px-6 md:px-8 pt-4">
+          <div className="flex flex-wrap items-center justify-between gap-3 border border-gold/30 bg-gold/5 px-4 py-3 text-sm">
+            <span className="text-foreground/85">
+              Retomamos suas respostas anteriores ({restoredCount}/{totalFields}). Continue de onde parou.
+            </span>
+            <button
+              type="button"
+              onClick={resetForm}
+              className="font-mono-label text-[11px] text-gold underline underline-offset-4 hover:text-gold/80"
+            >
+              Recomeçar
+            </button>
+          </div>
+        </div>
+      )}
+
       <div className="px-6 md:px-8 py-8 space-y-5">
+
         {PROGRESSIVE_FIELDS.map((f, i) => {
           const visible = i <= stepIndex;
           const active = i === stepIndex;
