@@ -42,18 +42,24 @@ export function Hero() {
   const lines = splitHeadline(title);
   // Easing assinatura — cubic-bezier(0.16, 1, 0.3, 1) (expo-out premium).
   const easeSig = [0.16, 1, 0.3, 1] as const;
-  const t = (d: number) => (reduce ? 0 : d);
 
   // Parallax sutil ligado ao scroll do hero (≤8%). Desligado em mobile e quando
   // o usuário pede menos movimento — evita jank/composite por frame.
   const heroRef = useRef<HTMLElement>(null);
   const isDesktop = useMediaQuery("(min-width: 1024px)");
+  const isMobile = useMediaQuery("(max-width: 767px)");
   const enableParallax = isDesktop && !reduce;
   const { scrollYProgress } = useScroll({
     target: heroRef,
     offset: ["start start", "end start"],
   });
   const imgY = useTransform(scrollYProgress, [0, 1], ["0%", enableParallax ? "6%" : "0%"]);
+
+  // Tempo + delay: no mobile, reveals curtos (~0.35s) e sem cascata de delays,
+  // mantendo o "luxo silencioso" sem peso de movimento. Reduced-motion → 0.
+  const t = (d: number) => (reduce ? 0 : isMobile ? Math.min(d * 0.5, 0.35) : d);
+  const dly = (d: number) => (reduce || isMobile ? 0 : d);
+
 
 
   return (
