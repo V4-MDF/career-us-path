@@ -30,6 +30,8 @@ import { type LeadInput } from "@/lib/leadScoring";
 import { evaluateQualification, type QualResult } from "@/lib/leadQualification";
 import { getAssignedVariantId, registerConversion } from "@/lib/abEngine";
 import { getOrigin, type LeadOrigin } from "@/lib/origin";
+import { markSessionStartedForm, markSessionConverted } from "@/lib/sessions";
+import { loadModel, computeScore } from "@/lib/scoring";
 
 export interface LeadFormProgressiveProps {
   segmentId?: string;
