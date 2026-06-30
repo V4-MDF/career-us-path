@@ -241,7 +241,8 @@ export function LeadFormProgressive({
   };
 
   const submit = async () => {
-    if (PROGRESSIVE_FIELDS.some((f) => !isFieldValid(f.key, data))) {
+    const current = dataRef.current;
+    if (PROGRESSIVE_FIELDS.some((f) => !isFieldValid(f.key, current))) {
       setError("Complete todas as perguntas antes de enviar.");
       return;
     }
@@ -250,9 +251,9 @@ export function LeadFormProgressive({
     try {
       const id = newId("lead");
       const origin = getOrigin(currentPath);
-      const qual = evaluateQualification(data);
+      const qual = evaluateQualification(current);
       const lead = {
-        ...data,
+        ...current,
         id,
         createdAt: new Date().toISOString(),
         utm: origin.utm,        // compat com tooling existente
@@ -264,15 +265,21 @@ export function LeadFormProgressive({
         qualification_reasons: qual.reasons,
       };
       await set("leads", id, lead);
-      if (segmentId) await registerConversion(segmentId);
-      // limpa parcial após conversão
+      // efeitos colaterais isolados — se falharem, NÃO bloqueiam o redirect
+      if (segmentId) {
+        try { await registerConversion(segmentId); }
+        catch (e) { console.warn("[avaliacao] registerConversion failed", e); }
+      }
       if (partialIdRef.current) {
-        await remove("leads_partial", partialIdRef.current);
-        try { window.sessionStorage.removeItem(SS_PARTIAL_ID); } catch { /* ignore */ }
+        try {
+          await remove("leads_partial", partialIdRef.current);
+          window.sessionStorage.removeItem(SS_PARTIAL_ID);
+        } catch (e) { console.warn("[avaliacao] partial cleanup failed", e); }
       }
       if (onSubmitted) onSubmitted({ id, qualification: qual.result });
       else setDone(true);
-    } catch {
+    } catch (err) {
+      console.error("[avaliacao] submit failed", err);
       setError("Não foi possível enviar agora. Tente novamente.");
     } finally {
       setLoading(false);
