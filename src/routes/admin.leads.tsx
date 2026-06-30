@@ -405,6 +405,20 @@ function Field({ k, v }: { k: string; v: string }) {
   );
 }
 
+/** Resumo compacto de origem para a coluna da tabela. */
+function originSummary(l: { utm?: Record<string, string>; origin?: LeadOrigin }): string {
+  const src = l.utm?.utm_source || l.origin?.utm.utm_source;
+  const med = l.utm?.utm_medium || l.origin?.utm.utm_medium;
+  if (src) return med ? `${src} / ${med}` : src;
+  const ref = l.origin?.internal.referrer;
+  if (ref) {
+    try { return `ref: ${new URL(ref).host}`; } catch { return `ref: ${ref}`; }
+  }
+  const fp = l.origin?.internal.from_path || l.origin?.internal.landing_path;
+  if (fp) return `interno: ${fp}`;
+  return "direto";
+}
+
 function FilterSelect({ label, value, onChange, options }: {
   label: string; value: string; onChange: (v: string) => void; options: [string, string][];
 }) {
