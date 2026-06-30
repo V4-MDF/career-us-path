@@ -18,7 +18,10 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as VistosSlugRouteImport } from './routes/vistos.$slug'
 import { Route as LpSlugRouteImport } from './routes/lp.$slug'
+import { Route as AdminSegmentosRouteImport } from './routes/admin.segmentos'
 import { Route as AdminLoginRouteImport } from './routes/admin.login'
+import { Route as AdminLeadsRouteImport } from './routes/admin.leads'
+import { Route as AdminAbRouteImport } from './routes/admin.ab'
 
 const SobreRoute = SobreRouteImport.update({
   id: '/sobre',
@@ -65,9 +68,24 @@ const LpSlugRoute = LpSlugRouteImport.update({
   path: '/lp/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminSegmentosRoute = AdminSegmentosRouteImport.update({
+  id: '/segmentos',
+  path: '/segmentos',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminLoginRoute = AdminLoginRouteImport.update({
   id: '/login',
   path: '/login',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminLeadsRoute = AdminLeadsRouteImport.update({
+  id: '/leads',
+  path: '/leads',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminAbRoute = AdminAbRouteImport.update({
+  id: '/ab',
+  path: '/ab',
   getParentRoute: () => AdminRoute,
 } as any)
 
@@ -78,7 +96,10 @@ export interface FileRoutesByFullPath {
   '/contato': typeof ContatoRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sobre': typeof SobreRoute
+  '/admin/ab': typeof AdminAbRoute
+  '/admin/leads': typeof AdminLeadsRoute
   '/admin/login': typeof AdminLoginRoute
+  '/admin/segmentos': typeof AdminSegmentosRoute
   '/lp/$slug': typeof LpSlugRoute
   '/vistos/$slug': typeof VistosSlugRoute
   '/admin/': typeof AdminIndexRoute
@@ -89,7 +110,10 @@ export interface FileRoutesByTo {
   '/contato': typeof ContatoRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sobre': typeof SobreRoute
+  '/admin/ab': typeof AdminAbRoute
+  '/admin/leads': typeof AdminLeadsRoute
   '/admin/login': typeof AdminLoginRoute
+  '/admin/segmentos': typeof AdminSegmentosRoute
   '/lp/$slug': typeof LpSlugRoute
   '/vistos/$slug': typeof VistosSlugRoute
   '/admin': typeof AdminIndexRoute
@@ -102,7 +126,10 @@ export interface FileRoutesById {
   '/contato': typeof ContatoRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sobre': typeof SobreRoute
+  '/admin/ab': typeof AdminAbRoute
+  '/admin/leads': typeof AdminLeadsRoute
   '/admin/login': typeof AdminLoginRoute
+  '/admin/segmentos': typeof AdminSegmentosRoute
   '/lp/$slug': typeof LpSlugRoute
   '/vistos/$slug': typeof VistosSlugRoute
   '/admin/': typeof AdminIndexRoute
@@ -116,7 +143,10 @@ export interface FileRouteTypes {
     | '/contato'
     | '/sitemap.xml'
     | '/sobre'
+    | '/admin/ab'
+    | '/admin/leads'
     | '/admin/login'
+    | '/admin/segmentos'
     | '/lp/$slug'
     | '/vistos/$slug'
     | '/admin/'
@@ -127,7 +157,10 @@ export interface FileRouteTypes {
     | '/contato'
     | '/sitemap.xml'
     | '/sobre'
+    | '/admin/ab'
+    | '/admin/leads'
     | '/admin/login'
+    | '/admin/segmentos'
     | '/lp/$slug'
     | '/vistos/$slug'
     | '/admin'
@@ -139,7 +172,10 @@ export interface FileRouteTypes {
     | '/contato'
     | '/sitemap.xml'
     | '/sobre'
+    | '/admin/ab'
+    | '/admin/leads'
     | '/admin/login'
+    | '/admin/segmentos'
     | '/lp/$slug'
     | '/vistos/$slug'
     | '/admin/'
@@ -221,6 +257,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LpSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/segmentos': {
+      id: '/admin/segmentos'
+      path: '/segmentos'
+      fullPath: '/admin/segmentos'
+      preLoaderRoute: typeof AdminSegmentosRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/login': {
       id: '/admin/login'
       path: '/login'
@@ -228,16 +271,36 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminLoginRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/leads': {
+      id: '/admin/leads'
+      path: '/leads'
+      fullPath: '/admin/leads'
+      preLoaderRoute: typeof AdminLeadsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/ab': {
+      id: '/admin/ab'
+      path: '/ab'
+      fullPath: '/admin/ab'
+      preLoaderRoute: typeof AdminAbRouteImport
+      parentRoute: typeof AdminRoute
+    }
   }
 }
 
 interface AdminRouteChildren {
+  AdminAbRoute: typeof AdminAbRoute
+  AdminLeadsRoute: typeof AdminLeadsRoute
   AdminLoginRoute: typeof AdminLoginRoute
+  AdminSegmentosRoute: typeof AdminSegmentosRoute
   AdminIndexRoute: typeof AdminIndexRoute
 }
 
 const AdminRouteChildren: AdminRouteChildren = {
+  AdminAbRoute: AdminAbRoute,
+  AdminLeadsRoute: AdminLeadsRoute,
   AdminLoginRoute: AdminLoginRoute,
+  AdminSegmentosRoute: AdminSegmentosRoute,
   AdminIndexRoute: AdminIndexRoute,
 }
 
