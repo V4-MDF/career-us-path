@@ -53,8 +53,6 @@ function Home() {
       <Header />
       <main>
         <Hero />
-        
-        <AuthorityStrip />
         <BlogStrip />
         <ContrastBrasilEUA />
         <NiwSection />
