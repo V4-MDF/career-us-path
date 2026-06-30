@@ -150,7 +150,7 @@ function PostPage() {
               <ShareRow url={`/blog/${post.slug}`} title={post.titulo} />
 
               {/* CTA final */}
-              <div className="mt-12 border border-gold/30 bg-ink-raise/50 p-8">
+              <div className="mt-12 rounded-2xl border border-gold/30 bg-ink-raise/50 p-8 shadow-soft">
                 <h2 className="font-display text-2xl">Pronto para avaliar o seu perfil?</h2>
                 <p className="mt-2 text-foreground/75">Análise individual e gratuita em até 48h.</p>
                 <a href={avaliacaoHref(`blog_${post.slug}`)} className="mt-5 inline-block">
