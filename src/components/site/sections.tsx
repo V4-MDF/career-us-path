@@ -296,7 +296,7 @@ export function ContrastBrasilEUA() {
               ))}
             </ul>
           </div>
-          <div className="relative gold-tick bg-white border border-gold/40 p-8">
+          <div className="relative gold-tick rounded-2xl bg-white border border-gold/40 p-8 shadow-soft">
             <div className="flex items-center gap-3 text-success">
               <CheckCircle2 className="h-5 w-5" />
               <h3 className="font-display text-xl text-ink-text m-0">O que os EUA oferecem a quem é qualificado</h3>
