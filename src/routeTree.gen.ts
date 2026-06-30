@@ -30,6 +30,7 @@ import { Route as AdminScoringRouteImport } from './routes/admin.scoring'
 import { Route as AdminMidiaRouteImport } from './routes/admin.midia'
 import { Route as AdminLoginRouteImport } from './routes/admin.login'
 import { Route as AdminLinksRouteImport } from './routes/admin.links'
+import { Route as AdminLeadsIncompletosRouteImport } from './routes/admin.leads-incompletos'
 import { Route as AdminLeadsRouteImport } from './routes/admin.leads'
 import { Route as AdminConteudoRouteImport } from './routes/admin.conteudo'
 import { Route as AdminConfiguracoesRouteImport } from './routes/admin.configuracoes'
@@ -141,6 +142,11 @@ const AdminLinksRoute = AdminLinksRouteImport.update({
   path: '/links',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminLeadsIncompletosRoute = AdminLeadsIncompletosRouteImport.update({
+  id: '/leads-incompletos',
+  path: '/leads-incompletos',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminLeadsRoute = AdminLeadsRouteImport.update({
   id: '/leads',
   path: '/leads',
@@ -181,6 +187,7 @@ export interface FileRoutesByFullPath {
   '/admin/configuracoes': typeof AdminConfiguracoesRoute
   '/admin/conteudo': typeof AdminConteudoRoute
   '/admin/leads': typeof AdminLeadsRoute
+  '/admin/leads-incompletos': typeof AdminLeadsIncompletosRoute
   '/admin/links': typeof AdminLinksRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin/midia': typeof AdminMidiaRoute
@@ -208,6 +215,7 @@ export interface FileRoutesByTo {
   '/admin/configuracoes': typeof AdminConfiguracoesRoute
   '/admin/conteudo': typeof AdminConteudoRoute
   '/admin/leads': typeof AdminLeadsRoute
+  '/admin/leads-incompletos': typeof AdminLeadsIncompletosRoute
   '/admin/links': typeof AdminLinksRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin/midia': typeof AdminMidiaRoute
@@ -237,6 +245,7 @@ export interface FileRoutesById {
   '/admin/configuracoes': typeof AdminConfiguracoesRoute
   '/admin/conteudo': typeof AdminConteudoRoute
   '/admin/leads': typeof AdminLeadsRoute
+  '/admin/leads-incompletos': typeof AdminLeadsIncompletosRoute
   '/admin/links': typeof AdminLinksRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin/midia': typeof AdminMidiaRoute
@@ -267,6 +276,7 @@ export interface FileRouteTypes {
     | '/admin/configuracoes'
     | '/admin/conteudo'
     | '/admin/leads'
+    | '/admin/leads-incompletos'
     | '/admin/links'
     | '/admin/login'
     | '/admin/midia'
@@ -294,6 +304,7 @@ export interface FileRouteTypes {
     | '/admin/configuracoes'
     | '/admin/conteudo'
     | '/admin/leads'
+    | '/admin/leads-incompletos'
     | '/admin/links'
     | '/admin/login'
     | '/admin/midia'
@@ -322,6 +333,7 @@ export interface FileRouteTypes {
     | '/admin/configuracoes'
     | '/admin/conteudo'
     | '/admin/leads'
+    | '/admin/leads-incompletos'
     | '/admin/links'
     | '/admin/login'
     | '/admin/midia'
@@ -499,6 +511,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminLinksRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/leads-incompletos': {
+      id: '/admin/leads-incompletos'
+      path: '/leads-incompletos'
+      fullPath: '/admin/leads-incompletos'
+      preLoaderRoute: typeof AdminLeadsIncompletosRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/leads': {
       id: '/admin/leads'
       path: '/leads'
@@ -543,6 +562,7 @@ interface AdminRouteChildren {
   AdminConfiguracoesRoute: typeof AdminConfiguracoesRoute
   AdminConteudoRoute: typeof AdminConteudoRoute
   AdminLeadsRoute: typeof AdminLeadsRoute
+  AdminLeadsIncompletosRoute: typeof AdminLeadsIncompletosRoute
   AdminLinksRoute: typeof AdminLinksRoute
   AdminLoginRoute: typeof AdminLoginRoute
   AdminMidiaRoute: typeof AdminMidiaRoute
@@ -560,6 +580,7 @@ const AdminRouteChildren: AdminRouteChildren = {
   AdminConfiguracoesRoute: AdminConfiguracoesRoute,
   AdminConteudoRoute: AdminConteudoRoute,
   AdminLeadsRoute: AdminLeadsRoute,
+  AdminLeadsIncompletosRoute: AdminLeadsIncompletosRoute,
   AdminLinksRoute: AdminLinksRoute,
   AdminLoginRoute: AdminLoginRoute,
   AdminMidiaRoute: AdminMidiaRoute,

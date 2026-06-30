@@ -12,7 +12,7 @@ import { useEffect, useState } from "react";
 import {
   BarChart3, BookText, ExternalLink, FileText, Image as ImageIcon, LayoutDashboard,
   Link as LinkIcon, LogOut, Menu, Search, Settings, ShieldCheck,
-  Sparkles, Tag, Target, Users, Users2, X,
+  Sparkles, Tag, Target, Users, Users2, UserX, X,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -33,6 +33,7 @@ type NavItem = {
 const NAV: NavItem[] = [
   { to: "/admin", label: "Dashboard", icon: LayoutDashboard, exact: true },
   { to: "/admin/leads", label: "Leads", icon: Users, badge: "crítico" },
+  { to: "/admin/leads-incompletos", label: "Leads incompletos", icon: UserX },
   { to: "/admin/scoring", label: "Pontuação", icon: Target },
   { to: "/admin/segmentos", label: "Segmentos / LPs", icon: Tag, badge: "crítico" },
 

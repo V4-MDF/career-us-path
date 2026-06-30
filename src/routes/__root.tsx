@@ -12,6 +12,7 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { TrackingInjector } from "../components/site/TrackingInjector";
+import { trackRouteChange } from "../lib/origin";
 
 function NotFoundComponent() {
   return (
@@ -118,6 +119,12 @@ function RootComponent() {
   const router = useRouter();
   // key muda a cada pathname → reanima o fade na troca de rota
   const pathname = router.state.location.pathname;
+
+  // Rastreia rota interna anterior em sessionStorage para o admin saber
+  // de onde o lead veio (página do site, não só utm_*).
+  useEffect(() => {
+    trackRouteChange(pathname, typeof document !== "undefined" ? document.title : undefined);
+  }, [pathname]);
 
   return (
     <QueryClientProvider client={queryClient}>

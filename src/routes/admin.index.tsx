@@ -6,6 +6,7 @@ import { PageHeader, StatCard, SectionCard } from "@/components/admin/ui";
 import { list } from "@/lib/dataStore";
 import { ensureSeed, type AbStats, type HeroVariant, type Segment } from "@/lib/segments";
 import type { LeadInput } from "@/lib/leadScoring";
+import type { PartialLead } from "@/components/site/LeadFormProgressive";
 import {
   loadModel, computeScore, TONE_BAR, TONE_CLASS, FUNNEL_LABEL,
   type ScoringModel, type FunnelStatus,
@@ -24,6 +25,7 @@ type StoredLead = LeadInput & {
 
 function DashboardPage() {
   const [leads, setLeads] = useState<StoredLead[]>([]);
+  const [partials, setPartials] = useState<PartialLead[]>([]);
   const [model, setModel] = useState<ScoringModel | null>(null);
   const [segments, setSegments] = useState<Segment[]>([]);
   const [variants, setVariants] = useState<HeroVariant[]>([]);
@@ -33,6 +35,7 @@ function DashboardPage() {
     (async () => {
       await ensureSeed();
       setLeads(await list<StoredLead>("leads"));
+      setPartials(await list<PartialLead>("leads_partial"));
       setModel(await loadModel());
       setSegments(await list<Segment>("segments"));
       setVariants(await list<HeroVariant>("hero_variants"));
@@ -52,6 +55,9 @@ function DashboardPage() {
   const prio = scored.filter((l) => l.bandId === "prioritario").length;
   const weekAgo = Date.now() - 7 * 86400000;
   const weekly = scored.filter((l) => new Date(l.createdAt).getTime() >= weekAgo).length;
+  const partialsWeek = partials.filter((p) => new Date(p.updatedAt).getTime() >= weekAgo).length;
+  const startedTotal = total + partials.length;
+  const completionRate = startedTotal > 0 ? Math.round((total / startedTotal) * 100) : 0;
 
   const bySeg = new Map<string, number>();
   scored.forEach((l) => { if (l.segmento) bySeg.set(l.segmento, (bySeg.get(l.segmento) ?? 0) + 1); });
@@ -89,6 +95,14 @@ function DashboardPage() {
         <StatCard label="Prioritários" value={`${prio}${total ? ` · ${Math.round((prio/total)*100)}%` : ""}`} accent="green" />
         <StatCard label="Leads na semana" value={weekly} accent="gold" />
         <StatCard label="Segmentos ativos" value={segments.filter((s) => s.ativo).length} accent="gray" />
+      </div>
+
+      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+        <StatCard label="Incompletos (7d)" value={partialsWeek} accent="yellow" hint={`${partials.length} no total`} />
+        <StatCard
+          label="Taxa de conclusão" value={`${completionRate}%`} accent="green"
+          hint={`${total} de ${startedTotal} iniciados`}
+        />
       </div>
 
       <div className="grid lg:grid-cols-2 gap-5">
