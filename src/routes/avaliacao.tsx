@@ -17,10 +17,11 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { createFileRoute, Link, useNavigate, useSearch } from "@tanstack/react-router";
-import { ChevronLeft, MessageCircle, ShieldCheck, Star } from "lucide-react";
-import { LeadForm } from "@/components/site/LeadForm";
+import { ChevronLeft, MessageCircle, ShieldCheck, Star, MapPin } from "lucide-react";
+import { LeadFormProgressive } from "@/components/site/LeadFormProgressive";
 import { trackFormView } from "@/lib/tracking";
 import { getSiteSettings } from "@/lib/admin/settings";
+import { getOrigin, describeOrigin } from "@/lib/origin";
 
 type SegKey = "medicos" | "engenheiros" | "empresarios";
 
@@ -72,6 +73,7 @@ function AvaliacaoPage() {
   const search = useSearch({ from: "/avaliacao" });
   const navigate = useNavigate();
   const [waMsisdn, setWaMsisdn] = useState<string>("16892209714");
+  const [originLabel, setOriginLabel] = useState<string | null>(null);
 
   // Dispara evento de remarketing ao montar (Público A).
   // Re-disparo seguro: trackFormView é no-op se Pixel/GA4 não carregados.
@@ -83,6 +85,9 @@ function AvaliacaoPage() {
     getSiteSettings().then((s) => {
       if (s.whatsapp_br) setWaMsisdn(s.whatsapp_br);
     });
+    // Snapshot da origem (utm + página interna anterior).
+    // Lê sessionStorage gravado pelo listener em __root.tsx.
+    setOriginLabel(describeOrigin(getOrigin("/avaliacao")));
   }, []);
 
   const segKey = useMemo<SegKey | null>(() => {
@@ -170,13 +175,19 @@ function AvaliacaoPage() {
               </div>
             </div>
 
-            {/* Coluna direita — formulário (mesmo componente, scoring + dataStore) */}
+            {/* Coluna direita — formulário progressivo (Typeform-style) */}
             <div>
-              <LeadForm
+              {originLabel && (
+                <div className="mb-3 inline-flex items-center gap-2 border border-gold/30 bg-ink-deep/40 px-3 py-1.5 text-[11px] font-mono-label text-gold/90">
+                  <MapPin className="h-3 w-3" /> {originLabel}
+                </div>
+              )}
+              <LeadFormProgressive
                 segmentId={segKey ?? undefined}
                 defaultProfissao={segKey ? SEG_DEFAULTS[segKey].profissao : undefined}
                 onSubmitted={goToThanks}
                 submitLabel="Enviar para análise"
+                currentPath="/avaliacao"
               />
             </div>
           </div>
