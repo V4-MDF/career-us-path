@@ -26,7 +26,7 @@ import {
   Accordion, AccordionContent, AccordionItem, AccordionTrigger,
 } from "@/components/ui/accordion";
 import { useContent } from "@/lib/siteContent";
-import { avaliacaoHref } from "@/lib/ctaLinks";
+import { avaliacaoHref, useAvaliacaoHref } from "@/lib/ctaLinks";
 import { SectionHead } from "./SectionHead";
 import { BrUsRouteBackdrop } from "./visuals/BrUsRouteBackdrop";
 import { FamilySealBackdrop } from "./visuals/FamilySealBackdrop";
