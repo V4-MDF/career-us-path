@@ -72,7 +72,11 @@ function LpFooter() {
   );
 }
 
+export function LandingPageTemplate({ segment, variant }: Props) {
+  // Hero: usa variante A/B ativa; fallback no hero_default do segmento.
+  const hero = variant ?? { ...segment.hero_default, segment_id: segment.id } as Pick<HeroVariant, "eyebrow" | "h1" | "sub" | "cta_texto">;
   const ctaHref = avaliacaoHref(`lp_${segment.id}`, segment.id);
+
 
   return (
     <div className="bg-background text-foreground">
