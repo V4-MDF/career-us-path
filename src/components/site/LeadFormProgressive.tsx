@@ -461,25 +461,27 @@ function ActiveQuestion({
     update(k, v as LeadInput[K]);
     setTimeout(() => onEnter(), 180);
   };
+  const fieldId = `lead-${field.key}`;
+  const hintId = field.hint ? `${fieldId}-hint` : undefined;
   return (
     <div className="py-4">
-      <Label className="font-display text-[24px] md:text-[28px] leading-snug text-foreground block mb-2">
+      <Label htmlFor={fieldId} className="font-display text-[24px] md:text-[28px] leading-snug text-foreground block mb-2">
         {field.label}
       </Label>
-      {field.hint && <p className="text-sm text-foreground/65 mb-4">{field.hint}</p>}
+      {field.hint && <p id={hintId} className="text-sm text-foreground/75 mb-4">{field.hint}</p>}
       <div className="mt-4 [&_input]:text-base [&_input]:h-12 [&_[role=combobox]]:h-12 [&_[role=combobox]]:text-base" onKeyDown={onKey}>
         {field.key === "nome" && (
-          <Input autoFocus value={data.nome} onChange={(e) => update("nome", e.target.value)} placeholder="Nome completo" />
+          <Input id={fieldId} autoFocus value={data.nome} onChange={(e) => update("nome", e.target.value)} placeholder="Nome completo" aria-describedby={hintId} autoComplete="name" />
         )}
         {field.key === "email" && (
-          <Input autoFocus type="email" value={data.email} onChange={(e) => update("email", e.target.value)} placeholder="voce@exemplo.com" />
+          <Input id={fieldId} autoFocus type="email" value={data.email} onChange={(e) => update("email", e.target.value)} placeholder="voce@exemplo.com" aria-describedby={hintId} autoComplete="email" inputMode="email" />
         )}
         {field.key === "whatsapp" && (
-          <Input autoFocus value={data.whatsapp} onChange={(e) => update("whatsapp", maskPhone(e.target.value))} placeholder="(11) 99999-9999" />
+          <Input id={fieldId} autoFocus value={data.whatsapp} onChange={(e) => update("whatsapp", maskPhone(e.target.value))} placeholder="(11) 99999-9999" aria-describedby={hintId} autoComplete="tel" inputMode="tel" />
         )}
         {field.key === "profissao" && (
           <Select value={data.profissao} onValueChange={selectAndAdvance("profissao")}>
-            <SelectTrigger><SelectValue placeholder="Selecione" /></SelectTrigger>
+            <SelectTrigger id={fieldId} aria-describedby={hintId}><SelectValue placeholder="Selecione" /></SelectTrigger>
             <SelectContent>
               {Object.entries(LABELS.profissao).map(([k, v]) => <SelectItem key={k} value={k}>{v}</SelectItem>)}
             </SelectContent>
@@ -487,7 +489,7 @@ function ActiveQuestion({
         )}
         {field.key === "formacao" && (
           <Select value={data.formacao} onValueChange={selectAndAdvance("formacao")}>
-            <SelectTrigger><SelectValue placeholder="Selecione" /></SelectTrigger>
+            <SelectTrigger id={fieldId} aria-describedby={hintId}><SelectValue placeholder="Selecione" /></SelectTrigger>
             <SelectContent>
               {Object.entries(LABELS.formacao).map(([k, v]) => <SelectItem key={k} value={k}>{v}</SelectItem>)}
             </SelectContent>
@@ -495,7 +497,7 @@ function ActiveQuestion({
         )}
         {field.key === "faixaEtaria" && (
           <Select value={data.faixaEtaria} onValueChange={selectAndAdvance("faixaEtaria")}>
-            <SelectTrigger><SelectValue placeholder="Selecione" /></SelectTrigger>
+            <SelectTrigger id={fieldId} aria-describedby={hintId}><SelectValue placeholder="Selecione" /></SelectTrigger>
             <SelectContent>
               {Object.entries(LABELS.faixaEtaria).map(([k, v]) => <SelectItem key={k} value={k}>{v}</SelectItem>)}
             </SelectContent>
@@ -503,16 +505,16 @@ function ActiveQuestion({
         )}
         {field.key === "cidade_uf" && (
           <div className="grid grid-cols-[1fr_110px] gap-3">
-            <Input autoFocus placeholder="Cidade" value={data.cidade} onChange={(e) => update("cidade", e.target.value)} />
+            <Input id={fieldId} autoFocus placeholder="Cidade" value={data.cidade} onChange={(e) => update("cidade", e.target.value)} aria-label="Cidade" autoComplete="address-level2" />
             <Select value={data.uf} onValueChange={(v) => update("uf", v)}>
-              <SelectTrigger><SelectValue placeholder="UF" /></SelectTrigger>
+              <SelectTrigger aria-label="Estado (UF)"><SelectValue placeholder="UF" /></SelectTrigger>
               <SelectContent>{ufs.map((u) => <SelectItem key={u} value={u}>{u}</SelectItem>)}</SelectContent>
             </Select>
           </div>
         )}
         {field.key === "renda" && (
           <Select value={data.renda} onValueChange={selectAndAdvance("renda")}>
-            <SelectTrigger><SelectValue placeholder="Selecione" /></SelectTrigger>
+            <SelectTrigger id={fieldId} aria-describedby={hintId}><SelectValue placeholder="Selecione" /></SelectTrigger>
             <SelectContent>
               {Object.entries(LABELS.renda).map(([k, v]) => <SelectItem key={k} value={k}>{v}</SelectItem>)}
             </SelectContent>
@@ -520,7 +522,7 @@ function ActiveQuestion({
         )}
         {field.key === "momento" && (
           <Select value={data.momento} onValueChange={selectAndAdvance("momento")}>
-            <SelectTrigger><SelectValue placeholder="Selecione" /></SelectTrigger>
+            <SelectTrigger id={fieldId} aria-describedby={hintId}><SelectValue placeholder="Selecione" /></SelectTrigger>
             <SelectContent>
               {Object.entries(LABELS.momento).map(([k, v]) => <SelectItem key={k} value={k}>{v}</SelectItem>)}
             </SelectContent>
@@ -530,3 +532,4 @@ function ActiveQuestion({
     </div>
   );
 }
+
