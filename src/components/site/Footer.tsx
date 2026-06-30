@@ -63,7 +63,10 @@ export function Footer() {
 
         {/* Matriz EUA */}
         <div className="md:col-span-4">
-          <h4 className="font-mono-label text-gold/80">Matriz · Estados Unidos</h4>
+          <h4 className="font-mono-label text-gold/80 flex items-center gap-2">
+            <FlagUS style={{ width: 18, height: 13 }} className="ring-1 ring-white/20" />
+            Matriz · Estados Unidos
+          </h4>
           <div className="mt-4 space-y-1.5 text-sm text-foreground/75 leading-relaxed">
             <p className="font-display text-foreground">Status na America LLC</p>
             <p>7575 KingsPointe Pkwy #4</p>
