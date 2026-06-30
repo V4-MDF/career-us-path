@@ -72,6 +72,7 @@ function Home() {
   const layout = useOrderedSections("home");
 
   return (
+
     <>
       <OrganizationJsonLd />
       <DynamicSectionHead sections={HOME_SECTIONS} baseTitle="Green Card EB-2 NIW" />
