@@ -585,7 +585,7 @@ export function LegacySection() {
         />
         <div className="mt-14 grid md:grid-cols-2 lg:grid-cols-4 gap-5">
           {pillars.map(({ icon: Icon, t, d }) => (
-            <article key={t} className="relative gold-tick border border-gold/25 bg-ink-raise/50 p-7 h-full">
+            <article key={t} className="relative gold-tick rounded-2xl border border-gold/25 bg-ink-raise/50 p-7 h-full shadow-soft transition-[border-color,box-shadow] hover:border-gold/55 hover:shadow-elevated">
               <Icon className="h-6 w-6 text-gold" />
               <h3 className="mt-5 font-display text-xl">{t}</h3>
               <p className="mt-3 text-foreground/75 leading-relaxed text-[15px]">{d}</p>
