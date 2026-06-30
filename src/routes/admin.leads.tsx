@@ -289,6 +289,8 @@ function LeadsPage() {
             options={[["all","Todas"], ...utmCampaigns.map((s) => [s, s] as [string,string])]} />
           <FilterSelect label="gclid (Google Ads)" value={fGclid} onChange={setFGclid}
             options={[["all","Todos"],["with","Com gclid"],["without","Sem gclid"]]} />
+          <FilterSelect label="Origem rastreada" value={fOrigin} onChange={setFOrigin}
+            options={[["all","Todas"],["complete","Completa (UTM/referrer/landing)"],["incomplete","Incompleta (direto)"]]} />
           <div>
             <label className="text-xs text-slate-500">Referrer (host ou URL)</label>
             <Input className="mt-1" placeholder="ex.: instagram.com" value={fReferrer} onChange={(e) => setFReferrer(e.target.value)} />
