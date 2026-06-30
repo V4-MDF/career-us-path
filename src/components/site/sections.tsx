@@ -778,7 +778,8 @@ function Reveal({
     <Comp
       ref={ref as any}
       id={id}
-      className={`cv-auto reveal ${shown ? "reveal-in" : ""} ${className ?? ""}`}
+      aria-label={id ? id.replace(/-/g, " ") : undefined}
+      className={`section-anchor cv-auto reveal ${shown ? "reveal-in" : ""} ${className ?? ""}`}
     >
       {children}
     </Comp>
