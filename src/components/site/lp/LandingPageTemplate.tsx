@@ -116,7 +116,7 @@ export function LandingPageTemplate({ segment, variant }: Props) {
             <div className="relative hidden lg:block">
               <div className="aspect-[4/5] rounded-2xl overflow-hidden border border-gold/20 bg-surface shadow-elegant">
                 {variant?.imagem ? (
-                  <img src={variant.imagem} alt="" className="h-full w-full object-cover" />
+                  <img src={variant.imagem} alt="" width={800} height={1000} loading="lazy" decoding="async" className="h-full w-full object-cover" />
                 ) : (
                   <div className="h-full w-full bg-gradient-to-br from-navy via-surface to-background flex items-end p-6">
                     <div className="text-xs uppercase tracking-[0.2em] text-gold/80">
