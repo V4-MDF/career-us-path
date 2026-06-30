@@ -131,7 +131,7 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <TrackingInjector />
-      <div key={pathname} className="route-fade">
+      <div key={pathname} id="conteudo" tabIndex={-1} className="route-fade focus:outline-none">
         <Outlet />
       </div>
     </QueryClientProvider>
