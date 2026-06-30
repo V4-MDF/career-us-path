@@ -145,10 +145,11 @@ function LeadsPage() {
   const stats = useMemo(() => {
     const total = filtered.length;
     const prio = filtered.filter((r) => r._calc.band.id === "prioritario").length;
+    const incomplete = filtered.filter((r) => isOriginIncomplete(r)).length;
     const byStatus: Record<string, number> = {};
     FUNNEL_STATUSES.forEach((s) => (byStatus[s] = 0));
     filtered.forEach((r) => { byStatus[r.status ?? "novo"]++; });
-    return { total, prio, pctPrio: total > 0 ? Math.round((prio / total) * 100) : 0, byStatus };
+    return { total, prio, pctPrio: total > 0 ? Math.round((prio / total) * 100) : 0, incomplete, byStatus };
   }, [filtered]);
 
   /**
