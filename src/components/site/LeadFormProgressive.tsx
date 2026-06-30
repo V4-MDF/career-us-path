@@ -150,6 +150,8 @@ export function LeadFormProgressive({
         // posiciona na primeira pergunta ainda inválida (ou no resumo final).
         const merged = { ...empty, ...prev.data } as LeadInput;
         const firstPending = PROGRESSIVE_FIELDS.findIndex((f) => !isFieldValid(f.key, merged));
+        const count = PROGRESSIVE_FIELDS.filter((f) => isFieldValid(f.key, merged)).length;
+        setRestoredCount(count);
         setStepIndex(firstPending === -1 ? PROGRESSIVE_FIELDS.length : firstPending);
       } catch { /* ignore */ }
       finally { if (!cancelled) setRestored(true); }
