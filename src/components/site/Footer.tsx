@@ -79,7 +79,10 @@ export function Footer() {
 
         {/* Filial Brasil */}
         <div className="md:col-span-4">
-          <h4 className="font-mono-label text-gold/80">Filial · Brasil</h4>
+          <h4 className="font-mono-label text-gold/80 flex items-center gap-2">
+            <FlagBR style={{ width: 18, height: 13 }} className="ring-1 ring-white/20" />
+            Filial · Brasil
+          </h4>
           <div className="mt-4 space-y-1.5 text-sm text-foreground/75 leading-relaxed">
             <p className="font-display text-foreground">Alphaville — CEA Corporate</p>
             <p>Alameda Araguaia, 2104</p>
