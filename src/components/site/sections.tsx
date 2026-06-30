@@ -437,8 +437,8 @@ export function PersonaCards() {
           {personas.map((p) => {
             const Icon = p.icon;
             return (
-              <article key={p.title} className="relative gold-tick border border-gold/25 bg-ink-raise/60 p-8 transition-colors hover:border-gold/60">
-                <span className="grid h-12 w-12 place-items-center border border-gold/50 text-gold">
+              <article key={p.title} className="relative gold-tick rounded-2xl border border-gold/25 bg-ink-raise/60 p-8 shadow-soft transition-[border-color,box-shadow] hover:border-gold/60 hover:shadow-elevated">
+                <span className="grid h-12 w-12 place-items-center rounded-lg border border-gold/50 text-gold">
                   <Icon className="h-6 w-6" />
                 </span>
                 <h3 className="mt-6 font-display text-2xl">{p.title}</h3>
