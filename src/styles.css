@@ -257,6 +257,18 @@
   font-size: 11px;
 }
 
+/* btn-label — tipografia padrão para CTAs/botões.
+ * Mesmo registro de Montserrat uppercase tracked dos displays/eyebrows,
+ * para que botões não destoem do resto do site (substitui usos de
+ * font-mono-label em elementos clicáveis). */
+@utility btn-label {
+  font-family: var(--font-display);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 12px;
+}
+
 /* Container com gutters fluidos clamp(20px, 6vw, 120px). */
 @utility container-x {
   width: 100%;
