@@ -91,6 +91,13 @@ function LeadsPage() {
     if (!ref) return "";
     try { return new URL(ref).host; } catch { return ref; }
   };
+  /** Verifica se o lead não tem nenhum rastreamento de origem (UTMs, referrer ou landing). */
+  const isOriginIncomplete = (r: StoredLead): boolean => {
+    const hasUtm = !!(r.utm?.utm_source || r.origin?.utm?.utm_source);
+    const hasRef = !!(r.origin?.internal.referrer);
+    const hasLanding = !!(r.origin?.internal.landing_path);
+    return !hasUtm && !hasRef && !hasLanding;
+  };
 
   const segments = useMemo(() => Array.from(new Set(rows.map((r) => r.segmento).filter(Boolean))) as string[], [rows]);
   const utms = useMemo(() => Array.from(new Set(rows.map((r) => utmOf(r, "utm_source")).filter(Boolean))), [rows]);
