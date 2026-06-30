@@ -512,6 +512,15 @@
   opacity: 1;
   transform: translate3d(0, 0, 0);
 }
+/* Mobile — luxo silencioso: reveal curto, deslocamento mínimo, sem will-change. */
+@media (max-width: 767px) {
+  .reveal {
+    transform: translate3d(0, 6px, 0);
+    transition: opacity 0.32s cubic-bezier(0.22, 0.61, 0.36, 1),
+                transform 0.32s cubic-bezier(0.22, 0.61, 0.36, 1);
+    will-change: auto;
+  }
+}
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1; transform: none; transition: none; }
 }

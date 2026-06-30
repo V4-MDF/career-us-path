@@ -42,18 +42,24 @@ export function Hero() {
   const lines = splitHeadline(title);
   // Easing assinatura — cubic-bezier(0.16, 1, 0.3, 1) (expo-out premium).
   const easeSig = [0.16, 1, 0.3, 1] as const;
-  const t = (d: number) => (reduce ? 0 : d);
 
   // Parallax sutil ligado ao scroll do hero (≤8%). Desligado em mobile e quando
   // o usuário pede menos movimento — evita jank/composite por frame.
   const heroRef = useRef<HTMLElement>(null);
   const isDesktop = useMediaQuery("(min-width: 1024px)");
+  const isMobile = useMediaQuery("(max-width: 767px)");
   const enableParallax = isDesktop && !reduce;
   const { scrollYProgress } = useScroll({
     target: heroRef,
     offset: ["start start", "end start"],
   });
   const imgY = useTransform(scrollYProgress, [0, 1], ["0%", enableParallax ? "6%" : "0%"]);
+
+  // Tempo + delay: no mobile, reveals curtos (~0.35s) e sem cascata de delays,
+  // mantendo o "luxo silencioso" sem peso de movimento. Reduced-motion → 0.
+  const t = (d: number) => (reduce ? 0 : isMobile ? Math.min(d * 0.5, 0.35) : d);
+  const dly = (d: number) => (reduce || isMobile ? 0 : d);
+
 
 
   return (
@@ -75,14 +81,15 @@ export function Hero() {
             <span className="font-mono-label text-gold">{eyebrow}</span>
           </motion.div>
 
-          {/* H1: tipo fluido grande e confiante (display-1). Reveal linha-a-linha com máscara — em reduced-motion entra instantâneo (sem y-mask). */}
+          {/* H1: tipo fluido grande e confiante (display-1). No desktop, reveal linha-a-linha com máscara y; no mobile/reduced, fade puro — sem peso visual. */}
           <h1 className="display-1 mt-8">
             {lines.map((ln, i) => (
               <span key={i} className="block overflow-hidden pb-1">
                 <motion.span
                   className="block"
-                  initial={{ y: "110%" }} animate={{ y: "0%" }}
-                  transition={{ duration: t(0.85), ease: easeSig, delay: t(0.15 + i * 0.1) }}
+                  initial={isMobile || reduce ? { opacity: 0 } : { y: "110%" }}
+                  animate={isMobile || reduce ? { opacity: 1 } : { y: "0%" }}
+                  transition={{ duration: t(0.85), ease: easeSig, delay: dly(0.15 + i * 0.1) }}
                 >
                   {renderEmphasis(ln)}
                 </motion.span>
@@ -93,22 +100,22 @@ export function Hero() {
           {/* Filete dourado que se desenha da esquerda → direita. */}
           <motion.div
             initial={{ scaleX: 0 }} animate={{ scaleX: 1 }}
-            transition={{ duration: t(0.9), ease: easeSig, delay: t(0.55) }}
+            transition={{ duration: t(0.9), ease: easeSig, delay: dly(0.55) }}
             style={{ transformOrigin: "left center" }}
             className="mt-10 h-px w-28 bg-gold"
           />
 
           <motion.p
-            initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: t(0.7), ease: easeSig, delay: t(0.7) }}
+            initial={{ opacity: 0, y: isMobile ? 6 : 12 }} animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: t(0.7), ease: easeSig, delay: dly(0.7) }}
             className="lead mt-7 max-w-xl"
           >
             {sub}
           </motion.p>
 
           <motion.div
-            initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: t(0.7), ease: easeSig, delay: t(0.85) }}
+            initial={{ opacity: 0, y: isMobile ? 6 : 12 }} animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: t(0.7), ease: easeSig, delay: dly(0.85) }}
             className="mt-10 flex flex-wrap gap-3"
           >
             <a href={avaliacaoHref("home_hero")}>
@@ -128,12 +135,13 @@ export function Hero() {
 
           <motion.div
             initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-            transition={{ duration: t(0.6), delay: t(1.1) }}
+            transition={{ duration: t(0.6), delay: dly(1.1) }}
             className="mt-14 flex items-start gap-3 text-sm text-foreground/60 border-l border-gold/50 pl-4 max-w-md"
           >
             <Star className="h-4 w-4 text-gold mt-0.5 shrink-0 fill-gold" />
             <span>{proof}</span>
           </motion.div>
+
 
 
         </div>
