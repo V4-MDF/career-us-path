@@ -442,12 +442,12 @@ function ActiveQuestion({
     setTimeout(() => onEnter(), 180);
   };
   return (
-    <div className="py-3">
-      <Label className="font-display text-[22px] md:text-[26px] leading-snug text-foreground block mb-1">
+    <div className="py-4">
+      <Label className="font-display text-[24px] md:text-[28px] leading-snug text-foreground block mb-2">
         {field.label}
       </Label>
-      {field.hint && <p className="text-xs text-foreground/55 mb-3">{field.hint}</p>}
-      <div className="mt-3" onKeyDown={onKey}>
+      {field.hint && <p className="text-sm text-foreground/65 mb-4">{field.hint}</p>}
+      <div className="mt-4 [&_input]:text-base [&_input]:h-12 [&_[role=combobox]]:h-12 [&_[role=combobox]]:text-base" onKeyDown={onKey}>
         {field.key === "nome" && (
           <Input autoFocus value={data.nome} onChange={(e) => update("nome", e.target.value)} placeholder="Nome completo" />
         )}
