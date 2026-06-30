@@ -126,6 +126,8 @@ function LeadsPage() {
         if (!ref.includes(needle) && !host.includes(needle)) return false;
       }
       if (fProf !== "all" && r.profissao !== fProf) return false;
+      if (fOrigin === "incomplete" && !isOriginIncomplete(r)) return false;
+      if (fOrigin === "complete" && isOriginIncomplete(r)) return false;
       if (fFrom && new Date(r.createdAt) < new Date(fFrom)) return false;
       if (fTo) { const end = new Date(fTo); end.setHours(23,59,59,999); if (new Date(r.createdAt) > end) return false; }
       if (q) {
