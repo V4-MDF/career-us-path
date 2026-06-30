@@ -1,17 +1,30 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
-import { AlertTriangle, BarChart3 } from "lucide-react";
-import { PageHeader, StatCard, SectionCard, ClassBadge } from "@/components/admin/ui";
+import { useEffect, useMemo, useState } from "react";
+import { AlertTriangle, BarChart3, Flame } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { PageHeader, StatCard, SectionCard } from "@/components/admin/ui";
 import { list } from "@/lib/dataStore";
 import { ensureSeed, type AbStats, type HeroVariant, type Segment } from "@/lib/segments";
-import type { ScoredLead } from "@/lib/leadScoring";
+import type { LeadInput } from "@/lib/leadScoring";
+import {
+  loadModel, computeScore, TONE_BAR, TONE_CLASS, FUNNEL_LABEL,
+  type ScoringModel, type FunnelStatus,
+} from "@/lib/scoring";
 
 export const Route = createFileRoute("/admin/")({
   component: DashboardPage,
 });
 
+type StoredLead = LeadInput & {
+  id: string;
+  createdAt: string;
+  segmento?: string;
+  status?: FunnelStatus;
+};
+
 function DashboardPage() {
-  const [leads, setLeads] = useState<(ScoredLead & { segmento?: string })[]>([]);
+  const [leads, setLeads] = useState<StoredLead[]>([]);
+  const [model, setModel] = useState<ScoringModel | null>(null);
   const [segments, setSegments] = useState<Segment[]>([]);
   const [variants, setVariants] = useState<HeroVariant[]>([]);
   const [stats, setStats] = useState<AbStats[]>([]);
@@ -19,24 +32,31 @@ function DashboardPage() {
   useEffect(() => {
     (async () => {
       await ensureSeed();
-      setLeads(await list<ScoredLead & { segmento?: string }>("leads"));
+      setLeads(await list<StoredLead>("leads"));
+      setModel(await loadModel());
       setSegments(await list<Segment>("segments"));
       setVariants(await list<HeroVariant>("hero_variants"));
       setStats(await list<AbStats>("ab_stats"));
     })();
   }, []);
 
-  const total = leads.length;
-  const classA = leads.filter((l) => l.classificacao === "A").length;
+  const scored = useMemo(() => {
+    if (!model) return [] as Array<StoredLead & { score: number; bandId: string; tone: "hot" | "warm" | "cool" | "cold"; bandLabel: string }>;
+    return leads.map((l) => {
+      const c = computeScore(l, model);
+      return { ...l, score: c.score, bandId: c.band.id, tone: c.band.tone, bandLabel: c.band.label };
+    });
+  }, [leads, model]);
+
+  const total = scored.length;
+  const prio = scored.filter((l) => l.bandId === "prioritario").length;
   const weekAgo = Date.now() - 7 * 86400000;
-  const weekly = leads.filter((l) => new Date(l.createdAt).getTime() >= weekAgo).length;
+  const weekly = scored.filter((l) => new Date(l.createdAt).getTime() >= weekAgo).length;
 
   const bySeg = new Map<string, number>();
-  leads.forEach((l) => { if (l.segmento) bySeg.set(l.segmento, (bySeg.get(l.segmento) ?? 0) + 1); });
+  scored.forEach((l) => { if (l.segmento) bySeg.set(l.segmento, (bySeg.get(l.segmento) ?? 0) + 1); });
 
-  const lastLeads = [...leads]
-    .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
-    .slice(0, 5);
+  const topLeads = [...scored].sort((a, b) => b.score - a.score).slice(0, 5);
 
   // Líder A/B por segmento
   const leaders = segments.map((s) => {
@@ -62,11 +82,11 @@ function DashboardPage() {
         </div>
       </div>
 
-      <PageHeader title="Dashboard" description="Resumo de captação e do teste A/B." />
+      <PageHeader title="Dashboard" description="Captação, qualidade de perfil e teste A/B." />
 
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
         <StatCard label="Leads (total)" value={total} accent="blue" />
-        <StatCard label="Classe A (quentes)" value={classA} accent="green" />
+        <StatCard label="Prioritários" value={`${prio}${total ? ` · ${Math.round((prio/total)*100)}%` : ""}`} accent="green" />
         <StatCard label="Leads na semana" value={weekly} accent="gold" />
         <StatCard label="Segmentos ativos" value={segments.filter((s) => s.ativo).length} accent="gray" />
       </div>
@@ -118,24 +138,45 @@ function DashboardPage() {
       </div>
 
       <div className="mt-5">
-        <SectionCard title="Últimos 5 leads">
-          {lastLeads.length === 0 ? (
+        <SectionCard title="Top 5 leads por pontuação" description="Worklist priorizada por aderência de perfil ao EB-2 NIW.">
+          {topLeads.length === 0 ? (
             <p className="text-sm text-slate-500">Ainda sem leads. Os envios do formulário aparecerão aqui.</p>
           ) : (
             <div className="overflow-x-auto -mx-5">
               <table className="w-full text-sm">
                 <thead className="text-left text-xs uppercase text-slate-500 border-b border-slate-200">
-                  <tr><th className="px-5 py-2">Data</th><th className="py-2">Nome</th><th className="py-2">Profissão</th><th className="py-2">Score</th><th className="py-2">Classe</th><th className="py-2">Segmento</th></tr>
+                  <tr>
+                    <th className="px-5 py-2 w-[140px]">Pontuação</th>
+                    <th className="py-2">Nome</th>
+                    <th className="py-2">Profissão</th>
+                    <th className="py-2">Segmento</th>
+                    <th className="py-2">Status</th>
+                    <th className="py-2 text-right">Data</th>
+                  </tr>
                 </thead>
                 <tbody>
-                  {lastLeads.map((l) => (
+                  {topLeads.map((l) => (
                     <tr key={l.id} className="border-b border-slate-100">
-                      <td className="px-5 py-2 text-slate-500">{new Date(l.createdAt).toLocaleString("pt-BR")}</td>
-                      <td className="py-2">{l.nome}</td>
-                      <td className="py-2 text-slate-600">{l.profissao}</td>
-                      <td className="py-2">{l.score}</td>
-                      <td className="py-2"><ClassBadge c={l.classificacao} /></td>
-                      <td className="py-2 text-slate-600">{l.segmento ?? "—"}</td>
+                      <td className="px-5 py-2.5">
+                        <div className="flex items-center gap-2">
+                          <div className="text-lg font-semibold tabular-nums w-8 text-right">{l.score}</div>
+                          <div className="flex-1 min-w-[60px]">
+                            <div className="h-1.5 bg-slate-100 rounded">
+                              <div className={`h-full rounded ${TONE_BAR[l.tone]}`} style={{ width: `${l.score}%` }} />
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                      <td className="py-2.5 font-medium">{l.nome}</td>
+                      <td className="py-2.5 text-slate-600">{l.profissao}</td>
+                      <td className="py-2.5 text-slate-600">{l.segmento ?? "—"}</td>
+                      <td className="py-2.5">
+                        <Badge variant="outline" className={`text-[10px] ${TONE_CLASS[l.tone]}`}>
+                          <Flame className="h-3 w-3 mr-1" /> {l.bandLabel}
+                        </Badge>
+                        <span className="ml-2 text-xs text-slate-500">{FUNNEL_LABEL[l.status ?? "novo"]}</span>
+                      </td>
+                      <td className="py-2.5 text-right text-slate-500 text-xs">{new Date(l.createdAt).toLocaleDateString("pt-BR")}</td>
                     </tr>
                   ))}
                 </tbody>
