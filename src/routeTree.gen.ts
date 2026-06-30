@@ -14,12 +14,14 @@ import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as LlmInfoRouteImport } from './routes/llm-info'
 import { Route as ContatoRouteImport } from './routes/contato'
 import { Route as BlogRouteImport } from './routes/blog'
+import { Route as AvaliacaoRouteImport } from './routes/avaliacao'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as VistosSlugRouteImport } from './routes/vistos.$slug'
 import { Route as LpSlugRouteImport } from './routes/lp.$slug'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
+import { Route as AvaliacaoObrigadoRouteImport } from './routes/avaliacao.obrigado'
 import { Route as AdminUsuariosRouteImport } from './routes/admin.usuarios'
 import { Route as AdminTrackingRouteImport } from './routes/admin.tracking'
 import { Route as AdminSeoRouteImport } from './routes/admin.seo'
@@ -58,6 +60,11 @@ const BlogRoute = BlogRouteImport.update({
   path: '/blog',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AvaliacaoRoute = AvaliacaoRouteImport.update({
+  id: '/avaliacao',
+  path: '/avaliacao',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminRoute = AdminRouteImport.update({
   id: '/admin',
   path: '/admin',
@@ -87,6 +94,11 @@ const BlogSlugRoute = BlogSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
   getParentRoute: () => BlogRoute,
+} as any)
+const AvaliacaoObrigadoRoute = AvaliacaoObrigadoRouteImport.update({
+  id: '/obrigado',
+  path: '/obrigado',
+  getParentRoute: () => AvaliacaoRoute,
 } as any)
 const AdminUsuariosRoute = AdminUsuariosRouteImport.update({
   id: '/usuarios',
@@ -152,6 +164,7 @@ const AdminAbRoute = AdminAbRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteWithChildren
+  '/avaliacao': typeof AvaliacaoRouteWithChildren
   '/blog': typeof BlogRouteWithChildren
   '/contato': typeof ContatoRoute
   '/llm-info': typeof LlmInfoRoute
@@ -169,6 +182,7 @@ export interface FileRoutesByFullPath {
   '/admin/seo': typeof AdminSeoRoute
   '/admin/tracking': typeof AdminTrackingRoute
   '/admin/usuarios': typeof AdminUsuariosRoute
+  '/avaliacao/obrigado': typeof AvaliacaoObrigadoRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/lp/$slug': typeof LpSlugRoute
   '/vistos/$slug': typeof VistosSlugRoute
@@ -176,6 +190,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/avaliacao': typeof AvaliacaoRouteWithChildren
   '/blog': typeof BlogRouteWithChildren
   '/contato': typeof ContatoRoute
   '/llm-info': typeof LlmInfoRoute
@@ -193,6 +208,7 @@ export interface FileRoutesByTo {
   '/admin/seo': typeof AdminSeoRoute
   '/admin/tracking': typeof AdminTrackingRoute
   '/admin/usuarios': typeof AdminUsuariosRoute
+  '/avaliacao/obrigado': typeof AvaliacaoObrigadoRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/lp/$slug': typeof LpSlugRoute
   '/vistos/$slug': typeof VistosSlugRoute
@@ -202,6 +218,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteWithChildren
+  '/avaliacao': typeof AvaliacaoRouteWithChildren
   '/blog': typeof BlogRouteWithChildren
   '/contato': typeof ContatoRoute
   '/llm-info': typeof LlmInfoRoute
@@ -219,6 +236,7 @@ export interface FileRoutesById {
   '/admin/seo': typeof AdminSeoRoute
   '/admin/tracking': typeof AdminTrackingRoute
   '/admin/usuarios': typeof AdminUsuariosRoute
+  '/avaliacao/obrigado': typeof AvaliacaoObrigadoRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/lp/$slug': typeof LpSlugRoute
   '/vistos/$slug': typeof VistosSlugRoute
@@ -229,6 +247,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/admin'
+    | '/avaliacao'
     | '/blog'
     | '/contato'
     | '/llm-info'
@@ -246,6 +265,7 @@ export interface FileRouteTypes {
     | '/admin/seo'
     | '/admin/tracking'
     | '/admin/usuarios'
+    | '/avaliacao/obrigado'
     | '/blog/$slug'
     | '/lp/$slug'
     | '/vistos/$slug'
@@ -253,6 +273,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/avaliacao'
     | '/blog'
     | '/contato'
     | '/llm-info'
@@ -270,6 +291,7 @@ export interface FileRouteTypes {
     | '/admin/seo'
     | '/admin/tracking'
     | '/admin/usuarios'
+    | '/avaliacao/obrigado'
     | '/blog/$slug'
     | '/lp/$slug'
     | '/vistos/$slug'
@@ -278,6 +300,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/admin'
+    | '/avaliacao'
     | '/blog'
     | '/contato'
     | '/llm-info'
@@ -295,6 +318,7 @@ export interface FileRouteTypes {
     | '/admin/seo'
     | '/admin/tracking'
     | '/admin/usuarios'
+    | '/avaliacao/obrigado'
     | '/blog/$slug'
     | '/lp/$slug'
     | '/vistos/$slug'
@@ -304,6 +328,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdminRoute: typeof AdminRouteWithChildren
+  AvaliacaoRoute: typeof AvaliacaoRouteWithChildren
   BlogRoute: typeof BlogRouteWithChildren
   ContatoRoute: typeof ContatoRoute
   LlmInfoRoute: typeof LlmInfoRoute
@@ -350,6 +375,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/avaliacao': {
+      id: '/avaliacao'
+      path: '/avaliacao'
+      fullPath: '/avaliacao'
+      preLoaderRoute: typeof AvaliacaoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin': {
       id: '/admin'
       path: '/admin'
@@ -391,6 +423,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/blog/$slug'
       preLoaderRoute: typeof BlogSlugRouteImport
       parentRoute: typeof BlogRoute
+    }
+    '/avaliacao/obrigado': {
+      id: '/avaliacao/obrigado'
+      path: '/obrigado'
+      fullPath: '/avaliacao/obrigado'
+      preLoaderRoute: typeof AvaliacaoObrigadoRouteImport
+      parentRoute: typeof AvaliacaoRoute
     }
     '/admin/usuarios': {
       id: '/admin/usuarios'
@@ -513,6 +552,18 @@ const AdminRouteChildren: AdminRouteChildren = {
 
 const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
 
+interface AvaliacaoRouteChildren {
+  AvaliacaoObrigadoRoute: typeof AvaliacaoObrigadoRoute
+}
+
+const AvaliacaoRouteChildren: AvaliacaoRouteChildren = {
+  AvaliacaoObrigadoRoute: AvaliacaoObrigadoRoute,
+}
+
+const AvaliacaoRouteWithChildren = AvaliacaoRoute._addFileChildren(
+  AvaliacaoRouteChildren,
+)
+
 interface BlogRouteChildren {
   BlogSlugRoute: typeof BlogSlugRoute
 }
@@ -526,6 +577,7 @@ const BlogRouteWithChildren = BlogRoute._addFileChildren(BlogRouteChildren)
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRoute: AdminRouteWithChildren,
+  AvaliacaoRoute: AvaliacaoRouteWithChildren,
   BlogRoute: BlogRouteWithChildren,
   ContatoRoute: ContatoRoute,
   LlmInfoRoute: LlmInfoRoute,
@@ -537,13 +589,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

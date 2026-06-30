@@ -11,6 +11,7 @@ import {
   OrganizationJsonLd, ArticleJsonLd, BreadcrumbJsonLd,
 } from "@/components/site/Seo";
 import { getPost, listPublishedPosts, type BlogPost } from "@/lib/blog";
+import { avaliacaoHref } from "@/lib/ctaLinks";
 
 export const Route = createFileRoute("/blog/$slug")({
   loader: async ({ params }) => {
@@ -152,9 +153,9 @@ function PostPage() {
               <div className="mt-12 border border-gold/30 bg-ink-raise/50 p-8">
                 <h2 className="font-display text-2xl">Pronto para avaliar o seu perfil?</h2>
                 <p className="mt-2 text-foreground/75">Análise individual e gratuita em até 48h.</p>
-                <Link to="/" hash="avaliacao" className="mt-5 inline-block">
+                <a href={avaliacaoHref(`blog_${post.slug}`)} className="mt-5 inline-block">
                   <Button size="lg" className="btn-sweep h-12 px-7">Avaliação gratuita</Button>
-                </Link>
+                </a>
               </div>
             </div>
           </div>

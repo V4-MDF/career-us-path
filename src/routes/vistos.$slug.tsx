@@ -10,7 +10,7 @@ import {
 import {
   OrganizationJsonLd, ServiceJsonLd, FAQJsonLd, BreadcrumbJsonLd,
 } from "@/components/site/Seo";
-import { LeadForm } from "@/components/site/LeadForm";
+import { avaliacaoHref } from "@/lib/ctaLinks";
 import { VISA_PAGES, COMPARISON, type VisaSlug, type VisaPage } from "@/lib/visaPages";
 
 export const Route = createFileRoute("/vistos/$slug")({
@@ -111,7 +111,7 @@ function VisaPageRoute() {
               {page.intro}
             </p>
             <div className="mt-10">
-              <a href="#avaliacao">
+              <a href={avaliacaoHref(`visto_${page.slug}_hero`)}>
                 <Button size="lg" className="btn-sweep h-12 px-7 text-base">
                   Avaliação gratuita
                 </Button>
@@ -254,27 +254,37 @@ function VisaPageRoute() {
           </div>
         </section>
 
-        {/* 8 — CTA + formulário */}
+        {/* 8 — CTA forte para a LP de avaliação */}
         <section id="avaliacao" className="section-parchment">
           <div className="container-x py-20 md:py-28 grid lg:grid-cols-12 gap-10 items-start">
-            <div className="lg:col-span-5">
-              <SectionHead num="07" eyebrow="AVALIAÇÃO GRATUITA" variant="parchment" title={page.ctaTitle} kicker={page.ctaSubtitle} />
-              <div className="mt-8 hidden lg:block">
-                <ul className="space-y-3 text-ink-text/80">
-                  {[
-                    "Análise individual do perfil em até 48h",
-                    "Indicação da categoria EB mais coerente",
-                    "Sem custo · 100% confidencial",
-                  ].map((t) => (
-                    <li key={t} className="flex items-start gap-2">
-                      <Check className="h-4 w-4 text-gold shrink-0 mt-1" /> {t}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
             <div className="lg:col-span-7">
-              <LeadForm />
+              <SectionHead num="07" eyebrow="AVALIAÇÃO GRATUITA" variant="parchment" title={page.ctaTitle} kicker={page.ctaSubtitle} />
+              <ul className="mt-8 space-y-3 text-ink-text/80">
+                {[
+                  "Análise individual do perfil em até 48h",
+                  "Indicação da categoria EB mais coerente",
+                  "Sem custo · 100% confidencial",
+                ].map((t) => (
+                  <li key={t} className="flex items-start gap-2">
+                    <Check className="h-4 w-4 text-gold shrink-0 mt-1" /> {t}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="lg:col-span-5">
+              <div className="border border-ink-text/15 bg-white p-8">
+                <p className="font-mono-label text-gold">PRÓXIMO PASSO</p>
+                <h3 className="mt-3 font-display text-2xl text-ink-text">
+                  Comece pela análise gratuita do seu perfil.
+                </h3>
+                <p className="mt-3 text-ink-text/70 text-[15px] leading-relaxed">
+                  Em poucos minutos enviamos sua avaliação para a equipe especializada
+                  em vistos EB. Resposta em até 48h pelo WhatsApp.
+                </p>
+                <a href={avaliacaoHref(`visto_${page.slug}_cta`)} className="mt-7 inline-block">
+                  <Button size="lg" className="btn-sweep h-12 px-7">Fazer minha avaliação gratuita</Button>
+                </a>
+              </div>
             </div>
           </div>
         </section>

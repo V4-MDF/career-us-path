@@ -19,6 +19,14 @@ export interface LeadFormProps {
   segmentId?: string;
   /** Pré-seleciona profissão (chave do select). */
   defaultProfissao?: string;
+  /**
+   * Callback após salvar o lead com sucesso.
+   * Quando definido, suprime o estado interno "done" (a página chamadora
+   * navega para uma rota de agradecimento — ex.: /avaliacao/obrigado).
+   */
+  onSubmitted?: (lead: { id: string; score: number; classificacao: string }) => void;
+  /** Label do botão de envio. */
+  submitLabel?: string;
 }
 
 const ufs = ["AC","AL","AM","AP","BA","CE","DF","ES","GO","MA","MG","MS","MT","PA","PB","PE","PI","PR","RJ","RN","RO","RR","RS","SC","SE","SP","TO"];
@@ -38,7 +46,7 @@ function maskPhone(v: string) {
   return `(${d.slice(0, 2)}) ${d.slice(2, 7)}-${d.slice(7)}`;
 }
 
-export function LeadForm({ segmentId, defaultProfissao }: LeadFormProps = {}) {
+export function LeadForm({ segmentId, defaultProfissao, onSubmitted, submitLabel }: LeadFormProps = {}) {
   const [step, setStep] = useState(0);
   const [data, setData] = useState<LeadInput>(() => ({
     ...empty,
@@ -104,7 +112,11 @@ export function LeadForm({ segmentId, defaultProfissao }: LeadFormProps = {}) {
       if (segmentId) {
         await registerConversion(segmentId);
       }
-      setDone(true);
+      if (onSubmitted) {
+        onSubmitted({ id, score, classificacao });
+      } else {
+        setDone(true);
+      }
     } catch (e) {
       setError("Não foi possível enviar agora. Tente novamente.");
     } finally {
@@ -264,7 +276,7 @@ export function LeadForm({ segmentId, defaultProfissao }: LeadFormProps = {}) {
           </Button>
         ) : (
           <Button onClick={submit} disabled={loading}>
-            {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : "Enviar perfil"}
+            {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : (submitLabel ?? "Enviar perfil")}
           </Button>
         )}
       </div>

@@ -116,29 +116,35 @@ const eb2niw: VisaPage = {
     ],
   },
   process: {
-    title: "Como funciona o processo",
+    title: "Como conduzimos o seu processo",
     steps: [
       {
         num: "01",
-        title: "Estruturação do caso",
+        title: "Análise Criteriosa",
         body:
-          "Diagnóstico do perfil, mapeamento de evidências (formação, publicações, prêmios, faturamento, impacto), construção do plano de atuação nos EUA e da narrativa jurídica.",
+          "Avaliamos histórico, formação, impacto e potencial para o EB-2 NIW — diagnóstico individual antes de qualquer compromisso.",
       },
       {
         num: "02",
-        title: "Petição I-140",
+        title: "Arquitetura Estratégica",
         body:
-          "Submissão da I-140 ao USCIS com a documentação completa e o memorando legal demonstrando os três critérios de Dhanasar. Eventual resposta a RFE (Request for Evidence).",
+          "Estruturamos a narrativa do seu Endeavor para evidenciar o interesse nacional americano nos três critérios de Dhanasar.",
       },
       {
         num: "03",
-        title: "Aprovação e ajuste / consular",
+        title: "Preparação Documental",
         body:
-          "Aprovada a I-140, segue-se o ajuste de status (se já estiver nos EUA com status válido) ou o processamento consular no Brasil — encerrando com a emissão do Green Card.",
+          "Documentação meticulosa, cartas de recomendação e evidências de alto padrão — coerência técnica e narrativa em cada peça.",
+      },
+      {
+        num: "04",
+        title: "Revisão Final",
+        body:
+          "Organização impecável da Petition (I-140 + memorando) nos critérios exigidos pelo USCIS antes do protocolo.",
       },
     ],
     note:
-      "Prazo realista total: aproximadamente 24 meses, com forte variação por volume do USCIS e disponibilidade consular. Começar cedo importa: a estruturação do caso é a etapa mais sensível ao tempo.",
+      "Prazo realista total do ciclo (estruturação → protocolo → decisão → ajuste/consular): aproximadamente 24 meses, com forte variação por USCIS e disponibilidade consular. Começar cedo importa.",
   },
   family: {
     title: "Green Card para toda a família",
