@@ -193,7 +193,7 @@ export function LeadFormProgressive({
       segmento: segmentId,
     };
     void set("leads_partial", partialIdRef.current, partial);
-  }, [data, done, segmentId, currentPath]);
+  }, [data, done, segmentId, currentPath, restored]);
 
   const advance = () => {
     const f = PROGRESSIVE_FIELDS[stepIndex];
