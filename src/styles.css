@@ -161,11 +161,14 @@
     color: var(--color-foreground);
     font-family: var(--font-sans);
     font-feature-settings: "ss01", "cv11";
-    font-size: 16px;
+    font-size: 17px;
     line-height: 1.65;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
   }
+  p { max-width: 70ch; }
+
   h1, h2, h3, h4 {
     font-family: var(--font-display);
     letter-spacing: -0.01em;
