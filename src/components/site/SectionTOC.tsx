@@ -154,7 +154,7 @@ function MobileChip({ activeLabel, onOpen }: { activeLabel: string; onOpen: () =
   return (
     <button
       onClick={onOpen}
-      className={`lg:hidden fixed bottom-5 left-1/2 -translate-x-1/2 z-40 inline-flex items-center gap-2 border border-gold/40 bg-ink-deep/90 backdrop-blur px-4 h-10 text-sm text-foreground transition-opacity ${
+      className={`lg:hidden fixed bottom-5 left-1/2 -translate-x-1/2 z-40 inline-flex items-center gap-2 rounded-full border border-gold/40 bg-ink-deep/90 backdrop-blur px-4 h-10 text-sm text-foreground shadow-elevated transition-opacity ${
         visible ? "opacity-100" : "pointer-events-none opacity-0"
       }`}
       aria-label="Abrir sumário desta página"
