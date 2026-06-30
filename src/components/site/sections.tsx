@@ -233,7 +233,7 @@ export function ContrastBrasilEUA() {
   const subtitle = useContent("contrast.subtitle");
 
   return (
-    <Reveal as="section" className="section-parchment py-24 md:py-32">
+    <Reveal as="section" className="section-parchment section-pad">
       <div className="container-x">
         <SectionHead num="01" eyebrow="POR QUE MIGRAR AGORA" title="Duas realidades. Uma decisão." variant="parchment" />
         <div className="mt-14 grid md:grid-cols-2 gap-6">
@@ -338,7 +338,7 @@ export function VisaCards() {
       desc: "Caminho para profissionais qualificados com oferta formal de emprego nos EUA." },
   ];
   return (
-    <Reveal as="section" className="section-ink-deep py-24 md:py-32 border-y border-gold/10">
+    <Reveal as="section" className="section-ink-deep section-pad border-y border-gold/10">
       <div className="container-x">
         <SectionHead num="03" eyebrow="VISTOS EB" title="Três caminhos. Uma estratégia para cada perfil." />
         <div className="mt-14 grid md:grid-cols-3 gap-5">
@@ -375,7 +375,7 @@ export function PersonaCards() {
       headline: "Geração de empregos e impostos pesa positivamente na sua petição." },
   ];
   return (
-    <Reveal as="section" className="py-24 md:py-32">
+    <Reveal as="section" className="section-pad">
       <div className="container-x">
         <SectionHead num="04" eyebrow="PERFIS QUE ATENDEMOS" title="Profissões consolidadas têm caminho mais curto pelo EB-2 NIW." />
         <div className="mt-14 grid md:grid-cols-3 gap-5">
@@ -419,7 +419,7 @@ export function ProcessSteps() {
       d: "Organização impecável da Petition nos critérios exigidos pelo USCIS." },
   ];
   return (
-    <Reveal as="section" className="section-parchment py-24 md:py-32">
+    <Reveal as="section" className="section-parchment section-pad">
       <div className="container-x">
         <SectionHead num="05" eyebrow="PROCESSO EB-2 NIW" title="Quatro etapas. Conduzidas com rigor." variant="parchment" />
         <div className="mt-14 grid md:grid-cols-2 lg:grid-cols-4 gap-5">
@@ -507,7 +507,7 @@ export function LegacySection() {
       d: "Controle do seu futuro imigratório, sem loterias e sem depender de empresas." },
   ];
   return (
-    <Reveal as="section" className="section-ink-deep py-24 md:py-32 border-y border-gold/10">
+    <Reveal as="section" className="section-ink-deep section-pad border-y border-gold/10">
       <div className="container-x">
         <SectionHead
           num="07"
@@ -539,7 +539,7 @@ export function SalaryCompare() {
     { p: "Profissional de TI sênior", br: "R$ 20.000 / mês", us: "US$ 14.000 / mês" },
   ];
   return (
-    <Reveal as="section" className="py-24 md:py-32">
+    <Reveal as="section" className="section-pad">
       <div className="container-x">
         <SectionHead
           num="08"
@@ -584,7 +584,7 @@ export function Testimonials() {
     },
   ];
   return (
-    <Reveal as="section" className="section-parchment py-24 md:py-32">
+    <Reveal as="section" className="section-parchment section-pad">
       <div className="container-x">
         <SectionHead
           num="09"
@@ -643,7 +643,7 @@ export function FAQ() {
     },
   ];
   return (
-    <Reveal as="section" className="py-24 md:py-32">
+    <Reveal as="section" className="section-pad">
       <div className="container-x max-w-3xl">
         <SectionHead num="10" eyebrow="DÚVIDAS FREQUENTES" title="Antes que você pergunte." />
         <Accordion type="single" collapsible className="mt-12">
