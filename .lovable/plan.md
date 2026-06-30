@@ -1,79 +1,57 @@
-## Diagnóstico
+## Objetivo
 
-A repaleta passou `--background` (ink) para `#0B0B0C` (quase preto) e `--ink-text` para `#141416`. Em qualquer lugar onde um botão/título já usava esses tokens **e** estava sobre uma superfície com a mesma cor, o contraste sumiu. Pontos críticos identificados:
+Adaptar a dobra **"Blog em destaque"** (`BlogStrip.tsx`) para mobile: trocar o grid empilhado de 3 cards altos por um **carrossel horizontal com snap**, e mostrar a **foto de capa** do post no topo de cada card (mobile e desktop). Desktop continua em grid 3 colunas.
 
-1. **Admin (`bg-slate-100` claro) usando botões shadcn**
-   - `variant="outline"` e `variant="secondary"` usam `bg-background`/`bg-secondary` (tokens dark do site público). No fundo claro do admin viram blocos quase pretos com hover ouro — fora de padrão e em alguns casos o texto fica `text-foreground` (cinza claro) sobre fundo escuro novo demais pelo contexto. Ainda mais grave: o admin foi escrito com Tailwind palette (slate/amber) e o `<Button>` agora puxa cor da paleta dossiê.
-   - `<Button variant="outline">` no header do admin (linha 145 `admin.tsx`) → fundo escuro inesperado.
-   - `<Button variant="ghost">` "Sair" (linha 151) → hover ouro com `text-accent-foreground` = preto sobre ouro, ok, mas idle herda do site público.
+## Mudanças
 
-2. **Site público: `text-ink-text` (#141416) usado fora de seções parchment**
-   - `sections.tsx` linha 478 — overlay `<ProcessIconStrip />` com `text-ink-text` cobre uma seção **escura** (CTA flow). Hoje o ícone é praticamente invisível (preto sobre preto).
-   - Demais usos de `text-ink-text` em `sections.tsx`, `visa/VisaPageBody.tsx`, `blog.tsx` estão dentro de seções/cards parchment (fundo creme) — seguem legíveis.
+**1. Card passa a incluir capa**
+- Adicionar `capa: string` ao tipo interno `Card` em `BlogStrip.tsx`.
+- Mapear `p.capa` dos posts reais (já existe em `BlogPost`).
+- Placeholders ganham 3 capas distintas (usar imagens já existentes em `src/assets/` — NYC skyline, família brasileira, passaporte — sem gerar nada novo).
 
-3. **Botões/links com `bg-foreground/30`, `bg-primary-foreground`, ou usando `bg-ink`/`bg-ink-deep` em cima de `bg-ink`**
-   - `avaliacao.obrigado.tsx` linhas 150/152: separador `bg-foreground/30` — fundo é ink (quase preto), foreground é claro — visível, ok.
-   - Cards `bg-ink-raise` sobre `bg-ink` agora têm diferença mínima (`#16161A` vs `#0B0B0C`) — visível mas sutil; aceitável.
+**2. Layout responsivo do trilho de cards**
 
-4. **Tipografia de botão**: novo `btn-label` é `12px uppercase tracked` — em alguns botões longos do admin (ex.: "Salvar configurações") pode comprimir/quebrar; é uma queixa de identidade, não de contraste, mas vou verificar.
+Substituir `mt-10 grid md:grid-cols-3 gap-5` por:
 
-## Plano de correção
+```text
+mobile  → flex overflow-x-auto snap-x snap-mandatory
+          cards: w-[78vw] max-w-[320px] shrink-0 snap-start
+          padding lateral compensando container-x para "espiar" o próximo
+desktop → md:grid md:grid-cols-3 md:overflow-visible md:w-auto
+```
 
-### A) Restaurar o admin como tema próprio (independente do site público)
+- Esconder scrollbar (`scrollbar-width:none` + `::-webkit-scrollbar{display:none}` via utility já presente ou inline `[&::-webkit-scrollbar]:hidden`).
+- Manter a mesma borda gold, `gold-tick`, hover e tipografia.
 
-O admin foi escrito com a paleta Tailwind direta (slate/amber/white). Botões shadcn estão puxando tokens dossiê e poluindo. Corrigir reescrevendo apenas os botões nas páginas/admin para variantes neutras:
+**3. Estrutura do card com capa**
 
-1. **Em `src/routes/admin.tsx`** trocar o `<Button variant="outline">` "Ver site" e `<Button variant="ghost">` "Sair" por botões nativos com classes slate (`<a className="inline-flex …border border-slate-300 bg-white hover:bg-slate-50 text-slate-700 …">`), removendo a dependência do componente shadcn no shell do admin.
-2. Em todas as outras páginas `admin.*.tsx` que usam `<Button>` shadcn, **manter o componente**, mas adicionar uma classe wrapper na main do admin que reescreve os tokens shadcn para a paleta clara:
-   ```css
-   /* styles.css */
-   [data-admin-shell] {
-     --background: #ffffff;
-     --foreground: #0f172a;        /* slate-900 */
-     --primary: #f59e0b;            /* amber-500 */
-     --primary-foreground: #0f172a;
-     --secondary: #f1f5f9;          /* slate-100 */
-     --secondary-foreground: #0f172a;
-     --muted: #f1f5f9;
-     --muted-foreground: #475569;
-     --accent: #fef3c7;             /* amber-100 */
-     --accent-foreground: #92400e;
-     --border: #e2e8f0;
-     --input: #cbd5e1;
-     --ring: #f59e0b;
-     --card: #ffffff;
-     --card-foreground: #0f172a;
-     --popover: #ffffff;
-     --popover-foreground: #0f172a;
-   }
-   ```
-   E adicionar `data-admin-shell` no wrapper do `admin.tsx` (`<div className="min-h-screen flex bg-slate-100 text-slate-900" data-admin-shell>`). Isso isola o admin sem reescrever cada uso de `<Button>`.
+```text
+<article/Link>
+  ├─ <img capa>   aspect-[16/10] object-cover (loading="lazy" exceto se quisermos eager no primeiro)
+  ├─ overlay sutil gradient-to-t from-ink-deep/80 para legibilidade
+  └─ bloco de texto atual (categoria, título, resumo, tempo, "Ler")
+</article>
+```
 
-3. **Voltar `btn-label` para o site público apenas**: o `Button` base não deve forçar uppercase no admin (relatórios, filtros, "Salvar", "Excluir" ficam estranhos em uppercase). Trocar abordagem:
-   - Reverter `Button` base para `text-sm font-medium` (Inter).
-   - Criar uma variante específica `cta` ou aplicar `btn-label` apenas por className nos CTAs do site público (Hero, Footer, formulários). Os botões públicos críticos hoje já recebem `variant="default"` em hero/footer; vou listar os pontos e aplicar `className="btn-label"` neles.
-   - Esse caminho preserva o admin natural e devolve a tipografia premium nos CTAs reais do site.
+Ajustes finos:
+- Padding do bloco textual: `p-6` (era `p-7`) para acomodar a imagem.
+- `resumo` com `line-clamp-2` no mobile, `md:line-clamp-3` no desktop, para o card ficar mais compacto no carrossel.
 
-### B) Corrigir os pontos `text-ink-text` invisíveis no público
+**4. Indicador de carrossel (mobile only)**
+- Linha discreta abaixo: `<div className="md:hidden mt-4 flex justify-center gap-1.5">` com 3 pontinhos estáticos `bg-gold/30` — apenas affordance visual, sem JS de tracking (mantém leve). Opcional; se quiser zero JS extra, omito.
 
-- `sections.tsx` linha 478: trocar `text-ink-text` → `text-gold/15` (overlay decorativo sutil sobre seção escura).
-- Auditar os demais `text-ink-text` para garantir que estão sempre dentro de `.section-parchment` (já estão, conforme grep).
+## Restrições
 
-### C) Garantir contraste mínimo nos cards escuros
+- Não tocar em `vistos`, hero, ou outras dobras.
+- Não alterar a lógica de `listPublishedPosts` nem o tipo `BlogPost`.
+- Desktop (md+) deve continuar **idêntico** visualmente, exceto pela adição da imagem de capa no topo do card.
+- Sem libs novas (sem embla/swiper) — usar CSS scroll-snap nativo.
+- Respeitar `prefers-reduced-motion` (scroll-snap nativo já obedece).
 
-- `--ink-raise` `#16161A` sobre `--ink` `#0B0B0C` → diferença visual fraca. Subir `--ink-raise` para `#1C1C20` para devolver elevação visível em cards `bg-ink-raise/50` (FAQ, scoring, blog cards).
+## Arquivos afetados
 
-### D) Validação
+- `src/components/site/BlogStrip.tsx` (único arquivo editado).
 
-- Rodar Playwright em `/`, `/avaliacao`, `/admin`, `/admin/leads`, `/admin/scoring`. Tirar screenshots desktop 1280 e validar:
-  - botões do admin com aparência clara/slate, texto legível
-  - títulos `H1/H2` visíveis em todas as seções
-  - CTAs do site público em Montserrat uppercase
-  - cards escuros com elevação perceptível
-- Se algum botão crítico ainda ficar invisível, ajustar pontualmente.
+## Confirmação
 
-## O que NÃO muda
-
-- Paleta dossiê do site público (preto + ouro + parchment) continua igual.
-- Estrutura de rotas, copy, lógica.
-- Tipografia das seções/headlines do site público.
+Posso prosseguir? Caso prefira que eu **omita os pontinhos indicadores** ou use uma lib de carrossel (Embla) em vez de scroll-snap CSS, me avise antes de implementar.
