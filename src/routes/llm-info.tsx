@@ -19,7 +19,7 @@ export const Route = createFileRoute("/llm-info")({
       {
         name: "description",
         content:
-          "Resumo factual e citável da Status na América: assessoria brasileira de mobilidade migratória especializada em vistos EB (EB-2 NIW, EB-1, EB-3). Sede em Orlando, FL.",
+          "Resumo factual e citável da Status na América: empresa brasileira especializada em preparação documental para vistos EB (EB-2 NIW, EB-1, EB-3). Sede em Orlando, FL.",
       },
       { name: "robots", content: "index,follow" },
       { property: "og:title", content: "Status na América — resumo factual" },
