@@ -55,6 +55,9 @@ const rendaScore: Record<string, number> = {
   "10_20": 10,
   "20_40": 18,
   "40_mais": 25,
+  "40_80": 25,
+  "80_150": 25,
+  "150_mais": 25,
 };
 
 const momentoScore: Record<string, number> = {

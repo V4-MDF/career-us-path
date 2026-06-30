@@ -1,103 +1,111 @@
+
 ## Escopo
 
-Seis correções pedidas, todas em código de apresentação (sem mexer em scoring, A/B, dataStore ou rotas de admin).
+Refatorar a página `/avaliacao`, ajustar o `LeadFormProgressive` e reconstruir `/avaliacao/obrigado` para suportar dois desfechos (qualificado x ainda-não-qualificado). Mudanças só de apresentação/UX e regras de qualificação no cliente — sem mexer em dataStore, A/B engine ou `scoring.ts` admin.
 
 ---
 
-### 1. Tipografia legível (Montserrat + Inter)
+### 1. Reformatar `/avaliacao` (layout + contraste)
 
-Trocar globalmente Bodoni Moda + Hanken Grotesk pela combinação solicitada:
+`src/routes/avaliacao.tsx`:
 
-- **Display/Títulos**: `Montserrat` (700/800), com `text-transform: uppercase` e `letter-spacing` levemente positivo (tracking-wide) — ativado por padrão em `h1/h2` e nos utilitários `display-1/2/3`.
-- **Corpo**: `Inter` 400/500 (já adequado para leitura confortável).
-- **Dados/labels**: manter `JetBrains Mono` (não é problema de legibilidade).
-
-Implementação:
-- `bun add @fontsource/montserrat @fontsource-variable/inter`
-- Atualizar `src/styles.css`: trocar `--font-display` e `--font-sans`, ajustar `@utility display-1/2/3` para incluir `text-transform: uppercase` e `font-weight: 800`, reduzir `letter-spacing` negativo herdado de Bodoni (que comprime texto e prejudica leitura).
-- Aumentar `line-height` do corpo de `1.55` para `1.65` e `font-size` base de 15px para 16px.
-- Remover `<link>` do Google Fonts antigo em `__root.tsx`.
-
-Comentário no CSS marcando que a identidade "Dossiê" agora é expressa por estrutura/cor (ink + parchment + gold), não por serifa.
+- **Fundo**: remover o `guilloche` losangulado. Substituir por fundo `bg-ink` sólido com um **gradiente radial suave** no topo (gold 4% → transparente) e uma linha hairline `border-gold/15` separando header. Sem padronagem repetida.
+- **Layout**: trocar o grid 2 colunas por **layout vertical centralizado**, max-width `680px`, ocupando 100% da viewport (`min-h-screen flex flex-col`). O form passa a ser o protagonista — preenche a página inteira na vertical, com bastante respiro entre perguntas.
+- **Header acima**: compacto (logo + "Voltar ao site"), igual já está, mas com `bg-ink/80 backdrop-blur` sticky.
+- **Bloco de intro acima do form** (no topo da coluna única): chip "AVALIAÇÃO GRATUITA · 100% CONFIDENCIAL", `h1` em `display-2` (tamanho reduzido vs hero), parágrafo curto. **Sem grid de credenciais lateral** — credenciais viram uma faixa horizontal compacta abaixo do form (ou no footer da página).
+- **Contraste/legibilidade**: forçar `text-foreground` (não `text-foreground/55`) nos labels principais e aumentar tamanho mínimo do input para 16px. Trocar borda fina sumida do card por `border-gold/25` + `bg-ink-raise` (mais elevação visível).
+- **Origem (chip "ORIGEM:")**: encolher para chip discreto acima do card, fonte mono mas em `text-foreground/50`, sem ocupar largura inteira.
 
 ---
 
-### 2. Motivos visuais EUA / Brasil / família / processo
+### 2. `LeadFormProgressive` — ajustes pontuais
 
-Quatro componentes SVG novos em `src/components/site/visuals/`, todos `aria-hidden`, leves, com `prefers-reduced-motion` respeitado e fallback estático no mobile:
+`src/components/site/LeadFormProgressive.tsx`:
 
-| Componente | Onde | O que faz |
-|---|---|---|
-| `BrUsRouteBackdrop.tsx` | Hero da Home (atrás do `<h1>`) | SVG inline com silhuetas estilizadas de BR e USA conectadas por uma rota pontilhada animada (dash-offset). Opacity 0.08, cor gold. |
-| `FamilySealBackdrop.tsx` | Dobra família/legado (`#familia` no sections.tsx) | Silhuetas lineares de família (4 figuras) + selo circular com águia estilizada à direita. |
-| `ProcessIconStrip.tsx` | Dobra do processo (`#processo`) | Tira de ícones SVG sobre a timeline: passaporte → formulário I-140 → carimbo USCIS → Green Card. Anima em sequência ao entrar na viewport (uma vez). |
-| `ConstellationCanvas.tsx` | Fundo global da Home (atrás de tudo, mix-blend overlay) | Canvas 2D com ~80 pontos formando constelação reativa ao mouse (linhas até 120px de distância). Pausa quando aba inativa; desativado em `prefers-reduced-motion` e em viewport < 768px (substituído por gradient estático). |
-
-Tokens novos em `styles.css`: `--motif-opacity` e utilitário `.motif-soft` para padronizar opacidade/blend.
-
----
-
-### 3. Carrossel do blog na hero
-
-Nova dobra `BlogStrip.tsx` colocada logo abaixo do hero (antes de "Credenciais"), lendo `getPublishedPosts()` do `src/lib/blog.ts`. Mostra os 3 posts mais recentes em cards horizontais (título, categoria, lead, tempo de leitura). Link "Ver todos →" para `/blog`. Se não houver posts publicados, renderiza placeholder enxuto com 3 títulos sugeridos (sem quebrar layout).
+- **Faixas de renda ampliadas** (público alvo tem renda alta). Substituir o select de renda por:
+  - `ate_10` — Até R$ 10 mil
+  - `10_20` — R$ 10–20 mil
+  - `20_40` — R$ 20–40 mil
+  - `40_80` — R$ 40–80 mil  *(novo)*
+  - `80_150` — R$ 80–150 mil  *(novo)*
+  - `150_mais` — Acima de R$ 150 mil  *(novo)*
+- Atualizar `LABELS.renda` no mesmo arquivo para refletir as novas chaves. Não mexer em `scoring.ts` (ele tunable via admin); só estender `leadScoring.ts` (`rendaScore`) adicionando as 3 novas faixas com pesos crescentes (mantendo o teto em 25 para não distorcer o score existente).
+- **Card mais legível**: aumentar font-size das perguntas ativas (`display-3`/24–28px) e dos inputs (16px base). Forçar cor `text-foreground` (não /90) nos valores colapsados.
+- **Tela cheia vertical**: remover paddings horizontais grandes; o form recebe `w-full` e cresce naturalmente. Cada pergunta com `py-6` (mais ar). Barra de progresso fica **sticky no topo** do card, sempre visível.
+- **Auto-advance** continua igual; **Enter** continua avançando inputs de texto.
 
 ---
 
-### 4. Remover botão de WhatsApp do site público
+### 3. Gating de qualificação (form condicional)
 
-Remover **todos** os CTAs/links de WhatsApp do site público:
-- `src/routes/avaliacao.tsx` — botão no header e qualquer menção secundária.
-- `src/routes/avaliacao.obrigado.tsx` — bloco "Falar agora no WhatsApp".
-- `src/routes/blog.$slug.tsx` — botão de share WhatsApp (manter X/Twitter e LinkedIn).
-- `src/components/site/Footer.tsx` e Header — se houver link/FAB.
-- `src/components/site/sections.tsx` — qualquer CTA secundário "fale conosco no WhatsApp".
+Critério de qualificação mínimo (heurística sóbria, executada só após o submit final):
+- **Formação**: pelo menos `superior` (rejeita `sem_superior`).
+- **Renda**: pelo menos `10_20` (rejeita `ate_10`).
+- **Profissão**: qualquer uma listada conta; `outra` (sem qualificação declarada) rebaixa.
 
-Manter no `/admin` (campo `whatsapp_br/us` em admin/links e coluna `whatsapp` em leads — é dado operacional do time, não CTA público). Manter `whatsapp` como campo coletado no formulário (continua sendo canal de retorno informado pelo lead).
+Implementação em `src/lib/leadQualification.ts` (novo arquivo, ~30 linhas):
+```ts
+export type QualResult = "qualificado" | "nao_qualificado";
+export function evaluateQualification(d: LeadInput): {
+  result: QualResult;
+  reasons: string[];
+};
+```
+Retorna `nao_qualificado` se: `formacao === "sem_superior"` OU `renda === "ate_10"` OU (`profissao === "outra"` E `renda` em `["ate_10","10_20"]`).
 
-Substituir CTAs secundários por "Enviar e-mail" (mailto) onde fizer sentido.
+No `submit()` do `LeadFormProgressive`:
+- Sempre persiste o lead (com `status: "novo"` igual hoje) — não descartamos contato, só roteamos a UX.
+- Calcula `qualification` e passa via `onSubmitted({ id, qualification })`.
+- Adiciona `qualification` e `qualification_reasons` ao objeto salvo em `leads` (campos novos, opcionais; admin já ignora extras).
 
----
-
-### 5. Fundo interativo global
-
-Coberto pelo `ConstellationCanvas` acima (item 2, fundo global). Adicionalmente:
-- Hero ganha parallax sutil já existente + camada nova de "ruído cinético" (grain animado em CSS, 60fps via `transform: translate3d`).
-- Respeita `prefers-reduced-motion` e mobile.
-
----
-
-### 6. Fix da /avaliacao
-
-Sem repro do usuário, mas auditoria do código + sessão revela problemas prováveis:
-
-- O header da `/avaliacao` tem botão de WhatsApp que será removido (item 4).
-- `LeadFormProgressive` (499 linhas) será verificado para: avanço entre perguntas, validação, persistência de `leads_partial` e fallback quando `segmentId` é `undefined`. Vou rodar Playwright contra `localhost:8080/avaliacao` em build mode para reproduzir o fluxo completo (todas as perguntas até "Enviar para análise") e identificar o ponto de travamento.
-- Garantir que `goToThanks` recebe `search` válido (hoje o cast `as never` pode estar disparando warning de tipo).
-- Confirmar que o `originLabel` aparece quando há UTM mas não bloqueia render quando ausente.
-
-Se o Playwright revelar bug específico (ex: pergunta X não avança, botão desabilitado), corrijo no mesmo passo. Se estiver "lento/visualmente confuso", refino UX: barra de progresso mais visível, foco automático no próximo campo, mensagens de erro inline.
+No `/avaliacao`, `goToThanks` passa `qualification` como search param:
+```ts
+navigate({ to: "/avaliacao/obrigado", search: { ...search, q: result }, replace: true })
+```
 
 ---
 
-## Ordem de execução
+### 4. Reconstruir `/avaliacao/obrigado`
 
-1. Instalar fontes + atualizar `styles.css` (item 1).
-2. Criar componentes de motivos visuais (item 2) e `BlogStrip` (item 3).
-3. Wire-in nos sections/hero da Home.
-4. Remover WhatsApp do público (item 4).
-5. Reproduzir `/avaliacao` com Playwright, corrigir bug encontrado (item 6).
-6. Build + smoke test visual (screenshots desktop + mobile).
+`src/routes/avaliacao.obrigado.tsx`:
+
+- Aceita `?q=qualificado|nao_qualificado` (default `qualificado` para compat).
+- **Layout**: mesma estética minimal vertical da nova `/avaliacao`. Header igual. `min-h-screen flex` centralizado.
+- **Variante "qualificado"** (positivo, como hoje, mas refinada):
+  - Selo gold com check, chip "PERFIL RECEBIDO".
+  - `h1`: "Obrigado. Sua avaliação está em análise."
+  - 3 cards de próximos passos (mantém os atuais 01/02/03).
+  - CTA: "Conhecer o EB-2 NIW" → `/vistos/eb2-niw` + "Voltar ao site".
+- **Variante "nao_qualificado"** (nova):
+  - Selo neutro (ink), chip "PERFIL REGISTRADO".
+  - `h1`: "Recebemos seu perfil — vamos guardar seu contato."
+  - Parágrafo honesto: "Pelo que você compartilhou, hoje o seu perfil ainda não atende a todos os critérios mínimos para os vistos EB-2 NIW / EB-1. Isso pode mudar conforme sua carreira evolui."
+  - Bloco "Enquanto isso, conheça o caminho" com 2 cards:
+    1. **Guia EB-2 NIW** → `/vistos/eb2-niw` (entender requisitos).
+    2. **Artigos do nosso blog** → `/blog` (estudar e se preparar).
+  - Nota fina: "Se quiser conversar mesmo assim, escreva para [email]."
+- Tracking: `trackLead()` dispara nos dois casos (lead foi capturado), mas com `qualification` como custom param.
+
+---
+
+### 5. Validação
+
+- `tsgo --noEmit` deve passar.
+- Playwright contra `localhost:8080/avaliacao`: preencher fluxo qualificado → ver obrigado positivo; preencher fluxo com renda `ate_10` + formacao `sem_superior` → ver obrigado "nao_qualificado". Screenshot dos dois desfechos.
+- Verificar admin `/admin/leads` continua listando ambos (campos `qualification` extras não quebram render).
+
+---
 
 ## Detalhes técnicos
 
-- **Fontes**: `@fontsource/montserrat` (pesos 400/600/700/800) e `@fontsource-variable/inter` importados em `src/styles.css` no bloco superior de imports. Sem `<link>` Google Fonts.
-- **SVGs**: inline (não asset CDN) — são pequenos (<5KB cada) e precisam responder a CSS vars de cor.
-- **Canvas**: `requestAnimationFrame` com `IntersectionObserver` para pausar quando hero sai da tela; `useReducedMotion` desliga; `matchMedia("(max-width: 767px)")` força fallback.
-- **Tipografia uppercase**: aplicada via `@utility display-1/2/3` e em `h1/h2`, não no body — preserva legibilidade de parágrafos.
-- **Não mexer**: `dataStore`, `scoring.ts`, `abEngine.ts`, rotas `/admin/*`, sitemap, lógica de leads.
+- **Não mexer**: `dataStore.ts`, `scoring.ts` (admin), `abEngine.ts`, `origin.ts`, rotas `/admin/*`, `tracking.ts`.
+- **Novo arquivo**: `src/lib/leadQualification.ts`.
+- **Editados**: `src/routes/avaliacao.tsx`, `src/routes/avaliacao.obrigado.tsx`, `src/components/site/LeadFormProgressive.tsx`, `src/lib/leadScoring.ts` (só extensão de `rendaScore`).
+- Faixas novas em `rendaScore`: `40_80: 25`, `80_150: 25`, `150_mais: 25` (mantém teto; modelo admin tunável fica intacto porque lê do dataStore).
+- A gating é puramente UI/roteamento. Lead nunca é descartado — sempre vai para `leads` e fica visível no admin com a flag `qualification` para o time decidir como tratar.
 
-## O que NÃO está no escopo
+## Fora do escopo
 
-- Refatoração de URL por dobra (já entregue em turno anterior).
-- Mudanças em copywriting (só remoção de menções a WhatsApp em CTAs).
-- Novos campos no formulário.
+- Mudanças no admin (tag de qualificação aparece como campo cru; UI dedicada fica para outro turno se pedido).
+- Mudanças no formulário inline da Home (continua linkando para `/avaliacao`).
+- Novos eventos de pixel além de `trackLead` já existente.

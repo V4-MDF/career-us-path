@@ -27,13 +27,14 @@ import {
 } from "@/components/ui/select";
 import { newId, set, remove } from "@/lib/dataStore";
 import { type LeadInput } from "@/lib/leadScoring";
+import { evaluateQualification, type QualResult } from "@/lib/leadQualification";
 import { getAssignedVariantId, registerConversion } from "@/lib/abEngine";
 import { getOrigin, type LeadOrigin } from "@/lib/origin";
 
 export interface LeadFormProgressiveProps {
   segmentId?: string;
   defaultProfissao?: string;
-  onSubmitted?: (lead: { id: string }) => void;
+  onSubmitted?: (lead: { id: string; qualification: QualResult }) => void;
   submitLabel?: string;
   /** Path da rota atual (para excluir da origem). Ex.: "/avaliacao" */
   currentPath?: string;
@@ -210,6 +211,7 @@ export function LeadFormProgressive({
     try {
       const id = newId("lead");
       const origin = getOrigin(currentPath);
+      const qual = evaluateQualification(data);
       const lead = {
         ...data,
         id,
@@ -219,6 +221,8 @@ export function LeadFormProgressive({
         segmento: segmentId,
         variante_ab: segmentId ? getAssignedVariantId(segmentId) : null,
         status: "novo" as const,
+        qualification: qual.result,
+        qualification_reasons: qual.reasons,
       };
       await set("leads", id, lead);
       if (segmentId) await registerConversion(segmentId);
@@ -227,7 +231,7 @@ export function LeadFormProgressive({
         await remove("leads_partial", partialIdRef.current);
         try { window.sessionStorage.removeItem(SS_PARTIAL_ID); } catch { /* ignore */ }
       }
-      if (onSubmitted) onSubmitted({ id });
+      if (onSubmitted) onSubmitted({ id, qualification: qual.result });
       else setDone(true);
     } catch {
       setError("Não foi possível enviar agora. Tente novamente.");
@@ -249,11 +253,11 @@ export function LeadFormProgressive({
   }
 
   return (
-    <div className="rounded-2xl border border-border bg-surface shadow-soft" ref={containerRef}>
-      {/* progresso */}
-      <div className="px-6 md:px-8 pt-6">
+    <div className="rounded-2xl border border-gold/25 bg-ink-raise shadow-soft overflow-hidden" ref={containerRef}>
+      {/* progresso — sticky no topo do card */}
+      <div className="sticky top-0 z-10 px-6 md:px-8 pt-5 pb-4 bg-ink-raise/95 backdrop-blur border-b border-border/40">
         <div className="flex items-center justify-between mb-2">
-          <span className="font-mono-label text-xs text-foreground/55">
+          <span className="font-mono-label text-xs text-foreground/70">
             {completedCount}/{totalFields} preenchidos
           </span>
           <span className="font-mono-label text-xs text-gold">{progressPct}%</span>
@@ -263,7 +267,7 @@ export function LeadFormProgressive({
         </div>
       </div>
 
-      <div className="px-6 md:px-8 py-8 space-y-4">
+      <div className="px-6 md:px-8 py-8 space-y-5">
         {PROGRESSIVE_FIELDS.map((f, i) => {
           const visible = i <= stepIndex;
           const active = i === stepIndex;
@@ -369,8 +373,12 @@ const LABELS: Record<string, Record<string, string>> = {
     "ate_29": "Até 29 anos", "30_39": "30 a 39", "40_49": "40 a 49", "50_mais": "50+",
   },
   renda: {
-    "ate_10": "Até R$ 10 mil", "10_20": "R$ 10–20 mil",
-    "20_40": "R$ 20–40 mil", "40_mais": "Acima de R$ 40 mil",
+    "ate_10": "Até R$ 10 mil",
+    "10_20": "R$ 10–20 mil",
+    "20_40": "R$ 20–40 mil",
+    "40_80": "R$ 40–80 mil",
+    "80_150": "R$ 80–150 mil",
+    "150_mais": "Acima de R$ 150 mil",
   },
   momento: {
     ja_decidi: "Já decidi", proximos_1_2: "Próximos 1–2 anos", sonho: "Pesquisando / sonho",
@@ -434,12 +442,12 @@ function ActiveQuestion({
     setTimeout(() => onEnter(), 180);
   };
   return (
-    <div className="py-3">
-      <Label className="font-display text-[22px] md:text-[26px] leading-snug text-foreground block mb-1">
+    <div className="py-4">
+      <Label className="font-display text-[24px] md:text-[28px] leading-snug text-foreground block mb-2">
         {field.label}
       </Label>
-      {field.hint && <p className="text-xs text-foreground/55 mb-3">{field.hint}</p>}
-      <div className="mt-3" onKeyDown={onKey}>
+      {field.hint && <p className="text-sm text-foreground/65 mb-4">{field.hint}</p>}
+      <div className="mt-4 [&_input]:text-base [&_input]:h-12 [&_[role=combobox]]:h-12 [&_[role=combobox]]:text-base" onKeyDown={onKey}>
         {field.key === "nome" && (
           <Input autoFocus value={data.nome} onChange={(e) => update("nome", e.target.value)} placeholder="Nome completo" />
         )}

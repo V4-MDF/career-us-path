@@ -1,21 +1,34 @@
 /**
  * /avaliacao/obrigado — agradecimento + próximos passos.
  *
- * Disparado APENAS após submit bem-sucedido em /avaliacao. É o gatilho do
- * Público B (Lead) no remarketing.
+ * Aceita ?q=qualificado|nao_qualificado para alternar o tom:
+ *  - qualificado: caminho positivo, prepara para conversa.
+ *  - nao_qualificado: acolhe, explica e convida a estudar (blog/pillar).
  *
- * SEO: noindex,nofollow e fora do sitemap.
+ * SEO: noindex,nofollow.
  */
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { CheckCircle2 } from "lucide-react";
+import { CheckCircle2, BookOpen, FileText, ChevronLeft, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { trackLead } from "@/lib/tracking";
 
+interface ObrigadoSearch {
+  q?: "qualificado" | "nao_qualificado";
+  [k: string]: string | undefined;
+}
+
 export const Route = createFileRoute("/avaliacao/obrigado")({
+  validateSearch: (s: Record<string, unknown>): ObrigadoSearch => {
+    const out: ObrigadoSearch = {};
+    Object.entries(s).forEach(([k, v]) => {
+      if (typeof v === "string") out[k] = v;
+    });
+    return out;
+  },
   head: () => ({
     meta: [
-      { title: "Recebemos seu perfil — em breve falaremos com você | Status na América" },
+      { title: "Recebemos seu perfil | Status na América" },
       { name: "robots", content: "noindex,nofollow" },
     ],
   }),
@@ -23,62 +36,39 @@ export const Route = createFileRoute("/avaliacao/obrigado")({
 });
 
 function Obrigado() {
-  // Público B — Lead (Pixel) + generate_lead (GA4). No-op se desativado.
-  useEffect(() => { trackLead(); }, []);
+  const search = Route.useSearch();
+  const variant = useMemo<"qualificado" | "nao_qualificado">(
+    () => (search.q === "nao_qualificado" ? "nao_qualificado" : "qualificado"),
+    [search.q],
+  );
+
+  useEffect(() => { trackLead({ qualification: variant }); }, [variant]);
 
   return (
     <div className="min-h-screen bg-ink text-foreground flex flex-col">
-      <header className="border-b border-gold/20">
-        <div className="container-x flex h-[68px] items-center">
+      <header className="sticky top-0 z-20 border-b border-gold/15 bg-ink/85 backdrop-blur">
+        <div className="container-x flex h-[64px] items-center justify-between">
           <Link to="/" className="flex items-center gap-3" aria-label="Status na América">
             <span className="grid h-9 w-9 place-items-center border border-gold/60 text-gold font-display text-lg">S</span>
-            <span className="font-display text-[17px]">Status<span className="text-gold">.</span> na América</span>
+            <span className="font-display text-[16px]">Status<span className="text-gold">.</span> na América</span>
+          </Link>
+          <Link to="/" className="inline-flex items-center gap-1 text-xs font-mono-label text-foreground/70 hover:text-gold">
+            <ChevronLeft className="h-3.5 w-3.5" /> Voltar ao site
           </Link>
         </div>
       </header>
 
-      <main className="flex-1 grid place-items-center">
-        <div className="container-x py-20 max-w-2xl text-center">
-          <div className="mx-auto grid h-16 w-16 place-items-center border border-gold/60 text-gold">
-            <CheckCircle2 className="h-8 w-8" />
-          </div>
-
-          <div className="mt-8 flex items-center justify-center gap-3">
-            <span aria-hidden className="h-px w-10 bg-gold" />
-            <span className="font-mono-label text-gold">PERFIL RECEBIDO</span>
-            <span aria-hidden className="h-px w-10 bg-gold" />
-          </div>
-
-          <h1 className="mt-6 font-display text-[40px] md:text-[52px] leading-[1.05]">
-            Obrigado. Sua avaliação está em análise.
-          </h1>
-
-          <p className="mt-6 text-lg text-foreground/80 leading-relaxed">
-            Nossa equipe vai analisar o seu perfil com atenção e entrar em contato em
-            até 48h pelo canal informado.
-          </p>
-
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
-            <Link to="/">
-              <Button size="lg" variant="outline" className="h-12 px-6 border-gold/40 text-foreground hover:border-gold hover:bg-gold/5">
-                Voltar para o site
-              </Button>
-            </Link>
-          </div>
-
-          <div className="mt-14 grid sm:grid-cols-3 gap-5 text-left">
-            {[
-              { n: "01", t: "Análise individual", d: "Olhamos o seu histórico, formação, impacto e contexto familiar." },
-              { n: "02", t: "Indicação de caminho", d: "Sinalizamos a categoria EB mais coerente com o seu perfil." },
-              { n: "03", t: "Próximos passos", d: "Se fizer sentido, agendamos uma conversa estratégica." },
-            ].map((s) => (
-              <div key={s.n} className="border border-gold/20 bg-ink-raise/40 p-5">
-                <div className="font-display text-3xl text-gold leading-none">{s.n}</div>
-                <h3 className="mt-3 font-display text-base">{s.t}</h3>
-                <p className="mt-2 text-sm text-foreground/70 leading-relaxed">{s.d}</p>
-              </div>
-            ))}
-          </div>
+      <main className="flex-1 relative">
+        <div
+          aria-hidden
+          className="absolute inset-x-0 top-0 h-[420px] pointer-events-none"
+          style={{
+            background:
+              "radial-gradient(ellipse at 50% 0%, color-mix(in oklab, var(--gold) 8%, transparent) 0%, transparent 70%)",
+          }}
+        />
+        <div className="relative mx-auto w-full max-w-[720px] px-5 md:px-6 py-14 md:py-20">
+          {variant === "qualificado" ? <Qualificado /> : <NaoQualificado />}
         </div>
       </main>
 
@@ -89,8 +79,145 @@ function Obrigado() {
             Não somos advogados licenciados e não prestamos consultoria jurídica nem
             representação legal em processos de imigração.
           </p>
+          <p className="mt-3 font-mono-label text-foreground/40">
+            © {new Date().getFullYear()} STATUS NA AMÉRICA LLC · EIN 99-4846502
+          </p>
         </div>
       </footer>
+    </div>
+  );
+}
+
+function Qualificado() {
+  return (
+    <div className="text-center">
+      <div className="mx-auto grid h-16 w-16 place-items-center border border-gold/60 text-gold rounded-full">
+        <CheckCircle2 className="h-8 w-8" />
+      </div>
+
+      <div className="mt-8 inline-flex items-center justify-center gap-3">
+        <span aria-hidden className="h-px w-10 bg-gold" />
+        <span className="font-mono-label text-[11px] text-gold">PERFIL RECEBIDO</span>
+        <span aria-hidden className="h-px w-10 bg-gold" />
+      </div>
+
+      <h1 className="mt-6 display-2 text-foreground">
+        Obrigado. Sua avaliação está em análise.
+      </h1>
+
+      <p className="mt-6 text-base md:text-lg text-foreground/80 leading-relaxed max-w-[560px] mx-auto">
+        Nossa equipe vai analisar o seu perfil com atenção e entrar em contato em
+        até 48h pelo canal informado.
+      </p>
+
+      <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
+        <Link to="/vistos/$slug" params={{ slug: "eb2-niw" }}>
+          <Button size="lg" className="h-12 px-6">Conhecer o EB-2 NIW</Button>
+        </Link>
+        <Link to="/">
+          <Button size="lg" variant="outline" className="h-12 px-6 border-gold/40 text-foreground hover:border-gold hover:bg-gold/5">
+            Voltar para o site
+          </Button>
+        </Link>
+      </div>
+
+      <div className="mt-14 grid sm:grid-cols-3 gap-5 text-left">
+        {[
+          { n: "01", t: "Análise individual", d: "Olhamos o seu histórico, formação, impacto e contexto familiar." },
+          { n: "02", t: "Indicação de caminho", d: "Sinalizamos a categoria EB mais coerente com o seu perfil." },
+          { n: "03", t: "Próximos passos", d: "Se fizer sentido, agendamos uma conversa estratégica." },
+        ].map((s) => (
+          <div key={s.n} className="border border-gold/20 bg-ink-raise/40 p-5 rounded-lg">
+            <div className="font-display text-3xl text-gold leading-none">{s.n}</div>
+            <h3 className="mt-3 font-display text-base">{s.t}</h3>
+            <p className="mt-2 text-sm text-foreground/70 leading-relaxed">{s.d}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function NaoQualificado() {
+  return (
+    <div>
+      <div className="text-center">
+        <div className="mx-auto grid h-16 w-16 place-items-center border border-border bg-ink-raise text-foreground/80 rounded-full">
+          <CheckCircle2 className="h-8 w-8" />
+        </div>
+
+        <div className="mt-8 inline-flex items-center justify-center gap-3">
+          <span aria-hidden className="h-px w-10 bg-foreground/30" />
+          <span className="font-mono-label text-[11px] text-foreground/70">PERFIL REGISTRADO</span>
+          <span aria-hidden className="h-px w-10 bg-foreground/30" />
+        </div>
+
+        <h1 className="mt-6 display-2 text-foreground">
+          Recebemos seu perfil — vamos guardar seu contato.
+        </h1>
+
+        <p className="mt-6 text-base md:text-lg text-foreground/80 leading-relaxed max-w-[600px] mx-auto">
+          Pelo que você compartilhou, hoje o seu perfil ainda não atende a todos os
+          critérios mínimos que costumamos recomendar para os vistos EB-2 NIW ou EB-1.
+          Isso pode mudar conforme sua carreira evolui — e nós continuamos por aqui.
+        </p>
+      </div>
+
+      <div className="mt-12">
+        <div className="text-center mb-6">
+          <span className="font-mono-label text-[11px] text-gold">ENQUANTO ISSO, CONHEÇA O CAMINHO</span>
+        </div>
+
+        <div className="grid sm:grid-cols-2 gap-5">
+          <Link
+            to="/vistos/$slug"
+            params={{ slug: "eb2-niw" }}
+            className="group border border-gold/25 bg-ink-raise/60 p-6 rounded-lg hover:border-gold/60 hover:bg-ink-raise transition-colors"
+          >
+            <FileText className="h-6 w-6 text-gold" />
+            <h3 className="mt-4 font-display text-lg text-foreground">Guia do EB-2 NIW</h3>
+            <p className="mt-2 text-sm text-foreground/70 leading-relaxed">
+              Entenda os critérios, o processo e o que costuma fortalecer um caso.
+            </p>
+            <span className="mt-4 inline-block font-mono-label text-[11px] text-gold group-hover:underline">
+              LER O GUIA →
+            </span>
+          </Link>
+
+          <Link
+            to="/blog"
+            className="group border border-gold/25 bg-ink-raise/60 p-6 rounded-lg hover:border-gold/60 hover:bg-ink-raise transition-colors"
+          >
+            <BookOpen className="h-6 w-6 text-gold" />
+            <h3 className="mt-4 font-display text-lg text-foreground">Artigos do blog</h3>
+            <p className="mt-2 text-sm text-foreground/70 leading-relaxed">
+              Conteúdo prático sobre carreira, documentação e preparação para o processo.
+            </p>
+            <span className="mt-4 inline-block font-mono-label text-[11px] text-gold group-hover:underline">
+              VER ARTIGOS →
+            </span>
+          </Link>
+        </div>
+      </div>
+
+      <div className="mt-12 border-t border-border/50 pt-6 flex items-start gap-3 text-sm text-foreground/70">
+        <Mail className="h-4 w-4 text-gold mt-0.5 shrink-0" />
+        <span>
+          Quer conversar mesmo assim? Escreva para{" "}
+          <a href="mailto:contato@statusnaamerica.com" className="text-gold hover:underline">
+            contato@statusnaamerica.com
+          </a>{" "}
+          — vamos te orientar.
+        </span>
+      </div>
+
+      <div className="mt-10 text-center">
+        <Link to="/">
+          <Button size="lg" variant="outline" className="h-12 px-6 border-gold/40 text-foreground hover:border-gold hover:bg-gold/5">
+            Voltar para o site
+          </Button>
+        </Link>
+      </div>
     </div>
   );
 }
