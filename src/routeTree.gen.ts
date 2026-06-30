@@ -36,6 +36,7 @@ import { Route as AdminConteudoRouteImport } from './routes/admin.conteudo'
 import { Route as AdminConfiguracoesRouteImport } from './routes/admin.configuracoes'
 import { Route as AdminBlogRouteImport } from './routes/admin.blog'
 import { Route as AdminAbRouteImport } from './routes/admin.ab'
+import { Route as VistosSlugSecaoRouteImport } from './routes/vistos.$slug.$secao'
 
 const SobreRoute = SobreRouteImport.update({
   id: '/sobre',
@@ -172,6 +173,11 @@ const AdminAbRoute = AdminAbRouteImport.update({
   path: '/ab',
   getParentRoute: () => AdminRoute,
 } as any)
+const VistosSlugSecaoRoute = VistosSlugSecaoRouteImport.update({
+  id: '/$secao',
+  path: '/$secao',
+  getParentRoute: () => VistosSlugRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -199,8 +205,9 @@ export interface FileRoutesByFullPath {
   '/avaliacao/obrigado': typeof AvaliacaoObrigadoRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/lp/$slug': typeof LpSlugRoute
-  '/vistos/$slug': typeof VistosSlugRoute
+  '/vistos/$slug': typeof VistosSlugRouteWithChildren
   '/admin/': typeof AdminIndexRoute
+  '/vistos/$slug/$secao': typeof VistosSlugSecaoRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -227,8 +234,9 @@ export interface FileRoutesByTo {
   '/avaliacao/obrigado': typeof AvaliacaoObrigadoRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/lp/$slug': typeof LpSlugRoute
-  '/vistos/$slug': typeof VistosSlugRoute
+  '/vistos/$slug': typeof VistosSlugRouteWithChildren
   '/admin': typeof AdminIndexRoute
+  '/vistos/$slug/$secao': typeof VistosSlugSecaoRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -257,8 +265,9 @@ export interface FileRoutesById {
   '/avaliacao/obrigado': typeof AvaliacaoObrigadoRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/lp/$slug': typeof LpSlugRoute
-  '/vistos/$slug': typeof VistosSlugRoute
+  '/vistos/$slug': typeof VistosSlugRouteWithChildren
   '/admin/': typeof AdminIndexRoute
+  '/vistos/$slug/$secao': typeof VistosSlugSecaoRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -290,6 +299,7 @@ export interface FileRouteTypes {
     | '/lp/$slug'
     | '/vistos/$slug'
     | '/admin/'
+    | '/vistos/$slug/$secao'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -318,6 +328,7 @@ export interface FileRouteTypes {
     | '/lp/$slug'
     | '/vistos/$slug'
     | '/admin'
+    | '/vistos/$slug/$secao'
   id:
     | '__root__'
     | '/'
@@ -347,6 +358,7 @@ export interface FileRouteTypes {
     | '/lp/$slug'
     | '/vistos/$slug'
     | '/admin/'
+    | '/vistos/$slug/$secao'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -359,7 +371,7 @@ export interface RootRouteChildren {
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   SobreRoute: typeof SobreRoute
   LpSlugRoute: typeof LpSlugRoute
-  VistosSlugRoute: typeof VistosSlugRoute
+  VistosSlugRoute: typeof VistosSlugRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -553,6 +565,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminAbRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/vistos/$slug/$secao': {
+      id: '/vistos/$slug/$secao'
+      path: '/$secao'
+      fullPath: '/vistos/$slug/$secao'
+      preLoaderRoute: typeof VistosSlugSecaoRouteImport
+      parentRoute: typeof VistosSlugRoute
+    }
   }
 }
 
@@ -616,6 +635,18 @@ const BlogRouteChildren: BlogRouteChildren = {
 
 const BlogRouteWithChildren = BlogRoute._addFileChildren(BlogRouteChildren)
 
+interface VistosSlugRouteChildren {
+  VistosSlugSecaoRoute: typeof VistosSlugSecaoRoute
+}
+
+const VistosSlugRouteChildren: VistosSlugRouteChildren = {
+  VistosSlugSecaoRoute: VistosSlugSecaoRoute,
+}
+
+const VistosSlugRouteWithChildren = VistosSlugRoute._addFileChildren(
+  VistosSlugRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRoute: AdminRouteWithChildren,
@@ -626,7 +657,7 @@ const rootRouteChildren: RootRouteChildren = {
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   SobreRoute: SobreRoute,
   LpSlugRoute: LpSlugRoute,
-  VistosSlugRoute: VistosSlugRoute,
+  VistosSlugRoute: VistosSlugRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -30,15 +30,39 @@ const SEED_POST_SLUGS = [
   "emissao-de-vistos-brasileiros-2026",
 ];
 
+// Catálogo de dobras indexáveis dos pilares — duplicado aqui em vez de
+// importar de sectionMap.ts para evitar bundling pesado no SSR handler.
+// Manter em sincronia com VISA_SECTIONS (sectionMap.ts).
+const VISA_INDEXABLE_SECTIONS = [
+  "definicao",
+  "elegibilidade",
+  "processo",
+  "familia",
+  "comparativo",
+  "duvidas-frequentes",
+];
+const VISA_SLUGS = ["eb2-niw", "eb1", "eb3"];
+
 export const Route = createFileRoute("/sitemap.xml")({
   server: {
     handlers: {
       GET: async () => {
         const entries: SitemapEntry[] = [
           { path: "/", changefreq: "weekly", priority: "1.0" },
-          { path: "/vistos/eb2-niw", changefreq: "monthly", priority: "0.9" },
-          { path: "/vistos/eb1", changefreq: "monthly", priority: "0.8" },
-          { path: "/vistos/eb3", changefreq: "monthly", priority: "0.8" },
+          // Pilares (página-mãe)
+          ...VISA_SLUGS.map((slug) => ({
+            path: `/vistos/${slug}`,
+            changefreq: "monthly" as const,
+            priority: slug === "eb2-niw" ? "0.9" : "0.8",
+          })),
+          // Sub-rotas canônicas por dobra de cada pilar
+          ...VISA_SLUGS.flatMap((slug) =>
+            VISA_INDEXABLE_SECTIONS.map((sec) => ({
+              path: `/vistos/${slug}/${sec}`,
+              changefreq: "monthly" as const,
+              priority: "0.7",
+            })),
+          ),
           { path: "/sobre", changefreq: "monthly", priority: "0.7" },
           { path: "/contato", changefreq: "monthly", priority: "0.6" },
           { path: "/blog", changefreq: "weekly", priority: "0.7" },
@@ -49,6 +73,7 @@ export const Route = createFileRoute("/sitemap.xml")({
             priority: "0.6",
           })),
         ];
+
 
         const urls = entries.map((e) =>
           [
