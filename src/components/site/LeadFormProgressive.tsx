@@ -216,7 +216,8 @@ export function LeadFormProgressive({
   const advance = () => {
     const f = PROGRESSIVE_FIELDS[stepIndex];
     if (!f) return;
-    if (!isFieldValid(f.key, data)) {
+    // lê do ref para enxergar o valor recém-setado pelo <Select>
+    if (!isFieldValid(f.key, dataRef.current)) {
       setError(errorFor(f.key));
       return;
     }
