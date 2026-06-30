@@ -223,15 +223,15 @@
 /* Filete decorativo curto no topo de cards */
 @utility gold-tick {
   position: relative;
-}
-@utility gold-tick::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 42px;
-  height: 3px;
-  background: var(--gold);
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 42px;
+    height: 3px;
+    background: var(--gold);
+  }
 }
 
 /* Padrão guilloché (linhas finas de certificado) — usar com opacidade ≤6% */
@@ -256,18 +256,18 @@
   position: relative;
   overflow: hidden;
   isolation: isolate;
-}
-@utility btn-sweep::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.18), transparent);
-  transform: translateX(-100%);
-  transition: transform 0.55s ease;
-  z-index: -1;
-}
-@utility btn-sweep:hover::after {
-  transform: translateX(100%);
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.18), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.55s ease;
+    z-index: -1;
+  }
+  &:hover::after {
+    transform: translateX(100%);
+  }
 }
 
 /* Link com underline dourado animado (nav) */
@@ -275,23 +275,23 @@
   position: relative;
   display: inline-block;
   padding-block: 2px;
-}
-@utility nav-link::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -2px;
-  height: 1px;
-  background: var(--gold);
-  transform: scaleX(0);
-  transform-origin: right center;
-  transition: transform 0.35s cubic-bezier(0.22, 0.61, 0.36, 1);
-}
-@utility nav-link:hover::after,
-@utility nav-link[data-status="active"]::after {
-  transform: scaleX(1);
-  transform-origin: left center;
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -2px;
+    height: 1px;
+    background: var(--gold);
+    transform: scaleX(0);
+    transform-origin: right center;
+    transition: transform 0.35s cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+  &:hover::after,
+  &[data-status="active"]::after {
+    transform: scaleX(1);
+    transform-origin: left center;
+  }
 }
 
 /* Alias de compat com componentes antigos que ainda usam bg-surface etc. */
@@ -309,4 +309,77 @@
 @theme inline {
   --shadow-elegant: 0 18px 40px -24px rgba(0, 0, 0, 0.55);
   --shadow-soft: 0 8px 24px -16px rgba(0, 0, 0, 0.45);
+}
+
+/* ----------------------------------------------------------------
+ * .prose-dossie — tipografia do corpo de posts do blog.
+ * Mantém Bodoni nas headlines e Hanken Grotesk no corpo, com filetes
+ * dourados em blockquote e listas com bullets desenhados.
+ * ---------------------------------------------------------------- */
+.prose-dossie {
+  color: rgba(236, 230, 214, 0.88);
+  font-size: 17px;
+  line-height: 1.75;
+  max-width: 68ch;
+}
+.prose-dossie > * + * { margin-top: 1.1em; }
+.prose-dossie h2 {
+  font-family: var(--font-display);
+  font-size: 1.85em;
+  line-height: 1.15;
+  margin-top: 2em;
+  color: #ECE6D6;
+}
+.prose-dossie h2::before {
+  content: "";
+  display: block;
+  width: 36px;
+  height: 1px;
+  background: var(--gold);
+  margin-bottom: 0.6em;
+}
+.prose-dossie h3 {
+  font-family: var(--font-display);
+  font-size: 1.4em;
+  line-height: 1.2;
+  margin-top: 1.6em;
+  color: #ECE6D6;
+}
+.prose-dossie a {
+  color: var(--gold);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+.prose-dossie strong { color: #ECE6D6; font-weight: 600; }
+.prose-dossie blockquote {
+  border-left: 2px solid var(--gold);
+  padding-left: 1.2em;
+  font-style: italic;
+  color: rgba(236, 230, 214, 0.75);
+}
+.prose-dossie ul, .prose-dossie ol { padding-left: 1.4em; }
+.prose-dossie ul li { list-style: none; position: relative; }
+.prose-dossie ul li::before {
+  content: "";
+  position: absolute;
+  left: -1.1em;
+  top: 0.8em;
+  width: 8px;
+  height: 1px;
+  background: var(--gold);
+}
+.prose-dossie ol { list-style: decimal; }
+.prose-dossie code {
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+  background: rgba(183, 151, 90, 0.12);
+  padding: 0.1em 0.35em;
+  border-radius: 3px;
+}
+.prose-dossie hr {
+  border: 0;
+  height: 1px;
+  background: rgba(183, 151, 90, 0.3);
+  margin: 2.2em 0;
 }

@@ -18,7 +18,8 @@ export type TableName =
   | "settings"      // chave/valor: branding, contatos, links, tracking
   | "page_seo"      // SEO por página (id = slug da página)
   | "media"         // imagens/logos/og (id = slot)
-  | "page_sections"; // ordem/ativação das dobras por página
+  | "page_sections" // ordem/ativação das dobras por página
+  | "blog_posts";   // posts do blog (id = slug)
 
 const PREFIX = "status_";
 

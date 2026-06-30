@@ -40,7 +40,11 @@ const PAGES: Array<{ slug: string; label: string; defaults: PageSeo }> = [
 function SeoPage() {
   return (
     <>
-      <PageHeader title="SEO" description="Meta tags por página. Para LPs, edite no segmento correspondente." />
+      <PageHeader
+        title="SEO"
+        description="Meta tags por página. Para LPs, edite no segmento correspondente."
+        actions={<SitemapDownloadButton />}
+      />
       <div className="mb-4 rounded-md border border-sky-200 bg-sky-50 px-4 py-3 text-sm text-sky-900 flex gap-2">
         <Info className="h-4 w-4 mt-0.5 shrink-0" />
         <div>SEO das LANDING PAGES (médicos, engenheiros, empresários, ...) é editado em <Link to="/admin/segmentos" className="underline font-medium">Segmentos</Link>.</div>
@@ -54,6 +58,60 @@ function SeoPage() {
         ))}
       </Tabs>
     </>
+  );
+}
+
+/**
+ * Gerar sitemap a partir do estado atual do dataStore — inclui posts do
+ * blog criados via admin (que o sitemap server-side não enxerga porque vive
+ * em localStorage). Faz download de um sitemap.xml pronto.
+ */
+function SitemapDownloadButton() {
+  async function generate() {
+    const { listPublishedPosts } = await import("@/lib/blog");
+    const posts = await listPublishedPosts();
+    const entries = [
+      { path: "/", priority: "1.0", changefreq: "weekly" },
+      { path: "/vistos/eb2-niw", priority: "0.9", changefreq: "monthly" },
+      { path: "/vistos/eb1", priority: "0.8", changefreq: "monthly" },
+      { path: "/vistos/eb3", priority: "0.8", changefreq: "monthly" },
+      { path: "/sobre", priority: "0.7", changefreq: "monthly" },
+      { path: "/contato", priority: "0.6", changefreq: "monthly" },
+      { path: "/blog", priority: "0.7", changefreq: "weekly" },
+      { path: "/llm-info", priority: "0.5", changefreq: "monthly" },
+      ...posts.map((p) => ({
+        path: `/blog/${p.slug}`,
+        priority: "0.6",
+        changefreq: "monthly",
+        lastmod: p.data_publicacao,
+      })),
+    ];
+    const urls = entries.map((e) => {
+      const tags = [
+        `    <loc>${e.path}</loc>`,
+        (e as { lastmod?: string }).lastmod && `    <lastmod>${(e as { lastmod?: string }).lastmod}</lastmod>`,
+        `    <changefreq>${e.changefreq}</changefreq>`,
+        `    <priority>${e.priority}</priority>`,
+      ].filter(Boolean).join("\n");
+      return `  <url>\n${tags}\n  </url>`;
+    });
+    const xml = [
+      `<?xml version="1.0" encoding="UTF-8"?>`,
+      `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`,
+      ...urls,
+      `</urlset>`,
+    ].join("\n");
+    const blob = new Blob([xml], { type: "application/xml" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url; a.download = "sitemap.xml"; a.click();
+    URL.revokeObjectURL(url);
+    toast.success(`Sitemap gerado com ${entries.length} URLs.`);
+  }
+  return (
+    <Button variant="outline" onClick={generate} className="gap-1.5">
+      <Save className="h-4 w-4" /> Gerar sitemap
+    </Button>
   );
 }
 
