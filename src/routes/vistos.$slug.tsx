@@ -60,7 +60,7 @@ export const Route = createFileRoute("/vistos/$slug")({
 });
 
 function VisaPage() {
-  const { page } = Route.useLoaderData();
+  const { page } = Route.useLoaderData() as { page: VisaPage };
 
   return (
     <>
