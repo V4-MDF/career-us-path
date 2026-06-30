@@ -238,18 +238,19 @@ function LpFooter() {
           </div>
         </section>
 
-        {/* 6. PROCESSO */}
+        {/* 6. PROCESSO EB-2 NIW (real) */}
         <section className="section-cream py-24">
           <div className="container-x">
-            <Badge variant="outline" className="border-navy/30 text-navy">Como trabalhamos</Badge>
+            <Badge variant="outline" className="border-navy/30 text-navy">Processo EB-2 NIW</Badge>
             <h2 className="mt-4 font-display text-3xl md:text-5xl text-navy max-w-3xl">
-              Três passos. Acompanhamento até a aprovação.
+              Quatro etapas. Conduzidas com rigor.
             </h2>
-            <div className="mt-12 grid md:grid-cols-3 gap-5">
+            <div className="mt-12 grid md:grid-cols-2 lg:grid-cols-4 gap-5">
               {[
-                { n: "01", t: "Avaliação gratuita do perfil", d: "Análise estratégica da sua trajetória — sem custo, sem compromisso." },
-                { n: "02", t: "Estratégia e preparação da petição", d: "Montagem da petição no rigor do USCIS, com documentação técnica e narrativa profissional sólida." },
-                { n: "03", t: "Acompanhamento até a aprovação", d: "Suporte ativo durante o processo e na chegada aos EUA." },
+                { n: "01", t: "Análise Criteriosa", d: "Avaliamos histórico, formação, impacto e potencial para o EB-2 NIW." },
+                { n: "02", t: "Arquitetura Estratégica", d: "Estruturamos a narrativa do seu Endeavor para evidenciar o interesse nacional americano." },
+                { n: "03", t: "Preparação Documental", d: "Documentação meticulosa, cartas de recomendação e evidências de alto padrão." },
+                { n: "04", t: "Revisão Final", d: "Organização impecável da Petition nos critérios exigidos pelo USCIS." },
               ].map((s) => (
                 <div key={s.n} className="rounded-2xl bg-white border border-navy/10 p-7">
                   <span className="font-display text-5xl text-gold">{s.n}</span>
@@ -369,8 +370,8 @@ function LpFooter() {
         {/* 11. CTA FINAL + FORMULÁRIO */}
         <section id="avaliacao" className="py-24 bg-gradient-to-b from-background to-surface relative">
           <div className="absolute inset-0 stars-pattern opacity-15 -z-10" />
-          <div className="container-x grid lg:grid-cols-[1fr_1fr] gap-12 items-start">
-            <div className="lg:pt-8">
+          <div className="container-x grid lg:grid-cols-[1.1fr_0.9fr] gap-12 items-start">
+            <div>
               <Badge className="bg-gold text-gold-foreground">Avaliação gratuita</Badge>
               <h2 className="mt-4 font-display text-3xl md:text-5xl leading-tight">
                 Descubra se você tem perfil para o Green Card.
@@ -392,10 +393,21 @@ function LpFooter() {
                 ))}
               </ul>
             </div>
-            <LeadForm
-              segmentId={segment.id}
-              defaultProfissao={segment.profissao_default}
-            />
+
+            {/* Card de CTA (form vive em /avaliacao). */}
+            <div className="rounded-2xl border border-gold/30 bg-surface p-7 md:p-9">
+              <p className="text-[11px] tracking-[0.22em] text-gold">PRÓXIMO PASSO</p>
+              <h3 className="mt-3 font-display text-2xl leading-tight">
+                Comece pela análise gratuita do seu perfil.
+              </h3>
+              <p className="mt-3 text-foreground/75 text-[15px] leading-relaxed">
+                Em poucos minutos você envia seus dados. Nossa equipe responde
+                em até 48h pelo WhatsApp.
+              </p>
+              <a href={avaliacaoHref(`lp_${segment.id}_cta`, segment.id)} className="mt-7 inline-block">
+                <Button size="lg" className="text-base">Fazer minha avaliação gratuita</Button>
+              </a>
+            </div>
           </div>
         </section>
       </main>
