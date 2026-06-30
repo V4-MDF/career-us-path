@@ -235,6 +235,16 @@ function LeadsPage() {
             options={[["all","Todos"], ...segments.map((s) => [s, s] as [string,string])]} />
           <FilterSelect label="utm_source" value={fUtm} onChange={setFUtm}
             options={[["all","Todas"], ...utms.map((s) => [s, s] as [string,string])]} />
+          <FilterSelect label="utm_medium" value={fUtmMedium} onChange={setFUtmMedium}
+            options={[["all","Todos"], ...utmMediums.map((s) => [s, s] as [string,string])]} />
+          <FilterSelect label="utm_campaign" value={fUtmCampaign} onChange={setFUtmCampaign}
+            options={[["all","Todas"], ...utmCampaigns.map((s) => [s, s] as [string,string])]} />
+          <FilterSelect label="gclid (Google Ads)" value={fGclid} onChange={setFGclid}
+            options={[["all","Todos"],["with","Com gclid"],["without","Sem gclid"]]} />
+          <div>
+            <label className="text-xs text-slate-500">Referrer (host ou URL)</label>
+            <Input className="mt-1" placeholder="ex.: instagram.com" value={fReferrer} onChange={(e) => setFReferrer(e.target.value)} />
+          </div>
           <FilterSelect label="Profissão" value={fProf} onChange={setFProf}
             options={[["all","Todas"], ...profs.map((s) => [s, s] as [string,string])]} />
           <div>
@@ -249,7 +259,7 @@ function LeadsPage() {
             options={[["score","Pontuação ↓"],["date","Data ↓"],["status","Status"]]} />
           <div className="flex items-end">
             <Button variant="ghost" className="text-slate-600"
-              onClick={() => { setScoreRange([0,100]); setFStatus("all"); setFSeg("all"); setFUtm("all"); setFProf("all"); setFFrom(""); setFTo(""); setQ(""); }}>
+              onClick={() => { setScoreRange([0,100]); setFStatus("all"); setFSeg("all"); setFUtm("all"); setFUtmMedium("all"); setFUtmCampaign("all"); setFGclid("all"); setFReferrer(""); setFProf("all"); setFFrom(""); setFTo(""); setQ(""); }}>
               Limpar filtros
             </Button>
           </div>
