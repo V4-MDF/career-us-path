@@ -13,6 +13,8 @@ import { Link } from "@tanstack/react-router";
 import { ChevronDown, Menu, MessageCircle, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
+import { avaliacaoHref } from "@/lib/ctaLinks";
+import { getSiteSettings } from "@/lib/admin/settings";
 
 interface VistoItem {
   label: string;
@@ -38,7 +40,10 @@ export function Header() {
   const [open, setOpen] = useState(false);
   const [vistosOpen, setVistosOpen] = useState(false);
   const [vistosMobileOpen, setVistosMobileOpen] = useState(false);
+  const [wa, setWa] = useState<string>("16892209714");
   const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => { getSiteSettings().then((s) => { if (s.whatsapp_br) setWa(s.whatsapp_br); }); }, []);
 
   // Fecha dropdown ao clicar fora ou ao pressionar Esc
   useEffect(() => {
@@ -137,7 +142,7 @@ export function Header() {
         {/* CTA */}
         <div className="flex items-center gap-3">
           <a
-            href="https://wa.me/5500000000000"
+            href={`https://wa.me/${wa}`}
             target="_blank"
             rel="noopener noreferrer"
             className="hidden sm:grid h-10 w-10 place-items-center border border-gold/40 text-gold hover:bg-gold/10 transition-colors"
@@ -145,7 +150,7 @@ export function Header() {
           >
             <MessageCircle className="h-4 w-4" />
           </a>
-          <a href="#avaliacao" className="hidden sm:block">
+          <a href={avaliacaoHref("header_cta")} className="hidden sm:block">
             <Button size="sm" className="btn-sweep h-10 px-5">Avaliação gratuita</Button>
           </a>
           <button
@@ -197,7 +202,7 @@ export function Header() {
                 {n.label}
               </Link>
             ))}
-            <a href="#avaliacao" onClick={() => setOpen(false)} className="mt-4">
+            <a href={avaliacaoHref("header_mobile_cta")} onClick={() => setOpen(false)} className="mt-4">
               <Button className="w-full btn-sweep">Avaliação gratuita</Button>
             </a>
           </div>
