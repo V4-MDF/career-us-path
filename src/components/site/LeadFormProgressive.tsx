@@ -169,7 +169,7 @@ export function LeadFormProgressive({
 
   // Salva snapshot parcial sempre que um campo se torna válido / muda.
   useEffect(() => {
-    if (done || !partialIdRef.current) return;
+    if (done || !partialIdRef.current || !restored) return;
     const completed = PROGRESSIVE_FIELDS.filter((f) => isFieldValid(f.key, data)).map((f) => f.key);
     if (completed.length === 0) return; // não polui store com leads vazios
     const last = completed[completed.length - 1] ?? null;
