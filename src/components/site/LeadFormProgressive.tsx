@@ -27,13 +27,14 @@ import {
 } from "@/components/ui/select";
 import { newId, set, remove } from "@/lib/dataStore";
 import { type LeadInput } from "@/lib/leadScoring";
+import { evaluateQualification, type QualResult } from "@/lib/leadQualification";
 import { getAssignedVariantId, registerConversion } from "@/lib/abEngine";
 import { getOrigin, type LeadOrigin } from "@/lib/origin";
 
 export interface LeadFormProgressiveProps {
   segmentId?: string;
   defaultProfissao?: string;
-  onSubmitted?: (lead: { id: string }) => void;
+  onSubmitted?: (lead: { id: string; qualification: QualResult }) => void;
   submitLabel?: string;
   /** Path da rota atual (para excluir da origem). Ex.: "/avaliacao" */
   currentPath?: string;
