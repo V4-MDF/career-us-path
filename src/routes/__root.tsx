@@ -115,13 +115,17 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const router = useRouter();
+  // key muda a cada pathname → reanima o fade na troca de rota
+  const pathname = router.state.location.pathname;
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Injeta GA4 / GTM / Pixel etc. lidos do dataStore (admin → Tracking) */}
       <TrackingInjector />
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <div key={pathname} className="route-fade">
+        <Outlet />
+      </div>
     </QueryClientProvider>
   );
 }
+
