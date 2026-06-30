@@ -12,8 +12,18 @@ import {
 import { CheckCircle2, ChevronRight, Loader2 } from "lucide-react";
 import { newId, set } from "@/lib/dataStore";
 import { captureUtms, computeScore, type LeadInput, type ScoredLead } from "@/lib/leadScoring";
+import { getAssignedVariantId, registerConversion } from "@/lib/abEngine";
+
+export interface LeadFormProps {
+  /** Slug do segmento da LP (medicos, engenheiros, empresarios). */
+  segmentId?: string;
+  /** Pré-seleciona profissão (chave do select). */
+  defaultProfissao?: string;
+}
 
 const ufs = ["AC","AL","AM","AP","BA","CE","DF","ES","GO","MA","MG","MS","MT","PA","PB","PE","PI","PR","RJ","RN","RO","RR","RS","SC","SE","SP","TO"];
+
+
 
 const empty: LeadInput = {
   nome: "", email: "", whatsapp: "",
@@ -28,9 +38,12 @@ function maskPhone(v: string) {
   return `(${d.slice(0, 2)}) ${d.slice(2, 7)}-${d.slice(7)}`;
 }
 
-export function LeadForm() {
+export function LeadForm({ segmentId, defaultProfissao }: LeadFormProps = {}) {
   const [step, setStep] = useState(0);
-  const [data, setData] = useState<LeadInput>(empty);
+  const [data, setData] = useState<LeadInput>(() => ({
+    ...empty,
+    profissao: defaultProfissao ?? "",
+  }));
   const [loading, setLoading] = useState(false);
   const [done, setDone] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -74,15 +87,23 @@ export function LeadForm() {
       const { score, classificacao } = computeScore(data);
       const id = newId("lead");
       const utm = typeof window !== "undefined" ? captureUtms(window.location.search) : {};
-      const lead: ScoredLead = {
+      const lead: ScoredLead & {
+        segmento?: string;
+        variante_ab?: string | null;
+      } = {
         ...data,
         id,
         createdAt: new Date().toISOString(),
         score,
         classificacao,
         utm,
+        segmento: segmentId,
+        variante_ab: segmentId ? getAssignedVariantId(segmentId) : null,
       };
       await set("leads", id, lead);
+      if (segmentId) {
+        await registerConversion(segmentId);
+      }
       setDone(true);
     } catch (e) {
       setError("Não foi possível enviar agora. Tente novamente.");
