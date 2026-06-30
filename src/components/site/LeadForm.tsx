@@ -92,28 +92,34 @@ export function LeadForm({ segmentId, defaultProfissao, onSubmitted, submitLabel
     setError(null);
     setLoading(true);
     try {
-      const { score, classificacao } = computeScore(data);
+      // Prompt 7: persistimos apenas respostas cruas + metadados.
+      // Score/faixa de prioridade são SEMPRE derivados ao vivo a partir
+      // do scoring_model no admin — nunca congelados no lead.
       const id = newId("lead");
       const utm = typeof window !== "undefined" ? captureUtms(window.location.search) : {};
-      const lead: ScoredLead & {
+      const lead: LeadInput & {
+        id: string;
+        createdAt: string;
+        utm: Record<string, string>;
         segmento?: string;
         variante_ab?: string | null;
+        status: "novo";
       } = {
         ...data,
         id,
         createdAt: new Date().toISOString(),
-        score,
-        classificacao,
         utm,
         segmento: segmentId,
         variante_ab: segmentId ? getAssignedVariantId(segmentId) : null,
+        status: "novo",
       };
       await set("leads", id, lead);
       if (segmentId) {
         await registerConversion(segmentId);
       }
       if (onSubmitted) {
-        onSubmitted({ id, score, classificacao });
+        // Mantemos a assinatura por compat: callers atuais não usam o score.
+        onSubmitted({ id, score: 0, classificacao: "" });
       } else {
         setDone(true);
       }
@@ -123,6 +129,7 @@ export function LeadForm({ segmentId, defaultProfissao, onSubmitted, submitLabel
       setLoading(false);
     }
   };
+
 
   if (done) {
     return (
