@@ -6,6 +6,10 @@
  */
 
 import { get, list, set, remove } from "./dataStore";
+import coverCustoVida from "@/assets/blog-custo-vida-eua.jpg";
+import coverImigrantes from "@/assets/blog-imigrantes-qualificados.jpg";
+import coverEbCategorias from "@/assets/blog-eb1-eb2-eb3.jpg";
+import coverVistos2026 from "@/assets/blog-vistos-2026.jpg";
 
 export type BlogStatus = "rascunho" | "publicado";
 
@@ -115,7 +119,7 @@ const SEED_POSTS: BlogPost[] = [
     titulo:
       "Quanto custa viver nos Estados Unidos? O guia realista para famílias brasileiras",
     categoria: "Vida nos EUA",
-    capa: PLACEHOLDER_COVER,
+    capa: coverCustoVida,
     resumo:
       "Moradia, escola, saúde, mercado e poder de compra: o que muda quando uma família brasileira de classe média se muda para os EUA — sem fantasia e sem catastrofismo.",
     autor: "Equipe Status na América",
@@ -125,7 +129,7 @@ const SEED_POSTS: BlogPost[] = [
       "Custo de vida nos EUA: guia realista para famílias brasileiras",
     meta_description:
       "Quanto custa viver nos Estados Unidos hoje? Moradia, escola, saúde e poder de compra para famílias brasileiras — comparativo objetivo.",
-    og_image: PLACEHOLDER_COVER,
+    og_image: coverCustoVida,
     tempo_leitura: 0, // calculado em save
     corpo: `## Por que esta conversa precisa ser honesta
 
@@ -155,7 +159,7 @@ Itens básicos custam, em média, o equivalente em dólar ao que custam em real 
     slug: "por-que-os-eua-querem-imigrantes-qualificados",
     titulo: "Por que os Estados Unidos querem imigrantes qualificados",
     categoria: "Vida nos EUA",
-    capa: PLACEHOLDER_COVER,
+    capa: coverImigrantes,
     resumo:
       "Imigração legal qualificada não é uma exceção americana — é um pilar histórico. Entenda por que profissionais que geram renda, impostos e empregos são exatamente o perfil que os EUA buscam atrair.",
     autor: "Equipe Status na América",
@@ -165,7 +169,7 @@ Itens básicos custam, em média, o equivalente em dólar ao que custam em real 
       "Por que os EUA querem imigrantes qualificados (e como isso muda o seu plano)",
     meta_description:
       "A imigração legal qualificada é um pilar da política americana. Entenda os interesses econômicos por trás dos vistos EB e por que o seu perfil pode ser exatamente o que os EUA buscam.",
-    og_image: PLACEHOLDER_COVER,
+    og_image: coverImigrantes,
     tempo_leitura: 0,
     corpo: `## Imigração não é só o que aparece nas manchetes
 
@@ -192,7 +196,7 @@ Se você é um profissional brasileiro consolidado — médico, engenheiro, empr
     titulo:
       "EB-1, EB-2 NIW ou EB-3: qual caminho de Green Card combina com o seu perfil?",
     categoria: "Vistos e Green Card",
-    capa: PLACEHOLDER_COVER,
+    capa: coverEbCategorias,
     resumo:
       "Três categorias EB, três perfis distintos. Um comparativo objetivo entre EB-1, EB-2 NIW e EB-3 para você entender em qual caminho seu perfil se encaixa.",
     autor: "Equipe Status na América",
@@ -202,7 +206,7 @@ Se você é um profissional brasileiro consolidado — médico, engenheiro, empr
       "EB-1, EB-2 NIW ou EB-3: qual Green Card combina com o seu perfil",
     meta_description:
       "Comparativo objetivo entre EB-1, EB-2 NIW e EB-3 para profissionais brasileiros: critérios, prazo, patrocinador e quando cada categoria faz sentido.",
-    og_image: PLACEHOLDER_COVER,
+    og_image: coverEbCategorias,
     tempo_leitura: 0,
     corpo: `## Três categorias, três lógicas distintas
 
@@ -233,7 +237,7 @@ A pergunta não é "qual é o melhor visto?" — é "qual é o melhor visto **pa
     titulo:
       "Emissão de vistos para brasileiros em 2026: o que considerar e por que planejar com antecedência",
     categoria: "Vistos e Green Card",
-    capa: PLACEHOLDER_COVER,
+    capa: coverVistos2026,
     resumo:
       "Cenários consulares oscilam — e essa é exatamente a razão pela qual o planejamento antecipado importa. Uma leitura sóbria do que está acontecendo e como isso impacta projetos sérios de imigração.",
     autor: "Equipe Status na América",
@@ -243,7 +247,7 @@ A pergunta não é "qual é o melhor visto?" — é "qual é o melhor visto **pa
       "Vistos para brasileiros em 2026: o que considerar antes de começar",
     meta_description:
       "Como estão a agenda consular e os prazos do USCIS para brasileiros em 2026, e por que planejar com antecedência é o que diferencia projetos sérios de imigração.",
-    og_image: PLACEHOLDER_COVER,
+    og_image: coverVistos2026,
     tempo_leitura: 0,
     corpo: `## O que está realmente acontecendo
 
@@ -266,14 +270,23 @@ Se sua decisão de mudar para os EUA é firme, a recomendação é objetiva: com
   },
 ];
 
-/** Insere os posts-semente apenas uma vez. */
+/** Insere os posts-semente apenas uma vez; migra capas antigas (placeholder) para as novas. */
 export async function ensureSeed(): Promise<void> {
-  const flag = await get<{ done: true }>("blog_posts", SEED_FLAG_KEY);
-  if (flag?.done) return;
   for (const p of SEED_POSTS) {
     const existing = await get<BlogPost>("blog_posts", p.slug);
     if (!existing) {
       await set("blog_posts", p.slug, { ...p, tempo_leitura: calcReadingTime(p.corpo) });
+      continue;
+    }
+    // Migração: se a capa armazenada é o placeholder antigo (SVG inline) ou
+    // está vazia, troca pela capa real do seed atual.
+    const stale = !existing.capa || existing.capa.startsWith("data:image/svg+xml");
+    if (stale) {
+      await set("blog_posts", p.slug, {
+        ...existing,
+        capa: p.capa,
+        og_image: existing.og_image && !existing.og_image.startsWith("data:image/svg+xml") ? existing.og_image : p.og_image,
+      });
     }
   }
   await set("blog_posts", SEED_FLAG_KEY, { done: true });
