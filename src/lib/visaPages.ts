@@ -246,7 +246,7 @@ const eb1: VisaPage = {
     },
     {
       q: "Quanto custa?",
-      a: "A avaliação inicial é gratuita. A proposta de assessoria varia conforme complexidade do caso e composição da família.",
+      a: "A avaliação inicial é gratuita. A proposta de preparação documental varia conforme complexidade do caso e composição da família.",
     },
   ],
   ctaTitle: "Tem reconhecimento internacional? Avalie o EB-1.",
