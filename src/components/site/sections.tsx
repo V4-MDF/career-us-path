@@ -282,7 +282,7 @@ export function ContrastBrasilEUA() {
       <div className="container-x">
         <SectionHead num="01" eyebrow="POR QUE MIGRAR AGORA" title="Duas realidades. Uma decisão." variant="parchment" />
         <div className="mt-14 grid md:grid-cols-2 gap-6">
-          <div className="relative gold-tick bg-white border border-ink-text/10 p-8">
+          <div className="relative gold-tick rounded-2xl bg-white border border-ink-text/10 p-8 shadow-soft">
             <div className="flex items-center gap-3 text-oxblood">
               <AlertTriangle className="h-5 w-5" />
               <h3 className="font-display text-xl text-ink-text m-0">A realidade que você já conhece no Brasil</h3>
