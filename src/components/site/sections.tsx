@@ -129,11 +129,11 @@ export function Hero() {
             transition={{ duration: t(0.7), ease: easeSig, delay: dly(0.85) }}
             className="mt-10 flex flex-wrap gap-3"
           >
-            <a href="#avaliacao-rapida" aria-label="Ir para o formulário de avaliação gratuita">
+            <Link to={avaliacaoHref("home_hero")} aria-label="Ir para o formulário de avaliação gratuita">
               <Button size="lg" className="btn-sweep h-12 px-7 text-[15px] active:scale-[0.98]">
                 {cta}
               </Button>
-            </a>
+            </Link>
 
             <a href="#eb-2-niw">
               <Button
