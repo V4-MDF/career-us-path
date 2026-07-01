@@ -7,10 +7,8 @@ import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { login, signUp } from "@/lib/admin/auth";
+import { login } from "@/lib/admin/auth";
 import { supabase } from "@/integrations/supabase/client";
-import { lovable } from "@/integrations/lovable";
 
 const searchSchema = z.object({
   next: z.string().optional(),
@@ -48,55 +46,17 @@ function AuthPage() {
           <p className="text-xs uppercase tracking-[0.22em] text-slate-500 mt-1">Área restrita</p>
         </div>
 
-        <Tabs defaultValue="signin" className="w-full">
-          <TabsList className="grid grid-cols-2 w-full">
-            <TabsTrigger value="signin">Entrar</TabsTrigger>
-            <TabsTrigger value="signup">Criar conta</TabsTrigger>
-          </TabsList>
-
-          <TabsContent value="signin">
-            <SignInForm nextUrl={(next as string) || "/admin"} />
-          </TabsContent>
-          <TabsContent value="signup">
-            <SignUpForm />
-          </TabsContent>
-        </Tabs>
+        <SignInForm nextUrl={(next as string) || "/admin"} />
 
         <div className="mt-4 flex items-start gap-2 text-[11px] text-slate-500">
           <ShieldCheck className="h-3.5 w-3.5 text-amber-500 mt-0.5 shrink-0" />
           <p>
-            Criar conta é aberto, mas o acesso ao painel exige role <em>admin</em>.
-            Um administrador libera em <em>/admin/usuarios</em>.
+            Acesso restrito. Novos usuários são criados exclusivamente por um
+            administrador em <em>/admin/usuarios</em>.
           </p>
         </div>
       </div>
     </div>
-  );
-}
-
-function GoogleButton() {
-  const [loading, setLoading] = useState(false);
-  async function onGoogle() {
-    setLoading(true);
-    const res = await lovable.auth.signInWithOAuth("google", {
-      redirect_uri: window.location.origin + "/auth",
-    });
-    if (res.error) {
-      setLoading(false);
-      toast.error(res.error.message ?? "Falha no Google Sign-In.");
-    }
-    // se redirected, o browser navega; caso contrário, o listener trata
-  }
-  return (
-    <Button
-      type="button"
-      variant="outline"
-      className="w-full mt-3"
-      onClick={onGoogle}
-      disabled={loading}
-    >
-      {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : "Continuar com Google"}
-    </Button>
   );
 }
 
@@ -122,7 +82,7 @@ function SignInForm({ nextUrl }: { nextUrl: string }) {
   return (
     <form
       onSubmit={onSubmit}
-      className="rounded-lg border border-slate-200 bg-white p-6 shadow-sm space-y-4 mt-3"
+      className="rounded-lg border border-slate-200 bg-white p-6 shadow-sm space-y-4"
     >
       <div>
         <Label htmlFor="email">Email</Label>
@@ -141,59 +101,6 @@ function SignInForm({ nextUrl }: { nextUrl: string }) {
       <Button type="submit" className="w-full bg-slate-900 hover:bg-slate-800 text-white" disabled={loading}>
         {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : "Entrar"}
       </Button>
-      <GoogleButton />
-    </form>
-  );
-}
-
-function SignUpForm() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
-
-  async function onSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    if (password.length < 6) {
-      toast.error("Senha deve ter no mínimo 6 caracteres.");
-      return;
-    }
-    setLoading(true);
-    const res = await signUp(email, password);
-    setLoading(false);
-    if (!res.ok) {
-      toast.error(res.error ?? "Falha ao criar conta.");
-      return;
-    }
-    if (res.needsConfirmation) {
-      toast.success("Conta criada. Verifique seu email para confirmar.");
-    } else {
-      toast.success("Conta criada. Peça a um admin para liberar seu acesso.");
-    }
-  }
-
-  return (
-    <form
-      onSubmit={onSubmit}
-      className="rounded-lg border border-slate-200 bg-white p-6 shadow-sm space-y-4 mt-3"
-    >
-      <div>
-        <Label htmlFor="su-email">Email</Label>
-        <Input
-          id="su-email" type="email" autoComplete="email" required
-          value={email} onChange={(e) => setEmail(e.target.value)} className="mt-1"
-        />
-      </div>
-      <div>
-        <Label htmlFor="su-password">Senha</Label>
-        <Input
-          id="su-password" type="password" autoComplete="new-password" required minLength={6}
-          value={password} onChange={(e) => setPassword(e.target.value)} className="mt-1"
-        />
-      </div>
-      <Button type="submit" className="w-full bg-slate-900 hover:bg-slate-800 text-white" disabled={loading}>
-        {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : "Criar conta"}
-      </Button>
-      <GoogleButton />
     </form>
   );
 }

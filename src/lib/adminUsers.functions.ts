@@ -52,38 +52,54 @@ export const listAdmins = createServerFn({ method: "GET" })
     }));
   });
 
-export const grantAdminByEmail = createServerFn({ method: "POST" })
+export const createAdminUser = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .inputValidator((input) => z.object({ email: z.string().email() }).parse(input))
+  .inputValidator((input) =>
+    z.object({
+      email: z.string().email(),
+      password: z.string().min(8, "Senha deve ter no mínimo 8 caracteres."),
+    }).parse(input),
+  )
   .handler(async ({ data, context }) => {
     await assertAdmin(context);
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     const email = data.email.trim().toLowerCase();
 
-    // Procura usuário paginado
-    let target: { id: string; email?: string | null } | null = null;
-    for (let page = 1; page <= 10 && !target; page++) {
+    // Try to find existing user
+    let userId: string | null = null;
+    for (let page = 1; page <= 10 && !userId; page++) {
       const { data: pageData, error } = await supabaseAdmin.auth.admin.listUsers({
-        page,
-        perPage: 200,
+        page, perPage: 200,
       });
       if (error) throw new Error(error.message);
       const found = pageData.users.find((u) => (u.email ?? "").toLowerCase() === email);
-      if (found) target = { id: found.id, email: found.email };
+      if (found) userId = found.id;
       if (pageData.users.length < 200) break;
     }
-    if (!target) {
-      throw new Error(
-        "Usuário com esse email não foi encontrado. Peça para ele criar a conta em /auth primeiro."
-      );
+
+    // Create if missing
+    if (!userId) {
+      const { data: created, error: cerr } = await supabaseAdmin.auth.admin.createUser({
+        email,
+        password: data.password,
+        email_confirm: true,
+      });
+      if (cerr || !created.user) throw new Error(cerr?.message || "Falha ao criar usuário.");
+      userId = created.user.id;
+    } else {
+      // Update password for existing user
+      const { error: uerr } = await supabaseAdmin.auth.admin.updateUserById(userId, {
+        password: data.password,
+      });
+      if (uerr) throw new Error(uerr.message);
     }
 
     const { error: insErr } = await supabaseAdmin
       .from("user_roles")
-      .upsert({ user_id: target.id, role: "admin" }, { onConflict: "user_id,role" });
+      .upsert({ user_id: userId, role: "admin" }, { onConflict: "user_id,role" });
     if (insErr) throw new Error(insErr.message);
 
-    return { ok: true, user_id: target.id, email: target.email };
+    return { ok: true, user_id: userId, email };
   });
 
 export const revokeAdmin = createServerFn({ method: "POST" })
