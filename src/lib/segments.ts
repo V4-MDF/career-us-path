@@ -24,12 +24,16 @@ export interface FAQItem {
   a: string;
 }
 
+export type VisaSlugRef = "eb2-niw" | "eb1" | "eb3";
+
 export interface Segment {
   id: string;
   slug: string;
   nome: string;
   ativo: boolean;
   noindex?: boolean;
+  /** Página de visto cuja estrutura será reusada no corpo da LP. */
+  visa_slug?: VisaSlugRef;
   /** Profissão pré-selecionada no LeadForm (chave do select). */
   profissao_default?: string;
   eyebrow: string;
@@ -47,6 +51,7 @@ export interface Segment {
     h1: string;
     sub: string;
     cta_texto: string;
+    imagem?: string;
   };
 }
 
@@ -82,6 +87,7 @@ const SEED_SEGMENTS: Segment[] = [
     nome: "Médicos",
     ativo: true,
     noindex: false,
+    visa_slug: "eb2-niw",
     profissao_default: "medico",
     eyebrow: "PARA MÉDICOS BRASILEIROS",
     prova_social:
@@ -130,6 +136,7 @@ const SEED_SEGMENTS: Segment[] = [
     nome: "Engenheiros",
     ativo: true,
     noindex: false,
+    visa_slug: "eb2-niw",
     profissao_default: "engenheiro",
     eyebrow: "PARA ENGENHEIROS BRASILEIROS",
     prova_social:
@@ -178,6 +185,7 @@ const SEED_SEGMENTS: Segment[] = [
     nome: "Empresários",
     ativo: true,
     noindex: false,
+    visa_slug: "eb2-niw",
     profissao_default: "empresario",
     eyebrow: "PARA EMPRESÁRIOS BRASILEIROS",
     prova_social:
