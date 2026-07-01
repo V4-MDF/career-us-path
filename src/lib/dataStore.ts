@@ -90,16 +90,29 @@ export async function list<T = unknown>(table: TableName): Promise<Array<T & { i
 }
 
 export async function set<T = unknown>(table: TableName, id: string, value: T): Promise<void> {
-  const { error } = await supabase
+  // Evitamos `.upsert()` porque o PostgREST, ao traduzir para
+  // `INSERT ... ON CONFLICT DO UPDATE`, exige que exista policy de UPDATE para
+  // o role — o que quebra o INSERT anônimo em tabelas como `leads` /
+  // `prequal_responses` (onde por design não há UPDATE para anon).
+  // Estratégia: INSERT; em caso de conflito de unique (23505), UPDATE.
+  const insert = await supabase
     .from("kv_records")
-    .upsert(
-      { table_name: table, record_id: id, data: value as never },
-      { onConflict: "table_name,record_id" }
-    );
+    .insert({ table_name: table, record_id: id, data: value as never });
 
-  if (error) {
-    // Loga mas mantém cache local — evita perder input do usuário em falha transitória.
-    console.warn("[dataStore] upsert falhou", table, id, error.message);
+  if (insert.error) {
+    if (insert.error.code === "23505") {
+      const update = await supabase
+        .from("kv_records")
+        .update({ data: value as never, updated_at: new Date().toISOString() })
+        .eq("table_name", table)
+        .eq("record_id", id);
+      if (update.error) {
+        console.warn("[dataStore] update falhou", table, id, update.error.message);
+      }
+    } else {
+      // Loga mas mantém cache local — evita perder input do usuário em falha transitória.
+      console.warn("[dataStore] insert falhou", table, id, insert.error.message);
+    }
   }
 
   const cache = cacheRead<T>(table);
