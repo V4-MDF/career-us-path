@@ -69,19 +69,19 @@ export function Hero() {
         />
       </div>
       <div className="absolute inset-0 -z-10 bg-gradient-to-b from-ink/85 via-ink/80 to-ink" />
-      {/* Motivo geográfico BR→USA — dot-grid + rota tracejada animada. */}
+      {/* Motivo geográfico BR→USA — dot-grid + rota tracejada estática. */}
       <div aria-hidden className="absolute inset-0 -z-10 text-gold">
         <BrUsRouteBackdrop />
       </div>
 
       <div className="container-x grid lg:grid-cols-[1.1fr_0.9fr] gap-16 lg:gap-20 items-center">
         <div>
-          <div className="flex items-center gap-3 hero-static-in">
+          <div className="flex items-center gap-3">
             <span aria-hidden className="h-px w-10 bg-gold" />
             <span className="font-mono-label text-gold">{eyebrow}</span>
           </div>
 
-          <h1 className="display-1 mt-8 hero-static-in">
+          <h1 className="display-1 mt-8">
             {lines.map((ln, i) => (
               <span key={i} className="block pb-1">
                 {renderEmphasis(ln)}
@@ -91,11 +91,11 @@ export function Hero() {
 
           <div className="mt-10 h-px w-28 bg-gold" />
 
-          <p className="lead mt-7 max-w-xl hero-static-in">
+          <p className="lead mt-7 max-w-xl">
             {sub}
           </p>
 
-          <div className="mt-10 flex flex-wrap gap-3 hero-static-in">
+          <div className="mt-10 flex flex-wrap gap-3">
             <Link to={useAvaliacaoHref("home_hero")} aria-label="Ir para o formulário de avaliação gratuita">
               <Button size="lg" className="btn-label btn-sweep h-12 px-7 text-[15px] active:scale-[0.98]">
                 {cta}
@@ -112,7 +112,7 @@ export function Hero() {
             </a>
           </div>
 
-          <div className="mt-14 flex items-start gap-3 text-sm text-foreground/60 border-l border-gold/50 pl-4 max-w-md hero-static-in">
+          <div className="mt-14 flex items-start gap-3 text-sm text-foreground/60 border-l border-gold/50 pl-4 max-w-md">
             <Star className="h-4 w-4 text-gold mt-0.5 shrink-0 fill-gold" />
             <span>{proof}</span>
           </div>
@@ -121,8 +121,8 @@ export function Hero() {
 
         </div>
 
-        {/* Bloco editorial — parallax sutil (apenas desktop). */}
-        <div className="relative hidden lg:block hero-static-in">
+        {/* Bloco editorial estático (sem parallax por scroll). */}
+        <div className="relative hidden lg:block">
           <div className="relative aspect-[4/5] overflow-hidden rounded-3xl border border-gold/30 bg-ink-raise shadow-elevated">
             {/* Fotografia editorial — família multigeracional em paisagem americana. */}
             <img
