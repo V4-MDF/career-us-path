@@ -85,19 +85,19 @@ function UsersPage() {
     <>
       <PageHeader
         title="Administradores"
-        description="Gerencie quem tem acesso ao painel. O usuário precisa criar conta em /auth primeiro; depois um admin libera o acesso aqui."
+        description="Gerencie quem tem acesso ao painel. Novos usuários são criados exclusivamente aqui — não há cadastro público."
         actions={
           <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
               <Button className="bg-slate-900 hover:bg-slate-800 gap-1.5">
-                <Plus className="h-4 w-4" />Liberar acesso
+                <Plus className="h-4 w-4" />Novo admin
               </Button>
             </DialogTrigger>
             <DialogContent>
-              <DialogHeader><DialogTitle>Liberar acesso admin</DialogTitle></DialogHeader>
+              <DialogHeader><DialogTitle>Criar usuário admin</DialogTitle></DialogHeader>
               <div className="space-y-3">
                 <div>
-                  <Label>Email do usuário</Label>
+                  <Label>Email</Label>
                   <Input
                     type="email"
                     value={email}
@@ -105,16 +105,33 @@ function UsersPage() {
                     className="mt-1"
                     placeholder="usuario@exemplo.com"
                   />
+                </div>
+                <div>
+                  <Label>Senha inicial</Label>
+                  <Input
+                    type="text"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    className="mt-1"
+                    placeholder="mínimo 8 caracteres"
+                    autoComplete="new-password"
+                  />
                   <p className="text-xs text-slate-500 mt-1">
-                    O usuário precisa ter criado a conta em <code>/auth</code> antes.
+                    Compartilhe com segurança. O usuário pode trocar depois.
+                    Se o email já existir, a senha será redefinida e o role admin concedido.
                   </p>
                 </div>
               </div>
-              <DialogFooter><Button onClick={onGrant}>Conceder admin</Button></DialogFooter>
+              <DialogFooter>
+                <Button onClick={onCreate} disabled={saving}>
+                  {saving ? "Criando…" : "Criar usuário"}
+                </Button>
+              </DialogFooter>
             </DialogContent>
           </Dialog>
         }
       />
+
 
       <SectionCard>
         <table className="w-full text-sm">
