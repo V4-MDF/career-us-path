@@ -1,61 +1,91 @@
 
-## Objetivo
+## Diagnóstico do estado atual
 
-Toda LP `/lp/$slug` (segmento) e toda variante A/B do Hero devem renderizar exatamente a mesma estrutura das páginas de visto (`/vistos/$slug`), trocando somente a **primeira dobra (Hero)** — eyebrow, H1, subtítulo, CTA e imagem. Nada mais muda entre variantes.
+Hoje o admin tem três padrões diferentes — nenhum bom para qualidade:
 
-Hoje a LP tem 10+ dobras próprias (comparativo, dores, custo de adiar, caminho, processo, checklist, autoridade, depoimentos, FAQ…) que divergem da página de visto. Isso será substituído pelo corpo canônico do visto.
+| Local | Como funciona hoje | Problema |
+|---|---|---|
+| `/admin/midia` (logo, favicon, OG, heros) | Upload vira **base64** salvo no banco, limitado a **400 KB** | Comprime demais, incha o banco, sem CDN |
+| `/admin/blog` (capa + og_image) | Upload vira **base64** no post, **sem limite** | Estoura linhas do banco, imagens de 2 MB carregam inline em todo request |
+| `/admin/segmentos`, `/admin/seo`, `/admin/ab` (hero de LP, og_image, variantes A/B) | **Só campo de URL** — sem botão de upload | Obriga o operador a hospedar por fora |
 
-## O que muda
+Base64 no banco = imagem trafega dentro do HTML/JSON, sem cache HTTP, sem redimensionamento, e o limite de 400 KB força perda visível de qualidade.
 
-### 1. Corpo compartilhado do visto aceita esconder o Hero
-`src/components/site/visa/VisaPageBody.tsx` recebe prop opcional `hideHero?: boolean`. Quando `true`, a `<section id="abertura">` (Hero de visto) não é renderizada — o Hero da LP entra no lugar. Nenhum outro comportamento muda; páginas de visto seguem idênticas.
+## O que vai mudar
 
-### 2. `LandingPageTemplate` renderiza Hero + VisaPageBody
-`src/components/site/lp/LandingPageTemplate.tsx` é reduzido a:
-- `<ConversionHeader />` (mantém — sem menu para não vazar tráfego pago)
-- **Hero de LP** (única dobra específica do segmento/variante): eyebrow, H1, sub, CTA, imagem — todos vindos da `HeroVariant` ativa (ou de `segment.hero_default` como fallback)
-- `<VisaPageBody page={visaPage} hideHero />` — corpo idêntico ao pilar do visto
-- `<LpFooter />`
+Migrar todos os uploads para **Supabase Storage** (já ativo via Lovable Cloud), servindo os arquivos originais via CDN. Sem base64. Sem limite artificial de 400 KB.
 
-Todas as outras seções antigas da LP (comparativo/dores/custo/checklist/depoimentos/FAQ do segmento etc.) são removidas do render.
+### 1. Bucket de mídia
 
-### 3. Segmento aponta para uma página de visto
-Novo campo em `Segment` (`src/lib/segments.ts`):
-- `visa_slug: VisaSlug` (default `"eb2-niw"`) — indica qual estrutura de visto a LP deve usar.
+Criar bucket público `media` (via `storage_create_bucket`), com policies:
+- `SELECT` liberado a todos (site público lê as imagens)
+- `INSERT / UPDATE / DELETE` apenas para usuários com role `admin` (via `has_role`)
+- Sem `TO anon` write — nenhum visitante consegue subir arquivo
 
-Seed dos três segmentos existentes (`medicos`, `engenheiros`, `empresarios`) recebe `visa_slug: "eb2-niw"`. Campos legados do segmento (comparativo, dores, custo_adiar, checklist, faq_segmento) permanecem no tipo por compatibilidade com o dataStore, mas deixam de ser usados na renderização — podem ser podados em prompt futuro.
+Estrutura de pastas: `media/site/`, `media/blog/`, `media/segmentos/`, `media/seo/`, `media/ab/`.
 
-### 4. Hero default do segmento ganha `imagem`
-`Segment.hero_default` recebe `imagem?: string` opcional (mesma semântica que já existe em `HeroVariant.imagem`). Assim o fallback também controla a imagem quando não há variante A/B.
+### 2. Componente `<ImageUploader />` reutilizável
 
-### 5. Admin — LP variante A/B foca em Hero
-Em `src/routes/admin.segmentos.tsx`:
-- Adicionar select `visa_slug` no editor do segmento (opções: EB-2 NIW, EB-1, EB-3).
-- Adicionar campo `imagem` (URL) no `hero_default`.
-- Deixar explícito na UI que a variante A/B **muda apenas o Hero** (eyebrow, H1, sub, CTA e imagem). Os campos legados de conteúdo do segmento saem do formulário (ficam apenas no dataStore como legado — não editáveis).
+Novo em `src/components/admin/ImageUploader.tsx`. Interface única:
 
-### 6. Rota `/lp/$slug`
-`src/routes/lp.$slug.tsx` carrega o segmento, resolve `VISA_PAGES[segment.visa_slug]` e passa `visaPage` para `LandingPageTemplate` junto com `segment` e `variant`. `notFound` continua se slug/segmento inválido ou se `visa_slug` não existir em `VISA_PAGES` (fallback para `eb2-niw`). Meta tags continuam vindo do segmento (title/description/noindex).
+```tsx
+<ImageUploader
+  value={url}
+  onChange={setUrl}
+  folder="blog"          // subpasta no bucket
+  filenameHint="capa"    // usado para nomear o arquivo
+  maxMB={5}
+  accept="image/jpeg,image/png,image/webp,image/avif,image/svg+xml"
+/>
+```
+
+Comportamento:
+- **Botão "Enviar imagem"** + drag-and-drop na área de preview
+- **Fallback "colar URL"** preservado (para quem já tem CDN externo)
+- Upload direto ao Storage via cliente supabase (browser → bucket), sem passar pelo servidor
+- Nome final: `{folder}/{timestamp}-{slug(filenameHint)}.{ext}` — evita colisão e cache stale
+- Valida tipo e tamanho **antes** do upload (default 5 MB, SVG permitido)
+- Mostra **preview**, **dimensões (px)**, **tamanho (KB)** e botão **Remover** após upload
+- Estado de loading + toast de erro/sucesso
+- `onChange` recebe a **URL pública** já pronta para gravar no `kv_records`
+
+### 3. Onde plugar o componente
+
+Substituir os inputs atuais nas 5 telas:
+
+- `admin.midia.tsx` — troca `MediaSlot` inteiro pelo `<ImageUploader />`. Remove o aviso de "localStorage 5 MB" e o limite de 400 KB.
+- `admin.blog.tsx` — `capa` e `og_image` passam a usar upload real (não base64).
+- `admin.segmentos.tsx` — campo `hero_default.imagem` ganha botão de upload.
+- `admin.seo.tsx` — `og_image` por página ganha botão de upload.
+- `admin.ab.tsx` — `imagem` da variante ganha botão de upload.
+
+O formato do dado gravado continua sendo uma **string URL** — 100% compatível com os componentes públicos (`LandingPageTemplate`, `BlogStrip`, meta tags), sem tocar em nada do site.
+
+### 4. Migração dos dados antigos (base64 → Storage)
+
+Uma vez, ao carregar cada tela: se `url` começa com `data:image/`, mostrar um aviso "Imagem legada em base64 — reenvie para migrar para o CDN". Não migro em massa automático (pode gerar duplicatas e o operador quer curar).
 
 ## Detalhes técnicos
 
-- `VisaPageBody` atualmente abre com `<main className="pt-28">`. Com `hideHero`, o Hero da LP já provê seu próprio topo — a `<main>` interna passa a `pt-0` quando `hideHero` está ligado, e o wrapper externo da LP fica responsável pelo espaçamento sob o `ConversionHeader` fixo.
-- O Hero da LP mantém o layout atual do template (grid 2 colunas com imagem à direita, prova social em citação lateral, badge de eyebrow em gold). Nada de repetir a abertura do visto.
-- CTA do Hero e do header continuam usando `avaliacaoHref(`lp_${segment.id}`, segment.id)` — tracking A/B e conversão via `abEngine.registerConversion` permanecem intocados.
-- `VISA_SECTIONS` / `DynamicSectionHead` (scroll-spy + `#hash`) **não** são incluídos na LP — LPs seguem sem TOC nem URL por dobra (é uma página de conversão, não pilar SEO). Só o conteúdo visual do corpo é reaproveitado.
-- Nenhuma mudança em `abEngine.ts`, `dataStore.ts`, `ctaLinks.ts` ou nas rotas de `/vistos/*`.
+**Client Storage API:**
+```ts
+const { data, error } = await supabase.storage
+  .from("media")
+  .upload(`${folder}/${filename}`, file, {
+    contentType: file.type,
+    cacheControl: "31536000, immutable",  // 1 ano — filename tem timestamp
+    upsert: false,
+  });
+const { data: { publicUrl } } = supabase.storage.from("media").getPublicUrl(data.path);
+```
 
-## Arquivos tocados
+**Qualidade:** o arquivo é armazenado **byte-a-byte como enviado** (sem recompressão do lado do Supabase). Se o usuário quiser otimizar, pode subir WebP/AVIF direto. Não vou introduzir transformações no upload — mantém "boa qualidade" que é o pedido.
 
-- `src/lib/segments.ts` — adicionar `visa_slug`, `hero_default.imagem`; atualizar seeds.
-- `src/lib/visaPages.ts` — exportação já pronta; sem mudança.
-- `src/components/site/visa/VisaPageBody.tsx` — prop `hideHero` opcional.
-- `src/components/site/lp/LandingPageTemplate.tsx` — reduzido a Header + Hero + `VisaPageBody hideHero` + Footer.
-- `src/routes/lp.$slug.tsx` — resolver `visaPage` a partir de `segment.visa_slug` e passar para o template.
-- `src/routes/admin.segmentos.tsx` — select de `visa_slug`, campo `imagem` no hero_default, e remoção dos editores de comparativo/dores/checklist/faq da UI.
+**Segurança:** RLS no `storage.objects` filtrando por `bucket_id = 'media'` e `has_role(auth.uid(), 'admin')` para operações de escrita. Leitura pública porque as imagens aparecem no site.
 
-## Fora de escopo
+**Fora do escopo:** CDN próprio, transformações on-the-fly (resize/otimização automática), galeria/reuso de imagens já enviadas. Se você quiser depois, monto um `/admin/midia` como biblioteca central.
 
-- Migração/purga dos campos legados no dataStore (ficam guardados para consulta e podem ser removidos em prompt futuro).
-- Novas variantes de estrutura por segmento (todas usam a mesma família visa).
-- Mudanças em SEO/canonical das páginas de visto.
+## Perguntas rápidas antes de executar
+
+1. **Limite por arquivo:** 5 MB é confortável para heros grandes. Quer maior (ex. 10 MB) ou menor?
+2. **SVG:** permito upload de SVG (útil para logo)? Tem risco baixo de XSS se o SVG vier de fonte não confiável — como só admin sobe, considero seguro. OK?
