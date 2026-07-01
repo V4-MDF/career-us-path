@@ -141,7 +141,7 @@ function AdminLayout() {
         </nav>
         <div className="absolute bottom-0 inset-x-0 p-4 border-t border-slate-800 text-xs text-slate-400 flex items-center gap-2">
           <ShieldCheck className="h-3.5 w-3.5 text-amber-400" />
-          <span>Modo validação · localStorage</span>
+          <span>Auth · Lovable Cloud</span>
         </div>
       </aside>
 
@@ -167,7 +167,7 @@ function AdminLayout() {
           <div className="hidden sm:block text-xs text-slate-500 max-w-[180px] truncate">{session?.email}</div>
           <Button
             variant="ghost" size="sm" className="gap-1.5 text-slate-600"
-            onClick={() => { logout(); navigate({ to: "/admin/login", replace: true }); }}
+            onClick={async () => { await logout(); navigate({ to: "/auth", replace: true }); }}
           >
             <LogOut className="h-3.5 w-3.5" /> Sair
           </Button>
