@@ -147,10 +147,20 @@
   --secondary-foreground: var(--ink-text);
   --border: rgba(14, 23, 38, 0.12);
   --input: rgba(14, 23, 38, 0.16);
-  --ring: rgba(183, 151, 90, 0.6);
+  --ring: rgba(122, 95, 46, 0.6);
+  /* Override gold para uso como TEXTO em parchment — o ouro claro
+   * (#B7975A) fica ~2.9:1 sobre parchment (FALHA WCAG AA). Escurece
+   * para #7A5F2E (~5.4:1) enquanto mantém a leitura "ouro antigo".
+   * Cascateia para text-gold, border-gold, bg-gold (CTAs seguem
+   * legíveis com ink como foreground). */
+  --gold: #7A5F2E;
+  --gold-soft: rgba(122, 95, 46, 0.22);
+  --primary: #7A5F2E;
+  --accent: #7A5F2E;
   background-color: var(--background);
   color: var(--foreground);
 }
+
 
 /* Camada mais profunda — divisor entre dobras escuras */
 .section-ink-deep {
