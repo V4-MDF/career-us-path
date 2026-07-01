@@ -686,49 +686,47 @@ export function PreQualPromo() {
     <section
       id="pre-qualificacao"
       aria-label="Pré-qualificação"
-      className="section-anchor section-pad relative border-t border-gold/15 bg-ink"
+      className="section-anchor relative border-t border-gold/15 bg-ink py-10 md:py-14"
     >
       <div className="container-x">
-        <div className="grid lg:grid-cols-[1.1fr_1fr] gap-10 items-center">
+        <div className="grid lg:grid-cols-[1fr_1fr] gap-8 items-center">
           <div>
-            <SectionHead
-              num="10"
-              eyebrow="TESTE DE PRÉ-QUALIFICAÇÃO"
-              title="Descubra em 2 minutos qual visto se encaixa no seu perfil."
-              kicker="Um teste rápido e gratuito que indica, na hora, se você tem perfil para EB-1A, EB-2 NIW, O-1 ou EB-3 — e qual caminho faz mais sentido começar."
-            />
-            <ul className="mt-8 grid sm:grid-cols-2 gap-3 text-[15px] text-foreground/80">
-              {[
-                "Resultado imediato na tela",
-                "Indicação do visto mais adequado",
-                "Sem custo e sem compromisso",
-                "Dados protegidos e confidenciais",
-              ].map((i) => (
-                <li key={i} className="flex gap-3 rounded-lg border border-gold/15 bg-ink-raise/40 p-4">
-                  <CheckCircle2 className="h-4 w-4 text-gold mt-1 shrink-0" /> {i}
+            <div className="flex items-center gap-3">
+              <span aria-hidden className="h-px w-8 bg-gold" />
+              <span className="font-mono-label text-gold">TESTE DE PRÉ-QUALIFICAÇÃO</span>
+            </div>
+            <h2 className="mt-5 font-display text-[clamp(1.4rem,2.8vw,2rem)] leading-tight max-w-md">
+              Descubra em 2 minutos qual visto se encaixa no seu perfil.
+            </h2>
+            <p className="mt-3 text-foreground/70 text-[15px] leading-relaxed max-w-lg">
+              Teste rápido e gratuito. Indica se você tem perfil para EB-1A, EB-2 NIW, O-1 ou EB-3.
+            </p>
+            <ul className="mt-5 flex flex-wrap gap-2 text-[13px] text-foreground/70">
+              {["Resultado imediato", "Indicação do visto ideal", "Sem custo", "Dados protegidos"].map((i) => (
+                <li key={i} className="flex items-center gap-1.5 rounded-full border border-gold/15 bg-ink-raise/40 px-3 py-1">
+                  <CheckCircle2 className="h-3 w-3 text-gold" /> {i}
                 </li>
               ))}
             </ul>
           </div>
 
-          <div className="rounded-2xl border border-gold/30 bg-ink-raise/50 p-7 lg:p-8 shadow-elevated">
+          <div className="rounded-2xl border border-gold/30 bg-ink-raise/50 p-6 shadow-elevated">
             <div className="flex items-center gap-2 text-gold">
               <Sparkles className="h-4 w-4" />
               <p className="font-mono-label text-gold/80">RESPOSTA NA HORA</p>
             </div>
-            <h3 className="mt-3 font-display text-2xl leading-tight">
+            <h3 className="mt-3 font-display text-xl leading-tight">
               Faça o teste agora e veja seu encaixe.
             </h3>
-            <p className="mt-3 text-foreground/75 text-[15px] leading-relaxed">
-              São poucas perguntas objetivas sobre formação, experiência e
-              conquistas. Ao final, mostramos o visto mais compatível e o próximo passo.
+            <p className="mt-2 text-foreground/70 text-[14px] leading-relaxed">
+              Poucas perguntas objetivas sobre formação e experiência. Ao final, o visto mais compatível.
             </p>
-            <Link to="/pre-qualificacao" className="mt-7 inline-block">
-              <Button size="lg" className="btn-label btn-sweep h-12 px-7">
+            <Link to="/pre-qualificacao" className="mt-5 inline-block">
+              <Button size="lg" className="btn-label btn-sweep h-11 px-6 text-[14px]">
                 Iniciar pré-qualificação
               </Button>
             </Link>
-            <p className="mt-3 text-[13px] text-foreground/55">
+            <p className="mt-2 text-[12px] text-foreground/50">
               Leva cerca de 2 minutos. Sem cadastro inicial.
             </p>
           </div>

@@ -44,8 +44,8 @@ const DEFAULT_LAYOUTS: Record<PageSlug, SectionItem[]> = {
     { id: "renda-em-dolar",      active: true },
     { id: "depoimentos",         active: true },
     { id: "duvidas-frequentes",  active: true },
-    { id: "pre-qualificacao",    active: true },
     { id: "avaliacao-gratuita",  active: true },
+    { id: "pre-qualificacao",    active: true },
   ],
 };
 
