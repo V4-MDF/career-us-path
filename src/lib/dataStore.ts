@@ -93,7 +93,7 @@ export async function set<T = unknown>(table: TableName, id: string, value: T): 
   const { error } = await supabase
     .from("kv_records")
     .upsert(
-      { table_name: table, record_id: id, data: value as unknown as object },
+      { table_name: table, record_id: id, data: value as never },
       { onConflict: "table_name,record_id" }
     );
 

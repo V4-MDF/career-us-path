@@ -61,14 +61,15 @@ export const grantAdminByEmail = createServerFn({ method: "POST" })
     const email = data.email.trim().toLowerCase();
 
     // Procura usuário paginado
-    let target: { id: string; email: string | null } | null = null;
+    let target: { id: string; email?: string | null } | null = null;
     for (let page = 1; page <= 10 && !target; page++) {
       const { data: pageData, error } = await supabaseAdmin.auth.admin.listUsers({
         page,
         perPage: 200,
       });
       if (error) throw new Error(error.message);
-      target = pageData.users.find((u) => (u.email ?? "").toLowerCase() === email) ?? null;
+      const found = pageData.users.find((u) => (u.email ?? "").toLowerCase() === email);
+      if (found) target = { id: found.id, email: found.email };
       if (pageData.users.length < 200) break;
     }
     if (!target) {
