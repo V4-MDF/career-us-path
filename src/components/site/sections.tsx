@@ -794,9 +794,9 @@ export function CtaBanner() {
  * ============================================================ */
 /**
  * Reveal — fade+slide leve via IntersectionObserver + classe CSS.
- * Substitui o `motion.div` por bloco com `content-visibility: auto`,
- * eliminando trabalho de animação JS por seção e reduzindo paint/layout
- * fora da viewport. Mantém o efeito visual quando entra na tela.
+ * Substitui o `motion.div` por um reveal CSS leve, disparado uma única vez.
+ * Evita `content-visibility` nas dobras para não reservar alturas estimadas
+ * que possam deslocar o scroll quando a seção entra na viewport.
  */
 function Reveal({
   children, className, as: As = "section", id,
@@ -829,7 +829,7 @@ function Reveal({
       ref={ref as any}
       id={id}
       aria-label={id ? id.replace(/-/g, " ") : undefined}
-      className={`section-anchor cv-auto reveal ${shown ? "reveal-in" : ""} ${className ?? ""}`}
+      className={`section-anchor reveal ${shown ? "reveal-in" : ""} ${className ?? ""}`}
     >
       {children}
     </Comp>
