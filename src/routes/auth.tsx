@@ -31,9 +31,21 @@ function AuthPage() {
   const { next } = useSearch({ from: "/auth" });
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data }) => {
-      if (data.session) navigate({ to: (next as string) || "/admin", replace: true });
-    });
+    (async () => {
+      const { data } = await supabase.auth.getSession();
+      if (!data.session) return;
+      const { data: isAdmin } = await supabase.rpc("has_role", {
+        _user_id: data.session.user.id,
+        _role: "admin",
+      });
+      if (isAdmin) {
+        navigate({ to: (next as string) || "/admin", replace: true });
+      } else {
+        // Sessão existe mas sem role admin — encerra para evitar loop.
+        await supabase.auth.signOut();
+        toast.error("Sua conta não tem acesso admin. Peça a um administrador.");
+      }
+    })();
   }, [navigate, next]);
 
   return (
