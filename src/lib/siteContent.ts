@@ -18,7 +18,7 @@ export const defaultContent = {
   "hero.title": "Seu Green Card americano baseado no mérito da sua carreira.",
   "hero.subtitle":
     "A Status na América ajuda profissionais brasileiros consolidados a conquistar a residência permanente nos EUA pelo EB-2 NIW — sem patrocinador, sem loteria, com Green Card para o cônjuge e os filhos.",
-  "hero.cta": "Fazer minha avaliação gratuita",
+  "hero.cta": "Fazer minha análise gratuita",
   "hero.proof":
     "+1.000 famílias atendidas · Nota 5,0 no Google · Sede em Orlando, Flórida",
 
