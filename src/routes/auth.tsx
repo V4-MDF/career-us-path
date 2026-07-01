@@ -85,17 +85,19 @@ function SignInForm({ nextUrl }: { nextUrl: string }) {
       className="rounded-lg border border-slate-200 bg-white p-6 shadow-sm space-y-4"
     >
       <div>
-        <Label htmlFor="email">Email</Label>
+        <Label htmlFor="email" className="text-slate-900">Email</Label>
         <Input
           id="email" type="email" autoComplete="username" required
-          value={email} onChange={(e) => setEmail(e.target.value)} className="mt-1"
+          value={email} onChange={(e) => setEmail(e.target.value)}
+          className="mt-1 text-slate-900 placeholder:text-slate-400"
         />
       </div>
       <div>
-        <Label htmlFor="password">Senha</Label>
+        <Label htmlFor="password" className="text-slate-900">Senha</Label>
         <Input
           id="password" type="password" autoComplete="current-password" required
-          value={password} onChange={(e) => setPassword(e.target.value)} className="mt-1"
+          value={password} onChange={(e) => setPassword(e.target.value)}
+          className="mt-1 text-slate-900 placeholder:text-slate-400"
         />
       </div>
       <Button type="submit" className="w-full bg-slate-900 hover:bg-slate-800 text-white" disabled={loading}>
