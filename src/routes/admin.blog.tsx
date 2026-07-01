@@ -188,11 +188,9 @@ function PostEditor({ post, onClose }: { post: BlogPost; onClose: () => void }) 
     setData(next);
   }
 
-  function onUploadCover(file: File) {
-    const reader = new FileReader();
-    reader.onload = () => setData((d) => ({ ...d, capa: String(reader.result || "") }));
-    reader.readAsDataURL(file);
-  }
+  // Upload de capa passou a ir para o CDN via <ImageUploader /> — o componente
+  // devolve a URL pública direto no `onChange`. Base64 legado é detectado e
+  // pede re-upload.
 
   return (
     <>
@@ -267,21 +265,12 @@ function PostEditor({ post, onClose }: { post: BlogPost; onClose: () => void }) 
           </SectionCard>
 
           <SectionCard title="Capa">
-            <div className="flex items-start gap-4">
-              <div className="w-40 h-24 bg-slate-100 border border-slate-200 overflow-hidden grid place-items-center text-slate-400 text-xs">
-                {data.capa ? <img src={data.capa} alt="" className="h-full w-full object-cover" /> : "Sem capa"}
-              </div>
-              <div className="flex-1 space-y-2">
-                <Input placeholder="URL da imagem" value={data.capa} onChange={(e) => setData({ ...data, capa: e.target.value })} />
-                <label className="inline-flex items-center gap-2 text-sm cursor-pointer text-slate-600 hover:text-slate-900">
-                  <input type="file" accept="image/*" className="hidden"
-                    onChange={(e) => e.target.files?.[0] && onUploadCover(e.target.files[0])} />
-                  <span className="inline-flex items-center gap-1.5 rounded border border-slate-300 px-2.5 py-1.5">
-                    <Upload className="h-3.5 w-3.5" /> Upload (base64)
-                  </span>
-                </label>
-              </div>
-            </div>
+            <ImageUploader
+              value={data.capa}
+              onChange={(url) => setData({ ...data, capa: url })}
+              folder="blog"
+              filenameHint={data.slug || "capa"}
+            />
           </SectionCard>
 
           <SectionCard title="Corpo (Markdown)" description={`Tempo estimado de leitura: ${readingTime} min`}>
@@ -306,9 +295,14 @@ function PostEditor({ post, onClose }: { post: BlogPost; onClose: () => void }) 
                   onChange={(e) => setData({ ...data, meta_description: e.target.value })} />
               </div>
               <div>
-                <Label>OG image (URL)</Label>
-                <Input value={data.og_image} placeholder={data.capa || "Usa a capa por padrão"}
-                  onChange={(e) => setData({ ...data, og_image: e.target.value })} />
+                <Label>OG image</Label>
+                <ImageUploader
+                  value={data.og_image}
+                  onChange={(url) => setData({ ...data, og_image: url })}
+                  folder="blog"
+                  filenameHint={`${data.slug || "post"}-og`}
+                />
+                <p className="text-[11px] text-slate-400 mt-1">Se vazio, usa a capa.</p>
               </div>
             </div>
           </SectionCard>
