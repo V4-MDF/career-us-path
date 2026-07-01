@@ -1,91 +1,49 @@
 
-## Diagnóstico do estado atual
+# Adaptar o visual do site ao painel admin
 
-Hoje o admin tem três padrões diferentes — nenhum bom para qualidade:
+Hoje o site público segue a identidade **Dossiê / Credencial** (fundo `ink #0B0B0C`, parchment `#EFE9DA`, ouro `#B7975A`, Montserrat display + Inter body, filetes dourados, radius 0.875rem). O `/admin` ficou num tema genérico shadcn: fundo `bg-slate-100`, sidebar `bg-slate-900` com amarelo `amber-400`, cards brancos com sombras suaves, sem tipografia da marca.
 
-| Local | Como funciona hoje | Problema |
-|---|---|---|
-| `/admin/midia` (logo, favicon, OG, heros) | Upload vira **base64** salvo no banco, limitado a **400 KB** | Comprime demais, incha o banco, sem CDN |
-| `/admin/blog` (capa + og_image) | Upload vira **base64** no post, **sem limite** | Estoura linhas do banco, imagens de 2 MB carregam inline em todo request |
-| `/admin/segmentos`, `/admin/seo`, `/admin/ab` (hero de LP, og_image, variantes A/B) | **Só campo de URL** — sem botão de upload | Obriga o operador a hospedar por fora |
+O plano traz a linguagem visual do site para o admin, mantendo densidade e legibilidade de painel (não é um clone estético da home — é a marca aplicada a uma UI de trabalho).
 
-Base64 no banco = imagem trafega dentro do HTML/JSON, sem cache HTTP, sem redimensionamento, e o limite de 400 KB força perda visível de qualidade.
+## Direção visual do admin
 
-## O que vai mudar
+- **Superfícies**: fundo geral `parchment-deep`, cards `parchment` com filete lateral dourado (em vez de branco puro + sombra). Sidebar em `ink-deep` com filete dourado à direita.
+- **Ouro como acento único** (troca do `amber-400`): item ativo do menu, KPIs, badges de status, focus ring, `border-l` dos StatCards.
+- **Tipografia**: títulos de página em Montserrat 700 uppercase com tracking largo + filete dourado curto (mesma assinatura do `SectionHead` público). Corpo e tabelas em Inter. Números de KPI em Montserrat 800.
+- **Header do admin**: barra `parchment` com hairline `gold/25`, breadcrumb em mono-label dourado ("ADMIN · LEADS").
+- **Login `/auth`**: adota o mesmo fundo `ink` do site, card `parchment`, logo oficial no topo (não mais o "S" placeholder).
+- **Componentes shadcn**: já herdam do `--radius` e das cores via tokens — a mudança principal é dropar as classes `slate-*`/`amber-*` hardcoded do shell e dos helpers admin.
 
-Migrar todos os uploads para **Supabase Storage** (já ativo via Lovable Cloud), servindo os arquivos originais via CDN. Sem base64. Sem limite artificial de 400 KB.
+## O que muda no código
 
-### 1. Bucket de mídia
+**`src/components/admin/ui.tsx`** — reescrita dos 3 helpers:
+- `PageHeader`: título Montserrat uppercase + filete gold + eyebrow mono ("ADMIN"). Descrição em `ink-text/70`.
+- `StatCard`: fundo `parchment`, borda `gold/20`, filete lateral em `gold` (default) ou `oxblood`/`success` para os accents. Label em mono uppercase; valor em Montserrat 800.
+- `SectionCard`: fundo `parchment`, header com hairline `gold/25`, footer `parchment-deep`.
+- `ClassBadge`: paleta A/B/C/D remapeada — A `gold`, B `ink`, C `slate`, D `parchment-deep` (mantém legibilidade sem verde/azul).
 
-Criar bucket público `media` (via `storage_create_bucket`), com policies:
-- `SELECT` liberado a todos (site público lê as imagens)
-- `INSERT / UPDATE / DELETE` apenas para usuários com role `admin` (via `has_role`)
-- Sem `TO anon` write — nenhum visitante consegue subir arquivo
+**`src/routes/admin.tsx`** — shell:
+- Fundo `bg-parchment-deep text-ink-text` (era `slate-100`).
+- Sidebar `bg-ink-deep` com borda direita `border-r border-gold/20`; item ativo `bg-gold text-ink-deep`; hover `bg-ink-raise`; badges "crítico" em `gold/80`.
+- Header sticky `bg-parchment` com hairline dourado e breadcrumb mono. Botões "Ver site" e "Sair" em `variant="ghost"` no tom da marca.
+- Logo: substituir o quadrado "S" pela logo oficial já usada no header público (`@/assets/logo-status-na-america.png.asset.json`).
+- Rodapé lateral: "Auth · Lovable Cloud" em `slate` claro sobre `ink-deep`.
 
-Estrutura de pastas: `media/site/`, `media/blog/`, `media/segmentos/`, `media/seo/`, `media/ab/`.
+**`src/routes/auth.tsx`** — página de login:
+- Fundo full-screen `bg-ink` com o mesmo backdrop sutil do site.
+- Card `bg-parchment text-ink-text rounded-2xl` com filete dourado no topo.
+- Logo oficial no topo (não o "S").
+- Labels/inputs no padrão do site (Inter, focus ring `gold`).
 
-### 2. Componente `<ImageUploader />` reutilizável
+**Nenhum outro admin.*.tsx precisa ser tocado** — todos usam `PageHeader`/`SectionCard`/`StatCard` + `Button`/`Input`/`Table` do shadcn, que herdam tokens automaticamente. Se algum lugar tiver `bg-white`, `text-slate-*` ou `bg-amber-*` hardcoded, esses ficam remapeados via grep no fim.
 
-Novo em `src/components/admin/ImageUploader.tsx`. Interface única:
+## Fora de escopo
 
-```tsx
-<ImageUploader
-  value={url}
-  onChange={setUrl}
-  folder="blog"          // subpasta no bucket
-  filenameHint="capa"    // usado para nomear o arquivo
-  maxMB={5}
-  accept="image/jpeg,image/png,image/webp,image/avif,image/svg+xml"
-/>
-```
+- Nada de nova feature, tabela, rota ou lógica.
+- Sem tocar em site público, banco, RLS ou server functions.
+- Sem tema dark toggle no admin — o admin fica no par `parchment/ink` (claro operacional com identidade da marca).
 
-Comportamento:
-- **Botão "Enviar imagem"** + drag-and-drop na área de preview
-- **Fallback "colar URL"** preservado (para quem já tem CDN externo)
-- Upload direto ao Storage via cliente supabase (browser → bucket), sem passar pelo servidor
-- Nome final: `{folder}/{timestamp}-{slug(filenameHint)}.{ext}` — evita colisão e cache stale
-- Valida tipo e tamanho **antes** do upload (default 5 MB, SVG permitido)
-- Mostra **preview**, **dimensões (px)**, **tamanho (KB)** e botão **Remover** após upload
-- Estado de loading + toast de erro/sucesso
-- `onChange` recebe a **URL pública** já pronta para gravar no `kv_records`
+## Verificação
 
-### 3. Onde plugar o componente
-
-Substituir os inputs atuais nas 5 telas:
-
-- `admin.midia.tsx` — troca `MediaSlot` inteiro pelo `<ImageUploader />`. Remove o aviso de "localStorage 5 MB" e o limite de 400 KB.
-- `admin.blog.tsx` — `capa` e `og_image` passam a usar upload real (não base64).
-- `admin.segmentos.tsx` — campo `hero_default.imagem` ganha botão de upload.
-- `admin.seo.tsx` — `og_image` por página ganha botão de upload.
-- `admin.ab.tsx` — `imagem` da variante ganha botão de upload.
-
-O formato do dado gravado continua sendo uma **string URL** — 100% compatível com os componentes públicos (`LandingPageTemplate`, `BlogStrip`, meta tags), sem tocar em nada do site.
-
-### 4. Migração dos dados antigos (base64 → Storage)
-
-Uma vez, ao carregar cada tela: se `url` começa com `data:image/`, mostrar um aviso "Imagem legada em base64 — reenvie para migrar para o CDN". Não migro em massa automático (pode gerar duplicatas e o operador quer curar).
-
-## Detalhes técnicos
-
-**Client Storage API:**
-```ts
-const { data, error } = await supabase.storage
-  .from("media")
-  .upload(`${folder}/${filename}`, file, {
-    contentType: file.type,
-    cacheControl: "31536000, immutable",  // 1 ano — filename tem timestamp
-    upsert: false,
-  });
-const { data: { publicUrl } } = supabase.storage.from("media").getPublicUrl(data.path);
-```
-
-**Qualidade:** o arquivo é armazenado **byte-a-byte como enviado** (sem recompressão do lado do Supabase). Se o usuário quiser otimizar, pode subir WebP/AVIF direto. Não vou introduzir transformações no upload — mantém "boa qualidade" que é o pedido.
-
-**Segurança:** RLS no `storage.objects` filtrando por `bucket_id = 'media'` e `has_role(auth.uid(), 'admin')` para operações de escrita. Leitura pública porque as imagens aparecem no site.
-
-**Fora do escopo:** CDN próprio, transformações on-the-fly (resize/otimização automática), galeria/reuso de imagens já enviadas. Se você quiser depois, monto um `/admin/midia` como biblioteca central.
-
-## Perguntas rápidas antes de executar
-
-1. **Limite por arquivo:** 5 MB é confortável para heros grandes. Quer maior (ex. 10 MB) ou menor?
-2. **SVG:** permito upload de SVG (útil para logo)? Tem risco baixo de XSS se o SVG vier de fonte não confiável — como só admin sobe, considero seguro. OK?
+- Rodar typecheck.
+- Abrir `/admin` e `/auth` no preview via Playwright (viewport 1280) e capturar screenshots do dashboard, de uma listagem (`/admin/leads`) e do login para confirmar consistência com a home.
