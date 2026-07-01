@@ -1,11 +1,8 @@
 /**
- * Layout do painel admin — tema CLARO, sidebar escura com destaque dourado.
+ * Layout do painel admin — identidade "Dossiê" (parchment + ink + gold).
  *
- * Gate de auth client-side: redireciona para /admin/login se não autenticado.
- * /admin/login renderiza fora do shell (sem sidebar).
- *
- * ⚠️ Esta proteção é de UX (validação). Substituir por Supabase Auth + RLS
- *    antes de tráfego pago — ver src/lib/admin/auth.ts.
+ * Auth gate: redireciona para /auth se não autenticado. /admin/login é legado
+ * e permanece renderizando fora do shell.
  */
 import { Outlet, Link, createFileRoute, useNavigate, useRouterState } from "@tanstack/react-router";
 import { useEffect, useState, useSyncExternalStore } from "react";
@@ -20,6 +17,7 @@ import { Toaster } from "@/components/ui/sonner";
 import {
   getCurrentSession, isAuthenticated, isReady, initAuthListener, logout, subscribeAuth,
 } from "@/lib/admin/auth";
+import logoAsset from "@/assets/logo-status-na-america.png.asset.json";
 
 export const Route = createFileRoute("/admin")({
   component: AdminLayout,
@@ -66,7 +64,6 @@ function AdminLayout() {
   const navigate = useNavigate();
   const [openMobile, setOpenMobile] = useState(false);
 
-  // Init auth listener once
   useEffect(() => {
     const unsub = initAuthListener();
     return () => { unsub(); };
@@ -87,35 +84,48 @@ function AdminLayout() {
 
   if (isLogin) {
     return (
-      <div data-admin-shell className="min-h-screen bg-slate-100">
+      <div data-admin-shell className="min-h-screen bg-ink">
         <Outlet />
         <Toaster richColors position="top-right" />
       </div>
     );
   }
   if (!ready) {
-    return <div data-admin-shell className="min-h-screen grid place-items-center bg-slate-50 text-slate-500">Carregando…</div>;
+    return (
+      <div data-admin-shell className="min-h-screen grid place-items-center bg-parchment-deep text-ink-text/60 font-mono text-xs uppercase tracking-[0.22em]">
+        Carregando…
+      </div>
+    );
   }
   if (!authed) return null;
 
   const session = getCurrentSession();
+  const activeItem = NAV.find((n) => (n.exact ? pathname === n.to : pathname.startsWith(n.to)));
 
   return (
-    <div data-admin-shell className="min-h-screen flex bg-slate-100 text-slate-900">
+    <div data-admin-shell className="min-h-screen flex bg-parchment-deep text-ink-text">
       {/* Sidebar */}
       <aside
-        className={`fixed lg:static inset-y-0 left-0 z-40 w-64 bg-slate-900 text-slate-100 transform transition-transform lg:translate-x-0 ${
+        className={`fixed lg:static inset-y-0 left-0 z-40 w-64 bg-ink-deep text-parchment border-r border-gold/20 transform transition-transform lg:translate-x-0 ${
           openMobile ? "translate-x-0" : "-translate-x-full"
         }`}
       >
-        <div className="px-5 py-5 border-b border-slate-800 flex items-center gap-2">
-          <span className="grid h-9 w-9 place-items-center rounded-md bg-amber-400 text-slate-900 font-serif text-lg font-bold">S</span>
-          <div>
-            <div className="font-serif text-sm leading-tight">Status. na América</div>
-            <div className="text-[10px] tracking-[0.2em] text-amber-400/80">PAINEL ADMIN</div>
+        <div className="px-5 py-5 border-b border-gold/15 flex items-center gap-3">
+          <img
+            src={logoAsset.url}
+            alt="Status na América"
+            className="h-9 w-9 rounded-md object-contain bg-parchment/5 p-1"
+          />
+          <div className="min-w-0">
+            <div className="font-display text-xs font-bold uppercase tracking-[0.14em] leading-tight text-parchment truncate">
+              Status na América
+            </div>
+            <div className="mt-0.5 font-mono text-[9px] uppercase tracking-[0.28em] text-gold/80">
+              Painel admin
+            </div>
           </div>
         </div>
-        <nav className="p-3 space-y-1">
+        <nav className="p-3 space-y-0.5">
           {NAV.map((item) => {
             const active = item.exact ? pathname === item.to : pathname.startsWith(item.to);
             const Icon = item.icon;
@@ -126,47 +136,59 @@ function AdminLayout() {
                 onClick={() => setOpenMobile(false)}
                 className={`flex items-center gap-3 px-3 py-2 rounded-md text-sm transition-colors ${
                   active
-                    ? "bg-amber-400 text-slate-900 font-medium"
-                    : "text-slate-300 hover:bg-slate-800 hover:text-white"
+                    ? "bg-gold text-ink-deep font-semibold"
+                    : "text-parchment/75 hover:bg-ink-raise hover:text-parchment"
                 }`}
               >
                 <Icon className="h-4 w-4 shrink-0" />
-                <span className="flex-1">{item.label}</span>
+                <span className="flex-1 truncate">{item.label}</span>
                 {item.badge && !active && (
-                  <span className="text-[9px] uppercase tracking-wider text-amber-400/80">{item.badge}</span>
+                  <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-gold/70">
+                    {item.badge}
+                  </span>
                 )}
               </Link>
             );
           })}
         </nav>
-        <div className="absolute bottom-0 inset-x-0 p-4 border-t border-slate-800 text-xs text-slate-400 flex items-center gap-2">
-          <ShieldCheck className="h-3.5 w-3.5 text-amber-400" />
+        <div className="absolute bottom-0 inset-x-0 p-4 border-t border-gold/15 font-mono text-[10px] uppercase tracking-[0.22em] text-parchment/50 flex items-center gap-2">
+          <ShieldCheck className="h-3.5 w-3.5 text-gold" />
           <span>Auth · Lovable Cloud</span>
         </div>
       </aside>
 
       {/* Backdrop mobile */}
       {openMobile && (
-        <div className="fixed inset-0 bg-black/40 z-30 lg:hidden" onClick={() => setOpenMobile(false)} />
+        <div className="fixed inset-0 bg-ink-deep/60 z-30 lg:hidden" onClick={() => setOpenMobile(false)} />
       )}
 
       {/* Conteúdo */}
       <div className="flex-1 min-w-0 flex flex-col">
-        <header className="h-14 bg-white border-b border-slate-200 flex items-center px-4 gap-3 sticky top-0 z-20">
-          <button className="lg:hidden p-2" onClick={() => setOpenMobile((o) => !o)} aria-label="Menu">
+        <header className="h-14 bg-parchment border-b border-gold/25 flex items-center px-4 gap-3 sticky top-0 z-20">
+          <button
+            className="lg:hidden p-2 text-ink-text hover:text-gold transition-colors"
+            onClick={() => setOpenMobile((o) => !o)}
+            aria-label="Menu"
+          >
             {openMobile ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
-          <div className="flex-1 min-w-0 text-sm text-slate-600 truncate">
-            {NAV.find((n) => (n.exact ? pathname === n.to : pathname.startsWith(n.to)))?.label ?? "Admin"}
+          <div className="flex-1 min-w-0 font-mono text-[11px] uppercase tracking-[0.22em] text-ink-text/70 truncate">
+            <span className="text-gold">Admin</span>
+            <span className="mx-2 text-ink-text/30">·</span>
+            <span>{activeItem?.label ?? "Painel"}</span>
           </div>
           <a href="/" target="_blank" rel="noopener noreferrer">
-            <Button variant="outline" size="sm" className="gap-1.5">
+            <Button variant="outline" size="sm" className="gap-1.5 border-ink-text/20 text-ink-text hover:bg-ink-text hover:text-parchment">
               <ExternalLink className="h-3.5 w-3.5" /> Ver site
             </Button>
           </a>
-          <div className="hidden sm:block text-xs text-slate-500 max-w-[180px] truncate">{session?.email}</div>
+          <div className="hidden sm:block text-xs text-ink-text/60 max-w-[180px] truncate">
+            {session?.email}
+          </div>
           <Button
-            variant="ghost" size="sm" className="gap-1.5 text-slate-600"
+            variant="ghost"
+            size="sm"
+            className="gap-1.5 text-ink-text/70 hover:text-oxblood hover:bg-transparent"
             onClick={async () => { await logout(); navigate({ to: "/auth", replace: true }); }}
           >
             <LogOut className="h-3.5 w-3.5" /> Sair
