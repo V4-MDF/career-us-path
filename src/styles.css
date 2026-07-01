@@ -285,9 +285,26 @@
   max-width: 56rem;
 }
 
-/* Padding vertical de seção: clamp(96px, 12vh, 176px) desktop / 64-80 mobile. */
+/* Padding vertical padronizado das dobras.
+ * Valores fixos por breakpoint (não fluidos) para garantir ritmo previsível
+ * no scroll — evita o efeito de "puxão" causado por clamp(vw) que muda a
+ * altura da dobra continuamente conforme a viewport. */
 @utility section-pad {
-  padding-block: clamp(4rem, 9vw, 11rem);
+  padding-block: 4.5rem; /* mobile: 72px */
+}
+@media (min-width: 768px) {
+  .section-pad { padding-block: 6rem; } /* tablet: 96px */
+}
+@media (min-width: 1024px) {
+  .section-pad { padding-block: 7.5rem; } /* desktop: 120px */
+}
+
+/* Variante compacta para dobras promocionais/transição (blog, pré-qual). */
+@utility section-pad-compact {
+  padding-block: 3rem; /* mobile: 48px */
+}
+@media (min-width: 768px) {
+  .section-pad-compact { padding-block: 4.5rem; } /* desktop: 72px */
 }
 
 /*
