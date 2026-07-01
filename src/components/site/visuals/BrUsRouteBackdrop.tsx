@@ -1,8 +1,8 @@
 /**
  * BrUsRouteBackdrop — SVG decorativo de fundo para o hero.
  * Silhuetas simplificadas de Brasil e EUA conectadas por uma rota
- * pontilhada que se anima ao montar. aria-hidden, leve, sem
- * dependências, respeita prefers-reduced-motion.
+ * pontilhada estática. aria-hidden, leve, sem dependências e sem
+ * animação contínua para não competir com o scroll.
  */
 export function BrUsRouteBackdrop({ className = "" }: { className?: string }) {
   return (
@@ -43,26 +43,10 @@ export function BrUsRouteBackdrop({ className = "" }: { className?: string }) {
           d="M330 230 Q 600 80 935 490"
           strokeDasharray="6 8"
           strokeLinecap="round"
-          data-motion-anim
-          style={{ animation: "dashFlow 6s linear infinite" }}
         />
         {/* "Avião" — triângulo pequeno */}
-        <polygon
-          points="0,-5 10,0 0,5"
-          fill="currentColor"
-          opacity="0.9"
-          data-motion-anim
-        >
-          <animateMotion
-            dur="9s"
-            repeatCount="indefinite"
-            rotate="auto"
-            path="M330 230 Q 600 80 935 490"
-          />
-        </polygon>
+        <polygon points="690,240 706,248 690,256 695,248" fill="currentColor" opacity="0.9" transform="rotate(38 698 248)" />
       </g>
-
-      <style>{`@keyframes dashFlow { to { stroke-dashoffset: -140; } }`}</style>
     </svg>
   );
 }

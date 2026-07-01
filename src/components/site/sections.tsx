@@ -14,7 +14,6 @@
  */
 
 import { Link } from "@tanstack/react-router";
-import { motion, useInView, useReducedMotion, useScroll, useTransform } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 import {
   AlertTriangle, Award, Briefcase, Building2, CheckCircle2, FileText,
@@ -48,33 +47,12 @@ export function Hero() {
   const sub = useContent("hero.subtitle");
   const cta = useContent("hero.cta");
   const proof = useContent("hero.proof");
-  const reduce = useReducedMotion();
   const lines = splitHeadline(title);
-  // Easing assinatura — cubic-bezier(0.16, 1, 0.3, 1) (expo-out premium).
-  const easeSig = [0.16, 1, 0.3, 1] as const;
-
-  // Parallax sutil ligado ao scroll do hero (≤8%). Desligado em mobile e quando
-  // o usuário pede menos movimento — evita jank/composite por frame.
-  const heroRef = useRef<HTMLElement>(null);
-  const isDesktop = useMediaQuery("(min-width: 1024px)");
-  const isMobile = useMediaQuery("(max-width: 767px)");
-  const enableParallax = isDesktop && !reduce;
-  const { scrollYProgress } = useScroll({
-    target: heroRef,
-    offset: ["start start", "end start"],
-  });
-  const imgY = useTransform(scrollYProgress, [0, 1], ["0%", enableParallax ? "6%" : "0%"]);
-
-  // Tempo + delay: no mobile, reveals curtos (~0.35s) e sem cascata de delays,
-  // mantendo o "luxo silencioso" sem peso de movimento. Reduced-motion → 0.
-  const t = (d: number) => (reduce ? 0 : isMobile ? Math.min(d * 0.5, 0.35) : d);
-  const dly = (d: number) => (reduce || isMobile ? 0 : d);
 
 
 
   return (
     <section
-      ref={heroRef}
       id="abertura"
       aria-label="Abertura"
       className="section-anchor relative overflow-hidden pt-32 md:pt-44 pb-24 md:pb-36"
@@ -98,52 +76,26 @@ export function Hero() {
 
       <div className="container-x grid lg:grid-cols-[1.1fr_0.9fr] gap-16 lg:gap-20 items-center">
         <div>
-          <motion.div
-            initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-            transition={{ duration: t(0.5), ease: easeSig }}
-            className="flex items-center gap-3"
-          >
+          <div className="flex items-center gap-3 hero-static-in">
             <span aria-hidden className="h-px w-10 bg-gold" />
             <span className="font-mono-label text-gold">{eyebrow}</span>
-          </motion.div>
+          </div>
 
-          {/* H1: tipo fluido grande e confiante (display-1). No desktop, reveal linha-a-linha com máscara y; no mobile/reduced, fade puro — sem peso visual. */}
-          <h1 className="display-1 mt-8">
+          <h1 className="display-1 mt-8 hero-static-in">
             {lines.map((ln, i) => (
-              <span key={i} className="block overflow-hidden pb-1">
-                <motion.span
-                  className="block"
-                  initial={isMobile || reduce ? { opacity: 0 } : { y: "110%" }}
-                  animate={isMobile || reduce ? { opacity: 1 } : { y: "0%" }}
-                  transition={{ duration: t(0.85), ease: easeSig, delay: dly(0.15 + i * 0.1) }}
-                >
-                  {renderEmphasis(ln)}
-                </motion.span>
+              <span key={i} className="block pb-1">
+                {renderEmphasis(ln)}
               </span>
             ))}
           </h1>
 
-          {/* Filete dourado que se desenha da esquerda → direita. */}
-          <motion.div
-            initial={{ scaleX: 0 }} animate={{ scaleX: 1 }}
-            transition={{ duration: t(0.9), ease: easeSig, delay: dly(0.55) }}
-            style={{ transformOrigin: "left center" }}
-            className="mt-10 h-px w-28 bg-gold"
-          />
+          <div className="mt-10 h-px w-28 bg-gold" />
 
-          <motion.p
-            initial={{ opacity: 0, y: isMobile ? 6 : 12 }} animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: t(0.7), ease: easeSig, delay: dly(0.7) }}
-            className="lead mt-7 max-w-xl"
-          >
+          <p className="lead mt-7 max-w-xl hero-static-in">
             {sub}
-          </motion.p>
+          </p>
 
-          <motion.div
-            initial={{ opacity: 0, y: isMobile ? 6 : 12 }} animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: t(0.7), ease: easeSig, delay: dly(0.85) }}
-            className="mt-10 flex flex-wrap gap-3"
-          >
+          <div className="mt-10 flex flex-wrap gap-3 hero-static-in">
             <Link to={useAvaliacaoHref("home_hero")} aria-label="Ir para o formulário de avaliação gratuita">
               <Button size="lg" className="btn-label btn-sweep h-12 px-7 text-[15px] active:scale-[0.98]">
                 {cta}
@@ -158,28 +110,19 @@ export function Hero() {
                 <PlayCircle className="mr-2 h-4 w-4" /> Entenda o EB-2 NIW
               </Button>
             </a>
-          </motion.div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-            transition={{ duration: t(0.6), delay: dly(1.1) }}
-            className="mt-14 flex items-start gap-3 text-sm text-foreground/60 border-l border-gold/50 pl-4 max-w-md"
-          >
+          <div className="mt-14 flex items-start gap-3 text-sm text-foreground/60 border-l border-gold/50 pl-4 max-w-md hero-static-in">
             <Star className="h-4 w-4 text-gold mt-0.5 shrink-0 fill-gold" />
             <span>{proof}</span>
-          </motion.div>
+          </div>
 
 
 
         </div>
 
         {/* Bloco editorial — parallax sutil (apenas desktop). */}
-        <motion.div
-          className="relative hidden lg:block"
-          initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-          transition={{ duration: t(1.0), ease: easeSig, delay: t(0.25) }}
-          style={enableParallax ? { y: imgY, willChange: "transform" } : undefined}
-        >
+        <div className="relative hidden lg:block hero-static-in">
           <div className="relative aspect-[4/5] overflow-hidden rounded-3xl border border-gold/30 bg-ink-raise shadow-elevated">
             {/* Fotografia editorial — família multigeracional em paisagem americana. */}
             <img
@@ -210,7 +153,7 @@ export function Hero() {
             </div>
             <p className="mt-1.5 font-mono-label text-[11px] xl:text-xs text-foreground/70">130+ AVALIAÇÕES 5★</p>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
@@ -849,19 +792,6 @@ export function CtaBanner() {
 /* ============================================================
  * Helpers
  * ============================================================ */
-function useMediaQuery(query: string): boolean {
-  const [matches, setMatches] = useState(false);
-  useEffect(() => {
-    if (typeof window === "undefined" || !window.matchMedia) return;
-    const mql = window.matchMedia(query);
-    const update = () => setMatches(mql.matches);
-    update();
-    mql.addEventListener("change", update);
-    return () => mql.removeEventListener("change", update);
-  }, [query]);
-  return matches;
-}
-
 /**
  * Reveal — fade+slide leve via IntersectionObserver + classe CSS.
  * Substitui o `motion.div` por bloco com `content-visibility: auto`,
