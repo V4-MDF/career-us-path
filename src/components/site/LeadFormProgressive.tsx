@@ -255,27 +255,39 @@ export function LeadFormProgressive({
     try {
       const id = newId("lead");
       const origin = getOrigin(currentPath);
-      const qual = evaluateQualification(current);
+      // Qualificação com fallback: nunca deixa uma falha aqui travar o funil.
+      let qual: { result: QualResult; reasons: string[] };
+      try {
+        qual = evaluateQualification(current);
+      } catch (e) {
+        console.warn("[avaliacao] evaluateQualification failed", e);
+        qual = { result: "qualificado", reasons: [] };
+      }
       const lead = {
         ...current,
         id,
         createdAt: new Date().toISOString(),
-        utm: origin.utm,        // compat com tooling existente
-        origin,                  // captura completa (utm + interno)
+        utm: origin.utm,
+        origin,
         segmento: segmentId,
         variante_ab: segmentId ? getAssignedVariantId(segmentId) : null,
         status: "novo" as const,
         qualification: qual.result,
         qualification_reasons: qual.reasons,
       };
+      // `set` já não lança — loga warn e mantém cache local em caso de falha.
       await set("leads", id, lead);
-      // Marca a sessão como convertida + calcula qualificação para o admin.
+
+      // Redireciona ANTES dos efeitos colaterais para garantir a navegação.
+      if (onSubmitted) onSubmitted({ id, qualification: qual.result });
+      else setDone(true);
+
+      // Efeitos colaterais isolados — não bloqueiam o redirect.
       try {
         const model = await loadModel();
         const score = computeScore(current, model).score;
         await markSessionConverted({ qualified: qual.result === "qualificado" || score >= 70, score });
       } catch (e) { console.warn("[avaliacao] session mark failed", e); }
-      // efeitos colaterais isolados — se falharem, NÃO bloqueiam o redirect
       if (segmentId) {
         try { await registerConversion(segmentId); }
         catch (e) { console.warn("[avaliacao] registerConversion failed", e); }
@@ -286,8 +298,6 @@ export function LeadFormProgressive({
           window.sessionStorage.removeItem(SS_PARTIAL_ID);
         } catch (e) { console.warn("[avaliacao] partial cleanup failed", e); }
       }
-      if (onSubmitted) onSubmitted({ id, qualification: qual.result });
-      else setDone(true);
     } catch (err) {
       console.error("[avaliacao] submit failed", err);
       setError("Não foi possível enviar agora. Tente novamente.");
