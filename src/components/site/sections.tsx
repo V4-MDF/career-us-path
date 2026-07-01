@@ -37,7 +37,7 @@ import { FlagsBRUS } from "./flags";
 import heroSkyline from "@/assets/hero-skyline.jpg";
 import familyPortrait from "@/assets/family-portrait.jpg";
 import passportDocuments from "@/assets/passport-documents.jpg";
-import usMapEngraving from "@/assets/us-map-engraving.png";
+import usMapEngraving from "@/assets/us-map-engraving.webp";
 
 /* ============================================================
  * 1. HERO
@@ -203,7 +203,7 @@ export function Hero() {
             </div>
           </div>
 
-          <div className="absolute top-4 right-4 xl:-top-5 xl:-right-5 rounded-xl border border-gold bg-ink-deep/95 backdrop-blur p-3 xl:p-4 max-w-[180px] xl:max-w-[200px] shadow-elevated">
+          <div className="absolute top-4 right-4 xl:-top-5 xl:-right-5 rounded-xl border border-gold bg-ink-deep p-3 xl:p-4 max-w-[180px] xl:max-w-[200px] shadow-elevated">
             <div className="absolute top-0 left-0 h-[3px] w-10 bg-gold" />
             <div className="flex items-center gap-1 text-gold">
               {[...Array(5)].map((_, i) => <Star key={i} className="h-3 w-3 xl:h-3.5 xl:w-3.5 fill-gold" />)}

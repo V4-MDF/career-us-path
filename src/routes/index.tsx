@@ -84,9 +84,17 @@ function Home() {
       <main>
         {layout
           .filter((s) => s.active)
-          .map((s) => {
+          .map((s, i) => {
             const Cmp = HOME_REGISTRY[s.id];
-            return Cmp ? <Cmp key={s.id} /> : null;
+            if (!Cmp) return null;
+            // Hero (primeira dobra ativa) fica sem cv-defer para não afetar LCP.
+            return i === 0 ? (
+              <Cmp key={s.id} />
+            ) : (
+              <div key={s.id} className="cv-defer">
+                <Cmp />
+              </div>
+            );
           })}
       </main>
       <Footer />
