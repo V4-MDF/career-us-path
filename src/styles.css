@@ -710,9 +710,10 @@
 }
 
 /* Admin: disabled state legível e consistente (>=4.5:1) — sobrepõe o
-   opacity para elementos com bg colorido, evitando amber/red lavados. */
-[data-admin-shell] button:disabled:not([class*="variant-ghost"]):not([class*="variant-link"]),
-[data-admin-shell] [role="button"][aria-disabled="true"] {
+   opacity para botões com bg sólido, evitando amber/red/slate lavados.
+   Ghost/link ficam apenas com opacity reduzida (herdada do Button). */
+[data-admin-shell] button:disabled[class*="bg-"],
+[data-admin-shell] [role="button"][aria-disabled="true"][class*="bg-"] {
   background-color: #e2e8f0 !important;
   color: #64748b !important;
   border-color: #cbd5e1 !important;
