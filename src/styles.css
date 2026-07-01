@@ -693,5 +693,29 @@
   --destructive-foreground: #ffffff;
   --border: #e2e8f0;
   --input: #cbd5e1;
-  --ring: #f59e0b;
+  --ring: #b45309;
+}
+
+/* Admin: link/texto em primary usa amber-700 para contraste AA sobre branco.
+   Não afeta bg-primary (CTAs) que permanecem amber vibrante #f59e0b. */
+[data-admin-shell] a.text-primary,
+[data-admin-shell] .text-primary:not([class*="bg-"]):not(button) {
+  color: #b45309;
+}
+
+/* Admin: botão link herda contraste seguro sem alterar CTAs sólidos. */
+[data-admin-shell] a[class*="underline-offset"],
+[data-admin-shell] button[class*="underline-offset"]:not([class*="bg-primary"]):not([class*="bg-destructive"]):not([class*="bg-secondary"]) {
+  color: #b45309;
+}
+
+/* Admin: disabled state legível e consistente (>=4.5:1) — sobrepõe o
+   opacity para elementos com bg colorido, evitando amber/red lavados. */
+[data-admin-shell] button:disabled:not([class*="variant-ghost"]):not([class*="variant-link"]),
+[data-admin-shell] [role="button"][aria-disabled="true"] {
+  background-color: #e2e8f0 !important;
+  color: #64748b !important;
+  border-color: #cbd5e1 !important;
+  opacity: 1 !important;
+  filter: none !important;
 }
