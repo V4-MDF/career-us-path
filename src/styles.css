@@ -202,7 +202,7 @@
      anel dourado; o box-shadow cria um halo escuro que eleva o contraste
      do anel a >=3:1 em qualquer fundo. */
   :where(a, button, [role="button"], [role="link"], [role="menuitem"], [role="tab"], [role="option"], input, select, textarea, summary, [tabindex]:not([tabindex="-1"])):focus-visible {
-    outline: 2px solid var(--gold);
+    outline: 2px solid var(--ring);
     outline-offset: 3px;
     box-shadow: 0 0 0 1px color-mix(in oklab, var(--ink-deep) 75%, transparent);
     border-radius: 6px;
