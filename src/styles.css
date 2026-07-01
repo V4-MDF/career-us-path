@@ -303,6 +303,15 @@
   .section-anchor { scroll-margin-top: 80px; }
 }
 
+/* content-visibility: pula layout/paint de dobras fora da viewport, com
+ * placeholder de altura estimada para não gerar layout shift. Aplicada em
+ * todas as dobras da Home exceto a primeira (Hero, above-the-fold). */
+@utility cv-defer {
+  content-visibility: auto;
+  contain-intrinsic-size: 900px 1200px;
+}
+
+
 
 /* Escala tipográfica fluida — Montserrat bold em uppercase nos displays
  * (titles). Tamanho ligeiramente reduzido vs Bodoni: Montserrat 800 ocupa
