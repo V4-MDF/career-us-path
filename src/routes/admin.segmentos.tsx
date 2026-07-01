@@ -15,6 +15,7 @@ import { PageHeader, SectionCard } from "@/components/admin/ui";
 import { list, newId, remove, set } from "@/lib/dataStore";
 import { ensureSeed, type Segment } from "@/lib/segments";
 import { broadcast } from "@/lib/admin/settings";
+import { ImageUploader } from "@/components/admin/ImageUploader";
 
 export const Route = createFileRoute("/admin/segmentos")({ component: SegmentsPage });
 

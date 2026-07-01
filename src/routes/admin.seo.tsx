@@ -10,6 +10,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { PageHeader, SectionCard } from "@/components/admin/ui";
 import { get, set } from "@/lib/dataStore";
 import { broadcast } from "@/lib/admin/settings";
+import { ImageUploader } from "@/components/admin/ImageUploader";
 
 export const Route = createFileRoute("/admin/seo")({ component: SeoPage });
 
