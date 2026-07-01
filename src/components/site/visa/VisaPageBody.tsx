@@ -53,7 +53,7 @@ export function VisaPageBody({ page }: { page: VisaPage }) {
           <div className="mt-10">
             <a href={avaliacaoHref(`visto_${page.slug}_hero`)}>
               <Button size="lg" className="btn-label btn-sweep h-12 px-7 text-base">
-                Avaliação gratuita
+                Análise gratuita
               </Button>
             </a>
           </div>
@@ -218,7 +218,7 @@ export function VisaPageBody({ page }: { page: VisaPage }) {
                 em vistos EB. Resposta em até 48h por e-mail.
               </p>
               <a href={avaliacaoHref(`visto_${page.slug}_cta`)} className="mt-7 inline-block">
-                <Button size="lg" className="btn-label btn-sweep h-12 px-7">Fazer minha avaliação gratuita</Button>
+                <Button size="lg" className="btn-label btn-sweep h-12 px-7">Fazer minha análise gratuita</Button>
               </a>
             </div>
           </div>

@@ -195,7 +195,7 @@ function BlogIndex() {
               </p>
             </div>
             <Link to="/" hash="avaliacao">
-              <Button size="lg" className="btn-label btn-sweep h-12 px-7">Avaliação gratuita</Button>
+              <Button size="lg" className="btn-label btn-sweep h-12 px-7">Análise gratuita</Button>
             </Link>
           </div>
         </section>
