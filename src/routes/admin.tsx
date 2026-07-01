@@ -8,7 +8,7 @@
  *    antes de tráfego pago — ver src/lib/admin/auth.ts.
  */
 import { Outlet, Link, createFileRoute, useNavigate, useRouterState } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import {
   BarChart3, BookText, Compass, ExternalLink, FileText, Image as ImageIcon, LayoutDashboard,
   Layers, Link as LinkIcon, LogOut, Menu, Search, Settings, ShieldCheck,
@@ -17,7 +17,9 @@ import {
 
 import { Button } from "@/components/ui/button";
 import { Toaster } from "@/components/ui/sonner";
-import { getCurrentSession, isAuthenticated, logout } from "@/lib/admin/auth";
+import {
+  getCurrentSession, isAuthenticated, isReady, initAuthListener, logout, subscribeAuth,
+} from "@/lib/admin/auth";
 
 export const Route = createFileRoute("/admin")({
   component: AdminLayout,
@@ -47,27 +49,41 @@ const NAV: NavItem[] = [
   { to: "/admin/links", label: "Botões & Links", icon: LinkIcon },
   { to: "/admin/seo", label: "SEO", icon: Search },
   { to: "/admin/tracking", label: "Tracking", icon: Sparkles },
-  { to: "/admin/usuarios", label: "Usuários", icon: Users2 },
+  { to: "/admin/usuarios", label: "Administradores", icon: Users2 },
   { to: "/admin/configuracoes", label: "Configurações", icon: Settings },
 ];
+
+function useAuthSnapshot() {
+  return useSyncExternalStore(
+    (cb) => subscribeAuth(cb),
+    () => `${isReady()}|${isAuthenticated()}|${getCurrentSession()?.userId ?? ""}`,
+    () => "false|false|",
+  );
+}
 
 function AdminLayout() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const navigate = useNavigate();
-  const [authed, setAuthed] = useState<boolean | null>(null);
   const [openMobile, setOpenMobile] = useState(false);
+
+  // Init auth listener once
+  useEffect(() => {
+    const unsub = initAuthListener();
+    return () => { unsub(); };
+  }, []);
+
+  useAuthSnapshot();
+  const ready = isReady();
+  const authed = isAuthenticated();
 
   const isLogin = pathname === "/admin/login";
 
   useEffect(() => {
-    if (isLogin) { setAuthed(true); return; }
-    if (!isAuthenticated()) {
-      navigate({ to: "/admin/login", replace: true });
-      setAuthed(false);
-    } else {
-      setAuthed(true);
+    if (isLogin) return;
+    if (ready && !authed) {
+      navigate({ to: "/auth", search: { next: "/admin" }, replace: true });
     }
-  }, [pathname, isLogin, navigate]);
+  }, [ready, authed, isLogin, navigate]);
 
   if (isLogin) {
     return (
@@ -77,7 +93,7 @@ function AdminLayout() {
       </div>
     );
   }
-  if (authed === null) {
+  if (!ready) {
     return <div data-admin-shell className="min-h-screen grid place-items-center bg-slate-50 text-slate-500">Carregando…</div>;
   }
   if (!authed) return null;
