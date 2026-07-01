@@ -21,10 +21,11 @@ import {
 import { avaliacaoHref } from "@/lib/ctaLinks";
 import { COMPARISON, type VisaPage } from "@/lib/visaPages";
 
-export function VisaPageBody({ page }: { page: VisaPage }) {
+export function VisaPageBody({ page, hideHero = false }: { page: VisaPage; hideHero?: boolean }) {
   return (
-    <main className="pt-28">
-      {/* Hero — fora do scroll-spy (não é uma "dobra" listada no TOC). */}
+    <main className={hideHero ? "pt-0" : "pt-28"}>
+      {!hideHero && (
+      /* Hero — fora do scroll-spy (não é uma "dobra" listada no TOC). */
       <section id="abertura" aria-label="Abertura" className="section-anchor bg-ink relative overflow-hidden">
         <div aria-hidden className="absolute inset-0 guilloche" />
         <div className="container-x section-pad relative">
@@ -59,6 +60,7 @@ export function VisaPageBody({ page }: { page: VisaPage }) {
           </div>
         </div>
       </section>
+      )}
 
       {/* 1 — Definição */}
       <section id="definicao" aria-label="Definição" className="section-anchor section-parchment">
