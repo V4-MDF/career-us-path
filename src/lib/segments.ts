@@ -87,6 +87,7 @@ const SEED_SEGMENTS: Segment[] = [
     nome: "Médicos",
     ativo: true,
     noindex: false,
+    visa_slug: "eb2-niw",
     profissao_default: "medico",
     eyebrow: "PARA MÉDICOS BRASILEIROS",
     prova_social:
@@ -135,6 +136,7 @@ const SEED_SEGMENTS: Segment[] = [
     nome: "Engenheiros",
     ativo: true,
     noindex: false,
+    visa_slug: "eb2-niw",
     profissao_default: "engenheiro",
     eyebrow: "PARA ENGENHEIROS BRASILEIROS",
     prova_social:
@@ -183,6 +185,7 @@ const SEED_SEGMENTS: Segment[] = [
     nome: "Empresários",
     ativo: true,
     noindex: false,
+    visa_slug: "eb2-niw",
     profissao_default: "empresario",
     eyebrow: "PARA EMPRESÁRIOS BRASILEIROS",
     prova_social:
