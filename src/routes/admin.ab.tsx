@@ -15,6 +15,7 @@ import { PageHeader, SectionCard } from "@/components/admin/ui";
 import { list, newId, remove, set } from "@/lib/dataStore";
 import { ensureSeed, type AbStats, type HeroVariant, type Segment } from "@/lib/segments";
 import { broadcast } from "@/lib/admin/settings";
+import { ImageUploader } from "@/components/admin/ImageUploader";
 
 export const Route = createFileRoute("/admin/ab")({ component: AbPage });
 
@@ -276,8 +277,15 @@ function VariantEditor({ variant, onSave, onDuplicate, onDelete }: {
           <Textarea rows={2} value={d.sub} onChange={(e) => setD({ ...d, sub: e.target.value })} className="mt-1" />
         </div>
         <div className="col-span-2">
-          <Label className="text-xs text-slate-500">Imagem (URL — opcional)</Label>
-          <Input value={d.imagem ?? ""} onChange={(e) => setD({ ...d, imagem: e.target.value })} className="mt-1" />
+          <Label className="text-xs text-slate-500">Imagem do Hero (opcional)</Label>
+          <div className="mt-1">
+            <ImageUploader
+              value={d.imagem ?? ""}
+              onChange={(url) => setD({ ...d, imagem: url })}
+              folder="ab"
+              filenameHint={`variant-${d.id || "hero"}`}
+            />
+          </div>
         </div>
       </div>
 

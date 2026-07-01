@@ -10,6 +10,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { PageHeader, SectionCard } from "@/components/admin/ui";
 import { get, set } from "@/lib/dataStore";
 import { broadcast } from "@/lib/admin/settings";
+import { ImageUploader } from "@/components/admin/ImageUploader";
 
 export const Route = createFileRoute("/admin/seo")({ component: SeoPage });
 
@@ -148,7 +149,17 @@ function SeoEditor({ page }: { page: { slug: string; label: string; defaults: Pa
             <div><label className="text-xs text-slate-500">OG Title</label><Input className="mt-1" value={v.og_title} onChange={(e) => upd("og_title", e.target.value)} /></div>
             <div><label className="text-xs text-slate-500">Canonical</label><Input className="mt-1" value={v.canonical} onChange={(e) => upd("canonical", e.target.value)} /></div>
             <div className="sm:col-span-2"><label className="text-xs text-slate-500">OG Description</label><Textarea rows={2} className="mt-1" value={v.og_description} onChange={(e) => upd("og_description", e.target.value)} /></div>
-            <div className="sm:col-span-2"><label className="text-xs text-slate-500">OG Image (URL)</label><Input className="mt-1" value={v.og_image} onChange={(e) => upd("og_image", e.target.value)} /></div>
+            <div className="sm:col-span-2">
+              <label className="text-xs text-slate-500">OG Image</label>
+              <div className="mt-1">
+                <ImageUploader
+                  value={v.og_image}
+                  onChange={(url) => upd("og_image", url)}
+                  folder="seo"
+                  filenameHint={`${v.id || "page"}-og`}
+                />
+              </div>
+            </div>
             <div>
               <label className="text-xs text-slate-500">Robots</label>
               <Select value={v.robots} onValueChange={(val) => upd("robots", val as PageSeo["robots"])}>

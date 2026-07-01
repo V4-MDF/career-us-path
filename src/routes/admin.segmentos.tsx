@@ -15,6 +15,7 @@ import { PageHeader, SectionCard } from "@/components/admin/ui";
 import { list, newId, remove, set } from "@/lib/dataStore";
 import { ensureSeed, type Segment } from "@/lib/segments";
 import { broadcast } from "@/lib/admin/settings";
+import { ImageUploader } from "@/components/admin/ImageUploader";
 
 export const Route = createFileRoute("/admin/segmentos")({ component: SegmentsPage });
 
@@ -154,7 +155,14 @@ function SegmentRow({ segment, open, onToggle, onSave, onDelete }: {
             <Fld label="CTA"><Input value={draft.hero_default.cta_texto} onChange={(e) => upd("hero_default", { ...draft.hero_default, cta_texto: e.target.value })} /></Fld>
             <Fld label="H1" full><Textarea rows={2} value={draft.hero_default.h1} onChange={(e) => upd("hero_default", { ...draft.hero_default, h1: e.target.value })} /></Fld>
             <Fld label="Subtítulo" full><Textarea rows={2} value={draft.hero_default.sub} onChange={(e) => upd("hero_default", { ...draft.hero_default, sub: e.target.value })} /></Fld>
-            <Fld label="Imagem (URL)" full><Input value={draft.hero_default.imagem ?? ""} placeholder="https://..." onChange={(e) => upd("hero_default", { ...draft.hero_default, imagem: e.target.value })} /></Fld>
+            <Fld label="Imagem do Hero" full>
+              <ImageUploader
+                value={draft.hero_default.imagem ?? ""}
+                onChange={(url) => upd("hero_default", { ...draft.hero_default, imagem: url })}
+                folder="segmentos"
+                filenameHint={`${draft.slug || "seg"}-hero`}
+              />
+            </Fld>
           </Group>
 
           <Group title="SEO da LP">
