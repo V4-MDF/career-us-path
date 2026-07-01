@@ -69,7 +69,8 @@ function SegmentsPage() {
     <>
       <PageHeader
         title="Segmentos / Landing Pages"
-        description="Cada segmento é uma LP em /lp/[slug]. Ao salvar, a página fica no ar imediatamente."
+        description="Cada segmento é uma LP em /lp/[slug]. A LP reusa a estrutura da página de visto escolhida — só o Hero muda entre segmentos e variantes A/B."
+
         actions={
           <Button className="gap-1.5 bg-slate-900 hover:bg-slate-800" onClick={async () => {
             const s = empty();
