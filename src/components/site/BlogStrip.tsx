@@ -69,7 +69,7 @@ export function BlogStrip() {
       aria-label="Blog em destaque"
       className="section-anchor section-ink-deep border-t border-gold/15"
     >
-      <div className="container-x py-16 md:py-20">
+      <div className="container-x section-pad">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
             <div className="flex items-center gap-3">

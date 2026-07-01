@@ -686,7 +686,7 @@ export function PreQualPromo() {
     <section
       id="pre-qualificacao"
       aria-label="Pré-qualificação"
-      className="section-anchor relative border-t border-gold/15 bg-ink py-10 md:py-14"
+      className="section-anchor section-pad-compact relative border-t border-gold/15 bg-ink"
     >
       <div className="container-x">
         <div className="grid lg:grid-cols-[1fr_1fr] gap-8 items-center">
