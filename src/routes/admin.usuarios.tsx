@@ -18,7 +18,7 @@ import { PageHeader, SectionCard } from "@/components/admin/ui";
 import { getCurrentSession } from "@/lib/admin/auth";
 import {
   listAdmins,
-  grantAdminByEmail,
+  createAdminUser,
   revokeAdmin,
   type AdminListItem,
 } from "@/lib/adminUsers.functions";
@@ -27,13 +27,15 @@ export const Route = createFileRoute("/admin/usuarios")({ component: UsersPage }
 
 function UsersPage() {
   const fetchList = useServerFn(listAdmins);
-  const doGrant = useServerFn(grantAdminByEmail);
+  const doCreate = useServerFn(createAdminUser);
   const doRevoke = useServerFn(revokeAdmin);
 
   const [users, setUsers] = useState<AdminListItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [open, setOpen] = useState(false);
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [saving, setSaving] = useState(false);
   const me = getCurrentSession();
 
   async function reload() {
@@ -49,15 +51,23 @@ function UsersPage() {
   }
   useEffect(() => { reload(); }, []);
 
-  async function onGrant() {
+  async function onCreate() {
+    if (password.length < 8) {
+      toast.error("Senha deve ter no mínimo 8 caracteres.");
+      return;
+    }
+    setSaving(true);
     try {
-      await doGrant({ data: { email } });
-      toast.success("Acesso admin concedido.");
+      await doCreate({ data: { email, password } });
+      toast.success("Usuário admin criado. Compartilhe as credenciais com segurança.");
       setEmail("");
+      setPassword("");
       setOpen(false);
       reload();
     } catch (e: unknown) {
-      toast.error((e as Error).message || "Falha ao conceder acesso.");
+      toast.error((e as Error).message || "Falha ao criar usuário.");
+    } finally {
+      setSaving(false);
     }
   }
 
