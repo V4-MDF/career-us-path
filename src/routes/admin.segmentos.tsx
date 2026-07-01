@@ -24,17 +24,18 @@ const empty = (): Segment => ({
   nome: "Novo Segmento",
   ativo: true,
   noindex: false,
+  visa_slug: "eb2-niw",
   profissao_default: "outra_qualificada",
   eyebrow: "PARA PROFISSIONAIS BRASILEIROS",
   prova_social: "",
   comparativo: { label: "Comparativo", lado_brasil: "", lado_eua: "", observacao: "" },
-  dores: [""],
+  dores: [],
   custo_adiar: "",
-  checklist: [{ texto: "", positivo: true }],
-  faq_segmento: [{ q: "", a: "" }],
+  checklist: [],
+  faq_segmento: [],
   meta_title: "",
   meta_description: "",
-  hero_default: { eyebrow: "", h1: "", sub: "", cta_texto: "Fazer minha avaliação gratuita" },
+  hero_default: { eyebrow: "", h1: "", sub: "", cta_texto: "Fazer minha análise gratuita", imagem: "" },
 });
 
 function SegmentsPage() {
