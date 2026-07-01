@@ -8,10 +8,7 @@ import {
   VisaCards, WhyUs,
 } from "@/components/site/sections";
 import { OrganizationJsonLd } from "@/components/site/Seo";
-import { DynamicSectionHead } from "@/components/site/DynamicSectionHead";
-import { HOME_SECTIONS } from "@/lib/sectionMap";
 import { BlogStrip } from "@/components/site/BlogStrip";
-import { ConstellationCanvas } from "@/components/site/visuals/ConstellationCanvas";
 import { useOrderedSections } from "@/lib/pageStructure";
 
 export const Route = createFileRoute("/")({
@@ -75,26 +72,14 @@ function Home() {
 
     <>
       <OrganizationJsonLd />
-      <DynamicSectionHead sections={HOME_SECTIONS} baseTitle="Green Card EB-2 NIW" />
-      {/* Fundo interativo global — constellation reativa ao mouse. */}
-      <div aria-hidden className="fixed inset-0 -z-20 pointer-events-none">
-        <ConstellationCanvas />
-      </div>
       <Header />
       <main>
         {layout
           .filter((s) => s.active)
-          .map((s, i) => {
+          .map((s) => {
             const Cmp = HOME_REGISTRY[s.id];
             if (!Cmp) return null;
-            // Hero (primeira dobra ativa) fica sem cv-defer para não afetar LCP.
-            return i === 0 ? (
-              <Cmp key={s.id} />
-            ) : (
-              <div key={s.id} className="cv-defer">
-                <Cmp />
-              </div>
-            );
+            return <Cmp key={s.id} />;
           })}
       </main>
       <Footer />

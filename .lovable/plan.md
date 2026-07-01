@@ -1,45 +1,41 @@
-## Diagnóstico
+## Diagnóstico rápido
 
-A rolagem da home está travando por 4 causas que se somam (confirmadas no replay + console):
+O comportamento “magnético” e descentralizado parece vir principalmente de três pontos:
 
-1. **Loop de re-render no `useOrderedSections`** — console acusa `getServerSnapshot should be cached to avoid an infinite loop`. Em `src/lib/pageStructure.ts:186` o snapshot do servidor (`reconcile(page, null)`) retorna um array novo a cada chamada, então o React entra em loop de hidratação na Home (que é a raiz da árvore visível). Isso por si só já causa engasgos sob qualquer scroll.
+1. A Home atualiza o hash da URL e o título conforme cada dobra entra na viewport; isso cria trabalho extra durante o scroll e pode dar sensação de puxão.
+2. Há `scroll-behavior: smooth` global e scroll programático para hashes, então links/âncoras podem animar a página inteira em vez de apenas navegar naturalmente.
+3. A Home ainda usa animações de texto/hero com Motion, canvas fixo e SVG animado, além de reveal em todas as dobras; juntos, isso pesa no scroll.
 
-2. **`ConstellationCanvas` global rodando 60fps durante todo o scroll** — está montado como `fixed inset-0` em `src/routes/index.tsx`. O `IntersectionObserver` observa o próprio canvas fixo, que **nunca sai da viewport**, então o RAF não pausa nunca. São 30–120 partículas + linhas O(n²) repintadas em canvas full-screen enquanto o usuário rola — principal causa do "engasgo entre dobras".
+## Plano de correção
 
-3. **Parallax do Hero continua atualizando `transform` mesmo depois do Hero sair da tela** — o replay mostra o elemento id:132 recebendo `translateY(...%)` a cada frame de scroll. O `useScroll` do Hero não tem `layoutEffect:false` nem cutoff por viewport, e o scroll-spy também escuta scroll em paralelo.
+1. **Remover o efeito “magnético” da Home**
+   - Desativar a sincronização automática de hash durante scroll na Home.
+   - Manter os IDs das dobras para SEO/AEO e links diretos, mas sem ficar reescrevendo a URL a cada rolagem.
+   - Evitar scroll programático automático no carregamento, exceto quando o usuário abrir uma URL com hash explícito.
 
-4. **Hydration mismatch nos CTAs** — `href="/avaliacao?bust=..."` muda entre SSR e cliente (ver console: `+ bust=1782852906729 / - /avaliacao`). Isso força re-hydration de várias subárvores no primeiro scroll, agravando o jank inicial.
+2. **Deixar o scroll mais natural**
+   - Trocar o `scroll-behavior: smooth` global por comportamento automático.
+   - Aplicar smooth scroll apenas em cliques intencionais de âncora, respeitando `prefers-reduced-motion`.
+   - Ajustar `scroll-margin-top` para centralizar melhor o início das dobras abaixo do header.
 
-Bônus (relacionado): o `SectionTOC` desktop usa `backdrop-blur` no sheet móvel — segundo a heurística de perf da Lovable, `backdrop-blur` sobre conteúdo animado degrada scroll. Hoje só impacta mobile aberto, mas vale trocar por shadow/solid.
+3. **Reduzir animações de texto**
+   - Remover animação linha-a-linha do H1 e fades sequenciais no Hero.
+   - Manter a Hero estática/premium, com no máximo uma entrada simples de opacidade via CSS.
+   - Remover Motion do Hero onde for apenas decoração.
 
-## Plano de Correção
+4. **Simplificar reveals das dobras**
+   - Manter reveal apenas uma vez, mas ainda mais leve: menos deslocamento, menor duração e sem `will-change` persistente.
+   - Em mobile, praticamente desativar movimento de texto e manter só opacidade curta ou estado estático.
 
-### 1. Estabilizar `useOrderedSections` (mata o loop)
-- Em `src/lib/pageStructure.ts`, memoizar também o **server snapshot** (cache por page slug) para que `useSyncExternalStore` receba sempre a mesma referência. Resultado: zero warning, zero loop, zero re-render da home inteira a cada tick.
+5. **Desligar fundos animados pesados na Home**
+   - Remover o `ConstellationCanvas` global da Home ou deixá-lo estático/desativado.
+   - Parar a animação contínua da rota BR→EUA no SVG; manter o desenho como fundo estático.
+   - Remover/evitar `backdrop-blur` em header/dropdowns públicos durante scroll, substituindo por fundo sólido translúcido.
 
-### 2. Domar o `ConstellationCanvas`
-- Pausar o RAF durante o scroll (debounce 180ms após o último evento) — enquanto o usuário rola, o canvas congela; volta a animar quando a rolagem para.
-- Trocar o `IntersectionObserver` (inútil em `position:fixed`) por listener de `scroll`+`visibilitychange`.
-- Reduzir `density` default de `0.00008` → `0.00005` e linkDistance `130` → `110` para cortar custo O(n²).
-- Manter o gate de `prefers-reduced-motion` e `<768px` já existente.
+6. **Validar visualmente a fluidez**
+   - Testar a Home em desktop e mobile com Playwright.
+   - Conferir se as dobras param no lugar correto, sem puxões, sem desalinhamento de conteúdo e sem animações excessivas.
 
-### 3. Limitar o parallax do Hero ao Hero visível
-- Em `sections.tsx` `Hero`, envolver o `useScroll` com `offset: ["start start", "end start"]` e adicionar um `useReducedMotion`/viewport check para desligar a transform quando o Hero saiu de cena (`scrollYProgress > 1`). Isso para o `style.transform` de atualizar a cada frame enquanto o usuário lê as outras dobras.
+## Resultado esperado
 
-### 4. Eliminar o hydration mismatch dos CTAs
-- Localizar onde o `?bust=<timestamp>&src=...` é injetado nos `<a href>` (CTAs do header, hero, NIW e CTA final). Mover a injeção do timestamp para `onClick` (ou usar `useEffect` para reescrever o href após mount), de forma que o SSR e o primeiro render do cliente produzam exatamente o mesmo HTML. Mantém o tracking, remove o warning e impede re-hydration em cascata no primeiro scroll.
-
-### 5. Polimentos rápidos de fluidez
-- Trocar `backdrop-blur-sm` do overlay do `SectionTOC` por `bg-ink-deep/85` puro (sem blur).
-- Garantir `will-change: transform` apenas no nó com parallax ativo (e remover quando termina), evitando promoção desnecessária de camadas nas outras dobras.
-
-## Validação
-- Console limpo do warning `getServerSnapshot`.
-- Console limpo do warning de hydration mismatch nos `href`s.
-- Playwright headless: rolar a home top→bottom medindo `performance.now()` entre frames; nenhum gap > 50ms (60fps ≈ 16ms).
-- Reordenação de dobras no `/admin/estrutura` continua refletindo na home (regressão da correção anterior).
-
-## Restrições
-- Não mexer em copy, layout visual nem na ordem padrão das dobras.
-- Não remover o `ConstellationCanvas` — só estabilizá-lo.
-- Manter o tracking de origem (`src=...`) — só mudar **quando** o querystring é anexado ao href.
+A Home deve rolar como uma página institucional normal: fluida, sem “snap”/puxões, sem troca constante de URL durante o scroll e com animações discretas o suficiente para preservar performance.
