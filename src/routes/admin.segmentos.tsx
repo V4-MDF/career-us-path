@@ -131,41 +131,30 @@ function SegmentRow({ segment, open, onToggle, onSave, onDelete }: {
           <div className="grid sm:grid-cols-2 gap-3">
             <Fld label="Nome"><Input value={draft.nome} onChange={(e) => upd("nome", e.target.value)} /></Fld>
             <Fld label="Slug (URL)"><Input value={draft.slug} onChange={(e) => upd("slug", e.target.value.replace(/\s+/g, "-").toLowerCase())} /></Fld>
-            <Fld label="Eyebrow"><Input value={draft.eyebrow} onChange={(e) => upd("eyebrow", e.target.value)} /></Fld>
+            <Fld label="Estrutura de visto usada no corpo">
+              <select
+                className="w-full h-9 rounded-lg border border-slate-200 bg-white px-2 text-sm"
+                value={draft.visa_slug ?? "eb2-niw"}
+                onChange={(e) => upd("visa_slug", e.target.value as Segment["visa_slug"])}
+              >
+                <option value="eb2-niw">EB-2 NIW</option>
+                <option value="eb1">EB-1</option>
+                <option value="eb3">EB-3</option>
+              </select>
+            </Fld>
             <Fld label="Profissão default (chave do select)"><Input value={draft.profissao_default ?? ""} onChange={(e) => upd("profissao_default", e.target.value)} /></Fld>
-            <Fld label="Prova social" full>
+            <Fld label="Eyebrow (badge acima do H1)"><Input value={draft.eyebrow} onChange={(e) => upd("eyebrow", e.target.value)} /></Fld>
+            <Fld label="Prova social (citação sob o CTA do Hero)" full>
               <Textarea value={draft.prova_social} onChange={(e) => upd("prova_social", e.target.value)} rows={2} />
             </Fld>
           </div>
 
-          <Group title="Hero default (fallback se não houver variantes A/B ativas)">
+          <Group title="Hero default (fallback quando não há variantes A/B ativas — só o Hero varia entre variantes)">
             <Fld label="Eyebrow"><Input value={draft.hero_default.eyebrow} onChange={(e) => upd("hero_default", { ...draft.hero_default, eyebrow: e.target.value })} /></Fld>
             <Fld label="CTA"><Input value={draft.hero_default.cta_texto} onChange={(e) => upd("hero_default", { ...draft.hero_default, cta_texto: e.target.value })} /></Fld>
             <Fld label="H1" full><Textarea rows={2} value={draft.hero_default.h1} onChange={(e) => upd("hero_default", { ...draft.hero_default, h1: e.target.value })} /></Fld>
             <Fld label="Subtítulo" full><Textarea rows={2} value={draft.hero_default.sub} onChange={(e) => upd("hero_default", { ...draft.hero_default, sub: e.target.value })} /></Fld>
-          </Group>
-
-          <Group title="Comparativo BR vs EUA">
-            <Fld label="Label"><Input value={draft.comparativo.label} onChange={(e) => upd("comparativo", { ...draft.comparativo, label: e.target.value })} /></Fld>
-            <Fld label="Observação"><Input value={draft.comparativo.observacao ?? ""} onChange={(e) => upd("comparativo", { ...draft.comparativo, observacao: e.target.value })} /></Fld>
-            <Fld label="Lado Brasil"><Input value={draft.comparativo.lado_brasil} onChange={(e) => upd("comparativo", { ...draft.comparativo, lado_brasil: e.target.value })} /></Fld>
-            <Fld label="Lado EUA"><Input value={draft.comparativo.lado_eua} onChange={(e) => upd("comparativo", { ...draft.comparativo, lado_eua: e.target.value })} /></Fld>
-          </Group>
-
-          <Group title="Dores" cols={1}>
-            <StringList items={draft.dores} onChange={(arr) => upd("dores", arr)} placeholder="Uma dor por item" />
-          </Group>
-
-          <Group title="Custo de adiar" cols={1}>
-            <Textarea rows={3} value={draft.custo_adiar} onChange={(e) => upd("custo_adiar", e.target.value)} />
-          </Group>
-
-          <Group title="Checklist (positivo = ✓, negativo = ✗)" cols={1}>
-            <ChecklistEditor items={draft.checklist} onChange={(arr) => upd("checklist", arr)} />
-          </Group>
-
-          <Group title="FAQ do segmento" cols={1}>
-            <FaqEditor items={draft.faq_segmento} onChange={(arr) => upd("faq_segmento", arr)} />
+            <Fld label="Imagem (URL)" full><Input value={draft.hero_default.imagem ?? ""} placeholder="https://..." onChange={(e) => upd("hero_default", { ...draft.hero_default, imagem: e.target.value })} /></Fld>
           </Group>
 
           <Group title="SEO da LP">
@@ -176,6 +165,7 @@ function SegmentRow({ segment, open, onToggle, onSave, onDelete }: {
               <span className="text-sm">noindex (esconder dos buscadores)</span>
             </div>
           </Group>
+
 
           <div className="flex flex-wrap items-center justify-between gap-2 border-t border-slate-100 pt-4">
             <AlertDialog>
