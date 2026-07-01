@@ -178,17 +178,21 @@ function AdminLayout() {
             <span>{activeItem?.label ?? "Painel"}</span>
           </div>
           <a href="/" target="_blank" rel="noopener noreferrer">
-            <Button variant="outline" size="sm" className="gap-1.5 border-ink-text/20 text-ink-text hover:bg-ink-text hover:text-parchment">
+            <Button
+              variant="outline"
+              size="sm"
+              className="gap-1.5 bg-parchment border-ink-text/30 text-ink-text hover:bg-ink-text hover:text-parchment hover:border-ink-text"
+            >
               <ExternalLink className="h-3.5 w-3.5" /> Ver site
             </Button>
           </a>
-          <div className="hidden sm:block text-xs text-ink-text/60 max-w-[180px] truncate">
+          <div className="hidden sm:block text-xs font-medium text-ink-text max-w-[180px] truncate">
             {session?.email}
           </div>
           <Button
             variant="ghost"
             size="sm"
-            className="gap-1.5 text-ink-text/70 hover:text-oxblood hover:bg-transparent"
+            className="gap-1.5 text-ink-text hover:text-oxblood hover:bg-ink-text/5"
             onClick={async () => { await logout(); navigate({ to: "/auth", replace: true }); }}
           >
             <LogOut className="h-3.5 w-3.5" /> Sair
