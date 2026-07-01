@@ -91,8 +91,10 @@ function AvaliacaoPage() {
 
   const goToThanks = (qualification: QualResult) => {
     navigate({
-      to: "/avaliacao/obrigado",
-      search: { ...search, q: qualification } as never,
+      to:
+        qualification === "qualificado"
+          ? "/avaliacao/obrigado-qualificado"
+          : "/avaliacao/obrigado-nao-qualificado",
       replace: true,
     });
   };
