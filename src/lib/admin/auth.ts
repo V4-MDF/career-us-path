@@ -1,165 +1,140 @@
 /**
- * Auth do painel admin — PROTOTYPE-GRADE.
+ * Autenticação do painel admin — Supabase Auth (Lovable Cloud).
  *
- * ⚠️ ATENÇÃO DE SEGURANÇA:
- *   Esta autenticação roda 100% no client (localStorage). NÃO é segurança real.
- *   Serve apenas ao período de validação (sem leads reais em produção).
- *   Antes de tráfego pago, MIGRAR para Supabase Auth + RLS:
- *     - trocar checkCredentials por supabase.auth.signInWithPassword
- *     - trocar a flag de sessão por supabase.auth.getSession()
- *     - proteger /admin/* por um middleware server-side
+ * - Login por email/senha ou Google.
+ * - Acesso ao /admin depende de o usuário ter a role `admin` na tabela
+ *   `public.user_roles` (verificação via RPC `has_role`).
+ * - Novos usuários fazem cadastro público em /auth (basta um email válido),
+ *   mas nenhum acesso admin é concedido automaticamente. Um admin existente
+ *   promove usuários em /admin/usuarios.
  *
- * Primeiro admin via env (Vite):
- *   VITE_ADMIN_EMAIL=admin@statusnaamerica.com
- *   VITE_ADMIN_PASSWORD=trocar-isto
- * No primeiro login válido, o registro é semeado em `admin_users`.
- * Novos usuários SÓ podem ser criados de dentro de /admin/usuarios.
+ * Bootstrap do primeiro admin:
+ *   1. Crie uma conta em /auth com o email desejado.
+ *   2. Rode no banco: INSERT INTO public.user_roles(user_id, role)
+ *      SELECT id, 'admin' FROM auth.users WHERE email='seu@email.com';
  */
 
-import { get, list, newId, set, remove } from "@/lib/dataStore";
+import { supabase } from "@/integrations/supabase/client";
 
-export interface AdminUser {
-  id: string;
-  email: string;
-  /** Hash simples (NÃO é seguro — apenas para validação). */
-  password_hash: string;
-  role: "admin" | "editor";
-  createdAt: string;
-}
-
-const SESSION_KEY = "status_admin_session";
-const SESSION_TTL_MS = 1000 * 60 * 60 * 12; // 12h
-
-interface SessionPayload {
+export interface AdminSession {
   userId: string;
   email: string;
-  exp: number;
-  sig: string;
 }
 
-/** Hash pseudo-aleatório — apenas para não deixar senhas em texto puro no LS. */
-function hashPassword(pw: string): string {
-  let h = 5381;
-  for (let i = 0; i < pw.length; i++) h = (h * 33) ^ pw.charCodeAt(i);
-  // mistura com sal fixo do projeto
-  const salt = "status_na_america_v1";
-  let s = 0;
-  for (let i = 0; i < salt.length; i++) s = (s * 31 + salt.charCodeAt(i)) >>> 0;
-  return (h >>> 0).toString(16) + "." + (s ^ h >>> 0).toString(16);
+// Cache síncrono da sessão + role para as APIs sync consumidas pelo layout.
+let cachedSession: AdminSession | null = null;
+let cachedIsAdmin = false;
+let initialized = false;
+const listeners = new Set<() => void>();
+
+function notify() {
+  for (const l of listeners) l();
 }
 
-function sign(payload: Omit<SessionPayload, "sig">): string {
-  return hashPassword(JSON.stringify(payload));
-}
-
-function readSession(): SessionPayload | null {
-  if (typeof window === "undefined") return null;
-  try {
-    const raw = window.localStorage.getItem(SESSION_KEY);
-    if (!raw) return null;
-    const parsed = JSON.parse(raw) as SessionPayload;
-    if (parsed.exp < Date.now()) return null;
-    const expected = sign({ userId: parsed.userId, email: parsed.email, exp: parsed.exp });
-    if (expected !== parsed.sig) return null;
-    return parsed;
-  } catch {
-    return null;
+async function refreshRole(userId: string): Promise<boolean> {
+  const { data, error } = await supabase.rpc("has_role", {
+    _user_id: userId,
+    _role: "admin",
+  });
+  if (error) {
+    console.warn("[auth] has_role RPC falhou:", error.message);
+    return false;
   }
+  return !!data;
 }
 
-export function getCurrentSession(): SessionPayload | null {
-  return readSession();
+async function hydrateFromSession() {
+  const { data } = await supabase.auth.getSession();
+  const s = data.session;
+  if (!s?.user) {
+    cachedSession = null;
+    cachedIsAdmin = false;
+  } else {
+    cachedSession = { userId: s.user.id, email: s.user.email ?? "" };
+    cachedIsAdmin = await refreshRole(s.user.id);
+  }
+  initialized = true;
+  notify();
+}
+
+/** Deve ser chamado uma vez pelo layout do admin. Idempotente. */
+export function initAuthListener(): () => void {
+  if (typeof window === "undefined") return () => {};
+  void hydrateFromSession();
+  const { data: sub } = supabase.auth.onAuthStateChange(async (event, session) => {
+    if (event === "SIGNED_OUT" || !session?.user) {
+      cachedSession = null;
+      cachedIsAdmin = false;
+      notify();
+      return;
+    }
+    if (event === "SIGNED_IN" || event === "TOKEN_REFRESHED" || event === "USER_UPDATED") {
+      cachedSession = { userId: session.user.id, email: session.user.email ?? "" };
+      cachedIsAdmin = await refreshRole(session.user.id);
+      notify();
+    }
+  });
+  return () => sub.subscription.unsubscribe();
+}
+
+export function subscribeAuth(cb: () => void): () => void {
+  listeners.add(cb);
+  return () => listeners.delete(cb);
+}
+
+export function isReady(): boolean {
+  return initialized;
+}
+
+export function getCurrentSession(): AdminSession | null {
+  return cachedSession;
 }
 
 export function isAuthenticated(): boolean {
-  return !!readSession();
+  return !!cachedSession && cachedIsAdmin;
 }
 
-/**
- * Sem usuários no LS? semeia o admin do .env no PRIMEIRO login válido.
- * Fallback de DEV: admin@statusnaamerica.com / status123 (apenas para validação).
- * SUBSTITUIR antes de qualquer uso real.
- */
-async function ensureEnvAdmin(email: string, password: string): Promise<void> {
-  const envEmail = (import.meta.env.VITE_ADMIN_EMAIL as string | undefined) ?? "admin@statusnaamerica.com";
-  const envPass = (import.meta.env.VITE_ADMIN_PASSWORD as string | undefined) ?? "status123";
-
-  if (email.trim().toLowerCase() !== envEmail.trim().toLowerCase()) return;
-  if (password !== envPass) return;
-
-  const existing = (await list<AdminUser>("admin_users")).find(
-    (u) => u.email.toLowerCase() === envEmail.toLowerCase()
-  );
-  if (existing) return;
-
-  const u: AdminUser = {
-    id: newId("user"),
-    email: envEmail,
-    password_hash: hashPassword(envPass),
-    role: "admin",
-    createdAt: new Date().toISOString(),
-  };
-  await set("admin_users", u.id, u);
-}
-
-export async function login(email: string, password: string): Promise<{ ok: boolean; error?: string }> {
-  await ensureEnvAdmin(email, password);
-  const users = await list<AdminUser>("admin_users");
-  const user = users.find((u) => u.email.toLowerCase() === email.trim().toLowerCase());
-  if (!user) return { ok: false, error: "Credenciais inválidas." };
-  if (user.password_hash !== hashPassword(password)) {
-    return { ok: false, error: "Credenciais inválidas." };
+export async function login(
+  email: string,
+  password: string
+): Promise<{ ok: boolean; error?: string }> {
+  const { data, error } = await supabase.auth.signInWithPassword({
+    email: email.trim(),
+    password,
+  });
+  if (error || !data.session) {
+    return { ok: false, error: error?.message ?? "Credenciais inválidas." };
   }
-  const exp = Date.now() + SESSION_TTL_MS;
-  const base = { userId: user.id, email: user.email, exp };
-  const payload: SessionPayload = { ...base, sig: sign(base) };
-  window.localStorage.setItem(SESSION_KEY, JSON.stringify(payload));
+  cachedSession = { userId: data.session.user.id, email: data.session.user.email ?? "" };
+  cachedIsAdmin = await refreshRole(data.session.user.id);
+  notify();
+  if (!cachedIsAdmin) {
+    return {
+      ok: false,
+      error: "Sua conta ainda não tem acesso admin. Peça a um administrador para liberar.",
+    };
+  }
   return { ok: true };
 }
 
-export function logout() {
-  if (typeof window === "undefined") return;
-  window.localStorage.removeItem(SESSION_KEY);
+export async function signUp(
+  email: string,
+  password: string
+): Promise<{ ok: boolean; error?: string; needsConfirmation?: boolean }> {
+  const redirect = typeof window !== "undefined" ? `${window.location.origin}/auth` : undefined;
+  const { data, error } = await supabase.auth.signUp({
+    email: email.trim(),
+    password,
+    options: { emailRedirectTo: redirect },
+  });
+  if (error) return { ok: false, error: error.message };
+  const needsConfirmation = !data.session;
+  return { ok: true, needsConfirmation };
 }
 
-/* ---------------- CRUD de usuários (apenas de dentro do admin) ---------------- */
-
-export async function listUsers(): Promise<AdminUser[]> {
-  return list<AdminUser>("admin_users");
-}
-
-export async function createUser(input: {
-  email: string;
-  password: string;
-  role: AdminUser["role"];
-}): Promise<{ ok: boolean; error?: string }> {
-  const email = input.email.trim().toLowerCase();
-  if (!email || !input.password) return { ok: false, error: "Email e senha são obrigatórios." };
-  const existing = (await list<AdminUser>("admin_users")).find((u) => u.email.toLowerCase() === email);
-  if (existing) return { ok: false, error: "Já existe um usuário com este email." };
-  const u: AdminUser = {
-    id: newId("user"),
-    email,
-    password_hash: hashPassword(input.password),
-    role: input.role,
-    createdAt: new Date().toISOString(),
-  };
-  await set("admin_users", u.id, u);
-  return { ok: true };
-}
-
-export async function updateUserPassword(id: string, password: string): Promise<void> {
-  const u = await get<AdminUser>("admin_users", id);
-  if (!u) return;
-  await set("admin_users", id, { ...u, password_hash: hashPassword(password) });
-}
-
-export async function updateUserRole(id: string, role: AdminUser["role"]): Promise<void> {
-  const u = await get<AdminUser>("admin_users", id);
-  if (!u) return;
-  await set("admin_users", id, { ...u, role });
-}
-
-export async function deleteUser(id: string): Promise<void> {
-  await remove("admin_users", id);
+export async function logout(): Promise<void> {
+  await supabase.auth.signOut();
+  cachedSession = null;
+  cachedIsAdmin = false;
+  notify();
 }
