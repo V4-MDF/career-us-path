@@ -15,10 +15,10 @@ import { Route as PreQualificacaoRouteImport } from './routes/pre-qualificacao'
 import { Route as LlmInfoRouteImport } from './routes/llm-info'
 import { Route as ContatoRouteImport } from './routes/contato'
 import { Route as BlogRouteImport } from './routes/blog'
-import { Route as AvaliacaoRouteImport } from './routes/avaliacao'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AvaliacaoIndexRouteImport } from './routes/avaliacao.index'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as VistosSlugRouteImport } from './routes/vistos.$slug'
 import { Route as LpSlugRouteImport } from './routes/lp.$slug'
@@ -77,11 +77,6 @@ const BlogRoute = BlogRouteImport.update({
   path: '/blog',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AvaliacaoRoute = AvaliacaoRouteImport.update({
-  id: '/avaliacao',
-  path: '/avaliacao',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
   path: '/auth',
@@ -95,6 +90,11 @@ const AdminRoute = AdminRouteImport.update({
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AvaliacaoIndexRoute = AvaliacaoIndexRouteImport.update({
+  id: '/avaliacao/',
+  path: '/avaliacao/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminIndexRoute = AdminIndexRouteImport.update({
@@ -119,20 +119,20 @@ const BlogSlugRoute = BlogSlugRouteImport.update({
 } as any)
 const AvaliacaoObrigadoQualificadoRoute =
   AvaliacaoObrigadoQualificadoRouteImport.update({
-    id: '/obrigado-qualificado',
-    path: '/obrigado-qualificado',
-    getParentRoute: () => AvaliacaoRoute,
+    id: '/avaliacao/obrigado-qualificado',
+    path: '/avaliacao/obrigado-qualificado',
+    getParentRoute: () => rootRouteImport,
   } as any)
 const AvaliacaoObrigadoNaoQualificadoRoute =
   AvaliacaoObrigadoNaoQualificadoRouteImport.update({
-    id: '/obrigado-nao-qualificado',
-    path: '/obrigado-nao-qualificado',
-    getParentRoute: () => AvaliacaoRoute,
+    id: '/avaliacao/obrigado-nao-qualificado',
+    path: '/avaliacao/obrigado-nao-qualificado',
+    getParentRoute: () => rootRouteImport,
   } as any)
 const AvaliacaoObrigadoRoute = AvaliacaoObrigadoRouteImport.update({
-  id: '/obrigado',
-  path: '/obrigado',
-  getParentRoute: () => AvaliacaoRoute,
+  id: '/avaliacao/obrigado',
+  path: '/avaliacao/obrigado',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const AdminUsuariosRoute = AdminUsuariosRouteImport.update({
   id: '/usuarios',
@@ -239,7 +239,6 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteWithChildren
   '/auth': typeof AuthRoute
-  '/avaliacao': typeof AvaliacaoRouteWithChildren
   '/blog': typeof BlogRouteWithChildren
   '/contato': typeof ContatoRoute
   '/llm-info': typeof LlmInfoRoute
@@ -270,6 +269,7 @@ export interface FileRoutesByFullPath {
   '/lp/$slug': typeof LpSlugRoute
   '/vistos/$slug': typeof VistosSlugRouteWithChildren
   '/admin/': typeof AdminIndexRoute
+  '/avaliacao/': typeof AvaliacaoIndexRoute
   '/pre-qualificacao/r/$token': typeof PreQualificacaoRTokenRoute
   '/vistos/$slug/$secao': typeof VistosSlugSecaoRoute
   '/vistos/$slug/': typeof VistosSlugIndexRoute
@@ -277,7 +277,6 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
-  '/avaliacao': typeof AvaliacaoRouteWithChildren
   '/blog': typeof BlogRouteWithChildren
   '/contato': typeof ContatoRoute
   '/llm-info': typeof LlmInfoRoute
@@ -307,6 +306,7 @@ export interface FileRoutesByTo {
   '/blog/$slug': typeof BlogSlugRoute
   '/lp/$slug': typeof LpSlugRoute
   '/admin': typeof AdminIndexRoute
+  '/avaliacao': typeof AvaliacaoIndexRoute
   '/pre-qualificacao/r/$token': typeof PreQualificacaoRTokenRoute
   '/vistos/$slug/$secao': typeof VistosSlugSecaoRoute
   '/vistos/$slug': typeof VistosSlugIndexRoute
@@ -316,7 +316,6 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteWithChildren
   '/auth': typeof AuthRoute
-  '/avaliacao': typeof AvaliacaoRouteWithChildren
   '/blog': typeof BlogRouteWithChildren
   '/contato': typeof ContatoRoute
   '/llm-info': typeof LlmInfoRoute
@@ -347,6 +346,7 @@ export interface FileRoutesById {
   '/lp/$slug': typeof LpSlugRoute
   '/vistos/$slug': typeof VistosSlugRouteWithChildren
   '/admin/': typeof AdminIndexRoute
+  '/avaliacao/': typeof AvaliacaoIndexRoute
   '/pre-qualificacao/r/$token': typeof PreQualificacaoRTokenRoute
   '/vistos/$slug/$secao': typeof VistosSlugSecaoRoute
   '/vistos/$slug/': typeof VistosSlugIndexRoute
@@ -357,7 +357,6 @@ export interface FileRouteTypes {
     | '/'
     | '/admin'
     | '/auth'
-    | '/avaliacao'
     | '/blog'
     | '/contato'
     | '/llm-info'
@@ -388,6 +387,7 @@ export interface FileRouteTypes {
     | '/lp/$slug'
     | '/vistos/$slug'
     | '/admin/'
+    | '/avaliacao/'
     | '/pre-qualificacao/r/$token'
     | '/vistos/$slug/$secao'
     | '/vistos/$slug/'
@@ -395,7 +395,6 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/auth'
-    | '/avaliacao'
     | '/blog'
     | '/contato'
     | '/llm-info'
@@ -425,6 +424,7 @@ export interface FileRouteTypes {
     | '/blog/$slug'
     | '/lp/$slug'
     | '/admin'
+    | '/avaliacao'
     | '/pre-qualificacao/r/$token'
     | '/vistos/$slug/$secao'
     | '/vistos/$slug'
@@ -433,7 +433,6 @@ export interface FileRouteTypes {
     | '/'
     | '/admin'
     | '/auth'
-    | '/avaliacao'
     | '/blog'
     | '/contato'
     | '/llm-info'
@@ -464,6 +463,7 @@ export interface FileRouteTypes {
     | '/lp/$slug'
     | '/vistos/$slug'
     | '/admin/'
+    | '/avaliacao/'
     | '/pre-qualificacao/r/$token'
     | '/vistos/$slug/$secao'
     | '/vistos/$slug/'
@@ -473,15 +473,18 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdminRoute: typeof AdminRouteWithChildren
   AuthRoute: typeof AuthRoute
-  AvaliacaoRoute: typeof AvaliacaoRouteWithChildren
   BlogRoute: typeof BlogRouteWithChildren
   ContatoRoute: typeof ContatoRoute
   LlmInfoRoute: typeof LlmInfoRoute
   PreQualificacaoRoute: typeof PreQualificacaoRouteWithChildren
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   SobreRoute: typeof SobreRoute
+  AvaliacaoObrigadoRoute: typeof AvaliacaoObrigadoRoute
+  AvaliacaoObrigadoNaoQualificadoRoute: typeof AvaliacaoObrigadoNaoQualificadoRoute
+  AvaliacaoObrigadoQualificadoRoute: typeof AvaliacaoObrigadoQualificadoRoute
   LpSlugRoute: typeof LpSlugRoute
   VistosSlugRoute: typeof VistosSlugRouteWithChildren
+  AvaliacaoIndexRoute: typeof AvaliacaoIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -528,13 +531,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/avaliacao': {
-      id: '/avaliacao'
-      path: '/avaliacao'
-      fullPath: '/avaliacao'
-      preLoaderRoute: typeof AvaliacaoRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/auth': {
       id: '/auth'
       path: '/auth'
@@ -554,6 +550,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/avaliacao/': {
+      id: '/avaliacao/'
+      path: '/avaliacao'
+      fullPath: '/avaliacao/'
+      preLoaderRoute: typeof AvaliacaoIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin/': {
@@ -586,24 +589,24 @@ declare module '@tanstack/react-router' {
     }
     '/avaliacao/obrigado-qualificado': {
       id: '/avaliacao/obrigado-qualificado'
-      path: '/obrigado-qualificado'
+      path: '/avaliacao/obrigado-qualificado'
       fullPath: '/avaliacao/obrigado-qualificado'
       preLoaderRoute: typeof AvaliacaoObrigadoQualificadoRouteImport
-      parentRoute: typeof AvaliacaoRoute
+      parentRoute: typeof rootRouteImport
     }
     '/avaliacao/obrigado-nao-qualificado': {
       id: '/avaliacao/obrigado-nao-qualificado'
-      path: '/obrigado-nao-qualificado'
+      path: '/avaliacao/obrigado-nao-qualificado'
       fullPath: '/avaliacao/obrigado-nao-qualificado'
       preLoaderRoute: typeof AvaliacaoObrigadoNaoQualificadoRouteImport
-      parentRoute: typeof AvaliacaoRoute
+      parentRoute: typeof rootRouteImport
     }
     '/avaliacao/obrigado': {
       id: '/avaliacao/obrigado'
-      path: '/obrigado'
+      path: '/avaliacao/obrigado'
       fullPath: '/avaliacao/obrigado'
       preLoaderRoute: typeof AvaliacaoObrigadoRouteImport
-      parentRoute: typeof AvaliacaoRoute
+      parentRoute: typeof rootRouteImport
     }
     '/admin/usuarios': {
       id: '/admin/usuarios'
@@ -792,22 +795,6 @@ const AdminRouteChildren: AdminRouteChildren = {
 
 const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
 
-interface AvaliacaoRouteChildren {
-  AvaliacaoObrigadoRoute: typeof AvaliacaoObrigadoRoute
-  AvaliacaoObrigadoNaoQualificadoRoute: typeof AvaliacaoObrigadoNaoQualificadoRoute
-  AvaliacaoObrigadoQualificadoRoute: typeof AvaliacaoObrigadoQualificadoRoute
-}
-
-const AvaliacaoRouteChildren: AvaliacaoRouteChildren = {
-  AvaliacaoObrigadoRoute: AvaliacaoObrigadoRoute,
-  AvaliacaoObrigadoNaoQualificadoRoute: AvaliacaoObrigadoNaoQualificadoRoute,
-  AvaliacaoObrigadoQualificadoRoute: AvaliacaoObrigadoQualificadoRoute,
-}
-
-const AvaliacaoRouteWithChildren = AvaliacaoRoute._addFileChildren(
-  AvaliacaoRouteChildren,
-)
-
 interface BlogRouteChildren {
   BlogSlugRoute: typeof BlogSlugRoute
 }
@@ -848,15 +835,18 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRoute: AdminRouteWithChildren,
   AuthRoute: AuthRoute,
-  AvaliacaoRoute: AvaliacaoRouteWithChildren,
   BlogRoute: BlogRouteWithChildren,
   ContatoRoute: ContatoRoute,
   LlmInfoRoute: LlmInfoRoute,
   PreQualificacaoRoute: PreQualificacaoRouteWithChildren,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   SobreRoute: SobreRoute,
+  AvaliacaoObrigadoRoute: AvaliacaoObrigadoRoute,
+  AvaliacaoObrigadoNaoQualificadoRoute: AvaliacaoObrigadoNaoQualificadoRoute,
+  AvaliacaoObrigadoQualificadoRoute: AvaliacaoObrigadoQualificadoRoute,
   LpSlugRoute: LpSlugRoute,
   VistosSlugRoute: VistosSlugRouteWithChildren,
+  AvaliacaoIndexRoute: AvaliacaoIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
