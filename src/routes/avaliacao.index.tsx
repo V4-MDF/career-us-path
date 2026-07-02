@@ -44,7 +44,7 @@ const SEG_DEFAULTS: Record<SegKey, { headline: string; profissao: string }> = {
   },
 };
 
-export const Route = createFileRoute("/avaliacao")({
+export const Route = createFileRoute("/avaliacao/")({
   validateSearch: (s: Record<string, unknown>): AvaliacaoSearch => {
     const out: AvaliacaoSearch = {};
     Object.entries(s).forEach(([k, v]) => {
@@ -67,7 +67,7 @@ export const Route = createFileRoute("/avaliacao")({
 });
 
 function AvaliacaoPage() {
-  const search = useSearch({ from: "/avaliacao" });
+  const search = useSearch({ from: "/avaliacao/" });
   const navigate = useNavigate();
 
   useEffect(() => {
