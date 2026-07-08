@@ -457,15 +457,15 @@ export function LeadFormProgressive({
               Revisão rápida do seu perfil antes da análise.
             </p>
             <dl className="mt-4 grid sm:grid-cols-2 gap-x-6 gap-y-2 text-sm">
-              <Summary k="Nome" v={data.nome} />
-              <Summary k="E-mail" v={data.email} />
-              <Summary k="WhatsApp" v={data.whatsapp} />
-              <Summary k="Profissão" v={LABELS.profissao[data.profissao] ?? data.profissao} />
-              <Summary k="Formação" v={LABELS.formacao[data.formacao] ?? data.formacao} />
-              <Summary k="Idade" v={LABELS.faixaEtaria[data.faixaEtaria] ?? data.faixaEtaria} />
-              <Summary k="Local" v={`${data.cidade}/${data.uf}`} />
-              <Summary k="Renda" v={LABELS.renda[data.renda] ?? data.renda} />
-              <Summary k="Momento" v={LABELS.momento[data.momento] ?? data.momento} />
+              {steps.some((s) => s.key === "nome") && <Summary k="Nome" v={data.nome} />}
+              {steps.some((s) => s.key === "email") && <Summary k="E-mail" v={data.email} />}
+              {steps.some((s) => s.key === "whatsapp") && <Summary k="WhatsApp" v={data.whatsapp} />}
+              {steps.some((s) => s.key === "profissao") && <Summary k="Profissão" v={LABELS.profissao[data.profissao] ?? data.profissao} />}
+              {steps.some((s) => s.key === "formacao") && <Summary k="Formação" v={LABELS.formacao[data.formacao] ?? data.formacao} />}
+              {steps.some((s) => s.key === "faixaEtaria") && <Summary k="Idade" v={LABELS.faixaEtaria[data.faixaEtaria] ?? data.faixaEtaria} />}
+              {steps.some((s) => s.key === "cidade_uf") && <Summary k="Local" v={`${data.cidade}/${data.uf}`} />}
+              {steps.some((s) => s.key === "renda") && <Summary k="Renda" v={LABELS.renda[data.renda] ?? data.renda} />}
+              {steps.some((s) => s.key === "momento") && <Summary k="Momento" v={LABELS.momento[data.momento] ?? data.momento} />}
             </dl>
           </motion.div>
         )}
