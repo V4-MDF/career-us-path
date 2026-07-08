@@ -15,14 +15,14 @@ import { get } from "./dataStore";
 
 export const defaultContent = {
   "hero.eyebrow": "IMIGRAÇÃO PARA OS ESTADOS UNIDOS — EB-2 NIW",
-  "hero.title": "Seu Green Card americano baseado no mérito da sua carreira.",
+  "hero.title": "Transforme a sua carreira em um Green Card americano.",
   "hero.subtitle":
     "A Status na América ajuda profissionais brasileiros consolidados a conquistar a residência permanente nos EUA pelo EB-2 NIW — sem patrocinador, sem loteria, com Green Card para o cônjuge e os filhos.",
   "hero.cta": "Fazer minha análise gratuita",
   "hero.proof":
     "+1.000 famílias atendidas · Nota 5,0 no Google · Sede em Orlando, Flórida",
 
-  "contrast.title": "Você não precisa recomeçar do zero.",
+  "contrast.title": "Você não precisa começar do zero.",
   "contrast.subtitle": "Precisa de um novo cenário para a carreira que você já construiu.",
 
   "niw.title": "EB-2 NIW: o Green Card por mérito profissional",
@@ -37,7 +37,7 @@ export const defaultContent = {
 
   "cta.title": "Descubra se você já tem perfil para o Green Card.",
   "cta.subtitle":
-    "Avaliação gratuita e confidencial. Em até 48h nossa equipe analisa seu perfil e indica o caminho mais coerente com sua história.",
+    "Análise gratuita e confidencial. Em até 48h nossa equipe analisa seu perfil e indica o caminho mais coerente com sua história.",
 };
 
 export type ContentKey = keyof typeof defaultContent;

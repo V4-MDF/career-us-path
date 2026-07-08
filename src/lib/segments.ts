@@ -94,9 +94,10 @@ const SEED_SEGMENTS: Segment[] = [
       "Atendimento especializado para médicos brasileiros",
     comparativo: {
       label: "Salário médio de médicos",
-      lado_brasil: "≈ R$ 15.000 / mês",
+      lado_brasil: "≈ R$ 180.000 / ano",
       lado_eua: "US$ 200.000 a 600.000 / ano",
-      observacao: "Valores de referência; variam por especialidade e local.",
+      observacao:
+        "Valores de referência (brutos). No Brasil, impostos e encargos reduzem de forma relevante o valor líquido — nos EUA a diferença é ainda maior.",
     },
     dores: [
       "Plantões disputados e jornadas exaustivas",
@@ -117,17 +118,17 @@ const SEED_SEGMENTS: Segment[] = [
     faq_segmento: [
       {
         q: "Preciso revalidar o diploma antes do visto?",
-        a: "São processos distintos; na avaliação explicamos a ordem ideal para o seu caso.",
+        a: "São processos distintos; na análise explicamos a ordem ideal para o seu caso.",
       },
     ],
     meta_title: "Green Card para médicos brasileiros | EB-2 NIW | Status na América",
     meta_description:
-      "Médico e quer construir carreira nos EUA? Veja como conquistar o Green Card por mérito pelo EB-2 NIW, sem patrocinador. Avaliação gratuita.",
+      "Médico e quer construir carreira nos EUA? Veja como conquistar o Green Card por mérito pelo EB-2 NIW, sem patrocinador. Análise gratuita.",
     hero_default: {
       eyebrow: "PARA MÉDICOS BRASILEIROS",
       h1: "Você é médico e quer construir sua carreira nos Estados Unidos?",
       sub: "Conquiste o Green Card pelo mérito da sua trajetória — pelo EB-2 NIW, sem patrocinador e sem loteria. Green Card também para cônjuge e filhos.",
-      cta_texto: "Fazer minha avaliação gratuita",
+      cta_texto: "Fazer minha análise gratuita",
     },
   },
   {
@@ -143,9 +144,10 @@ const SEED_SEGMENTS: Segment[] = [
       "Engenheiros brasileiros qualificados têm forte aderência ao EB-2 NIW",
     comparativo: {
       label: "Salário médio de engenheiros",
-      lado_brasil: "≈ R$ 12.000 / mês",
+      lado_brasil: "≈ R$ 144.000 / ano",
       lado_eua: "US$ 90.000 a 150.000 / ano",
-      observacao: "Valores de referência; variam por área e senioridade.",
+      observacao:
+        "Valores de referência (brutos). No Brasil, impostos e encargos reduzem de forma relevante o valor líquido — nos EUA a diferença é ainda maior.",
     },
     dores: [
       "Salário estagnado mesmo com anos de experiência",
@@ -171,12 +173,12 @@ const SEED_SEGMENTS: Segment[] = [
     ],
     meta_title: "Green Card para engenheiros brasileiros | EB-2 NIW | Status na América",
     meta_description:
-      "Engenheiro e quer carreira nos EUA? Conquiste o Green Card por mérito pelo EB-2 NIW, sem patrocinador. Avaliação gratuita do seu perfil.",
+      "Engenheiro e quer carreira nos EUA? Conquiste o Green Card por mérito pelo EB-2 NIW, sem patrocinador. Análise gratuita do seu perfil.",
     hero_default: {
       eyebrow: "PARA ENGENHEIROS BRASILEIROS",
       h1: "Você é engenheiro e quer levar sua carreira para os Estados Unidos?",
       sub: "Conquiste o Green Card pelo mérito da sua trajetória em engenharia — pelo EB-2 NIW, sem patrocinador e sem loteria. Green Card também para cônjuge e filhos.",
-      cta_texto: "Fazer minha avaliação gratuita",
+      cta_texto: "Fazer minha análise gratuita",
     },
   },
   {
@@ -192,13 +194,17 @@ const SEED_SEGMENTS: Segment[] = [
       "Empresários que geram renda, impostos e empregos são exatamente o perfil que os EUA querem atrair",
     comparativo: {
       label: "Ambiente para quem empreende",
-      lado_brasil: "Carga tributária alta, insegurança jurídica, instabilidade",
-      lado_eua: "Mercado de escala, segurança jurídica e dólar forte",
+      lado_brasil:
+        "Carga tributária alta, insegurança jurídica, juros altos que encarecem o crescimento, falta de apoio e incentivo do governo",
+      lado_eua:
+        "Ambiente pró-negócio, segurança jurídica, incentivo a quem empreende e dólar forte",
       observacao: "Para empresários, o ganho não é só salário — é o ambiente de negócio.",
     },
     dores: [
       "Carga tributária que corrói o resultado do seu negócio",
       "Insegurança jurídica e instabilidade nas regras",
+      "Juros altos que encarecem o crescimento",
+      "Falta de apoio e incentivo do governo a quem empreende",
       "Violência e qualidade de vida abaixo do seu padrão",
       "Teto de crescimento no mercado brasileiro",
       "Preocupação com o futuro e a segurança dos filhos",
@@ -220,12 +226,12 @@ const SEED_SEGMENTS: Segment[] = [
     ],
     meta_title: "Green Card para empresários brasileiros | EB-2 NIW | Status na América",
     meta_description:
-      "Empresário e quer migrar com a família para os EUA? Green Card por mérito pelo EB-2 NIW. Avaliação gratuita do seu perfil.",
+      "Empresário e quer migrar com a família para os EUA? Green Card por mérito pelo EB-2 NIW. Análise gratuita do seu perfil.",
     hero_default: {
       eyebrow: "PARA EMPRESÁRIOS BRASILEIROS",
-      h1: "Você é empresário e quer recomeçar com segurança nos Estados Unidos?",
+      h1: "Você empresário quer construir seu futuro com segurança nos Estados Unidos?",
       sub: "Leve sua família, seu patrimônio e sua experiência empreendedora para um ambiente de negócio estável e em dólar — com o Green Card pelo EB-2 NIW.",
-      cta_texto: "Fazer minha avaliação gratuita",
+      cta_texto: "Fazer minha análise gratuita",
     },
   },
 ];

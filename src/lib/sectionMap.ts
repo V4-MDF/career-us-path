@@ -41,7 +41,7 @@ export const HOME_SECTIONS: SectionDef[] = [
   { id: "depoimentos",          label: "Depoimentos" },
   { id: "duvidas-frequentes",   label: "Dúvidas frequentes" },
   { id: "pre-qualificacao",     label: "Pré-qualificação" },
-  { id: "avaliacao-gratuita",   label: "Avaliação gratuita" },
+  { id: "avaliacao-gratuita",   label: "Análise gratuita" },
 ];
 
 // ============================================================
@@ -70,7 +70,7 @@ export const VISA_SECTIONS: SectionDef[] = [
   {
     id: "familia",
     label: "Família",
-    intent: "Quem é incluído na petição: cônjuge e filhos.",
+    intent: "Quem é incluído no processo: cônjuge e filhos.",
     indexable: true,
   },
   {
@@ -87,7 +87,7 @@ export const VISA_SECTIONS: SectionDef[] = [
   },
   {
     id: "avaliacao-gratuita",
-    label: "Avaliação gratuita",
+    label: "Análise gratuita",
     intent: "Como solicitar a análise gratuita do seu perfil.",
     indexable: false, // CTA — não vale a pena indexar isolado
   },

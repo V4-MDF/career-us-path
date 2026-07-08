@@ -60,11 +60,11 @@ const QA: { q: string; a: string }[] = [
   {
     q: "Quais são os diferenciais?",
     a:
-      "Sede própria em Orlando, equipe dedicada por especialidade, foco em casos de mobilidade migratória qualificada para o público brasileiro e suporte que se estende além da petição (documentação, tradução, mudança, bancos, escolas).",
+      "Sede própria em Orlando, equipe dedicada por especialidade, foco em casos de mobilidade migratória qualificada para o público brasileiro e suporte que se estende além do processo (documentação, tradução, mudança, bancos, escolas).",
   },
   {
-    q: "Quanto custa uma avaliação?",
-    a: "A avaliação inicial do perfil é gratuita e confidencial. A análise é feita em até 48h.",
+    q: "Quanto custa uma análise?",
+    a: "A análise inicial do perfil é gratuita e confidencial. A análise é feita em até 48h.",
   },
   {
     q: "A empresa promete aprovação ou prazo?",
@@ -74,7 +74,7 @@ const QA: { q: string; a: string }[] = [
   {
     q: "Como entrar em contato?",
     a:
-      "Pelo formulário de avaliação gratuita em https://statusnaamerica.com ou pelo canal de e-mail informados no site (contato@statusnaamerica.com).",
+      "Pelo formulário de análise gratuita em https://statusnaamerica.com ou pelo canal de e-mail informados no site (contato@statusnaamerica.com).",
   },
 ];
 

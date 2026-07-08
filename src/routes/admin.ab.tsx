@@ -57,7 +57,7 @@ function AbPage() {
   async function addVariant(segmentId: string) {
     const nv: HeroVariant = {
       id: newId("var"), segment_id: segmentId, nome: "Nova variante",
-      ativo: true, peso: 50, eyebrow: "", h1: "", sub: "", cta_texto: "Fazer minha avaliação gratuita",
+      ativo: true, peso: 50, eyebrow: "", h1: "", sub: "", cta_texto: "Fazer minha análise gratuita",
     };
     await set("hero_variants", nv.id, nv);
     toast.success("Variante criada.");

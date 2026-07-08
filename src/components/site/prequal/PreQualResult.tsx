@@ -192,7 +192,7 @@ export function PreQualResult({ record, variant }: Props) {
           </h2>
           <p className="mt-3 text-[15px] text-foreground/75 max-w-2xl">
             Conheça os critérios completos e leia os artigos sobre EB-2 NIW e EB-1 — a maioria
-            dos perfis aprovados leva alguns meses construindo evidências antes da petição.
+            dos perfis aprovados leva alguns meses construindo evidências antes de dar entrada no processo.
           </p>
           <div className="mt-5 flex flex-wrap gap-3">
             <a href="/vistos/eb2-niw"><Button className="btn-label h-11 px-5">Entender EB-2 NIW</Button></a>

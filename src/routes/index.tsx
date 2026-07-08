@@ -25,14 +25,14 @@ export const Route = createFileRoute("/")({
       {
         property: "og:description",
         content:
-          "Conquiste o Green Card americano pelo mérito da sua carreira. Avaliação gratuita do seu perfil EB-2 NIW.",
+          "Conquiste o Green Card americano pelo mérito da sua carreira. Análise gratuita do seu perfil EB-2 NIW.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "/" },
       { property: "og:image", content: "/og-image.jpg" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Status na América | Green Card EB-2 NIW" },
-      { name: "twitter:description", content: "Imigração para os EUA por mérito profissional." },
+      { name: "twitter:description", content: "Green Card americano por mérito profissional. Análise gratuita." },
       { name: "twitter:image", content: "/og-image.jpg" },
     ],
     links: [{ rel: "canonical", href: "/" }],
