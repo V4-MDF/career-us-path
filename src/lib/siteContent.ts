@@ -38,7 +38,49 @@ export const defaultContent = {
   "cta.title": "Descubra se você já tem perfil para o Green Card.",
   "cta.subtitle":
     "Análise gratuita e confidencial. Em até 48h nossa equipe analisa seu perfil e indica o caminho mais coerente com sua história.",
+
+  // ==== Selos e parceiros (Correções 3) ============================
+  // Faixa de credenciais tratada como selos oficiais. Slots com `.url`
+  // vazio renderizam moldura placeholder — o cliente envia os arquivos
+  // e o admin cola a URL da imagem no /admin/conteudo.
+  "partners.eyebrow": "CREDENCIAIS E PARCEIROS",
+  "partners.title": "Reconhecimentos oficiais que sustentam nossa operação.",
+  "partners.slot1.label": "BBB · Nota A",
+  "partners.slot1.url": "",
+  "partners.slot2.label": "Google Business · 5,0",
+  "partners.slot2.url": "",
+  "partners.slot3.label": "EIN 99-4846502",
+  "partners.slot3.url": "",
+  "partners.slot4.label": "AILA (parceiro)",
+  "partners.slot4.url": "",
+  "partners.slot5.label": "USCIS · Documentação",
+  "partners.slot5.url": "",
+  "partners.slot6.label": "Parceiro (placeholder)",
+  "partners.slot6.url": "",
+
+  // ==== Depoimentos em vídeo + estudos de caso =====================
+  // O caso EB-2 on-message é o do Helder (sócio que obteve Green Card
+  // via EB-2 NIW). O segundo slot fica reservado para vídeo de cliente
+  // real (ex.: engenheiro/empresário aprovado) conforme surgirem os
+  // estudos de caso do YouTube. URLs vazias → renderiza placeholder.
+  "testimonials.videoEyebrow": "CASOS REAIS EM VÍDEO",
+  "testimonials.videoTitle": "Quem já passou pelo processo — no vídeo.",
+  "testimonials.helderName": "Helder Moreira",
+  "testimonials.helderCaption": "Caso real — Green Card EB-2 NIW",
+  "testimonials.helderRole": "Sócio da Status na América",
+  "testimonials.helderVideoUrl": "",
+  "testimonials.secondaryName": "Cliente aprovado",
+  "testimonials.secondaryCaption": "Caso de cliente — em breve",
+  "testimonials.secondaryRole": "Engenheiro / Empresário",
+  "testimonials.secondaryVideoUrl": "",
+  "testimonials.googleReviewsUrl":
+    "https://www.google.com/search?q=Status+na+Am%C3%A9rica+Orlando+reviews",
+  "testimonials.caseStudiesEyebrow": "ESTUDOS DE CASO",
+  "testimonials.caseStudiesTitle": "Casos reais, documentados.",
+  "testimonials.caseStudiesLead":
+    "Estamos preparando os primeiros estudos de caso completos — perfil, estratégia adotada e resultado. Publicados em breve.",
 };
+
 
 export type ContentKey = keyof typeof defaultContent;
 
