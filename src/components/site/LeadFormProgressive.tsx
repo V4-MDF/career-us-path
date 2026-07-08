@@ -135,7 +135,7 @@ export function LeadFormProgressive({
 }: LeadFormProgressiveProps) {
   const steps: FieldDef[] = useMemo(
     () => (fields && fields.length > 0
-      ? steps.filter((f) => fields.includes(f.key))
+      ? PROGRESSIVE_FIELDS.filter((f) => fields.includes(f.key))
       : PROGRESSIVE_FIELDS),
     [fields],
   );
