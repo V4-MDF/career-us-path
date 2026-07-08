@@ -128,7 +128,7 @@ const eb2niw: VisaPage = {
         num: "02",
         title: "Arquitetura Estratégica",
         body:
-          "Estruturamos a narrativa do seu Endeavor para evidenciar o interesse nacional americano nos três critérios de Dhanasar.",
+          "Estruturamos a narrativa do seu perfil profissional para evidenciar o interesse nacional americano.",
       },
       {
         num: "03",
@@ -140,7 +140,7 @@ const eb2niw: VisaPage = {
         num: "04",
         title: "Revisão Final",
         body:
-          "Organização impecável da Petition (I-140 + memorando) nos critérios exigidos pelo USCIS antes do protocolo.",
+          "Organização completa e criteriosa do seu processo, dentro dos padrões exigidos pelo USCIS.",
       },
     ],
     note:
@@ -149,13 +149,13 @@ const eb2niw: VisaPage = {
   family: {
     title: "Green Card para toda a família",
     body:
-      "A petição EB-2 NIW inclui cônjuge e filhos solteiros menores de 21 anos, que recebem Green Card derivado junto com o requerente principal. O cônjuge passa a poder trabalhar livremente nos EUA, e os filhos têm acesso à educação pública americana nas mesmas condições de residentes.",
+      "O processo EB-2 NIW inclui cônjuge e filhos solteiros menores de 21 anos, que recebem Green Card derivado junto com o requerente principal. O cônjuge passa a poder trabalhar livremente nos EUA, e os filhos têm acesso à educação pública americana nas mesmas condições de residentes.",
   },
   faq: [
     {
       q: "Preciso de uma empresa americana me contratando?",
       a:
-        "Não. O EB-2 NIW dispensa tanto o empregador patrocinador quanto a labor certification (PERM). O próprio profissional peticiona seu Green Card com base no mérito.",
+        "Não. O EB-2 NIW dispensa tanto o empregador patrocinador quanto a labor certification (PERM). O próprio profissional conduz seu Green Card com base no mérito.",
     },
     {
       q: "Preciso obrigatoriamente de mestrado?",
@@ -165,27 +165,27 @@ const eb2niw: VisaPage = {
     {
       q: "Inglês fluente é obrigatório para começar?",
       a:
-        "Não é requisito para a petição EB-2 NIW. A petição é instruída em inglês pela equipe jurídica parceira; o profissional não precisa ser fluente para iniciar. A fluência, no entanto, é um diferencial relevante para a vida e a carreira nos EUA.",
+        "Não é requisito para o EB-2 NIW. A documentação é instruída em inglês pela equipe jurídica parceira; o profissional não precisa ser fluente para iniciar. A fluência, no entanto, é um diferencial relevante para a vida e a carreira nos EUA.",
     },
     {
       q: "Quanto tempo leva o processo?",
       a:
-        "Estimativa realista de aproximadamente 24 meses, considerando estruturação, petição I-140, eventual RFE e ajuste/consular. Os prazos do USCIS e dos consulados oscilam — por isso começar cedo importa. Não trabalhamos com prazos garantidos.",
+        "Estimativa realista de aproximadamente 24 meses, considerando estruturação, processo I-140, eventual RFE e ajuste/consular. Os prazos do USCIS e dos consulados oscilam — por isso começar cedo importa. Não trabalhamos com prazos garantidos.",
     },
     {
       q: "Como está a emissão de vistos para brasileiros em 2026?",
       a:
-        "Há flutuações reais na agenda consular e nos tempos de processamento, que dependem de fatores externos ao caso. Por isso planejamento antecipado importa: estruturar a petição cedo amplia a janela de manobra. Acompanhamos o cenário e conduzimos cada caso conforme as regras vigentes — sem prometer prazos.",
+        "Há flutuações reais na agenda consular e nos tempos de processamento, que dependem de fatores externos ao caso. Por isso planejamento antecipado importa: estruturar o processo cedo amplia a janela de manobra. Acompanhamos o cenário e conduzimos cada caso conforme as regras vigentes — sem prometer prazos.",
     },
     {
       q: "Quanto custa?",
       a:
-        "A avaliação inicial do perfil é gratuita. O investimento da preparação documental varia conforme a composição da família, a complexidade da documentação e o estágio do caso. Apresentamos a proposta após o diagnóstico.",
+        "A análise inicial do perfil é gratuita. O investimento da preparação documental varia conforme a composição da família, a complexidade da documentação e o estágio do caso. Apresentamos a proposta após o diagnóstico.",
     },
   ],
   ctaTitle: "Descubra se você já tem perfil para o EB-2 NIW.",
   ctaSubtitle:
-    "Avaliação gratuita e confidencial. Em até 48h nossa equipe analisa sua trajetória e indica o caminho mais coerente.",
+    "Análise gratuita e confidencial. Em até 48h nossa equipe analisa sua trajetória e indica o caminho mais coerente.",
 };
 
 /* ---------------- EB-1 ---------------- */
