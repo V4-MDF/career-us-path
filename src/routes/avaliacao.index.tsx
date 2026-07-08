@@ -132,14 +132,14 @@ function AvaliacaoPage() {
             alt=""
             width={1920}
             height={1280}
-            className="w-full h-full object-cover opacity-[0.22]"
+            className="w-full h-full object-cover opacity-[0.14]"
           />
-          {/* Vinheta + fade para o ink sólido abaixo */}
+          {/* Vinheta + fade para o ink sólido abaixo — overlay reforçado (AA) */}
           <div
             className="absolute inset-0"
             style={{
               background:
-                "linear-gradient(to bottom, color-mix(in oklab, var(--ink) 55%, transparent) 0%, color-mix(in oklab, var(--ink) 75%, transparent) 45%, var(--ink) 100%), radial-gradient(ellipse at 50% 0%, color-mix(in oklab, var(--gold) 10%, transparent) 0%, transparent 65%)",
+                "linear-gradient(to bottom, color-mix(in oklab, var(--ink) 75%, transparent) 0%, color-mix(in oklab, var(--ink) 88%, transparent) 45%, var(--ink) 100%), radial-gradient(ellipse at 50% 0%, color-mix(in oklab, var(--gold) 10%, transparent) 0%, transparent 65%)",
             }}
           />
         </div>
@@ -151,7 +151,7 @@ function AvaliacaoPage() {
             <div className="inline-flex items-center gap-3">
               <span aria-hidden className="h-px w-8 bg-gold" />
               <span className="font-mono-label text-[11px] tracking-wider text-gold">
-                AVALIAÇÃO GRATUITA · 100% CONFIDENCIAL
+                ANÁLISE GRATUITA · 100% CONFIDENCIAL
               </span>
               <span aria-hidden className="h-px w-8 bg-gold" />
             </div>
