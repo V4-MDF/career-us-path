@@ -151,7 +151,15 @@ const MODEL_ID = "scoring_model";
 export async function loadModel(): Promise<ScoringModel> {
   try {
     const m = await get<ScoringModel>("settings", MODEL_ID);
-    if (m && Array.isArray(m.factors) && Array.isArray(m.faixas)) return m;
+    if (m && Array.isArray(m.factors) && Array.isArray(m.faixas)) {
+      // Auto-migrate: se stored é anterior ao default atual, adota novos pesos
+      // (mantém edição preservada em versões >= default).
+      if ((m.version ?? 0) < DEFAULT_MODEL.version) {
+        await saveModel(DEFAULT_MODEL);
+        return { ...DEFAULT_MODEL, updatedAt: new Date().toISOString() };
+      }
+      return m;
+    }
   } catch { /* noop */ }
   return DEFAULT_MODEL;
 }
