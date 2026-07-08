@@ -220,7 +220,7 @@ const eb1: VisaPage = {
     title: "Como funciona o processo",
     steps: [
       { num: "01", title: "Diagnóstico de elegibilidade", body: "Mapeamento de evidências objetivas em pelo menos 3 dos critérios oficiais." },
-      { num: "02", title: "Petição I-140", body: "Submissão ao USCIS com a documentação probatória completa e o memorando jurídico." },
+      { num: "02", title: "Processo I-140", body: "Submissão ao USCIS com a documentação probatória completa e o memorando jurídico." },
       { num: "03", title: "Aprovação e ajuste / consular", body: "Conclusão do processo, com Green Card para o requerente, cônjuge e filhos." },
     ],
     note:
@@ -246,7 +246,7 @@ const eb1: VisaPage = {
     },
     {
       q: "Quanto custa?",
-      a: "A avaliação inicial é gratuita. A proposta de preparação documental varia conforme complexidade do caso e composição da família.",
+      a: "A análise inicial é gratuita. A proposta de preparação documental varia conforme complexidade do caso e composição da família.",
     },
   ],
   ctaTitle: "Tem reconhecimento internacional? Avalie o EB-1.",
@@ -273,7 +273,7 @@ const eb3: VisaPage = {
     intro:
       "O EB-3 é apropriado quando NÃO há perfil para EB-2 NIW ou EB-1 e existe um empregador americano disposto a conduzir o patrocínio — assumindo custos e prazos do PERM. É um caminho que depende fortemente da empresa.",
     items: [
-      { title: "Há empregador disposto a patrocinar", body: "Empresa americana que aceita conduzir PERM, comprovar inexistência de mão-de-obra local e patrocinar a petição." },
+      { title: "Há empregador disposto a patrocinar", body: "Empresa americana que aceita conduzir PERM, comprovar inexistência de mão-de-obra local e patrocinar o processo." },
       { title: "Profissional qualificado", body: "Diploma de bacharelado (professionals) ou pelo menos 2 anos de experiência/treinamento (skilled workers)." },
       { title: "Disponibilidade para o tempo do PERM", body: "O PERM costuma ser a etapa mais demorada; o processo total depende da agenda do empregador e do Departamento do Trabalho." },
     ],
@@ -282,7 +282,7 @@ const eb3: VisaPage = {
     title: "Como funciona o processo",
     steps: [
       { num: "01", title: "PERM (Labor Certification)", body: "O empregador comprova ao DOL que não há trabalhador americano disponível e qualificado para a vaga, seguindo recrutamento formal regulado." },
-      { num: "02", title: "Petição I-140", body: "Aprovado o PERM, o empregador submete a I-140 ao USCIS em favor do profissional." },
+      { num: "02", title: "Processo I-140", body: "Aprovado o PERM, o empregador submete a I-140 ao USCIS em favor do profissional." },
       { num: "03", title: "Ajuste / consular", body: "Aprovada a I-140, segue-se o ajuste de status ou processamento consular, com Green Card para o requerente, cônjuge e filhos." },
     ],
     note:
