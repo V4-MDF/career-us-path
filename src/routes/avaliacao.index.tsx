@@ -161,8 +161,8 @@ function AvaliacaoPage() {
             </h1>
 
             <p className="mt-5 text-base md:text-lg text-foreground/80 leading-relaxed max-w-[560px] mx-auto">
-              Análise gratuita e sem compromisso. Nossa equipe analisa o seu perfil e
-              responde em até 48h pelo canal informado.
+              Cinco perguntas rápidas. Nossa equipe analisa o seu perfil e responde em
+              até 48h pelo canal informado.
             </p>
           </div>
 
