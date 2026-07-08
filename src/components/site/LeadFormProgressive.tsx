@@ -40,6 +40,17 @@ export interface LeadFormProgressiveProps {
   submitLabel?: string;
   /** Path da rota atual (para excluir da origem). Ex.: "/avaliacao" */
   currentPath?: string;
+  /**
+   * Lista de campos a exibir. Default = form completo (9 campos).
+   * Passar um subset menor para o form curto de captura de barreira baixa.
+   * Ex.: ["nome","email","whatsapp","profissao","renda"] (fase de validação).
+   */
+  fields?: FieldKey[];
+  /**
+   * Modo "enrichment": não cria lead novo — atualiza um `leads[leadId]` existente
+   * com os campos preenchidos e recalcula o score. Usado por /avaliacao/completar.
+   */
+  enrichLeadId?: string;
 }
 
 const ufs = ["AC","AL","AM","AP","BA","CE","DF","ES","GO","MA","MG","MS","MT","PA","PB","PE","PI","PR","RJ","RN","RO","RR","RS","SC","SE","SP","TO"];
