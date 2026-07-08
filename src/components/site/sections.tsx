@@ -547,9 +547,9 @@ export function LegacySection() {
  * ============================================================ */
 export function SalaryCompare() {
   const rows = [
-    { p: "Médico especialista", br: "R$ 25.000 / mês", us: "US$ 22.000 / mês" },
-    { p: "Engenheiro sênior",   br: "R$ 18.000 / mês", us: "US$ 12.500 / mês" },
-    { p: "Profissional de TI sênior", br: "R$ 20.000 / mês", us: "US$ 14.000 / mês" },
+    { p: "Médico especialista", br: "R$ 300.000 / ano", us: "US$ 264.000 / ano" },
+    { p: "Engenheiro sênior",   br: "R$ 216.000 / ano", us: "US$ 150.000 / ano" },
+    { p: "Profissional de TI sênior", br: "R$ 240.000 / ano", us: "US$ 168.000 / ano" },
   ];
   return (
     <Reveal as="section" id="renda-em-dolar" className="section-pad">
@@ -558,7 +558,7 @@ export function SalaryCompare() {
           num="08"
           eyebrow="RENDA EM DÓLAR"
           title="A mesma carreira. Outro patamar de remuneração."
-          kicker="Estimativas de mercado mensais médias. Valores variam por especialidade, cidade e senioridade."
+          kicker="Estimativas anuais brutas de mercado. Valores variam por especialidade, cidade e senioridade."
         />
         <div className="mt-14 rounded-2xl border border-gold/25 overflow-hidden shadow-soft">
           <div className="grid grid-cols-[1.4fr_1fr_1fr] font-mono-label text-foreground/60 bg-ink-deep px-6 py-4 border-b border-gold/20">
@@ -574,6 +574,10 @@ export function SalaryCompare() {
             </div>
           ))}
         </div>
+        <p className="mt-5 text-sm text-foreground/60 leading-relaxed max-w-3xl">
+          Valores de referência (brutos). No Brasil, impostos e encargos reduzem de forma
+          relevante o valor líquido — nos EUA a diferença é ainda maior.
+        </p>
       </div>
     </Reveal>
   );
@@ -636,7 +640,7 @@ export function FAQ() {
     },
     {
       q: "Qual a experiência de vocês?",
-      a: "Atuamos exclusivamente na preparação de documentação para vistos de emprego por mérito — EB-1, EB-2 NIW e EB-3. Esse foco gera profundidade nos critérios do USCIS. Não somos generalistas: cada caso é construído por uma equipe que já estruturou centenas de petições semelhantes.",
+      a: "Atuamos exclusivamente na preparação de documentação para vistos de emprego por mérito — EB-1, EB-2 NIW e EB-3. Esse foco gera profundidade nos critérios do USCIS. Não somos generalistas: cada caso é construído por uma equipe que já estruturou centenas de processos semelhantes.",
     },
     {
       q: "Posso confiar mesmo sem ir presencialmente?",
@@ -742,12 +746,12 @@ export function CtaBanner() {
   const title = useContent("cta.title");
   const sub = useContent("cta.subtitle");
   return (
-    <section id="avaliacao-gratuita" aria-label="Avaliação gratuita" className="section-anchor section-ink-deep section-pad relative border-t border-gold/15">
+    <section id="avaliacao-gratuita" aria-label="Análise gratuita" className="section-anchor section-ink-deep section-pad relative border-t border-gold/15">
       {/* Sem guilloché aqui — reservado ao NIW (regra Chanel: tire um acessório). */}
 
       <div className="container-x">
         <div className="max-w-3xl">
-          <SectionHead num="11" eyebrow="AVALIAÇÃO GRATUITA" title={title} kicker={sub} />
+          <SectionHead num="11" eyebrow="ANÁLISE GRATUITA" title={title} kicker={sub} />
         </div>
 
         <div className="mt-12 grid lg:grid-cols-[1.2fr_1fr] gap-10 items-start">
@@ -774,7 +778,7 @@ export function CtaBanner() {
               por e-mail com a indicação do caminho mais coerente.
             </p>
             <a href={useAvaliacaoHref("home_cta_final")} className="mt-7 inline-block">
-              <Button size="lg" className="btn-label btn-sweep h-12 px-7">Fazer minha avaliação gratuita</Button>
+              <Button size="lg" className="btn-label btn-sweep h-12 px-7">Fazer minha análise gratuita</Button>
             </a>
             <a
               href="/pre-qualificacao"
@@ -851,14 +855,14 @@ export function HeroAssessment() {
   return (
     <section
       id="avaliacao-rapida"
-      aria-label="Avaliação gratuita do seu perfil"
+      aria-label="Análise gratuita do seu perfil"
       className="section-anchor section-pad relative border-t border-gold/15"
     >
       <div className="container-x grid lg:grid-cols-[0.9fr_1.1fr] gap-10 lg:gap-14 items-start">
         <div>
-          <p className="font-mono-label text-gold">AVALIAÇÃO GRATUITA</p>
+          <p className="font-mono-label text-gold">ANÁLISE GRATUITA</p>
           <h2 className="mt-4 font-display text-[clamp(1.75rem,3.4vw,2.6rem)] leading-tight">
-            Comece sua avaliação aqui mesmo.
+            Comece sua análise aqui mesmo.
           </h2>
           <p className="mt-5 text-foreground/80 max-w-md leading-relaxed">
             Responda algumas perguntas curtas sobre o seu perfil. Suas respostas
