@@ -169,7 +169,9 @@ function AvaliacaoPage() {
           {/* Origem capturada silenciosamente — visível apenas no admin/tracking de cada lead */}
 
 
-          {/* Formulário */}
+          {/* Formulário curto (fase de validação): 5 campos essenciais.
+              O aprofundamento (formação, idade, cidade/UF, momento) é
+              oferecido opcionalmente em /avaliacao/completar após envio. */}
           <div className="mt-6">
             <LeadFormProgressive
               segmentId={segKey ?? undefined}
@@ -177,6 +179,7 @@ function AvaliacaoPage() {
               onSubmitted={(lead) => goToThanks(lead.qualification)}
               submitLabel="Enviar para análise"
               currentPath="/avaliacao"
+              fields={["nome", "whatsapp", "email", "profissao", "renda"]}
             />
           </div>
 
