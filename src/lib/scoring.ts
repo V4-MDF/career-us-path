@@ -108,7 +108,7 @@ export const DEFAULT_MODEL: ScoringModel = {
       key: "formacao",
       label: "Formação",
       field: "formacao",
-      peso: 20,
+      peso: 15,
       valores: { doutorado: 1.0, mestrado: 1.0, pos: 0.75, superior: 0.4, sem_superior: 0.1 },
       labels: {
         doutorado: "Doutorado", mestrado: "Mestrado", pos: "Pós-graduação",
