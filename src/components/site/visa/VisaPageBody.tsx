@@ -192,11 +192,11 @@ export function VisaPageBody({ page, hideHero = false }: { page: VisaPage; hideH
         </div>
       </section>
 
-      {/* 7 — Avaliação gratuita (CTA) */}
-      <section id="avaliacao-gratuita" aria-label="Avaliação gratuita" className="section-anchor section-parchment">
+      {/* 7 — Análise gratuita (CTA) */}
+      <section id="avaliacao-gratuita" aria-label="Análise gratuita" className="section-anchor section-parchment">
         <div className="container-x section-pad grid lg:grid-cols-12 gap-10 items-start">
           <div className="lg:col-span-7">
-            <SectionHead num="07" eyebrow="AVALIAÇÃO GRATUITA" variant="parchment" title={page.ctaTitle} kicker={page.ctaSubtitle} />
+            <SectionHead num="07" eyebrow="ANÁLISE GRATUITA" variant="parchment" title={page.ctaTitle} kicker={page.ctaSubtitle} />
             <ul className="mt-8 space-y-3 text-ink-text/80">
               {[
                 "Análise individual do perfil em até 48h",
@@ -216,7 +216,7 @@ export function VisaPageBody({ page, hideHero = false }: { page: VisaPage; hideH
                 Comece pela análise gratuita do seu perfil.
               </h3>
               <p className="mt-3 text-ink-text/70 text-[15px] leading-relaxed">
-                Em poucos minutos enviamos sua avaliação para a equipe especializada
+                Em poucos minutos enviamos sua análise para a equipe especializada
                 em vistos EB. Resposta em até 48h por e-mail.
               </p>
               <a href={avaliacaoHref(`visto_${page.slug}_cta`)} className="mt-7 inline-block">

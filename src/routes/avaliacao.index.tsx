@@ -31,15 +31,15 @@ interface AvaliacaoSearch {
 
 const SEG_DEFAULTS: Record<SegKey, { headline: string; profissao: string }> = {
   medicos: {
-    headline: "Avaliação gratuita para médicos brasileiros.",
+    headline: "Análise gratuita para médicos brasileiros.",
     profissao: "medico",
   },
   engenheiros: {
-    headline: "Avaliação gratuita para engenheiros brasileiros.",
+    headline: "Análise gratuita para engenheiros brasileiros.",
     profissao: "engenheiro",
   },
   empresarios: {
-    headline: "Avaliação gratuita para empresários brasileiros.",
+    headline: "Análise gratuita para empresários brasileiros.",
     profissao: "empresario",
   },
 };
@@ -54,7 +54,7 @@ export const Route = createFileRoute("/avaliacao/")({
   },
   head: () => ({
     meta: [
-      { title: "Avaliação gratuita do seu perfil EB-2 NIW | Status na América" },
+      { title: "Análise gratuita do seu perfil EB-2 NIW | Status na América" },
       {
         name: "description",
         content:
