@@ -34,6 +34,7 @@ export interface PageSectionsRow {
 const DEFAULT_LAYOUTS: Record<PageSlug, SectionItem[]> = {
   home: [
     { id: "abertura",            active: true },
+    { id: "selos-parceiros",     active: true },
     { id: "blog-em-destaque",    active: true },
     { id: "brasil-vs-eua",       active: true },
     { id: "eb-2-niw",            active: true },
