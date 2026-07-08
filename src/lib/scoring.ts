@@ -72,7 +72,7 @@ export const FUNNEL_LABEL: Record<FunnelStatus, string> = {
  * DEFAULT MODEL — defaults do briefing (pesos somam 100).
  * ---------------------------------------------------------------- */
 export const DEFAULT_MODEL: ScoringModel = {
-  version: 1,
+  version: 2,
   updatedAt: new Date(0).toISOString(),
   factors: [
     {
