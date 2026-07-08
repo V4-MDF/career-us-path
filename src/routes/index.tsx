@@ -51,6 +51,7 @@ export const Route = createFileRoute("/")({
  */
 const HOME_REGISTRY: Record<string, ComponentType> = {
   "abertura": Hero,
+  "selos-parceiros": PartnersBadges,
   "blog-em-destaque": BlogStrip,
   "brasil-vs-eua": ContrastBrasilEUA,
   "eb-2-niw": NiwSection,
