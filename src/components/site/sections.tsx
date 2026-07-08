@@ -311,7 +311,7 @@ export function NiwSection() {
               <div>
                 <p className="font-mono-label text-gold/80">DOSSIÊ EB-2 NIW</p>
                 <p className="mt-1 font-display text-lg text-foreground">
-                  Documentação preparada com rigor de petição americana.
+                  Documentação preparada com o rigor exigido pelo USCIS.
                 </p>
               </div>
               <FlagsBRUS size={16} />
@@ -370,7 +370,7 @@ export function PersonaCards() {
     { icon: Wrench, title: "Engenheiros", seg: "engenheiros",
       headline: "Da infraestrutura à tecnologia: o mercado americano valoriza o que você já faz." },
     { icon: Building2, title: "Empresários", seg: "empresarios",
-      headline: "Geração de empregos e impostos pesa positivamente na sua petição." },
+      headline: "Geração de empregos e impostos pesa positivamente no seu processo." },
   ];
   return (
     <Reveal as="section" id="perfis-atendidos" className="section-pad">
@@ -391,7 +391,7 @@ export function PersonaCards() {
                   href={avaliacaoHref(`home_persona_${p.seg}`, p.seg)}
                   className="mt-7 inline-flex items-center text-sm text-gold hover:text-gold"
                 >
-                  Avaliar meu perfil <span aria-hidden className="ml-2">→</span>
+                  Analisar meu perfil <span aria-hidden className="ml-2">→</span>
                 </a>
               </article>
             );
@@ -410,11 +410,11 @@ export function ProcessSteps() {
     { n: "01", icon: GraduationCap, t: "Análise Criteriosa",
       d: "Avaliamos histórico, formação, impacto e potencial para o EB-2 NIW." },
     { n: "02", icon: Layers, t: "Arquitetura Estratégica",
-      d: "Estruturamos a narrativa do seu Endeavor para evidenciar o interesse nacional americano." },
+      d: "Estruturamos a narrativa do seu perfil profissional para evidenciar o interesse nacional americano." },
     { n: "03", icon: FileText, t: "Preparação Documental",
       d: "Documentação meticulosa, cartas de recomendação e evidências de alto padrão." },
     { n: "04", icon: Briefcase, t: "Revisão Final",
-      d: "Organização impecável da Petition nos critérios exigidos pelo USCIS." },
+      d: "Organização completa e criteriosa do seu processo, dentro dos padrões exigidos pelo USCIS." },
   ];
   return (
     <Reveal as="section" id="processo-eb-2-niw" className="section-parchment section-pad relative overflow-hidden">
@@ -502,6 +502,8 @@ export function LegacySection() {
       d: "Residência permanente para você e a família, caminho para a cidadania americana." },
     { icon: Heart, t: "Segurança Familiar",
       d: "Cônjuge com autorização de trabalho e filhos solteiros menores de 21 com os mesmos benefícios." },
+    { icon: GraduationCap, t: "Futuro dos Filhos",
+      d: "Educação de ponta e segurança para os seus filhos crescerem, com os mesmos direitos de residência." },
     { icon: Sparkles, t: "Previsibilidade",
       d: "Controle do seu futuro imigratório, sem loterias e sem depender de empresas." },
   ];
@@ -524,9 +526,9 @@ export function LegacySection() {
           num="07"
           eyebrow="O QUE VOCÊ CONQUISTA"
           title="Muito mais que um visto. Um legado."
-          kicker="O Green Card pelo EB-2 NIW reconfigura o horizonte da sua família — em quatro pilares."
+          kicker="O Green Card pelo EB-2 NIW reconfigura o horizonte da sua família — em cinco pilares."
         />
-        <div className="mt-14 grid md:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className="mt-14 grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5">
           {pillars.map(({ icon: Icon, t, d }) => (
             <article key={t} className="relative gold-tick rounded-2xl border border-gold/25 bg-ink-raise/50 p-7 h-full shadow-soft transition-[border-color,box-shadow] hover:border-gold/55 hover:shadow-elevated">
               <Icon className="h-6 w-6 text-gold" />
