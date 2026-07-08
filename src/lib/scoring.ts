@@ -72,14 +72,14 @@ export const FUNNEL_LABEL: Record<FunnelStatus, string> = {
  * DEFAULT MODEL — defaults do briefing (pesos somam 100).
  * ---------------------------------------------------------------- */
 export const DEFAULT_MODEL: ScoringModel = {
-  version: 1,
+  version: 2,
   updatedAt: new Date(0).toISOString(),
   factors: [
     {
       key: "renda",
       label: "Renda",
       field: "renda",
-      peso: 25,
+      peso: 35,
       valores: { "40_mais": 1.0, "20_40": 0.7, "10_20": 0.4, ate_10: 0.12 },
       labels: {
         "40_mais": "R$ 40k+",
@@ -92,7 +92,7 @@ export const DEFAULT_MODEL: ScoringModel = {
       key: "profissao",
       label: "Profissão",
       field: "profissao",
-      peso: 25,
+      peso: 20,
       valores: {
         medico: 1.0, engenheiro: 1.0, empresario: 1.0,
         dentista: 1.0, advogado: 1.0, ti: 1.0,
@@ -108,7 +108,7 @@ export const DEFAULT_MODEL: ScoringModel = {
       key: "formacao",
       label: "Formação",
       field: "formacao",
-      peso: 20,
+      peso: 15,
       valores: { doutorado: 1.0, mestrado: 1.0, pos: 0.75, superior: 0.4, sem_superior: 0.1 },
       labels: {
         doutorado: "Doutorado", mestrado: "Mestrado", pos: "Pós-graduação",
@@ -151,7 +151,15 @@ const MODEL_ID = "scoring_model";
 export async function loadModel(): Promise<ScoringModel> {
   try {
     const m = await get<ScoringModel>("settings", MODEL_ID);
-    if (m && Array.isArray(m.factors) && Array.isArray(m.faixas)) return m;
+    if (m && Array.isArray(m.factors) && Array.isArray(m.faixas)) {
+      // Auto-migrate: se stored é anterior ao default atual, adota novos pesos
+      // (mantém edição preservada em versões >= default).
+      if ((m.version ?? 0) < DEFAULT_MODEL.version) {
+        await saveModel(DEFAULT_MODEL);
+        return { ...DEFAULT_MODEL, updatedAt: new Date().toISOString() };
+      }
+      return m;
+    }
   } catch { /* noop */ }
   return DEFAULT_MODEL;
 }
