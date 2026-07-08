@@ -92,7 +92,7 @@ export const DEFAULT_MODEL: ScoringModel = {
       key: "profissao",
       label: "Profissão",
       field: "profissao",
-      peso: 25,
+      peso: 20,
       valores: {
         medico: 1.0, engenheiro: 1.0, empresario: 1.0,
         dentista: 1.0, advogado: 1.0, ti: 1.0,
