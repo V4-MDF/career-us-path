@@ -79,7 +79,7 @@ export const DEFAULT_MODEL: ScoringModel = {
       key: "renda",
       label: "Renda",
       field: "renda",
-      peso: 25,
+      peso: 35,
       valores: { "40_mais": 1.0, "20_40": 0.7, "10_20": 0.4, ate_10: 0.12 },
       labels: {
         "40_mais": "R$ 40k+",
