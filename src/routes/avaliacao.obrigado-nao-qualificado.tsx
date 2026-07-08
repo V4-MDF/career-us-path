@@ -124,13 +124,21 @@ function ObrigadoNaoQualificado() {
               </span>
             </div>
 
-            <div className="mt-10 text-center">
+            <div className="mt-10 text-center flex flex-wrap items-center justify-center gap-3">
+              <Link to="/avaliacao/completar">
+                <Button size="lg" className="btn-label h-12 px-6">
+                  Completar meu perfil
+                </Button>
+              </Link>
               <Link to="/">
                 <Button size="lg" variant="outline" className="btn-label h-12 px-6 border-gold/40 text-foreground hover:border-gold hover:bg-gold/5">
                   Voltar para o site
                 </Button>
               </Link>
             </div>
+            <p className="mt-3 text-center font-mono-label text-[11px] text-foreground/50">
+              Opcional · Ajuda nosso time a te orientar melhor
+            </p>
           </div>
         </div>
       </main>

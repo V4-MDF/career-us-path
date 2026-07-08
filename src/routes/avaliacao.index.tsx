@@ -161,15 +161,17 @@ function AvaliacaoPage() {
             </h1>
 
             <p className="mt-5 text-base md:text-lg text-foreground/80 leading-relaxed max-w-[560px] mx-auto">
-              Análise gratuita e sem compromisso. Nossa equipe analisa o seu perfil e
-              responde em até 48h pelo canal informado.
+              Cinco perguntas rápidas. Nossa equipe analisa o seu perfil e responde em
+              até 48h pelo canal informado.
             </p>
           </div>
 
           {/* Origem capturada silenciosamente — visível apenas no admin/tracking de cada lead */}
 
 
-          {/* Formulário */}
+          {/* Formulário curto (fase de validação): 5 campos essenciais.
+              O aprofundamento (formação, idade, cidade/UF, momento) é
+              oferecido opcionalmente em /avaliacao/completar após envio. */}
           <div className="mt-6">
             <LeadFormProgressive
               segmentId={segKey ?? undefined}
@@ -177,6 +179,7 @@ function AvaliacaoPage() {
               onSubmitted={(lead) => goToThanks(lead.qualification)}
               submitLabel="Enviar para análise"
               currentPath="/avaliacao"
+              fields={["nome", "whatsapp", "email", "profissao", "renda"]}
             />
           </div>
 

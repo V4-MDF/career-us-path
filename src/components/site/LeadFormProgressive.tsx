@@ -40,6 +40,17 @@ export interface LeadFormProgressiveProps {
   submitLabel?: string;
   /** Path da rota atual (para excluir da origem). Ex.: "/avaliacao" */
   currentPath?: string;
+  /**
+   * Lista de campos a exibir. Default = form completo (9 campos).
+   * Passar um subset menor para o form curto de captura de barreira baixa.
+   * Ex.: ["nome","email","whatsapp","profissao","renda"] (fase de validação).
+   */
+  fields?: FieldKey[];
+  /**
+   * Modo "enrichment": não cria lead novo — atualiza um `leads[leadId]` existente
+   * com os campos preenchidos e recalcula o score. Usado por /avaliacao/completar.
+   */
+  enrichLeadId?: string;
 }
 
 const ufs = ["AC","AL","AM","AP","BA","CE","DF","ES","GO","MA","MG","MS","MT","PA","PB","PE","PI","PR","RJ","RN","RO","RR","RS","SC","SE","SP","TO"];
@@ -120,7 +131,14 @@ export interface PartialLead {
 
 export function LeadFormProgressive({
   segmentId, defaultProfissao, onSubmitted, submitLabel, currentPath,
+  fields, enrichLeadId,
 }: LeadFormProgressiveProps) {
+  const steps: FieldDef[] = useMemo(
+    () => (fields && fields.length > 0
+      ? PROGRESSIVE_FIELDS.filter((f) => fields.includes(f.key))
+      : PROGRESSIVE_FIELDS),
+    [fields],
+  );
   const [data, setData] = useState<LeadInput>(() => ({ ...empty, profissao: defaultProfissao ?? "" }));
   const [stepIndex, setStepIndex] = useState(0); // pergunta ativa
   const [loading, setLoading] = useState(false);
@@ -157,10 +175,10 @@ export function LeadFormProgressive({
         }));
         // posiciona na primeira pergunta ainda inválida (ou no resumo final).
         const merged = { ...empty, ...prev.data } as LeadInput;
-        const firstPending = PROGRESSIVE_FIELDS.findIndex((f) => !isFieldValid(f.key, merged));
-        const count = PROGRESSIVE_FIELDS.filter((f) => isFieldValid(f.key, merged)).length;
+        const firstPending = steps.findIndex((f) => !isFieldValid(f.key, merged));
+        const count = steps.filter((f) => isFieldValid(f.key, merged)).length;
         setRestoredCount(count);
-        setStepIndex(firstPending === -1 ? PROGRESSIVE_FIELDS.length : firstPending);
+        setStepIndex(firstPending === -1 ? steps.length : firstPending);
       } catch { /* ignore */ }
       finally { if (!cancelled) setRestored(true); }
     })();
@@ -180,9 +198,9 @@ export function LeadFormProgressive({
   };
 
 
-  const totalFields = PROGRESSIVE_FIELDS.length;
+  const totalFields = steps.length;
   const completedCount = useMemo(
-    () => PROGRESSIVE_FIELDS.filter((f) => isFieldValid(f.key, data)).length,
+    () => steps.filter((f) => isFieldValid(f.key, data)).length,
     [data],
   );
   const progressPct = Math.round((completedCount / totalFields) * 100);
@@ -190,7 +208,7 @@ export function LeadFormProgressive({
   // Salva snapshot parcial sempre que um campo se torna válido / muda.
   useEffect(() => {
     if (done || !partialIdRef.current || !restored) return;
-    const completed = PROGRESSIVE_FIELDS.filter((f) => isFieldValid(f.key, data)).map((f) => f.key);
+    const completed = steps.filter((f) => isFieldValid(f.key, data)).map((f) => f.key);
     if (completed.length === 0) return; // não polui store com leads vazios
     const last = completed[completed.length - 1] ?? null;
     const partial: PartialLead = {
@@ -218,7 +236,7 @@ export function LeadFormProgressive({
   }, [data, done, segmentId, currentPath, restored]);
 
   const advance = () => {
-    const f = PROGRESSIVE_FIELDS[stepIndex];
+    const f = steps[stepIndex];
     if (!f) return;
     // lê do ref para enxergar o valor recém-setado pelo <Select>
     if (!isFieldValid(f.key, dataRef.current)) {
@@ -246,13 +264,51 @@ export function LeadFormProgressive({
 
   const submit = async () => {
     const current = dataRef.current;
-    if (PROGRESSIVE_FIELDS.some((f) => !isFieldValid(f.key, current))) {
+    if (steps.some((f) => !isFieldValid(f.key, current))) {
       setError("Complete todas as perguntas antes de enviar.");
       return;
     }
     setError(null);
     setLoading(true);
     try {
+      // -------- Modo ENRIQUECIMENTO: atualiza lead existente --------
+      if (enrichLeadId) {
+        const prev = await get<Record<string, unknown>>("leads", enrichLeadId);
+        if (!prev) {
+          setError("Não encontramos seu perfil inicial. Preencha o formulário curto primeiro.");
+          setLoading(false);
+          return;
+        }
+        // Merge só dos campos preenchidos nesta etapa (não sobrescreve com vazio).
+        const merged: LeadInput = { ...(prev as unknown as LeadInput) };
+        (Object.keys(current) as (keyof LeadInput)[]).forEach((k) => {
+          const v = current[k];
+          if (typeof v === "string" && v.trim() !== "") merged[k] = v;
+        });
+        let qual: { result: QualResult; reasons: string[] };
+        try { qual = evaluateQualification(merged); }
+        catch { qual = { result: "qualificado", reasons: [] }; }
+        const enriched = {
+          ...prev,
+          ...merged,
+          enriched_at: new Date().toISOString(),
+          qualification: qual.result,
+          qualification_reasons: qual.reasons,
+        };
+        await set("leads", enrichLeadId, enriched);
+        // Recalcula score com fatores adicionais (derivado ao vivo — apenas
+        // marca a sessão como convertida com score atualizado).
+        try {
+          const model = await loadModel();
+          const score = computeScore(merged, model).score;
+          await markSessionConverted({ qualified: qual.result === "qualificado" || score >= 70, score });
+        } catch (e) { console.warn("[avaliacao] enrich session mark failed", e); }
+        if (onSubmitted) onSubmitted({ id: enrichLeadId, qualification: qual.result });
+        else setDone(true);
+        return;
+      }
+
+      // -------- Modo CAPTURA: cria novo lead --------
       const id = newId("lead");
       const origin = getOrigin(currentPath);
       // Qualificação com fallback: nunca deixa uma falha aqui travar o funil.
@@ -277,6 +333,13 @@ export function LeadFormProgressive({
       };
       // `set` já não lança — loga warn e mantém cache local em caso de falha.
       await set("leads", id, lead);
+
+      // Guarda o leadId da sessão para permitir enriquecimento posterior
+      // (etapa opcional em /avaliacao/completar). Não é PII sensível.
+      try {
+        window.sessionStorage.setItem("sna_last_lead_id", id);
+        window.localStorage.setItem("sna_last_lead_id", id);
+      } catch { /* ignore */ }
 
       // Redireciona ANTES dos efeitos colaterais para garantir a navegação.
       if (onSubmitted) onSubmitted({ id, qualification: qual.result });
@@ -352,7 +415,7 @@ export function LeadFormProgressive({
 
       <div className="px-6 md:px-8 py-8 space-y-5">
 
-        {PROGRESSIVE_FIELDS.map((f, i) => {
+        {steps.map((f, i) => {
           const visible = i <= stepIndex;
           const active = i === stepIndex;
           const valid = isFieldValid(f.key, data);
@@ -394,15 +457,15 @@ export function LeadFormProgressive({
               Revisão rápida do seu perfil antes da análise.
             </p>
             <dl className="mt-4 grid sm:grid-cols-2 gap-x-6 gap-y-2 text-sm">
-              <Summary k="Nome" v={data.nome} />
-              <Summary k="E-mail" v={data.email} />
-              <Summary k="WhatsApp" v={data.whatsapp} />
-              <Summary k="Profissão" v={LABELS.profissao[data.profissao] ?? data.profissao} />
-              <Summary k="Formação" v={LABELS.formacao[data.formacao] ?? data.formacao} />
-              <Summary k="Idade" v={LABELS.faixaEtaria[data.faixaEtaria] ?? data.faixaEtaria} />
-              <Summary k="Local" v={`${data.cidade}/${data.uf}`} />
-              <Summary k="Renda" v={LABELS.renda[data.renda] ?? data.renda} />
-              <Summary k="Momento" v={LABELS.momento[data.momento] ?? data.momento} />
+              {steps.some((s) => s.key === "nome") && <Summary k="Nome" v={data.nome} />}
+              {steps.some((s) => s.key === "email") && <Summary k="E-mail" v={data.email} />}
+              {steps.some((s) => s.key === "whatsapp") && <Summary k="WhatsApp" v={data.whatsapp} />}
+              {steps.some((s) => s.key === "profissao") && <Summary k="Profissão" v={LABELS.profissao[data.profissao] ?? data.profissao} />}
+              {steps.some((s) => s.key === "formacao") && <Summary k="Formação" v={LABELS.formacao[data.formacao] ?? data.formacao} />}
+              {steps.some((s) => s.key === "faixaEtaria") && <Summary k="Idade" v={LABELS.faixaEtaria[data.faixaEtaria] ?? data.faixaEtaria} />}
+              {steps.some((s) => s.key === "cidade_uf") && <Summary k="Local" v={`${data.cidade}/${data.uf}`} />}
+              {steps.some((s) => s.key === "renda") && <Summary k="Renda" v={LABELS.renda[data.renda] ?? data.renda} />}
+              {steps.some((s) => s.key === "momento") && <Summary k="Momento" v={LABELS.momento[data.momento] ?? data.momento} />}
             </dl>
           </motion.div>
         )}
