@@ -271,6 +271,44 @@ export function LeadFormProgressive({
     setError(null);
     setLoading(true);
     try {
+      // -------- Modo ENRIQUECIMENTO: atualiza lead existente --------
+      if (enrichLeadId) {
+        const prev = await get<Record<string, unknown>>("leads", enrichLeadId);
+        if (!prev) {
+          setError("Não encontramos seu perfil inicial. Preencha o formulário curto primeiro.");
+          setLoading(false);
+          return;
+        }
+        // Merge só dos campos preenchidos nesta etapa (não sobrescreve com vazio).
+        const merged: LeadInput = { ...(prev as unknown as LeadInput) };
+        (Object.keys(current) as (keyof LeadInput)[]).forEach((k) => {
+          const v = current[k];
+          if (typeof v === "string" && v.trim() !== "") merged[k] = v;
+        });
+        let qual: { result: QualResult; reasons: string[] };
+        try { qual = evaluateQualification(merged); }
+        catch { qual = { result: "qualificado", reasons: [] }; }
+        const enriched = {
+          ...prev,
+          ...merged,
+          enriched_at: new Date().toISOString(),
+          qualification: qual.result,
+          qualification_reasons: qual.reasons,
+        };
+        await set("leads", enrichLeadId, enriched);
+        // Recalcula score com fatores adicionais (derivado ao vivo — apenas
+        // marca a sessão como convertida com score atualizado).
+        try {
+          const model = await loadModel();
+          const score = computeScore(merged, model).score;
+          await markSessionConverted({ qualified: qual.result === "qualificado" || score >= 70, score });
+        } catch (e) { console.warn("[avaliacao] enrich session mark failed", e); }
+        if (onSubmitted) onSubmitted({ id: enrichLeadId, qualification: qual.result });
+        else setDone(true);
+        return;
+      }
+
+      // -------- Modo CAPTURA: cria novo lead --------
       const id = newId("lead");
       const origin = getOrigin(currentPath);
       // Qualificação com fallback: nunca deixa uma falha aqui travar o funil.
@@ -295,6 +333,13 @@ export function LeadFormProgressive({
       };
       // `set` já não lança — loga warn e mantém cache local em caso de falha.
       await set("leads", id, lead);
+
+      // Guarda o leadId da sessão para permitir enriquecimento posterior
+      // (etapa opcional em /avaliacao/completar). Não é PII sensível.
+      try {
+        window.sessionStorage.setItem("sna_last_lead_id", id);
+        window.localStorage.setItem("sna_last_lead_id", id);
+      } catch { /* ignore */ }
 
       // Redireciona ANTES dos efeitos colaterais para garantir a navegação.
       if (onSubmitted) onSubmitted({ id, qualification: qual.result });
