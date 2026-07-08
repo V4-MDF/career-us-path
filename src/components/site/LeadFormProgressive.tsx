@@ -135,7 +135,7 @@ export function LeadFormProgressive({
 }: LeadFormProgressiveProps) {
   const steps: FieldDef[] = useMemo(
     () => (fields && fields.length > 0
-      ? PROGRESSIVE_FIELDS.filter((f) => fields.includes(f.key))
+      ? steps.filter((f) => fields.includes(f.key))
       : PROGRESSIVE_FIELDS),
     [fields],
   );
@@ -175,10 +175,10 @@ export function LeadFormProgressive({
         }));
         // posiciona na primeira pergunta ainda inválida (ou no resumo final).
         const merged = { ...empty, ...prev.data } as LeadInput;
-        const firstPending = PROGRESSIVE_FIELDS.findIndex((f) => !isFieldValid(f.key, merged));
-        const count = PROGRESSIVE_FIELDS.filter((f) => isFieldValid(f.key, merged)).length;
+        const firstPending = steps.findIndex((f) => !isFieldValid(f.key, merged));
+        const count = steps.filter((f) => isFieldValid(f.key, merged)).length;
         setRestoredCount(count);
-        setStepIndex(firstPending === -1 ? PROGRESSIVE_FIELDS.length : firstPending);
+        setStepIndex(firstPending === -1 ? steps.length : firstPending);
       } catch { /* ignore */ }
       finally { if (!cancelled) setRestored(true); }
     })();
@@ -198,9 +198,9 @@ export function LeadFormProgressive({
   };
 
 
-  const totalFields = PROGRESSIVE_FIELDS.length;
+  const totalFields = steps.length;
   const completedCount = useMemo(
-    () => PROGRESSIVE_FIELDS.filter((f) => isFieldValid(f.key, data)).length,
+    () => steps.filter((f) => isFieldValid(f.key, data)).length,
     [data],
   );
   const progressPct = Math.round((completedCount / totalFields) * 100);
@@ -208,7 +208,7 @@ export function LeadFormProgressive({
   // Salva snapshot parcial sempre que um campo se torna válido / muda.
   useEffect(() => {
     if (done || !partialIdRef.current || !restored) return;
-    const completed = PROGRESSIVE_FIELDS.filter((f) => isFieldValid(f.key, data)).map((f) => f.key);
+    const completed = steps.filter((f) => isFieldValid(f.key, data)).map((f) => f.key);
     if (completed.length === 0) return; // não polui store com leads vazios
     const last = completed[completed.length - 1] ?? null;
     const partial: PartialLead = {
@@ -236,7 +236,7 @@ export function LeadFormProgressive({
   }, [data, done, segmentId, currentPath, restored]);
 
   const advance = () => {
-    const f = PROGRESSIVE_FIELDS[stepIndex];
+    const f = steps[stepIndex];
     if (!f) return;
     // lê do ref para enxergar o valor recém-setado pelo <Select>
     if (!isFieldValid(f.key, dataRef.current)) {
@@ -264,7 +264,7 @@ export function LeadFormProgressive({
 
   const submit = async () => {
     const current = dataRef.current;
-    if (PROGRESSIVE_FIELDS.some((f) => !isFieldValid(f.key, current))) {
+    if (steps.some((f) => !isFieldValid(f.key, current))) {
       setError("Complete todas as perguntas antes de enviar.");
       return;
     }
@@ -370,7 +370,7 @@ export function LeadFormProgressive({
 
       <div className="px-6 md:px-8 py-8 space-y-5">
 
-        {PROGRESSIVE_FIELDS.map((f, i) => {
+        {steps.map((f, i) => {
           const visible = i <= stepIndex;
           const active = i === stepIndex;
           const valid = isFieldValid(f.key, data);
