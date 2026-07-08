@@ -584,8 +584,16 @@ export function SalaryCompare() {
 }
 
 /* ============================================================
- * 10. DEPOIMENTOS — REAIS (Prompt 5)
- * Adicionar mais depoimentos reais do Google via admin (futuro).
+ * 10. DEPOIMENTOS — Vídeo (EB-2 do Helder) + Reais + Estudos de caso
+ *
+ * NOTA DE CONTEÚDO (não visível ao usuário):
+ * O depoimento âncora em vídeo para o pilar EB-2 é do HELDER (sócio da
+ * Status na América que obteve o Green Card por EB-2 NIW). Os demais
+ * sócios seguiram caminhos migratórios distintos; para on-message do
+ * EB-2 usar exclusivamente o caso do Helder. Segundo slot fica
+ * reservado para vídeo de cliente real (engenheiro/empresário
+ * aprovado) conforme os estudos de caso do YouTube ficarem prontos.
+ * URLs dos vídeos são editáveis em /admin/conteudo (site_content).
  * ============================================================ */
 export function Testimonials() {
   const items = [
@@ -600,6 +608,27 @@ export function Testimonials() {
       q: "Amei o atendimento do Sr. Neto, atencioso em todos os detalhes e dúvidas. Um bom profissional faz toda a diferença.",
     },
   ];
+
+  const videoEyebrow = useContent("testimonials.videoEyebrow");
+  const videoTitle = useContent("testimonials.videoTitle");
+  const helderName = useContent("testimonials.helderName");
+  const helderCaption = useContent("testimonials.helderCaption");
+  const helderRole = useContent("testimonials.helderRole");
+  const helderVideoUrl = useContent("testimonials.helderVideoUrl");
+  const secondaryName = useContent("testimonials.secondaryName");
+  const secondaryCaption = useContent("testimonials.secondaryCaption");
+  const secondaryRole = useContent("testimonials.secondaryRole");
+  const secondaryVideoUrl = useContent("testimonials.secondaryVideoUrl");
+  const googleUrl = useContent("testimonials.googleReviewsUrl");
+  const csEyebrow = useContent("testimonials.caseStudiesEyebrow");
+  const csTitle = useContent("testimonials.caseStudiesTitle");
+  const csLead = useContent("testimonials.caseStudiesLead");
+
+  const videoSlots = [
+    { name: helderName, role: helderRole, caption: helderCaption, url: helderVideoUrl, primary: true },
+    { name: secondaryName, role: secondaryRole, caption: secondaryCaption, url: secondaryVideoUrl, primary: false },
+  ];
+
   return (
     <Reveal as="section" id="depoimentos" className="section-parchment section-pad">
       <div className="container-x">
@@ -610,24 +639,192 @@ export function Testimonials() {
           kicker="Mais de 130 avaliações 5★ no Google e no Facebook."
           variant="parchment"
         />
-        <div className="mt-14 grid md:grid-cols-2 gap-5 max-w-4xl">
-          {items.map((i) => (
-            <article key={i.name} className="relative gold-tick rounded-2xl bg-white border border-ink-text/10 p-7 flex flex-col h-full shadow-soft">
-              <div className="flex gap-0.5 text-gold">
-                {[...Array(5)].map((_, k) => <Star key={k} className="h-3.5 w-3.5 fill-gold" />)}
-              </div>
-              <p className="mt-5 text-ink-text/85 italic font-display text-[17px] leading-relaxed">"{i.q}"</p>
-              <div className="mt-auto pt-6 border-t border-ink-text/10">
-                <p className="font-display text-ink-text">{i.name}</p>
-                <p className="font-mono-label text-ink-text/55 mt-1">{i.role}</p>
-              </div>
-            </article>
-          ))}
+
+        {/* --- Vídeos de caso (EB-2 do Helder + slot secundário) --- */}
+        <div className="mt-14">
+          <div className="flex items-center gap-3">
+            <span aria-hidden className="h-px w-8 bg-gold" />
+            <span className="font-mono-label text-oxblood">{videoEyebrow}</span>
+          </div>
+          <h3 className="mt-4 font-display text-[clamp(1.4rem,2.6vw,1.9rem)] leading-tight text-ink-text max-w-2xl">
+            {videoTitle}
+          </h3>
+
+          <div className="mt-8 grid md:grid-cols-2 gap-6">
+            {videoSlots.map((v) => (
+              <article
+                key={v.caption + v.name}
+                className={`relative rounded-2xl overflow-hidden border bg-white shadow-soft ${
+                  v.primary ? "border-gold/60 ring-1 ring-gold/40" : "border-ink-text/10"
+                }`}
+              >
+                <div className="relative aspect-video bg-ink">
+                  {v.url ? (
+                    <video
+                      src={v.url}
+                      controls
+                      preload="metadata"
+                      className="h-full w-full object-cover"
+                    />
+                  ) : (
+                    <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-gradient-to-br from-ink to-ink-raise text-foreground/70">
+                      <PlayCircle className="h-14 w-14 text-gold/80" aria-hidden />
+                      <span className="font-mono-label text-gold/80 text-xs">
+                        VÍDEO EM BREVE
+                      </span>
+                    </div>
+                  )}
+                  {v.primary && (
+                    <span className="absolute top-3 left-3 inline-flex items-center gap-1.5 rounded-full bg-gold/95 text-ink px-3 py-1 font-mono-label text-[11px] shadow-elevated">
+                      <Award className="h-3 w-3" /> ÂNCORA EB-2 NIW
+                    </span>
+                  )}
+                </div>
+                <div className="p-5">
+                  <p className="font-mono-label text-oxblood text-[11px]">{v.caption}</p>
+                  <p className="mt-2 font-display text-ink-text text-lg">{v.name}</p>
+                  <p className="font-mono-label text-ink-text/55 mt-1 text-[12px]">{v.role}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+
+        {/* --- Depoimentos reais (Google/Facebook) --- */}
+        <div className="mt-16">
+          <div className="flex items-center gap-3">
+            <span aria-hidden className="h-px w-8 bg-gold" />
+            <span className="font-mono-label text-oxblood">AVALIAÇÕES REAIS</span>
+          </div>
+          <div className="mt-6 grid md:grid-cols-2 gap-5 max-w-4xl">
+            {items.map((i) => (
+              <article key={i.name} className="relative gold-tick rounded-2xl bg-white border border-ink-text/10 p-7 flex flex-col h-full shadow-soft">
+                <div className="flex gap-0.5 text-gold">
+                  {[...Array(5)].map((_, k) => <Star key={k} className="h-3.5 w-3.5 fill-gold" />)}
+                </div>
+                <p className="mt-5 text-ink-text/85 italic font-display text-[17px] leading-relaxed">"{i.q}"</p>
+                <div className="mt-auto pt-6 border-t border-ink-text/10">
+                  <p className="font-display text-ink-text">{i.name}</p>
+                  <p className="font-mono-label text-ink-text/55 mt-1">{i.role}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+          {googleUrl && (
+            <p className="mt-6">
+              <a
+                href={googleUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 font-mono-label text-oxblood hover:text-gold transition-colors text-[12px]"
+              >
+                Ver todas as avaliações no Google →
+              </a>
+            </p>
+          )}
+        </div>
+
+        {/* --- Estudos de caso (bloco preparado, casos reais em breve) --- */}
+        <div className="mt-16 rounded-2xl border border-gold/30 bg-white/80 p-8 shadow-soft">
+          <div className="flex items-center gap-3">
+            <span aria-hidden className="h-px w-8 bg-gold" />
+            <span className="font-mono-label text-oxblood">{csEyebrow}</span>
+          </div>
+          <h3 className="mt-3 font-display text-xl md:text-2xl text-ink-text">{csTitle}</h3>
+          <p className="mt-2 text-ink-text/70 text-[15px] leading-relaxed max-w-3xl">{csLead}</p>
+          <div className="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {[1, 2, 3].map((n) => (
+              <article
+                key={n}
+                className="rounded-xl border border-dashed border-ink-text/15 bg-parchment/40 p-5 min-h-[160px] flex flex-col justify-between"
+              >
+                <div className="flex items-center gap-2 text-ink-text/50">
+                  <FileText className="h-4 w-4" />
+                  <span className="font-mono-label text-[11px]">CASO #{String(n).padStart(2, "0")}</span>
+                </div>
+                <div className="mt-6">
+                  <p className="font-display text-ink-text/60 text-[15px]">Estudo em preparação</p>
+                  <p className="mt-1 font-mono-label text-ink-text/40 text-[11px]">
+                    Perfil · Estratégia · Resultado
+                  </p>
+                </div>
+              </article>
+            ))}
+          </div>
         </div>
       </div>
     </Reveal>
   );
 }
+
+/* ============================================================
+ * 10b. SELOS & PARCEIROS — moldura dourada, editável via admin
+ * ============================================================ */
+export function PartnersBadges() {
+  const eyebrow = useContent("partners.eyebrow");
+  const title = useContent("partners.title");
+  const slots: Array<{ label: string; url: string }> = [
+    { label: useContent("partners.slot1.label"), url: useContent("partners.slot1.url") },
+    { label: useContent("partners.slot2.label"), url: useContent("partners.slot2.url") },
+    { label: useContent("partners.slot3.label"), url: useContent("partners.slot3.url") },
+    { label: useContent("partners.slot4.label"), url: useContent("partners.slot4.url") },
+    { label: useContent("partners.slot5.label"), url: useContent("partners.slot5.url") },
+    { label: useContent("partners.slot6.label"), url: useContent("partners.slot6.url") },
+  ];
+
+  return (
+    <section
+      id="selos-parceiros"
+      aria-label="Credenciais e parceiros"
+      className="section-anchor section-parchment border-y border-gold/25 py-12"
+    >
+      <div className="container-x">
+        <div className="flex items-center gap-3">
+          <span aria-hidden className="h-px w-10 bg-gold" />
+          <span className="font-mono-label text-oxblood">{eyebrow}</span>
+        </div>
+        <h2 className="mt-3 font-display text-[clamp(1.2rem,2.2vw,1.6rem)] text-ink-text max-w-2xl">
+          {title}
+        </h2>
+
+        <ul className="mt-8 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+          {slots.map((s, idx) => (
+            <li
+              key={idx}
+              className="group relative rounded-xl border border-gold/50 bg-white/70 p-3 aspect-[3/2] flex items-center justify-center shadow-soft"
+              style={{
+                boxShadow: "inset 0 0 0 1px rgba(196,161,72,0.25)",
+              }}
+              title={s.label}
+            >
+              {/* moldura dourada dupla estilo credencial */}
+              <span aria-hidden className="absolute inset-1 rounded-lg border border-gold/25 pointer-events-none" />
+              {s.url ? (
+                <img
+                  src={s.url}
+                  alt={s.label}
+                  className="max-h-[70%] max-w-[80%] object-contain"
+                  loading="lazy"
+                />
+              ) : (
+                <div className="text-center px-2">
+                  <ShieldCheck className="h-5 w-5 text-gold/70 mx-auto" aria-hidden />
+                  <span className="mt-1 block font-mono-label text-ink-text/70 text-[10.5px] leading-tight">
+                    {s.label}
+                  </span>
+                </div>
+              )}
+            </li>
+          ))}
+        </ul>
+        <p className="mt-4 font-mono-label text-ink-text/45 text-[10.5px]">
+          Logos são geridos em /admin/conteudo · Selos e parceiros.
+        </p>
+      </div>
+    </section>
+  );
+}
+
 
 /* ============================================================
  * 11. FAQ — REAIS (Prompt 5)

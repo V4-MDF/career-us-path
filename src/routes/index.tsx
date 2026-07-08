@@ -4,8 +4,8 @@ import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import {
   ContrastBrasilEUA, CtaBanner, FAQ, Hero, LegacySection,
-  NiwSection, PreQualPromo, ProcessSteps, SalaryCompare, Testimonials,
-  VisaCards, WhyUs,
+  NiwSection, PartnersBadges, PreQualPromo, ProcessSteps,
+  SalaryCompare, Testimonials, VisaCards, WhyUs,
 } from "@/components/site/sections";
 import { OrganizationJsonLd } from "@/components/site/Seo";
 import { BlogStrip } from "@/components/site/BlogStrip";
@@ -51,6 +51,7 @@ export const Route = createFileRoute("/")({
  */
 const HOME_REGISTRY: Record<string, ComponentType> = {
   "abertura": Hero,
+  "selos-parceiros": PartnersBadges,
   "blog-em-destaque": BlogStrip,
   "brasil-vs-eua": ContrastBrasilEUA,
   "eb-2-niw": NiwSection,
