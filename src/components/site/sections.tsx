@@ -34,6 +34,8 @@ import { LeadFormProgressive } from "./LeadFormProgressive";
 import { useLocation } from "@tanstack/react-router";
 import { FlagsBRUS } from "./flags";
 import { FlagBR, FlagUS, FlagsBRUSDual } from "./visuals/DualFlagIcons";
+import { BrazilMap, UsaMap } from "./visuals/CountryMapOutline";
+import { FlagCircleBadge } from "./visuals/FlagCircleBadge";
 import heroSkyline from "@/assets/hero-skyline.jpg";
 import familyPortrait from "@/assets/family-portrait.jpg";
 import passportDocuments from "@/assets/passport-documents.jpg";
