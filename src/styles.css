@@ -99,6 +99,15 @@
   --ink-text:      #141416;
   --success:       #3F8A5F;
 
+  /* Paleta dual BR ↔ US — surfaces, filetes, borders e accents. */
+  --brazil-green:      #0E5C3A;
+  --brazil-green-deep: #0A4A2E;
+  --brazil-yellow:     #E6B84A;
+  --usa-blue:          #0B2A5B;
+  --usa-blue-soft:     #DCE6F0;
+  --usa-red:           #8A1F2B;
+  --cream-light:       #F7F2E6;
+
   /* Mapeamento shadcn — DARK por padrão (site é dark-first) */
   --background: var(--ink);
   --foreground: #ECE6D6;
