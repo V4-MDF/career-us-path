@@ -41,7 +41,6 @@ export const HOME_SECTIONS: SectionDef[] = [
   { id: "renda-em-dolar",       label: "Renda em dólar" },
   { id: "depoimentos",          label: "Depoimentos" },
   { id: "duvidas-frequentes",   label: "Dúvidas frequentes" },
-  { id: "pre-qualificacao",     label: "Pré-qualificação" },
   { id: "avaliacao-gratuita",   label: "Análise gratuita" },
 ];
 

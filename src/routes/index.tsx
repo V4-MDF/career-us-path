@@ -4,7 +4,7 @@ import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import {
   ContrastBrasilEUA, CtaBanner, FAQ, Hero, LegacySection,
-  NiwSection, PartnersBadges, PreQualPromo, ProcessSteps,
+  NiwSection, PartnersBadges, ProcessSteps,
   SalaryCompare, Testimonials, VisaCards, WhyUs,
 } from "@/components/site/sections";
 import { OrganizationJsonLd } from "@/components/site/Seo";
@@ -62,7 +62,6 @@ const HOME_REGISTRY: Record<string, ComponentType> = {
   "renda-em-dolar": SalaryCompare,
   "depoimentos": Testimonials,
   "duvidas-frequentes": FAQ,
-  "pre-qualificacao": PreQualPromo,
   "avaliacao-gratuita": CtaBanner,
 };
 

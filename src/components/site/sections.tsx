@@ -898,118 +898,104 @@ export function FAQ() {
 }
 
 /* ============================================================
- * 12. CTA FINAL — sem form inline (Prompt 5).
- * Substitui a antiga CtaForm; navega para /avaliacao com src.
+ * 12. CTA FINAL — dobra única de fechamento com duas ofertas.
+ * Fusão do antigo CtaBanner (Análise gratuita) + PreQualPromo,
+ * apresentando as duas rotas como escolha lado a lado.
  * ============================================================ */
-/* ============================================================
- * PRÉ-QUALIFICAÇÃO — dobra promocional do teste rápido
- * ============================================================ */
-export function PreQualPromo() {
-  return (
-    <section
-      id="pre-qualificacao"
-      aria-label="Pré-qualificação"
-      className="section-anchor section-parchment section-pad-compact relative border-t border-gold/20"
-    >
-      <div className="container-x">
-        <div className="grid lg:grid-cols-[1fr_1fr] gap-8 items-center">
-          <div>
-            <div className="flex items-center gap-3">
-              <span aria-hidden className="h-px w-8 bg-gold" />
-              <span className="font-mono-label text-oxblood">TESTE DE PRÉ-QUALIFICAÇÃO</span>
-            </div>
-            <h2 className="mt-5 font-display text-[clamp(1.4rem,2.8vw,2rem)] leading-tight max-w-md text-ink-text">
-              Descubra em 2 minutos qual visto se encaixa no seu perfil.
-            </h2>
-            <p className="mt-3 text-ink-text/70 text-[15px] leading-relaxed max-w-lg">
-              Teste rápido e gratuito. Indica se você tem perfil para EB-1A, EB-2 NIW, O-1 ou EB-3.
-            </p>
-            <ul className="mt-5 flex flex-wrap gap-2 text-[13px] text-ink-text/70">
-              {["Resultado imediato", "Indicação do visto ideal", "Sem custo", "Dados protegidos"].map((i) => (
-                <li key={i} className="flex items-center gap-1.5 rounded-full border border-gold/30 bg-white/70 px-3 py-1">
-                  <CheckCircle2 className="h-3 w-3 text-gold" /> {i}
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="rounded-2xl border border-gold/30 bg-white/80 p-6 shadow-soft">
-            <div className="flex items-center gap-2 text-oxblood">
-              <Sparkles className="h-4 w-4" />
-              <p className="font-mono-label text-oxblood">RESPOSTA NA HORA</p>
-            </div>
-            <h3 className="mt-3 font-display text-xl leading-tight text-ink-text">
-              Faça o teste agora e veja seu encaixe.
-            </h3>
-            <p className="mt-2 text-ink-text/70 text-[14px] leading-relaxed">
-              Poucas perguntas objetivas sobre formação e experiência. Ao final, o visto mais compatível.
-            </p>
-            <Link to="/pre-qualificacao" className="mt-5 inline-block">
-              <Button size="lg" className="btn-label btn-sweep h-11 px-6 text-[14px]">
-                Iniciar pré-qualificação
-              </Button>
-            </Link>
-            <p className="mt-2 text-[12px] text-ink-text/50">
-              Leva cerca de 2 minutos. Sem cadastro inicial.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-  );
-}
-
 export function CtaBanner() {
   const title = useContent("cta.title");
   const sub = useContent("cta.subtitle");
   return (
-    <section id="avaliacao-gratuita" aria-label="Análise gratuita" className="section-anchor section-ink-deep section-pad relative border-t border-gold/15">
-      {/* Sem guilloché aqui — reservado ao NIW (regra Chanel: tire um acessório). */}
-
+    <section
+      id="avaliacao-gratuita"
+      aria-label="Duas formas de começar"
+      className="section-anchor section-ink-deep section-pad relative border-t border-gold/15"
+    >
       <div className="container-x">
         <div className="max-w-3xl">
-          <SectionHead num="11" eyebrow="ANÁLISE GRATUITA" title={title} kicker={sub} />
+          <SectionHead num="11" eyebrow="DUAS FORMAS DE COMEÇAR" title={title} kicker={sub} />
         </div>
 
-        <div className="mt-12 grid lg:grid-cols-[1.2fr_1fr] gap-10 items-start">
-          <ul className="grid sm:grid-cols-2 gap-3 text-[15px] text-foreground/80">
-            {[
-              "Análise estratégica gratuita do seu perfil",
-              "Resposta em até 48h por e-mail",
-              "Confidencial e sem compromisso",
-              "Equipe especializada em vistos EB",
-            ].map((i) => (
-              <li key={i} className="flex gap-3 rounded-lg border border-gold/15 bg-ink-raise/40 p-4">
-                <CheckCircle2 className="h-4 w-4 text-gold mt-1 shrink-0" /> {i}
-              </li>
-            ))}
-          </ul>
-
-          <div className="rounded-2xl border border-gold/30 bg-ink-raise/50 p-7 lg:p-8 shadow-elevated">
-            <p className="font-mono-label text-gold/80">PRÓXIMO PASSO</p>
+        <div className="mt-12 grid lg:grid-cols-2 gap-6 lg:gap-8 items-stretch">
+          {/* Oferta principal — Análise gratuita */}
+          <div className="relative rounded-2xl border border-gold/40 bg-ink-raise/60 p-7 lg:p-9 shadow-elevated flex flex-col">
+            <span className="absolute -top-3 left-6 rounded-full bg-gold px-3 py-1 font-mono-label text-[10px] text-ink">
+              RECOMENDADO
+            </span>
+            <p className="font-mono-label text-gold/85">ANÁLISE COMPLETA</p>
             <h3 className="mt-3 font-display text-2xl leading-tight">
-              Comece pela análise gratuita do seu perfil.
+              Diagnóstico do seu perfil em até 48h.
             </h3>
             <p className="mt-3 text-foreground/75 text-[15px] leading-relaxed">
-              Em poucos minutos você envia seus dados. Nossa equipe responde em até 48h
-              por e-mail com a indicação do caminho mais coerente.
+              Você envia seus dados e nossa equipe responde por e-mail com a indicação
+              do caminho mais coerente com a sua história.
             </p>
+            <ul className="mt-5 space-y-2 text-[14px] text-foreground/80">
+              {[
+                "Análise estratégica gratuita",
+                "Resposta personalizada em até 48h",
+                "Confidencial e sem compromisso",
+              ].map((i) => (
+                <li key={i} className="flex gap-2.5">
+                  <CheckCircle2 className="h-4 w-4 text-gold mt-0.5 shrink-0" />
+                  <span>{i}</span>
+                </li>
+              ))}
+            </ul>
             <a href={useAvaliacaoHref("home_cta_final")} className="mt-7 inline-block">
-              <Button size="lg" className="btn-label btn-sweep h-12 px-7">Fazer minha análise gratuita</Button>
+              <Button size="lg" className="btn-label btn-sweep h-12 px-7">
+                Fazer minha análise gratuita
+              </Button>
             </a>
-            <a
-              href="/pre-qualificacao"
-              className="mt-3 block text-[13px] text-gold/85 hover:text-gold underline underline-offset-4"
-            >
-              Prefere um teste rápido com resultado na hora? Faça a pré-qualificação →
-            </a>
+            <p className="mt-3 text-[12px] text-foreground/50">
+              Para quem quer um diagnóstico completo do perfil.
+            </p>
+          </div>
+
+          {/* Oferta secundária — Pré-qualificação */}
+          <div className="rounded-2xl border border-gold/20 bg-ink-raise/30 p-7 lg:p-9 flex flex-col">
+            <div className="flex items-center gap-2 text-gold/80">
+              <Sparkles className="h-4 w-4" />
+              <p className="font-mono-label text-gold/80">RESPOSTA NA HORA</p>
+            </div>
+            <h3 className="mt-3 font-display text-2xl leading-tight">
+              Teste rápido: seu encaixe em 2 minutos.
+            </h3>
+            <p className="mt-3 text-foreground/70 text-[15px] leading-relaxed">
+              Poucas perguntas objetivas sobre formação e experiência. Ao final,
+              o visto mais compatível — EB-1A, EB-2 NIW, O-1 ou EB-3.
+            </p>
+            <ul className="mt-5 space-y-2 text-[14px] text-foreground/75">
+              {[
+                "Resultado imediato",
+                "Indicação do visto ideal",
+                "Sem cadastro inicial",
+              ].map((i) => (
+                <li key={i} className="flex gap-2.5">
+                  <CheckCircle2 className="h-4 w-4 text-gold/70 mt-0.5 shrink-0" />
+                  <span>{i}</span>
+                </li>
+              ))}
+            </ul>
+            <Link to="/pre-qualificacao" className="mt-7 inline-block">
+              <Button
+                size="lg"
+                variant="outline"
+                className="btn-label h-12 px-7 border-gold/50 text-gold hover:bg-gold/10 hover:text-gold"
+              >
+                Iniciar pré-qualificação
+              </Button>
+            </Link>
+            <p className="mt-3 text-[12px] text-foreground/50">
+              Para quem quer saber em 2 minutos se tem encaixe.
+            </p>
           </div>
         </div>
       </div>
     </section>
   );
 }
+
 
 /* ============================================================
  * Helpers
