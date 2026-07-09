@@ -782,8 +782,9 @@ export function PartnersBadges() {
     <section
       id="selos-parceiros"
       aria-label="Credenciais e parceiros"
-      className="section-anchor section-parchment border-y border-gold/25 py-12"
+      className="section-anchor section-parchment border-y border-gold/25 py-12 relative"
     >
+      <div aria-hidden className="tricolor-rule absolute inset-x-0 top-0" />
       <div className="container-x">
         <div className="flex items-center gap-3">
           <span aria-hidden className="h-px w-10 bg-gold" />
