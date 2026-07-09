@@ -72,6 +72,15 @@
   --color-ink-text: var(--ink-text);
   --color-success: var(--success);
 
+  /* Paleta dual BR ↔ US (Tailwind tokens: text-brazil-green, bg-usa-blue, etc.) */
+  --color-brazil-green: var(--brazil-green);
+  --color-brazil-green-deep: var(--brazil-green-deep);
+  --color-brazil-yellow: var(--brazil-yellow);
+  --color-usa-blue: var(--usa-blue);
+  --color-usa-blue-soft: var(--usa-blue-soft);
+  --color-usa-red: var(--usa-red);
+  --color-cream-light: var(--cream-light);
+
   /* Tipografia (atualizada): Montserrat para títulos (uppercase, 700/800)
    * e Inter para corpo. Trocada de Bodoni+Hanken por demanda de
    * legibilidade — a identidade "Dossiê" agora vive em estrutura
