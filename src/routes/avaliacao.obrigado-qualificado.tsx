@@ -25,8 +25,38 @@ export const Route = createFileRoute("/avaliacao/obrigado-qualificado")({
 });
 
 function ObrigadoQualificado() {
+  const [waHref, setWaHref] = useState<string | null>(null);
+  const [popupBlocked, setPopupBlocked] = useState(false);
+
   useEffect(() => {
     trackLead({ qualification: "qualificado" });
+  }, []);
+
+  // Lê o lead salvo em sessionStorage, monta o link do WhatsApp e tenta abrir
+  // automaticamente. Se o navegador bloquear o popup, mostramos o aviso e o
+  // usuário abre pelo botão (clique = gesto do usuário, sempre passa).
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    let raw: string | null = null;
+    try { raw = window.sessionStorage.getItem("lastQualifiedLead"); } catch { /* noop */ }
+    if (!raw) return;
+    let lead: LeadWhatsAppInput | null = null;
+    try { lead = JSON.parse(raw) as LeadWhatsAppInput; } catch { lead = null; }
+    if (!lead) return;
+
+    let cancelled = false;
+    buildWhatsAppLink(leadWhatsAppMessage(lead)).then((href) => {
+      if (cancelled) return;
+      setWaHref(href);
+      // Pequeno delay para o navegador não confundir o open com o load.
+      window.setTimeout(() => {
+        const win = window.open(href, "_blank", "noopener,noreferrer");
+        if (!win) setPopupBlocked(true);
+      }, 400);
+      try { window.sessionStorage.removeItem("lastQualifiedLead"); } catch { /* noop */ }
+    }).catch(() => { /* segue sem WhatsApp */ });
+
+    return () => { cancelled = true; };
   }, []);
 
   return (
