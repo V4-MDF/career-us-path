@@ -20,6 +20,7 @@ import { trackFormView } from "@/lib/tracking";
 import { getOrigin } from "@/lib/origin";
 import type { QualResult } from "@/lib/leadQualification";
 import avaliacaoBg from "@/assets/avaliacao-bg.jpg";
+import logoAsset from "@/assets/logo-status-na-america.png.asset.json";
 
 type SegKey = "medicos" | "engenheiros" | "empresarios";
 
