@@ -19,6 +19,7 @@ import { LeadFormProgressive } from "@/components/site/LeadFormProgressive";
 import { trackFormView } from "@/lib/tracking";
 import { getOrigin } from "@/lib/origin";
 import type { QualResult } from "@/lib/leadQualification";
+import { saveQualificationResult, type QualificationResult } from "@/components/site/ObrigadoContent";
 import avaliacaoBg from "@/assets/avaliacao-bg.jpg";
 import logoAsset from "@/assets/logo-status-na-america.png.asset.json";
 
@@ -91,13 +92,8 @@ function AvaliacaoPage() {
     : "Descubra se você tem perfil para o Green Card americano por mérito.";
 
   const goToThanks = (qualification: QualResult) => {
-    navigate({
-      to:
-        qualification === "qualificado"
-          ? "/avaliacao/obrigado-qualificado"
-          : "/avaliacao/obrigado-nao-qualificado",
-      replace: true,
-    });
+    saveQualificationResult(qualification as QualificationResult);
+    navigate({ to: "/avaliacao/obrigado", replace: true });
   };
 
   return (

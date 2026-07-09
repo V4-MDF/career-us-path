@@ -1,25 +1,31 @@
-## Sincronizar ordem das dobras entre admin e site público
+Atualmente o formulário redireciona para `/avaliacao/obrigado-qualificado` ou `/avaliacao/obrigado-nao-qualificado`, deixando explícito no URL se o lead foi qualificado. O objetivo é usar uma única URL neutra (`/avaliacao/obrigado`) e decidir o conteúdo no cliente de forma discreta.
 
-### Causa raiz
-`useOrderedSections("home")` (em `src/lib/pageStructure.ts`) lê o snapshot **apenas do localStorage** via `useSyncExternalStore`. Quando o admin salva a nova ordem, o valor vai para o Supabase (`kv_records`) e também para o localStorage **do navegador do admin** — mas qualquer outro visitante (outro navegador/dispositivo/aba anônima) nunca hidrata do banco e continua vendo a ordem default. Resultado: o rearranjo "não aparece" no site principal.
+## Alterações propostas
 
-Além disso, `HOME_SECTIONS` em `src/lib/sectionMap.ts` ainda lista `credenciais` (14 itens), enquanto o layout real da Home tem 13 dobras — o `AuthorityStrip` que usava esse id é código órfão. Isso explica o "não está atualizado com as dobras atuais".
+1. **Unificar destino do formulário**
+   - Em `src/routes/avaliacao.index.tsx`, o callback `goToThanks` sempre navegará para `/avaliacao/obrigado`.
+   - Antes de navegar, guarda em `sessionStorage` a chave `lastQualificationResult` (`qualificado` | `nao_qualificado`).
+   - Mantém o salvamento de `lastQualifiedLead` no `LeadFormProgressive` para o WhatsApp automático.
 
-### Mudanças
+2. **Tornar `/avaliacao/obrigado` a página canônica**
+   - Substitui o redirect legado em `src/routes/avaliacao.obrigado.tsx` por um componente que:
+     - Lê `lastQualificationResult` do `sessionStorage` no cliente.
+     - Renderiza o conteúdo de "qualificado" ou "não qualificado".
+     - Se não houver estado (acesso direto), exibe uma mensagem genérica de "Perfil recebido".
+   - O SEO continua `noindex,nofollow`.
 
-**1. `src/lib/pageStructure.ts` — hidratar do banco no cliente**
-- Adicionar um `useEffect`-equivalent externo ao `useSyncExternalStore`: um pequeno módulo de inicialização que, no primeiro import no browser, chama `loadPageSections("home")` (que já lê do Supabase via `dataStore.get`). O resultado atualiza o localStorage (`dataStore.set` já faz isso via cache) e dispara `broadcast()` para o `useSyncExternalStore` re-renderizar.
-- Implementação: uma função `ensureHydrated(page)` chamada dentro de `subscribe()` na primeira execução (guarda por `Set<PageSlug>` para não repetir). Assim, todo componente que usa `useOrderedSections` dispara a hidratação uma vez por sessão.
-- Sem SSR breakage: `ensureHydrated` só roda quando `typeof window !== "undefined"`.
+3. **Reutilizar conteúdo existente**
+   - Extrai os JSX das páginas `avaliacao.obrigado-qualificado.tsx` e `avaliacao.obrigado-nao-qualificado.tsx` para componentes internos no arquivo unificado (ou para um novo módulo `src/components/site/ObrigadoContent.tsx`), preservando o layout, copy, WhatsApp automático e CTA do Instagram.
 
-**2. `src/lib/sectionMap.ts` — alinhar HOME_SECTIONS**
-- Remover o item `{ id: "credenciais", label: "Credenciais" }` de `HOME_SECTIONS` (ficam 13 itens, batendo com `DEFAULT_LAYOUTS.home` e `HOME_REGISTRY`).
-- Manter o comentário do bloco atualizado.
+4. **Redirecionar URLs antigas**
+   - Transforma `src/routes/avaliacao.obrigado-qualificado.tsx` e `src/routes/avaliacao.obrigado-nao-qualificado.tsx` em rotas que apenas redirecionam para `/avaliacao/obrigado`.
+   - Isso mantém links antigos/externos funcionando sem expor a variação ao usuário final.
 
-**3. `src/components/site/sections.tsx` — remover código órfão**
-- Remover o export `AuthorityStrip` (linhas ~183-204) que não é usado em lugar nenhum e mantém um `id="credenciais"` inconsistente. O comentário do topo do arquivo que o menciona também sai.
+5. **Testar fluxo**
+   - Submeter um lead qualificado: deve abrir `/avaliacao/obrigado` e mostrar a versão qualificada (com WhatsApp automático).
+   - Submeter um lead não qualificado: deve abrir `/avaliacao/obrigado` e mostrar a versão de acolhimento.
+   - Acessar `/avaliacao/obrigado-qualificado` ou `/avaliacao/obrigado-nao-qualificado` diretamente: deve redirecionar para `/avaliacao/obrigado`.
 
-### Fora do escopo
-- Sem mudanças de RLS/migrations — `kv_records` já existe e `dataStore.get` já lê do banco.
-- Sem mudanças no `HOME_REGISTRY` (já bate com os 13 ids).
-- Sem alterar o admin (`/admin/estrutura`) — a lista dele já vem correta de `DEFAULT_LAYOUTS.home`.
+## Resultado esperado
+- O cliente sempre vê apenas `/avaliacao/obrigado` no navegador, independente do resultado.
+- A variação de conteúdo é controlada internamente por `sessionStorage`, sem expor "não qualificado" no endereço.
