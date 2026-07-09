@@ -1,29 +1,18 @@
-## Causa raiz
+## Objetivo
 
-Em TanStack file-based routing com notação por ponto, `src/routes/avaliacao.tsx` vira **layout pai** de qualquer arquivo `avaliacao.*.tsx` (obrigado, obrigado-qualificado, obrigado-nao-qualificado). Como `avaliacao.tsx` renderiza o formulário completo e **não tem `<Outlet/>`**, ao navegar para `/avaliacao/obrigado` o router monta o pai (formulário) e a rota filha (redirect / página de obrigado) nunca aparece.
+Reverter a "Correção 4" (formulário curto + etapa de aprofundamento opcional) e voltar ao formulário único completo em `/avaliacao`.
 
-Sintoma exato: submeter o form navega para `/avaliacao/obrigado-qualificado`, o URL muda, mas a tela continua mostrando o formulário — porque o pai `avaliacao.tsx` está sempre montado nesse subtree.
+## Mudanças
 
-## Correção
+1. **Deletar** `src/routes/avaliacao.completar.tsx`.
+2. **`src/routes/avaliacao.index.tsx`**: remover a prop `fields={["nome","whatsapp","email","profissao","renda"]}` do `LeadFormProgressive` para voltar ao conjunto completo padrão (nome, whatsapp, email, profissão, renda, formação, faixa etária, cidade/UF, momento). Ajustar o subtítulo de "Cinco perguntas rápidas…" para o texto original ("Nossa equipe analisa e responde em até 48h.").
+3. **`src/components/site/LeadFormProgressive.tsx`**:
+   - Remover o modo de enriquecimento (props `enrichLeadId`, `fields`, `submitLabel`, `onSubmitted`) — voltar ao comportamento anterior de criar/atualizar o lead com o conjunto fixo de campos.
+   - Remover a gravação de `sna_last_lead_id` em `sessionStorage/localStorage` (usada só pela etapa de aprofundamento).
+   - Manter intactos: tracking (`trackFormView`/`trackLead`), UTMs, segmento, variante A/B, scoring, `leads_partial`, sessões e o redirect para `/avaliacao/obrigado-qualificado` vs `/avaliacao/obrigado-nao-qualificado`.
+4. **`src/routes/avaliacao.obrigado-qualificado.tsx`** e **`avaliacao.obrigado-nao-qualificado.tsx`**: remover o CTA "Complete seu perfil" que aponta para `/avaliacao/completar`.
+5. Rodar typecheck para garantir que nenhuma referência a `/avaliacao/completar` ou às props removidas ficou pendente (o `routeTree.gen.ts` é regenerado automaticamente).
 
-Converter `avaliacao.tsx` em **rota leaf** renomeando para `avaliacao.index.tsx`. Assim:
+## Preservado
 
-- `avaliacao.index.tsx` → `/avaliacao` (leaf, isolada)
-- `avaliacao.obrigado-qualificado.tsx` → `/avaliacao/obrigado-qualificado` (leaf, isolada)
-- `avaliacao.obrigado-nao-qualificado.tsx` → `/avaliacao/obrigado-nao-qualificado` (leaf, isolada)
-- `avaliacao.obrigado.tsx` → redirect legado (leaf, isolada)
-
-Nenhuma delas será pai de nenhuma outra — todas viram irmãs num mesmo nível de URL.
-
-### Passos
-
-1. `mv src/routes/avaliacao.tsx src/routes/avaliacao.index.tsx`
-2. Dentro do arquivo renomeado, ajustar a assinatura: `createFileRoute("/avaliacao/")` (com barra final, como o plugin gera para index routes). Também trocar `useSearch({ from: "/avaliacao" })` para `useSearch({ from: "/avaliacao/" })`.
-3. Deixar o plugin regenerar `src/routeTree.gen.ts` automaticamente.
-
-Nada mais precisa mudar — os arquivos de obrigado já estão corretos, o `goToThanks` já aponta para `/avaliacao/obrigado-qualificado` e `/avaliacao/obrigado-nao-qualificado`, e o `submit()` já foi endurecido no turno anterior.
-
-### Arquivos
-
-- Renomear: `src/routes/avaliacao.tsx` → `src/routes/avaliacao.index.tsx`
-- Editar (dentro do arquivo renomeado): string em `createFileRoute` e em `useSearch`.
+Rotas, tracking (FormView/Lead), UTMs, A/B, scoring (com renda peso 35), páginas de obrigado qualificado/não-qualificado e funil de leads incompletos continuam iguais.

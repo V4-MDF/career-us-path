@@ -26,7 +26,6 @@ import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as AvaliacaoObrigadoQualificadoRouteImport } from './routes/avaliacao.obrigado-qualificado'
 import { Route as AvaliacaoObrigadoNaoQualificadoRouteImport } from './routes/avaliacao.obrigado-nao-qualificado'
 import { Route as AvaliacaoObrigadoRouteImport } from './routes/avaliacao.obrigado'
-import { Route as AvaliacaoCompletarRouteImport } from './routes/avaliacao.completar'
 import { Route as AdminUsuariosRouteImport } from './routes/admin.usuarios'
 import { Route as AdminTrackingRouteImport } from './routes/admin.tracking'
 import { Route as AdminSeoRouteImport } from './routes/admin.seo'
@@ -133,11 +132,6 @@ const AvaliacaoObrigadoNaoQualificadoRoute =
 const AvaliacaoObrigadoRoute = AvaliacaoObrigadoRouteImport.update({
   id: '/avaliacao/obrigado',
   path: '/avaliacao/obrigado',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AvaliacaoCompletarRoute = AvaliacaoCompletarRouteImport.update({
-  id: '/avaliacao/completar',
-  path: '/avaliacao/completar',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminUsuariosRoute = AdminUsuariosRouteImport.update({
@@ -268,7 +262,6 @@ export interface FileRoutesByFullPath {
   '/admin/seo': typeof AdminSeoRoute
   '/admin/tracking': typeof AdminTrackingRoute
   '/admin/usuarios': typeof AdminUsuariosRoute
-  '/avaliacao/completar': typeof AvaliacaoCompletarRoute
   '/avaliacao/obrigado': typeof AvaliacaoObrigadoRoute
   '/avaliacao/obrigado-nao-qualificado': typeof AvaliacaoObrigadoNaoQualificadoRoute
   '/avaliacao/obrigado-qualificado': typeof AvaliacaoObrigadoQualificadoRoute
@@ -307,7 +300,6 @@ export interface FileRoutesByTo {
   '/admin/seo': typeof AdminSeoRoute
   '/admin/tracking': typeof AdminTrackingRoute
   '/admin/usuarios': typeof AdminUsuariosRoute
-  '/avaliacao/completar': typeof AvaliacaoCompletarRoute
   '/avaliacao/obrigado': typeof AvaliacaoObrigadoRoute
   '/avaliacao/obrigado-nao-qualificado': typeof AvaliacaoObrigadoNaoQualificadoRoute
   '/avaliacao/obrigado-qualificado': typeof AvaliacaoObrigadoQualificadoRoute
@@ -347,7 +339,6 @@ export interface FileRoutesById {
   '/admin/seo': typeof AdminSeoRoute
   '/admin/tracking': typeof AdminTrackingRoute
   '/admin/usuarios': typeof AdminUsuariosRoute
-  '/avaliacao/completar': typeof AvaliacaoCompletarRoute
   '/avaliacao/obrigado': typeof AvaliacaoObrigadoRoute
   '/avaliacao/obrigado-nao-qualificado': typeof AvaliacaoObrigadoNaoQualificadoRoute
   '/avaliacao/obrigado-qualificado': typeof AvaliacaoObrigadoQualificadoRoute
@@ -389,7 +380,6 @@ export interface FileRouteTypes {
     | '/admin/seo'
     | '/admin/tracking'
     | '/admin/usuarios'
-    | '/avaliacao/completar'
     | '/avaliacao/obrigado'
     | '/avaliacao/obrigado-nao-qualificado'
     | '/avaliacao/obrigado-qualificado'
@@ -428,7 +418,6 @@ export interface FileRouteTypes {
     | '/admin/seo'
     | '/admin/tracking'
     | '/admin/usuarios'
-    | '/avaliacao/completar'
     | '/avaliacao/obrigado'
     | '/avaliacao/obrigado-nao-qualificado'
     | '/avaliacao/obrigado-qualificado'
@@ -467,7 +456,6 @@ export interface FileRouteTypes {
     | '/admin/seo'
     | '/admin/tracking'
     | '/admin/usuarios'
-    | '/avaliacao/completar'
     | '/avaliacao/obrigado'
     | '/avaliacao/obrigado-nao-qualificado'
     | '/avaliacao/obrigado-qualificado'
@@ -491,7 +479,6 @@ export interface RootRouteChildren {
   PreQualificacaoRoute: typeof PreQualificacaoRouteWithChildren
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   SobreRoute: typeof SobreRoute
-  AvaliacaoCompletarRoute: typeof AvaliacaoCompletarRoute
   AvaliacaoObrigadoRoute: typeof AvaliacaoObrigadoRoute
   AvaliacaoObrigadoNaoQualificadoRoute: typeof AvaliacaoObrigadoNaoQualificadoRoute
   AvaliacaoObrigadoQualificadoRoute: typeof AvaliacaoObrigadoQualificadoRoute
@@ -619,13 +606,6 @@ declare module '@tanstack/react-router' {
       path: '/avaliacao/obrigado'
       fullPath: '/avaliacao/obrigado'
       preLoaderRoute: typeof AvaliacaoObrigadoRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/avaliacao/completar': {
-      id: '/avaliacao/completar'
-      path: '/avaliacao/completar'
-      fullPath: '/avaliacao/completar'
-      preLoaderRoute: typeof AvaliacaoCompletarRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin/usuarios': {
@@ -861,7 +841,6 @@ const rootRouteChildren: RootRouteChildren = {
   PreQualificacaoRoute: PreQualificacaoRouteWithChildren,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   SobreRoute: SobreRoute,
-  AvaliacaoCompletarRoute: AvaliacaoCompletarRoute,
   AvaliacaoObrigadoRoute: AvaliacaoObrigadoRoute,
   AvaliacaoObrigadoNaoQualificadoRoute: AvaliacaoObrigadoNaoQualificadoRoute,
   AvaliacaoObrigadoQualificadoRoute: AvaliacaoObrigadoQualificadoRoute,
