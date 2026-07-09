@@ -161,9 +161,10 @@ function AvaliacaoPage() {
             </h1>
 
             <p className="mt-5 text-base md:text-lg text-foreground/80 leading-relaxed max-w-[560px] mx-auto">
-              Cinco perguntas rápidas. Nossa equipe analisa o seu perfil e responde em
+              Perguntas rápidas sobre o seu perfil. Nossa equipe analisa e responde em
               até 48h pelo canal informado.
             </p>
+
           </div>
 
           {/* Origem capturada silenciosamente — visível apenas no admin/tracking de cada lead */}
