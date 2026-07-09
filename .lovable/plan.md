@@ -1,27 +1,25 @@
-## Adicionar pergunta "Tipo de visto buscado" ao formulário de Análise
+## Sincronizar ordem das dobras entre admin e site público
 
-Nova pergunta inserida logo após o WhatsApp (posição 4), antes de Profissão. Não altera scoring nem qualificação — apenas captura a intenção para o admin.
+### Causa raiz
+`useOrderedSections("home")` (em `src/lib/pageStructure.ts`) lê o snapshot **apenas do localStorage** via `useSyncExternalStore`. Quando o admin salva a nova ordem, o valor vai para o Supabase (`kv_records`) e também para o localStorage **do navegador do admin** — mas qualquer outro visitante (outro navegador/dispositivo/aba anônima) nunca hidrata do banco e continua vendo a ordem default. Resultado: o rearranjo "não aparece" no site principal.
+
+Além disso, `HOME_SECTIONS` em `src/lib/sectionMap.ts` ainda lista `credenciais` (14 itens), enquanto o layout real da Home tem 13 dobras — o `AuthorityStrip` que usava esse id é código órfão. Isso explica o "não está atualizado com as dobras atuais".
 
 ### Mudanças
 
-**1. `src/lib/leadScoring.ts`** — Adicionar campo opcional ao `LeadInput`:
-```ts
-objetivo_visto?: "morar" | "trabalhar" | "estudar" | "turismo" | "";
-```
+**1. `src/lib/pageStructure.ts` — hidratar do banco no cliente**
+- Adicionar um `useEffect`-equivalent externo ao `useSyncExternalStore`: um pequeno módulo de inicialização que, no primeiro import no browser, chama `loadPageSections("home")` (que já lê do Supabase via `dataStore.get`). O resultado atualiza o localStorage (`dataStore.set` já faz isso via cache) e dispara `broadcast()` para o `useSyncExternalStore` re-renderizar.
+- Implementação: uma função `ensureHydrated(page)` chamada dentro de `subscribe()` na primeira execução (guarda por `Set<PageSlug>` para não repetir). Assim, todo componente que usa `useOrderedSections` dispara a hidratação uma vez por sessão.
+- Sem SSR breakage: `ensureHydrated` só roda quando `typeof window !== "undefined"`.
 
-**2. `src/components/site/LeadFormProgressive.tsx`**
-- Novo `FieldKey`: `"objetivo_visto"`.
-- Inserir em `PROGRESSIVE_FIELDS` após `whatsapp`:
-  > "O que você está buscando nos EUA?" — opções: Morar definitivamente / Trabalhar / Estudar / Turismo.
-- `isFieldValid`: exige valor não vazio.
-- Renderizar como `<Select>` no `ActiveQuestion` (mesmo padrão de profissão/formação, com auto-advance).
-- Adicionar label em `LABELS.objetivo_visto` e linha no resumo final (`Summary k="Objetivo"`).
-- Incluir no `empty` inicial.
+**2. `src/lib/sectionMap.ts` — alinhar HOME_SECTIONS**
+- Remover o item `{ id: "credenciais", label: "Credenciais" }` de `HOME_SECTIONS` (ficam 13 itens, batendo com `DEFAULT_LAYOUTS.home` e `HOME_REGISTRY`).
+- Manter o comentário do bloco atualizado.
 
-**3. `src/lib/whatsapp.ts`** — Incluir "Objetivo" na mensagem gerada para o WhatsApp do lead qualificado (linha extra logo abaixo de Nome/Contato).
-
-**4. `src/routes/admin.leads.tsx`** — Adicionar o campo "Objetivo do visto" no modal de detalhes do lead (na seção de perfil), usando o mesmo componente `Field` semântico.
+**3. `src/components/site/sections.tsx` — remover código órfão**
+- Remover o export `AuthorityStrip` (linhas ~183-204) que não é usado em lugar nenhum e mantém um `id="credenciais"` inconsistente. O comentário do topo do arquivo que o menciona também sai.
 
 ### Fora do escopo
-- Sem mudanças em scoring, qualificação, RLS, migrations ou tipos do Supabase (`objetivo_visto` viaja dentro do JSON do lead — a coluna `data` já é flexível, não requer migração de schema).
-- Sem bifurcação de fluxo: todos os objetivos seguem o mesmo caminho até o final.
+- Sem mudanças de RLS/migrations — `kv_records` já existe e `dataStore.get` já lê do banco.
+- Sem mudanças no `HOME_REGISTRY` (já bate com os 13 ids).
+- Sem alterar o admin (`/admin/estrutura`) — a lista dele já vem correta de `DEFAULT_LAYOUTS.home`.

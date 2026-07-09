@@ -166,6 +166,20 @@ function getCachedSnapshot(page: PageSlug): SectionItem[] {
   return next;
 }
 
+const hydrated = new Set<PageSlug>();
+function ensureHydrated(page: PageSlug) {
+  if (typeof window === "undefined") return;
+  if (hydrated.has(page)) return;
+  hydrated.add(page);
+  // Busca o layout salvo no Supabase e atualiza o cache local, para que
+  // qualquer visitante (não só o admin que salvou) veja a ordem correta.
+  loadPageSections(page)
+    .then(() => {
+      try { window.dispatchEvent(new Event("status:admin-change")); } catch { /* ignore */ }
+    })
+    .catch(() => { /* mantém defaults */ });
+}
+
 function subscribe(callback: () => void): () => void {
   if (typeof window === "undefined") return () => {};
   const onStorage = (e: StorageEvent) => {
