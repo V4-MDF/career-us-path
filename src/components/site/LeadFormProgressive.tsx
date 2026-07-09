@@ -17,7 +17,7 @@
  * Não altera scoring (sempre derivado ao vivo em /admin) nem A/B.
  */
 import { useEffect, useMemo, useRef, useState } from "react";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { CheckCircle2, ChevronRight, Loader2, Pencil } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -363,26 +363,25 @@ export function LeadFormProgressive({
           const valid = isFieldValid(f.key, data);
           if (!visible) return null;
           return (
-            <AnimatePresence key={f.key} mode="wait">
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: reduce ? 0 : 0.35, ease: [0.16, 1, 0.3, 1] }}
-                data-step={i}
-              >
-                {active ? (
-                  <ActiveQuestion
-                    field={f} data={data} update={update}
-                    onEnter={advance}
-                  />
-                ) : (
-                  <CollapsedAnswer
-                    field={f} data={data} valid={valid}
-                    onEdit={() => editStep(i)}
-                  />
-                )}
-              </motion.div>
-            </AnimatePresence>
+            <motion.div
+              key={f.key}
+              initial={i === 0 ? false : { opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: reduce ? 0 : 0.28, ease: [0.16, 1, 0.3, 1] }}
+              data-step={i}
+            >
+              {active ? (
+                <ActiveQuestion
+                  field={f} data={data} update={update}
+                  onEnter={advance}
+                />
+              ) : (
+                <CollapsedAnswer
+                  field={f} data={data} valid={valid}
+                  onEdit={() => editStep(i)}
+                />
+              )}
+            </motion.div>
           );
         })}
 

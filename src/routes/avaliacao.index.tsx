@@ -20,6 +20,7 @@ import { trackFormView } from "@/lib/tracking";
 import { getOrigin } from "@/lib/origin";
 import type { QualResult } from "@/lib/leadQualification";
 import avaliacaoBg from "@/assets/avaliacao-bg.jpg";
+import logoAsset from "@/assets/logo-status-na-america.png.asset.json";
 
 type SegKey = "medicos" | "engenheiros" | "empresarios";
 
@@ -104,13 +105,15 @@ function AvaliacaoPage() {
       {/* Header sticky compacto */}
       <header className="sticky top-0 z-20 border-b border-gold/15 bg-ink/85 backdrop-blur">
         <div className="container-x flex h-[64px] items-center justify-between">
-          <Link to="/" className="flex items-center gap-3" aria-label="Voltar ao site">
-            <span className="grid h-9 w-9 place-items-center rounded-lg border border-gold/60 text-gold font-display text-lg">
-              S
-            </span>
-            <span className="font-display text-[16px]">
-              Status<span className="text-gold">.</span> na América
-            </span>
+          <Link to="/" className="flex items-center" aria-label="Status na América — Início">
+            <img
+              src={logoAsset.url}
+              alt="Status na América"
+              className="h-10 md:h-11 w-auto"
+              width={160}
+              height={44}
+              decoding="async"
+            />
           </Link>
           <Link
             to="/"
