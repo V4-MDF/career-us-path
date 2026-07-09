@@ -35,7 +35,7 @@ import { useLocation } from "@tanstack/react-router";
 import { FlagsBRUS } from "./flags";
 import { FlagBR, FlagUS, FlagsBRUSDual } from "./visuals/DualFlagIcons";
 import { BrazilMap, UsaMap } from "./visuals/CountryMapOutline";
-import { FlagCircleBadge } from "./visuals/FlagCircleBadge";
+
 import heroSkyline from "@/assets/hero-skyline.jpg";
 import familyPortrait from "@/assets/family-portrait.jpg";
 import passportDocuments from "@/assets/passport-documents.jpg";
@@ -224,57 +224,55 @@ export function ContrastBrasilEUA() {
   const title = useContent("contrast.title");
   const subtitle = useContent("contrast.subtitle");
 
+  const cards = [
+    { code: "BR", title: ["Realidade", "no Brasil"], items: brasil, accent: "var(--brazil-green)", Map: BrazilMap },
+    { code: "US", title: ["Oportunidades", "nos EUA"], items: eua, accent: "var(--usa-blue)", Map: UsaMap },
+  ] as const;
+
   return (
-    <Reveal as="section" id="brasil-vs-eua" className="section-ink section-pad relative">
+    <Reveal as="section" id="brasil-vs-eua" className="section-cream-light section-pad relative">
       <div aria-hidden className="tricolor-rule absolute inset-x-0 top-0" />
       <div className="container-x">
         <SectionHead num="01" eyebrow="POR QUE MIGRAR AGORA" title="Duas realidades. Uma decisão." />
         <div className="mt-14 grid md:grid-cols-2 gap-6">
-          {/* Brasil */}
-          <div className="relative overflow-hidden rounded-2xl bg-ink-deep/60 border border-gold/15 p-8 md:p-10 shadow-soft">
-            <BrazilMap
-              aria-hidden
-              className="absolute -right-8 -top-6 h-[115%] w-auto text-gold/10 pointer-events-none"
-            />
-            <div className="relative">
-              <FlagCircleBadge country="br" />
-              <h3 className="mt-6 font-display text-2xl md:text-[28px] text-foreground leading-tight">
-                Realidade<br />no Brasil
-              </h3>
-              <ul className="mt-7 space-y-3.5">
-                {brasil.map((b) => (
-                  <li key={b} className="flex gap-3 text-foreground/85">
-                    <span className="mt-2 h-1.5 w-1.5 rounded-full ring-2 ring-usa-red/70 shrink-0" />
-                    <span>{b}</span>
-                  </li>
-                ))}
-              </ul>
+          {cards.map(({ code, title: cardTitle, items, accent, Map }) => (
+            <div
+              key={code}
+              className="relative overflow-hidden rounded-2xl bg-white border border-ink-text/10 shadow-soft p-7 md:p-10"
+              style={{ borderTop: `2px solid ${accent}` }}
+            >
+              <Map
+                aria-hidden
+                className="absolute -right-10 -top-8 h-[110%] w-auto pointer-events-none"
+                style={{ color: accent, opacity: 0.08 }}
+              />
+              <div className="relative">
+                <span
+                  className="inline-flex items-center justify-center h-8 px-3 rounded-full border font-mono-label text-[11px] tracking-[0.2em]"
+                  style={{ color: accent, borderColor: `color-mix(in oklab, ${accent} 40%, transparent)` }}
+                >
+                  {code}
+                </span>
+                <h3 className="mt-6 font-display text-2xl md:text-[28px] text-ink-text leading-tight">
+                  {cardTitle[0]}<br />{cardTitle[1]}
+                </h3>
+                <ul className="mt-7 space-y-3.5">
+                  {items.map((b) => (
+                    <li key={b} className="flex gap-4 text-ink-text/85 leading-relaxed">
+                      <span
+                        aria-hidden
+                        className="mt-[0.7rem] h-px w-3 shrink-0"
+                        style={{ backgroundColor: accent }}
+                      />
+                      <span>{b}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
-          </div>
-
-          {/* EUA */}
-          <div className="relative overflow-hidden rounded-2xl bg-ink-deep/60 border border-gold/15 p-8 md:p-10 shadow-soft">
-            <UsaMap
-              aria-hidden
-              className="absolute -right-10 -top-4 h-[110%] w-auto text-gold/10 pointer-events-none"
-            />
-            <div className="relative">
-              <FlagCircleBadge country="us" />
-              <h3 className="mt-6 font-display text-2xl md:text-[28px] text-foreground leading-tight">
-                Oportunidades<br />nos EUA
-              </h3>
-              <ul className="mt-7 space-y-3.5">
-                {eua.map((b) => (
-                  <li key={b} className="flex gap-3 text-foreground/85">
-                    <CheckCircle2 className="h-4 w-4 text-emerald-400 mt-1 shrink-0" />
-                    <span>{b}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
+          ))}
         </div>
-        <p className="mt-14 max-w-3xl mx-auto text-center font-display text-xl md:text-2xl text-foreground/70 leading-snug">
+        <p className="mt-14 max-w-3xl mx-auto text-center font-display text-xl md:text-2xl text-ink-text/70 leading-snug">
           {title} <span className="text-gold italic">{subtitle}</span>
         </p>
       </div>
