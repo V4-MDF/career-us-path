@@ -463,6 +463,7 @@ function errorFor(k: FieldKey): string {
     case "nome": return "Informe seu nome completo.";
     case "email": return "Informe um e-mail válido.";
     case "whatsapp": return "Informe um WhatsApp válido com DDD.";
+    case "objetivo_visto": return "Selecione o objetivo do visto.";
     case "profissao": return "Selecione sua profissão.";
     case "formacao": return "Selecione sua formação.";
     case "faixaEtaria": return "Selecione sua faixa etária.";
