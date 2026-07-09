@@ -7,6 +7,7 @@ export interface LeadInput {
   nome: string;
   email: string;
   whatsapp: string;
+  objetivo_visto?: "morar" | "trabalhar" | "estudar" | "turismo" | "";
   profissao: string;
   faixaEtaria: string;
   formacao: string;
