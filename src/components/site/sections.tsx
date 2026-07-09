@@ -28,6 +28,7 @@ import { useContent } from "@/lib/siteContent";
 import { avaliacaoHref, useAvaliacaoHref } from "@/lib/ctaLinks";
 import { SectionHead } from "./SectionHead";
 import { BrUsRouteBackdrop } from "./visuals/BrUsRouteBackdrop";
+import { VideoPlayer } from "./VideoPlayer";
 import { FamilySealBackdrop } from "./visuals/FamilySealBackdrop";
 import { ProcessIconStrip } from "./visuals/ProcessIconStrip";
 import { LeadFormProgressive } from "./LeadFormProgressive";
@@ -659,21 +660,8 @@ export function Testimonials() {
                 }`}
               >
                 <div className="relative aspect-video bg-ink">
-                  {v.url ? (
-                    <video
-                      src={v.url}
-                      controls
-                      preload="metadata"
-                      className="h-full w-full object-cover"
-                    />
-                  ) : (
-                    <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-gradient-to-br from-ink to-ink-raise text-foreground/70">
-                      <PlayCircle className="h-14 w-14 text-gold/80" aria-hidden />
-                      <span className="font-mono-label text-gold/80 text-xs">
-                        VÍDEO EM BREVE
-                      </span>
-                    </div>
-                  )}
+                  <VideoPlayer url={v.url} title={v.name || "Depoimento em vídeo"} />
+
                   {v.primary && (
                     <span className="absolute top-3 left-3 inline-flex items-center gap-1.5 rounded-full bg-gold/95 text-ink px-3 py-1 font-mono-label text-[11px] shadow-elevated">
                       <Award className="h-3 w-3" /> ÂNCORA EB-2 NIW

@@ -1,31 +1,38 @@
-Atualmente o formulário redireciona para `/avaliacao/obrigado-qualificado` ou `/avaliacao/obrigado-nao-qualificado`, deixando explícito no URL se o lead foi qualificado. O objetivo é usar uma única URL neutra (`/avaliacao/obrigado`) e decidir o conteúdo no cliente de forma discreta.
+# Suporte a YouTube nos campos de vídeo do admin
 
-## Alterações propostas
+## Estado atual
+- No admin (`/admin/conteudo` → Home → "Depoimentos em vídeo · Estudos de caso") já existem dois campos de URL de vídeo: `testimonials.helderVideoUrl` e `testimonials.secondaryVideoUrl`.
+- Porém a Home renderiza esses valores com `<video src={url}>` (em `src/components/site/sections.tsx`), que só toca arquivos de vídeo diretos (MP4/WebM). Colar um link do YouTube ali resulta em player quebrado.
+- Nenhum outro lugar do site consome vídeo hoje (fiz a busca).
 
-1. **Unificar destino do formulário**
-   - Em `src/routes/avaliacao.index.tsx`, o callback `goToThanks` sempre navegará para `/avaliacao/obrigado`.
-   - Antes de navegar, guarda em `sessionStorage` a chave `lastQualificationResult` (`qualificado` | `nao_qualificado`).
-   - Mantém o salvamento de `lastQualifiedLead` no `LeadFormProgressive` para o WhatsApp automático.
+## O que fazer
 
-2. **Tornar `/avaliacao/obrigado` a página canônica**
-   - Substitui o redirect legado em `src/routes/avaliacao.obrigado.tsx` por um componente que:
-     - Lê `lastQualificationResult` do `sessionStorage` no cliente.
-     - Renderiza o conteúdo de "qualificado" ou "não qualificado".
-     - Se não houver estado (acesso direto), exibe uma mensagem genérica de "Perfil recebido".
-   - O SEO continua `noindex,nofollow`.
+### 1. Utilitário `src/lib/videoEmbed.ts` (novo)
+Função `parseVideoUrl(url)` que devolve:
+- `{ kind: "youtube", embedUrl, id }` para `youtube.com/watch?v=`, `youtu.be/`, `youtube.com/shorts/`, `youtube.com/embed/`.
+- `{ kind: "vimeo", embedUrl, id }` para `vimeo.com/<id>`.
+- `{ kind: "file", src }` para URLs de arquivo direto (`.mp4`, `.webm`, `.mov`) ou qualquer outra URL http(s).
+- `null` se vazio/ inválido.
 
-3. **Reutilizar conteúdo existente**
-   - Extrai os JSX das páginas `avaliacao.obrigado-qualificado.tsx` e `avaliacao.obrigado-nao-qualificado.tsx` para componentes internos no arquivo unificado (ou para um novo módulo `src/components/site/ObrigadoContent.tsx`), preservando o layout, copy, WhatsApp automático e CTA do Instagram.
+URLs de embed do YouTube usam `https://www.youtube-nocookie.com/embed/<id>?rel=0&modestbranding=1` (privacy-friendly, sem "vídeos relacionados" de terceiros).
 
-4. **Redirecionar URLs antigas**
-   - Transforma `src/routes/avaliacao.obrigado-qualificado.tsx` e `src/routes/avaliacao.obrigado-nao-qualificado.tsx` em rotas que apenas redirecionam para `/avaliacao/obrigado`.
-   - Isso mantém links antigos/externos funcionando sem expor a variação ao usuário final.
+### 2. Componente `src/components/site/VideoPlayer.tsx` (novo)
+Recebe `url`, `title`, `className`. Usa `parseVideoUrl`:
+- `youtube`/`vimeo` → `<iframe>` responsivo com `allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"` e `allowFullScreen`, `loading="lazy"`, `title={title}`.
+- `file` → `<video src controls preload="metadata">` (comportamento atual).
+- `null` → placeholder "VÍDEO EM BREVE" já existente (extraído do `sections.tsx`).
 
-5. **Testar fluxo**
-   - Submeter um lead qualificado: deve abrir `/avaliacao/obrigado` e mostrar a versão qualificada (com WhatsApp automático).
-   - Submeter um lead não qualificado: deve abrir `/avaliacao/obrigado` e mostrar a versão de acolhimento.
-   - Acessar `/avaliacao/obrigado-qualificado` ou `/avaliacao/obrigado-nao-qualificado` diretamente: deve redirecionar para `/avaliacao/obrigado`.
+### 3. Substituir o bloco `<video>` em `src/components/site/sections.tsx`
+No slot de depoimentos (linhas ~661–676), trocar o `<video>`/placeholder por `<VideoPlayer url={v.url} title={v.name} />`. O layout externo (aspect-video, ring de âncora, caption) fica igual.
 
-## Resultado esperado
-- O cliente sempre vê apenas `/avaliacao/obrigado` no navegador, independente do resultado.
-- A variação de conteúdo é controlada internamente por `sessionStorage`, sem expor "não qualificado" no endereço.
+### 4. Melhoria de UX no admin (`src/routes/admin.conteudo.tsx`)
+Nos dois labels de URL de vídeo (`helderVideoUrl`, `secondaryVideoUrl`), trocar de:
+- `"Slot Helder · URL do vídeo (mp4/hospedado)"` → `"Slot Helder · URL do vídeo (YouTube, Vimeo ou MP4)"`
+- idem para o slot secundário.
+
+Não precisa mudar o widget de input — segue sendo um campo de texto simples. A detecção de formato acontece na renderização.
+
+## Fora de escopo
+- Não estou adicionando upload de vídeo (só link externo).
+- Não estou tocando na hero nem em outras dobras — não há outros campos de vídeo no site hoje.
+- Sem mudança de schema no Supabase; os valores continuam em `site_content` como string.
