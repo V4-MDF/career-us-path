@@ -817,9 +817,6 @@ export function PartnersBadges() {
             </li>
           ))}
         </ul>
-        <p className="mt-4 font-mono-label text-ink-text/45 text-[10.5px]">
-          Logos são geridos em /admin/conteudo · Selos e parceiros.
-        </p>
       </div>
     </section>
   );
