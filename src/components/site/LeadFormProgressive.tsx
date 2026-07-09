@@ -295,6 +295,7 @@ export function LeadFormProgressive({
               nome: current.nome,
               email: current.email,
               whatsapp: current.whatsapp,
+              objetivo_visto: current.objetivo_visto,
               profissao: current.profissao,
               formacao: current.formacao,
               faixaEtaria: current.faixaEtaria,
