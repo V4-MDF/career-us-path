@@ -450,6 +450,7 @@ function LeadsPage() {
                   <div className="grid grid-cols-2 gap-3">
                     <Field k="Email" v={open.email} />
                     <Field k="WhatsApp" v={open.whatsapp} />
+                    <Field k="Objetivo do visto" v={open.objetivo_visto ?? "—"} />
                     <Field k="Cidade / UF" v={`${open.cidade} / ${open.uf}`} />
                     <Field k="Profissão" v={open.profissao} />
                     <Field k="Faixa etária" v={open.faixaEtaria} />

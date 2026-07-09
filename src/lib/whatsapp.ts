@@ -35,6 +35,7 @@ export interface LeadWhatsAppInput {
   nome?: string;
   email?: string;
   whatsapp?: string;
+  objetivo_visto?: string;
   profissao?: string;
   formacao?: string;
   faixaEtaria?: string;
@@ -46,6 +47,15 @@ export interface LeadWhatsAppInput {
 
 export function leadWhatsAppMessage(lead: LeadWhatsAppInput): string {
   const cidadeUf = [lead.cidade, lead.uf].filter(Boolean).join("/");
+  const objetivoLabels: Record<string, string> = {
+    morar: "Morar definitivamente",
+    trabalhar: "Trabalhar",
+    estudar: "Estudar",
+    turismo: "Turismo",
+  };
+  const objetivo = lead.objetivo_visto
+    ? objetivoLabels[lead.objetivo_visto] ?? lead.objetivo_visto
+    : "";
   const linhas: string[] = [
     "Olá! Acabei de enviar meu perfil para análise no site da Status na América.",
     "",
@@ -53,6 +63,7 @@ export function leadWhatsAppMessage(lead: LeadWhatsAppInput): string {
     lead.nome ? `• Nome: ${lead.nome}` : null,
     lead.email ? `• E-mail: ${lead.email}` : null,
     lead.whatsapp ? `• WhatsApp: ${lead.whatsapp}` : null,
+    objetivo ? `• Objetivo do visto: ${objetivo}` : null,
     lead.profissao ? `• Profissão: ${lead.profissao}` : null,
     lead.formacao ? `• Formação: ${lead.formacao}` : null,
     lead.faixaEtaria ? `• Faixa etária: ${lead.faixaEtaria}` : null,

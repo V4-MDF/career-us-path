@@ -47,6 +47,7 @@ const ufs = ["AC","AL","AM","AP","BA","CE","DF","ES","GO","MA","MG","MS","MT","P
 
 type FieldKey =
   | "nome" | "email" | "whatsapp"
+  | "objetivo_visto"
   | "profissao" | "formacao" | "faixaEtaria"
   | "cidade_uf" | "renda" | "momento";
 
@@ -61,6 +62,7 @@ export const PROGRESSIVE_FIELDS: FieldDef[] = [
   { key: "nome",        label: "Para começarmos, qual é o seu nome completo?" },
   { key: "email",        label: "Em qual e-mail podemos te responder?", hint: "Análise enviada em até 48h." },
   { key: "whatsapp",     label: "E seu WhatsApp para contato?" },
+  { key: "objetivo_visto", label: "O que você está buscando nos EUA?" },
   { key: "profissao",   label: "Qual é a sua profissão ou área de atuação?" },
   { key: "formacao",     label: "Qual é a sua formação acadêmica?" },
   { key: "faixaEtaria", label: "Em qual faixa etária você está?" },
@@ -70,7 +72,7 @@ export const PROGRESSIVE_FIELDS: FieldDef[] = [
 ];
 
 const empty: LeadInput = {
-  nome: "", email: "", whatsapp: "",
+  nome: "", email: "", whatsapp: "", objetivo_visto: "",
   profissao: "", faixaEtaria: "", formacao: "",
   cidade: "", uf: "", renda: "", momento: "",
 };
@@ -87,6 +89,7 @@ function isFieldValid(key: FieldKey, d: LeadInput): boolean {
     case "nome": return d.nome.trim().length >= 2;
     case "email": return /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(d.email);
     case "whatsapp": return d.whatsapp.replace(/\D/g, "").length >= 10;
+    case "objetivo_visto": return !!d.objetivo_visto;
     case "profissao": return !!d.profissao;
     case "formacao": return !!d.formacao;
     case "faixaEtaria": return !!d.faixaEtaria;
@@ -292,6 +295,7 @@ export function LeadFormProgressive({
               nome: current.nome,
               email: current.email,
               whatsapp: current.whatsapp,
+              objetivo_visto: current.objetivo_visto,
               profissao: current.profissao,
               formacao: current.formacao,
               faixaEtaria: current.faixaEtaria,
@@ -423,6 +427,7 @@ export function LeadFormProgressive({
               {steps.some((s) => s.key === "nome") && <Summary k="Nome" v={data.nome} />}
               {steps.some((s) => s.key === "email") && <Summary k="E-mail" v={data.email} />}
               {steps.some((s) => s.key === "whatsapp") && <Summary k="WhatsApp" v={data.whatsapp} />}
+              {steps.some((s) => s.key === "objetivo_visto") && <Summary k="Objetivo" v={LABELS.objetivo_visto[data.objetivo_visto ?? ""] ?? (data.objetivo_visto ?? "")} />}
               {steps.some((s) => s.key === "profissao") && <Summary k="Profissão" v={LABELS.profissao[data.profissao] ?? data.profissao} />}
               {steps.some((s) => s.key === "formacao") && <Summary k="Formação" v={LABELS.formacao[data.formacao] ?? data.formacao} />}
               {steps.some((s) => s.key === "faixaEtaria") && <Summary k="Idade" v={LABELS.faixaEtaria[data.faixaEtaria] ?? data.faixaEtaria} />}
@@ -460,6 +465,7 @@ function errorFor(k: FieldKey): string {
     case "nome": return "Informe seu nome completo.";
     case "email": return "Informe um e-mail válido.";
     case "whatsapp": return "Informe um WhatsApp válido com DDD.";
+    case "objetivo_visto": return "Selecione o objetivo do visto.";
     case "profissao": return "Selecione sua profissão.";
     case "formacao": return "Selecione sua formação.";
     case "faixaEtaria": return "Selecione sua faixa etária.";
@@ -470,6 +476,12 @@ function errorFor(k: FieldKey): string {
 }
 
 const LABELS: Record<string, Record<string, string>> = {
+  objetivo_visto: {
+    morar: "Morar definitivamente",
+    trabalhar: "Trabalhar",
+    estudar: "Estudar",
+    turismo: "Turismo",
+  },
   profissao: {
     medico: "Médico", dentista: "Dentista", engenheiro: "Engenheiro",
     advogado: "Advogado", empresario: "Empresário", ti: "Tecnologia / TI",
@@ -510,6 +522,7 @@ function CollapsedAnswer({
   const display = (() => {
     switch (field.key) {
       case "cidade_uf": return data.cidade && data.uf ? `${data.cidade}/${data.uf}` : "";
+      case "objetivo_visto": return LABELS.objetivo_visto[data.objetivo_visto ?? ""] ?? (data.objetivo_visto ?? "");
       case "profissao": return LABELS.profissao[data.profissao] ?? data.profissao;
       case "formacao": return LABELS.formacao[data.formacao] ?? data.formacao;
       case "faixaEtaria": return LABELS.faixaEtaria[data.faixaEtaria] ?? data.faixaEtaria;
@@ -568,6 +581,14 @@ function ActiveQuestion({
         )}
         {field.key === "whatsapp" && (
           <Input id={fieldId} autoFocus value={data.whatsapp} onChange={(e) => update("whatsapp", maskPhone(e.target.value))} placeholder="(11) 99999-9999" aria-describedby={hintId} autoComplete="tel" inputMode="tel" />
+        )}
+        {field.key === "objetivo_visto" && (
+          <Select value={data.objetivo_visto ?? ""} onValueChange={selectAndAdvance("objetivo_visto")}>
+            <SelectTrigger id={fieldId} aria-describedby={hintId}><SelectValue placeholder="Selecione" /></SelectTrigger>
+            <SelectContent>
+              {Object.entries(LABELS.objetivo_visto).map(([k, v]) => <SelectItem key={k} value={k}>{v}</SelectItem>)}
+            </SelectContent>
+          </Select>
         )}
         {field.key === "profissao" && (
           <Select value={data.profissao} onValueChange={selectAndAdvance("profissao")}>
