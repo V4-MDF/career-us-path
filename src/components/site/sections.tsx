@@ -877,7 +877,7 @@ export function FAQ() {
     },
   ];
   return (
-    <Reveal as="section" id="duvidas-frequentes" className="section-cream-light section-pad">
+    <Reveal as="section" id="duvidas-frequentes" className="section-ink section-pad border-t border-gold/10">
       <div className="container-x max-w-3xl">
         <SectionHead num="10" eyebrow="DÚVIDAS FREQUENTES" title="Antes que você pergunte." />
         <Accordion type="single" collapsible className="mt-12">
@@ -909,39 +909,39 @@ export function PreQualPromo() {
     <section
       id="pre-qualificacao"
       aria-label="Pré-qualificação"
-      className="section-anchor section-pad-compact relative border-t border-gold/15 bg-ink"
+      className="section-anchor section-parchment section-pad-compact relative border-t border-gold/20"
     >
       <div className="container-x">
         <div className="grid lg:grid-cols-[1fr_1fr] gap-8 items-center">
           <div>
             <div className="flex items-center gap-3">
               <span aria-hidden className="h-px w-8 bg-gold" />
-              <span className="font-mono-label text-gold">TESTE DE PRÉ-QUALIFICAÇÃO</span>
+              <span className="font-mono-label text-oxblood">TESTE DE PRÉ-QUALIFICAÇÃO</span>
             </div>
-            <h2 className="mt-5 font-display text-[clamp(1.4rem,2.8vw,2rem)] leading-tight max-w-md">
+            <h2 className="mt-5 font-display text-[clamp(1.4rem,2.8vw,2rem)] leading-tight max-w-md text-ink-text">
               Descubra em 2 minutos qual visto se encaixa no seu perfil.
             </h2>
-            <p className="mt-3 text-foreground/70 text-[15px] leading-relaxed max-w-lg">
+            <p className="mt-3 text-ink-text/70 text-[15px] leading-relaxed max-w-lg">
               Teste rápido e gratuito. Indica se você tem perfil para EB-1A, EB-2 NIW, O-1 ou EB-3.
             </p>
-            <ul className="mt-5 flex flex-wrap gap-2 text-[13px] text-foreground/70">
+            <ul className="mt-5 flex flex-wrap gap-2 text-[13px] text-ink-text/70">
               {["Resultado imediato", "Indicação do visto ideal", "Sem custo", "Dados protegidos"].map((i) => (
-                <li key={i} className="flex items-center gap-1.5 rounded-full border border-gold/15 bg-ink-raise/40 px-3 py-1">
+                <li key={i} className="flex items-center gap-1.5 rounded-full border border-gold/30 bg-white/70 px-3 py-1">
                   <CheckCircle2 className="h-3 w-3 text-gold" /> {i}
                 </li>
               ))}
             </ul>
           </div>
 
-          <div className="rounded-2xl border border-gold/30 bg-ink-raise/50 p-6 shadow-elevated">
-            <div className="flex items-center gap-2 text-gold">
+          <div className="rounded-2xl border border-gold/30 bg-white/80 p-6 shadow-soft">
+            <div className="flex items-center gap-2 text-oxblood">
               <Sparkles className="h-4 w-4" />
-              <p className="font-mono-label text-gold/80">RESPOSTA NA HORA</p>
+              <p className="font-mono-label text-oxblood">RESPOSTA NA HORA</p>
             </div>
-            <h3 className="mt-3 font-display text-xl leading-tight">
+            <h3 className="mt-3 font-display text-xl leading-tight text-ink-text">
               Faça o teste agora e veja seu encaixe.
             </h3>
-            <p className="mt-2 text-foreground/70 text-[14px] leading-relaxed">
+            <p className="mt-2 text-ink-text/70 text-[14px] leading-relaxed">
               Poucas perguntas objetivas sobre formação e experiência. Ao final, o visto mais compatível.
             </p>
             <Link to="/pre-qualificacao" className="mt-5 inline-block">
@@ -949,13 +949,14 @@ export function PreQualPromo() {
                 Iniciar pré-qualificação
               </Button>
             </Link>
-            <p className="mt-2 text-[12px] text-foreground/50">
+            <p className="mt-2 text-[12px] text-ink-text/50">
               Leva cerca de 2 minutos. Sem cadastro inicial.
             </p>
           </div>
         </div>
       </div>
     </section>
+
   );
 }
 
