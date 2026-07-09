@@ -71,7 +71,7 @@ export const PROGRESSIVE_FIELDS: FieldDef[] = [
 const empty: LeadInput = {
   nome: "", email: "", whatsapp: "", objetivo_visto: "",
   profissao: "", faixaEtaria: "", formacao: "",
-  renda: "", momento: "",
+  cidade: "", uf: "", renda: "", momento: "",
 };
 
 function maskPhone(v: string) {
@@ -427,7 +427,6 @@ export function LeadFormProgressive({
               {steps.some((s) => s.key === "profissao") && <Summary k="Profissão" v={LABELS.profissao[data.profissao] ?? data.profissao} />}
               {steps.some((s) => s.key === "formacao") && <Summary k="Formação" v={LABELS.formacao[data.formacao] ?? data.formacao} />}
               {steps.some((s) => s.key === "faixaEtaria") && <Summary k="Idade" v={LABELS.faixaEtaria[data.faixaEtaria] ?? data.faixaEtaria} />}
-              {steps.some((s) => s.key === "cidade_uf") && <Summary k="Local" v={`${data.cidade}/${data.uf}`} />}
               {steps.some((s) => s.key === "renda") && <Summary k="Renda" v={LABELS.renda[data.renda] ?? data.renda} />}
               {steps.some((s) => s.key === "momento") && <Summary k="Momento" v={LABELS.momento[data.momento] ?? data.momento} />}
             </dl>
@@ -516,7 +515,6 @@ function CollapsedAnswer({
 }: { field: FieldDef; data: LeadInput; valid: boolean; onEdit: () => void }) {
   const display = (() => {
     switch (field.key) {
-      case "cidade_uf": return data.cidade && data.uf ? `${data.cidade}/${data.uf}` : "";
       case "objetivo_visto": return LABELS.objetivo_visto[data.objetivo_visto ?? ""] ?? (data.objetivo_visto ?? "");
       case "profissao": return LABELS.profissao[data.profissao] ?? data.profissao;
       case "formacao": return LABELS.formacao[data.formacao] ?? data.formacao;
