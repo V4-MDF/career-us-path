@@ -580,6 +580,14 @@ function ActiveQuestion({
         {field.key === "whatsapp" && (
           <Input id={fieldId} autoFocus value={data.whatsapp} onChange={(e) => update("whatsapp", maskPhone(e.target.value))} placeholder="(11) 99999-9999" aria-describedby={hintId} autoComplete="tel" inputMode="tel" />
         )}
+        {field.key === "objetivo_visto" && (
+          <Select value={data.objetivo_visto ?? ""} onValueChange={selectAndAdvance("objetivo_visto")}>
+            <SelectTrigger id={fieldId} aria-describedby={hintId}><SelectValue placeholder="Selecione" /></SelectTrigger>
+            <SelectContent>
+              {Object.entries(LABELS.objetivo_visto).map(([k, v]) => <SelectItem key={k} value={k}>{v}</SelectItem>)}
+            </SelectContent>
+          </Select>
+        )}
         {field.key === "profissao" && (
           <Select value={data.profissao} onValueChange={selectAndAdvance("profissao")}>
             <SelectTrigger id={fieldId} aria-describedby={hintId}><SelectValue placeholder="Selecione" /></SelectTrigger>
