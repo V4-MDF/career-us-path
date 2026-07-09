@@ -72,7 +72,7 @@ export const PROGRESSIVE_FIELDS: FieldDef[] = [
 ];
 
 const empty: LeadInput = {
-  nome: "", email: "", whatsapp: "",
+  nome: "", email: "", whatsapp: "", objetivo_visto: "",
   profissao: "", faixaEtaria: "", formacao: "",
   cidade: "", uf: "", renda: "", momento: "",
 };
