@@ -35,6 +35,7 @@ export interface LeadWhatsAppInput {
   nome?: string;
   email?: string;
   whatsapp?: string;
+  objetivo_visto?: string;
   profissao?: string;
   formacao?: string;
   faixaEtaria?: string;
