@@ -40,7 +40,6 @@ const FIELD_LABEL: Record<string, string> = {
   profissao: "Profissão",
   formacao: "Formação",
   faixaEtaria: "Faixa etária",
-  cidade_uf: "Cidade/UF",
   renda: "Renda",
   momento: "Momento",
 };
@@ -244,9 +243,7 @@ function IncompletePage() {
                 <h4 className="text-xs uppercase tracking-wider text-slate-500 mb-2">Respostas capturadas</h4>
                 <dl className="space-y-1.5 text-sm">
                   {PROGRESSIVE_FIELDS.map((f) => {
-                    const value = f.key === "cidade_uf"
-                      ? `${selected.data.cidade}${selected.data.cidade && selected.data.uf ? "/" : ""}${selected.data.uf}`
-                      : (selected.data as unknown as Record<string, string>)[f.key as string] ?? "";
+                    const value = (selected.data as unknown as Record<string, string>)[f.key as string] ?? "";
                     return (
                       <div key={f.key} className="flex justify-between gap-2">
                         <dt className="text-slate-500">{FIELD_LABEL[f.key]}</dt>

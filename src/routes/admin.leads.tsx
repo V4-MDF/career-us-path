@@ -132,7 +132,7 @@ function LeadsPage() {
       if (fTo) { const end = new Date(fTo); end.setHours(23,59,59,999); if (new Date(r.createdAt) > end) return false; }
       if (q) {
         const qq = q.toLowerCase();
-        if (![r.nome, r.email, r.whatsapp, r.cidade].some((v) => v?.toLowerCase().includes(qq))) return false;
+        if (![r.nome, r.email, r.whatsapp].some((v) => v?.toLowerCase().includes(qq))) return false;
       }
       return true;
     });
@@ -274,7 +274,7 @@ function LeadsPage() {
             <label className="text-xs text-slate-500">Buscar</label>
             <div className="relative mt-1">
               <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-slate-400" />
-              <Input className="pl-8" placeholder="Nome, email, cidade…" value={q} onChange={(e) => setQ(e.target.value)} />
+              <Input className="pl-8" placeholder="Nome, email, WhatsApp…" value={q} onChange={(e) => setQ(e.target.value)} />
             </div>
           </div>
           <FilterSelect label="Status" value={fStatus} onChange={setFStatus}
@@ -451,7 +451,7 @@ function LeadsPage() {
                     <Field k="Email" v={open.email} />
                     <Field k="WhatsApp" v={open.whatsapp} />
                     <Field k="Objetivo do visto" v={open.objetivo_visto ?? "—"} />
-                    <Field k="Cidade / UF" v={`${open.cidade} / ${open.uf}`} />
+                    {open.cidade || open.uf ? <Field k="Cidade / UF" v={`${open.cidade || ""} / ${open.uf || ""}`} /> : null}
                     <Field k="Profissão" v={open.profissao} />
                     <Field k="Faixa etária" v={open.faixaEtaria} />
                     <Field k="Formação" v={open.formacao} />
