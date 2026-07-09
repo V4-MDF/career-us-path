@@ -520,8 +520,8 @@ function ScoreCell({ calc }: { calc: ComputedScore }) {
 function Field({ k, v }: { k: string; v: string }) {
   return (
     <div>
-      <div className="text-[10px] uppercase tracking-wider text-slate-500">{k}</div>
-      <div className="text-slate-800">{v}</div>
+      <div className="text-[10px] uppercase tracking-wider text-muted-foreground">{k}</div>
+      <div className="text-foreground">{v}</div>
     </div>
   );
 }
