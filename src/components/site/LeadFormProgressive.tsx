@@ -465,7 +465,7 @@ function errorFor(k: FieldKey): string {
     case "profissao": return "Selecione sua profissão.";
     case "formacao": return "Selecione sua formação.";
     case "faixaEtaria": return "Selecione sua faixa etária.";
-    case "renda": return "Selecione a faixa de renda.;
+    case "renda": return "Selecione a faixa de renda.";
     case "momento": return "Selecione o momento.";
   }
 }
