@@ -121,14 +121,9 @@ export interface PartialLead {
 
 export function LeadFormProgressive({
   segmentId, defaultProfissao, onSubmitted, submitLabel, currentPath,
-  fields, enrichLeadId,
 }: LeadFormProgressiveProps) {
-  const steps: FieldDef[] = useMemo(
-    () => (fields && fields.length > 0
-      ? PROGRESSIVE_FIELDS.filter((f) => fields.includes(f.key))
-      : PROGRESSIVE_FIELDS),
-    [fields],
-  );
+  const steps: FieldDef[] = PROGRESSIVE_FIELDS;
+
   const [data, setData] = useState<LeadInput>(() => ({ ...empty, profissao: defaultProfissao ?? "" }));
   const [stepIndex, setStepIndex] = useState(0); // pergunta ativa
   const [loading, setLoading] = useState(false);
