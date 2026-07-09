@@ -16,7 +16,7 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import {
-  AlertTriangle, Award, Briefcase, Building2, CheckCircle2, FileText,
+  Award, Briefcase, Building2, CheckCircle2, FileText,
   GraduationCap, Heart, Layers, MapPin, PlayCircle, ShieldCheck,
   Sparkles, Star, Stethoscope, TrendingUp, Users, Wrench,
 } from "lucide-react";
