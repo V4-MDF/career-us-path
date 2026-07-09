@@ -368,10 +368,13 @@ export function VisaCards() {
 export function PersonaCards() {
   const personas = [
     { icon: Stethoscope, title: "Médicos", seg: "medicos",
+      accent: "border-t-usa-blue text-usa-blue",
       headline: "Sua trajetória clínica é um ativo de interesse americano." },
     { icon: Wrench, title: "Engenheiros", seg: "engenheiros",
+      accent: "border-t-gold text-gold",
       headline: "Da infraestrutura à tecnologia: o mercado americano valoriza o que você já faz." },
     { icon: Building2, title: "Empresários", seg: "empresarios",
+      accent: "border-t-brazil-green text-brazil-yellow",
       headline: "Geração de empregos e impostos pesa positivamente no seu processo." },
   ];
   return (
@@ -382,11 +385,11 @@ export function PersonaCards() {
           {personas.map((p) => {
             const Icon = p.icon;
             return (
-              <article key={p.title} className="relative gold-tick rounded-2xl border border-gold/25 bg-ink-raise/60 p-8 shadow-soft transition-[border-color,box-shadow] hover:border-gold/60 hover:shadow-elevated">
-                <span className="grid h-12 w-12 place-items-center rounded-lg border border-gold/50 text-gold">
+              <article key={p.title} className={`relative rounded-2xl border-t-4 border-x border-b border-gold/25 bg-ink-raise/60 p-8 shadow-soft transition-[border-color,box-shadow] hover:shadow-elevated ${p.accent}`}>
+                <span className="grid h-12 w-12 place-items-center rounded-lg border border-current/50">
                   <Icon className="h-6 w-6" />
                 </span>
-                <h3 className="mt-6 font-display text-2xl">{p.title}</h3>
+                <h3 className="mt-6 font-display text-2xl text-foreground">{p.title}</h3>
                 <p className="mt-3 text-foreground/75 leading-relaxed">{p.headline}</p>
                 {/* CTA leva à LP /avaliacao com seg + src — preserva utms da URL atual. */}
                 <a
