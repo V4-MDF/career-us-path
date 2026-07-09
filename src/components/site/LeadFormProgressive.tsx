@@ -47,6 +47,7 @@ const ufs = ["AC","AL","AM","AP","BA","CE","DF","ES","GO","MA","MG","MS","MT","P
 
 type FieldKey =
   | "nome" | "email" | "whatsapp"
+  | "objetivo_visto"
   | "profissao" | "formacao" | "faixaEtaria"
   | "cidade_uf" | "renda" | "momento";
 
@@ -61,6 +62,7 @@ export const PROGRESSIVE_FIELDS: FieldDef[] = [
   { key: "nome",        label: "Para começarmos, qual é o seu nome completo?" },
   { key: "email",        label: "Em qual e-mail podemos te responder?", hint: "Análise enviada em até 48h." },
   { key: "whatsapp",     label: "E seu WhatsApp para contato?" },
+  { key: "objetivo_visto", label: "O que você está buscando nos EUA?" },
   { key: "profissao",   label: "Qual é a sua profissão ou área de atuação?" },
   { key: "formacao",     label: "Qual é a sua formação acadêmica?" },
   { key: "faixaEtaria", label: "Em qual faixa etária você está?" },
