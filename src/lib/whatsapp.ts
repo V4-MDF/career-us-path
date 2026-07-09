@@ -26,3 +26,41 @@ export async function buildWhatsAppLink(message: string): Promise<string> {
 export function whatsappLinkFor(number: string, message: string): string {
   return `https://wa.me/${digits(number)}?text=${encodeURIComponent(message)}`;
 }
+
+/**
+ * Monta a mensagem enviada ao WhatsApp após o envio do formulário geral.
+ * Inclui os dados que o lead preencheu para o atendente já entrar em contexto.
+ */
+export interface LeadWhatsAppInput {
+  nome?: string;
+  email?: string;
+  whatsapp?: string;
+  profissao?: string;
+  formacao?: string;
+  faixaEtaria?: string;
+  cidade?: string;
+  uf?: string;
+  renda?: string;
+  momento?: string;
+}
+
+export function leadWhatsAppMessage(lead: LeadWhatsAppInput): string {
+  const cidadeUf = [lead.cidade, lead.uf].filter(Boolean).join("/");
+  const linhas: string[] = [
+    "Olá! Acabei de enviar meu perfil para análise no site da Status na América.",
+    "",
+    "*Meus dados:*",
+    lead.nome ? `• Nome: ${lead.nome}` : null,
+    lead.email ? `• E-mail: ${lead.email}` : null,
+    lead.whatsapp ? `• WhatsApp: ${lead.whatsapp}` : null,
+    lead.profissao ? `• Profissão: ${lead.profissao}` : null,
+    lead.formacao ? `• Formação: ${lead.formacao}` : null,
+    lead.faixaEtaria ? `• Faixa etária: ${lead.faixaEtaria}` : null,
+    cidadeUf ? `• Cidade: ${cidadeUf}` : null,
+    lead.renda ? `• Renda mensal: ${lead.renda}` : null,
+    lead.momento ? `• Momento: ${lead.momento}` : null,
+    "",
+    "Gostaria de conversar sobre os próximos passos.",
+  ].filter((l): l is string => l !== null);
+  return linhas.join("\n");
+}

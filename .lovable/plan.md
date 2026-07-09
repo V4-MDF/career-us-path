@@ -1,49 +1,28 @@
-## Problema
+## Objetivo
+Após um lead qualificado enviar o formulário geral (`/avaliacao`) e ser salvo no painel, mostrar a página de obrigado-qualificado e abrir automaticamente o WhatsApp com uma mensagem pré-preenchida contendo os dados do lead. Não qualificados continuam com o fluxo atual (sem WhatsApp).
 
-No rodapé da Home hoje temos duas dobras de conversão coladas:
+## Mudanças
 
-```text
-… FAQ (ink) → CTA "Análise gratuita" → CTA "Pré-qualificação" → Footer
-```
+**1. `src/lib/whatsapp.ts`**
+- Adicionar helper `leadWhatsAppMessage(lead)` que monta uma mensagem parecida com a da pré-qualificação: nome, e-mail, WhatsApp, profissão, renda, formação, timing, score, origem/UTM.
 
-São dois CTAs disputando o mesmo momento de decisão — repetitivo e enfraquece cada um.
+**2. `src/routes/avaliacao.index.tsx`**
+- Ao salvar o lead qualificado, além de navegar para `/avaliacao/obrigado-qualificado`, passar os dados via `search` params (ou salvar temporariamente em `sessionStorage` com chave `lastQualifiedLead`) para a página de obrigado montar a mensagem.
+- Preferência: `sessionStorage` (evita URLs longas com dados pessoais).
 
-## Proposta
+**3. `src/routes/avaliacao.obrigado-qualificado.tsx`**
+- Ler `lastQualifiedLead` do sessionStorage no mount.
+- Chamar `buildWhatsAppLink(leadWhatsAppMessage(lead))` (usa `whatsapp_br` das Configurações).
+- Auto-abrir em nova aba via `window.open(href, "_blank")` uma única vez (dentro de `useEffect`, com guarda para não reabrir em re-render / StrictMode).
+- Adicionar bloco visível de fallback: botão gold "Abrir WhatsApp agora" + texto "Se a janela não abrir automaticamente, clique no botão." Manter o botão "Conheça nossas redes sociais" já existente.
+- Limpar `sessionStorage` após uso.
 
-Fundir em **uma única dobra de fechamento com duas ofertas lado a lado**, mantendo as duas rotas mas apresentadas como escolha, não como sequência.
+**4. Bloqueio de popup**
+- Muitos navegadores bloqueiam `window.open` sem interação. Mitigar com:
+  - Delay pequeno + `noopener,noreferrer`.
+  - Se `window.open` retornar `null`, exibir aviso discreto acima do botão ("Seu navegador bloqueou a abertura automática — clique no botão abaixo").
 
-```text
-┌──────────────────────── CTA FINAL (ink-deep) ─────────────────────────┐
-│  DUAS FORMAS DE COMEÇAR                                               │
-│                                                                       │
-│  ┌─ Análise gratuita ────────┐   ┌─ Pré-qualificação ───────────┐    │
-│  │ PRINCIPAL / destaque ouro │   │ Secundária / outline          │    │
-│  │ Resposta em até 48h       │   │ Resultado em 2 min            │    │
-│  │ [FAZER MINHA ANÁLISE]     │   │ [INICIAR PRÉ-QUALIFICAÇÃO]    │    │
-│  └───────────────────────────┘   └───────────────────────────────┘    │
-└───────────────────────────────────────────────────────────────────────┘
-```
-
-- Uma única superfície (ink-deep) com filete tricolor no topo.
-- Análise gratuita como CTA principal (botão sólido dourado, hierarquia maior).
-- Pré-qualificação como opção rápida (botão outline, texto menor).
-- Copy curta indicando quando escolher cada uma ("quero um diagnóstico completo" vs "quero saber em 2 minutos").
-
-## Mudanças técnicas
-
-- `src/components/site/sections.tsx`
-  - Reescrever `CtaBanner` para renderizar as duas ofertas em grid 2-col (empilha no mobile).
-  - Remover `PreQualPromo` como dobra independente (função absorvida).
-- `src/lib/pageStructure.ts`
-  - Remover o item `pre-qualificacao` da ordem padrão.
-  - Migração leve no `useOrderedSections`: se um usuário tiver a ordem salva com `pre-qualificacao`, filtra silenciosamente (id deixa de existir).
-- `src/routes/admin.estrutura.tsx` — nada a fazer, o registry de dobras já é dinâmico.
-- Rota `/pre-qualificacao` continua existindo e acessível pelo botão dentro do CTA fundido.
-
-## Ritmo final do rodapé
-
-```text
-Depoimentos (parchment)  →  FAQ (ink)  →  CTA final duplo (ink-deep)  →  Footer
-```
-
-Sem duas dobras de mesma cor coladas e sem dois CTAs consecutivos.
+## Fora de escopo
+- Página de não qualificado permanece igual.
+- Pré-qualificação (`/pre-qualificacao`) já tem seu próprio fluxo de WhatsApp — não mexer.
+- Nenhuma mudança em schema/DB — o lead continua sendo salvo como hoje antes do redirect.

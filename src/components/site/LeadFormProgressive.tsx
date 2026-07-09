@@ -282,6 +282,28 @@ export function LeadFormProgressive({
       // `set` já não lança — loga warn e mantém cache local em caso de falha.
       await set("leads", id, lead);
 
+      // Guarda payload do lead qualificado para a página de obrigado montar
+      // a mensagem do WhatsApp. Sessão apenas — limpo após uso.
+      if (qual.result === "qualificado" && typeof window !== "undefined") {
+        try {
+          window.sessionStorage.setItem(
+            "lastQualifiedLead",
+            JSON.stringify({
+              nome: current.nome,
+              email: current.email,
+              whatsapp: current.whatsapp,
+              profissao: current.profissao,
+              formacao: current.formacao,
+              faixaEtaria: current.faixaEtaria,
+              cidade: current.cidade,
+              uf: current.uf,
+              renda: current.renda,
+              momento: current.momento,
+            }),
+          );
+        } catch { /* storage indisponível — segue sem WhatsApp auto */ }
+      }
+
       // Redireciona ANTES dos efeitos colaterais para garantir a navegação.
       if (onSubmitted) onSubmitted({ id, qualification: qual.result });
       else setDone(true);

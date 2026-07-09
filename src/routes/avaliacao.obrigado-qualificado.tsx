@@ -2,11 +2,12 @@
  * /avaliacao/obrigado-qualificado — página de agradecimento para leads qualificados.
  * SEO: noindex,nofollow.
  */
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { CheckCircle2, ChevronLeft } from "lucide-react";
+import { CheckCircle2, ChevronLeft, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { trackLead } from "@/lib/tracking";
+import { buildWhatsAppLink, leadWhatsAppMessage, type LeadWhatsAppInput } from "@/lib/whatsapp";
 
 export const Route = createFileRoute("/avaliacao/obrigado-qualificado")({
   head: () => ({
@@ -24,8 +25,38 @@ export const Route = createFileRoute("/avaliacao/obrigado-qualificado")({
 });
 
 function ObrigadoQualificado() {
+  const [waHref, setWaHref] = useState<string | null>(null);
+  const [popupBlocked, setPopupBlocked] = useState(false);
+
   useEffect(() => {
     trackLead({ qualification: "qualificado" });
+  }, []);
+
+  // Lê o lead salvo em sessionStorage, monta o link do WhatsApp e tenta abrir
+  // automaticamente. Se o navegador bloquear o popup, mostramos o aviso e o
+  // usuário abre pelo botão (clique = gesto do usuário, sempre passa).
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    let raw: string | null = null;
+    try { raw = window.sessionStorage.getItem("lastQualifiedLead"); } catch { /* noop */ }
+    if (!raw) return;
+    let lead: LeadWhatsAppInput | null = null;
+    try { lead = JSON.parse(raw) as LeadWhatsAppInput; } catch { lead = null; }
+    if (!lead) return;
+
+    let cancelled = false;
+    buildWhatsAppLink(leadWhatsAppMessage(lead)).then((href) => {
+      if (cancelled) return;
+      setWaHref(href);
+      // Pequeno delay para o navegador não confundir o open com o load.
+      window.setTimeout(() => {
+        const win = window.open(href, "_blank", "noopener,noreferrer");
+        if (!win) setPopupBlocked(true);
+      }, 400);
+      try { window.sessionStorage.removeItem("lastQualifiedLead"); } catch { /* noop */ }
+    }).catch(() => { /* segue sem WhatsApp */ });
+
+    return () => { cancelled = true; };
   }, []);
 
   return (
@@ -72,13 +103,29 @@ function ObrigadoQualificado() {
               até 48h pelo canal informado.
             </p>
 
-            <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
+            {waHref && (
+              <div className="mt-10 mx-auto max-w-[520px] border border-gold/30 bg-ink-raise/40 rounded-lg p-5">
+                <p className="text-sm text-foreground/80">
+                  {popupBlocked
+                    ? "Seu navegador bloqueou a abertura automática. Fale com nossa equipe agora pelo WhatsApp:"
+                    : "Estamos abrindo o WhatsApp com seus dados. Se a janela não abrir, use o botão abaixo:"}
+                </p>
+                <a href={waHref} target="_blank" rel="noopener noreferrer" className="inline-block mt-4">
+                  <Button size="lg" className="btn-label h-12 px-6 gap-2">
+                    <MessageCircle className="h-4 w-4" />
+                    Abrir WhatsApp agora
+                  </Button>
+                </a>
+              </div>
+            )}
+
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
               <a
                 href="https://www.instagram.com/statusamerica.br/"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Button size="lg" className="btn-label h-12 px-6">
+                <Button size="lg" variant="outline" className="btn-label h-12 px-6 border-gold/40 text-foreground hover:bg-gold/10">
                   Conheça nossas redes sociais
                 </Button>
               </a>
