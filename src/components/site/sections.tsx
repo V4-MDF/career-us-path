@@ -180,28 +180,6 @@ function renderEmphasis(text: string) {
   );
 }
 
-/* ============================================================
- * 2. FAIXA DE AUTORIDADE — selos reais (Prompt 5)
- * ============================================================ */
-export function AuthorityStrip() {
-  const items = [
-    "BBB · ACCREDITED A",
-    "EIN 99-4846502",
-    "SEDE EM ORLANDO, FL",
-    "130+ AVALIAÇÕES 5★",
-    "25+ ANOS DE EXPERIÊNCIA",
-  ];
-  return (
-    <section id="credenciais" aria-label="Credenciais" className="section-anchor section-ink-deep border-y border-gold/15">
-      <div className="container-x py-7 flex flex-wrap items-center justify-center gap-x-10 gap-y-3">
-        <span className="font-mono-label text-gold">CREDENCIAIS</span>
-        {items.map((i) => (
-          <span key={i} className="font-mono-label text-foreground/55">{i}</span>
-        ))}
-      </div>
-    </section>
-  );
-}
 
 /* ============================================================
  * 3. BRASIL vs EUA
