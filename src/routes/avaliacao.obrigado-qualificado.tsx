@@ -2,11 +2,12 @@
  * /avaliacao/obrigado-qualificado — página de agradecimento para leads qualificados.
  * SEO: noindex,nofollow.
  */
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { CheckCircle2, ChevronLeft } from "lucide-react";
+import { CheckCircle2, ChevronLeft, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { trackLead } from "@/lib/tracking";
+import { buildWhatsAppLink, leadWhatsAppMessage, type LeadWhatsAppInput } from "@/lib/whatsapp";
 
 export const Route = createFileRoute("/avaliacao/obrigado-qualificado")({
   head: () => ({
