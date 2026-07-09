@@ -506,7 +506,7 @@ function ScoreCell({ calc }: { calc: ComputedScore }) {
     <div className="flex items-center gap-3">
       <div className="text-2xl font-semibold tabular-nums w-10 text-right">{calc.score}</div>
       <div className="flex-1 min-w-[80px]">
-        <div className="h-1.5 bg-slate-100 rounded">
+        <div className="h-1.5 bg-muted rounded">
           <div className={`h-full rounded ${TONE_BAR[calc.band.tone]}`} style={{ width: `${calc.score}%` }} />
         </div>
         <div className="mt-1">
