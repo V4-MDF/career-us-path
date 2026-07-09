@@ -513,7 +513,7 @@ export function LegacySection() {
       d: "Controle do seu futuro imigratório, sem loterias e sem depender de empresas." },
   ];
   return (
-    <Reveal as="section" id="legado" className="section-ink-deep section-pad border-y border-gold/10 relative overflow-hidden">
+    <Reveal as="section" id="legado" className="section-verde-brasil section-pad border-y border-gold/25 relative overflow-hidden">
       {/* Backdrops sobrepostos: mapa dos EUA gravado + selo de família. */}
       <div aria-hidden className="absolute inset-0 flex items-center justify-center pointer-events-none">
         <img
@@ -557,7 +557,8 @@ export function SalaryCompare() {
     { p: "Profissional de TI sênior", br: "R$ 240.000 / ano", us: "US$ 168.000 / ano" },
   ];
   return (
-    <Reveal as="section" id="renda-em-dolar" className="section-pad">
+    <Reveal as="section" id="renda-em-dolar" className="section-sky section-pad relative">
+      <div aria-hidden className="tricolor-rule absolute inset-x-0 top-0" />
       <div className="container-x">
         <SectionHead
           num="08"
@@ -859,7 +860,7 @@ export function FAQ() {
     },
   ];
   return (
-    <Reveal as="section" id="duvidas-frequentes" className="section-pad">
+    <Reveal as="section" id="duvidas-frequentes" className="section-cream-light section-pad">
       <div className="container-x max-w-3xl">
         <SectionHead num="10" eyebrow="DÚVIDAS FREQUENTES" title="Antes que você pergunte." />
         <Accordion type="single" collapsible className="mt-12">
