@@ -223,41 +223,56 @@ export function ContrastBrasilEUA() {
   const subtitle = useContent("contrast.subtitle");
 
   return (
-    <Reveal as="section" id="brasil-vs-eua" className="section-cream-light section-pad relative">
+    <Reveal as="section" id="brasil-vs-eua" className="section-ink section-pad relative">
       <div aria-hidden className="tricolor-rule absolute inset-x-0 top-0" />
       <div className="container-x">
-        <SectionHead num="01" eyebrow="POR QUE MIGRAR AGORA" title="Duas realidades. Uma decisão." variant="parchment" />
+        <SectionHead num="01" eyebrow="POR QUE MIGRAR AGORA" title="Duas realidades. Uma decisão." />
         <div className="mt-14 grid md:grid-cols-2 gap-6">
-          <div className="tricolor-top relative gold-tick rounded-2xl bg-white border-t-2 border-t-brazil-green border-x border-b border-ink-text/10 p-8 shadow-soft">
-            <div className="flex items-center gap-3 text-brazil-green">
-              <FlagBR className="h-5 w-7 shrink-0" />
-              <h3 className="font-display text-xl text-ink-text m-0">A realidade que você já conhece no Brasil</h3>
+          {/* Brasil */}
+          <div className="relative overflow-hidden rounded-2xl bg-ink-deep/60 border border-gold/15 p-8 md:p-10 shadow-soft">
+            <BrazilMap
+              aria-hidden
+              className="absolute -right-8 -top-6 h-[115%] w-auto text-gold/10 pointer-events-none"
+            />
+            <div className="relative">
+              <FlagCircleBadge country="br" />
+              <h3 className="mt-6 font-display text-2xl md:text-[28px] text-foreground leading-tight">
+                Realidade<br />no Brasil
+              </h3>
+              <ul className="mt-7 space-y-3.5">
+                {brasil.map((b) => (
+                  <li key={b} className="flex gap-3 text-foreground/85">
+                    <span className="mt-2 h-1.5 w-1.5 rounded-full ring-2 ring-usa-red/70 shrink-0" />
+                    <span>{b}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
-            <ul className="mt-7 space-y-3.5">
-              {brasil.map((b) => (
-                <li key={b} className="flex gap-3 text-ink-text/85">
-                  <span className="mt-2.5 h-1 w-1 rounded-full bg-brazil-green shrink-0" />
-                  <span>{b}</span>
-                </li>
-              ))}
-            </ul>
           </div>
-          <div className="relative gold-tick rounded-2xl bg-white border-t-2 border-t-usa-blue border-x border-b border-usa-blue/25 p-8 shadow-soft">
-            <div className="flex items-center gap-3 text-usa-blue">
-              <FlagUS className="h-5 w-7 shrink-0" />
-              <h3 className="font-display text-xl text-ink-text m-0">O que os EUA oferecem a quem é qualificado</h3>
+
+          {/* EUA */}
+          <div className="relative overflow-hidden rounded-2xl bg-ink-deep/60 border border-gold/15 p-8 md:p-10 shadow-soft">
+            <UsaMap
+              aria-hidden
+              className="absolute -right-10 -top-4 h-[110%] w-auto text-gold/10 pointer-events-none"
+            />
+            <div className="relative">
+              <FlagCircleBadge country="us" />
+              <h3 className="mt-6 font-display text-2xl md:text-[28px] text-foreground leading-tight">
+                Oportunidades<br />nos EUA
+              </h3>
+              <ul className="mt-7 space-y-3.5">
+                {eua.map((b) => (
+                  <li key={b} className="flex gap-3 text-foreground/85">
+                    <CheckCircle2 className="h-4 w-4 text-emerald-400 mt-1 shrink-0" />
+                    <span>{b}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
-            <ul className="mt-7 space-y-3.5">
-              {eua.map((b) => (
-                <li key={b} className="flex gap-3 text-ink-text/85">
-                  <CheckCircle2 className="h-4 w-4 text-success mt-1 shrink-0" />
-                  <span>{b}</span>
-                </li>
-              ))}
-            </ul>
           </div>
         </div>
-        <p className="mt-14 max-w-3xl font-display text-2xl md:text-[32px] text-ink-text leading-snug">
+        <p className="mt-14 max-w-3xl mx-auto text-center font-display text-xl md:text-2xl text-foreground/70 leading-snug">
           {title} <span className="text-gold italic">{subtitle}</span>
         </p>
       </div>
