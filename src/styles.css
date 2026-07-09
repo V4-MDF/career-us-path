@@ -72,6 +72,15 @@
   --color-ink-text: var(--ink-text);
   --color-success: var(--success);
 
+  /* Paleta dual BR ↔ US (Tailwind tokens: text-brazil-green, bg-usa-blue, etc.) */
+  --color-brazil-green: var(--brazil-green);
+  --color-brazil-green-deep: var(--brazil-green-deep);
+  --color-brazil-yellow: var(--brazil-yellow);
+  --color-usa-blue: var(--usa-blue);
+  --color-usa-blue-soft: var(--usa-blue-soft);
+  --color-usa-red: var(--usa-red);
+  --color-cream-light: var(--cream-light);
+
   /* Tipografia (atualizada): Montserrat para títulos (uppercase, 700/800)
    * e Inter para corpo. Trocada de Bodoni+Hanken por demanda de
    * legibilidade — a identidade "Dossiê" agora vive em estrutura
@@ -98,6 +107,15 @@
   --slate:         #B8B2A4;
   --ink-text:      #141416;
   --success:       #3F8A5F;
+
+  /* Paleta dual BR ↔ US — surfaces, filetes, borders e accents. */
+  --brazil-green:      #0E5C3A;
+  --brazil-green-deep: #0A4A2E;
+  --brazil-yellow:     #E6B84A;
+  --usa-blue:          #0B2A5B;
+  --usa-blue-soft:     #DCE6F0;
+  --usa-red:           #8A1F2B;
+  --cream-light:       #F7F2E6;
 
   /* Mapeamento shadcn — DARK por padrão (site é dark-first) */
   --background: var(--ink);
@@ -168,6 +186,99 @@
   background-color: var(--background);
   color: var(--foreground);
 }
+
+/* ----------------------------------------------------------------
+ * Surfaces cromáticas — dualidade BR ↔ US
+ * ---------------------------------------------------------------- */
+
+/* Cream light — parchment mais claro, "arejado", entre dobras escuras. */
+.section-cream-light {
+  --background: var(--cream-light);
+  --foreground: var(--ink-text);
+  --card: #FFFFFF;
+  --card-foreground: var(--ink-text);
+  --muted: #EDE6D4;
+  --muted-foreground: #4A5567;
+  --border: rgba(14, 23, 38, 0.10);
+  --gold: #7A5F2E;
+  --gold-soft: rgba(122, 95, 46, 0.20);
+  --primary: #7A5F2E;
+  --accent: #7A5F2E;
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+/* Sky — azul-céu suave (lado "EUA": renda, futuro, benefícios). */
+.section-sky {
+  --background: var(--usa-blue-soft);
+  --foreground: var(--ink-text);
+  --card: #FFFFFF;
+  --card-foreground: var(--ink-text);
+  --muted: #C9D6E4;
+  --muted-foreground: #354867;
+  --border: rgba(11, 42, 91, 0.18);
+  --gold: #7A5F2E;
+  --gold-soft: rgba(11, 42, 91, 0.18);
+  --primary: var(--usa-blue);
+  --accent: #7A5F2E;
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+/* Verde-Brasil — fundo profundo (lado "BR": herança, legado, decisão). */
+.section-verde-brasil {
+  --background: var(--brazil-green-deep);
+  --foreground: #F1EBD8;
+  --card: rgba(255, 255, 255, 0.04);
+  --card-foreground: #F1EBD8;
+  --muted: rgba(255, 255, 255, 0.06);
+  --muted-foreground: #C8C1AE;
+  --border: rgba(230, 184, 74, 0.28);
+  --gold: var(--brazil-yellow);
+  --gold-soft: rgba(230, 184, 74, 0.22);
+  --primary: var(--brazil-yellow);
+  --primary-foreground: var(--brazil-green-deep);
+  --accent: var(--brazil-yellow);
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+/* Filete tricolor BR-Gold-US — usar como top border em dobras de transição. */
+@utility tricolor-rule {
+  height: 3px;
+  background: linear-gradient(90deg,
+    var(--brazil-green) 0%,
+    var(--brazil-green) 33%,
+    var(--gold) 33%,
+    var(--gold) 66%,
+    var(--usa-blue) 66%,
+    var(--usa-blue) 100%);
+  border: 0;
+  opacity: 0.85;
+}
+
+/* Filete tricolor decorativo aplicado ao topo de um card/section via ::before. */
+@utility tricolor-top {
+  position: relative;
+}
+.tricolor-top::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg,
+    var(--brazil-green) 0%,
+    var(--brazil-green) 33%,
+    var(--gold) 33%,
+    var(--gold) 66%,
+    var(--usa-blue) 66%,
+    var(--usa-blue) 100%);
+  border-top-left-radius: inherit;
+  border-top-right-radius: inherit;
+}
+
 
 @layer base {
   * {

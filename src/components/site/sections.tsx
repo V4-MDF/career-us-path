@@ -16,7 +16,7 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import {
-  AlertTriangle, Award, Briefcase, Building2, CheckCircle2, FileText,
+  Award, Briefcase, Building2, CheckCircle2, FileText,
   GraduationCap, Heart, Layers, MapPin, PlayCircle, ShieldCheck,
   Sparkles, Star, Stethoscope, TrendingUp, Users, Wrench,
 } from "lucide-react";
@@ -33,6 +33,7 @@ import { ProcessIconStrip } from "./visuals/ProcessIconStrip";
 import { LeadFormProgressive } from "./LeadFormProgressive";
 import { useLocation } from "@tanstack/react-router";
 import { FlagsBRUS } from "./flags";
+import { FlagBR, FlagUS, FlagsBRUSDual } from "./visuals/DualFlagIcons";
 import heroSkyline from "@/assets/hero-skyline.jpg";
 import familyPortrait from "@/assets/family-portrait.jpg";
 import passportDocuments from "@/assets/passport-documents.jpg";
@@ -77,7 +78,8 @@ export function Hero() {
       <div className="container-x grid lg:grid-cols-[1.1fr_0.9fr] gap-16 lg:gap-20 items-center">
         <div>
           <div className="flex items-center gap-3">
-            <span aria-hidden className="h-px w-10 bg-gold" />
+            <FlagsBRUSDual />
+            <span aria-hidden className="h-px w-6 bg-gold" />
             <span className="font-mono-label text-gold">{eyebrow}</span>
           </div>
 
@@ -221,27 +223,28 @@ export function ContrastBrasilEUA() {
   const subtitle = useContent("contrast.subtitle");
 
   return (
-    <Reveal as="section" id="brasil-vs-eua" className="section-parchment section-pad">
+    <Reveal as="section" id="brasil-vs-eua" className="section-cream-light section-pad relative">
+      <div aria-hidden className="tricolor-rule absolute inset-x-0 top-0" />
       <div className="container-x">
         <SectionHead num="01" eyebrow="POR QUE MIGRAR AGORA" title="Duas realidades. Uma decisão." variant="parchment" />
         <div className="mt-14 grid md:grid-cols-2 gap-6">
-          <div className="relative gold-tick rounded-2xl bg-white border border-ink-text/10 p-8 shadow-soft">
-            <div className="flex items-center gap-3 text-oxblood">
-              <AlertTriangle className="h-5 w-5" />
+          <div className="tricolor-top relative gold-tick rounded-2xl bg-white border-t-2 border-t-brazil-green border-x border-b border-ink-text/10 p-8 shadow-soft">
+            <div className="flex items-center gap-3 text-brazil-green">
+              <FlagBR className="h-5 w-7 shrink-0" />
               <h3 className="font-display text-xl text-ink-text m-0">A realidade que você já conhece no Brasil</h3>
             </div>
             <ul className="mt-7 space-y-3.5">
               {brasil.map((b) => (
                 <li key={b} className="flex gap-3 text-ink-text/85">
-                  <span className="mt-2.5 h-1 w-1 rounded-full bg-oxblood shrink-0" />
+                  <span className="mt-2.5 h-1 w-1 rounded-full bg-brazil-green shrink-0" />
                   <span>{b}</span>
                 </li>
               ))}
             </ul>
           </div>
-          <div className="relative gold-tick rounded-2xl bg-white border border-gold/40 p-8 shadow-soft">
-            <div className="flex items-center gap-3 text-success">
-              <CheckCircle2 className="h-5 w-5" />
+          <div className="relative gold-tick rounded-2xl bg-white border-t-2 border-t-usa-blue border-x border-b border-usa-blue/25 p-8 shadow-soft">
+            <div className="flex items-center gap-3 text-usa-blue">
+              <FlagUS className="h-5 w-7 shrink-0" />
               <h3 className="font-display text-xl text-ink-text m-0">O que os EUA oferecem a quem é qualificado</h3>
             </div>
             <ul className="mt-7 space-y-3.5">
@@ -366,10 +369,13 @@ export function VisaCards() {
 export function PersonaCards() {
   const personas = [
     { icon: Stethoscope, title: "Médicos", seg: "medicos",
+      accent: "border-t-usa-blue text-usa-blue",
       headline: "Sua trajetória clínica é um ativo de interesse americano." },
     { icon: Wrench, title: "Engenheiros", seg: "engenheiros",
+      accent: "border-t-gold text-gold",
       headline: "Da infraestrutura à tecnologia: o mercado americano valoriza o que você já faz." },
     { icon: Building2, title: "Empresários", seg: "empresarios",
+      accent: "border-t-brazil-green text-brazil-yellow",
       headline: "Geração de empregos e impostos pesa positivamente no seu processo." },
   ];
   return (
@@ -380,11 +386,11 @@ export function PersonaCards() {
           {personas.map((p) => {
             const Icon = p.icon;
             return (
-              <article key={p.title} className="relative gold-tick rounded-2xl border border-gold/25 bg-ink-raise/60 p-8 shadow-soft transition-[border-color,box-shadow] hover:border-gold/60 hover:shadow-elevated">
-                <span className="grid h-12 w-12 place-items-center rounded-lg border border-gold/50 text-gold">
+              <article key={p.title} className={`relative rounded-2xl border-t-4 border-x border-b border-gold/25 bg-ink-raise/60 p-8 shadow-soft transition-[border-color,box-shadow] hover:shadow-elevated ${p.accent}`}>
+                <span className="grid h-12 w-12 place-items-center rounded-lg border border-current/50">
                   <Icon className="h-6 w-6" />
                 </span>
-                <h3 className="mt-6 font-display text-2xl">{p.title}</h3>
+                <h3 className="mt-6 font-display text-2xl text-foreground">{p.title}</h3>
                 <p className="mt-3 text-foreground/75 leading-relaxed">{p.headline}</p>
                 {/* CTA leva à LP /avaliacao com seg + src — preserva utms da URL atual. */}
                 <a
@@ -508,7 +514,7 @@ export function LegacySection() {
       d: "Controle do seu futuro imigratório, sem loterias e sem depender de empresas." },
   ];
   return (
-    <Reveal as="section" id="legado" className="section-ink-deep section-pad border-y border-gold/10 relative overflow-hidden">
+    <Reveal as="section" id="legado" className="section-verde-brasil section-pad border-y border-gold/25 relative overflow-hidden">
       {/* Backdrops sobrepostos: mapa dos EUA gravado + selo de família. */}
       <div aria-hidden className="absolute inset-0 flex items-center justify-center pointer-events-none">
         <img
@@ -552,7 +558,8 @@ export function SalaryCompare() {
     { p: "Profissional de TI sênior", br: "R$ 240.000 / ano", us: "US$ 168.000 / ano" },
   ];
   return (
-    <Reveal as="section" id="renda-em-dolar" className="section-pad">
+    <Reveal as="section" id="renda-em-dolar" className="section-sky section-pad relative">
+      <div aria-hidden className="tricolor-rule absolute inset-x-0 top-0" />
       <div className="container-x">
         <SectionHead
           num="08"
@@ -776,8 +783,9 @@ export function PartnersBadges() {
     <section
       id="selos-parceiros"
       aria-label="Credenciais e parceiros"
-      className="section-anchor section-parchment border-y border-gold/25 py-12"
+      className="section-anchor section-parchment border-y border-gold/25 py-12 relative"
     >
+      <div aria-hidden className="tricolor-rule absolute inset-x-0 top-0" />
       <div className="container-x">
         <div className="flex items-center gap-3">
           <span aria-hidden className="h-px w-10 bg-gold" />
@@ -854,7 +862,7 @@ export function FAQ() {
     },
   ];
   return (
-    <Reveal as="section" id="duvidas-frequentes" className="section-pad">
+    <Reveal as="section" id="duvidas-frequentes" className="section-cream-light section-pad">
       <div className="container-x max-w-3xl">
         <SectionHead num="10" eyebrow="DÚVIDAS FREQUENTES" title="Antes que você pergunte." />
         <Accordion type="single" collapsible className="mt-12">
