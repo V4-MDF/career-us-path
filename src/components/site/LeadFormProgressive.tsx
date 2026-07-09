@@ -474,6 +474,12 @@ function errorFor(k: FieldKey): string {
 }
 
 const LABELS: Record<string, Record<string, string>> = {
+  objetivo_visto: {
+    morar: "Morar definitivamente",
+    trabalhar: "Trabalhar",
+    estudar: "Estudar",
+    turismo: "Turismo",
+  },
   profissao: {
     medico: "Médico", dentista: "Dentista", engenheiro: "Engenheiro",
     advogado: "Advogado", empresario: "Empresário", ti: "Tecnologia / TI",
