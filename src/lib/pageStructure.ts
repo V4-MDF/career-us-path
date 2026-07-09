@@ -207,6 +207,7 @@ function getServerSnapshot(page: PageSlug): SectionItem[] {
 }
 
 export function useOrderedSections(page: PageSlug): SectionItem[] {
+  ensureHydrated(page);
   return useSyncExternalStore(
     subscribe,
     () => getCachedSnapshot(page),
