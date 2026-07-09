@@ -80,7 +80,7 @@ export function Hero() {
       <div className="container-x grid lg:grid-cols-[1.1fr_0.9fr] gap-16 lg:gap-20 items-center">
         <div>
           <div className="flex items-center gap-3">
-            <FlagsBRUSDual />
+            <FlagsBRUS size={16} />
             <span aria-hidden className="h-px w-6 bg-gold" />
             <span className="font-mono-label text-gold">{eyebrow}</span>
           </div>
