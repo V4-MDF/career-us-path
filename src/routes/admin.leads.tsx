@@ -392,14 +392,14 @@ function LeadsPage() {
 
                 <div className="mt-5 space-y-5 text-sm">
                   {/* Score grande + faixa */}
-                  <div className="rounded-md border border-slate-200 p-4">
-                    <div className="text-[10px] uppercase tracking-wider text-slate-500 mb-2">
+                  <div className="rounded-md border border-border p-4">
+                    <div className="text-[10px] uppercase tracking-wider text-muted-foreground mb-2">
                       Pontuação de qualidade do perfil
                     </div>
                     <div className="flex items-center gap-4">
-                      <div className="text-5xl font-semibold tabular-nums">{calc.score}</div>
+                      <div className="text-5xl font-semibold tabular-nums text-foreground">{calc.score}</div>
                       <div className="flex-1">
-                        <div className="h-2 bg-slate-100 rounded">
+                        <div className="h-2 bg-muted rounded">
                           <div className={`h-full rounded ${TONE_BAR[calc.band.tone]}`} style={{ width: `${calc.score}%` }} />
                         </div>
                         <div className="mt-2">
@@ -413,7 +413,7 @@ function LeadsPage() {
 
                   {/* Status (manual) */}
                   <div>
-                    <div className="text-[10px] uppercase tracking-wider text-slate-500 mb-2">Status do funil</div>
+                    <div className="text-[10px] uppercase tracking-wider text-muted-foreground mb-2">Status do funil</div>
                     <Select value={open.status ?? "novo"} onValueChange={(v) => setStatus(open, v as FunnelStatus)}>
                       <SelectTrigger><SelectValue /></SelectTrigger>
                       <SelectContent>
@@ -423,24 +423,24 @@ function LeadsPage() {
                   </div>
 
                   {/* Composição */}
-                  <div className="rounded-md border border-slate-200">
-                    <div className="px-4 py-2 bg-slate-50 text-xs uppercase tracking-wider text-slate-500">
+                  <div className="rounded-md border border-border">
+                    <div className="px-4 py-2 bg-muted/40 text-xs uppercase tracking-wider text-muted-foreground">
                       Composição da pontuação
                     </div>
                     <div className="p-4 space-y-2 text-xs">
                       {calc.composicao.map((c) => (
                         <div key={c.key} className="flex items-center gap-2">
-                          <div className="w-28 text-slate-500">{c.label}</div>
-                          <div className="flex-1 text-slate-700 truncate">{c.display}</div>
-                          <div className="w-24 h-1.5 bg-slate-100 rounded">
-                            <div className="h-full bg-amber-400 rounded" style={{ width: `${c.pesoNorm > 0 ? (c.pontos / c.pesoNorm) * 100 : 0}%` }} />
+                          <div className="w-28 text-muted-foreground">{c.label}</div>
+                          <div className="flex-1 text-foreground truncate">{c.display}</div>
+                          <div className="w-24 h-1.5 bg-muted rounded">
+                            <div className="h-full bg-gold rounded" style={{ width: `${c.pesoNorm > 0 ? (c.pontos / c.pesoNorm) * 100 : 0}%` }} />
                           </div>
-                          <div className="w-20 text-right font-medium tabular-nums">
-                            {c.pontos.toFixed(1)}<span className="text-slate-400"> / {c.pesoNorm.toFixed(0)}</span>
+                          <div className="w-20 text-right font-medium tabular-nums text-foreground">
+                            {c.pontos.toFixed(1)}<span className="text-muted-foreground/70"> / {c.pesoNorm.toFixed(0)}</span>
                           </div>
                         </div>
                       ))}
-                      <div className="flex justify-between border-t border-slate-100 pt-2 mt-2 font-semibold">
+                      <div className="flex justify-between border-t border-border pt-2 mt-2 font-semibold text-foreground">
                         <span>Total</span><span className="tabular-nums">{calc.score} / 100</span>
                       </div>
                     </div>
@@ -461,34 +461,34 @@ function LeadsPage() {
                   </div>
 
                   {/* UTMs */}
-                  <div className="rounded-md border border-slate-200">
-                    <div className="px-4 py-2 bg-slate-50 text-xs uppercase tracking-wider text-slate-500">UTMs</div>
-                    <div className="p-4 grid grid-cols-2 gap-2 text-xs">
+                  <div className="rounded-md border border-border">
+                    <div className="px-4 py-2 bg-muted/40 text-xs uppercase tracking-wider text-muted-foreground">UTMs</div>
+                    <div className="p-4 grid grid-cols-2 gap-2 text-xs text-foreground">
                       {(["utm_source","utm_medium","utm_campaign","utm_content","utm_term"] as const).map((k) => (
-                        <div key={k}><span className="text-slate-500">{k}:</span> {open.utm?.[k] ?? "—"}</div>
+                        <div key={k}><span className="text-muted-foreground">{k}:</span> {open.utm?.[k] ?? "—"}</div>
                       ))}
-                      {open.utm?.gclid && <div><span className="text-slate-500">gclid:</span> {open.utm.gclid}</div>}
-                      {open.utm?.fbclid && <div><span className="text-slate-500">fbclid:</span> {open.utm.fbclid}</div>}
+                      {open.utm?.gclid && <div><span className="text-muted-foreground">gclid:</span> {open.utm.gclid}</div>}
+                      {open.utm?.fbclid && <div><span className="text-muted-foreground">fbclid:</span> {open.utm.fbclid}</div>}
                     </div>
                   </div>
 
                   {/* Origem (referrer + página interna) */}
                   {isOriginIncomplete(open) && (
-                    <div className="rounded-md border border-red-200 bg-red-50 p-3 flex items-start gap-2 text-xs">
-                      <AlertTriangle className="h-4 w-4 text-red-600 shrink-0 mt-0.5" />
+                    <div className="rounded-md border border-red-500/40 bg-red-500/10 p-3 flex items-start gap-2 text-xs">
+                      <AlertTriangle className="h-4 w-4 text-red-400 shrink-0 mt-0.5" />
                       <div>
-                        <div className="font-semibold text-red-800">Origem incompleta</div>
-                        <div className="text-red-700 mt-0.5">Nenhum UTM, referrer externo ou página interna foi capturado para este lead. Verifique o script de tracking na página de origem.</div>
+                        <div className="font-semibold text-red-200">Origem incompleta</div>
+                        <div className="text-red-300/90 mt-0.5">Nenhum UTM, referrer externo ou página interna foi capturado para este lead. Verifique o script de tracking na página de origem.</div>
                       </div>
                     </div>
                   )}
-                  <div className="rounded-md border border-slate-200">
-                    <div className="px-4 py-2 bg-slate-50 text-xs uppercase tracking-wider text-slate-500">Origem do tráfego</div>
-                    <div className="p-4 grid grid-cols-1 gap-2 text-xs">
-                      <div><span className="text-slate-500">Referrer externo:</span> {open.origin?.internal.referrer ?? "—"}</div>
-                      <div><span className="text-slate-500">Página interna anterior:</span> {open.origin?.internal.from_path ?? "—"}{open.origin?.internal.from_title ? ` · ${open.origin.internal.from_title}` : ""}</div>
-                      <div><span className="text-slate-500">Landing (1ª página da sessão):</span> {open.origin?.internal.landing_path ?? "—"}</div>
-                      <div><span className="text-slate-500">Início da sessão:</span> {open.origin?.internal.landing_ts ? new Date(open.origin.internal.landing_ts).toLocaleString("pt-BR") : "—"}</div>
+                  <div className="rounded-md border border-border">
+                    <div className="px-4 py-2 bg-muted/40 text-xs uppercase tracking-wider text-muted-foreground">Origem do tráfego</div>
+                    <div className="p-4 grid grid-cols-1 gap-2 text-xs text-foreground">
+                      <div><span className="text-muted-foreground">Referrer externo:</span> {open.origin?.internal.referrer ?? "—"}</div>
+                      <div><span className="text-muted-foreground">Página interna anterior:</span> {open.origin?.internal.from_path ?? "—"}{open.origin?.internal.from_title ? ` · ${open.origin.internal.from_title}` : ""}</div>
+                      <div><span className="text-muted-foreground">Landing (1ª página da sessão):</span> {open.origin?.internal.landing_path ?? "—"}</div>
+                      <div><span className="text-muted-foreground">Início da sessão:</span> {open.origin?.internal.landing_ts ? new Date(open.origin.internal.landing_ts).toLocaleString("pt-BR") : "—"}</div>
                     </div>
                   </div>
                 </div>
@@ -506,7 +506,7 @@ function ScoreCell({ calc }: { calc: ComputedScore }) {
     <div className="flex items-center gap-3">
       <div className="text-2xl font-semibold tabular-nums w-10 text-right">{calc.score}</div>
       <div className="flex-1 min-w-[80px]">
-        <div className="h-1.5 bg-slate-100 rounded">
+        <div className="h-1.5 bg-muted rounded">
           <div className={`h-full rounded ${TONE_BAR[calc.band.tone]}`} style={{ width: `${calc.score}%` }} />
         </div>
         <div className="mt-1">
@@ -520,8 +520,8 @@ function ScoreCell({ calc }: { calc: ComputedScore }) {
 function Field({ k, v }: { k: string; v: string }) {
   return (
     <div>
-      <div className="text-[10px] uppercase tracking-wider text-slate-500">{k}</div>
-      <div className="text-slate-800">{v}</div>
+      <div className="text-[10px] uppercase tracking-wider text-muted-foreground">{k}</div>
+      <div className="text-foreground">{v}</div>
     </div>
   );
 }

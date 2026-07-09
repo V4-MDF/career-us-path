@@ -1,28 +1,24 @@
-## Objetivo
-Após um lead qualificado enviar o formulário geral (`/avaliacao`) e ser salvo no painel, mostrar a página de obrigado-qualificado e abrir automaticamente o WhatsApp com uma mensagem pré-preenchida contendo os dados do lead. Não qualificados continuam com o fluxo atual (sem WhatsApp).
+## Diagnóstico
+O painel admin roda em tema escuro, mas o Sheet de detalhes do lead em `src/routes/admin.leads.tsx` usa cores light-mode fixas (`text-slate-500`, `text-slate-700/800`, `bg-slate-50`, `bg-slate-100`, `border-slate-200`, `border-slate-100`). Sobre o fundo escuro, labels e valores ficam praticamente ilegíveis — é o que aparece no print.
 
-## Mudanças
+## Correção
+Trocar as cores fixas do slate por tokens semânticos do design system, que já se adaptam ao tema:
 
-**1. `src/lib/whatsapp.ts`**
-- Adicionar helper `leadWhatsAppMessage(lead)` que monta uma mensagem parecida com a da pré-qualificação: nome, e-mail, WhatsApp, profissão, renda, formação, timing, score, origem/UTM.
+**`src/routes/admin.leads.tsx` (Sheet de detalhes, linhas ~393–493, e helper `Field` linhas 520–527)**
+- Rótulos "PONTUAÇÃO…", "STATUS DO FUNIL", "COMPOSIÇÃO…", "UTMS", "ORIGEM DO TRÁFEGO", nomes de campos: `text-slate-500` → `text-muted-foreground`.
+- Valores (nome, e-mail, whatsapp, pontos, etc.): `text-slate-700/800` → `text-foreground`.
+- Fundos das barras de progresso vazias: `bg-slate-100` → `bg-muted`.
+- Cabeçalhos de seção (UTMs/Composição/Origem): `bg-slate-50` → `bg-muted/40`.
+- Bordas: `border-slate-200`, `border-slate-100` → `border-border`.
+- `text-slate-400` (denominador " / 20") → `text-muted-foreground/70`.
+- Bloco "Origem incompleta": manter o vermelho, mas usar variantes que funcionam no escuro — `bg-red-500/10 border-red-500/40 text-red-300` (título em `text-red-200`).
+- Barra de composição preenchida (`bg-amber-400`) → `bg-gold` (token do projeto) para casar com o resto da UI.
 
-**2. `src/routes/avaliacao.index.tsx`**
-- Ao salvar o lead qualificado, além de navegar para `/avaliacao/obrigado-qualificado`, passar os dados via `search` params (ou salvar temporariamente em `sessionStorage` com chave `lastQualifiedLead`) para a página de obrigado montar a mensagem.
-- Preferência: `sessionStorage` (evita URLs longas com dados pessoais).
+**`ScoreCell` (linhas 504–518)**
+- Mesma troca: `bg-slate-100` → `bg-muted` na trilha da barra.
 
-**3. `src/routes/avaliacao.obrigado-qualificado.tsx`**
-- Ler `lastQualifiedLead` do sessionStorage no mount.
-- Chamar `buildWhatsAppLink(leadWhatsAppMessage(lead))` (usa `whatsapp_br` das Configurações).
-- Auto-abrir em nova aba via `window.open(href, "_blank")` uma única vez (dentro de `useEffect`, com guarda para não reabrir em re-render / StrictMode).
-- Adicionar bloco visível de fallback: botão gold "Abrir WhatsApp agora" + texto "Se a janela não abrir automaticamente, clique no botão." Manter o botão "Conheça nossas redes sociais" já existente.
-- Limpar `sessionStorage` após uso.
-
-**4. Bloqueio de popup**
-- Muitos navegadores bloqueiam `window.open` sem interação. Mitigar com:
-  - Delay pequeno + `noopener,noreferrer`.
-  - Se `window.open` retornar `null`, exibir aviso discreto acima do botão ("Seu navegador bloqueou a abertura automática — clique no botão abaixo").
+Sem mudar layout, textos ou lógica — apenas classes de cor. Resolve o contraste do modal inteiro (título, score, composição, campos, UTMs, origem) de uma vez.
 
 ## Fora de escopo
-- Página de não qualificado permanece igual.
-- Pré-qualificação (`/pre-qualificacao`) já tem seu próprio fluxo de WhatsApp — não mexer.
-- Nenhuma mudança em schema/DB — o lead continua sendo salvo como hoje antes do redirect.
+- Tabela principal de leads, filtros e demais rotas admin — o print mostra só o Sheet.
+- Nenhuma mudança de tokens globais no `src/styles.css`.
