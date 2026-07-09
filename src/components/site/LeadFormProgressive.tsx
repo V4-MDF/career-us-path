@@ -520,6 +520,7 @@ function CollapsedAnswer({
   const display = (() => {
     switch (field.key) {
       case "cidade_uf": return data.cidade && data.uf ? `${data.cidade}/${data.uf}` : "";
+      case "objetivo_visto": return LABELS.objetivo_visto[data.objetivo_visto ?? ""] ?? (data.objetivo_visto ?? "");
       case "profissao": return LABELS.profissao[data.profissao] ?? data.profissao;
       case "formacao": return LABELS.formacao[data.formacao] ?? data.formacao;
       case "faixaEtaria": return LABELS.faixaEtaria[data.faixaEtaria] ?? data.faixaEtaria;
