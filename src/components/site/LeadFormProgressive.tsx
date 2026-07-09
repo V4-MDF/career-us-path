@@ -43,13 +43,11 @@ export interface LeadFormProgressiveProps {
 }
 
 
-const ufs = ["AC","AL","AM","AP","BA","CE","DF","ES","GO","MA","MG","MS","MT","PA","PB","PE","PI","PR","RJ","RN","RO","RR","RS","SC","SE","SP","TO"];
-
 type FieldKey =
   | "nome" | "email" | "whatsapp"
   | "objetivo_visto"
   | "profissao" | "formacao" | "faixaEtaria"
-  | "cidade_uf" | "renda" | "momento";
+  | "renda" | "momento";
 
 interface FieldDef {
   key: FieldKey;
@@ -66,7 +64,6 @@ export const PROGRESSIVE_FIELDS: FieldDef[] = [
   { key: "profissao",   label: "Qual é a sua profissão ou área de atuação?" },
   { key: "formacao",     label: "Qual é a sua formação acadêmica?" },
   { key: "faixaEtaria", label: "Em qual faixa etária você está?" },
-  { key: "cidade_uf",    label: "Onde você mora hoje?" },
   { key: "renda",        label: "Sua renda mensal aproximada?", hint: "Confidencial. Ajuda a entender o melhor caminho." },
   { key: "momento",      label: "Em que momento da decisão você está?" },
 ];
@@ -74,7 +71,7 @@ export const PROGRESSIVE_FIELDS: FieldDef[] = [
 const empty: LeadInput = {
   nome: "", email: "", whatsapp: "", objetivo_visto: "",
   profissao: "", faixaEtaria: "", formacao: "",
-  cidade: "", uf: "", renda: "", momento: "",
+  renda: "", momento: "",
 };
 
 function maskPhone(v: string) {
@@ -93,7 +90,6 @@ function isFieldValid(key: FieldKey, d: LeadInput): boolean {
     case "profissao": return !!d.profissao;
     case "formacao": return !!d.formacao;
     case "faixaEtaria": return !!d.faixaEtaria;
-    case "cidade_uf": return d.cidade.trim().length >= 2 && !!d.uf;
     case "renda": return !!d.renda;
     case "momento": return !!d.momento;
   }
@@ -469,8 +465,7 @@ function errorFor(k: FieldKey): string {
     case "profissao": return "Selecione sua profissão.";
     case "formacao": return "Selecione sua formação.";
     case "faixaEtaria": return "Selecione sua faixa etária.";
-    case "cidade_uf": return "Informe cidade e UF.";
-    case "renda": return "Selecione a faixa de renda.";
+    case "renda": return "Selecione a faixa de renda.;
     case "momento": return "Selecione o momento.";
   }
 }
@@ -613,15 +608,6 @@ function ActiveQuestion({
               {Object.entries(LABELS.faixaEtaria).map(([k, v]) => <SelectItem key={k} value={k}>{v}</SelectItem>)}
             </SelectContent>
           </Select>
-        )}
-        {field.key === "cidade_uf" && (
-          <div className="grid grid-cols-[1fr_110px] gap-3">
-            <Input id={fieldId} autoFocus placeholder="Cidade" value={data.cidade} onChange={(e) => update("cidade", e.target.value)} aria-label="Cidade" autoComplete="address-level2" />
-            <Select value={data.uf} onValueChange={(v) => update("uf", v)}>
-              <SelectTrigger aria-label="Estado (UF)"><SelectValue placeholder="UF" /></SelectTrigger>
-              <SelectContent>{ufs.map((u) => <SelectItem key={u} value={u}>{u}</SelectItem>)}</SelectContent>
-            </Select>
-          </div>
         )}
         {field.key === "renda" && (
           <Select value={data.renda} onValueChange={selectAndAdvance("renda")}>
