@@ -89,6 +89,7 @@ function isFieldValid(key: FieldKey, d: LeadInput): boolean {
     case "nome": return d.nome.trim().length >= 2;
     case "email": return /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(d.email);
     case "whatsapp": return d.whatsapp.replace(/\D/g, "").length >= 10;
+    case "objetivo_visto": return !!d.objetivo_visto;
     case "profissao": return !!d.profissao;
     case "formacao": return !!d.formacao;
     case "faixaEtaria": return !!d.faixaEtaria;
