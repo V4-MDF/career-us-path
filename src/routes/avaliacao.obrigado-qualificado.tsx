@@ -73,11 +73,15 @@ function ObrigadoQualificado() {
             </p>
 
             <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
-              <Link to="/vistos/$slug" params={{ slug: "eb2-niw" }}>
+              <a
+                href="https://www.instagram.com/statusamerica.br/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <Button size="lg" className="btn-label h-12 px-6">
-                  Conhecer o EB-2 NIW
+                  Conheça nossas redes sociais
                 </Button>
-              </Link>
+              </a>
             </div>
 
 
