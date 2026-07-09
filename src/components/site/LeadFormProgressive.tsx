@@ -426,6 +426,7 @@ export function LeadFormProgressive({
               {steps.some((s) => s.key === "nome") && <Summary k="Nome" v={data.nome} />}
               {steps.some((s) => s.key === "email") && <Summary k="E-mail" v={data.email} />}
               {steps.some((s) => s.key === "whatsapp") && <Summary k="WhatsApp" v={data.whatsapp} />}
+              {steps.some((s) => s.key === "objetivo_visto") && <Summary k="Objetivo" v={LABELS.objetivo_visto[data.objetivo_visto ?? ""] ?? (data.objetivo_visto ?? "")} />}
               {steps.some((s) => s.key === "profissao") && <Summary k="Profissão" v={LABELS.profissao[data.profissao] ?? data.profissao} />}
               {steps.some((s) => s.key === "formacao") && <Summary k="Formação" v={LABELS.formacao[data.formacao] ?? data.formacao} />}
               {steps.some((s) => s.key === "faixaEtaria") && <Summary k="Idade" v={LABELS.faixaEtaria[data.faixaEtaria] ?? data.faixaEtaria} />}
