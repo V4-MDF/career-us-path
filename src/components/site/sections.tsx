@@ -222,27 +222,28 @@ export function ContrastBrasilEUA() {
   const subtitle = useContent("contrast.subtitle");
 
   return (
-    <Reveal as="section" id="brasil-vs-eua" className="section-parchment section-pad">
+    <Reveal as="section" id="brasil-vs-eua" className="section-cream-light section-pad relative">
+      <div aria-hidden className="tricolor-rule absolute inset-x-0 top-0" />
       <div className="container-x">
         <SectionHead num="01" eyebrow="POR QUE MIGRAR AGORA" title="Duas realidades. Uma decisão." variant="parchment" />
         <div className="mt-14 grid md:grid-cols-2 gap-6">
-          <div className="relative gold-tick rounded-2xl bg-white border border-ink-text/10 p-8 shadow-soft">
-            <div className="flex items-center gap-3 text-oxblood">
-              <AlertTriangle className="h-5 w-5" />
+          <div className="tricolor-top relative gold-tick rounded-2xl bg-white border-t-2 border-t-brazil-green border-x border-b border-ink-text/10 p-8 shadow-soft">
+            <div className="flex items-center gap-3 text-brazil-green">
+              <FlagBR className="h-5 w-7 shrink-0" />
               <h3 className="font-display text-xl text-ink-text m-0">A realidade que você já conhece no Brasil</h3>
             </div>
             <ul className="mt-7 space-y-3.5">
               {brasil.map((b) => (
                 <li key={b} className="flex gap-3 text-ink-text/85">
-                  <span className="mt-2.5 h-1 w-1 rounded-full bg-oxblood shrink-0" />
+                  <span className="mt-2.5 h-1 w-1 rounded-full bg-brazil-green shrink-0" />
                   <span>{b}</span>
                 </li>
               ))}
             </ul>
           </div>
-          <div className="relative gold-tick rounded-2xl bg-white border border-gold/40 p-8 shadow-soft">
-            <div className="flex items-center gap-3 text-success">
-              <CheckCircle2 className="h-5 w-5" />
+          <div className="relative gold-tick rounded-2xl bg-white border-t-2 border-t-usa-blue border-x border-b border-usa-blue/25 p-8 shadow-soft">
+            <div className="flex items-center gap-3 text-usa-blue">
+              <FlagUS className="h-5 w-7 shrink-0" />
               <h3 className="font-display text-xl text-ink-text m-0">O que os EUA oferecem a quem é qualificado</h3>
             </div>
             <ul className="mt-7 space-y-3.5">
