@@ -31,7 +31,6 @@ export const HOME_SECTIONS: SectionDef[] = [
   { id: "abertura",             label: "Abertura" },
   { id: "selos-parceiros",      label: "Selos e parceiros" },
   { id: "blog-em-destaque",     label: "Blog em destaque" },
-  { id: "credenciais",          label: "Credenciais" },
   { id: "brasil-vs-eua",        label: "Brasil vs EUA" },
   { id: "eb-2-niw",             label: "EB-2 NIW" },
   { id: "vistos-eb",            label: "Vistos EB" },
