@@ -877,7 +877,7 @@ export function FAQ() {
     },
   ];
   return (
-    <Reveal as="section" id="duvidas-frequentes" className="section-cream-light section-pad">
+    <Reveal as="section" id="duvidas-frequentes" className="section-ink section-pad border-t border-gold/10">
       <div className="container-x max-w-3xl">
         <SectionHead num="10" eyebrow="DÚVIDAS FREQUENTES" title="Antes que você pergunte." />
         <Accordion type="single" collapsible className="mt-12">
