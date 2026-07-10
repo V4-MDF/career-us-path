@@ -45,6 +45,11 @@ export function parseVideoUrl(raw: string | null | undefined): ParsedVideo | nul
   const trimmed = raw.trim();
   if (!trimmed) return null;
 
+  // Caminho relativo (ex.: /__l5e/assets-v1/.../hero.mp4) → arquivo direto.
+  if (trimmed.startsWith("/")) {
+    return { kind: "file", src: trimmed };
+  }
+
   let u: URL;
   try {
     u = new URL(trimmed);
