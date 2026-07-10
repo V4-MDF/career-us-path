@@ -571,6 +571,31 @@ export function LegacySection() {
           title="Muito mais que um visto. Um legado."
           kicker="O Green Card pelo EB-2 NIW reconfigura o horizonte da sua família, em cinco pilares."
         />
+
+        {/* Bloco editorial de família (dobra mais emocional da Home). */}
+        <div className="mt-12 grid lg:grid-cols-[1.15fr_0.85fr] gap-8 items-center">
+          <PhotoFrame
+            src={visaFamilyFuture}
+            alt="Família brasileira com filhos em ambiente escolar americano, futuro e pertencimento"
+            ratio="16/10"
+            className="border border-gold/30 shadow-elevated"
+            width={1600}
+            height={1000}
+          />
+          <div className="relative rounded-2xl border border-gold/25 bg-ink-raise/60 p-7 md:p-9 shadow-soft">
+            <div aria-hidden className="absolute inset-0 -z-10 guilloche opacity-70 rounded-2xl" />
+            <span className="font-mono-label text-gold">FUTURO DOS FILHOS</span>
+            <p className="mt-4 font-display text-2xl md:text-[26px] leading-tight text-foreground">
+              A decisão que muda três gerações.
+            </p>
+            <p className="mt-4 text-foreground/75 leading-relaxed">
+              Green Card para cônjuge e filhos solteiros menores de 21. Escola pública de qualidade,
+              universidade a custo de residente e caminho para a cidadania americana. O que você constrói
+              hoje é a herança que seus filhos vão viver.
+            </p>
+          </div>
+        </div>
+
         <div className="mt-14 grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5">
           {pillars.map(({ icon: Icon, t, d }) => (
             <article key={t} className="relative gold-tick rounded-2xl border border-gold/25 bg-ink-raise/50 p-7 h-full shadow-soft transition-[border-color,box-shadow] hover:border-gold/55 hover:shadow-elevated">
