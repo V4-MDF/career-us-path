@@ -91,7 +91,7 @@ export function Hero() {
             <span className="font-mono-label text-gold">{eyebrow}</span>
           </div>
 
-          <h1 className="display-1 mt-8">
+          <h1 className="display-1 mt-6 md:mt-8 [overflow-wrap:break-word] [hyphens:auto]">
             {lines.map((ln, i) => (
               <span key={i} className="block pb-1">
                 {renderEmphasis(ln)}
