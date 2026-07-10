@@ -603,7 +603,29 @@ export function LegacySection() {
           </div>
         </div>
 
-        <div className="mt-14 grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5">
+        {/* Mobile: carrossel horizontal com snap */}
+        <div className="mt-14 md:hidden -mx-4 px-4 overflow-x-auto snap-x snap-mandatory scroll-smooth scrollbar-hide">
+          <div className="flex gap-4 pb-2">
+            {pillars.map(({ icon: Icon, t, d }) => (
+              <article
+                key={t}
+                className="snap-start shrink-0 w-[82%] gold-tick rounded-2xl border border-gold/25 bg-ink-raise/50 p-6 shadow-soft"
+              >
+                <Icon className="h-6 w-6 text-gold" />
+                <h3 className="mt-5 font-display text-xl">{t}</h3>
+                <p className="mt-3 text-foreground/75 leading-relaxed text-[15px]">{d}</p>
+              </article>
+            ))}
+          </div>
+          <div className="mt-3 flex justify-center gap-1.5" aria-hidden>
+            {pillars.map((_, i) => (
+              <span key={i} className="h-1 w-6 rounded-full bg-gold/30" />
+            ))}
+          </div>
+        </div>
+
+        {/* Desktop/tablet: grid */}
+        <div className="mt-14 hidden md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5">
           {pillars.map(({ icon: Icon, t, d }) => (
             <article key={t} className="relative gold-tick rounded-2xl border border-gold/25 bg-ink-raise/50 p-7 h-full shadow-soft transition-[border-color,box-shadow] hover:border-gold/55 hover:shadow-elevated">
               <Icon className="h-6 w-6 text-gold" />
