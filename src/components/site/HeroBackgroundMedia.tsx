@@ -46,12 +46,26 @@ function useCanPlayVideo(): boolean {
   return ok;
 }
 
+function isValidHttpOrAssetUrl(u: string): boolean {
+  const s = u.trim();
+  if (!s) return false;
+  if (s.startsWith("/") || s.startsWith("http://") || s.startsWith("https://") || s.startsWith("data:")) return true;
+  return false;
+}
+
 export function HeroBackgroundMedia({ videoUrl, posterUrl }: Props) {
   const canPlay = useCanPlayVideo();
-  const effectiveVideoUrl = videoUrl?.trim() ? videoUrl.trim() : DEFAULT_VIDEO_URL;
-  const parsed = parseVideoUrl(effectiveVideoUrl);
-  const poster = posterUrl?.trim() ? posterUrl.trim() : heroSkyline;
+  const [videoFailed, setVideoFailed] = useState(false);
+  const [posterFailed, setPosterFailed] = useState(false);
 
+  const trimmedVideo = videoUrl?.trim() ?? "";
+  const userParsed = trimmedVideo ? parseVideoUrl(trimmedVideo) : null;
+  const defaultParsed = parseVideoUrl(DEFAULT_VIDEO_URL);
+  // If the user URL is invalid OR its load failed at runtime, fall back to the default clip.
+  const parsed = !userParsed || videoFailed ? defaultParsed : userParsed;
+
+  const userPosterValid = !!posterUrl && isValidHttpOrAssetUrl(posterUrl);
+  const poster = userPosterValid && !posterFailed ? posterUrl!.trim() : heroSkyline;
 
   // Sempre renderiza o poster (também serve de fallback).
   return (
@@ -63,11 +77,13 @@ export function HeroBackgroundMedia({ videoUrl, posterUrl }: Props) {
         height={1024}
         fetchPriority="high"
         style={{ filter: DARKEN_FILTER }}
+        onError={() => setPosterFailed(true)}
         className="h-full w-full object-cover object-center opacity-90 [mask-image:linear-gradient(to_bottom,black_75%,transparent_100%)]"
       />
 
       {canPlay && parsed?.kind === "file" && (
         <video
+          key={parsed.src}
           className="absolute inset-0 h-full w-full object-cover object-center opacity-95 [mask-image:linear-gradient(to_bottom,black_75%,transparent_100%)]"
           style={{ filter: DARKEN_FILTER }}
           src={parsed.src}
@@ -79,6 +95,7 @@ export function HeroBackgroundMedia({ videoUrl, posterUrl }: Props) {
           preload="metadata"
           disablePictureInPicture
           controls={false}
+          onError={() => setVideoFailed(true)}
         />
 
       )}
