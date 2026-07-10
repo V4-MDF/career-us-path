@@ -105,9 +105,8 @@ export function VisaPageBody({ page, hideHero = false }: { page: VisaPage; hideH
       </section>
 
       {/* 2 — Elegibilidade */}
-      <section id="elegibilidade" aria-label="Elegibilidade" className="section-anchor bg-ink relative overflow-hidden">
-        <div aria-hidden className="absolute inset-0 guilloche opacity-40" />
-        <div className="container-x section-pad relative">
+      <section id="elegibilidade" aria-label="Elegibilidade" className="section-anchor bg-ink">
+        <div className="container-x section-pad">
           <SectionHead num="02" eyebrow="ELEGIBILIDADE" title={page.qualifies.title} kicker={page.qualifies.intro} />
           <ul className="mt-12 grid gap-5 md:grid-cols-2">
             {page.qualifies.items.map((it) => (
