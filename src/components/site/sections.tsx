@@ -975,6 +975,14 @@ export function FAQ() {
       q: "Não tenho dinheiro sobrando, compensa?",
       a: "É um investimento significativo, e por isso a análise inicial é gratuita: para que a decisão seja informada. Valores são apresentados com clareza após o diagnóstico, sem pressão e sem letras miúdas. Não trabalhamos com promessas de ganho garantido.",
     },
+    {
+      q: "As taxas do governo americano estão incluídas no valor da assessoria?",
+      a: "Não. Existem duas coisas diferentes: (1) as taxas oficiais do governo americano (USCIS), pagas diretamente ao órgão; e (2) o valor da nossa assessoria, que cobre a preparação e organização estratégica do seu processo. São separados. As taxas do USCIS são definidas pelo próprio governo, podem mudar e são pagas por formulário. Na fase final (Green Card), parte das taxas é individual — ou seja, cônjuge e filhos têm suas próprias taxas. Na sua análise gratuita, explicamos exatamente quais taxas se aplicam ao seu caso e à sua família.",
+    },
+    {
+      q: "Preciso pagar taxas separadas para minha família?",
+      a: "Na etapa da petição inicial, a taxa é do requerente principal. Já na etapa final de Green Card, cônjuge e filhos entram com seus próprios formulários e taxas — portanto, há custos individuais por pessoa nessa fase. Detalhamos isso na análise, conforme o tamanho da sua família.",
+    },
   ];
   return (
     <Reveal as="section" id="duvidas-frequentes" className="section-ink section-pad border-t border-gold/10">
