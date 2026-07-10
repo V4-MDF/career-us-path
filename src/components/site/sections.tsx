@@ -42,7 +42,7 @@ import heroSkyline from "@/assets/hero-skyline.jpg";
 import passportDocuments from "@/assets/passport-documents.jpg";
 import usMapEngraving from "@/assets/us-map-engraving.webp";
 import familySuburbUsa from "@/assets/home-family-suburb-usa.jpg";
-import brasilSomber from "@/assets/home-brasil-somber.jpg";
+
 import visaFamilyFuture from "@/assets/visa-family-future.jpg";
 import { PhotoFrame } from "./visa/PhotoFrame";
 import { loadSalaryList, SEED_SALARY, type SalaryRow } from "@/lib/salaryList";
