@@ -142,7 +142,7 @@ export function Hero() {
             <div className="absolute inset-3 rounded-2xl border border-gold/30 pointer-events-none" />
             <div className="absolute bottom-0 left-0 right-0 p-7">
               <div className="flex items-center gap-3 mb-3">
-                <FlagsBRUS size={14} />
+                <span aria-hidden className="h-px w-6 bg-gold" />
                 <span className="font-mono-label text-gold/80">RETRATO EDITORIAL</span>
               </div>
               <p className="font-display text-2xl leading-tight text-foreground">
