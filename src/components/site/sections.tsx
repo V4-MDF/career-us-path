@@ -612,13 +612,18 @@ export function LegacySection() {
 
 /* ============================================================
  * 9. SALÁRIO BRASIL vs EUA
+ *
+ * Lista de profissões em alta demanda. Colunas com unidade explícita:
+ * Brasil = por MÊS, EUA = por ANO (formato usual de cada país).
+ * Dados vêm de salary_list (editável em /admin/salarios), com fallback
+ * para o seed.
  * ============================================================ */
 export function SalaryCompare() {
-  const rows = [
-    { p: "Médico especialista", br: "R$ 300.000 / ano", us: "US$ 264.000 / ano" },
-    { p: "Engenheiro sênior",   br: "R$ 216.000 / ano", us: "US$ 150.000 / ano" },
-    { p: "Profissional de TI sênior", br: "R$ 240.000 / ano", us: "US$ 168.000 / ano" },
-  ];
+  const [rows, setRows] = useState<SalaryRow[]>(SEED_SALARY);
+  useEffect(() => {
+    loadSalaryList().then((list) => setRows(list.filter((r) => r.ativo)));
+  }, []);
+
   return (
     <Reveal as="section" id="renda-em-dolar" className="section-sky section-pad relative">
       <div aria-hidden className="tricolor-rule absolute inset-x-0 top-0" />
@@ -627,30 +632,66 @@ export function SalaryCompare() {
           num="08"
           eyebrow="RENDA EM DÓLAR"
           title="A mesma carreira. Outro patamar de remuneração."
-          kicker="Estimativas anuais brutas de mercado. Valores variam por especialidade, cidade e senioridade."
+          kicker="Profissões em alta demanda nos EUA. Referência de mercado, brutos, no formato usual de cada país."
+          variant="parchment"
         />
-        <div className="mt-14 rounded-2xl border border-gold/25 overflow-hidden shadow-soft">
-          <div className="grid grid-cols-[1.4fr_1fr_1fr] font-mono-label text-foreground/60 bg-ink-deep px-6 py-4 border-b border-gold/20">
-            <span>PROFISSÃO</span><span>BRASIL</span><span className="text-gold">ESTADOS UNIDOS</span>
+
+        {/* Tabela (md+) */}
+        <div className="mt-14 hidden md:block rounded-2xl border border-gold/25 overflow-hidden shadow-soft bg-white/70">
+          <div className="grid grid-cols-[1.6fr_1fr_1fr] bg-[#16223A] px-6 py-4">
+            <span className="font-mono-label text-parchment/90">PROFISSÃO</span>
+            <span className="font-mono-label text-parchment/90">NO BRASIL · POR MÊS</span>
+            <span className="font-mono-label text-gold">NOS EUA · POR ANO</span>
           </div>
           {rows.map((r, i) => (
-            <div key={r.p} className={`grid grid-cols-[1.4fr_1fr_1fr] items-center px-6 py-6 ${i > 0 ? "border-t border-gold/15" : ""}`}>
-              <span className="font-display text-lg">{r.p}</span>
-              <span className="text-foreground/70 font-mono text-sm">{r.br}</span>
+            <div
+              key={r.id}
+              className={`grid grid-cols-[1.6fr_1fr_1fr] items-center px-6 py-5 border-t border-ink-text/5 ${
+                i % 2 === 1 ? "bg-ink-text/[0.03]" : "bg-transparent"
+              }`}
+            >
+              <span className="font-display text-lg text-ink-text">{r.profissao}</span>
+              <span className="text-ink-text/75 font-mono text-sm">{r.br_mensal} <span className="text-ink-text/45">/ mês</span></span>
               <span className="text-gold font-mono text-sm flex items-center gap-2">
-                <TrendingUp className="h-4 w-4" /> {r.us}
+                <TrendingUp className="h-4 w-4 shrink-0" />
+                <span>{r.eua_anual} <span className="text-gold/70">/ ano</span></span>
               </span>
             </div>
           ))}
         </div>
-        <p className="mt-5 text-sm text-foreground/60 leading-relaxed max-w-3xl">
-          Valores de referência (brutos). No Brasil, impostos e encargos reduzem de forma
-          relevante o valor líquido, nos EUA a diferença é ainda maior.
+
+        {/* Cards empilhados (mobile) */}
+        <div className="mt-10 md:hidden space-y-3">
+          {rows.map((r) => (
+            <div key={r.id} className="rounded-xl border border-gold/25 bg-white/70 p-4 shadow-soft">
+              <p className="font-display text-lg text-ink-text leading-tight">{r.profissao}</p>
+              <div className="mt-3 grid grid-cols-2 gap-3 text-sm">
+                <div>
+                  <div className="font-mono-label text-ink-text/55 text-[10px]">NO BRASIL · POR MÊS</div>
+                  <div className="mt-1 font-mono text-ink-text/85">{r.br_mensal}</div>
+                </div>
+                <div>
+                  <div className="font-mono-label text-gold text-[10px]">NOS EUA · POR ANO</div>
+                  <div className="mt-1 font-mono text-gold flex items-center gap-1.5">
+                    <TrendingUp className="h-3.5 w-3.5 shrink-0" />
+                    {r.eua_anual}
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <p className="mt-6 text-sm text-ink-text/60 leading-relaxed max-w-3xl">
+          Valores de referência (brutos), no formato usual de cada país. No Brasil o salário costuma ser
+          mensal; nos EUA, anual. Impostos e encargos reduzem o valor líquido, e a diferença de poder de
+          compra tende a ser ainda maior a favor dos EUA.
         </p>
       </div>
     </Reveal>
   );
 }
+
 
 /* ============================================================
  * 10. DEPOIMENTOS. Vídeo (EB-2 do Helder) + Reais + Estudos de caso
