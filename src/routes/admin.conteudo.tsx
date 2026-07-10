@@ -89,7 +89,8 @@ const PAGES: Array<{
   {
     slug: "eb2-niw", label: "Vistos · EB-2 NIW",
     sections: [
-      { title: "Hero (texto enxuto + vídeo)", keys: [
+      { title: "Hero (imagem + texto enxuto + vídeo)", keys: [
+        { k: "visa.eb2-niw.heroImage", label: "URL da imagem de fundo do hero (webp/jpg) — específica deste visto" },
         { k: "visa.eb2-niw.heroSubtitle", label: "Subtítulo curto (1–2 linhas)", multiline: true },
         { k: "visa.eb2-niw.heroVideoUrl", label: "URL do vídeo (YouTube, Vimeo ou MP4)" },
         { k: "visa.eb2-niw.heroVideoThumb", label: "URL da thumbnail (webp/jpg, opcional)" },
@@ -99,7 +100,8 @@ const PAGES: Array<{
   {
     slug: "eb1", label: "Vistos · EB-1",
     sections: [
-      { title: "Hero (texto enxuto + vídeo)", keys: [
+      { title: "Hero (imagem + texto enxuto + vídeo)", keys: [
+        { k: "visa.eb1.heroImage", label: "URL da imagem de fundo do hero (webp/jpg) — específica deste visto" },
         { k: "visa.eb1.heroSubtitle", label: "Subtítulo curto (1–2 linhas)", multiline: true },
         { k: "visa.eb1.heroVideoUrl", label: "URL do vídeo (YouTube, Vimeo ou MP4)" },
         { k: "visa.eb1.heroVideoThumb", label: "URL da thumbnail (webp/jpg, opcional)" },
@@ -109,7 +111,8 @@ const PAGES: Array<{
   {
     slug: "eb3", label: "Vistos · EB-3",
     sections: [
-      { title: "Hero (texto enxuto + vídeo)", keys: [
+      { title: "Hero (imagem + texto enxuto + vídeo)", keys: [
+        { k: "visa.eb3.heroImage", label: "URL da imagem de fundo do hero (webp/jpg) — específica deste visto" },
         { k: "visa.eb3.heroSubtitle", label: "Subtítulo curto (1–2 linhas)", multiline: true },
         { k: "visa.eb3.heroVideoUrl", label: "URL do vídeo (YouTube, Vimeo ou MP4)" },
         { k: "visa.eb3.heroVideoThumb", label: "URL da thumbnail (webp/jpg, opcional)" },

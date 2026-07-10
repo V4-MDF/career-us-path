@@ -28,8 +28,9 @@ import { useContent } from "@/lib/siteContent";
 // NOTA: as fotografias abaixo são placeholders art-direcionados no mesmo
 // tratamento visual do site. Substituir por fotografia real com o mesmo
 // enquadramento e a classe .photo-treatment. NUNCA usar ilustração ou
-// imagem genérica de IA nas páginas de visto.
-import heroFamilyUsa from "@/assets/visa-hero-family-usa.jpg";
+// imagem genérica de IA nas páginas de visto. A imagem do HERO é por-visto
+// (chave `visa.<slug>.heroImage` em site_content, editável no admin) — não
+// compartilhar a mesma imagem entre vistos.
 import professionalWork from "@/assets/visa-professional-work.jpg";
 import familyFuture from "@/assets/visa-family-future.jpg";
 
@@ -241,11 +242,22 @@ function VisaHero({ page }: { page: VisaPage }) {
   const subtitleKey = `visa.${page.slug}.heroSubtitle` as const;
   const videoKey = `visa.${page.slug}.heroVideoUrl` as const;
   const thumbKey = `visa.${page.slug}.heroVideoThumb` as const;
+  const imageKey = `visa.${page.slug}.heroImage` as const;
   const heroSubtitle = useContent(subtitleKey);
   const videoUrl = useContent(videoKey);
   const videoThumb = useContent(thumbKey);
+  const heroImage = useContent(imageKey);
   const [open, setOpen] = useState(false);
   const hasVideo = Boolean(videoUrl && videoUrl.trim().length > 0);
+
+  // Alt específico por visto (a imagem não é compartilhada — cada visto tem
+  // a sua cena; alt reflete o perfil daquela categoria).
+  const heroAlt =
+    page.slug === "eb2-niw"
+      ? "Profissional brasileiro consolidado em contexto residencial americano, com família ao fundo — Green Card por mérito EB-2 NIW"
+      : page.slug === "eb1"
+        ? "Executivo sênior com reconhecimento internacional em escritório de alto padrão — Green Card EB-1 por habilidade extraordinária"
+        : "Profissional qualificada em ambiente de trabalho americano — Green Card EB-3 com oferta formal de emprego";
 
   return (
     <section
@@ -253,10 +265,11 @@ function VisaHero({ page }: { page: VisaPage }) {
       aria-label="Abertura"
       className="section-anchor bg-ink relative overflow-hidden flex items-center min-h-[86vh]"
     >
-      {/* Foto de fundo full-bleed com tratamento padrão. */}
+      {/* Foto de fundo full-bleed com tratamento padrão. Imagem POR visto,
+          editável no admin via `visa.<slug>.heroImage`. */}
       <PhotoFrame
-        src={heroFamilyUsa}
-        alt="Família brasileira em frente à casa nos Estados Unidos com bandeira americana"
+        src={heroImage}
+        alt={heroAlt}
         fill
         priority
         width={1920}
