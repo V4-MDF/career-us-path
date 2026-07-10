@@ -869,3 +869,10 @@
   opacity: 1 !important;
   filter: none !important;
 }
+
+/* Utilitário: esconder scrollbar em carrosseis horizontais. */
+@utility scrollbar-hide {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar { display: none; }
+}
