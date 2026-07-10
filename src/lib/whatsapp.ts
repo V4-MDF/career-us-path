@@ -28,6 +28,18 @@ export function whatsappLinkFor(number: string, message: string): string {
 }
 
 /**
+ * Mensagem padrão para visitantes que chegam à página de obrigado sem
+ * dados detalhados do lead no sessionStorage.
+ */
+export function defaultWhatsAppMessage(): string {
+  return [
+    "Olá! Acabei de enviar meu perfil para análise no site da Status na América.",
+    "",
+    "Gostaria de conversar sobre os próximos passos.",
+  ].join("\n");
+}
+
+/**
  * Monta a mensagem enviada ao WhatsApp após o envio do formulário geral.
  * Inclui os dados que o lead preencheu para o atendente já entrar em contexto.
  */
