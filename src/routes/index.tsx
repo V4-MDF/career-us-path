@@ -12,7 +12,7 @@ import { BlogStrip } from "@/components/site/BlogStrip";
 import { primePageSections, useOrderedSections } from "@/lib/pageStructure";
 import { getPageSectionsFn } from "@/lib/pageSections.functions";
 
-const OG_IMAGE = "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/6b7cadcb-19ab-4c07-9ce9-d72d0a46c4f6/id-preview-09f8a24a--5de380e6-3aa3-4bc3-844b-02836eb26c67.lovable.app-1782844621831.png";
+const OG_IMAGE = "https://lp.statusnaamerica.com/__l5e/assets-v1/db6af206-dff3-4b36-b8f2-a6d534ba74a4/og-home.jpg";
 
 const HOME_FAQS = [
   { q: "A Status na América é confiável?", a: "Sim. Empresa registrada nos EUA (EIN 99-4846502), sede em Orlando/FL e filial no Brasil (CNPJ 62.917.376/0001-21), 130+ avaliações 5★ no Google e Facebook, acreditada pelo BBB com nota A." },
