@@ -116,6 +116,7 @@ export const defaultContent = {
   // Substituir por fotografia real art-direcionada com o tratamento padrão —
   // nunca imagem genérica de IA; imagem específica deste visto, não compartilhada.
   "visa.eb1.heroImage": visaHeroEb1,
+  "visa.eb1.definitionImage": "",
   "visa.eb3.heroSubtitle":
     "O Green Card com oferta formal de emprego nos EUA, exige patrocinador e PERM.",
   "visa.eb3.heroVideoUrl": "",
