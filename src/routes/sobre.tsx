@@ -23,7 +23,7 @@ import {
 } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
-import { PartnersBadges, Testimonials } from "@/components/site/sections";
+import { PartnersBadges } from "@/components/site/sections";
 import { Button } from "@/components/ui/button";
 import { useContent } from "@/lib/siteContent";
 
@@ -97,7 +97,6 @@ function SobrePage() {
         <NumerosCredenciais />
         <PartnersBadges />
         <OndeEstamos />
-        <Testimonials />
         <CtaFinal />
         <Disclaimer />
       </main>
