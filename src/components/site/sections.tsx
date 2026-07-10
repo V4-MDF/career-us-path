@@ -139,10 +139,6 @@ export function Hero() {
             <VideoPlayer url={heroVideoUrl} title="Vídeo institucional Status na América" />
           </div>
 
-          <div className="mt-4 flex items-center gap-3">
-            <span aria-hidden className="h-px w-6 bg-gold" />
-            <span className="font-mono-label text-gold/85 text-[11px]">FILME INSTITUCIONAL · 16:9</span>
-          </div>
 
         </div>
       </div>
@@ -541,19 +537,12 @@ export function InstitutionalVideo() {
             {lead && (
               <p className="mt-6 text-parchment/80 leading-relaxed max-w-md">{lead}</p>
             )}
-            <p className="mt-8 font-mono-label text-gold/70 text-[11px]">
-              FORMATO 16:9 · HORIZONTAL
-            </p>
           </div>
 
           {/* Coluna do vídeo (moldura dourada, formato horizontal) */}
           <div className="relative">
             <div className="relative aspect-video w-full overflow-hidden rounded-2xl border border-gold/40 bg-ink-raise shadow-elevated ring-1 ring-gold/10">
               <VideoPlayer url={url} title={title || "Vídeo institucional Status na América"} />
-            </div>
-            <div className="mt-4 flex items-center gap-3">
-              <span aria-hidden className="h-px w-6 bg-gold" />
-              <span className="font-mono-label text-gold/85 text-[11px]">FILME INSTITUCIONAL</span>
             </div>
           </div>
         </div>
