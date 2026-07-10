@@ -13,6 +13,7 @@ import { Link } from "@tanstack/react-router";
 import { Facebook, Instagram, Youtube } from "lucide-react";
 import { getSiteSettings, type SiteSettings } from "@/lib/admin/settings";
 import { FlagBR, FlagUS } from "./flags";
+import logoAsset from "@/assets/logo-status-na-america.webp.asset.json";
 
 export function Footer() {
   const [s, setS] = useState<SiteSettings | null>(null);
@@ -30,12 +31,16 @@ export function Footer() {
       <div className="container-x py-16 grid gap-12 md:grid-cols-12">
         {/* Marca + redes */}
         <div className="md:col-span-4">
-          <div className="flex items-center gap-3">
-            <span className="grid h-10 w-10 place-items-center border border-gold/60 text-gold font-display text-xl">S</span>
-            <span className="font-display text-2xl">
-              Status<span className="text-gold">.</span> na América
-            </span>
-          </div>
+          <Link to="/" aria-label="Status na América — página inicial" className="inline-block">
+            <img
+              src={logoAsset.url}
+              alt="Status na América"
+              width={220}
+              height={56}
+              loading="lazy"
+              className="h-12 w-auto"
+            />
+          </Link>
           <p className="mt-6 max-w-sm text-sm text-foreground/65 leading-relaxed">
             Especialistas em preparação documental para mobilidade migratória, para
             profissionais brasileiros que escolheram construir o próximo capítulo nos Estados Unidos.
