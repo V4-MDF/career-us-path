@@ -2,14 +2,18 @@
  * useScrollSpy, observa `<section id=…>` na rota e devolve o id ativo,
  * atualizando `window.location.hash` via `history.replaceState` (debounced).
  *
- * Princípios:
+ * Princípios (revisado para eliminar jank de scroll, especialmente Safari):
  *  - Um único IntersectionObserver para todas as sections (barato).
- *  - `rootMargin: "-30% 0px -55% 0px"` → dispara quando a dobra está
- *    realmente no foco visual do leitor (terço superior).
+ *  - `rootMargin: "-30% 0px -55% 0px"` → dobra em foco visual do leitor.
+ *  - Nunca ler/escrever layout no callback (só Map<id, ratio>).
+ *  - Só reagimos DEPOIS que o usuário pausa o scroll (~180ms) — evita
+ *    setState + replaceState em rajada durante o scroll (Safari repinta
+ *    a tab-strip a cada `document.title = ...`, o que trava o gesto).
+ *  - Atualiza state e hash na mesma janela (uma única mutação DOM).
  *  - replaceState, não pushState, botão voltar não polui.
- *  - Debounce de 220ms para evitar >4 atualizações/s em scroll rápido.
  *  - SSR-safe (no-op no servidor).
  *  - Não dispara durante scroll programático (`suspendUntil` ref).
+ *  - Sem scrollTo/scrollIntoView em callback de scroll: o scroll é do usuário.
  */
 
 import { useEffect, useRef, useState } from "react";
@@ -32,15 +36,19 @@ export interface ScrollSpyOptions {
   syncHash?: boolean;
   /** rootMargin do IntersectionObserver. */
   rootMargin?: string;
+  /** Debounce (ms) do settle após o observer. Default 180ms. */
+  settleMs?: number;
 }
 
 export function useScrollSpy({
   ids,
   syncHash = true,
   rootMargin = "-30% 0px -55% 0px",
+  settleMs = 180,
 }: ScrollSpyOptions): string | null {
   const [activeId, setActiveId] = useState<string | null>(null);
-  const debounceRef = useRef<number | null>(null);
+  const activeIdRef = useRef<string | null>(null);
+  const settleRef = useRef<number | null>(null);
 
   useEffect(() => {
     if (typeof window === "undefined" || typeof IntersectionObserver === "undefined") return;
@@ -48,22 +56,38 @@ export function useScrollSpy({
 
     const visibility = new Map<string, number>();
 
+    const scheduleSettle = () => {
+      if (settleRef.current !== null) window.clearTimeout(settleRef.current);
+      settleRef.current = window.setTimeout(() => {
+        // Escolhe a dobra com maior ratio no momento do "settle".
+        let bestId: string | null = null;
+        let bestRatio = 0;
+        for (const id of ids) {
+          const r = visibility.get(id) ?? 0;
+          if (r > bestRatio) {
+            bestRatio = r;
+            bestId = id;
+          }
+        }
+        if (!bestId) return;
+        if (bestId === activeIdRef.current) return; // idempotente
+
+        activeIdRef.current = bestId;
+        setActiveId(bestId);
+
+        if (syncHash) {
+          const desired = `#${bestId}`;
+          if (window.location.hash !== desired) {
+            const url = `${window.location.pathname}${window.location.search}${desired}`;
+            window.history.replaceState(null, "", url);
+          }
+        }
+      }, settleMs);
+    };
+
     const observer = new IntersectionObserver(
       (entries) => {
-        // Scroll programático em andamento: ignora updates intermediários
-        // e mantém o activeId travado no alvo.
-        if (performance.now() < programmaticScroll.until) {
-          if (programmaticScroll.targetId) setActiveId(programmaticScroll.targetId);
-          // Apenas atualiza o map para quando a suspensão terminar.
-          for (const entry of entries) {
-            const id = (entry.target as HTMLElement).id;
-            if (!id) continue;
-            if (entry.isIntersecting) visibility.set(id, entry.intersectionRatio || 0.0001);
-            else visibility.delete(id);
-          }
-          return;
-        }
-
+        // Atualiza o mapa de visibilidade SEM tocar em DOM/estado.
         for (const entry of entries) {
           const id = (entry.target as HTMLElement).id;
           if (!id) continue;
@@ -74,47 +98,35 @@ export function useScrollSpy({
           }
         }
 
-        let bestId: string | null = null;
-        let bestRatio = 0;
-        for (const id of ids) {
-          const r = visibility.get(id) ?? 0;
-          if (r > bestRatio) {
-            bestRatio = r;
-            bestId = id;
+        // Scroll programático em andamento: mantém activeId travado no alvo,
+        // sem tocar em URL/título — o `scrollToSection` já fez isso uma vez.
+        if (performance.now() < programmaticScroll.until) {
+          if (
+            programmaticScroll.targetId &&
+            programmaticScroll.targetId !== activeIdRef.current
+          ) {
+            activeIdRef.current = programmaticScroll.targetId;
+            setActiveId(programmaticScroll.targetId);
           }
+          return;
         }
 
-        if (!bestId) return;
-        setActiveId(bestId);
-
-        if (syncHash) {
-          if (debounceRef.current !== null) window.clearTimeout(debounceRef.current);
-          debounceRef.current = window.setTimeout(() => {
-            const desired = `#${bestId}`;
-            if (window.location.hash !== desired) {
-              const url = `${window.location.pathname}${window.location.search}${desired}`;
-              window.history.replaceState(null, "", url);
-            }
-          }, 220);
-        }
+        // Debounce: só decide a dobra ativa quando o scroll pausa.
+        scheduleSettle();
       },
       { rootMargin, threshold: [0, 0.1, 0.25, 0.5, 0.75, 1] },
     );
 
-    const elements: HTMLElement[] = [];
     for (const id of ids) {
       const el = document.getElementById(id);
-      if (el) {
-        observer.observe(el);
-        elements.push(el);
-      }
+      if (el) observer.observe(el);
     }
 
     return () => {
       observer.disconnect();
-      if (debounceRef.current !== null) window.clearTimeout(debounceRef.current);
+      if (settleRef.current !== null) window.clearTimeout(settleRef.current);
     };
-  }, [ids.join("|"), syncHash, rootMargin]);
+  }, [ids.join("|"), syncHash, rootMargin, settleMs]);
 
   return activeId;
 }
@@ -123,6 +135,9 @@ export function useScrollSpy({
  * Helper: rola até a section com o id pedido, respeitando reduced-motion
  * e o header fixo. Suspende o scroll-spy durante a animação para evitar
  * flicker do <title> e do hash passando por todas as dobras intermediárias.
+ *
+ * Usado apenas em cliques explícitos (TOC, deep-link inicial). Nunca
+ * chamado por handlers de scroll.
  */
 export function scrollToSection(id: string, suspendSpyMs = 900) {
   if (typeof window === "undefined") return;
