@@ -173,8 +173,15 @@ function ensureHydrated(page: PageSlug) {
   hydrated.add(page);
   // Busca o layout salvo no Supabase e atualiza o cache local, para que
   // qualquer visitante (não só o admin que salvou) veja a ordem correta.
+  // Só dispara re-render se o payload diferir do snapshot atual, para
+  // evitar o flicker de reordenação quando o localStorage já está sincronizado.
   loadPageSections(page)
-    .then(() => {
+    .then((items) => {
+      const currentKey = getCachedSnapshot(page)
+        .map((s) => `${s.id}:${s.active ? 1 : 0}`)
+        .join("|");
+      const nextKey = items.map((s) => `${s.id}:${s.active ? 1 : 0}`).join("|");
+      if (currentKey === nextKey) return;
       try { window.dispatchEvent(new Event("status:admin-change")); } catch { /* ignore */ }
     })
     .catch(() => { /* mantém defaults */ });
