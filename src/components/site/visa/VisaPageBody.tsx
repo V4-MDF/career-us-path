@@ -33,11 +33,25 @@ export function VisaPageBody({ page, hideHero = false }: { page: VisaPage; hideH
   return (
     <main className={hideHero ? "pt-0" : "pt-28"}>
       {!hideHero && (
-      /* Hero — fora do scroll-spy (não é uma "dobra" listada no TOC). */
-      <section id="abertura" aria-label="Abertura" className="section-anchor bg-ink relative overflow-hidden">
-        <div aria-hidden className="absolute inset-0 guilloche" />
-        <div className="container-x section-pad relative">
-          <nav aria-label="Breadcrumb" className="font-mono-label text-foreground/55 flex items-center gap-2">
+      /* Hero fotográfico — full-bleed com overlay navy forte (AA em todo
+         texto). Grão + vinheta vêm do <PhotoFrame>. Fora do scroll-spy. */
+      <section id="abertura" aria-label="Abertura" className="section-anchor bg-ink relative overflow-hidden min-h-[86vh] flex items-center">
+        <PhotoFrame
+          src={heroFamilyUsa}
+          alt="Família brasileira em frente à casa nos Estados Unidos com bandeira americana"
+          fill
+          priority
+          width={1920}
+          height={1088}
+          focal="60% 40%"
+          className="!rounded-none"
+        />
+        {/* Overlay navy: 85% à esquerda → 55% à direita, para AA no texto. */}
+        <div aria-hidden className="absolute inset-0 bg-gradient-to-r from-[#0A111C]/92 via-[#0A111C]/78 to-[#0A111C]/55" />
+        <div aria-hidden className="absolute inset-0 guilloche opacity-40" />
+
+        <div className="container-x section-pad relative w-full">
+          <nav aria-label="Breadcrumb" className="font-mono-label text-foreground/70 flex items-center gap-2">
             <Link to="/" className="hover:text-gold">Início</Link>
             <ChevronRight className="h-3 w-3" />
             <span className="text-gold">{page.eyebrow}</span>
@@ -53,10 +67,10 @@ export function VisaPageBody({ page, hideHero = false }: { page: VisaPage; hideH
             )}
           </div>
 
-          <h1 className="mt-5 font-display text-[40px] md:text-[64px] leading-[1.04] max-w-4xl">
+          <h1 className="mt-5 font-display text-[40px] md:text-[64px] leading-[1.04] max-w-4xl text-foreground drop-shadow-[0_2px_20px_rgba(0,0,0,0.5)]">
             {page.h1}
           </h1>
-          <p className="mt-6 text-lg md:text-xl text-foreground/80 leading-relaxed max-w-3xl">
+          <p className="mt-6 text-lg md:text-xl text-foreground/90 leading-relaxed max-w-3xl">
             {page.intro}
           </p>
           <div className="mt-10">
