@@ -46,9 +46,9 @@ export function VisaPageBody({ page, hideHero = false }: { page: VisaPage; hideH
           focal="60% 40%"
           className="!rounded-none"
         />
-        {/* Overlay navy: 85% à esquerda → 55% à direita, para AA no texto. */}
-        <div aria-hidden className="absolute inset-0 bg-gradient-to-r from-[#0A111C]/92 via-[#0A111C]/78 to-[#0A111C]/55" />
-        <div aria-hidden className="absolute inset-0 guilloche opacity-40" />
+        {/* Overlay navy sólido: 88% no lado do texto → 45% no lado oposto,
+            garantindo AA no H1/subtítulo sem padrões sobre a foto. */}
+        <div aria-hidden className="absolute inset-0 bg-gradient-to-r from-[#0A111C]/92 via-[#0A111C]/75 to-[#0A111C]/45" />
 
         <div className="container-x section-pad relative w-full">
           <nav aria-label="Breadcrumb" className="font-mono-label text-foreground/70 flex items-center gap-2">
@@ -105,9 +105,8 @@ export function VisaPageBody({ page, hideHero = false }: { page: VisaPage; hideH
       </section>
 
       {/* 2 — Elegibilidade */}
-      <section id="elegibilidade" aria-label="Elegibilidade" className="section-anchor bg-ink relative overflow-hidden">
-        <div aria-hidden className="absolute inset-0 guilloche opacity-40" />
-        <div className="container-x section-pad relative">
+      <section id="elegibilidade" aria-label="Elegibilidade" className="section-anchor bg-ink">
+        <div className="container-x section-pad">
           <SectionHead num="02" eyebrow="ELEGIBILIDADE" title={page.qualifies.title} kicker={page.qualifies.intro} />
           <ul className="mt-12 grid gap-5 md:grid-cols-2">
             {page.qualifies.items.map((it) => (
@@ -141,9 +140,8 @@ export function VisaPageBody({ page, hideHero = false }: { page: VisaPage; hideH
 
       {/* 4 — Família — dobra emocional. Foto grande da família (coração do
           "futuro dos filhos / legado"), texto ao lado com peso reduzido. */}
-      <section id="familia" aria-label="Família" className="section-anchor bg-ink-deep relative overflow-hidden">
-        <div aria-hidden className="absolute inset-0 guilloche opacity-30" />
-        <div className="container-x section-pad grid md:grid-cols-12 gap-10 items-center relative">
+      <section id="familia" aria-label="Família" className="section-anchor bg-ink-deep">
+        <div className="container-x section-pad grid md:grid-cols-12 gap-10 items-center">
           <div className="md:col-span-7 order-2 md:order-1">
             <PhotoFrame
               src={familyFuture}
