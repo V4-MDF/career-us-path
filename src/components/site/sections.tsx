@@ -332,7 +332,7 @@ export function NiwSection() {
         </div>
 
         <div className="relative">
-          <div className="aspect-video overflow-hidden rounded-2xl border border-gold/40 bg-ink-deep relative shadow-elevated">
+          <div className="photo-treatment aspect-video overflow-hidden rounded-2xl border border-gold/40 bg-ink-deep relative shadow-elevated">
             {/* Foto editorial, passaporte brasileiro + documentos sobre mesa de madeira. */}
             <img
               src={passportDocuments}
@@ -342,7 +342,9 @@ export function NiwSection() {
               loading="lazy"
               className="absolute inset-0 h-full w-full object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-tr from-ink-deep/95 via-ink-deep/70 to-ink-deep/30" />
+            <div aria-hidden className="photo-treatment__grain" />
+            <div aria-hidden className="photo-treatment__vignette" />
+            <div className="absolute inset-0 bg-gradient-to-tr from-ink-deep/90 via-ink-deep/55 to-ink-deep/15" />
             <div className="absolute inset-3 rounded-xl border border-gold/30 pointer-events-none" />
             <div className="absolute bottom-0 left-0 right-0 p-6">
               <p className="font-mono-label text-gold/80">DOSSIÊ EB-2 NIW</p>
