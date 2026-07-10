@@ -140,9 +140,8 @@ export function VisaPageBody({ page, hideHero = false }: { page: VisaPage; hideH
 
       {/* 4 — Família — dobra emocional. Foto grande da família (coração do
           "futuro dos filhos / legado"), texto ao lado com peso reduzido. */}
-      <section id="familia" aria-label="Família" className="section-anchor bg-ink-deep relative overflow-hidden">
-        <div aria-hidden className="absolute inset-0 guilloche opacity-30" />
-        <div className="container-x section-pad grid md:grid-cols-12 gap-10 items-center relative">
+      <section id="familia" aria-label="Família" className="section-anchor bg-ink-deep">
+        <div className="container-x section-pad grid md:grid-cols-12 gap-10 items-center">
           <div className="md:col-span-7 order-2 md:order-1">
             <PhotoFrame
               src={familyFuture}
