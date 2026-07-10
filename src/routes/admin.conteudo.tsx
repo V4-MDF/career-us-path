@@ -12,6 +12,14 @@ import { defaultContent } from "@/lib/siteContent";
 import { isPending } from "@/lib/pendingValidation";
 import { broadcast } from "@/lib/admin/settings";
 import { parseVideoUrl } from "@/lib/videoEmbed";
+import { ImageUploader } from "@/components/admin/ImageUploader";
+
+function detectMediaKind(key: string, label: string): "image" | "video" | null {
+  const s = `${key} ${label}`.toLowerCase();
+  if (/video|vídeo|videourl/i.test(s) && !/thumb|poster|imagem/i.test(s)) return "video";
+  if (/image|imagem|poster|thumb|logo|url do logo|heroimage|definitionimage|posterurl/i.test(s)) return "image";
+  return null;
+}
 
 export const Route = createFileRoute("/admin/conteudo")({ component: ContentPage });
 
