@@ -290,10 +290,6 @@ function NumerosCredenciais() {
       v: useContent("sobre.numeros.n5.valor"),
       l: useContent("sobre.numeros.n5.label"),
     },
-    {
-      v: useContent("sobre.numeros.n6.valor"),
-      l: useContent("sobre.numeros.n6.label"),
-    },
   ];
 
   return (
@@ -307,7 +303,7 @@ function NumerosCredenciais() {
           {title}
         </h2>
 
-        <ul className="mt-10 grid gap-5 grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
+        <ul className="mt-10 grid gap-5 grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
           {stats.map((s, i) => (
             <li
               key={i}

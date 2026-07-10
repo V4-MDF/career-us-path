@@ -3,7 +3,7 @@
  *
  * Prompt 5: dados reais + CTAs apontando para LP /avaliacao com src/seg/utms.
  *  - ProcessSteps: substituído pelo processo real EB-2 NIW (4 etapas).
- *  - WhyUs: estatísticas reais (25+ anos, 5.000+ processos, 98% satisfação,
+ *  - WhyUs: estatísticas reais (5.000+ processos, 98% satisfação,
  *           1.000+ famílias, 130+ avaliações 5★, BBB nota A).
  *  - Testimonials: vídeos de casos reais (Helder + slot secundário).
  *  - FAQ: perguntas reais (confiança, experiência, atendimento remoto, valor).
@@ -464,7 +464,6 @@ export function WhyUs() {
 
   // Stats reais (Prompt 5), internamente "pendentes de validação" (admin)
   const stats = [
-    { value: "25+", label: "ANOS DE EXPERIÊNCIA" },
     { value: "5.000+", label: "PROCESSOS" },
     { value: "98%", label: "DE SATISFAÇÃO" },
     { value: "1.000+", label: "FAMÍLIAS ATENDIDAS" },
