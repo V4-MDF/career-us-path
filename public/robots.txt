@@ -4,7 +4,6 @@ Disallow: /admin
 Disallow: /admin/
 Disallow: /lp
 Disallow: /lp/
+Disallow: /auth
 
-# Sitemap (sem domínio absoluto até o domínio final ser definido —
-# o crawler resolve a partir do host atual).
-Sitemap: /sitemap.xml
+Sitemap: https://lp.statusnaamerica.com/sitemap.xml
