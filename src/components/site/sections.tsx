@@ -228,19 +228,44 @@ export function ContrastBrasilEUA() {
       <div className="container-x">
         <SectionHead num="01" eyebrow="POR QUE MIGRAR AGORA" title="Duas realidades. Uma decisão." />
         <div className="mt-14 grid md:grid-cols-2 gap-6">
-          {cards.map(({ code, title: cardTitle, items, accent, Map }) => (
+          {cards.map(({ code, title: cardTitle, items, accent, Map, photo, photoAlt, photoTone }) => (
             <div
               key={code}
-              className="relative overflow-hidden rounded-2xl bg-white border border-ink-text/10 shadow-soft p-7 md:p-10"
+              className="relative overflow-hidden rounded-2xl bg-white border border-ink-text/10 shadow-soft flex flex-col"
               style={{ borderTop: `2px solid ${accent}` }}
             >
-              <Map
-                aria-hidden
-                className="absolute -right-10 -top-8 h-[110%] w-auto pointer-events-none"
-                style={{ color: accent, opacity: 0.08 }}
-              />
-              <div className="relative">
-                <span
+              {/* Faixa fotográfica editorial no topo do card (tratamento unificado). */}
+              <div className="photo-treatment relative aspect-[16/9] overflow-hidden">
+                <img
+                  src={photo}
+                  alt={photoAlt}
+                  width={1400}
+                  height={787}
+                  loading="lazy"
+                  className={`h-full w-full object-cover ${photoTone === "grayscale" ? "grayscale-[.55] brightness-95" : ""}`}
+                />
+                <div aria-hidden className="photo-treatment__grain" />
+                <div aria-hidden className="photo-treatment__vignette" />
+                <div
+                  aria-hidden
+                  className="absolute inset-0"
+                  style={{
+                    background: photoTone === "grayscale"
+                      ? "linear-gradient(180deg, rgba(14,23,38,0.15) 0%, rgba(14,23,38,0.55) 100%)"
+                      : "linear-gradient(180deg, rgba(255,255,255,0) 40%, rgba(0,0,0,0.35) 100%)",
+                  }}
+                />
+                <span aria-hidden className="absolute bottom-0 left-0 right-0 h-px" style={{ backgroundColor: accent, opacity: 0.6 }} />
+              </div>
+
+              <div className="p-7 md:p-10 relative">
+                <Map
+                  aria-hidden
+                  className="absolute -right-10 -top-8 h-[110%] w-auto pointer-events-none"
+                  style={{ color: accent, opacity: 0.08 }}
+                />
+                <div className="relative">
+                  <span
                   className="inline-flex items-center justify-center h-8 px-3 rounded-full border font-mono-label text-[11px] tracking-[0.2em]"
                   style={{ color: accent, borderColor: `color-mix(in oklab, ${accent} 40%, transparent)` }}
                 >
