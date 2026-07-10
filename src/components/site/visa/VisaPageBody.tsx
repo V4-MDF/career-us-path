@@ -354,7 +354,7 @@ function VisaHero({ page }: { page: VisaPage }) {
                 </div>
               </button>
               <p className="mt-3 text-center font-mono-label text-[10px] tracking-[0.18em] text-foreground/80">
-                {page.eyebrow} · CASO EM VÍDEO
+                Saiba mais sobre o Visto
               </p>
             </div>
           </div>
