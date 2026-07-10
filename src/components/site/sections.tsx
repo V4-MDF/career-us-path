@@ -38,6 +38,7 @@ import { FlagBR, FlagUS, FlagsBRUSDual } from "./visuals/DualFlagIcons";
 
 
 import heroSkyline from "@/assets/hero-skyline.jpg";
+import { HeroBackgroundMedia } from "./HeroBackgroundMedia";
 
 import passportDocuments from "@/assets/passport-documents.jpg";
 import usMapEngraving from "@/assets/us-map-engraving.webp";
