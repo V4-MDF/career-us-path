@@ -12,15 +12,19 @@
  */
 
 import { Link } from "@tanstack/react-router";
-import { Check, ChevronRight } from "lucide-react";
+import { Check, ChevronRight, PlayCircle } from "lucide-react";
+import { useState } from "react";
 import { SectionHead } from "@/components/site/SectionHead";
 import { Button } from "@/components/ui/button";
 import {
   Accordion, AccordionContent, AccordionItem, AccordionTrigger,
 } from "@/components/ui/accordion";
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { avaliacaoHref } from "@/lib/ctaLinks";
 import { COMPARISON, type VisaPage } from "@/lib/visaPages";
 import { PhotoFrame } from "@/components/site/visa/PhotoFrame";
+import { VideoPlayer } from "@/components/site/VideoPlayer";
+import { useContent } from "@/lib/siteContent";
 // NOTA: as fotografias abaixo são placeholders art-direcionados no mesmo
 // tratamento visual do site. Substituir por fotografia real com o mesmo
 // enquadramento e a classe .photo-treatment — NUNCA usar ilustração ou
@@ -28,6 +32,7 @@ import { PhotoFrame } from "@/components/site/visa/PhotoFrame";
 import heroFamilyUsa from "@/assets/visa-hero-family-usa.jpg";
 import professionalWork from "@/assets/visa-professional-work.jpg";
 import familyFuture from "@/assets/visa-family-future.jpg";
+
 
 export function VisaPageBody({ page, hideHero = false }: { page: VisaPage; hideHero?: boolean }) {
   return (
