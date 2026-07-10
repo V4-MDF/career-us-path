@@ -3,8 +3,7 @@
  *
  * Diferente de /avaliacao (formulário comercial curto), aqui o respondente
  * tem um questionário longo (4 etapas) que gera um VEREDICTO automático por
- * visto (EB-1A, EB-2 NIW, O-1, EB-3) com link público compartilhável e CTA
- * para WhatsApp.
+ * visto (EB-1A, EB-2 NIW, O-1, EB-3) com link público compartilhável.
  *
  * Fluxo:
  *  1) renderiza <PreQualForm>;
