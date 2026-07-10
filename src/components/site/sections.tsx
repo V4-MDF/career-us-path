@@ -68,7 +68,7 @@ export function Hero() {
     <section
       id="abertura"
       aria-label="Abertura"
-      className="section-anchor relative overflow-hidden pt-32 md:pt-44 pb-24 md:pb-36"
+      className="section-anchor relative overflow-hidden pt-24 md:pt-44 pb-16 md:pb-36"
     >
       {/* Fundo da hero: vídeo (desktop, sem reduced-motion) ou poster estático.
           Fallback silencioso para hero-skyline se não houver configuração no admin. */}
