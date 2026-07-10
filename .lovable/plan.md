@@ -1,59 +1,33 @@
-## Objetivo
+## Auditoria + ajustes
 
-Remover todos os travessões longos (`—`) do site e substituí-los por pontuação natural em português brasileiro (ponto quando a segunda parte é uma afirmação forte; vírgula ou dois-pontos quando é continuação da ideia). Aplicar em copy visível, painel admin e comentários de código.
+### 1. Bug de reordenação das dobras (flicker)
+Sintoma: a ordem da Home muda "sozinha" ao carregar.
 
-## Escopo
+Causa em `src/lib/pageStructure.ts`:
+- SSR/initial snapshot devolve `DEFAULT_LAYOUTS` (ordem do código).
+- Depois da hidratação, `ensureHydrated` busca a ordem salva no Supabase e dispara `status:admin-change`, forçando re-render com a nova ordem. Resultado visível: as dobras "pulam" de lugar.
+- Além disso, `getServerSnapshot` e o snapshot do cliente inicial divergem quando já existe layout em `localStorage`, mas o snapshot inicial ignora isso.
 
-Aproximadamente 320 ocorrências em ~50 arquivos, distribuídas em três grupos:
+Correções:
+- Ler `localStorage` de forma síncrona no primeiro snapshot do cliente (já feito), mas também disparar o `dispatchEvent` só quando o payload vindo do Supabase for diferente do cache atual (comparar chaves `id:active`). Sem diferença, sem broadcast.
+- Persistir o snapshot do Supabase no `localStorage` antes do broadcast, para que o próximo carregamento já parta da ordem correta e não haja flicker em visitas subsequentes.
+- Garantir estabilidade do cache em `getCachedSnapshot` (já usa key). Adicionar guarda para não trocar referência quando reconcile devolver mesma ordem.
 
-**Copy visível ao visitante (~180 ocorrências)** — prioridade alta, tom precisa ficar natural:
-- `src/lib/siteContent.ts` (defaults de textos da Home e institucional)
-- `src/lib/visaPages.ts` + `src/components/site/visa/VisaPageBody.tsx` (páginas de visto EB-2 NIW / EB-1 / EB-3)
-- `src/lib/blog.ts` (posts do blog)
-- `src/components/site/sections.tsx` (14 dobras da Home, FAQ, CTAs)
-- `src/components/site/LeadFormProgressive.tsx`, `src/components/site/prequal/PreQualForm.tsx`, `src/components/site/prequal/PreQualResult.tsx`
-- `src/routes/avaliacao.index.tsx`, `src/routes/avaliacao.obrigado.tsx`, `src/routes/sobre.tsx`, `src/routes/llm-info.tsx`, `src/routes/vistos.$slug.*`
-- `src/lib/leadQualification.ts`, `src/lib/scoring.ts`, `src/lib/leadScoring.ts`, `src/lib/visaQualifier.ts`, `src/lib/segments.ts` (strings de mensagens exibidas)
-- `src/lib/whatsapp.ts` (mensagem enviada ao lead)
+### 2. Dobra "Duas realidades. Uma decisão."
+Objetivo: mais compacta e mais direta.
 
-**Painel admin (~80 ocorrências)**:
-- `src/routes/admin.*.tsx` (todos os rótulos, tooltips e textos exibidos)
+Mudanças em `ContrastBrasilEUA` (`src/components/site/sections.tsx`):
+- Remover a faixa fotográfica dos dois cards (sem `photo`, sem `photo-treatment`, sem `familySuburbUsa`/`brasilSomber` nessa dobra).
+- Reduzir padding para `p-6 md:p-7` e enxugar espaços verticais (título `text-xl md:text-2xl`, `mt-4` no título, `space-y-2.5` na lista).
+- Card Brasil: paleta vermelha assertiva. Accent `#B23A3A` (vermelho sóbrio), fundo `bg-[#FBEEEE]`, borda topo 3px vermelha, badge "BR" e eyebrow em vermelho, ícones `AlertOctagon`/`XCircle` em vermelho.
+- Card EUA: paleta verde de conquista. Accent `#2E7D5B` mantido, fundo `bg-[#EEF6F1]`, borda topo verde, badge "US" e eyebrow em verde, ícones `CheckCircle2` em verde.
+- Divisor central com seta BR→US mantido, mas menor (h-9 w-9).
+- Mobile: cards empilhados, sem imagens, altura muito menor.
+- Section padding reduzido: substituir `section-pad` por classe utilitária com `py-16 md:py-20` local ao bloco (ou wrapper interno com `py-2` a menos).
 
-**Comentários e docs de código (~60 ocorrências)**:
-- Cabeçalhos de arquivos, JSDoc, `README.md`, comentários inline em `src/lib/*`, `src/hooks/*`, `src/components/site/visuals/*`, `src/styles.css`.
+### 3. Verificação pós-mudança
+- Recarregar `/` várias vezes (com e sem `localStorage`) confirmando que a ordem não "salta".
+- Screenshot desktop + mobile da dobra "Duas realidades" confirmando cards curtos, ícones vermelhos (BR) e verdes (EUA), sem fotos.
 
-## Regra de substituição
-
-Aplicar caso a caso conforme a função retórica do travessão:
-
-- **Ponto final** quando a segunda parte é conclusão ou afirmação de peso.  
-  Ex.: `"Green Card por mérito profissional — sem empresa patrocinadora."` → `"Green Card por mérito profissional. Sem empresa patrocinadora."`
-- **Vírgula** quando é aposto curto ou explicação natural.  
-  Ex.: `"documentação preparada com o rigor exigido pelo USCIS — sem promessas de prazo."` → `"documentação preparada com o rigor exigido pelo USCIS, sem promessas de prazo."`
-- **Dois-pontos** quando introduz lista, definição ou consequência direta.  
-  Ex.: `"O que controlamos — a qualidade da estruturação."` → `"O que controlamos: a qualidade da estruturação."`
-- **Parênteses** quando é nota lateral que já vem cercada por vírgulas em cascata.
-- Preservar `—` apenas em contextos técnicos onde ele não é copy: separadores de UI que não são texto lido (ex.: labels tipo `"RETRATO EDITORIAL"` não têm travessão, mas listas com formato `"BBB · Nota A"` já usam `·` e ficam). Traços curtos (`-`) e meia-quadratins (`–`) em datas/intervalos ficam.
-
-## Não muda
-
-- Nada de layout, estilo, rotas, tracking, scoring, A/B, RLS, migrations.
-- Fontes, cores, componentes shadcn.
-- Estrutura de arquivos.
-- `·` (ponto médio) usado como separador tipográfico (ex.: `"BBB · Nota A"`) fica.
-- URLs, código, nomes de variáveis.
-
-## Execução
-
-Faço a revisão em quatro lotes, um commit lógico por lote, relendo cada arquivo alterado para garantir que o texto continua natural em PT-BR (não é substituição cega por regex — cada `—` vira a pontuação adequada ao contexto):
-
-1. **Lote 1 — Copy da Home e institucional**: `siteContent.ts`, `sections.tsx`, `sobre.tsx`, `Footer`, `Header`, `llm-info.tsx`.
-2. **Lote 2 — Páginas de visto e blog**: `visaPages.ts`, `VisaPageBody.tsx`, `vistos.$slug.*`, `blog.ts`.
-3. **Lote 3 — Formulários e fluxo de conversão**: `LeadFormProgressive`, `PreQualForm`, `PreQualResult`, `avaliacao.*`, `whatsapp.ts`, `leadQualification.ts`, `scoring.ts`, `leadScoring.ts`, `visaQualifier.ts`, `segments.ts`.
-4. **Lote 4 — Admin + comentários e docs**: `src/routes/admin.*.tsx`, `README.md`, comentários em `src/lib/*`, `src/hooks/*`, `src/components/**`, `src/styles.css`, `src/server.ts`.
-
-Após cada lote, rodo `rg "—" <arquivos-do-lote>` para confirmar zero ocorrências residuais e faço leitura visual das seções principais na preview para checar se nenhuma frase ficou truncada ou estranha.
-
-## Entregável
-
-Zero `—` no repositório (`rg "—" src/` retorna vazio), copy visível reescrita em PT-BR natural sem alterar significado, admin com rótulos limpos, comentários de código sem o caractere. Nenhuma mudança funcional.
+### Escopo
+Somente `src/lib/pageStructure.ts` e `src/components/site/sections.tsx` (bloco `ContrastBrasilEUA` + remoção dos imports de foto se ficarem órfãos). Sem tocar em outras dobras, admin, backend ou dados salvos.
