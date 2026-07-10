@@ -46,7 +46,7 @@ function RadioGroup<T extends string>({
   return (
     <fieldset className="border-t border-gold/10 pt-5">
       <legend className="font-display text-lg text-foreground">{legend}</legend>
-      {hint && <p className="mt-1 text-[13px] text-foreground/60">{hint}</p>}
+      {hint && <p className="mt-1 text-[13px] text-foreground/80">{hint}</p>}
       <div className="mt-3 flex flex-wrap gap-2">
         {options.map((o) => {
           const active = value === o.value;
@@ -257,7 +257,7 @@ export function PreQualForm({ onSubmit, submitting }: Props) {
         <header>
           <p className="font-mono-label text-gold/80">ETAPA 3. RECONHECIMENTO E IMPACTO</p>
           <h2 className="font-display text-2xl mt-1">Critérios avaliados pelo USCIS</h2>
-          <p className="mt-1 text-[13px] text-foreground/60">
+          <p className="mt-1 text-[13px] text-foreground/80">
             Responda apenas o que conseguiria comprovar com documentação.
           </p>
         </header>
@@ -330,7 +330,7 @@ export function PreQualForm({ onSubmit, submitting }: Props) {
           />
           <span>
             Autorizo a Status na América a tratar meus dados para gerar o resultado deste
-            teste, em conformidade com a LGPD. <span className="text-foreground/60">Esta
+            teste, em conformidade com a LGPD. <span className="text-foreground/80">Esta
             triagem é orientativa e não substitui parecer jurídico individual.</span>
           </span>
         </label>
@@ -342,7 +342,7 @@ export function PreQualForm({ onSubmit, submitting }: Props) {
           {submitting ? "Calculando…" : "Ver meu resultado"}
         </Button>
         {!canSubmit && (
-          <p className="text-[12px] text-foreground/55">
+          <p className="text-[12px] text-foreground/80">
             Preencha nome, e-mail, WhatsApp e marque o consentimento para liberar o envio.
           </p>
         )}

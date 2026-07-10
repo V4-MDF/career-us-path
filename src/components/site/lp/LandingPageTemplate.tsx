@@ -124,7 +124,7 @@ export function LandingPageTemplate({ segment, variant }: Props) {
                   <div className="h-full w-full bg-gradient-to-br from-ink via-ink-raise to-ink-deep flex items-end p-6">
                     <div className="text-xs uppercase tracking-[0.2em] text-gold/80">
                       Imagem placeholder<br />
-                      <span className="text-foreground/60 normal-case tracking-normal text-sm">
+                      <span className="text-foreground/80 normal-case tracking-normal text-sm">
                         Profissional brasileiro nos EUA
                       </span>
                     </div>

@@ -46,12 +46,12 @@ function PublicResultPage() {
   return (
     <main className="bg-ink min-h-screen pt-[68px]">
       <div className="container-x py-12 sm:py-16 max-w-3xl">
-        <Link to="/" className="inline-flex items-center gap-1.5 text-[13px] text-foreground/60 hover:text-gold mb-8">
+        <Link to="/" className="inline-flex items-center gap-1.5 text-[13px] text-foreground/80 hover:text-gold mb-8">
           <ChevronLeft className="h-3.5 w-3.5" /> Voltar ao site
         </Link>
 
         {loading && (
-          <p className="text-foreground/60">Carregando resultado…</p>
+          <p className="text-foreground/80">Carregando resultado…</p>
         )}
 
         {!loading && !record && (

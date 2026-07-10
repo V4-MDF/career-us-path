@@ -190,12 +190,12 @@ function AvaliacaoPage() {
             ].map((c) => (
               <li key={c.l} className="border-l-2 border-gold/60 pl-3">
                 <div className="font-display text-xl text-foreground leading-none">{c.v}</div>
-                <div className="mt-2 font-mono-label text-[10px] text-foreground/60">{c.l}</div>
+                <div className="mt-2 font-mono-label text-[10px] text-foreground/80">{c.l}</div>
               </li>
             ))}
           </ul>
 
-          <div className="mt-8 flex items-start gap-3 text-xs text-foreground/65 border-l border-gold/40 pl-4">
+          <div className="mt-8 flex items-start gap-3 text-xs text-foreground/80 border-l border-gold/40 pl-4">
             <ShieldCheck className="h-4 w-4 text-gold mt-0.5 shrink-0" />
             <span>
               Empresa registrada nos EUA (EIN 99-4846502) e no Brasil (CNPJ 62.917.376/0001-21).
@@ -206,13 +206,13 @@ function AvaliacaoPage() {
       </main>
 
       <footer className="border-t border-gold/15 bg-ink-deep">
-        <div className="container-x py-8 text-xs text-foreground/55 leading-relaxed max-w-4xl">
+        <div className="container-x py-8 text-xs text-foreground/80 leading-relaxed max-w-4xl">
           <p>
             A Status na América atua na preparação e organização de documentos imigratórios.
             Não somos advogados licenciados e não prestamos orientação jurídica nem
             representação legal em processos de imigração.
           </p>
-          <p className="mt-3 font-mono-label text-foreground/40">
+          <p className="mt-3 font-mono-label text-foreground/80">
             © {new Date().getFullYear()} STATUS NA AMÉRICA LLC · EIN 99-4846502
           </p>
         </div>

@@ -74,7 +74,7 @@ function BlogIndex() {
         <section className="bg-ink-deep border-y border-gold/15">
           <div className="container-x py-5 flex flex-wrap items-center gap-2">
             <Filter className="h-4 w-4 text-gold/70" />
-            <span className="font-mono-label text-foreground/55 mr-3">FILTRAR</span>
+            <span className="font-mono-label text-foreground/80 mr-3">FILTRAR</span>
             {(["Todos", ...CATEGORIAS] as const).map((c) => {
               const active = filtro === c;
               return (
@@ -116,14 +116,14 @@ function BlogIndex() {
                 <div className="lg:col-span-5 p-8 md:p-10 flex flex-col justify-center">
                   <div className="flex items-center gap-3 font-mono-label text-gold">
                     <span>DESTAQUE</span>
-                    <span className="text-foreground/40">·</span>
-                    <span className="text-foreground/60">{featured.categoria}</span>
+                    <span className="text-foreground/80">·</span>
+                    <span className="text-foreground/80">{featured.categoria}</span>
                   </div>
                   <h2 className="mt-4 font-display text-3xl md:text-4xl leading-tight group-hover:text-gold transition-colors">
                     {featured.titulo}
                   </h2>
                   <p className="mt-4 text-foreground/75 leading-relaxed">{featured.resumo}</p>
-                  <div className="mt-6 flex items-center gap-4 text-xs text-foreground/55">
+                  <div className="mt-6 flex items-center gap-4 text-xs text-foreground/80">
                     <span>{formatDate(featured.data_publicacao)}</span>
                     <span className="inline-flex items-center gap-1.5">
                       <Clock className="h-3.5 w-3.5" /> {featured.tempo_leitura} min de leitura
@@ -139,7 +139,7 @@ function BlogIndex() {
         <section className="bg-ink pb-24">
           <div className="container-x">
             {rest.length === 0 ? (
-              <p className="text-foreground/60">Nenhum post nesta categoria.</p>
+              <p className="text-foreground/80">Nenhum post nesta categoria.</p>
             ) : (
               <ul className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
                 {rest.map((p) => (
@@ -167,7 +167,7 @@ function BlogIndex() {
                           {p.titulo}
                         </h3>
                         <p className="mt-2 text-sm text-foreground/70 line-clamp-3">{p.resumo}</p>
-                        <div className="mt-4 flex items-center gap-3 text-[11px] text-foreground/50">
+                        <div className="mt-4 flex items-center gap-3 text-[11px] text-foreground/80">
                           <span>{formatDate(p.data_publicacao)}</span>
                           <span>·</span>
                           <span className="inline-flex items-center gap-1">

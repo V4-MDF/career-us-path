@@ -107,7 +107,7 @@ function LlmInfo() {
             ))}
           </dl>
 
-          <div className="mt-12 text-sm text-foreground/55">
+          <div className="mt-12 text-sm text-foreground/80">
             <p>
               Para conteúdo institucional completo, ver{" "}
               <Link to="/" className="text-gold underline">página inicial</Link>,{" "}

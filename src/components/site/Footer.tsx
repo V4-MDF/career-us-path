@@ -41,11 +41,11 @@ export function Footer() {
               className="h-12 w-auto"
             />
           </Link>
-          <p className="mt-6 max-w-sm text-sm text-foreground/65 leading-relaxed">
+          <p className="mt-6 max-w-sm text-sm text-foreground/80 leading-relaxed">
             Especialistas em preparação documental para mobilidade migratória, para
             profissionais brasileiros que escolheram construir o próximo capítulo nos Estados Unidos.
           </p>
-          <div className="mt-7 flex gap-3 text-foreground/55">
+          <div className="mt-7 flex gap-3 text-foreground/80">
             {[
               { Icon: Instagram, href: ig, label: "Instagram" },
               { Icon: Youtube, href: yt, label: "YouTube" },
@@ -76,7 +76,7 @@ export function Footer() {
             <p className="font-display text-foreground">Status na America LLC</p>
             <p>7575 KingsPointe Pkwy #4</p>
             <p>Orlando, FL 32819</p>
-            <p className="font-mono text-xs text-foreground/60 mt-2">EIN 99-4846502</p>
+            <p className="font-mono text-xs text-foreground/80 mt-2">EIN 99-4846502</p>
             <p className="mt-3">+1 689 251-0985</p>
             <p>+1 689 220-9691</p>
           </div>
@@ -92,7 +92,7 @@ export function Footer() {
             <p className="font-display text-foreground">Alphaville. CEA Corporate</p>
             <p>Alameda Araguaia, 2104</p>
             <p>Barueri/SP · CEP 06455-000</p>
-            <p className="font-mono text-xs text-foreground/60 mt-2">CNPJ 62.917.376/0001-21</p>
+            <p className="font-mono text-xs text-foreground/80 mt-2">CNPJ 62.917.376/0001-21</p>
             <p className="mt-3">Tel.: +1 689 220-9714</p>
             {email && (
               <p>
@@ -102,7 +102,7 @@ export function Footer() {
           </div>
 
           <div className="mt-6 pt-4 border-t border-gold/15">
-            <p className="font-mono-label text-foreground/55">EXPANSÃO</p>
+            <p className="font-mono-label text-foreground/80">EXPANSÃO</p>
             <p className="mt-2 text-sm text-foreground/70">
               Portugal · Dubai <span className="font-mono-label text-gold/70 ml-1">EM BREVE</span>
             </p>
@@ -113,16 +113,16 @@ export function Footer() {
       {/* Disclaimer obrigatório + créditos */}
       <div className="border-t border-gold/15">
         <div className="container-x py-6 space-y-4">
-          <p className="text-[11px] text-foreground/55 leading-relaxed max-w-4xl">
+          <p className="text-[11px] text-foreground/80 leading-relaxed max-w-4xl">
             A Status na América atua na preparação e organização de documentos imigratórios.
             Não somos advogados licenciados e não prestamos orientação jurídica nem
             representação legal em processos de imigração.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 items-start sm:items-center justify-between">
-            <p className="text-[11px] font-mono-label text-foreground/40">
+            <p className="text-[11px] font-mono-label text-foreground/80">
               © {new Date().getFullYear()} STATUS NA AMÉRICA · TODOS OS DIREITOS RESERVADOS
             </p>
-            <div className="flex gap-6 font-mono-label text-foreground/55">
+            <div className="flex gap-6 font-mono-label text-foreground/80">
               <Link to="/contato" className="hover:text-gold">Contato</Link>
               <Link to="/sobre" className="hover:text-gold">Sobre</Link>
               <Link to="/blog" className="hover:text-gold">Blog</Link>
