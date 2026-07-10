@@ -62,6 +62,7 @@ const HOME_REGISTRY: Record<string, ComponentType> = {
   "vistos-eb": VisaCards,
   "processo-eb-2-niw": ProcessSteps,
   "por-que-status": WhyUs,
+  "video-institucional": InstitutionalVideo,
   "legado": LegacySection,
   "renda-em-dolar": SalaryCompare,
   "depoimentos": Testimonials,
