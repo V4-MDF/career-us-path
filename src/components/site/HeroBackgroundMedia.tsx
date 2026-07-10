@@ -15,10 +15,13 @@
 import { useEffect, useState } from "react";
 import { parseVideoUrl } from "@/lib/videoEmbed";
 import heroSkyline from "@/assets/hero-skyline.jpg";
-import heroFamilyVideo from "@/assets/hero-american-family.mp4.asset.json";
+import heroFamilyVideo from "@/assets/hero-family-children.mp4.asset.json";
 
-/** Vídeo padrão: família em rua residencial americana ao entardecer. */
+/** Vídeo padrão: família com crianças caminhando ao ar livre (horizontal, 1920x1080). */
 const DEFAULT_VIDEO_URL = heroFamilyVideo.url;
+
+/** Filtro para escurecer a mídia e garantir contraste do texto sobreposto. */
+const DARKEN_FILTER = "brightness(0.55) saturate(0.9)";
 
 type Props = {
   videoUrl: string;
@@ -59,12 +62,14 @@ export function HeroBackgroundMedia({ videoUrl, posterUrl }: Props) {
         width={1600}
         height={1024}
         fetchPriority="high"
-        className="h-full w-full object-cover object-center opacity-80 [mask-image:linear-gradient(to_bottom,black_75%,transparent_100%)]"
+        style={{ filter: DARKEN_FILTER }}
+        className="h-full w-full object-cover object-center opacity-90 [mask-image:linear-gradient(to_bottom,black_75%,transparent_100%)]"
       />
 
       {canPlay && parsed?.kind === "file" && (
         <video
-          className="absolute inset-0 h-full w-full object-cover object-center opacity-90 [mask-image:linear-gradient(to_bottom,black_75%,transparent_100%)]"
+          className="absolute inset-0 h-full w-full object-cover object-center opacity-95 [mask-image:linear-gradient(to_bottom,black_75%,transparent_100%)]"
+          style={{ filter: DARKEN_FILTER }}
           src={parsed.src}
           poster={typeof poster === "string" ? poster : undefined}
           autoPlay
