@@ -38,56 +38,8 @@ export function VisaPageBody({ page, hideHero = false }: { page: VisaPage; hideH
   return (
     <main className={hideHero ? "pt-28" : "pt-0"}>
 
-      {!hideHero && (
-      /* Hero fotográfico — full-bleed com overlay navy forte (AA em todo
-         texto). Grão + vinheta vêm do <PhotoFrame>. Fora do scroll-spy. */
-      <section id="abertura" aria-label="Abertura" className="section-anchor bg-ink relative overflow-hidden min-h-[86vh] flex items-center">
-        <PhotoFrame
-          src={heroFamilyUsa}
-          alt="Família brasileira em frente à casa nos Estados Unidos com bandeira americana"
-          fill
-          priority
-          width={1920}
-          height={1088}
-          focal="60% 40%"
-          className="!rounded-none"
-        />
-        {/* Overlay navy sólido: 88% no lado do texto → 45% no lado oposto,
-            garantindo AA no H1/subtítulo sem padrões sobre a foto. */}
-        <div aria-hidden className="absolute inset-0 bg-gradient-to-r from-[#0A111C]/92 via-[#0A111C]/75 to-[#0A111C]/45" />
+      {!hideHero && <VisaHero page={page} />}
 
-        <div className="container-x section-pad relative w-full">
-          <nav aria-label="Breadcrumb" className="font-mono-label text-foreground/70 flex items-center gap-2">
-            <Link to="/" className="hover:text-gold">Início</Link>
-            <ChevronRight className="h-3 w-3" />
-            <span className="text-gold">{page.eyebrow}</span>
-          </nav>
-
-          <div className="mt-6 flex items-center gap-3">
-            <span aria-hidden className="h-px w-10 bg-gold/70" />
-            <span className="font-mono-label text-gold">{page.eyebrow}</span>
-            {page.badge && (
-              <span className="rounded-md border border-gold/60 px-2 py-0.5 font-mono-label text-[9px] text-gold">
-                {page.badge}
-              </span>
-            )}
-          </div>
-
-          <h1 className="mt-5 font-display text-[40px] md:text-[64px] leading-[1.04] max-w-4xl text-foreground drop-shadow-[0_2px_20px_rgba(0,0,0,0.5)]">
-            {page.h1}
-          </h1>
-          <p className="mt-6 text-lg md:text-xl text-foreground/90 leading-relaxed max-w-3xl">
-            {page.intro}
-          </p>
-          <div className="mt-10">
-            <a href={avaliacaoHref(`visto_${page.slug}_hero`)}>
-              <Button size="lg" className="btn-label btn-sweep h-12 px-7 text-base">
-                Análise gratuita
-              </Button>
-            </a>
-          </div>
-        </div>
-      </section>
       )}
 
       {/* 1 — Definição — layout editorial: texto + retrato profissional */}
