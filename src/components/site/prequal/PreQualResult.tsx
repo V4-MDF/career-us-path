@@ -1,20 +1,16 @@
 /**
- * PreQualResult, exibe o veredicto do teste, alternativas e CTA WhatsApp.
+ * PreQualResult, exibe o veredicto do teste, alternativas e próximos passos.
  *
  * Reutilizado em duas situações:
  *  1) imediatamente após o envio do formulário (com nome em primeira pessoa);
  *  2) na página pública compartilhável `/pre-qualificacao/r/:token` (modo
  *     "dossiê", neutro, sem auto-save).
- *
- * O WhatsApp é construído em runtime (lê `whatsapp_br` das configurações).
  */
 
-import { useEffect, useState } from "react";
-import { Check, AlertTriangle, ShieldAlert, ExternalLink, Copy } from "lucide-react";
+import { Check, AlertTriangle, ShieldAlert, Copy } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
-import { markWhatsAppOpened, publicResultUrl, whatsappMessageFor, type PreQualResponse } from "@/lib/prequal";
-import { buildWhatsAppLink } from "@/lib/whatsapp";
+import { publicResultUrl, type PreQualResponse } from "@/lib/prequal";
 import type { Verdict, VisaScore } from "@/lib/visaQualifier";
 
 interface Props {
