@@ -66,10 +66,10 @@ export function HeroBackgroundMedia({ videoUrl, posterUrl }: Props) {
           loop
           playsInline
           preload="metadata"
-          // @ts-expect-error atributo válido em iOS
           disablePictureInPicture
           controls={false}
         />
+
       )}
 
       {canPlay && parsed?.kind === "youtube" && (
