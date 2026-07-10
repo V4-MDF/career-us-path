@@ -15,9 +15,9 @@
 import { useEffect, useState } from "react";
 import { parseVideoUrl } from "@/lib/videoEmbed";
 import heroSkyline from "@/assets/hero-skyline.jpg";
-import heroFamilyVideo from "@/assets/hero-family-children.mp4.asset.json";
+import heroFamilyVideo from "@/assets/hero-family-motion.mp4.asset.json";
 
-/** Vídeo padrão: família com crianças caminhando ao ar livre (horizontal, 1920x1080). */
+/** Foto motion padrão: família caminhando em direção ao lar (horizontal, 1920x1080). */
 const DEFAULT_VIDEO_URL = heroFamilyVideo.url;
 
 /** Filtro para escurecer a mídia e garantir contraste do texto sobreposto. */
