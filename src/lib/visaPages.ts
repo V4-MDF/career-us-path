@@ -91,7 +91,7 @@ const eb2niw: VisaPage = {
   qualifies: {
     title: "Quem se qualifica para o EB-2 NIW",
     intro:
-      "São dois grupos de elegibilidade no EB-2; em seguida, o caso é avaliado pelos três critérios do precedente Matter of Dhanasar (2016), que substituiu o teste anterior.",
+      "São dois grupos de elegibilidade no EB-2; em seguida, o caso é avaliado por três critérios definidos pela legislação imigratória americana.",
     items: [
       {
         title: "Grau avançado OU habilidade excepcional",
@@ -99,21 +99,22 @@ const eb2niw: VisaPage = {
           "Mestrado, doutorado, ou bacharelado com 5+ anos de experiência progressiva na área (equiparado a grau avançado). Alternativamente, comprovação de habilidade excepcional via evidências objetivas (formação, experiência, reconhecimento do setor, remuneração acima da média, associações etc.).",
       },
       {
-        title: "Dhanasar #1 — Mérito e importância nacional",
+        title: "Seu trabalho tem mérito e importância para os EUA",
         body:
           "A atuação proposta deve ter mérito substancial e importância nacional. Não se exige que tenha alcance nacional em si — basta que os benefícios potenciais (econômicos, científicos, culturais, em saúde, em educação) extrapolem o impacto local.",
       },
       {
-        title: "Dhanasar #2 — Bem posicionado para avançar",
+        title: "Você está bem posicionado para realizar esse trabalho",
         body:
           "O profissional precisa estar bem posicionado para efetivamente avançar nesta atuação nos EUA: histórico de realizações, plano consistente, recursos, formação compatível e demanda no mercado americano.",
       },
       {
-        title: "Dhanasar #3 — Benefício de dispensar o patrocinador",
+        title: "É vantajoso para os EUA dispensar o patrocinador no seu caso",
         body:
           "Os EUA se beneficiam ao dispensar a exigência de oferta de emprego e PERM neste caso específico — porque a urgência, a singularidade do perfil ou o impacto justificam a flexibilização da regra geral.",
       },
     ],
+
   },
   process: {
     title: "Como conduzimos o seu processo",
