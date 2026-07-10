@@ -67,9 +67,9 @@ function refHost(referrer: string | null | undefined): string | null {
   try { return new URL(referrer).host; } catch { return referrer; }
 }
 
-function bucketValue(dim: Dim, origin: LeadOrigin): string {
-  const utm = origin.utm ?? {};
-  const internal = origin.internal ?? ({} as LeadOrigin["internal"]);
+function bucketValue(dim: Dim, origin?: LeadOrigin | null): string {
+  const utm = origin?.utm ?? {};
+  const internal = origin?.internal ?? ({} as LeadOrigin["internal"]);
   switch (dim) {
     case "utm_source":   return utm.utm_source   || DIRECT;
     case "utm_medium":   return utm.utm_medium   || DIRECT;
