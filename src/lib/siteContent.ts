@@ -12,6 +12,13 @@
 
 import { useEffect, useState } from "react";
 import { get } from "./dataStore";
+// Fotografias hero por página de visto (defaults). Placeholders
+// art-direcionados no tratamento padrão do site — substituir por foto real
+// específica de cada visto, nunca imagem genérica de IA, nunca compartilhar
+// a mesma imagem entre vistos.
+import visaHeroEb2Niw from "@/assets/visa-hero-eb2-niw.jpg";
+import visaHeroEb1 from "@/assets/visa-hero-eb1.jpg";
+import visaHeroEb3 from "@/assets/visa-hero-eb3.jpg";
 
 export const defaultContent = {
   "hero.eyebrow": "IMIGRAÇÃO PARA OS ESTADOS UNIDOS. EB-2 NIW",
