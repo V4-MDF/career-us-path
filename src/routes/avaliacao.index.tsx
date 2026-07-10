@@ -185,7 +185,6 @@ function AvaliacaoPage() {
             {[
               { v: "A", l: "BBB ACCREDITED" },
               { v: "130+", l: "AVALIAÇÕES 5★" },
-              { v: "25+", l: "ANOS DE EXPERIÊNCIA" },
               { v: "5.000+", l: "PROCESSOS" },
             ].map((c) => (
               <li key={c.l} className="border-l-2 border-gold/60 pl-3">
