@@ -26,6 +26,13 @@ export const PENDING_VALIDATION: Record<string, true> = {
   "segment.engenheiros.lado_brasil": true,
   "segment.engenheiros.lado_eua": true,
   "segment.empresarios.prova_social": true,
+  // Sobre — números/credenciais aguardando confirmação do cliente
+  "sobre.numeros.n1.valor": true,
+  "sobre.numeros.n2.valor": true,
+  "sobre.numeros.n3.valor": true,
+  "sobre.numeros.n4.valor": true,
+  "sobre.numeros.n5.valor": true,
+  "sobre.numeros.n6.valor": true,
 };
 
 export function isPending(key: string): boolean {
