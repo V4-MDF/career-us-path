@@ -1,5 +1,5 @@
 /**
- * VideoPlayer — renderiza um vídeo a partir de qualquer URL suportada
+ * VideoPlayer, renderiza um vídeo a partir de qualquer URL suportada
  * (YouTube, Vimeo ou arquivo direto). Sem URL, mostra placeholder
  * "VÍDEO EM BREVE" com o estilo já usado na dobra de depoimentos.
  */

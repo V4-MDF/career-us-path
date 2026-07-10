@@ -1,5 +1,5 @@
 /**
- * <DynamicSectionHead> — atualiza `<title>` e `<link rel="canonical">`
+ * <DynamicSectionHead>, atualiza `<title>` e `<link rel="canonical">`
  * client-side conforme o scroll-spy detecta uma nova dobra ativa.
  *
  * Importante:
@@ -27,7 +27,7 @@ interface Props {
   baseTitle: string;
   brand?: string;
   /** Quando true, NÃO atualiza window.location.hash (usado se a rota é a
-   *  sub-rota canônica /vistos/$slug/$secao — o hash não faz sentido lá). */
+   *  sub-rota canônica /vistos/$slug/$secao, o hash não faz sentido lá). */
   freezeHash?: boolean;
 }
 
@@ -78,7 +78,7 @@ export function DynamicSectionHead({
   }, [activeId, sections, baseTitle, brand]);
 
   // 3. Atualiza <link rel="canonical"> client-side com o hash atual.
-  //    Mantém o canonical SSR (sem hash) — apenas anexa o hash quando há dobra.
+  //    Mantém o canonical SSR (sem hash), apenas anexa o hash quando há dobra.
   useEffect(() => {
     if (typeof document === "undefined") return;
     if (freezeHash) return;

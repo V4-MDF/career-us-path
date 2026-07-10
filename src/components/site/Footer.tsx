@@ -1,5 +1,5 @@
 /**
- * Footer — "rodapé de documento oficial".
+ * Footer, "rodapé de documento oficial".
  *
  * Prompt 5: injeção de dados reais.
  *   - Matriz Orlando (EIN) e filial Brasil (CNPJ).
@@ -37,7 +37,7 @@ export function Footer() {
             </span>
           </div>
           <p className="mt-6 max-w-sm text-sm text-foreground/65 leading-relaxed">
-            Especialistas em preparação documental para mobilidade migratória — para
+            Especialistas em preparação documental para mobilidade migratória, para
             profissionais brasileiros que escolheram construir o próximo capítulo nos Estados Unidos.
           </p>
           <div className="mt-7 flex gap-3 text-foreground/55">
@@ -84,7 +84,7 @@ export function Footer() {
             Filial · Brasil
           </h4>
           <div className="mt-4 space-y-1.5 text-sm text-foreground/75 leading-relaxed">
-            <p className="font-display text-foreground">Alphaville — CEA Corporate</p>
+            <p className="font-display text-foreground">Alphaville. CEA Corporate</p>
             <p>Alameda Araguaia, 2104</p>
             <p>Barueri/SP · CEP 06455-000</p>
             <p className="font-mono text-xs text-foreground/60 mt-2">CNPJ 62.917.376/0001-21</p>

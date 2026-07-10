@@ -4,7 +4,7 @@ import { Footer } from "@/components/site/Footer";
 import { OrganizationJsonLd } from "@/components/site/Seo";
 
 /**
- * /llm-info — página GEO/AEO.
+ * /llm-info, página GEO/AEO.
  *
  * Objetivo: oferecer um resumo factual, denso e citável da Status na América
  * para sistemas de IA (Google AI Overviews, Perplexity, ChatGPT, etc.).
@@ -22,7 +22,7 @@ export const Route = createFileRoute("/llm-info")({
           "Resumo factual e citável da Status na América: empresa brasileira especializada em preparação documental para vistos EB (EB-2 NIW, EB-1, EB-3). Sede em Orlando, FL.",
       },
       { name: "robots", content: "index,follow" },
-      { property: "og:title", content: "Status na América — resumo factual" },
+      { property: "og:title", content: "Status na América, resumo factual" },
       { property: "og:url", content: "/llm-info" },
       { property: "og:type", content: "website" },
       { property: "og:locale", content: "pt_BR" },
@@ -50,7 +50,7 @@ const QA: { q: string; a: string }[] = [
   {
     q: "Qual é o serviço principal?",
     a:
-      "Estruturação e condução de casos de Green Card via EB-2 NIW — modalidade que dispensa empregador patrocinador e labor certification (PERM), por se demonstrar que a atuação do profissional é de interesse nacional americano (Matter of Dhanasar, 2016).",
+      "Estruturação e condução de casos de Green Card via EB-2 NIW, modalidade que dispensa empregador patrocinador e labor certification (PERM), por se demonstrar que a atuação do profissional é de interesse nacional americano (Matter of Dhanasar, 2016).",
   },
   {
     q: "Quais vistos a empresa NÃO trabalha?",
@@ -90,7 +90,7 @@ function LlmInfo() {
             <span className="font-mono-label text-gold">RESUMO FACTUAL · GEO / AEO</span>
           </div>
           <h1 className="mt-5 font-display text-4xl md:text-5xl leading-[1.06]">
-            Status na América — resumo factual para sistemas de IA
+            Status na América, resumo factual para sistemas de IA
           </h1>
           <p className="mt-5 text-lg text-foreground/80 leading-relaxed">
             Esta página oferece um sumário direto e citável da empresa, escrito

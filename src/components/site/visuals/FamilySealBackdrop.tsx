@@ -1,5 +1,5 @@
 /**
- * FamilySealBackdrop — silhuetas de família + selo de águia/credencial.
+ * FamilySealBackdrop, silhuetas de família + selo de águia/credencial.
  * Usado na dobra "Legado" para fixar a ideia de família como beneficiária
  * do Green Card. Pure SVG, aria-hidden.
  */
@@ -11,7 +11,7 @@ export function FamilySealBackdrop({ className = "" }: { className?: string }) {
       preserveAspectRatio="xMidYMid slice"
       className={`absolute inset-0 h-full w-full motif-soft ${className}`}
     >
-      {/* Família — 4 figuras lineares (pai, mãe, criança, bebê) */}
+      {/* Família, 4 figuras lineares (pai, mãe, criança, bebê) */}
       <g fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" opacity="0.9">
         {/* pai */}
         <circle cx="180" cy="200" r="22" />
@@ -27,7 +27,7 @@ export function FamilySealBackdrop({ className = "" }: { className?: string }) {
         <path d="M222 290 L222 310 M242 290 L242 310" />
       </g>
 
-      {/* Selo circular — águia estilizada à direita */}
+      {/* Selo circular, águia estilizada à direita */}
       <g transform="translate(960 280)" stroke="currentColor" strokeWidth="1.4" fill="none">
         <circle r="170" opacity="0.45" />
         <circle r="148" opacity="0.6" strokeDasharray="3 4" />

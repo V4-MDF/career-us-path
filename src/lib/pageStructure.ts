@@ -1,11 +1,11 @@
 /**
- * pageStructure — fonte única para ordem e visibilidade de dobras por página.
+ * pageStructure, fonte única para ordem e visibilidade de dobras por página.
  *
  * Persistência: dataStore["page_sections"][pageSlug] = { items, updatedAt }.
  * O admin (/admin/estrutura) edita; a rota pública consome via `useOrderedSections`.
  *
  * Merge defensivo: se o código adicionar dobras novas (ou remover antigas),
- * o estado salvo é reconciliado com os defaults — novas entram no fim como
+ * o estado salvo é reconciliado com os defaults, novas entram no fim como
  * ativas; órfãs somem.
  */
 
@@ -27,7 +27,7 @@ export interface PageSectionsRow {
 }
 
 /* ============================================================
- * Defaults — ordem inicial real de cada página.
+ * Defaults, ordem inicial real de cada página.
  * Devem refletir o JSX original antes de qualquer customização.
  * ============================================================ */
 
@@ -127,7 +127,7 @@ export async function savePageSections(page: PageSlug, items: SectionItem[]) {
 }
 
 /* ============================================================
- * Hook reativo — usado pela rota pública.
+ * Hook reativo, usado pela rota pública.
  * Escuta o evento "status:admin-change" para refletir edições do admin
  * em tempo real (mesma aba) sem reload.
  * ============================================================ */

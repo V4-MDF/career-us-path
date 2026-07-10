@@ -14,7 +14,7 @@ function digits(s: string): string {
 
 /**
  * Gera href https://wa.me/<num>?text=<msg>.
- * Lê o número configurado de forma assíncrona — para uso em handlers e effects.
+ * Lê o número configurado de forma assíncrona, para uso em handlers e effects.
  */
 export async function buildWhatsAppLink(message: string): Promise<string> {
   const s = await getSiteSettings().catch(() => defaultSettings);

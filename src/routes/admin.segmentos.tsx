@@ -70,7 +70,7 @@ function SegmentsPage() {
     <>
       <PageHeader
         title="Segmentos / Landing Pages"
-        description="Cada segmento é uma LP em /lp/[slug]. A LP reusa a estrutura da página de visto escolhida — só o Hero muda entre segmentos e variantes A/B."
+        description="Cada segmento é uma LP em /lp/[slug]. A LP reusa a estrutura da página de visto escolhida, só o Hero muda entre segmentos e variantes A/B."
 
         actions={
           <Button className="gap-1.5 bg-slate-900 hover:bg-slate-800" onClick={async () => {
@@ -150,7 +150,7 @@ function SegmentRow({ segment, open, onToggle, onSave, onDelete }: {
             </Fld>
           </div>
 
-          <Group title="Hero default (fallback quando não há variantes A/B ativas — só o Hero varia entre variantes)">
+          <Group title="Hero default (fallback quando não há variantes A/B ativas, só o Hero varia entre variantes)">
             <Fld label="Eyebrow"><Input value={draft.hero_default.eyebrow} onChange={(e) => upd("hero_default", { ...draft.hero_default, eyebrow: e.target.value })} /></Fld>
             <Fld label="CTA"><Input value={draft.hero_default.cta_texto} onChange={(e) => upd("hero_default", { ...draft.hero_default, cta_texto: e.target.value })} /></Fld>
             <Fld label="H1" full><Textarea rows={2} value={draft.hero_default.h1} onChange={(e) => upd("hero_default", { ...draft.hero_default, h1: e.target.value })} /></Fld>

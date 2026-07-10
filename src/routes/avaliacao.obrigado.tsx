@@ -1,5 +1,5 @@
 /**
- * /avaliacao/obrigado — página de agradecimento única e discreta.
+ * /avaliacao/obrigado, página de agradecimento única e discreta.
  *
  * A variação (qualificado / não qualificado) é decidida pelo
  * `lastQualificationResult` guardado em sessionStorage no submit do formulário.

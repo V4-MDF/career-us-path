@@ -1,5 +1,5 @@
 /**
- * BlogStrip — faixa de conteúdo do blog logo abaixo do hero da Home.
+ * BlogStrip, faixa de conteúdo do blog logo abaixo do hero da Home.
  * Mobile: carrossel horizontal com scroll-snap (cards "espiando" o próximo).
  * Desktop (md+): grid 3 colunas.
  * Cada card exibe a foto de capa do post no topo.

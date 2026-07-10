@@ -85,7 +85,7 @@ function UsersPage() {
     <>
       <PageHeader
         title="Administradores"
-        description="Gerencie quem tem acesso ao painel. Novos usuários são criados exclusivamente aqui — não há cadastro público."
+        description="Gerencie quem tem acesso ao painel. Novos usuários são criados exclusivamente aqui, não há cadastro público."
         actions={
           <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
@@ -156,7 +156,7 @@ function UsersPage() {
                 </td>
                 <td className="py-2 text-slate-600">admin</td>
                 <td className="py-2 text-slate-500">
-                  {u.created_at ? new Date(u.created_at).toLocaleString("pt-BR") : "—"}
+                  {u.created_at ? new Date(u.created_at).toLocaleString("pt-BR") : "-"}
                 </td>
                 <td className="py-2 text-right">
                   <AlertDialog>

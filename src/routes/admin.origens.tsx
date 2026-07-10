@@ -1,5 +1,5 @@
 /**
- * /admin/origens — resumo de métricas por canal.
+ * /admin/origens, resumo de métricas por canal.
  *
  * Agrega SESSÕES (visitantes do site), leads completos + parciais por:
  *   - utm_source, utm_medium, utm_campaign
@@ -211,19 +211,19 @@ function OrigensPage() {
         <StatCard label="Sessões (total)" value={sessionsTotal} accent="blue" hint="Visitantes únicos por aba" />
         <StatCard
           label="Conv. sessão → lead"
-          value={sessionsTotal ? pct(convSessionToLead) : "—"}
+          value={sessionsTotal ? pct(convSessionToLead) : "-"}
           accent="green"
           hint={`${completedTotal} leads completos`}
         />
         <StatCard
           label="Conv. início → completo"
-          value={startedTotal ? pct(convStartToLead) : "—"}
+          value={startedTotal ? pct(convStartToLead) : "-"}
           accent="gold"
           hint={`${startedTotal} formulários iniciados`}
         />
         <StatCard
           label="Taxa de qualidade"
-          value={sessionsTotal ? pct(qualityRateTotal) : "—"}
+          value={sessionsTotal ? pct(qualityRateTotal) : "-"}
           accent="yellow"
           hint={`${qualifiedTotal} qualificados ÷ sessões`}
         />
@@ -233,7 +233,7 @@ function OrigensPage() {
         <div className="mb-4 flex items-start gap-2 rounded-md border border-amber-300/60 bg-amber-50 px-3 py-2 text-xs text-amber-900">
           <Info className="h-3.5 w-3.5 mt-0.5" />
           <span>
-            Há mais leads do que sessões rastreadas — o rastreio de sessões começa a partir
+            Há mais leads do que sessões rastreadas, o rastreio de sessões começa a partir
             do deploy deste módulo. Leads antigos aparecem como "sem sessão".
           </span>
         </div>
@@ -301,17 +301,17 @@ function OrigensPage() {
                               style={{ width: `${Math.min(pSL, 100)}%` }}
                             />
                           </div>
-                          <span className="text-xs tabular-nums w-10 text-right">{r.sessions ? `${pSL}%` : "—"}</span>
+                          <span className="text-xs tabular-nums w-10 text-right">{r.sessions ? `${pSL}%` : "-"}</span>
                         </div>
                       </td>
                       <td className="py-2.5 text-right tabular-nums">
-                        {r.started ? `${Math.round(r.rateStartToLead * 100)}%` : "—"}
+                        {r.started ? `${Math.round(r.rateStartToLead * 100)}%` : "-"}
                       </td>
                       <td className="py-2.5 text-right tabular-nums">
-                        {r.sessions ? `${Math.round(r.qualityRate * 100)}%` : "—"}
+                        {r.sessions ? `${Math.round(r.qualityRate * 100)}%` : "-"}
                       </td>
                       <td className="py-2.5 text-right pr-5 tabular-nums text-slate-700">
-                        {r.avgScore ?? "—"}
+                        {r.avgScore ?? "-"}
                       </td>
                     </tr>
                   );

@@ -1,5 +1,5 @@
 /**
- * sessions.ts — rastreio de sessões do site (client-side).
+ * sessions.ts, rastreio de sessões do site (client-side).
  *
  * Uma "sessão" = uma aba do navegador (sessionStorage). Para cada sessão
  * registramos UM documento em dataStore["sessions"] com:
@@ -30,7 +30,7 @@ export interface SessionRecord {
   converted: boolean;
   /** Lead concluído foi avaliado como qualificado (heurística + score). */
   qualified: boolean;
-  /** Score do lead (quando completo) — referência para score médio por canal. */
+  /** Score do lead (quando completo), referência para score médio por canal. */
   score: number | null;
 }
 
@@ -43,7 +43,7 @@ function currentSessionId(): string | null {
 
 /**
  * Garante que existe uma sessão para a aba atual. Chamado uma vez por
- * pageview no __root.tsx — só cria o registro na primeira vez.
+ * pageview no __root.tsx, só cria o registro na primeira vez.
  */
 export async function ensureSession(currentPath?: string): Promise<void> {
   if (!isBrowser()) return;

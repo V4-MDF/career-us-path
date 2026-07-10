@@ -1,5 +1,5 @@
 /**
- * /admin/scoring — Configuração da pontuação de qualidade do perfil.
+ * /admin/scoring. Configuração da pontuação de qualidade do perfil.
  *
  * - Edita PESOS (somam 100, normalização automática).
  * - Edita VALORES de aderência (0..1) por resposta de cada fator.
@@ -7,7 +7,7 @@
  * - HISTOGRAMA ao vivo dos leads atuais (preview ao mexer nos pesos).
  *
  * Toda alteração é salva no dataStore e reflete imediatamente em /admin/leads
- * (repontuação ao vivo — score nunca é congelado por lead).
+ * (repontuação ao vivo, score nunca é congelado por lead).
  *
  * Roadmap (Supabase + tracking por lead): adicionar segundo eixo
  * "pontuação de engajamento" (chegou em /avaliacao, retornos, tempo de
@@ -93,7 +93,7 @@ function ScoringPage() {
         <Info className="h-4 w-4 mt-0.5 shrink-0" />
         <div>
           A pontuação mede a <strong>aderência do perfil</strong> ao EB-2 NIW. Ela <strong>prioriza
-          e diagnostica</strong> — não é uma classe fixa. Ajuste os pesos conforme aprender o que converte.
+          e diagnostica</strong>, não é uma classe fixa. Ajuste os pesos conforme aprender o que converte.
         </div>
       </div>
 
@@ -136,7 +136,7 @@ function ScoringPage() {
             </div>
           ))}
           {sum === 0 && (
-            <div className="text-xs text-rose-600">Todos os pesos zerados — score sairá sempre 0.</div>
+            <div className="text-xs text-rose-600">Todos os pesos zerados, score sairá sempre 0.</div>
           )}
         </div>
       </SectionCard>
@@ -153,7 +153,7 @@ function ScoringPage() {
       <div className="mt-5">
         <SectionCard
           title="Faixas de prioridade"
-          description="Limiares ajustáveis. A faixa é só um recorte do score — a worklist é o score em si."
+          description="Limiares ajustáveis. A faixa é só um recorte do score, a worklist é o score em si."
         >
           <div className="space-y-2">
             {model.faixas.map((b, i) => (

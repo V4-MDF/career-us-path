@@ -2,11 +2,11 @@
  * Helper para gerar o href da LP de avaliação preservando UTMs e adicionando
  * `seg` (segmento da LP de origem) e `src` (página de origem).
  *
- * IMPORTANTE — hydration:
+ * IMPORTANTE, hydration:
  *  - `avaliacaoHref` lê `window.location.search`, então retorna valores
  *    diferentes em SSR vs cliente. Para usar em JSX renderizado, prefira o
  *    hook `useAvaliacaoHref`, que devolve "/avaliacao" no primeiro render
- *    (igual ao SSR) e injeta os params após mount — evita hydration mismatch.
+ *    (igual ao SSR) e injeta os params após mount, evita hydration mismatch.
  */
 import { useEffect, useState } from "react";
 

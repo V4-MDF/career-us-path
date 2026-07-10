@@ -1,5 +1,5 @@
 /**
- * /avaliacao — LP dedicada de conversão (form como página).
+ * /avaliacao. LP dedicada de conversão (form como página).
  *
  * Layout vertical single-column, ocupando toda a página. Sem padronagem de
  * fundo: ink sólido + glow gold sutil no topo. O form é o protagonista.
@@ -76,7 +76,7 @@ function AvaliacaoPage() {
     trackFormView({ seg: search.seg ?? null, src: search.src ?? null });
   }, [search.seg, search.src]);
 
-  // Captura origem silenciosamente — fica disponível no payload do lead (admin/tracking)
+  // Captura origem silenciosamente, fica disponível no payload do lead (admin/tracking)
   useEffect(() => {
     getOrigin("/avaliacao");
   }, []);
@@ -101,7 +101,7 @@ function AvaliacaoPage() {
       {/* Header sticky compacto */}
       <header className="sticky top-0 z-20 border-b border-gold/15 bg-ink/85 backdrop-blur">
         <div className="container-x flex h-[64px] items-center justify-between">
-          <Link to="/" className="flex items-center" aria-label="Status na América — Início">
+          <Link to="/" className="flex items-center" aria-label="Status na América. Início">
             <img
               src={logoAsset.url}
               alt="Status na América"
@@ -133,7 +133,7 @@ function AvaliacaoPage() {
             height={1280}
             className="w-full h-full object-cover opacity-[0.14]"
           />
-          {/* Vinheta + fade para o ink sólido abaixo — overlay reforçado (AA) */}
+          {/* Vinheta + fade para o ink sólido abaixo, overlay reforçado (AA) */}
           <div
             className="absolute inset-0"
             style={{
@@ -166,7 +166,7 @@ function AvaliacaoPage() {
 
           </div>
 
-          {/* Origem capturada silenciosamente — visível apenas no admin/tracking de cada lead */}
+          {/* Origem capturada silenciosamente, visível apenas no admin/tracking de cada lead */}
 
 
           <div className="mt-6">
@@ -180,7 +180,7 @@ function AvaliacaoPage() {
           </div>
 
 
-          {/* Credenciais — faixa horizontal compacta abaixo do form */}
+          {/* Credenciais, faixa horizontal compacta abaixo do form */}
           <ul className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-4">
             {[
               { v: "A", l: "BBB ACCREDITED" },

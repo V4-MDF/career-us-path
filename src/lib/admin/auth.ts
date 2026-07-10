@@ -1,5 +1,5 @@
 /**
- * Autenticação do painel admin — Supabase Auth (Lovable Cloud).
+ * Autenticação do painel admin. Supabase Auth (Lovable Cloud).
  *
  * - Login por email/senha ou Google.
  * - Acesso ao /admin depende de o usuário ter a role `admin` na tabela

@@ -1,5 +1,5 @@
 /**
- * prequal — store e modelos do teste de pré-qualificação (/pre-qualificacao).
+ * prequal, store e modelos do teste de pré-qualificação (/pre-qualificacao).
  *
  * Diferente de `/avaliacao` (lead form curto + scoring comercial), este é um
  * questionário estruturado que termina em um VEREDICTO por visto (apto /
@@ -39,7 +39,7 @@ export type Area =
   | "saude" | "tecnologia" | "engenharia" | "ciencia"
   | "negocios" | "educacao" | "artes" | "outro";
 
-/** Estrutura completa de respostas — alimenta o scorer. */
+/** Estrutura completa de respostas, alimenta o scorer. */
 export interface PreQualAnswers {
   // Contato
   fullName: string;

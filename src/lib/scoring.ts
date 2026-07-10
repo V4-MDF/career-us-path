@@ -1,5 +1,5 @@
 /**
- * Scoring (Prompt 7) — Pontuação de qualidade do perfil 0–100, derivada AO VIVO.
+ * Scoring (Prompt 7). Pontuação de qualidade do perfil 0–100, derivada AO VIVO.
  *
  * Mede ADERÊNCIA DO PERFIL ao EB-2 NIW. Não é uma classe fixa: o score é sempre
  * recomputado a partir do `scoring_model` atual + respostas cruas do lead.
@@ -7,11 +7,11 @@
  *
  * Persistência: o modelo vive em dataStore.table("settings") sob id "scoring_model".
  * Status de funil (Novo/Em contato/Qualificado/Proposta/Convertido/Descartado) é
- * MANUAL e separado do score — vive em cada lead.
+ * MANUAL e separado do score, vive em cada lead.
  *
  * Roadmap (Supabase): adicionar segundo eixo "pontuação de engajamento" (chegou em
  * /avaliacao, retornos, tempo de preenchimento, páginas vistas) e visão de matriz
- * perfil × engajamento. Estrutura é extensível — `factors` pode receber fatores
+ * perfil × engajamento. Estrutura é extensível, `factors` pode receber fatores
  * comportamentais sem refatorar a função de cálculo.
  */
 import { get, set } from "@/lib/dataStore";
@@ -69,7 +69,7 @@ export const FUNNEL_LABEL: Record<FunnelStatus, string> = {
 };
 
 /* ----------------------------------------------------------------
- * DEFAULT MODEL — defaults do briefing (pesos somam 100).
+ * DEFAULT MODEL, defaults do briefing (pesos somam 100).
  * ---------------------------------------------------------------- */
 export const DEFAULT_MODEL: ScoringModel = {
   version: 2,
@@ -175,7 +175,7 @@ export async function resetModel(): Promise<ScoringModel> {
 }
 
 /* ----------------------------------------------------------------
- * CÁLCULO — score 0..100 + composição por fator.
+ * CÁLCULO, score 0..100 + composição por fator.
  * Pesos são NORMALIZADOS para somar 100 antes da multiplicação.
  * ---------------------------------------------------------------- */
 export interface FactorContribution {
@@ -221,7 +221,7 @@ export function computeScore(lead: LeadInput, model: ScoringModel = DEFAULT_MODE
       key: f.key,
       label: f.label,
       raw,
-      display: f.labels[raw] ?? raw ?? "—",
+      display: f.labels[raw] ?? raw ?? "-",
       pesoNorm,
       aderencia,
       pontos,
@@ -232,7 +232,7 @@ export function computeScore(lead: LeadInput, model: ScoringModel = DEFAULT_MODE
 }
 
 /* ----------------------------------------------------------------
- * UI helpers — paleta da escala calor→fria.
+ * UI helpers, paleta da escala calor→fria.
  * ---------------------------------------------------------------- */
 export const TONE_CLASS: Record<PriorityBand["tone"], string> = {
   hot:  "bg-rose-100 text-rose-800 border-rose-200",

@@ -1,5 +1,5 @@
 /**
- * Seções da Home — Sistema "Dossiê / Credencial".
+ * Seções da Home. Sistema "Dossiê / Credencial".
  *
  * Prompt 5: dados reais + CTAs apontando para LP /avaliacao com src/seg/utms.
  *  - ProcessSteps: substituído pelo processo real EB-2 NIW (4 etapas).
@@ -10,7 +10,7 @@
  *  - LegacySection: nova dobra "Muito mais que um visto. Um legado.".
  *  - CtaForm (com form inline) → CtaBanner (CTA forte para /avaliacao).
  *  - AuthorityStrip: credenciais reais (BBB A, EIN, sede Orlando).
- *  - Todos os CTAs usam avaliacaoHref(src[, seg]) — preserva utms/seg.
+ *  - Todos os CTAs usam avaliacaoHref(src[, seg]), preserva utms/seg.
  */
 
 import { Link } from "@tanstack/react-router";
@@ -61,7 +61,7 @@ export function Hero() {
       aria-label="Abertura"
       className="section-anchor relative overflow-hidden pt-32 md:pt-44 pb-24 md:pb-36"
     >
-      {/* Skyline NYC ao amanhecer — atmosfera EUA. Overlay forte preserva legibilidade. */}
+      {/* Skyline NYC ao amanhecer, atmosfera EUA. Overlay forte preserva legibilidade. */}
       <div aria-hidden className="absolute inset-0 -z-20">
         <img
           src={heroSkyline}
@@ -73,7 +73,7 @@ export function Hero() {
         />
       </div>
       <div className="absolute inset-0 -z-10 bg-gradient-to-b from-ink/95 via-ink/90 to-ink" />
-      {/* Motivo geográfico BR→USA — dot-grid + rota tracejada estática. */}
+      {/* Motivo geográfico BR→USA, dot-grid + rota tracejada estática. */}
       <div aria-hidden className="absolute inset-0 -z-10 text-gold">
         <BrUsRouteBackdrop />
       </div>
@@ -129,7 +129,7 @@ export function Hero() {
         {/* Bloco editorial estático (sem parallax por scroll). */}
         <div className="relative hidden lg:block">
           <div className="relative aspect-[4/5] overflow-hidden rounded-3xl border border-gold/30 bg-ink-raise shadow-elevated">
-            {/* Fotografia editorial — família multigeracional em paisagem americana. */}
+            {/* Fotografia editorial, família multigeracional em paisagem americana. */}
             <img
               src={familyPortrait}
               alt="Família brasileira em paisagem americana ao amanhecer"
@@ -276,7 +276,7 @@ export function NiwSection() {
       <div className="absolute inset-0 -z-10 guilloche" />
       <div className="container-x grid lg:grid-cols-2 gap-14 items-center">
         <div>
-          <SectionHead num="02" eyebrow="CARRO-CHEFE — EB-2 NIW" title={title} />
+          <SectionHead num="02" eyebrow="CARRO-CHEFE. EB-2 NIW" title={title} />
           <p className="mt-6 text-[17px] text-foreground/80 leading-relaxed max-w-xl">{lead}</p>
           <ul className="mt-9 grid sm:grid-cols-2 gap-3">
             {bullets.map(({ icon: Icon, t }) => (
@@ -293,7 +293,7 @@ export function NiwSection() {
 
         <div className="relative">
           <div className="aspect-video overflow-hidden rounded-2xl border border-gold/40 bg-ink-deep relative shadow-elevated">
-            {/* Foto editorial — passaporte brasileiro + documentos sobre mesa de madeira. */}
+            {/* Foto editorial, passaporte brasileiro + documentos sobre mesa de madeira. */}
             <img
               src={passportDocuments}
               alt="Passaporte brasileiro, documentos e mapa dos Estados Unidos sobre mesa de madeira"
@@ -355,7 +355,7 @@ export function VisaCards() {
 }
 
 /* ============================================================
- * 6. PERFIS QUE ATENDEMOS — CTA leva para /avaliacao
+ * 6. PERFIS QUE ATENDEMOS. CTA leva para /avaliacao
  * ============================================================ */
 export function PersonaCards() {
   const personas = [
@@ -383,7 +383,7 @@ export function PersonaCards() {
                 </span>
                 <h3 className="mt-6 font-display text-2xl text-foreground">{p.title}</h3>
                 <p className="mt-3 text-foreground/75 leading-relaxed">{p.headline}</p>
-                {/* CTA leva à LP /avaliacao com seg + src — preserva utms da URL atual. */}
+                {/* CTA leva à LP /avaliacao com seg + src, preserva utms da URL atual. */}
                 <a
                   href={avaliacaoHref(`home_persona_${p.seg}`, p.seg)}
                   className="mt-7 inline-flex items-center text-sm text-gold hover:text-gold"
@@ -400,7 +400,7 @@ export function PersonaCards() {
 }
 
 /* ============================================================
- * 7. PROCESSO EB-2 NIW (Prompt 5 — 4 etapas reais)
+ * 7. PROCESSO EB-2 NIW (Prompt 5, 4 etapas reais)
  * ============================================================ */
 export function ProcessSteps() {
   const steps = [
@@ -434,13 +434,13 @@ export function ProcessSteps() {
 }
 
 /* ============================================================
- * 8. POR QUE A STATUS — estatísticas reais
+ * 8. POR QUE A STATUS, estatísticas reais
  * ============================================================ */
 export function WhyUs() {
   const title = useContent("why.title");
   const lead = useContent("why.lead");
 
-  // Stats reais (Prompt 5) — internamente "pendentes de validação" (admin)
+  // Stats reais (Prompt 5), internamente "pendentes de validação" (admin)
   const stats = [
     { value: "25+", label: "ANOS DE EXPERIÊNCIA" },
     { value: "5.000+", label: "PROCESSOS" },
@@ -450,7 +450,7 @@ export function WhyUs() {
   const items = [
     { icon: MapPin, t: "Sede própria em Orlando, Flórida (EIN 99-4846502)" },
     { icon: Users, t: "Filial no Brasil em Barueri/SP (CNPJ 62.917.376/0001-21)" },
-    { icon: ShieldCheck, t: "Acreditação BBB — nota A" },
+    { icon: ShieldCheck, t: "Acreditação BBB, nota A" },
     { icon: Star, t: "130+ avaliações 5★ no Google e Facebook" },
   ];
   return (
@@ -489,7 +489,7 @@ export function WhyUs() {
 }
 
 /* ============================================================
- * 8b. LEGADO — "Muito mais que um visto. Um legado." (Prompt 5)
+ * 8b. LEGADO. "Muito mais que um visto. Um legado." (Prompt 5)
  * ============================================================ */
 export function LegacySection() {
   const pillars = [
@@ -523,7 +523,7 @@ export function LegacySection() {
           num="07"
           eyebrow="O QUE VOCÊ CONQUISTA"
           title="Muito mais que um visto. Um legado."
-          kicker="O Green Card pelo EB-2 NIW reconfigura o horizonte da sua família — em cinco pilares."
+          kicker="O Green Card pelo EB-2 NIW reconfigura o horizonte da sua família, em cinco pilares."
         />
         <div className="mt-14 grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5">
           {pillars.map(({ icon: Icon, t, d }) => (
@@ -574,7 +574,7 @@ export function SalaryCompare() {
         </div>
         <p className="mt-5 text-sm text-foreground/60 leading-relaxed max-w-3xl">
           Valores de referência (brutos). No Brasil, impostos e encargos reduzem de forma
-          relevante o valor líquido — nos EUA a diferença é ainda maior.
+          relevante o valor líquido, nos EUA a diferença é ainda maior.
         </p>
       </div>
     </Reveal>
@@ -582,7 +582,7 @@ export function SalaryCompare() {
 }
 
 /* ============================================================
- * 10. DEPOIMENTOS — Vídeo (EB-2 do Helder) + Reais + Estudos de caso
+ * 10. DEPOIMENTOS. Vídeo (EB-2 do Helder) + Reais + Estudos de caso
  *
  * NOTA DE CONTEÚDO (não visível ao usuário):
  * O depoimento âncora em vídeo para o pilar EB-2 é do HELDER (sócio da
@@ -743,7 +743,7 @@ export function Testimonials() {
 }
 
 /* ============================================================
- * 10b. SELOS & PARCEIROS — moldura dourada, editável via admin
+ * 10b. SELOS & PARCEIROS, moldura dourada, editável via admin
  * ============================================================ */
 function PatchIcon({ label }: { label: string }) {
   const l = (label || "").toLowerCase();
@@ -828,7 +828,7 @@ export function PartnersBadges() {
 
 
 /* ============================================================
- * 11. FAQ — REAIS (Prompt 5)
+ * 11. FAQ. REAIS (Prompt 5)
  * ============================================================ */
 export function FAQ() {
   const faqs = [
@@ -838,7 +838,7 @@ export function FAQ() {
     },
     {
       q: "Qual a experiência de vocês?",
-      a: "Atuamos exclusivamente na preparação de documentação para vistos de emprego por mérito — EB-1, EB-2 NIW e EB-3. Esse foco gera profundidade nos critérios do USCIS. Não somos generalistas: cada caso é construído por uma equipe que já estruturou centenas de processos semelhantes.",
+      a: "Atuamos exclusivamente na preparação de documentação para vistos de emprego por mérito. EB-1, EB-2 NIW e EB-3. Esse foco gera profundidade nos critérios do USCIS. Não somos generalistas: cada caso é construído por uma equipe que já estruturou centenas de processos semelhantes.",
     },
     {
       q: "Posso confiar mesmo sem ir presencialmente?",
@@ -846,7 +846,7 @@ export function FAQ() {
     },
     {
       q: "Já fui enganado antes. Como sei que não é mais uma promessa?",
-      a: "Não prometemos o que não podemos garantir. Somos honestos sobre requisitos, sobre as chances reais do seu perfil e sobre os prazos do USCIS e dos consulados, que não dependem de nenhum escritório. Nosso compromisso é com a qualidade da estruturação — não com retórica.",
+      a: "Não prometemos o que não podemos garantir. Somos honestos sobre requisitos, sobre as chances reais do seu perfil e sobre os prazos do USCIS e dos consulados, que não dependem de nenhum escritório. Nosso compromisso é com a qualidade da estruturação, não com retórica.",
     },
     {
       q: "Meu caso é complicado, vale tentar?",
@@ -854,7 +854,7 @@ export function FAQ() {
     },
     {
       q: "Não tenho dinheiro sobrando, compensa?",
-      a: "É um investimento significativo — e por isso a análise inicial é gratuita: para que a decisão seja informada. Valores são apresentados com clareza após o diagnóstico, sem pressão e sem letras miúdas. Não trabalhamos com promessas de ganho garantido.",
+      a: "É um investimento significativo, e por isso a análise inicial é gratuita: para que a decisão seja informada. Valores são apresentados com clareza após o diagnóstico, sem pressão e sem letras miúdas. Não trabalhamos com promessas de ganho garantido.",
     },
   ];
   return (
@@ -879,7 +879,7 @@ export function FAQ() {
 }
 
 /* ============================================================
- * 12. CTA FINAL — dobra única de fechamento com duas ofertas.
+ * 12. CTA FINAL, dobra única de fechamento com duas ofertas.
  * Fusão do antigo CtaBanner (Análise gratuita) + PreQualPromo,
  * apresentando as duas rotas como escolha lado a lado.
  * ============================================================ */
@@ -898,7 +898,7 @@ export function CtaBanner() {
         </div>
 
         <div className="mt-12 grid lg:grid-cols-2 gap-6 lg:gap-8 items-stretch">
-          {/* Oferta principal — Análise gratuita */}
+          {/* Oferta principal. Análise gratuita */}
           <div className="relative rounded-2xl border border-gold/40 bg-ink-raise/60 p-7 lg:p-9 shadow-elevated flex flex-col">
             <span className="absolute -top-3 left-6 rounded-full bg-gold px-3 py-1 font-mono-label text-[10px] text-ink">
               RECOMENDADO
@@ -933,7 +933,7 @@ export function CtaBanner() {
             </p>
           </div>
 
-          {/* Oferta secundária — Pré-qualificação */}
+          {/* Oferta secundária. Pré-qualificação */}
           <div className="rounded-2xl border border-gold/20 bg-ink-raise/30 p-7 lg:p-9 flex flex-col">
             <div className="flex items-center gap-2 text-gold/80">
               <Sparkles className="h-4 w-4" />
@@ -944,7 +944,7 @@ export function CtaBanner() {
             </h3>
             <p className="mt-3 text-foreground/70 text-[15px] leading-relaxed">
               Poucas perguntas objetivas sobre formação e experiência. Ao final,
-              o visto mais compatível — EB-1A, EB-2 NIW, O-1 ou EB-3.
+              o visto mais compatível. EB-1A, EB-2 NIW, O-1 ou EB-3.
             </p>
             <ul className="mt-5 space-y-2 text-[14px] text-foreground/75">
               {[
@@ -982,7 +982,7 @@ export function CtaBanner() {
  * Helpers
  * ============================================================ */
 /**
- * Reveal — fade+slide leve via IntersectionObserver + classe CSS.
+ * Reveal, fade+slide leve via IntersectionObserver + classe CSS.
  * Substitui o `motion.div` por um reveal CSS leve, disparado uma única vez.
  * Evita `content-visibility` nas dobras para não reservar alturas estimadas
  * que possam deslocar o scroll quando a seção entra na viewport.
@@ -1032,7 +1032,7 @@ function CountUp({ value, className }: { value: string; className?: string }) {
 
 // ──────────────────────────────────────────────────────────────────────────────
 // HeroAssessment: bloco "Avaliação gratuita" embutido logo após o Hero, com
-// o formulário progressivo (LeadFormProgressive) inline — sem mandar o usuário
+// o formulário progressivo (LeadFormProgressive) inline, sem mandar o usuário
 // para outra página. A CTA principal do Hero ancora para #avaliacao-rapida.
 // ──────────────────────────────────────────────────────────────────────────────
 export function HeroAssessment() {
@@ -1051,7 +1051,7 @@ export function HeroAssessment() {
           </h2>
           <p className="mt-5 text-foreground/80 max-w-md leading-relaxed">
             Responda algumas perguntas curtas sobre o seu perfil. Suas respostas
-            ficam salvas no seu dispositivo — se sair, retoma de onde parou. Nossa
+            ficam salvas no seu dispositivo, se sair, retoma de onde parou. Nossa
             equipe responde por e-mail em até 48h.
           </p>
           <ul className="mt-7 space-y-3 text-sm text-foreground/80">

@@ -1,5 +1,5 @@
 /**
- * /admin/leads-incompletos — funil de abandono do form progressivo.
+ * /admin/leads-incompletos, funil de abandono do form progressivo.
  *
  * Mostra:
  *  - Tabela de leads parciais (não enviaram), com último campo, % concluído
@@ -166,7 +166,7 @@ function IncompletePage() {
                                 <div className="h-full rounded bg-amber-400" style={{ width: `${pct}%` }} />
                               </div>
                               <div className="text-[11px] text-slate-500 mt-1">
-                                parou em <span className="font-medium">{FIELD_LABEL[p.last_field ?? ""] ?? "—"}</span>
+                                parou em <span className="font-medium">{FIELD_LABEL[p.last_field ?? ""] ?? "-"}</span>
                               </div>
                             </div>
                           </div>
@@ -174,7 +174,7 @@ function IncompletePage() {
                         <td className="py-2.5">
                           <div className="font-medium truncate max-w-[180px]">{p.data.nome || <span className="text-slate-400">sem nome</span>}</div>
                           <div className="text-xs text-slate-500 truncate max-w-[180px]">
-                            {p.data.email || p.data.whatsapp || "—"}
+                            {p.data.email || p.data.whatsapp || "-"}
                           </div>
                         </td>
                         <td className="py-2.5 text-xs text-slate-600">
@@ -247,7 +247,7 @@ function IncompletePage() {
                     return (
                       <div key={f.key} className="flex justify-between gap-2">
                         <dt className="text-slate-500">{FIELD_LABEL[f.key]}</dt>
-                        <dd className="text-slate-900 text-right truncate max-w-[60%]">{value || <span className="text-slate-300">—</span>}</dd>
+                        <dd className="text-slate-900 text-right truncate max-w-[60%]">{value || <span className="text-slate-300">-</span>}</dd>
                       </div>
                     );
                   })}
@@ -265,15 +265,15 @@ function IncompletePage() {
                   ))}
                   <div className="flex justify-between gap-2">
                     <dt className="text-slate-500">página anterior</dt>
-                    <dd className="text-slate-900 text-right truncate max-w-[60%]">{selected.origin.internal.from_path ?? "—"}</dd>
+                    <dd className="text-slate-900 text-right truncate max-w-[60%]">{selected.origin.internal.from_path ?? "-"}</dd>
                   </div>
                   <div className="flex justify-between gap-2">
                     <dt className="text-slate-500">landing</dt>
-                    <dd className="text-slate-900 text-right truncate max-w-[60%]">{selected.origin.internal.landing_path ?? "—"}</dd>
+                    <dd className="text-slate-900 text-right truncate max-w-[60%]">{selected.origin.internal.landing_path ?? "-"}</dd>
                   </div>
                   <div className="flex justify-between gap-2">
                     <dt className="text-slate-500">referrer</dt>
-                    <dd className="text-slate-900 text-right truncate max-w-[60%]">{selected.origin.internal.referrer ?? "—"}</dd>
+                    <dd className="text-slate-900 text-right truncate max-w-[60%]">{selected.origin.internal.referrer ?? "-"}</dd>
                   </div>
                 </dl>
               </section>

@@ -36,7 +36,7 @@ function ConfigPage() {
               <Field label="Cor de destaque (ink)"><Input type="color" value={s.accent_color} onChange={(e) => upd("accent_color", e.target.value)} /></Field>
             </div>
             <p className="text-xs text-slate-500">
-              As cores ficam salvas e poderão ser aplicadas via tokens CSS — recomendado validar contraste antes de mudar a paleta principal do site.
+              As cores ficam salvas e poderão ser aplicadas via tokens CSS, recomendado validar contraste antes de mudar a paleta principal do site.
             </p>
           </div>
         </SectionCard>

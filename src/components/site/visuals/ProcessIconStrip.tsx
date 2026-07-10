@@ -1,5 +1,5 @@
 /**
- * ProcessIconStrip — tira horizontal com 4 ícones SVG ilustrando o
+ * ProcessIconStrip, tira horizontal com 4 ícones SVG ilustrando o
  * processo EB-2 NIW: passaporte → documentos → carimbo USCIS → Green Card.
  * Usado como camada decorativa atrás da dobra de processo.
  */

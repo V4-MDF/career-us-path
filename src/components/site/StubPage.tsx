@@ -26,7 +26,7 @@ export function StubPage({
           <h1 className="mt-4 font-display text-4xl md:text-6xl">{title}</h1>
           <p className="mt-6 text-lg text-foreground/80 leading-relaxed">{description}</p>
           <p className="mt-4 text-sm text-muted-foreground italic">
-            Página em construção — conteúdo completo será adicionado nos próximos passos.
+            Página em construção, conteúdo completo será adicionado nos próximos passos.
           </p>
           <div className="mt-10 flex gap-3">
             <a href={ctaHref}><Button className="btn-label" size="lg">Análise gratuita</Button></a>

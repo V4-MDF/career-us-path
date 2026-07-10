@@ -1,12 +1,12 @@
 /**
- * useScrollSpy — observa `<section id=…>` na rota e devolve o id ativo,
+ * useScrollSpy, observa `<section id=…>` na rota e devolve o id ativo,
  * atualizando `window.location.hash` via `history.replaceState` (debounced).
  *
  * Princípios:
  *  - Um único IntersectionObserver para todas as sections (barato).
  *  - `rootMargin: "-30% 0px -55% 0px"` → dispara quando a dobra está
  *    realmente no foco visual do leitor (terço superior).
- *  - replaceState, não pushState — botão voltar não polui.
+ *  - replaceState, não pushState, botão voltar não polui.
  *  - Debounce de 220ms para evitar >4 atualizações/s em scroll rápido.
  *  - SSR-safe (no-op no servidor).
  *  - Não dispara durante scroll programático (`suspendUntil` ref).
@@ -21,7 +21,7 @@ import { useEffect, useRef, useState } from "react";
 const programmaticScroll = {
   /** timestamp (performance.now) até quando ignorar updates do observer */
   until: 0,
-  /** id-alvo do scroll programático — vira activeId imediatamente */
+  /** id-alvo do scroll programático, vira activeId imediatamente */
   targetId: null as string | null,
 };
 
@@ -136,7 +136,7 @@ export function scrollToSection(id: string, suspendSpyMs = 900) {
 
   el.scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "start" });
 
-  // Atualiza o hash uma única vez, imediatamente — sem debounce/flicker.
+  // Atualiza o hash uma única vez, imediatamente, sem debounce/flicker.
   const url = `${window.location.pathname}${window.location.search}#${id}`;
   if (window.location.hash !== `#${id}`) {
     window.history.replaceState(null, "", url);

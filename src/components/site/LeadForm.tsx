@@ -22,7 +22,7 @@ export interface LeadFormProps {
   /**
    * Callback após salvar o lead com sucesso.
    * Quando definido, suprime o estado interno "done" (a página chamadora
-   * navega para uma rota de agradecimento — ex.: /avaliacao/obrigado).
+   * navega para uma rota de agradecimento, ex.: /avaliacao/obrigado).
    */
   onSubmitted?: (lead: { id: string; score: number; classificacao: string }) => void;
   /** Label do botão de envio. */
@@ -94,7 +94,7 @@ export function LeadForm({ segmentId, defaultProfissao, onSubmitted, submitLabel
     try {
       // Prompt 7: persistimos apenas respostas cruas + metadados.
       // Score/faixa de prioridade são SEMPRE derivados ao vivo a partir
-      // do scoring_model no admin — nunca congelados no lead.
+      // do scoring_model no admin, nunca congelados no lead.
       const id = newId("lead");
       const utm = typeof window !== "undefined" ? captureUtms(window.location.search) : {};
       const lead: LeadInput & {

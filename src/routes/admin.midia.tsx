@@ -11,7 +11,7 @@ function MediaPage() {
     <>
       <PageHeader
         title="Imagens & Mídia"
-        description="Logo, favicon, OG e heros. Upload direto para o CDN — mantém a qualidade original."
+        description="Logo, favicon, OG e heros. Upload direto para o CDN, mantém a qualidade original."
       />
       <div className="grid md:grid-cols-2 gap-4">
         {mediaSlots.map((s) => <MediaSlot key={s.id} id={s.id} label={s.label} />)}

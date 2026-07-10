@@ -3,7 +3,7 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { LandingPageTemplate, useLpState } from "@/components/site/lp/LandingPageTemplate";
 
 /**
- * Rota dinâmica /lp/:slug — motor de Landing Pages.
+ * Rota dinâmica /lp/:slug, motor de Landing Pages.
  *
  * Segmentos e variantes A/B vivem no dataStore (seed em src/lib/segments.ts).
  * Hero é A/B (sticky via abEngine); restante da LP vem do segmento.

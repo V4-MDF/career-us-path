@@ -18,7 +18,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Imigração legal para os EUA por mérito profissional. Preparação documental especializada para vistos EB-2 NIW, EB-1 e EB-3 — profissionais brasileiros consolidados, com Green Card para cônjuge e filhos.",
+          "Imigração legal para os EUA por mérito profissional. Preparação documental especializada para vistos EB-2 NIW, EB-1 e EB-3, profissionais brasileiros consolidados, com Green Card para cônjuge e filhos.",
       },
       { name: "robots", content: "index,follow" },
       { property: "og:title", content: "Status na América | Green Card EB-2 NIW" },
@@ -43,7 +43,7 @@ export const Route = createFileRoute("/")({
 /**
  * Registry de dobras da Home: cada id do `sectionMap` mapeia para o componente.
  * A ordem efetiva e a visibilidade vêm de `useOrderedSections("home")`, que lê
- * de dataStore["page_sections"]["home"] — editado em /admin/estrutura.
+ * de dataStore["page_sections"]["home"], editado em /admin/estrutura.
  *
  * Ao criar uma dobra nova: adicionar componente exportado em `sections.tsx`,
  * registrar o id em HOME_SECTIONS (sectionMap.ts), em DEFAULT_LAYOUTS.home

@@ -1,5 +1,5 @@
 /**
- * /pre-qualificacao — Teste estruturado de pré-qualificação.
+ * /pre-qualificacao. Teste estruturado de pré-qualificação.
  *
  * Diferente de /avaliacao (formulário comercial curto), aqui o respondente
  * tem um questionário longo (4 etapas) que gera um VEREDICTO automático por
@@ -27,7 +27,7 @@ export const Route = createFileRoute("/pre-qualificacao")({
   component: PreQualPage,
   head: () => ({
     meta: [
-      { title: "Teste de pré-qualificação — Status na América" },
+      { title: "Teste de pré-qualificação. Status na América" },
       { name: "description", content: "Descubra em minutos qual visto americano (EB-1A, EB-2 NIW, O-1 ou EB-3) tem mais afinidade com o seu perfil." },
       { name: "robots", content: "noindex, nofollow" },
     ],

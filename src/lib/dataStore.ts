@@ -1,5 +1,5 @@
 /**
- * dataStore — camada única de persistência.
+ * dataStore, camada única de persistência.
  *
  * IMPLEMENTAÇÃO: Lovable Cloud (Postgres) via tabela genérica `kv_records`.
  * Mantemos um **shadow cache em localStorage** para preservar leituras
@@ -21,7 +21,7 @@ export type TableName =
   | "segments"
   | "hero_variants"
   | "ab_stats"
-  | "admin_users"          // legado — não é mais usado (auth via Supabase)
+  | "admin_users"          // legado, não é mais usado (auth via Supabase)
   | "settings"
   | "page_seo"
   | "media"
@@ -47,7 +47,7 @@ function cacheWrite<T = unknown>(table: TableName, data: Record<string, T>) {
   try {
     window.localStorage.setItem(PREFIX + table, JSON.stringify(data));
   } catch {
-    // limite do localStorage — falha silenciosa, o banco continua sendo a verdade.
+    // limite do localStorage, falha silenciosa, o banco continua sendo a verdade.
   }
 }
 
@@ -92,7 +92,7 @@ export async function list<T = unknown>(table: TableName): Promise<Array<T & { i
 export async function set<T = unknown>(table: TableName, id: string, value: T): Promise<void> {
   // Evitamos `.upsert()` porque o PostgREST, ao traduzir para
   // `INSERT ... ON CONFLICT DO UPDATE`, exige que exista policy de UPDATE para
-  // o role — o que quebra o INSERT anônimo em tabelas como `leads` /
+  // o role, o que quebra o INSERT anônimo em tabelas como `leads` /
   // `prequal_responses` (onde por design não há UPDATE para anon).
   // Estratégia: INSERT; em caso de conflito de unique (23505), UPDATE.
   const insert = await supabase
@@ -110,7 +110,7 @@ export async function set<T = unknown>(table: TableName, id: string, value: T): 
         console.warn("[dataStore] update falhou", table, id, update.error.message);
       }
     } else {
-      // Loga mas mantém cache local — evita perder input do usuário em falha transitória.
+      // Loga mas mantém cache local, evita perder input do usuário em falha transitória.
       console.warn("[dataStore] insert falhou", table, id, insert.error.message);
     }
   }

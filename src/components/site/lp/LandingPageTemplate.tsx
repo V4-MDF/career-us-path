@@ -4,7 +4,7 @@
  * ARQUITETURA:
  * - Header enxuto (sem menu, para não vazar tráfego pago)
  * - HERO específico do segmento/variante A/B (única dobra que muda)
- * - VisaPageBody com hideHero — mesmo corpo canônico da página de visto
+ * - VisaPageBody com hideHero, mesmo corpo canônico da página de visto
  *   escolhida pelo segmento (segment.visa_slug, default "eb2-niw")
  * - Footer enxuto
  *
@@ -26,7 +26,7 @@ interface Props {
   variant: HeroVariant | null;
 }
 
-/* Header de conversão enxuto — sem menu para não vazar tráfego pago */
+/* Header de conversão enxuto, sem menu para não vazar tráfego pago */
 function ConversionHeader({ segmentId }: { segmentId: string }) {
   return (
     <header className="fixed top-0 inset-x-0 z-50 border-b border-border/40 bg-background/85 backdrop-blur">
@@ -83,7 +83,7 @@ export function LandingPageTemplate({ segment, variant }: Props) {
     <div className="bg-background text-foreground">
       <ConversionHeader segmentId={segment.id} />
       <main className="pt-16">
-        {/* 1. HERO — única dobra específica do segmento/variante */}
+        {/* 1. HERO, única dobra específica do segmento/variante */}
         <section className="relative overflow-hidden pt-16 md:pt-24 pb-20">
           <div className="absolute inset-0 -z-10">
             <div className="absolute inset-0 stars-pattern opacity-25" />
@@ -135,7 +135,7 @@ export function LandingPageTemplate({ segment, variant }: Props) {
           </div>
         </section>
 
-        {/* 2+. CORPO — reusa exatamente a estrutura da página de visto */}
+        {/* 2+. CORPO, reusa exatamente a estrutura da página de visto */}
         <VisaPageBody page={visaPage} hideHero />
       </main>
       <LpFooter />

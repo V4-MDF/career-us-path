@@ -1,5 +1,5 @@
 /**
- * TrackingInjector — lê settings/tracking do dataStore e injeta scripts/metas
+ * TrackingInjector, lê settings/tracking do dataStore e injeta scripts/metas
  * no <head>. Re-aplica em mudanças (admin) e na navegação entre rotas.
  *
  * Roda apenas no client.

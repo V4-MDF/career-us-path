@@ -1,9 +1,9 @@
 /**
- * <SectionAnchor> — wrapper semântico para uma dobra com URL própria.
+ * <SectionAnchor>, wrapper semântico para uma dobra com URL própria.
  *
  * - Aplica `id`, `aria-labelledby` e o utilitário CSS `section-anchor`
  *   (que injeta `scroll-margin-top` para compensar o header fixo).
- * - Não muda layout — render via `as` (default `section`).
+ * - Não muda layout, render via `as` (default `section`).
  *
  * Não é obrigatório para que o useScrollSpy funcione (basta um id no
  * `<section>`), mas centraliza a semântica e o offset de scroll.

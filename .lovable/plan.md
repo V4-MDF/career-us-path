@@ -1,30 +1,59 @@
-## Diagnóstico
+## Objetivo
 
-O logo hoje é servido por um único asset compartilhado: `src/assets/logo-status-na-america.png.asset.json`. Ele é o "monograma stacked" (STATUS grande + NA AMÉRICA em dourado + selo azul), diferente da versão horizontal enviada por você ("S" dourado em box + "Status. na América" em wordmark).
+Remover todos os travessões longos (`—`) do site e substituí-los por pontuação natural em português brasileiro (ponto quando a segunda parte é uma afirmação forte; vírgula ou dois-pontos quando é continuação da ideia). Aplicar em copy visível, painel admin e comentários de código.
 
-Usos no código (todos apontam para o mesmo asset, então trocar o asset resolve os três):
+## Escopo
 
-- `src/components/site/Header.tsx` — header fixo do site inteiro
-- `src/routes/auth.tsx` — tela de login do admin
-- `src/routes/avaliacao.index.tsx` — página `/avaliacao`
+Aproximadamente 320 ocorrências em ~50 arquivos, distribuídas em três grupos:
 
-Não há outros `<img>` de logo espalhados. Favicon (`public/favicon.png`) e `og-image` são arquivos separados.
+**Copy visível ao visitante (~180 ocorrências)** — prioridade alta, tom precisa ficar natural:
+- `src/lib/siteContent.ts` (defaults de textos da Home e institucional)
+- `src/lib/visaPages.ts` + `src/components/site/visa/VisaPageBody.tsx` (páginas de visto EB-2 NIW / EB-1 / EB-3)
+- `src/lib/blog.ts` (posts do blog)
+- `src/components/site/sections.tsx` (14 dobras da Home, FAQ, CTAs)
+- `src/components/site/LeadFormProgressive.tsx`, `src/components/site/prequal/PreQualForm.tsx`, `src/components/site/prequal/PreQualResult.tsx`
+- `src/routes/avaliacao.index.tsx`, `src/routes/avaliacao.obrigado.tsx`, `src/routes/sobre.tsx`, `src/routes/llm-info.tsx`, `src/routes/vistos.$slug.*`
+- `src/lib/leadQualification.ts`, `src/lib/scoring.ts`, `src/lib/leadScoring.ts`, `src/lib/visaQualifier.ts`, `src/lib/segments.ts` (strings de mensagens exibidas)
+- `src/lib/whatsapp.ts` (mensagem enviada ao lead)
 
-## Plano
+**Painel admin (~80 ocorrências)**:
+- `src/routes/admin.*.tsx` (todos os rótulos, tooltips e textos exibidos)
 
-1. **Novo asset do logo** — usar a imagem que você anexou (S em box dourado + "Status. na América" em wordmark) e subir via `lovable-assets` como o novo `logo-status-na-america.png`, sobrescrevendo o pointer `src/assets/logo-status-na-america.png.asset.json`.
-   - Como o pointer é imutável (UUID único), o passo real é: gerar um novo pointer e reescrever o JSON, além de deletar o asset antigo do CDN.
-2. **Ajustar dimensões do `<img>`** onde o wordmark horizontal exige proporção diferente da stacked:
-   - `Header.tsx`: `h-8 md:h-10` (era `h-12 md:h-14`) — o wordmark horizontal fica desproporcional na altura atual.
-   - `avaliacao.index.tsx`: mesma redução proporcional no topo do formulário.
-   - `auth.tsx`: mesma redução.
-3. **Favicon e og:image** — manter como estão (não fazem parte do escopo "logo do site"). Se você quiser, posso trocar o favicon para o "S" em box num passo seguinte.
+**Comentários e docs de código (~60 ocorrências)**:
+- Cabeçalhos de arquivos, JSDoc, `README.md`, comentários inline em `src/lib/*`, `src/hooks/*`, `src/components/site/visuals/*`, `src/styles.css`.
 
-## Ponto a confirmar
+## Regra de substituição
 
-A imagem anexada no chat é uma captura de tela pequena e escura, não um arquivo de logo em alta resolução. Antes de subir, preciso saber:
+Aplicar caso a caso conforme a função retórica do travessão:
 
-- **Você tem o arquivo do logo horizontal em alta resolução (PNG/SVG com fundo transparente)?** O ideal é subir esse arquivo — usar o screenshot direto vai deixar o logo serrilhado e com fundo preto sólido em vez de transparente, e o problema se repete.
-- Se não tiver o arquivo original, eu posso gerar uma versão vetorial/limpa a partir do screenshot (S dourado em box com borda + wordmark "Status. na América" sobre transparente), mas será uma reconstrução, não o arquivo oficial.
+- **Ponto final** quando a segunda parte é conclusão ou afirmação de peso.  
+  Ex.: `"Green Card por mérito profissional — sem empresa patrocinadora."` → `"Green Card por mérito profissional. Sem empresa patrocinadora."`
+- **Vírgula** quando é aposto curto ou explicação natural.  
+  Ex.: `"documentação preparada com o rigor exigido pelo USCIS — sem promessas de prazo."` → `"documentação preparada com o rigor exigido pelo USCIS, sem promessas de prazo."`
+- **Dois-pontos** quando introduz lista, definição ou consequência direta.  
+  Ex.: `"O que controlamos — a qualidade da estruturação."` → `"O que controlamos: a qualidade da estruturação."`
+- **Parênteses** quando é nota lateral que já vem cercada por vírgulas em cascata.
+- Preservar `—` apenas em contextos técnicos onde ele não é copy: separadores de UI que não são texto lido (ex.: labels tipo `"RETRATO EDITORIAL"` não têm travessão, mas listas com formato `"BBB · Nota A"` já usam `·` e ficam). Traços curtos (`-`) e meia-quadratins (`–`) em datas/intervalos ficam.
 
-Me diga qual caminho: **(a) enviar o arquivo original em alta resolução** ou **(b) reconstruir a partir do screenshot**. Aí executo a troca em um passo só.
+## Não muda
+
+- Nada de layout, estilo, rotas, tracking, scoring, A/B, RLS, migrations.
+- Fontes, cores, componentes shadcn.
+- Estrutura de arquivos.
+- `·` (ponto médio) usado como separador tipográfico (ex.: `"BBB · Nota A"`) fica.
+- URLs, código, nomes de variáveis.
+
+## Execução
+
+Faço a revisão em quatro lotes, um commit lógico por lote, relendo cada arquivo alterado para garantir que o texto continua natural em PT-BR (não é substituição cega por regex — cada `—` vira a pontuação adequada ao contexto):
+
+1. **Lote 1 — Copy da Home e institucional**: `siteContent.ts`, `sections.tsx`, `sobre.tsx`, `Footer`, `Header`, `llm-info.tsx`.
+2. **Lote 2 — Páginas de visto e blog**: `visaPages.ts`, `VisaPageBody.tsx`, `vistos.$slug.*`, `blog.ts`.
+3. **Lote 3 — Formulários e fluxo de conversão**: `LeadFormProgressive`, `PreQualForm`, `PreQualResult`, `avaliacao.*`, `whatsapp.ts`, `leadQualification.ts`, `scoring.ts`, `leadScoring.ts`, `visaQualifier.ts`, `segments.ts`.
+4. **Lote 4 — Admin + comentários e docs**: `src/routes/admin.*.tsx`, `README.md`, comentários em `src/lib/*`, `src/hooks/*`, `src/components/**`, `src/styles.css`, `src/server.ts`.
+
+Após cada lote, rodo `rg "—" <arquivos-do-lote>` para confirmar zero ocorrências residuais e faço leitura visual das seções principais na preview para checar se nenhuma frase ficou truncada ou estranha.
+
+## Entregável
+
+Zero `—` no repositório (`rg "—" src/` retorna vazio), copy visível reescrita em PT-BR natural sem alterar significado, admin com rótulos limpos, comentários de código sem o caractere. Nenhuma mudança funcional.

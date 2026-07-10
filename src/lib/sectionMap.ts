@@ -24,7 +24,7 @@ export interface SectionDef {
 }
 
 // ============================================================
-// HOME — 13 dobras (após reordenação do design dossiê).
+// HOME, 13 dobras (após reordenação do design dossiê).
 // Nenhuma é indexable: a Home indexa como página única.
 // ============================================================
 export const HOME_SECTIONS: SectionDef[] = [
@@ -44,7 +44,7 @@ export const HOME_SECTIONS: SectionDef[] = [
 ];
 
 // ============================================================
-// PILARES DE VISTO — 7 dobras, todas indexáveis.
+// PILARES DE VISTO, 7 dobras, todas indexáveis.
 // Geram sub-rotas /vistos/$slug/$secao com canonical próprio.
 // ============================================================
 export const VISA_SECTIONS: SectionDef[] = [
@@ -88,12 +88,12 @@ export const VISA_SECTIONS: SectionDef[] = [
     id: "avaliacao-gratuita",
     label: "Análise gratuita",
     intent: "Como solicitar a análise gratuita do seu perfil.",
-    indexable: false, // CTA — não vale a pena indexar isolado
+    indexable: false, // CTA, não vale a pena indexar isolado
   },
 ];
 
 // ============================================================
-// SOBRE / CONTATO — stubs ainda; mantemos o map para quando expandirem.
+// SOBRE / CONTATO, stubs ainda; mantemos o map para quando expandirem.
 // ============================================================
 export const SOBRE_SECTIONS: SectionDef[] = [
   { id: "quem-somos",     label: "Quem somos" },
@@ -107,7 +107,7 @@ export const CONTATO_SECTIONS: SectionDef[] = [
 ];
 
 // ============================================================
-// BLOG POST — sections fixas (header/corpo/cta/relacionados) +
+// BLOG POST, sections fixas (header/corpo/cta/relacionados) +
 // h2s do corpo são adicionados dinamicamente pelo SectionTOC
 // em modo `auto-extract`.
 // ============================================================
@@ -118,7 +118,7 @@ export const BLOG_POST_SECTIONS: SectionDef[] = [
 ];
 
 // ============================================================
-// Lookup helper — usado pela sub-rota e pelo sitemap.
+// Lookup helper, usado pela sub-rota e pelo sitemap.
 // ============================================================
 export function getVisaSection(id: string): SectionDef | undefined {
   return VISA_SECTIONS.find((s) => s.id === id);

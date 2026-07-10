@@ -1,5 +1,5 @@
 /**
- * Layout do painel admin — identidade "Dossiê" (parchment + ink + gold).
+ * Layout do painel admin, identidade "Dossiê" (parchment + ink + gold).
  *
  * Auth gate: redireciona para /auth se não autenticado. /admin/login é legado
  * e permanece renderizando fora do shell.

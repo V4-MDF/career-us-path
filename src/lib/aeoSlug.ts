@@ -1,5 +1,5 @@
 /**
- * AEO Slug Utilities — Status na América
+ * AEO Slug Utilities. Status na América
  * =======================================
  *
  * Slugs otimizados para Answer Engine Optimization (Google + LLMs).
@@ -25,7 +25,7 @@
  *              { kind: "guia", profession: "medico" })
  *                                                   → "como-medico-brasileiro-pode-morar-nos-eua-com-eb-2-niw"
  *
- * NUNCA edite slugs persistidos diretamente — use `migrateSlug()` para
+ * NUNCA edite slugs persistidos diretamente, use `migrateSlug()` para
  * gerar o novo slug + registrar o redirect 301 em `LEGACY_REDIRECTS`.
  */
 
@@ -45,7 +45,7 @@
 export const AEO_KEYWORDS = {
   /** Termo guarda-chuva que TODA URL de visto deve carregar. */
   greenCard: "green-card",
-  /** Sufixo humano para cada visto — capta intenção comercial. */
+  /** Sufixo humano para cada visto, capta intenção comercial. */
   visaBenefit: {
     "eb-2-niw": "green-card-por-merito",
     "eb-1": "green-card-habilidade-extraordinaria",
@@ -67,7 +67,7 @@ export const AEO_KEYWORDS = {
 } as const;
 
 // =============================================================================
-// Slugify base — normalização estrita ASCII
+// Slugify base, normalização estrita ASCII
 // =============================================================================
 
 /**
@@ -102,7 +102,7 @@ export type ContentKind =
   | "generic";      // sem injeção semântica
 
 export interface SlugifyOptions {
-  /** Tipo de conteúdo — define prefixos/sufixos injetados. */
+  /** Tipo de conteúdo, define prefixos/sufixos injetados. */
   kind?: ContentKind;
   /**
    * Topic ID interno (ex: "eb-2-niw", "eb-1"). Quando presente, é anexado
@@ -112,7 +112,7 @@ export interface SlugifyOptions {
   topic?: string;
   /** Profissão alvo (medico, engenheiro, empresario). */
   profession?: string;
-  /** Ano de relevância — anexado quando o conteúdo é time-sensitive. */
+  /** Ano de relevância, anexado quando o conteúdo é time-sensitive. */
   year?: number;
   /**
    * Sufixo único anti-colisão (ID, SKU, código). Convertido para baseSlug
@@ -148,7 +148,7 @@ export function slugifyAEO(title: string, opts: SlugifyOptions = {}): string {
     slug = template;
   }
 
-  // 3. Caso especial: pilar de visto — anexa o "benefício humano"
+  // 3. Caso especial: pilar de visto, anexa o "benefício humano"
   if (kind === "visa" && topic) {
     const code = baseSlug(topic);
     const benefit = AEO_KEYWORDS.visaBenefit[code];
@@ -184,7 +184,7 @@ export function slugifyAEO(title: string, opts: SlugifyOptions = {}): string {
 /**
  * Gera slug para hub comparativo: `<a>-vs-<b>-qual-escolher`.
  * Ordena alfabeticamente para garantir canonical único (eb-1-vs-eb-2 ≠ eb-2-vs-eb-1
- * seria ruim para SEO — escolhemos a ordem alfabética como canônica).
+ * seria ruim para SEO, escolhemos a ordem alfabética como canônica).
  */
 export function slugifyComparison(a: string, b: string): string {
   const [first, second] = [baseSlug(a), baseSlug(b)].sort();

@@ -1,5 +1,5 @@
 /**
- * /admin/pre-qualificacao — listagem das respostas do teste de pré-qualificação.
+ * /admin/pre-qualificacao, listagem das respostas do teste de pré-qualificação.
  *
  * KPIs no topo: total, qualificados (apto/parcial sem blocker), abertura
  * WhatsApp, distribuição por visto recomendado.
@@ -117,10 +117,10 @@ function PreQualAdmin() {
                         <td className="py-3 pr-3">
                           {r.whatsappOpened
                             ? <span className="inline-flex items-center gap-1 text-emerald-700"><MessageCircle className="h-3.5 w-3.5" /> abriu</span>
-                            : <span className="text-slate-400">—</span>}
+                            : <span className="text-slate-400">-</span>}
                         </td>
                         <td className="py-3 pr-3 text-xs text-slate-600 max-w-[220px] truncate" title={orig ?? ""}>
-                          {orig ?? "—"}
+                          {orig ?? "-"}
                         </td>
                         <td className="py-3 pr-3 text-xs text-slate-500 whitespace-nowrap">
                           {new Date(r.createdAt).toLocaleString("pt-BR")}
