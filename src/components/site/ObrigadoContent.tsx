@@ -10,7 +10,7 @@ import { Link } from "@tanstack/react-router";
 import { CheckCircle2, BookOpen, FileText, ChevronLeft, Mail, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { trackLead } from "@/lib/tracking";
-import { buildWhatsAppLink, leadWhatsAppMessage, type LeadWhatsAppInput } from "@/lib/whatsapp";
+import { buildWhatsAppLink, leadWhatsAppMessage, defaultWhatsAppMessage, type LeadWhatsAppInput } from "@/lib/whatsapp";
 
 const SS_QUALIFICATION = "lastQualificationResult";
 const SS_QUALIFIED_LEAD = "lastQualifiedLead";
