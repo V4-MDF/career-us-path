@@ -435,13 +435,13 @@ export function LeadFormProgressive({
 
         {error && <p className="text-sm text-destructive">{error}</p>}
 
-        <div className="pt-2 flex items-center justify-end">
+        <div className="pt-2 flex items-center justify-center sm:justify-end">
           {stepIndex < totalFields ? (
-            <Button onClick={advance} size="lg" className="btn-label gap-1">
+            <Button onClick={advance} size="lg" className="btn-label gap-1 w-full sm:w-auto">
               Continuar <ChevronRight className="h-4 w-4" />
             </Button>
           ) : (
-            <Button className="btn-label" onClick={submit} disabled={loading} size="lg">
+            <Button className="btn-label w-full sm:w-auto" onClick={submit} disabled={loading} size="lg">
               {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : (submitLabel ?? "Enviar para análise")}
             </Button>
           )}
