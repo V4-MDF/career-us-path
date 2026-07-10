@@ -75,10 +75,6 @@ export const defaultContent = {
   "testimonials.secondaryVideoUrl": "",
   "testimonials.googleReviewsUrl":
     "https://www.google.com/search?q=Status+na+Am%C3%A9rica+Orlando+reviews",
-  "testimonials.caseStudiesEyebrow": "ESTUDOS DE CASO",
-  "testimonials.caseStudiesTitle": "Casos reais, documentados.",
-  "testimonials.caseStudiesLead":
-    "Estamos preparando os primeiros estudos de caso completos, perfil, estratégia adotada e resultado. Publicados em breve.",
 
   // ==== Hero das páginas de visto (subtítulo enxuto + vídeo por página) ====
   // Cada página de visto lê seu próprio vídeo aqui; vazio → placeholder.
