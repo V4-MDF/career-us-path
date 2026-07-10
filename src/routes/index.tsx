@@ -49,6 +49,7 @@ export const Route = createFileRoute("/")({
     ],
     links: [{ rel: "canonical", href: "https://lp.statusnaamerica.com/" }],
   }),
+  loader: () => getPageSectionsFn({ data: { page: "home" } }),
   component: Home,
 });
 
