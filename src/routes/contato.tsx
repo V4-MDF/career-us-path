@@ -15,14 +15,12 @@ import { z } from "zod";
 import {
   Mail,
   MapPin,
-  MessageCircle,
   Phone,
   Instagram,
   Facebook,
   Youtube,
   CheckCircle2,
   Loader2,
-  ExternalLink,
 } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
@@ -36,7 +34,6 @@ import { useContent } from "@/lib/siteContent";
 import { getSiteSettings, defaultSettings, type SiteSettings } from "@/lib/admin/settings";
 import { newId, set } from "@/lib/dataStore";
 import { getOrigin } from "@/lib/origin";
-import { whatsappLinkFor } from "@/lib/whatsapp";
 
 export const Route = createFileRoute("/contato")({
   head: () => ({
