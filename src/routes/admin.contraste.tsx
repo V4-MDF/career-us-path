@@ -108,13 +108,15 @@ function ContrastAdmin() {
               <SectionCard
                 key={side.key}
                 title={side.title}
-                description={side.hint}
-                actions={
-                  <div className="flex gap-2">
-                    <Button variant="outline" size="sm" onClick={() => resetSeed(side.key)}>Restaurar sugestão</Button>
-                    <Button variant="outline" size="sm" onClick={() => add(side.key)}>
-                      <Plus className="h-4 w-4 mr-1" /> Adicionar
-                    </Button>
+                description={
+                  <div className="flex items-center justify-between gap-3">
+                    <span>{side.hint}</span>
+                    <span className="flex gap-2">
+                      <Button variant="outline" size="sm" onClick={() => resetSeed(side.key)}>Restaurar sugestão</Button>
+                      <Button variant="outline" size="sm" onClick={() => add(side.key)}>
+                        <Plus className="h-4 w-4 mr-1" /> Adicionar
+                      </Button>
+                    </span>
                   </div>
                 }
               >
