@@ -15,7 +15,6 @@ import {
   MapPin,
   ShieldCheck,
   BadgeCheck,
-  Users,
   Home as HomeIcon,
   Landmark,
   GraduationCap,
@@ -95,7 +94,6 @@ function SobrePage() {
         <SobreHero />
         <NossaHistoria />
         <DiferencialEUA />
-        <Equipe />
         <NumerosCredenciais />
         <PartnersBadges />
         <OndeEstamos />
@@ -264,92 +262,6 @@ function DiferencialEUA() {
   );
 }
 
-/* --------------------------------- Equipe ------------------------------- */
-
-function Equipe() {
-  const eyebrow = useContent("sobre.equipe.eyebrow");
-  const title = useContent("sobre.equipe.title");
-  const note = useContent("sobre.equipe.note");
-
-  const membros = [
-    {
-      nome: useContent("sobre.equipe.m1.nome"),
-      papel: useContent("sobre.equipe.m1.papel"),
-      bio: useContent("sobre.equipe.m1.bio"),
-      foto: useContent("sobre.equipe.m1.foto"),
-    },
-    {
-      nome: useContent("sobre.equipe.m2.nome"),
-      papel: useContent("sobre.equipe.m2.papel"),
-      bio: useContent("sobre.equipe.m2.bio"),
-      foto: useContent("sobre.equipe.m2.foto"),
-    },
-    {
-      nome: useContent("sobre.equipe.m3.nome"),
-      papel: useContent("sobre.equipe.m3.papel"),
-      bio: useContent("sobre.equipe.m3.bio"),
-      foto: useContent("sobre.equipe.m3.foto"),
-    },
-    {
-      nome: useContent("sobre.equipe.m4.nome"),
-      papel: useContent("sobre.equipe.m4.papel"),
-      bio: useContent("sobre.equipe.m4.bio"),
-      foto: useContent("sobre.equipe.m4.foto"),
-    },
-  ];
-
-  return (
-    <section className="bg-parchment py-16 md:py-24 border-b border-gold/20">
-      <div className="container-x">
-        <div className="flex items-center gap-3">
-          <span aria-hidden className="h-px w-10 bg-gold" />
-          <span className="font-mono-label text-oxblood">{eyebrow}</span>
-        </div>
-        <h2 className="mt-3 font-display display-2 text-ink-text max-w-2xl">
-          {title}
-        </h2>
-        <p className="mt-3 text-sm text-ink-text/60 italic">{note}</p>
-
-        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {membros.map((m, i) => (
-            <article
-              key={i}
-              className="rounded-xl border border-gold/40 bg-white shadow-soft overflow-hidden"
-            >
-              {m.foto ? (
-                <img
-                  src={m.foto}
-                  alt={m.nome}
-                  className="w-full aspect-[4/5] object-cover"
-                  loading="lazy"
-                />
-              ) : (
-                <div className="aspect-[4/5] bg-ink/5 flex items-center justify-center">
-                  <Users className="h-10 w-10 text-gold/60" />
-                </div>
-              )}
-              <div className="p-5 border-t border-gold/25">
-                <div className="font-display text-lg text-ink-text">{m.nome}</div>
-                <div className="font-mono-label text-[11px] text-oxblood mt-1">
-                  {m.papel}
-                </div>
-                {m.bio ? (
-                  <p className="mt-3 text-sm text-ink-text/80 leading-relaxed">
-                    {m.bio}
-                  </p>
-                ) : (
-                  <p className="mt-3 text-xs text-ink-text/40 italic">
-                    Biografia a completar pelo cliente.
-                  </p>
-                )}
-              </div>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
 
 /* ------------------------ Números e credenciais ------------------------- */
 
