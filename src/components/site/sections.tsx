@@ -538,6 +538,41 @@ export function WhyUs() {
 }
 
 /* ============================================================
+ * 7b. VÍDEO INSTITUCIONAL — slot reservado 16:9.
+ * Enquanto a URL não estiver preenchida no admin, mostra placeholder.
+ * ============================================================ */
+export function InstitutionalVideo() {
+  const eyebrow = useContent("institutional.eyebrow");
+  const title = useContent("institutional.title");
+  const lead = useContent("institutional.lead");
+  const url = useContent("institutional.videoUrl");
+
+  return (
+    <Reveal as="section" id="video-institucional" className="section-pad relative">
+      <div className="container-x max-w-5xl">
+        <div className="flex items-center gap-3">
+          <span aria-hidden className="h-px w-8 bg-gold" />
+          <span className="font-mono-label text-gold/85">{eyebrow || "VÍDEO INSTITUCIONAL"}</span>
+        </div>
+        <h2 className="mt-4 font-display text-[clamp(1.6rem,3.2vw,2.4rem)] leading-tight text-foreground max-w-3xl">
+          {title || "Conheça a Status na América."}
+        </h2>
+        {lead && (
+          <p className="mt-4 text-foreground/80 leading-relaxed max-w-2xl">{lead}</p>
+        )}
+
+        <div className="mt-10 relative aspect-video w-full overflow-hidden rounded-2xl border border-gold/30 bg-ink-raise shadow-elevated ring-1 ring-gold/10">
+          <VideoPlayer url={url} title={title || "Vídeo institucional Status na América"} />
+        </div>
+        <p className="mt-3 font-mono-label text-foreground/50 text-[11px]">
+          FORMATO 16:9 · HORIZONTAL
+        </p>
+      </div>
+    </Reveal>
+  );
+}
+
+/* ============================================================
  * 8b. LEGADO. "Muito mais que um visto. Um legado." (Prompt 5)
  * ============================================================ */
 export function LegacySection() {
