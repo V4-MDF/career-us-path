@@ -19,6 +19,10 @@ import { get } from "./dataStore";
 import visaHeroEb2Niw from "@/assets/visa-hero-eb2-niw.jpg";
 import visaHeroEb1 from "@/assets/visa-hero-eb1.jpg";
 import visaHeroEb3 from "@/assets/visa-hero-eb3.jpg";
+// Dobra "01 Definição" — mérito da carreira = mostrar o profissional
+// beneficiário no exercício da sua competência, não a empresa/consultoria.
+// Substituir por fotografia real art-direcionada com o tratamento padrão.
+import visaDefinitionEb2Niw from "@/assets/visa-eb2-niw-definition.jpg";
 
 export const defaultContent = {
   "hero.eyebrow": "IMIGRAÇÃO PARA OS ESTADOS UNIDOS. EB-2 NIW",
