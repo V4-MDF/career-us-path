@@ -31,16 +31,26 @@ function DashboardPage() {
   const [variants, setVariants] = useState<HeroVariant[]>([]);
   const [stats, setStats] = useState<AbStats[]>([]);
 
+  const reload = async () => {
+    await ensureSeed();
+    setLeads(await list<StoredLead>("leads"));
+    setPartials(await list<PartialLead>("leads_partial"));
+    setModel(await loadModel());
+    setSegments(await list<Segment>("segments"));
+    setVariants(await list<HeroVariant>("hero_variants"));
+    setStats(await list<AbStats>("ab_stats"));
+  };
+  useEffect(() => { reload(); }, []);
+  // Reflete mudanças de /admin/scoring ao voltar para a aba/janela.
   useEffect(() => {
-    (async () => {
-      await ensureSeed();
-      setLeads(await list<StoredLead>("leads"));
-      setPartials(await list<PartialLead>("leads_partial"));
-      setModel(await loadModel());
-      setSegments(await list<Segment>("segments"));
-      setVariants(await list<HeroVariant>("hero_variants"));
-      setStats(await list<AbStats>("ab_stats"));
-    })();
+    const onFocus = () => { reload(); };
+    const onVis = () => { if (document.visibilityState === "visible") reload(); };
+    window.addEventListener("focus", onFocus);
+    document.addEventListener("visibilitychange", onVis);
+    return () => {
+      window.removeEventListener("focus", onFocus);
+      document.removeEventListener("visibilitychange", onVis);
+    };
   }, []);
 
   const scored = useMemo(() => {
