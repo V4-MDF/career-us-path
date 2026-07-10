@@ -85,18 +85,38 @@ export const defaultContent = {
 
   // ==== Hero das páginas de visto (subtítulo enxuto + vídeo por página) ====
   // Cada página de visto lê seu próprio vídeo aqui; vazio → placeholder.
+  // ==== Hero das páginas de visto (subtítulo enxuto + vídeo + IMAGEM por visto) ====
+  // Cada página de visto lê seu próprio vídeo E sua própria imagem aqui.
+  // heroImage: URL da fotografia de fundo, específica de cada visto.
+  // NUNCA compartilhar a mesma imagem entre vistos, nem usar IA genérica.
   "visa.eb2-niw.heroSubtitle":
     "O Green Card por mérito profissional, sem empresa patrocinadora e sem oferta de emprego.",
   "visa.eb2-niw.heroVideoUrl": "",
   "visa.eb2-niw.heroVideoThumb": "",
+  // EB-2 NIW (carro-chefe): profissional brasileiro 40+ consolidado com toque
+  // de família ao fundo em contexto americano aspiracional. Substituir por
+  // fotografia real art-direcionada com o tratamento padrão — nunca imagem
+  // genérica de IA; imagem específica deste visto, não compartilhada.
+  "visa.eb2-niw.heroImage": visaHeroEb2Niw,
   "visa.eb1.heroSubtitle":
     "O Green Card para quem tem reconhecimento internacional comprovado, sem patrocinador, sem PERM.",
   "visa.eb1.heroVideoUrl": "",
   "visa.eb1.heroVideoThumb": "",
+  // EB-1 (habilidade extraordinária): figura de excelência/liderança em
+  // ambiente de alto padrão (escritório executivo, laboratório, palco).
+  // Substituir por fotografia real art-direcionada com o tratamento padrão —
+  // nunca imagem genérica de IA; imagem específica deste visto, não compartilhada.
+  "visa.eb1.heroImage": visaHeroEb1,
   "visa.eb3.heroSubtitle":
     "O Green Card com oferta formal de emprego nos EUA, exige patrocinador e PERM.",
   "visa.eb3.heroVideoUrl": "",
   "visa.eb3.heroVideoThumb": "",
+  // EB-3 (profissional qualificado): profissional em ambiente de trabalho
+  // americano concreto (hospital, indústria, empresa). Tom mão-na-massa /
+  // oportunidade real. Substituir por fotografia real art-direcionada com o
+  // tratamento padrão — nunca imagem genérica de IA; imagem específica deste
+  // visto, não compartilhada.
+  "visa.eb3.heroImage": visaHeroEb3,
 
   // ==== Página de Contato =========================================
   "contato.eyebrow": "FALE CONOSCO",
