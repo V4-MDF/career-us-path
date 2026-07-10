@@ -24,6 +24,8 @@ export interface LeadOrigin {
 
 const SS_LAST_PATH = "sna_last_path";
 const SS_LAST_TITLE = "sna_last_title";
+const SS_PREV_PATH = "sna_prev_path";
+const SS_PREV_TITLE = "sna_prev_title";
 const SS_LANDING = "sna_landing";
 const SS_REFERRER = "sna_referrer";
 
@@ -31,8 +33,10 @@ const isBrowser = () => typeof window !== "undefined";
 
 /**
  * Chamado pelo __root.tsx a cada mudança de rota.
- * Antes de sobrescrever last_path, salva o anterior, esse "anterior"
- * é o que importa quando o usuário chega em /avaliacao.
+ *
+ * Mantém DOIS slots: `last` (rota atual) e `prev` (rota imediatamente
+ * anterior). Ao chegar em /avaliacao, `prev` guarda a LP de origem,
+ * `last` seria a própria /avaliacao (e por isso é filtrada em getOrigin).
  */
 export function trackRouteChange(pathname: string, title?: string) {
   if (!isBrowser()) return;
@@ -44,6 +48,15 @@ export function trackRouteChange(pathname: string, title?: string) {
         JSON.stringify({ path: pathname, ts: new Date().toISOString() }),
       );
       if (document.referrer) sessionStorage.setItem(SS_REFERRER, document.referrer);
+    }
+    // Antes de sobrescrever "last", promove o valor atual para "prev",
+    // desde que seja uma rota diferente (evita prev == last após reload/StrictMode).
+    const currentLast = sessionStorage.getItem(SS_LAST_PATH);
+    const currentLastTitle = sessionStorage.getItem(SS_LAST_TITLE);
+    if (currentLast && currentLast !== pathname) {
+      sessionStorage.setItem(SS_PREV_PATH, currentLast);
+      if (currentLastTitle) sessionStorage.setItem(SS_PREV_TITLE, currentLastTitle);
+      else sessionStorage.removeItem(SS_PREV_TITLE);
     }
     sessionStorage.setItem(SS_LAST_PATH, pathname);
     if (title) sessionStorage.setItem(SS_LAST_TITLE, title);
@@ -77,6 +90,8 @@ export function getOrigin(currentPath?: string): LeadOrigin {
 
     const lastPath = sessionStorage.getItem(SS_LAST_PATH);
     const lastTitle = sessionStorage.getItem(SS_LAST_TITLE);
+    const prevPath = sessionStorage.getItem(SS_PREV_PATH);
+    const prevTitle = sessionStorage.getItem(SS_PREV_TITLE);
     const referrer = sessionStorage.getItem(SS_REFERRER) || document.referrer || null;
     const landingRaw = sessionStorage.getItem(SS_LANDING);
     let landing_path: string | null = null;
@@ -88,13 +103,23 @@ export function getOrigin(currentPath?: string): LeadOrigin {
         landing_ts = l.ts;
       } catch { /* ignore */ }
     }
-    // não considera a própria rota atual como "origem"
-    const from_path = lastPath && lastPath !== currentPath ? lastPath : null;
+    // Escolhe a melhor "página interna anterior":
+    // 1) `last` se for diferente da rota atual (usuário chegou aqui de outra página)
+    // 2) `prev` se `last` for a própria rota atual (ex.: já está em /avaliacao)
+    let from_path: string | null = null;
+    let from_title: string | null = null;
+    if (lastPath && lastPath !== currentPath) {
+      from_path = lastPath;
+      from_title = lastTitle;
+    } else if (prevPath && prevPath !== currentPath) {
+      from_path = prevPath;
+      from_title = prevTitle;
+    }
     return {
       utm,
       internal: {
         from_path,
-        from_title: from_path ? lastTitle : null,
+        from_title,
         referrer: referrer || null,
         landing_path,
         landing_ts,
