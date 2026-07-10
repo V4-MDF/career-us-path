@@ -211,7 +211,7 @@ function ContentPage() {
                           onBlur={() => save(f.k)} />
                       )}
                       <div className="mt-0.5 text-[10px] text-slate-400">Chave: {f.k} · salva ao sair do campo</div>
-                      {/^URL do vídeo/i.test(f.label) && (values[f.k] ?? "").trim() !== "" && (() => {
+                      {/(URL do vídeo|Vídeo de fundo)/i.test(f.label) && (values[f.k] ?? "").trim() !== "" && (() => {
                         const parsed = parseVideoUrl(values[f.k] ?? "");
                         return parsed ? (
                           <div className="mt-1 text-[10px] font-medium text-emerald-700">
