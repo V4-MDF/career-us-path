@@ -126,8 +126,8 @@
   --popover: var(--ink-raise);
   --popover-foreground: #ECE6D6;
 
-  --primary: var(--gold);
-  --primary-foreground: var(--ink-deep);
+  --primary: #8A6F3E;
+  --primary-foreground: #FFFFFF;
 
   --secondary: var(--ink-raise);
   --secondary-foreground: #ECE6D6;
