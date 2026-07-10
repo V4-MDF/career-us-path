@@ -42,6 +42,9 @@ export function Header() {
   const [vistosOpen, setVistosOpen] = useState(false);
   const [vistosMobileOpen, setVistosMobileOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const avaliacaoHeaderHref = useAvaliacaoHref("header_cta");
+  const avaliacaoMobileHref = useAvaliacaoHref("header_mobile_cta");
+
 
 
   // Fecha dropdown ao clicar fora ou ao pressionar Esc
