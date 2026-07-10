@@ -322,7 +322,7 @@ export function NiwSection() {
   ];
   return (
     <Reveal as="section" id="eb-2-niw" className="section-pad relative">
-      <div className="absolute inset-0 -z-10 guilloche" />
+      
       <div className="container-x grid lg:grid-cols-2 gap-14 items-center">
         <div>
           <SectionHead num="02" eyebrow="CARRO-CHEFE. EB-2 NIW" title={title} />
@@ -382,8 +382,7 @@ export function VisaCards() {
   ];
   return (
     <Reveal as="section" id="vistos-eb" className="section-ink-deep section-pad border-y border-gold/10 relative overflow-hidden">
-      {/* Profundidade sutil (sem foto): textura guilloché + filete dourado no topo. */}
-      <div aria-hidden className="absolute inset-0 -z-10 guilloche opacity-60" />
+      {/* Profundidade limpa: filete dourado no topo (sem padrão de fundo). */}
       <div aria-hidden className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold/50 to-transparent" />
       <div className="container-x relative">
 
@@ -591,8 +590,7 @@ export function LegacySection() {
             width={1600}
             height={1000}
           />
-          <div className="relative rounded-2xl border border-gold/25 bg-ink-raise/60 p-7 md:p-9 shadow-soft">
-            <div aria-hidden className="absolute inset-0 -z-10 guilloche opacity-70 rounded-2xl" />
+          <div className="relative rounded-2xl border border-gold/25 bg-[#16223A] p-7 md:p-9 shadow-soft">
             <span className="font-mono-label text-gold">FUTURO DOS FILHOS</span>
             <p className="mt-4 font-display text-2xl md:text-[26px] leading-tight text-foreground">
               A decisão que muda três gerações.

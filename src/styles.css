@@ -532,21 +532,12 @@
   }
 }
 
-/* Padrão guilloché (linhas finas de certificado), usar com opacidade ≤6% */
+/* .guilloche foi neutralizada globalmente. Mantida apenas como no-op para não
+ * quebrar referências antigas. Nenhuma textura/pattern decorativo é aplicado
+ * em fundos do site — profundidade vem de cor sólida, borda e espaçamento. */
 @utility guilloche {
-  background-image:
-    repeating-linear-gradient(45deg,
-      var(--gold) 0,
-      var(--gold) 0.5px,
-      transparent 0.5px,
-      transparent 12px),
-    repeating-linear-gradient(-45deg,
-      var(--gold) 0,
-      var(--gold) 0.5px,
-      transparent 0.5px,
-      transparent 12px);
-  background-size: 24px 24px;
-  opacity: 0.04;
+  background-image: none;
+  opacity: 0;
 }
 
 /* Sweep do botão dourado (esquerda → direita) */
