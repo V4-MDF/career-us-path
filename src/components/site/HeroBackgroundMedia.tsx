@@ -46,10 +46,19 @@ function useCanPlayVideo(): boolean {
   return ok;
 }
 
+function isValidHttpOrAssetUrl(u: string): boolean {
+  const s = u.trim();
+  if (!s) return false;
+  if (s.startsWith("/") || s.startsWith("http://") || s.startsWith("https://") || s.startsWith("data:")) return true;
+  return false;
+}
+
 export function HeroBackgroundMedia({ videoUrl, posterUrl }: Props) {
   const canPlay = useCanPlayVideo();
-  const effectiveVideoUrl = videoUrl?.trim() ? videoUrl.trim() : DEFAULT_VIDEO_URL;
-  const parsed = parseVideoUrl(effectiveVideoUrl);
+  const trimmedVideo = videoUrl?.trim() ?? "";
+  // Try user-supplied URL; if invalid/unparseable, silently fall back to the default motion clip.
+  const userParsed = trimmedVideo ? parseVideoUrl(trimmedVideo) : null;
+  const parsed = userParsed ?? parseVideoUrl(DEFAULT_VIDEO_URL);
   const poster = posterUrl?.trim() ? posterUrl.trim() : heroSkyline;
 
 
