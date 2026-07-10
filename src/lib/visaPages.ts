@@ -181,7 +181,17 @@ const eb2niw: VisaPage = {
     {
       q: "Quanto custa?",
       a:
-        "A análise inicial do perfil é gratuita. O investimento da preparação documental varia conforme a composição da família, a complexidade da documentação e o estágio do caso. Apresentamos a proposta após o diagnóstico.",
+        "A análise inicial do perfil é gratuita. O investimento da preparação documental varia conforme a composição da família, a complexidade da documentação e o estágio do caso. O valor da assessoria é separado das taxas oficiais do governo americano (USCIS), que são pagas diretamente ao órgão e podem variar. Apresentamos a proposta e o panorama completo de custos após o diagnóstico.",
+    },
+    {
+      q: "As taxas do governo americano estão incluídas no valor da assessoria?",
+      a:
+        "Não. Existem duas coisas diferentes: (1) as taxas oficiais do governo americano (USCIS), pagas diretamente ao órgão; e (2) o valor da nossa assessoria, que cobre a preparação e organização estratégica do seu processo. São separados. As taxas do USCIS são definidas pelo próprio governo, podem mudar e são pagas por formulário. Na fase final (Green Card), parte das taxas é individual — ou seja, cônjuge e filhos têm suas próprias taxas. Na sua análise gratuita, explicamos exatamente quais taxas se aplicam ao seu caso e à sua família.",
+    },
+    {
+      q: "Preciso pagar taxas separadas para minha família?",
+      a:
+        "Na etapa da petição inicial, a taxa é do requerente principal. Já na etapa final de Green Card, cônjuge e filhos entram com seus próprios formulários e taxas — portanto, há custos individuais por pessoa nessa fase. Detalhamos isso na análise, conforme o tamanho da sua família.",
     },
   ],
   ctaTitle: "Descubra se você já tem perfil para o EB-2 NIW.",
