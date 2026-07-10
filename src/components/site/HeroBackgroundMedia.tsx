@@ -15,6 +15,10 @@
 import { useEffect, useState } from "react";
 import { parseVideoUrl } from "@/lib/videoEmbed";
 import heroSkyline from "@/assets/hero-skyline.jpg";
+import heroFamilyVideo from "@/assets/hero-family.mp4.asset.json";
+
+/** Vídeo padrão (banco de imagens): família caminhando em rua americana. */
+const DEFAULT_VIDEO_URL = heroFamilyVideo.url;
 
 type Props = {
   videoUrl: string;
@@ -41,8 +45,10 @@ function useCanPlayVideo(): boolean {
 
 export function HeroBackgroundMedia({ videoUrl, posterUrl }: Props) {
   const canPlay = useCanPlayVideo();
-  const parsed = parseVideoUrl(videoUrl);
+  const effectiveVideoUrl = videoUrl?.trim() ? videoUrl.trim() : DEFAULT_VIDEO_URL;
+  const parsed = parseVideoUrl(effectiveVideoUrl);
   const poster = posterUrl?.trim() ? posterUrl.trim() : heroSkyline;
+
 
   // Sempre renderiza o poster (também serve de fallback).
   return (
