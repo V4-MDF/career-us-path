@@ -76,6 +76,18 @@ function LeadsPage() {
     setLoading(false);
   }
   useEffect(() => { reload(); }, []);
+  // Re-sincroniza modelo/leads ao voltar para a aba ou focar a janela,
+  // para refletir mudanças feitas em /admin/scoring imediatamente.
+  useEffect(() => {
+    const onFocus = () => { reload(); };
+    const onVis = () => { if (document.visibilityState === "visible") reload(); };
+    window.addEventListener("focus", onFocus);
+    document.addEventListener("visibilitychange", onVis);
+    return () => {
+      window.removeEventListener("focus", onFocus);
+      document.removeEventListener("visibilitychange", onVis);
+    };
+  }, []);
 
   // Repontuação ao vivo: recomputa toda vez que mudam model ou rows.
   const scored: ScoredRow[] = useMemo(() => {
