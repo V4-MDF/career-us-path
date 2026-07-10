@@ -62,12 +62,14 @@ export function HeroBackgroundMedia({ videoUrl, posterUrl }: Props) {
         width={1600}
         height={1024}
         fetchPriority="high"
-        className="h-full w-full object-cover object-center opacity-80 [mask-image:linear-gradient(to_bottom,black_75%,transparent_100%)]"
+        style={{ filter: DARKEN_FILTER }}
+        className="h-full w-full object-cover object-center opacity-90 [mask-image:linear-gradient(to_bottom,black_75%,transparent_100%)]"
       />
 
       {canPlay && parsed?.kind === "file" && (
         <video
-          className="absolute inset-0 h-full w-full object-cover object-center opacity-90 [mask-image:linear-gradient(to_bottom,black_75%,transparent_100%)]"
+          className="absolute inset-0 h-full w-full object-cover object-center opacity-95 [mask-image:linear-gradient(to_bottom,black_75%,transparent_100%)]"
+          style={{ filter: DARKEN_FILTER }}
           src={parsed.src}
           poster={typeof poster === "string" ? poster : undefined}
           autoPlay
