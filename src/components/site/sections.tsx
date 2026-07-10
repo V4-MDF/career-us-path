@@ -745,6 +745,24 @@ export function Testimonials() {
 /* ============================================================
  * 10b. SELOS & PARCEIROS — moldura dourada, editável via admin
  * ============================================================ */
+function PatchIcon({ label }: { label: string }) {
+  const l = (label || "").toLowerCase();
+  let Icon: typeof ShieldCheck = ShieldCheck;
+  let tint = "text-gold";
+  if (l.includes("bbb")) { Icon = Award; tint = "text-oxblood"; }
+  else if (l.includes("google")) { Icon = StarIcon; tint = "text-gold"; }
+  else if (l.includes("ein") || l.includes("cnpj")) { Icon = Building2; tint = "text-ink-text"; }
+  else if (l.includes("aila")) { Icon = Scale; tint = "text-oxblood"; }
+  else if (l.includes("uscis") || l.includes("document")) { Icon = Stamp; tint = "text-gold"; }
+  else if (l.includes("orlando") || l.includes("sede")) { Icon = Landmark; tint = "text-ink-text"; }
+  else if (l.includes("parceiro")) { Icon = Users; tint = "text-oxblood"; }
+  return (
+    <span className={`inline-grid place-items-center h-8 w-8 rounded-full border border-gold/50 bg-white shadow-soft ${tint}`}>
+      <Icon className="h-4 w-4" strokeWidth={1.75} aria-hidden />
+    </span>
+  );
+}
+
 export function PartnersBadges() {
   const eyebrow = useContent("partners.eyebrow");
   const title = useContent("partners.title");
