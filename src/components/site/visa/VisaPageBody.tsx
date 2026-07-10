@@ -28,8 +28,9 @@ import { useContent } from "@/lib/siteContent";
 // NOTA: as fotografias abaixo são placeholders art-direcionados no mesmo
 // tratamento visual do site. Substituir por fotografia real com o mesmo
 // enquadramento e a classe .photo-treatment. NUNCA usar ilustração ou
-// imagem genérica de IA nas páginas de visto.
-import heroFamilyUsa from "@/assets/visa-hero-family-usa.jpg";
+// imagem genérica de IA nas páginas de visto. A imagem do HERO é por-visto
+// (chave `visa.<slug>.heroImage` em site_content, editável no admin) — não
+// compartilhar a mesma imagem entre vistos.
 import professionalWork from "@/assets/visa-professional-work.jpg";
 import familyFuture from "@/assets/visa-family-future.jpg";
 
