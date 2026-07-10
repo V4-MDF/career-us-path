@@ -202,7 +202,7 @@ export function Header() {
                 {n.label}
               </Link>
             ))}
-            <a href={useAvaliacaoHref("header_mobile_cta")} onClick={() => setOpen(false)} className="mt-4">
+            <a href={avaliacaoMobileHref} onClick={() => setOpen(false)} className="mt-4">
               <Button className="btn-label w-full btn-sweep min-h-11">Análise gratuita</Button>
             </a>
           </div>
