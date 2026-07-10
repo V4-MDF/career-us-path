@@ -815,7 +815,6 @@ export function Testimonials() {
                 <div className="p-5">
                   <p className="font-mono-label text-oxblood text-[11px]">{v.caption}</p>
                   <p className="mt-2 font-display text-ink-text text-lg">{v.name}</p>
-                  <p className="font-mono-label text-ink-text/55 mt-1 text-[12px]">{v.role}</p>
                 </div>
               </article>
             ))}
