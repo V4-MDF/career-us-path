@@ -1,40 +1,33 @@
 ## Objetivo
-Trocar o vídeo padrão da hero da Home por um clipe **horizontal (16:9)** mostrando uma **família com crianças** em contexto americano, com **tom mais escuro** para garantir contraste com o título e subtítulo em cima.
+1. Trocar o vídeo da hero por uma **foto motion** (cinemagraph curto e sutil) de uma família, priorizando um clipe leve com pouco movimento (mais próximo de uma foto viva do que de um vídeo tradicional).
+2. No painel admin (`/admin/conteudo` e onde mais aparecer), todos os campos de **imagem** (e vídeo enviável) passam a ter **upload direto para o CDN**, além da opção de colar URL.
 
 ## Passos
 
-1. **Sourcing do clipe (banco gratuito, licença permissiva)**
-   - Buscar em Coverr / Pexels / Mixkit por termos como "family children walking suburb", "parents kids american home", "family kids park sunset".
-   - Critérios obrigatórios:
-     - **Horizontal 16:9** (1920x1080 ou 1280x720), nunca vertical/quadrado.
-     - Presença clara de **crianças** + pelo menos um adulto.
-     - Tom naturalmente mais escuro (fim de tarde / golden hour tardio / interior com luz baixa) — evita clipes estourados de sol.
-     - MP4 H.264, 8–15s, ≤ ~8 MB, movimento lento, coerente com "Silent Luxury".
+### 1. Foto motion da família (hero da Home)
+- Sourcing em Pexels/Coverr por clipes tipo "cinemagraph family", "family portrait subtle motion", "parents children slow motion still". Critérios:
+  - Horizontal 16:9, 1920x1080.
+  - Movimento sutil (cabelo ao vento, folhas, luz) — não caminhada rápida.
+  - Tom naturalmente mais escuro / golden hour, para manter contraste do título.
+  - ≤ 8 MB, 6–12s, loop-friendly.
+- Publicar no CDN via `lovable-assets create` → `src/assets/hero-family-motion.mp4.asset.json`.
+- Deletar o asset anterior `hero-family-children.mp4` do CDN.
+- Atualizar `HeroBackgroundMedia.tsx` para apontar `DEFAULT_VIDEO_URL` ao novo pointer. Manter `filter: brightness(0.55) saturate(0.9)` e o mask-image atual.
+- Se não achar clipe adequado, aviso antes com 2–3 opções para você escolher.
 
-2. **Escurecer o clipe (garantir contraste AA no título)**
-   - Estratégia em duas camadas, sem re-encodar o vídeo:
-     - **Filtro CSS no `<video>`**: `brightness(0.6) saturate(0.9)` aplicado no `HeroBackgroundMedia.tsx` — cobre também o poster para consistência entre desktop/mobile.
-     - **Overlay navy da hero**: aumentar levemente a opacidade do gradiente escuro por cima (na seção Hero em `sections.tsx`) para reforçar leitura do texto sem apagar a imagem.
-   - Manter o `mask-image` de fade inferior atual (evita corte abrupto).
-
-3. **Publicação no CDN**
-   - Baixar para `/tmp/`.
-   - `lovable-assets create --file /tmp/<nome>.mp4 --filename hero-family-children.mp4 > src/assets/hero-family-children.mp4.asset.json`.
-   - `lovable-assets delete --file src/assets/hero-american-family.mp4.asset.json` (remove o clipe atual do CDN).
-
-4. **Trocar o default no componente**
-   - Em `src/components/site/HeroBackgroundMedia.tsx`:
-     - Trocar o import para o novo pointer `hero-family-children.mp4.asset.json`.
-     - `DEFAULT_VIDEO_URL` passa a apontar para o novo asset.
-     - Adicionar `filter: brightness(0.6) saturate(0.9)` no `<video>` e no `<img>` do poster.
-
-5. **Ajuste fino do overlay (opcional, só se necessário)**
-   - Se após escurecer o vídeo o contraste do texto ainda não ficar confortável, subir a opacidade do gradiente navy da hero em `sections.tsx` em ~10%.
+### 2. Upload em campos de imagem/vídeo do admin
+- Reaproveitar `src/components/admin/ImageUploader.tsx` (já usado em `/admin/midia`) e criar um `MediaUploader` irmão que aceite também vídeo (`video/mp4`, `video/webm`), com preview em `<video muted>`.
+- Em `src/routes/admin.conteudo.tsx`, detectar por rótulo/chave se o campo é:
+  - **Imagem** (`heroImage`, `posterUrl`, `partners.slotN.url`, `heroVideoThumb`, `definitionImage`) → renderizar `ImageUploader` acima do `Input` de URL. O upload preenche o campo automaticamente e salva.
+  - **Vídeo** (`hero.videoUrl`, `heroVideoUrl`, `testimonials.*VideoUrl`) → renderizar `MediaUploader` (aceita mp4/webm) OU manter o input para colar link do YouTube/Vimeo. Ambos coexistem: uploader p/ arquivo, campo de texto p/ link externo.
+- Manter o input de URL visível e editável (nem tudo é upload — YouTube continua colando link).
+- Salvar segue o mesmo fluxo `onBlur` → `set("site_content", ...)` + `broadcast()`.
+- Não mexer em `/admin/midia` (já tem uploader); apenas garantir consistência visual.
 
 ## Não mexer
-- Formato/altura do hero, mask-image, tipografia, poster de fallback (`hero-skyline`).
-- Comportamento mobile (continua só poster) e `prefers-reduced-motion`.
-- Campo `hero.videoUrl` no admin continua sobrescrevendo o default.
+- Estrutura de dobras, tipografia, `mask-image`, comportamento mobile do hero.
+- Auto-gen: `client.ts`, `types.ts`.
+- Campos de texto puro (título, subtítulo etc.) continuam como `Input`/`Textarea`.
 
-## Se não achar clipe adequado
-- Aviso antes de trocar e proponho 2–3 alternativas com link + thumbnail para você escolher.
+## Detalhe técnico
+- O `ImageUploader` atual já usa storage `media` do Cloud com upload direto; `MediaUploader` para vídeo reutilizará o mesmo bucket, apenas ampliando o `accept` e o preview. Nenhuma nova tabela/migração.
