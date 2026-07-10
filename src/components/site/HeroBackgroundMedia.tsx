@@ -55,12 +55,17 @@ function isValidHttpOrAssetUrl(u: string): boolean {
 
 export function HeroBackgroundMedia({ videoUrl, posterUrl }: Props) {
   const canPlay = useCanPlayVideo();
-  const trimmedVideo = videoUrl?.trim() ?? "";
-  // Try user-supplied URL; if invalid/unparseable, silently fall back to the default motion clip.
-  const userParsed = trimmedVideo ? parseVideoUrl(trimmedVideo) : null;
-  const parsed = userParsed ?? parseVideoUrl(DEFAULT_VIDEO_URL);
-  const poster = posterUrl && isValidHttpOrAssetUrl(posterUrl) ? posterUrl.trim() : heroSkyline;
+  const [videoFailed, setVideoFailed] = useState(false);
+  const [posterFailed, setPosterFailed] = useState(false);
 
+  const trimmedVideo = videoUrl?.trim() ?? "";
+  const userParsed = trimmedVideo ? parseVideoUrl(trimmedVideo) : null;
+  const defaultParsed = parseVideoUrl(DEFAULT_VIDEO_URL);
+  // If the user URL is invalid OR its load failed at runtime, fall back to the default clip.
+  const parsed = !userParsed || videoFailed ? defaultParsed : userParsed;
+
+  const userPosterValid = !!posterUrl && isValidHttpOrAssetUrl(posterUrl);
+  const poster = userPosterValid && !posterFailed ? posterUrl!.trim() : heroSkyline;
 
   // Sempre renderiza o poster (também serve de fallback).
   return (
@@ -72,11 +77,13 @@ export function HeroBackgroundMedia({ videoUrl, posterUrl }: Props) {
         height={1024}
         fetchPriority="high"
         style={{ filter: DARKEN_FILTER }}
+        onError={() => setPosterFailed(true)}
         className="h-full w-full object-cover object-center opacity-90 [mask-image:linear-gradient(to_bottom,black_75%,transparent_100%)]"
       />
 
       {canPlay && parsed?.kind === "file" && (
         <video
+          key={parsed.src}
           className="absolute inset-0 h-full w-full object-cover object-center opacity-95 [mask-image:linear-gradient(to_bottom,black_75%,transparent_100%)]"
           style={{ filter: DARKEN_FILTER }}
           src={parsed.src}
@@ -88,6 +95,7 @@ export function HeroBackgroundMedia({ videoUrl, posterUrl }: Props) {
           preload="metadata"
           disablePictureInPicture
           controls={false}
+          onError={() => setVideoFailed(true)}
         />
 
       )}
