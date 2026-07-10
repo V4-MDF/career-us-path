@@ -46,9 +46,9 @@ export function VisaPageBody({ page, hideHero = false }: { page: VisaPage; hideH
           focal="60% 40%"
           className="!rounded-none"
         />
-        {/* Overlay navy: 85% à esquerda → 55% à direita, para AA no texto. */}
-        <div aria-hidden className="absolute inset-0 bg-gradient-to-r from-[#0A111C]/92 via-[#0A111C]/78 to-[#0A111C]/55" />
-        <div aria-hidden className="absolute inset-0 guilloche opacity-40" />
+        {/* Overlay navy sólido: 88% no lado do texto → 45% no lado oposto,
+            garantindo AA no H1/subtítulo sem padrões sobre a foto. */}
+        <div aria-hidden className="absolute inset-0 bg-gradient-to-r from-[#0A111C]/92 via-[#0A111C]/75 to-[#0A111C]/45" />
 
         <div className="container-x section-pad relative w-full">
           <nav aria-label="Breadcrumb" className="font-mono-label text-foreground/70 flex items-center gap-2">
