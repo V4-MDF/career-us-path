@@ -38,7 +38,7 @@ import { FlagBR, FlagUS, FlagsBRUSDual } from "./visuals/DualFlagIcons";
 import { BrazilMap, UsaMap } from "./visuals/CountryMapOutline";
 
 import heroSkyline from "@/assets/hero-skyline.jpg";
-import familyPortrait from "@/assets/family-portrait.jpg";
+
 import passportDocuments from "@/assets/passport-documents.jpg";
 import usMapEngraving from "@/assets/us-map-engraving.webp";
 import familySuburbUsa from "@/assets/home-family-suburb-usa.jpg";
