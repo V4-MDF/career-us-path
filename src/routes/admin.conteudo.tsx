@@ -12,6 +12,14 @@ import { defaultContent } from "@/lib/siteContent";
 import { isPending } from "@/lib/pendingValidation";
 import { broadcast } from "@/lib/admin/settings";
 import { parseVideoUrl } from "@/lib/videoEmbed";
+import { ImageUploader } from "@/components/admin/ImageUploader";
+
+function detectMediaKind(key: string, label: string): "image" | "video" | null {
+  const s = `${key} ${label}`.toLowerCase();
+  if (/video|vídeo|videourl/i.test(s) && !/thumb|poster|imagem/i.test(s)) return "video";
+  if (/image|imagem|poster|thumb|logo|url do logo|heroimage|definitionimage|posterurl/i.test(s)) return "image";
+  return null;
+}
 
 export const Route = createFileRoute("/admin/conteudo")({ component: ContentPage });
 
@@ -205,11 +213,34 @@ function ContentPage() {
                         <Textarea rows={2} value={values[f.k] ?? ""} className="mt-1"
                           onChange={(e) => setValues({ ...values, [f.k]: e.target.value })}
                           onBlur={() => save(f.k)} />
-                      ) : (
-                        <Input value={values[f.k] ?? ""} className="mt-1"
-                          onChange={(e) => setValues({ ...values, [f.k]: e.target.value })}
-                          onBlur={() => save(f.k)} />
-                      )}
+                      ) : (() => {
+                        const mediaKind = detectMediaKind(f.k, f.label);
+                        return (
+                          <>
+                            {mediaKind && (
+                              <div className="mt-1">
+                                <ImageUploader
+                                  kind={mediaKind}
+                                  value={values[f.k] ?? ""}
+                                  onChange={async (url) => {
+                                    setValues((v) => ({ ...v, [f.k]: url }));
+                                    await set("site_content", f.k, { value: url });
+                                    broadcast();
+                                  }}
+                                  folder={mediaKind === "video" ? "videos" : "site"}
+                                  filenameHint={f.k.replace(/\W+/g, "-")}
+                                  previewClass="aspect-video"
+                                />
+                              </div>
+                            )}
+                            {!mediaKind && (
+                              <Input value={values[f.k] ?? ""} className="mt-1"
+                                onChange={(e) => setValues({ ...values, [f.k]: e.target.value })}
+                                onBlur={() => save(f.k)} />
+                            )}
+                          </>
+                        );
+                      })()}
                       <div className="mt-0.5 text-[10px] text-slate-400">Chave: {f.k} · salva ao sair do campo</div>
                       {/(URL do vídeo|Vídeo de fundo)/i.test(f.label) && (values[f.k] ?? "").trim() !== "" && (() => {
                         const parsed = parseVideoUrl(values[f.k] ?? "");
