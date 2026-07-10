@@ -52,6 +52,12 @@ const PAGES: Array<{
         { k: "niw.title", label: "Título" },
         { k: "niw.lead", label: "Lead", multiline: true },
       ]},
+      { title: "Vídeo institucional (slot 16:9 na Home)", keys: [
+        { k: "institutional.eyebrow", label: "Eyebrow" },
+        { k: "institutional.title", label: "Título" },
+        { k: "institutional.lead", label: "Lead / descrição curta", multiline: true },
+        { k: "institutional.videoUrl", label: "URL do vídeo (YouTube, Vimeo ou MP4) — deixe vazio para manter o placeholder" },
+      ]},
       { title: "Processo", keys: [
         { k: "process.title", label: "Título" },
       ]},
