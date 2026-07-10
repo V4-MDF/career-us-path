@@ -90,6 +90,8 @@ export function getOrigin(currentPath?: string): LeadOrigin {
 
     const lastPath = sessionStorage.getItem(SS_LAST_PATH);
     const lastTitle = sessionStorage.getItem(SS_LAST_TITLE);
+    const prevPath = sessionStorage.getItem(SS_PREV_PATH);
+    const prevTitle = sessionStorage.getItem(SS_PREV_TITLE);
     const referrer = sessionStorage.getItem(SS_REFERRER) || document.referrer || null;
     const landingRaw = sessionStorage.getItem(SS_LANDING);
     let landing_path: string | null = null;
@@ -101,13 +103,23 @@ export function getOrigin(currentPath?: string): LeadOrigin {
         landing_ts = l.ts;
       } catch { /* ignore */ }
     }
-    // não considera a própria rota atual como "origem"
-    const from_path = lastPath && lastPath !== currentPath ? lastPath : null;
+    // Escolhe a melhor "página interna anterior":
+    // 1) `last` se for diferente da rota atual (usuário chegou aqui de outra página)
+    // 2) `prev` se `last` for a própria rota atual (ex.: já está em /avaliacao)
+    let from_path: string | null = null;
+    let from_title: string | null = null;
+    if (lastPath && lastPath !== currentPath) {
+      from_path = lastPath;
+      from_title = lastTitle;
+    } else if (prevPath && prevPath !== currentPath) {
+      from_path = prevPath;
+      from_title = prevTitle;
+    }
     return {
       utm,
       internal: {
         from_path,
-        from_title: from_path ? lastTitle : null,
+        from_title,
         referrer: referrer || null,
         landing_path,
         landing_ts,
