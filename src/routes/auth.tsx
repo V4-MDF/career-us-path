@@ -9,7 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { login } from "@/lib/admin/auth";
 import { supabase } from "@/integrations/supabase/client";
-import logoAsset from "@/assets/logo-status-na-america.png.asset.json";
+import logoAsset from "@/assets/logo-status-na-america.webp.asset.json";
 
 const searchSchema = z.object({
   next: z.string().optional(),
