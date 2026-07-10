@@ -138,14 +138,24 @@ export function VisaPageBody({ page, hideHero = false }: { page: VisaPage; hideH
         </div>
       </section>
 
-      {/* 4 — Família */}
-      <section id="familia" aria-label="Família" className="section-anchor bg-ink-deep">
-        <div className="container-x section-pad grid md:grid-cols-12 gap-10 items-start">
-          <div className="md:col-span-5">
-            <SectionHead num="04" eyebrow="FAMÍLIA" title={page.family.title} />
+      {/* 4 — Família — dobra emocional. Foto grande da família (coração do
+          "futuro dos filhos / legado"), texto ao lado com peso reduzido. */}
+      <section id="familia" aria-label="Família" className="section-anchor bg-ink-deep relative overflow-hidden">
+        <div aria-hidden className="absolute inset-0 guilloche opacity-30" />
+        <div className="container-x section-pad grid md:grid-cols-12 gap-10 items-center relative">
+          <div className="md:col-span-7 order-2 md:order-1">
+            <PhotoFrame
+              src={familyFuture}
+              alt="Família brasileira feliz em bairro suburbano americano, transmitindo pertencimento e futuro"
+              ratio="3/2"
+              width={1600}
+              height={1200}
+              className="shadow-elegant ring-1 ring-gold/25"
+            />
           </div>
-          <div className="md:col-span-7">
-            <p className="text-lg leading-relaxed text-foreground/80">{page.family.body}</p>
+          <div className="md:col-span-5 order-1 md:order-2">
+            <SectionHead num="04" eyebrow="FAMÍLIA" title={page.family.title} />
+            <p className="mt-6 text-lg leading-relaxed text-foreground/85">{page.family.body}</p>
           </div>
         </div>
       </section>
