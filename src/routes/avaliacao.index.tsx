@@ -105,9 +105,9 @@ function AvaliacaoPage() {
             <img
               src={logoAsset.url}
               alt="Status na América"
-              className="h-10 md:h-11 w-auto"
-              width={160}
-              height={44}
+              className="h-8 md:h-9 w-auto"
+              width={200}
+              height={40}
               decoding="async"
             />
           </Link>
