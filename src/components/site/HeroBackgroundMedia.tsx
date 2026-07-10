@@ -15,9 +15,9 @@
 import { useEffect, useState } from "react";
 import { parseVideoUrl } from "@/lib/videoEmbed";
 import heroSkyline from "@/assets/hero-skyline.jpg";
-import heroFamilyVideo from "@/assets/hero-family.mp4.asset.json";
+import heroFamilyVideo from "@/assets/hero-american-family.mp4.asset.json";
 
-/** Vídeo padrão (banco de imagens): família caminhando em rua americana. */
+/** Vídeo padrão: família em rua residencial americana ao entardecer. */
 const DEFAULT_VIDEO_URL = heroFamilyVideo.url;
 
 type Props = {
