@@ -55,7 +55,7 @@ function VisaCard({ v, primary }: { v: VisaScore; primary?: boolean }) {
       <p className="mt-3 text-[14px] text-foreground/75">{v.short}</p>
 
       <div className="mt-4">
-        <div className="flex justify-between font-mono-label text-[10px] text-foreground/60">
+        <div className="flex justify-between font-mono-label text-[10px] text-foreground/80">
           <span>AFINIDADE COM SEU PERFIL</span><span>{v.score}/100</span>
         </div>
         <div className="mt-1.5"><ScoreBar value={v.score} /></div>
@@ -63,7 +63,7 @@ function VisaCard({ v, primary }: { v: VisaScore; primary?: boolean }) {
 
       {v.metCriteria.length > 0 && (
         <div className="mt-5">
-          <p className="font-mono-label text-[10px] text-foreground/60">CRITÉRIOS QUE VOCÊ JÁ ATENDE</p>
+          <p className="font-mono-label text-[10px] text-foreground/80">CRITÉRIOS QUE VOCÊ JÁ ATENDE</p>
           <ul className="mt-2 space-y-1.5 text-[13px] text-foreground/85">
             {v.metCriteria.map((c) => (
               <li key={c} className="flex gap-2"><Check className="h-3.5 w-3.5 mt-0.5 text-emerald-400 shrink-0" />{c}</li>
@@ -74,7 +74,7 @@ function VisaCard({ v, primary }: { v: VisaScore; primary?: boolean }) {
 
       {v.gaps.length > 0 && (
         <div className="mt-4">
-          <p className="font-mono-label text-[10px] text-foreground/60">A DESENVOLVER</p>
+          <p className="font-mono-label text-[10px] text-foreground/80">A DESENVOLVER</p>
           <ul className="mt-2 space-y-1.5 text-[13px] text-foreground/70">
             {v.gaps.map((c) => (
               <li key={c} className="flex gap-2"><AlertTriangle className="h-3.5 w-3.5 mt-0.5 text-amber-300 shrink-0" />{c}</li>
@@ -176,7 +176,7 @@ export function PreQualResult({ record, variant }: Props) {
           </div>
 
           {variant === "personal" && (
-            <p className="mt-4 text-[12px] text-foreground/55 break-all">
+            <p className="mt-4 text-[12px] text-foreground/80 break-all">
               Link público: {publicResultUrl(record.id)}
             </p>
           )}
@@ -201,7 +201,7 @@ export function PreQualResult({ record, variant }: Props) {
         </section>
       )}
 
-      <p className="text-[12px] text-foreground/45">
+      <p className="text-[12px] text-foreground/80">
         Esta avaliação é orientativa e baseada nas respostas declaradas. Não substitui parecer
         jurídico individual sobre o caso.
       </p>

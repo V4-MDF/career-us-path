@@ -64,13 +64,13 @@ function ObrigadoShell({ children }: { children: React.ReactNode }) {
       </main>
 
       <footer className="border-t border-gold/15 bg-ink-deep">
-        <div className="container-x py-8 text-xs text-foreground/55 leading-relaxed max-w-4xl">
+        <div className="container-x py-8 text-xs text-foreground/80 leading-relaxed max-w-4xl">
           <p>
             A Status na América atua na preparação e organização de documentos imigratórios.
             Não somos advogados licenciados e não prestamos orientação jurídica nem
             representação legal em processos de imigração.
           </p>
-          <p className="mt-3 font-mono-label text-foreground/40">
+          <p className="mt-3 font-mono-label text-foreground/80">
             © {new Date().getFullYear()} STATUS NA AMÉRICA LLC · EIN 99-4846502
           </p>
         </div>

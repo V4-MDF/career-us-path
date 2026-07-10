@@ -127,7 +127,7 @@ export function Hero() {
             </a>
           </div>
 
-          <div className="mt-14 flex items-start gap-3 text-sm text-foreground/60 border-l border-gold/50 pl-4 max-w-md">
+          <div className="mt-14 flex items-start gap-3 text-sm text-foreground/80 border-l border-gold/50 pl-4 max-w-md">
             <Star className="h-4 w-4 text-gold mt-0.5 shrink-0 fill-gold" />
             <span>{proof}</span>
           </div>
@@ -1047,7 +1047,7 @@ export function CtaBanner() {
                 Fazer minha análise gratuita
               </Button>
             </a>
-            <p className="mt-3 text-[12px] text-foreground/50">
+            <p className="mt-3 text-[12px] text-foreground/80">
               Para quem quer um diagnóstico completo do perfil.
             </p>
           </div>
@@ -1086,7 +1086,7 @@ export function CtaBanner() {
                 Iniciar pré-qualificação
               </Button>
             </Link>
-            <p className="mt-3 text-[12px] text-foreground/50">
+            <p className="mt-3 text-[12px] text-foreground/80">
               Para quem quer saber em 2 minutos se tem encaixe.
             </p>
           </div>

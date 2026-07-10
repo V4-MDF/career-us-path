@@ -95,7 +95,7 @@ function PostPage() {
           {/* Header do post */}
           <header className="bg-ink">
             <div className="container-x max-w-3xl py-12 md:py-16">
-              <nav aria-label="Breadcrumb" className="font-mono-label text-foreground/55 flex items-center gap-2 flex-wrap">
+              <nav aria-label="Breadcrumb" className="font-mono-label text-foreground/80 flex items-center gap-2 flex-wrap">
                 <Link to="/" className="hover:text-gold">Início</Link>
                 <ChevronRight className="h-3 w-3" />
                 <Link to="/blog" className="hover:text-gold">Blog</Link>
@@ -109,7 +109,7 @@ function PostPage() {
               <h1 className="mt-4 font-display text-4xl md:text-5xl leading-[1.08]">{post.titulo}</h1>
               <p className="mt-5 text-lg text-foreground/80 leading-relaxed">{post.resumo}</p>
 
-              <div className="mt-6 flex flex-wrap items-center gap-4 text-xs text-foreground/55 font-mono-label">
+              <div className="mt-6 flex flex-wrap items-center gap-4 text-xs text-foreground/80 font-mono-label">
                 <span>{post.autor}</span>
                 <span aria-hidden>·</span>
                 <span>{formatDate(post.data_publicacao)}</span>
@@ -214,7 +214,7 @@ function ShareRow({ url, title }: { url: string; title: string }) {
 
   return (
     <div className="mt-10 flex flex-wrap items-center gap-3 border-t border-gold/15 pt-6">
-      <span className="font-mono-label text-foreground/55">COMPARTILHAR</span>
+      <span className="font-mono-label text-foreground/80">COMPARTILHAR</span>
       <a className="text-sm underline hover:text-gold" target="_blank" rel="noopener noreferrer"
         href={`mailto:?subject=${enc(title)}&body=${enc(full)}`}>E-mail</a>
       <a className="text-sm underline hover:text-gold" target="_blank" rel="noopener noreferrer"

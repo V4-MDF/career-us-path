@@ -436,7 +436,7 @@ function LeadsPage() {
                             <div className="h-full bg-gold rounded" style={{ width: `${c.pesoNorm > 0 ? (c.pontos / c.pesoNorm) * 100 : 0}%` }} />
                           </div>
                           <div className="w-20 text-right font-medium tabular-nums text-foreground">
-                            {c.pontos.toFixed(1)}<span className="text-muted-foreground/70"> / {c.pesoNorm.toFixed(0)}</span>
+                            {c.pontos.toFixed(1)}<span className="text-muted-foreground"> / {c.pesoNorm.toFixed(0)}</span>
                           </div>
                         </div>
                       ))}

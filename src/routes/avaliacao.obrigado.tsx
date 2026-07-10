@@ -42,7 +42,7 @@ function ObrigadoPage() {
   if (result === "loading") {
     return (
       <div className="min-h-screen bg-ink flex items-center justify-center">
-        <span className="font-mono-label text-sm text-foreground/60">Carregando...</span>
+        <span className="font-mono-label text-sm text-foreground/80">Carregando...</span>
       </div>
     );
   }

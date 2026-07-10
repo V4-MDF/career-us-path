@@ -416,7 +416,7 @@ export function LeadFormProgressive({
             className="rounded-xl border border-gold/30 bg-ink-deep/40 p-5"
           >
             <h4 className="font-display text-xl">Tudo certo para enviar.</h4>
-            <p className="mt-1 text-sm text-foreground/65">
+            <p className="mt-1 text-sm text-foreground/80">
               Revisão rápida do seu perfil antes da análise.
             </p>
             <dl className="mt-4 grid sm:grid-cols-2 gap-x-6 gap-y-2 text-sm">
@@ -504,7 +504,7 @@ const LABELS: Record<string, Record<string, string>> = {
 function Summary({ k, v }: { k: string; v: string }) {
   return (
     <div className="flex justify-between gap-3 border-b border-border/40 py-1">
-      <dt className="text-foreground/55">{k}</dt>
+      <dt className="text-foreground/80">{k}</dt>
       <dd className="text-foreground/90 text-right truncate">{v || "-"}</dd>
     </div>
   );
@@ -531,11 +531,11 @@ function CollapsedAnswer({
     >
       <div className="flex items-center gap-2.5 min-w-0">
         <span className={`h-1.5 w-1.5 rounded-full shrink-0 ${valid ? "bg-gold" : "bg-border"}`} />
-        <span className="text-xs font-mono-label text-foreground/45 truncate">{field.label}</span>
+        <span className="text-xs font-mono-label text-foreground/80 truncate">{field.label}</span>
       </div>
       <div className="flex items-center gap-2 text-sm text-foreground/90 truncate">
         <span className="truncate max-w-[60vw] sm:max-w-[260px]">{display || "-"}</span>
-        <Pencil className="h-3.5 w-3.5 text-foreground/40 shrink-0" />
+        <Pencil className="h-3.5 w-3.5 text-foreground/80 shrink-0" />
       </div>
     </button>
   );

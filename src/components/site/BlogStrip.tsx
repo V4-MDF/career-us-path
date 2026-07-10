@@ -148,7 +148,7 @@ export function BlogStrip() {
                   <p className="mt-3 text-sm text-foreground/70 leading-relaxed line-clamp-2 md:line-clamp-3">
                     {p.resumo}
                   </p>
-                  <div className="mt-auto pt-5 flex items-center justify-between text-xs font-mono-label text-foreground/55">
+                  <div className="mt-auto pt-5 flex items-center justify-between text-xs font-mono-label text-foreground/80">
                     <span className="inline-flex items-center gap-1.5">
                       <Clock className="h-3 w-3" /> {p.tempo_leitura} min
                     </span>
@@ -158,7 +158,7 @@ export function BlogStrip() {
                       </span>
                     )}
                     {p.placeholder && (
-                      <span className="text-foreground/40">EM BREVE</span>
+                      <span className="text-foreground/80">EM BREVE</span>
                     )}
                   </div>
                 </div>

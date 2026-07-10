@@ -74,7 +74,7 @@ export function VisaPageBody({ page, hideHero = false }: { page: VisaPage; hideH
               </li>
             ))}
           </ul>
-          <p className="mt-6 text-xs text-foreground/50">Critérios baseados no precedente Matter of Dhanasar (2016).</p>
+          <p className="mt-6 text-xs text-foreground/80">Critérios baseados no precedente Matter of Dhanasar (2016).</p>
         </div>
       </section>
 
@@ -337,7 +337,7 @@ function VisaHero({ page }: { page: VisaPage }) {
                   </span>
                 </div>
               </button>
-              <p className="mt-3 text-center font-mono-label text-[10px] tracking-[0.18em] text-foreground/60">
+              <p className="mt-3 text-center font-mono-label text-[10px] tracking-[0.18em] text-foreground/80">
                 {page.eyebrow} · CASO EM VÍDEO
               </p>
             </div>
