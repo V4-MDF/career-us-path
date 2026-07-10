@@ -90,11 +90,23 @@ export function reconcile(page: PageSlug, saved: SectionItem[] | null | undefine
 
   const base = (saved ?? defaults).filter((s) => validIds.has(s.id));
 
-  // adiciona novas dobras que apareceram no código depois da última edição
+  // adiciona novas dobras que apareceram no código depois da última edição,
+  // preservando a posição relativa definida no `DEFAULT_LAYOUTS` (insere após
+  // a dobra anterior mais próxima que já exista no layout salvo).
   const existing = new Set(base.map((s) => s.id));
-  for (const def of defaults) {
-    if (!existing.has(def.id)) base.push({ id: def.id, active: true });
-  }
+  defaults.forEach((def, defIdx) => {
+    if (existing.has(def.id)) return;
+    // procura, de trás pra frente a partir da posição default, a dobra anterior
+    // que já existe no `base` para inserir logo após ela.
+    let insertAt = base.length;
+    for (let i = defIdx - 1; i >= 0; i--) {
+      const prevId = defaults[i].id;
+      const idx = base.findIndex((s) => s.id === prevId);
+      if (idx !== -1) { insertAt = idx + 1; break; }
+    }
+    base.splice(insertAt, 0, { id: def.id, active: true });
+    existing.add(def.id);
+  });
 
   // força pinned na frente e ativo
   const idx = base.findIndex((s) => s.id === pinned);
