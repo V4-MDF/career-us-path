@@ -59,7 +59,7 @@ export function HeroBackgroundMedia({ videoUrl, posterUrl }: Props) {
   // Try user-supplied URL; if invalid/unparseable, silently fall back to the default motion clip.
   const userParsed = trimmedVideo ? parseVideoUrl(trimmedVideo) : null;
   const parsed = userParsed ?? parseVideoUrl(DEFAULT_VIDEO_URL);
-  const poster = posterUrl?.trim() ? posterUrl.trim() : heroSkyline;
+  const poster = posterUrl && isValidHttpOrAssetUrl(posterUrl) ? posterUrl.trim() : heroSkyline;
 
 
   // Sempre renderiza o poster (também serve de fallback).
