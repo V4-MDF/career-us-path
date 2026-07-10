@@ -201,6 +201,14 @@ function LeadsPage() {
     toast.success(`Status: ${FUNNEL_LABEL[status]}`);
   }
 
+  async function deleteLead(lead: StoredLead) {
+    if (!window.confirm(`Excluir o lead "${lead.nome}"? Esta ação não pode ser desfeita.`)) return;
+    await remove("leads", lead.id);
+    setRows((rs) => rs.filter((r) => r.id !== lead.id));
+    setOpen((o) => (o && o.id === lead.id ? null : o));
+    toast.success("Lead excluído");
+  }
+
   function exportCsv() {
     if (!model) return;
     downloadCsv(`leads_${new Date().toISOString().slice(0,10)}.csv`,
