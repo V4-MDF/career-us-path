@@ -1017,12 +1017,12 @@ export function CtaBanner() {
 
         <div className="mt-12 grid lg:grid-cols-2 gap-6 lg:gap-8 items-stretch">
           {/* Oferta principal. Análise gratuita */}
-          <div className="relative rounded-2xl border border-gold/40 bg-ink-raise/60 p-7 lg:p-9 shadow-elevated flex flex-col">
-            <span className="absolute -top-3 left-6 rounded-full bg-gold px-3 py-1 font-mono-label text-[10px] text-ink">
+          <div className="relative min-w-0 rounded-2xl border border-gold/40 bg-ink-raise/60 p-5 sm:p-7 lg:p-9 shadow-elevated flex flex-col">
+            <span className="absolute -top-3 left-5 sm:left-6 rounded-full bg-gold px-3 py-1 font-mono-label text-[10px] text-ink">
               RECOMENDADO
             </span>
             <p className="font-mono-label text-gold/85">ANÁLISE COMPLETA</p>
-            <h3 className="mt-3 font-display text-2xl leading-tight">
+            <h3 className="mt-3 font-display text-2xl leading-tight break-words">
               Diagnóstico do seu perfil em até 48h.
             </h3>
             <p className="mt-3 text-foreground/75 text-[15px] leading-relaxed">
@@ -1041,8 +1041,8 @@ export function CtaBanner() {
                 </li>
               ))}
             </ul>
-            <a href={useAvaliacaoHref("home_cta_final")} className="mt-7 inline-block">
-              <Button size="lg" className="btn-label btn-sweep h-12 px-7">
+            <a href={useAvaliacaoHref("home_cta_final")} className="mt-7 block sm:inline-block">
+              <Button size="lg" className="btn-label btn-sweep h-12 px-4 sm:px-7 w-full sm:w-auto whitespace-normal text-center leading-tight">
                 Fazer minha análise gratuita
               </Button>
             </a>
@@ -1052,12 +1052,12 @@ export function CtaBanner() {
           </div>
 
           {/* Oferta secundária. Pré-qualificação */}
-          <div className="rounded-2xl border border-gold/20 bg-ink-raise/30 p-7 lg:p-9 flex flex-col">
+          <div className="min-w-0 rounded-2xl border border-gold/20 bg-ink-raise/30 p-5 sm:p-7 lg:p-9 flex flex-col">
             <div className="flex items-center gap-2 text-gold/80">
-              <Sparkles className="h-4 w-4" />
+              <Sparkles className="h-4 w-4 shrink-0" />
               <p className="font-mono-label text-gold/80">RESPOSTA NA HORA</p>
             </div>
-            <h3 className="mt-3 font-display text-2xl leading-tight">
+            <h3 className="mt-3 font-display text-2xl leading-tight break-words">
               Teste rápido: seu encaixe em 2 minutos.
             </h3>
             <p className="mt-3 text-foreground/70 text-[15px] leading-relaxed">
@@ -1076,11 +1076,11 @@ export function CtaBanner() {
                 </li>
               ))}
             </ul>
-            <Link to="/pre-qualificacao" className="mt-7 inline-block">
+            <Link to="/pre-qualificacao" className="mt-7 block sm:inline-block">
               <Button
                 size="lg"
                 variant="outline"
-                className="btn-label h-12 px-7 border-gold/50 text-gold hover:bg-gold/10 hover:text-gold"
+                className="btn-label h-12 px-4 sm:px-7 w-full sm:w-auto whitespace-normal text-center leading-tight border-gold/50 text-gold hover:bg-gold/10 hover:text-gold"
               >
                 Iniciar pré-qualificação
               </Button>
