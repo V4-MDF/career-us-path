@@ -207,6 +207,9 @@ export function VisaPageBody({ page, hideHero = false }: { page: VisaPage; hideH
                 </li>
               ))}
             </ul>
+            <p className="mt-6 text-xs text-ink-text/60 leading-relaxed max-w-md">
+              O valor da assessoria é separado das taxas oficiais do governo americano (USCIS), que são pagas diretamente ao órgão e podem variar. Apresentamos o panorama completo de custos na sua análise gratuita.
+            </p>
           </div>
           <div className="lg:col-span-5">
             <div className="rounded-2xl border border-ink-text/15 bg-white p-8 shadow-elevated">
