@@ -9,7 +9,8 @@ import {
 } from "@/components/site/sections";
 import { OrganizationJsonLd, WebSiteJsonLd, FAQJsonLd } from "@/components/site/Seo";
 import { BlogStrip } from "@/components/site/BlogStrip";
-import { useOrderedSections } from "@/lib/pageStructure";
+import { primePageSections, useOrderedSections } from "@/lib/pageStructure";
+import { getPageSectionsFn } from "@/lib/pageSections.functions";
 
 const OG_IMAGE = "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/6b7cadcb-19ab-4c07-9ce9-d72d0a46c4f6/id-preview-09f8a24a--5de380e6-3aa3-4bc3-844b-02836eb26c67.lovable.app-1782844621831.png";
 
