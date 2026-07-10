@@ -58,7 +58,10 @@ export function Hero() {
   const sub = useContent("hero.subtitle");
   const cta = useContent("hero.cta");
   const proof = useContent("hero.proof");
+  const heroVideoUrl = useContent("hero.videoUrl");
+  const heroPosterUrl = useContent("hero.posterUrl");
   const lines = splitHeadline(title);
+
 
 
 
