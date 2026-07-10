@@ -144,13 +144,6 @@ export function Hero() {
             <span className="font-mono-label text-gold/85 text-[11px]">FILME INSTITUCIONAL · 16:9</span>
           </div>
 
-          <div className="absolute top-4 right-4 xl:-top-5 xl:-right-5 rounded-xl border border-gold bg-ink-deep p-3 xl:p-4 max-w-[180px] xl:max-w-[200px] shadow-elevated">
-            <div className="absolute top-0 left-0 h-[3px] w-10 bg-gold" />
-            <div className="flex items-center gap-1 text-gold">
-              {[...Array(5)].map((_, i) => <Star key={i} className="h-3 w-3 xl:h-3.5 xl:w-3.5 fill-gold" />)}
-            </div>
-            <p className="mt-1.5 font-mono-label text-[11px] xl:text-xs text-foreground/70">130+ AVALIAÇÕES 5★</p>
-          </div>
         </div>
       </div>
     </section>
