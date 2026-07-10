@@ -79,7 +79,23 @@ export const defaultContent = {
   "testimonials.caseStudiesTitle": "Casos reais, documentados.",
   "testimonials.caseStudiesLead":
     "Estamos preparando os primeiros estudos de caso completos — perfil, estratégia adotada e resultado. Publicados em breve.",
+
+  // ==== Hero das páginas de visto (subtítulo enxuto + vídeo por página) ====
+  // Cada página de visto lê seu próprio vídeo aqui; vazio → placeholder.
+  "visa.eb2-niw.heroSubtitle":
+    "O Green Card por mérito profissional — sem empresa patrocinadora e sem oferta de emprego.",
+  "visa.eb2-niw.heroVideoUrl": "",
+  "visa.eb2-niw.heroVideoThumb": "",
+  "visa.eb1.heroSubtitle":
+    "O Green Card para quem tem reconhecimento internacional comprovado — sem patrocinador, sem PERM.",
+  "visa.eb1.heroVideoUrl": "",
+  "visa.eb1.heroVideoThumb": "",
+  "visa.eb3.heroSubtitle":
+    "O Green Card com oferta formal de emprego nos EUA — exige patrocinador e PERM.",
+  "visa.eb3.heroVideoUrl": "",
+  "visa.eb3.heroVideoThumb": "",
 };
+
 
 
 export type ContentKey = keyof typeof defaultContent;
