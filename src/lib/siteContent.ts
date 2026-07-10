@@ -127,6 +127,7 @@ export const defaultContent = {
   // tratamento padrão — nunca imagem genérica de IA; imagem específica deste
   // visto, não compartilhada.
   "visa.eb3.heroImage": visaHeroEb3,
+  "visa.eb3.definitionImage": "",
 
   // ==== Página de Contato =========================================
   "contato.eyebrow": "FALE CONOSCO",
