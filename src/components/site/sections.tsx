@@ -37,7 +37,7 @@ import { FlagsBRUS } from "./flags";
 import { FlagBR, FlagUS, FlagsBRUSDual } from "./visuals/DualFlagIcons";
 
 
-import heroSkyline from "@/assets/hero-skyline.jpg";
+import { HeroBackgroundMedia } from "./HeroBackgroundMedia";
 
 import passportDocuments from "@/assets/passport-documents.jpg";
 import usMapEngraving from "@/assets/us-map-engraving.webp";
@@ -57,7 +57,10 @@ export function Hero() {
   const sub = useContent("hero.subtitle");
   const cta = useContent("hero.cta");
   const proof = useContent("hero.proof");
+  const heroVideoUrl = useContent("hero.videoUrl");
+  const heroPosterUrl = useContent("hero.posterUrl");
   const lines = splitHeadline(title);
+
 
 
 
@@ -67,20 +70,12 @@ export function Hero() {
       aria-label="Abertura"
       className="section-anchor relative overflow-hidden pt-32 md:pt-44 pb-24 md:pb-36"
     >
-      {/* Fotografia art-direcionada: skyline EUA + família em contexto americano.
-          Overlay navy forte (85%→55%) preserva contraste AA sobre a foto. */}
-      <div aria-hidden className="absolute inset-0 -z-20">
-        <img
-          src={heroSkyline}
-          alt=""
-          width={1600}
-          height={1024}
-          fetchPriority="high"
-          className="h-full w-full object-cover object-bottom opacity-[0.35] motion-safe:[mask-image:linear-gradient(to_bottom,black_45%,transparent_100%)]"
-        />
-      </div>
-      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-[#0A111C]/95 via-[#0A111C]/85 to-[#0A111C]/55" />
-      <div className="absolute inset-0 -z-10 bg-gradient-to-r from-ink/70 via-transparent to-ink/40" />
+      {/* Fundo da hero: vídeo (desktop, sem reduced-motion) ou poster estático.
+          Fallback silencioso para hero-skyline se não houver configuração no admin. */}
+      <HeroBackgroundMedia videoUrl={heroVideoUrl} posterUrl={heroPosterUrl} />
+      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-[#0A111C]/95 via-[#0A111C]/85 to-[#0A111C]/60" />
+      <div className="absolute inset-0 -z-10 bg-gradient-to-r from-ink/80 via-ink/40 to-ink/50" />
+
       {/* Grão fino global para unificar a hero com o tratamento das fotos. */}
       <div aria-hidden className="absolute inset-0 -z-10 opacity-[0.06] mix-blend-overlay [background-image:radial-gradient(rgba(255,255,255,0.6)_1px,transparent_1px)] [background-size:3px_3px]" />
       {/* Motivo geográfico BR→USA, dot-grid + rota tracejada estática. */}
