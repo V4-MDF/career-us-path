@@ -174,9 +174,9 @@ export function VisaPageBody({ page, hideHero = false }: { page: VisaPage; hideH
           <div className="mt-10 overflow-x-auto rounded-2xl border border-ink-text/15 bg-white shadow-soft">
             <table className="w-full text-sm">
               <thead>
-                <tr className="bg-ink text-foreground">
+                <tr className="bg-ink">
                   {COMPARISON.headers.map((h, i) => (
-                    <th key={i} className="px-5 py-4 text-left font-mono-label">{h}</th>
+                    <th key={i} className="px-5 py-4 text-left font-mono-label text-gold">{h}</th>
                   ))}
                 </tr>
               </thead>
