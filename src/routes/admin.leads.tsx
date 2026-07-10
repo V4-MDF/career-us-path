@@ -422,6 +422,17 @@ function LeadsPage() {
                   </SheetDescription>
                 </SheetHeader>
 
+                <div className="mt-4">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="text-red-600 border-red-200 hover:bg-red-50 hover:text-red-700"
+                    onClick={() => deleteLead(open)}
+                  >
+                    <Trash2 className="h-4 w-4 mr-2" /> Excluir lead
+                  </Button>
+                </div>
+
                 <div className="mt-5 space-y-5 text-sm">
                   {/* Score grande + faixa */}
                   <div className="rounded-md border border-border p-4">
