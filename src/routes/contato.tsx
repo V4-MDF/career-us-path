@@ -141,12 +141,10 @@ function ContatoHero({
   eyebrow,
   title,
   subtitle,
-  waHref,
 }: {
   eyebrow: string;
   title: string;
   subtitle: string;
-  waHref: string;
 }) {
   return (
     <section className="relative bg-ink text-white pt-32 pb-16 md:pt-40 md:pb-20 border-b border-gold/25">
@@ -158,22 +156,12 @@ function ContatoHero({
         <h1 className="mt-4 font-display display-1 text-white">{title}</h1>
         <p className="mt-5 text-white/80 text-lg leading-relaxed max-w-2xl">{subtitle}</p>
 
-        <div className="mt-8 flex flex-col sm:flex-row gap-3">
+        <div className="mt-8">
           <Link to="/avaliacao" className="inline-flex">
             <Button size="lg" className="btn-label w-full sm:w-auto">
               Análise gratuita
             </Button>
           </Link>
-          <a href={waHref} target="_blank" rel="noopener noreferrer">
-            <Button
-              size="lg"
-              variant="outline"
-              className="btn-label w-full sm:w-auto border-white/40 text-white hover:bg-white/10"
-            >
-              <MessageCircle className="mr-2 h-4 w-4" />
-              Chamar no WhatsApp
-            </Button>
-          </a>
         </div>
       </div>
     </section>
