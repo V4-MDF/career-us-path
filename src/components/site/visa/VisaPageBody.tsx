@@ -20,6 +20,14 @@ import {
 } from "@/components/ui/accordion";
 import { avaliacaoHref } from "@/lib/ctaLinks";
 import { COMPARISON, type VisaPage } from "@/lib/visaPages";
+import { PhotoFrame } from "@/components/site/visa/PhotoFrame";
+// NOTA: as fotografias abaixo são placeholders art-direcionados no mesmo
+// tratamento visual do site. Substituir por fotografia real com o mesmo
+// enquadramento e a classe .photo-treatment — NUNCA usar ilustração ou
+// imagem genérica de IA nas páginas de visto.
+import heroFamilyUsa from "@/assets/visa-hero-family-usa.jpg";
+import professionalWork from "@/assets/visa-professional-work.jpg";
+import familyFuture from "@/assets/visa-family-future.jpg";
 
 export function VisaPageBody({ page, hideHero = false }: { page: VisaPage; hideHero?: boolean }) {
   return (
