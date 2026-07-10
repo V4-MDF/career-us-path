@@ -221,83 +221,53 @@ export function ContrastBrasilEUA() {
       code: "BR",
       side: "from" as const,
       eyebrow: "O QUE VOCÊ DEIXA PARA TRÁS",
-      title: ["Realidade", "no Brasil"],
+      title: "Realidade no Brasil",
       items: brasil,
-      accent: "#9B3B47",            // oxblood contido
+      accent: "#B23A3A",
+      cardBg: "bg-[#FBEEEE]",
       Icon: XCircle,
-      cardBg: "bg-[#F1ECE2]",       // levemente mais pesado/frio
-      photo: brasilSomber,
-      photoAlt: "Vista de cidade brasileira em dia cinza através de janela com chuva",
-      photoTone: "grayscale" as const,
     },
     {
       code: "US",
       side: "to" as const,
       eyebrow: "O QUE VOCÊ CONQUISTA",
-      title: ["Oportunidades", "nos EUA"],
+      title: "Oportunidades nos EUA",
       items: eua,
-      accent: "#2E7D5B",            // verde profundo sóbrio
+      accent: "#2E7D5B",
+      cardBg: "bg-[#EEF6F1]",
       Icon: CheckCircle2,
-      cardBg: "bg-white",
-      photo: familySuburbUsa,
-      photoAlt: "Família brasileira em subúrbio americano ao entardecer",
-      photoTone: "warm" as const,
     },
   ] as const;
 
   return (
-    <Reveal as="section" id="brasil-vs-eua" className="section-cream-light section-pad relative">
+    <Reveal as="section" id="brasil-vs-eua" className="section-cream-light relative py-16 md:py-20">
       <div aria-hidden className="tricolor-rule absolute inset-x-0 top-0" />
       <div className="container-x">
         <SectionHead num="01" eyebrow="POR QUE MIGRAR AGORA" title="Duas realidades. Uma decisão." />
 
-        <div className="relative mt-14 grid md:grid-cols-2 gap-6 md:gap-10">
+        <div className="relative mt-10 grid md:grid-cols-2 gap-5 md:gap-8">
           {/* Divisor central "BR → US" (md+) */}
           <div
             aria-hidden
-            className="hidden md:flex absolute inset-y-8 left-1/2 -translate-x-1/2 items-center justify-center z-10 pointer-events-none"
+            className="hidden md:flex absolute inset-y-4 left-1/2 -translate-x-1/2 items-center justify-center z-10 pointer-events-none"
           >
-            <span className="grid h-11 w-11 place-items-center rounded-full bg-parchment border border-gold/40 shadow-soft">
-              <ArrowRight className="h-5 w-5 text-gold" />
+            <span className="grid h-9 w-9 place-items-center rounded-full bg-parchment border border-gold/40 shadow-soft">
+              <ArrowRight className="h-4 w-4 text-gold" />
             </span>
           </div>
 
-          {cards.map(({ code, side, eyebrow, title: cardTitle, items, accent, Icon, cardBg, photo, photoAlt, photoTone }) => (
+          {cards.map(({ code, side, eyebrow, title: cardTitle, items, accent, cardBg, Icon }) => (
             <div
               key={code}
-              className={`relative overflow-hidden rounded-2xl border border-ink-text/10 shadow-soft flex flex-col ${cardBg} ${
+              className={`relative rounded-2xl border border-ink-text/10 shadow-soft ${cardBg} ${
                 side === "to" ? "md:ring-1 md:ring-gold/25" : ""
               }`}
               style={{ borderTop: `3px solid ${accent}` }}
             >
-              {/* Faixa fotográfica editorial no topo do card. */}
-              <div className="photo-treatment relative aspect-[16/9] overflow-hidden">
-                <img
-                  src={photo}
-                  alt={photoAlt}
-                  width={1400}
-                  height={787}
-                  loading="lazy"
-                  className={`h-full w-full object-cover ${photoTone === "grayscale" ? "grayscale-[.55] brightness-95" : ""}`}
-                />
-                <div aria-hidden className="photo-treatment__grain" />
-                <div aria-hidden className="photo-treatment__vignette" />
-                <div
-                  aria-hidden
-                  className="absolute inset-0"
-                  style={{
-                    background: photoTone === "grayscale"
-                      ? "linear-gradient(180deg, rgba(14,23,38,0.15) 0%, rgba(14,23,38,0.55) 100%)"
-                      : "linear-gradient(180deg, rgba(255,255,255,0) 40%, rgba(0,0,0,0.35) 100%)",
-                  }}
-                />
-                <span aria-hidden className="absolute bottom-0 left-0 right-0 h-px" style={{ backgroundColor: accent, opacity: 0.7 }} />
-              </div>
-
-              <div className="p-7 md:p-10 relative">
+              <div className="p-6 md:p-7">
                 <div className="flex items-center gap-3">
                   <span
-                    className="inline-flex items-center justify-center h-8 px-3 rounded-full border font-mono-label text-[11px] tracking-[0.2em] bg-white/70"
+                    className="inline-flex items-center justify-center h-7 px-2.5 rounded-full border font-mono-label text-[10px] tracking-[0.2em] bg-white/80"
                     style={{ color: accent, borderColor: `color-mix(in oklab, ${accent} 55%, transparent)` }}
                   >
                     {code}
@@ -310,17 +280,17 @@ export function ContrastBrasilEUA() {
                   </span>
                 </div>
 
-                <h3 className="mt-6 font-display text-2xl md:text-[28px] text-ink-text leading-tight">
-                  {cardTitle[0]}<br />{cardTitle[1]}
+                <h3 className="mt-4 font-display text-xl md:text-2xl text-ink-text leading-tight">
+                  {cardTitle}
                 </h3>
 
-                <ul className="mt-7 space-y-3.5">
+                <ul className="mt-5 space-y-2.5">
                   {items.map((b) => (
-                    <li key={b} className="flex gap-3 text-ink-text/90 leading-relaxed">
+                    <li key={b} className="flex gap-2.5 text-[15px] text-ink-text/90 leading-snug">
                       <Icon
                         aria-hidden
-                        className="mt-[0.25rem] h-[18px] w-[18px] shrink-0"
-                        strokeWidth={1.75}
+                        className="mt-[0.2rem] h-[17px] w-[17px] shrink-0"
+                        strokeWidth={1.8}
                         style={{ color: accent }}
                       />
                       <span>{b}</span>
