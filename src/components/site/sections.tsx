@@ -5,7 +5,7 @@
  *  - ProcessSteps: substituído pelo processo real EB-2 NIW (4 etapas).
  *  - WhyUs: estatísticas reais (25+ anos, 5.000+ processos, 98% satisfação,
  *           1.000+ famílias, 130+ avaliações 5★, BBB nota A).
- *  - Testimonials: depoimentos reais (Pedro Rezende, Ruani Costa).
+ *  - Testimonials: vídeos de casos reais (Helder + slot secundário).
  *  - FAQ: perguntas reais (confiança, experiência, atendimento remoto, valor).
  *  - LegacySection: nova dobra "Muito mais que um visto. Um legado.".
  *  - CtaForm (com form inline) → CtaBanner (CTA forte para /avaliacao).
@@ -732,7 +732,7 @@ export function SalaryCompare() {
 
 
 /* ============================================================
- * 10. DEPOIMENTOS. Vídeo (EB-2 do Helder) + Reais + Estudos de caso
+ * 10. DEPOIMENTOS. Vídeo (EB-2 do Helder) + slot secundário
  *
  * NOTA DE CONTEÚDO (não visível ao usuário):
  * O depoimento âncora em vídeo para o pilar EB-2 é do HELDER (sócio da
@@ -744,18 +744,6 @@ export function SalaryCompare() {
  * URLs dos vídeos são editáveis em /admin/conteudo (site_content).
  * ============================================================ */
 export function Testimonials() {
-  const items = [
-    {
-      name: "Pedro Rezende",
-      role: "Cliente",
-      q: "Andrea transmite seriedade, informação e segurança no atendimento. Esclareceu pontos importantes com clareza, profissionalismo e transparência.",
-    },
-    {
-      name: "Ruani Costa",
-      role: "Cliente",
-      q: "Amei o atendimento do Sr. Neto, atencioso em todos os detalhes e dúvidas. Um bom profissional faz toda a diferença.",
-    },
-  ];
 
   const videoEyebrow = useContent("testimonials.videoEyebrow");
   const videoTitle = useContent("testimonials.videoTitle");
@@ -821,39 +809,6 @@ export function Testimonials() {
           </div>
         </div>
 
-        {/* --- Depoimentos reais (Google/Facebook) --- */}
-        <div className="mt-16">
-          <div className="flex items-center gap-3">
-            <span aria-hidden className="h-px w-8 bg-gold" />
-            <span className="font-mono-label text-oxblood">AVALIAÇÕES REAIS</span>
-          </div>
-          <div className="mt-6 grid md:grid-cols-2 gap-5 max-w-4xl">
-            {items.map((i) => (
-              <article key={i.name} className="relative gold-tick rounded-2xl bg-white border border-ink-text/10 p-7 flex flex-col h-full shadow-soft">
-                <div className="flex gap-0.5 text-gold">
-                  {[...Array(5)].map((_, k) => <Star key={k} className="h-3.5 w-3.5 fill-gold" />)}
-                </div>
-                <p className="mt-5 text-ink-text/85 italic font-display text-[17px] leading-relaxed">"{i.q}"</p>
-                <div className="mt-auto pt-6 border-t border-ink-text/10">
-                  <p className="font-display text-ink-text">{i.name}</p>
-                  <p className="font-mono-label text-ink-text/55 mt-1">{i.role}</p>
-                </div>
-              </article>
-            ))}
-          </div>
-          {googleUrl && (
-            <p className="mt-6">
-              <a
-                href={googleUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 font-mono-label text-oxblood hover:text-gold transition-colors text-[12px]"
-              >
-                Ver todas as avaliações no Google →
-              </a>
-            </p>
-          )}
-        </div>
 
       </div>
     </Reveal>
