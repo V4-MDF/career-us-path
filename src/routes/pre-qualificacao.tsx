@@ -72,7 +72,7 @@ function PreQualPage() {
                 Avaliamos seu perfil contra os critérios dos vistos <strong>EB-1A</strong>,
                 <strong> EB-2 NIW</strong>, <strong>O-1</strong> e <strong>EB-3</strong>. Ao final você
                 recebe um resultado imediato, com pontos fortes, lacunas e um link público
-                para conversar pelo WhatsApp com nossa equipe.
+                para consultar depois.
               </p>
             </header>
 
