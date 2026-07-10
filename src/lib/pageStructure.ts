@@ -156,31 +156,73 @@ function getSnapshot(page: PageSlug): SectionItem[] {
 // Cache de snapshot por page para manter referência estável entre renders
 // quando os dados não mudam (requisito de useSyncExternalStore).
 const snapshotCache = new Map<PageSlug, { key: string; value: SectionItem[] }>();
+// Server snapshot precisa ser estável (mesma referência) entre chamadas, senão
+// useSyncExternalStore detecta "novo" snapshot a cada render e entra em loop.
+const serverSnapshotCache = new Map<PageSlug, SectionItem[]>();
+const hydrated = new Set<PageSlug>();
+
+function keyOf(items: SectionItem[]): string {
+  return items.map((s) => `${s.id}:${s.active ? 1 : 0}`).join("|");
+}
 
 function getCachedSnapshot(page: PageSlug): SectionItem[] {
   const next = getSnapshot(page);
-  const key = next.map((s) => `${s.id}:${s.active ? 1 : 0}`).join("|");
+  const key = keyOf(next);
   const prev = snapshotCache.get(page);
   if (prev && prev.key === key) return prev.value;
   snapshotCache.set(page, { key, value: next });
   return next;
 }
 
-const hydrated = new Set<PageSlug>();
+function getServerSnapshot(page: PageSlug): SectionItem[] {
+  let cached = serverSnapshotCache.get(page);
+  if (!cached) {
+    cached = reconcile(page, null);
+    serverSnapshotCache.set(page, cached);
+  }
+  return cached;
+}
+
+/**
+ * "Prima" a ordem de dobras antes do primeiro render, para que SSR e
+ * cliente já produzam o mesmo snapshot com a ordem salva no banco.
+ * Chamado pelo loader da rota; elimina o flash de reordenação.
+ * Idempotente.
+ */
+export function primePageSections(page: PageSlug, items: SectionItem[]): void {
+  const reconciled = reconcile(page, items);
+  const key = keyOf(reconciled);
+
+  const prevServer = serverSnapshotCache.get(page);
+  if (!prevServer || keyOf(prevServer) !== key) {
+    serverSnapshotCache.set(page, reconciled);
+  }
+  const prevClient = snapshotCache.get(page);
+  if (!prevClient || prevClient.key !== key) {
+    snapshotCache.set(page, { key, value: reconciled });
+  }
+
+  if (typeof window !== "undefined") {
+    try {
+      const raw = window.localStorage.getItem("status_page_sections");
+      const parsed = raw ? (JSON.parse(raw) as Record<string, PageSectionsRow>) : {};
+      parsed[page] = { items: reconciled, updatedAt: new Date().toISOString() };
+      window.localStorage.setItem("status_page_sections", JSON.stringify(parsed));
+    } catch {
+      /* ignore */
+    }
+    hydrated.add(page);
+  }
+}
+
 function ensureHydrated(page: PageSlug) {
   if (typeof window === "undefined") return;
   if (hydrated.has(page)) return;
   hydrated.add(page);
-  // Busca o layout salvo no Supabase e atualiza o cache local, para que
-  // qualquer visitante (não só o admin que salvou) veja a ordem correta.
-  // Só dispara re-render se o payload diferir do snapshot atual, para
-  // evitar o flicker de reordenação quando o localStorage já está sincronizado.
   loadPageSections(page)
     .then((items) => {
-      const currentKey = getCachedSnapshot(page)
-        .map((s) => `${s.id}:${s.active ? 1 : 0}`)
-        .join("|");
-      const nextKey = items.map((s) => `${s.id}:${s.active ? 1 : 0}`).join("|");
+      const currentKey = keyOf(getCachedSnapshot(page));
+      const nextKey = keyOf(items);
       if (currentKey === nextKey) return;
       try { window.dispatchEvent(new Event("status:admin-change")); } catch { /* ignore */ }
     })
@@ -198,19 +240,6 @@ function subscribe(callback: () => void): () => void {
     window.removeEventListener("status:admin-change", callback);
     window.removeEventListener("storage", onStorage);
   };
-}
-
-// Server snapshot precisa ser estável (mesma referência) entre chamadas, senão
-// useSyncExternalStore detecta "novo" snapshot a cada render e entra em loop
-// (warning: "The result of getServerSnapshot should be cached…").
-const serverSnapshotCache = new Map<PageSlug, SectionItem[]>();
-function getServerSnapshot(page: PageSlug): SectionItem[] {
-  let cached = serverSnapshotCache.get(page);
-  if (!cached) {
-    cached = reconcile(page, null);
-    serverSnapshotCache.set(page, cached);
-  }
-  return cached;
 }
 
 export function useOrderedSections(page: PageSlug): SectionItem[] {
