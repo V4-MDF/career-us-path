@@ -3,7 +3,7 @@ import type { ComponentType } from "react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import {
-  ContrastBrasilEUA, CtaBanner, FAQ, Hero, LegacySection,
+  ContrastBrasilEUA, CtaBanner, FAQ, Hero, InstitutionalVideo, LegacySection,
   NiwSection, PartnersBadges, ProcessSteps,
   SalaryCompare, Testimonials, VisaCards, WhyUs,
 } from "@/components/site/sections";
