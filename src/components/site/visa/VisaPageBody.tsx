@@ -12,15 +12,19 @@
  */
 
 import { Link } from "@tanstack/react-router";
-import { Check, ChevronRight } from "lucide-react";
+import { Check, ChevronRight, PlayCircle } from "lucide-react";
+import { useState } from "react";
 import { SectionHead } from "@/components/site/SectionHead";
 import { Button } from "@/components/ui/button";
 import {
   Accordion, AccordionContent, AccordionItem, AccordionTrigger,
 } from "@/components/ui/accordion";
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { avaliacaoHref } from "@/lib/ctaLinks";
 import { COMPARISON, type VisaPage } from "@/lib/visaPages";
 import { PhotoFrame } from "@/components/site/visa/PhotoFrame";
+import { VideoPlayer } from "@/components/site/VideoPlayer";
+import { useContent } from "@/lib/siteContent";
 // NOTA: as fotografias abaixo são placeholders art-direcionados no mesmo
 // tratamento visual do site. Substituir por fotografia real com o mesmo
 // enquadramento e a classe .photo-treatment — NUNCA usar ilustração ou
@@ -29,61 +33,14 @@ import heroFamilyUsa from "@/assets/visa-hero-family-usa.jpg";
 import professionalWork from "@/assets/visa-professional-work.jpg";
 import familyFuture from "@/assets/visa-family-future.jpg";
 
+
 export function VisaPageBody({ page, hideHero = false }: { page: VisaPage; hideHero?: boolean }) {
   return (
     <main className={hideHero ? "pt-28" : "pt-0"}>
 
-      {!hideHero && (
-      /* Hero fotográfico — full-bleed com overlay navy forte (AA em todo
-         texto). Grão + vinheta vêm do <PhotoFrame>. Fora do scroll-spy. */
-      <section id="abertura" aria-label="Abertura" className="section-anchor bg-ink relative overflow-hidden min-h-[86vh] flex items-center">
-        <PhotoFrame
-          src={heroFamilyUsa}
-          alt="Família brasileira em frente à casa nos Estados Unidos com bandeira americana"
-          fill
-          priority
-          width={1920}
-          height={1088}
-          focal="60% 40%"
-          className="!rounded-none"
-        />
-        {/* Overlay navy sólido: 88% no lado do texto → 45% no lado oposto,
-            garantindo AA no H1/subtítulo sem padrões sobre a foto. */}
-        <div aria-hidden className="absolute inset-0 bg-gradient-to-r from-[#0A111C]/92 via-[#0A111C]/75 to-[#0A111C]/45" />
+      {!hideHero && <VisaHero page={page} />}
 
-        <div className="container-x section-pad relative w-full">
-          <nav aria-label="Breadcrumb" className="font-mono-label text-foreground/70 flex items-center gap-2">
-            <Link to="/" className="hover:text-gold">Início</Link>
-            <ChevronRight className="h-3 w-3" />
-            <span className="text-gold">{page.eyebrow}</span>
-          </nav>
 
-          <div className="mt-6 flex items-center gap-3">
-            <span aria-hidden className="h-px w-10 bg-gold/70" />
-            <span className="font-mono-label text-gold">{page.eyebrow}</span>
-            {page.badge && (
-              <span className="rounded-md border border-gold/60 px-2 py-0.5 font-mono-label text-[9px] text-gold">
-                {page.badge}
-              </span>
-            )}
-          </div>
-
-          <h1 className="mt-5 font-display text-[40px] md:text-[64px] leading-[1.04] max-w-4xl text-foreground drop-shadow-[0_2px_20px_rgba(0,0,0,0.5)]">
-            {page.h1}
-          </h1>
-          <p className="mt-6 text-lg md:text-xl text-foreground/90 leading-relaxed max-w-3xl">
-            {page.intro}
-          </p>
-          <div className="mt-10">
-            <a href={avaliacaoHref(`visto_${page.slug}_hero`)}>
-              <Button size="lg" className="btn-label btn-sweep h-12 px-7 text-base">
-                Análise gratuita
-              </Button>
-            </a>
-          </div>
-        </div>
-      </section>
-      )}
 
       {/* 1 — Definição — layout editorial: texto + retrato profissional */}
       <section id="definicao" aria-label="Definição" className="section-anchor section-parchment">
@@ -271,3 +228,133 @@ export function VisaPageBody({ page, hideHero = false }: { page: VisaPage; hideH
     </main>
   );
 }
+
+/* ------------------------------------------------------------------ */
+/* Hero — 2 colunas: texto enxuto à esquerda + vídeo do visto à direita.
+   Overlay navy sólido sobre a fotografia (sem textura). Vídeo dinâmico
+   por página (site_content: visa.<slug>.heroVideoUrl / heroSubtitle). */
+/* ------------------------------------------------------------------ */
+function VisaHero({ page }: { page: VisaPage }) {
+  const subtitleKey = `visa.${page.slug}.heroSubtitle` as const;
+  const videoKey = `visa.${page.slug}.heroVideoUrl` as const;
+  const thumbKey = `visa.${page.slug}.heroVideoThumb` as const;
+  const heroSubtitle = useContent(subtitleKey);
+  const videoUrl = useContent(videoKey);
+  const videoThumb = useContent(thumbKey);
+  const [open, setOpen] = useState(false);
+  const hasVideo = Boolean(videoUrl && videoUrl.trim().length > 0);
+
+  return (
+    <section
+      id="abertura"
+      aria-label="Abertura"
+      className="section-anchor bg-ink relative overflow-hidden flex items-center min-h-[86vh]"
+    >
+      {/* Foto de fundo full-bleed com tratamento padrão. */}
+      <PhotoFrame
+        src={heroFamilyUsa}
+        alt="Família brasileira em frente à casa nos Estados Unidos com bandeira americana"
+        fill
+        priority
+        width={1920}
+        height={1088}
+        focal="65% 40%"
+        className="!rounded-none"
+      />
+      {/* Overlay navy sólido — 88% (esq.) → 40% (dir.). Sem padrões sobre a foto. */}
+      <div
+        aria-hidden
+        className="absolute inset-0 bg-gradient-to-r from-[#0A111C]/92 via-[#0A111C]/72 to-[#0A111C]/40"
+      />
+      {/* Reforço vertical inferior para AA em telas curtas. */}
+      <div aria-hidden className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#0A111C]/70 to-transparent" />
+
+      <div className="container-x section-pad relative w-full">
+        <div className="grid gap-10 lg:gap-14 lg:grid-cols-12 items-center">
+          {/* ESQUERDA — texto enxuto */}
+          <div className="lg:col-span-7">
+            <nav aria-label="Breadcrumb" className="font-mono-label text-foreground/70 flex items-center gap-2">
+              <Link to="/" className="hover:text-gold">Início</Link>
+              <ChevronRight className="h-3 w-3" />
+              <span className="text-gold">{page.eyebrow}</span>
+            </nav>
+
+            <div className="mt-6 flex items-center gap-3">
+              <span aria-hidden className="h-px w-10 bg-gold/70" />
+              <span className="font-mono-label text-gold">{page.eyebrow}</span>
+              {page.badge && (
+                <span className="rounded-md border border-gold/60 px-2 py-0.5 font-mono-label text-[9px] text-gold">
+                  {page.badge}
+                </span>
+              )}
+            </div>
+
+            <h1 className="mt-5 font-display text-[36px] md:text-[52px] lg:text-[56px] leading-[1.05] text-foreground drop-shadow-[0_2px_20px_rgba(0,0,0,0.5)]">
+              {page.h1}
+            </h1>
+            <p className="mt-5 text-base md:text-lg text-foreground/90 leading-relaxed max-w-xl">
+              {heroSubtitle}
+            </p>
+            <div className="mt-8">
+              <a href={avaliacaoHref(`visto_${page.slug}_hero`)}>
+                <Button size="lg" className="btn-label btn-sweep h-12 px-7 text-base">
+                  Análise gratuita
+                </Button>
+              </a>
+            </div>
+          </div>
+
+          {/* DIREITA — moldura de vídeo */}
+          <div className="lg:col-span-5">
+            <div className="relative mx-auto max-w-xl">
+              {/* Filete dourado externo (assinatura credencial). */}
+              <div aria-hidden className="absolute -inset-2 rounded-2xl border border-gold/25 pointer-events-none" />
+              <button
+                type="button"
+                onClick={() => hasVideo && setOpen(true)}
+                disabled={!hasVideo}
+                aria-label={hasVideo ? `Assistir vídeo: ${page.h1}` : "Vídeo em breve"}
+                className="group relative block w-full overflow-hidden rounded-xl ring-1 ring-gold/40 shadow-elevated bg-ink-raise aspect-video focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+              >
+                {videoThumb ? (
+                  <img
+                    src={videoThumb}
+                    alt=""
+                    width={1280}
+                    height={720}
+                    loading="lazy"
+                    decoding="async"
+                    className="absolute inset-0 h-full w-full object-cover"
+                  />
+                ) : (
+                  <div className="absolute inset-0 bg-gradient-to-br from-[#16223A] to-[#0A111C]" />
+                )}
+                <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent" />
+                <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 text-foreground">
+                  <PlayCircle className="h-16 w-16 text-gold drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)] transition-transform group-hover:scale-105" aria-hidden />
+                  <span className="font-mono-label text-gold text-[10px] tracking-[0.2em]">
+                    {hasVideo ? "ASSISTIR VÍDEO" : "VÍDEO EM BREVE"}
+                  </span>
+                </div>
+              </button>
+              <p className="mt-3 text-center font-mono-label text-[10px] tracking-[0.18em] text-foreground/60">
+                {page.eyebrow} · CASO EM VÍDEO
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Modal do vídeo — abre apenas quando há URL. */}
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogContent className="max-w-4xl bg-ink border-gold/30 p-0 overflow-hidden">
+          <DialogTitle className="sr-only">{page.h1} · Vídeo</DialogTitle>
+          <div className="relative aspect-video w-full bg-black">
+            {open && <VideoPlayer url={videoUrl} title={`${page.h1} · vídeo`} />}
+          </div>
+        </DialogContent>
+      </Dialog>
+    </section>
+  );
+}
+
