@@ -17,8 +17,8 @@ import { Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import {
   Award, Briefcase, Building2, CheckCircle2, FileText,
-  GraduationCap, Heart, Layers, MapPin, PlayCircle, ShieldCheck,
-  Sparkles, Star, Stethoscope, TrendingUp, Users, Wrench,
+  GraduationCap, Heart, Landmark, Layers, MapPin, PlayCircle, Scale, ShieldCheck,
+  Sparkles, Star, Stamp, Star as StarIcon, Stethoscope, TrendingUp, Users, Wrench,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -745,6 +745,24 @@ export function Testimonials() {
 /* ============================================================
  * 10b. SELOS & PARCEIROS — moldura dourada, editável via admin
  * ============================================================ */
+function PatchIcon({ label }: { label: string }) {
+  const l = (label || "").toLowerCase();
+  let Icon: typeof ShieldCheck = ShieldCheck;
+  let tint = "text-gold";
+  if (l.includes("bbb")) { Icon = Award; tint = "text-oxblood"; }
+  else if (l.includes("google")) { Icon = StarIcon; tint = "text-gold"; }
+  else if (l.includes("ein") || l.includes("cnpj")) { Icon = Building2; tint = "text-ink-text"; }
+  else if (l.includes("aila")) { Icon = Scale; tint = "text-oxblood"; }
+  else if (l.includes("uscis") || l.includes("document")) { Icon = Stamp; tint = "text-gold"; }
+  else if (l.includes("orlando") || l.includes("sede")) { Icon = Landmark; tint = "text-ink-text"; }
+  else if (l.includes("parceiro")) { Icon = Users; tint = "text-oxblood"; }
+  return (
+    <span className={`inline-grid place-items-center h-8 w-8 rounded-full border border-gold/50 bg-white shadow-soft ${tint}`}>
+      <Icon className="h-4 w-4" strokeWidth={1.75} aria-hidden />
+    </span>
+  );
+}
+
 export function PartnersBadges() {
   const eyebrow = useContent("partners.eyebrow");
   const title = useContent("partners.title");
@@ -793,9 +811,9 @@ export function PartnersBadges() {
                   loading="lazy"
                 />
               ) : (
-                <div className="text-center px-2">
-                  <ShieldCheck className="h-5 w-5 text-gold/70 mx-auto" aria-hidden />
-                  <span className="mt-1 block font-mono-label text-ink-text/70 text-[10.5px] leading-tight">
+                <div className="text-center px-2 flex flex-col items-center">
+                  <PatchIcon label={s.label} />
+                  <span className="mt-1.5 block font-mono-label text-ink-text/70 text-[10.5px] leading-tight">
                     {s.label}
                   </span>
                 </div>
