@@ -5,12 +5,11 @@
  * qual versão mostrar com base no `lastQualificationResult` do sessionStorage.
  * Assim o URL permanece discreto e não revela "qualificado" / "não qualificado".
  */
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Link } from "@tanstack/react-router";
-import { CheckCircle2, BookOpen, FileText, ChevronLeft, Mail, MessageCircle } from "lucide-react";
+import { CheckCircle2, BookOpen, FileText, ChevronLeft, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { trackLead } from "@/lib/tracking";
-import { buildWhatsAppLink, leadWhatsAppMessage, defaultWhatsAppMessage, type LeadWhatsAppInput } from "@/lib/whatsapp";
 
 const SS_QUALIFICATION = "lastQualificationResult";
 const SS_QUALIFIED_LEAD = "lastQualifiedLead";
