@@ -105,19 +105,21 @@ export function VisaPageBody({ page, hideHero = false }: { page: VisaPage; hideH
       </section>
 
       {/* 2 — Elegibilidade */}
-      <section id="elegibilidade" aria-label="Elegibilidade" className="section-anchor bg-ink">
+      <section id="elegibilidade" aria-label="Elegibilidade" className="section-anchor bg-[#0E1726]">
         <div className="container-x section-pad">
           <SectionHead num="02" eyebrow="ELEGIBILIDADE" title={page.qualifies.title} kicker={page.qualifies.intro} />
           <ul className="mt-12 grid gap-5 md:grid-cols-2">
             {page.qualifies.items.map((it) => (
-              <li key={it.title} className="gold-tick rounded-2xl border border-gold/20 bg-ink-raise/60 p-7 pt-9 shadow-soft transition-[border-color,box-shadow] hover:border-gold/45 hover:shadow-elevated">
+              <li key={it.title} className="gold-tick rounded-2xl border border-gold/20 bg-[#16223A] p-7 pt-9 shadow-soft transition-[border-color,box-shadow] hover:border-gold/45 hover:shadow-elevated">
                 <h3 className="font-display text-2xl text-foreground">{it.title}</h3>
-                <p className="mt-3 text-foreground/75 leading-relaxed">{it.body}</p>
+                <p className="mt-3 text-foreground/80 leading-relaxed">{it.body}</p>
               </li>
             ))}
           </ul>
+          <p className="mt-6 text-xs text-foreground/50">Critérios baseados no precedente Matter of Dhanasar (2016).</p>
         </div>
       </section>
+
 
       {/* 3 — Processo */}
       <section id="processo" aria-label="Processo" className="section-anchor section-parchment">
