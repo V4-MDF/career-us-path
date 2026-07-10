@@ -3,7 +3,7 @@ import type { ComponentType } from "react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import {
-  ContrastBrasilEUA, CtaBanner, FAQ, Hero, LegacySection,
+  ContrastBrasilEUA, CtaBanner, FAQ, Hero, InstitutionalVideo, LegacySection,
   NiwSection, PartnersBadges, ProcessSteps,
   SalaryCompare, Testimonials, VisaCards, WhyUs,
 } from "@/components/site/sections";
@@ -62,6 +62,7 @@ const HOME_REGISTRY: Record<string, ComponentType> = {
   "vistos-eb": VisaCards,
   "processo-eb-2-niw": ProcessSteps,
   "por-que-status": WhyUs,
+  "video-institucional": InstitutionalVideo,
   "legado": LegacySection,
   "renda-em-dolar": SalaryCompare,
   "depoimentos": Testimonials,

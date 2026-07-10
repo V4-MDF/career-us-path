@@ -41,6 +41,7 @@ const DEFAULT_LAYOUTS: Record<PageSlug, SectionItem[]> = {
     { id: "vistos-eb",           active: true },
     { id: "processo-eb-2-niw",   active: true },
     { id: "por-que-status",      active: true },
+    { id: "video-institucional", active: true },
     { id: "legado",              active: true },
     { id: "renda-em-dolar",      active: true },
     { id: "depoimentos",         active: true },

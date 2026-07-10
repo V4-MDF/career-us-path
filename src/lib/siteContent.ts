@@ -37,6 +37,11 @@ export const defaultContent = {
   "hero.videoUrl": "",
   "hero.posterUrl": "",
 
+  "institutional.eyebrow": "VÍDEO INSTITUCIONAL",
+  "institutional.title": "Conheça a Status na América.",
+  "institutional.lead": "Em 90 segundos, entenda quem somos, como trabalhamos e por que centenas de famílias brasileiras confiam a construção do seu Green Card à nossa equipe.",
+  "institutional.videoUrl": "",
+
   "contrast.title": "Você não precisa começar do zero.",
   "contrast.subtitle": "Precisa de um novo cenário para a carreira que você já construiu.",
 

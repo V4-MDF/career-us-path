@@ -36,6 +36,7 @@ export const HOME_SECTIONS: SectionDef[] = [
   { id: "vistos-eb",            label: "Vistos EB" },
   { id: "processo-eb-2-niw",    label: "Processo" },
   { id: "por-que-status",       label: "Por que a Status" },
+  { id: "video-institucional",  label: "Vídeo institucional" },
   { id: "legado",               label: "Legado" },
   { id: "renda-em-dolar",       label: "Renda em dólar" },
   { id: "depoimentos",          label: "Depoimentos" },
