@@ -62,11 +62,15 @@ export function ImageUploader({
   onChange,
   folder,
   filenameHint = "img",
-  maxMB = 5,
-  accept = DEFAULT_ACCEPT,
+  maxMB,
+  accept,
   label,
   previewClass = "aspect-video",
+  kind = "image",
 }: ImageUploaderProps) {
+  const isVideo = kind === "video";
+  const effectiveAccept = accept ?? (isVideo ? DEFAULT_VIDEO_ACCEPT : DEFAULT_IMAGE_ACCEPT);
+  const effectiveMaxMB = maxMB ?? (isVideo ? 20 : 5);
   const [busy, setBusy] = useState(false);
   const [meta, setMeta] = useState<{ w: number; h: number; kb: number } | null>(null);
   const [urlDraft, setUrlDraft] = useState(value);
