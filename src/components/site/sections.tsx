@@ -38,9 +38,13 @@ import { FlagBR, FlagUS, FlagsBRUSDual } from "./visuals/DualFlagIcons";
 import { BrazilMap, UsaMap } from "./visuals/CountryMapOutline";
 
 import heroSkyline from "@/assets/hero-skyline.jpg";
-import familyPortrait from "@/assets/family-portrait.jpg";
+
 import passportDocuments from "@/assets/passport-documents.jpg";
 import usMapEngraving from "@/assets/us-map-engraving.webp";
+import familySuburbUsa from "@/assets/home-family-suburb-usa.jpg";
+import brasilSomber from "@/assets/home-brasil-somber.jpg";
+import visaFamilyFuture from "@/assets/visa-family-future.jpg";
+import { PhotoFrame } from "./visa/PhotoFrame";
 
 /* ============================================================
  * 1. HERO
@@ -61,7 +65,8 @@ export function Hero() {
       aria-label="Abertura"
       className="section-anchor relative overflow-hidden pt-32 md:pt-44 pb-24 md:pb-36"
     >
-      {/* Skyline NYC ao amanhecer, atmosfera EUA. Overlay forte preserva legibilidade. */}
+      {/* Fotografia art-direcionada: skyline EUA + família em contexto americano.
+          Overlay navy forte (85%→55%) preserva contraste AA sobre a foto. */}
       <div aria-hidden className="absolute inset-0 -z-20">
         <img
           src={heroSkyline}
@@ -69,12 +74,15 @@ export function Hero() {
           width={1600}
           height={1024}
           fetchPriority="high"
-          className="h-full w-full object-cover object-bottom opacity-[0.22] motion-safe:[mask-image:linear-gradient(to_bottom,black_40%,transparent_100%)]"
+          className="h-full w-full object-cover object-bottom opacity-[0.35] motion-safe:[mask-image:linear-gradient(to_bottom,black_45%,transparent_100%)]"
         />
       </div>
-      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-ink/95 via-ink/90 to-ink" />
+      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-[#0A111C]/95 via-[#0A111C]/85 to-[#0A111C]/55" />
+      <div className="absolute inset-0 -z-10 bg-gradient-to-r from-ink/70 via-transparent to-ink/40" />
+      {/* Grão fino global para unificar a hero com o tratamento das fotos. */}
+      <div aria-hidden className="absolute inset-0 -z-10 opacity-[0.06] mix-blend-overlay [background-image:radial-gradient(rgba(255,255,255,0.6)_1px,transparent_1px)] [background-size:3px_3px]" />
       {/* Motivo geográfico BR→USA, dot-grid + rota tracejada estática. */}
-      <div aria-hidden className="absolute inset-0 -z-10 text-gold">
+      <div aria-hidden className="absolute inset-0 -z-10 text-gold/70">
         <BrUsRouteBackdrop />
       </div>
 
@@ -126,24 +134,28 @@ export function Hero() {
 
         </div>
 
-        {/* Bloco editorial estático (sem parallax por scroll). */}
+        {/* Bloco editorial estático. Tratamento de cor único (.photo-treatment)
+            unifica a foto com o restante do site. */}
         <div className="relative hidden lg:block">
-          <div className="relative aspect-[4/5] overflow-hidden rounded-3xl border border-gold/30 bg-ink-raise shadow-elevated">
-            {/* Fotografia editorial, família multigeracional em paisagem americana. */}
+          <div className="photo-treatment relative aspect-[4/5] overflow-hidden rounded-3xl border border-gold/40 bg-ink-raise shadow-elevated">
+
+            {/* Fotografia editorial: família brasileira em subúrbio americano ao pôr do sol. */}
             <img
-              src={familyPortrait}
-              alt="Família brasileira em paisagem americana ao amanhecer"
-              width={1280}
-              height={1600}
+              src={familySuburbUsa}
+              alt="Família brasileira caminhando em subúrbio americano ao entardecer, casa com bandeira dos EUA ao fundo"
+              width={1600}
+              height={1200}
               loading="eager"
               className="absolute inset-0 h-full w-full object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-ink-deep via-ink-deep/70 to-ink-deep/25" />
+            <div aria-hidden className="photo-treatment__grain" />
+            <div aria-hidden className="photo-treatment__vignette" />
+            <div className="absolute inset-0 bg-gradient-to-t from-ink-deep via-ink-deep/55 to-transparent" />
             <div className="absolute inset-3 rounded-2xl border border-gold/30 pointer-events-none" />
             <div className="absolute bottom-0 left-0 right-0 p-7">
               <div className="flex items-center gap-3 mb-3">
                 <span aria-hidden className="h-px w-6 bg-gold" />
-                <span className="font-mono-label text-gold/80">RETRATO EDITORIAL</span>
+                <span className="font-mono-label text-gold/85">RETRATO EDITORIAL</span>
               </div>
               <p className="font-display text-2xl leading-tight text-foreground">
                 Uma família. Um Green Card. Um novo capítulo.
@@ -204,8 +216,10 @@ export function ContrastBrasilEUA() {
   const subtitle = useContent("contrast.subtitle");
 
   const cards = [
-    { code: "BR", title: ["Realidade", "no Brasil"], items: brasil, accent: "var(--brazil-green)", Map: BrazilMap },
-    { code: "US", title: ["Oportunidades", "nos EUA"], items: eua, accent: "var(--usa-blue)", Map: UsaMap },
+    { code: "BR", title: ["Realidade", "no Brasil"], items: brasil, accent: "var(--brazil-green)", Map: BrazilMap,
+      photo: brasilSomber, photoAlt: "Vista de cidade brasileira em dia cinza através de janela com chuva", photoTone: "grayscale" },
+    { code: "US", title: ["Oportunidades", "nos EUA"], items: eua, accent: "var(--usa-blue)", Map: UsaMap,
+      photo: familySuburbUsa, photoAlt: "Família brasileira em subúrbio americano ao entardecer", photoTone: "warm" },
   ] as const;
 
   return (
@@ -214,19 +228,44 @@ export function ContrastBrasilEUA() {
       <div className="container-x">
         <SectionHead num="01" eyebrow="POR QUE MIGRAR AGORA" title="Duas realidades. Uma decisão." />
         <div className="mt-14 grid md:grid-cols-2 gap-6">
-          {cards.map(({ code, title: cardTitle, items, accent, Map }) => (
+          {cards.map(({ code, title: cardTitle, items, accent, Map, photo, photoAlt, photoTone }) => (
             <div
               key={code}
-              className="relative overflow-hidden rounded-2xl bg-white border border-ink-text/10 shadow-soft p-7 md:p-10"
+              className="relative overflow-hidden rounded-2xl bg-white border border-ink-text/10 shadow-soft flex flex-col"
               style={{ borderTop: `2px solid ${accent}` }}
             >
-              <Map
-                aria-hidden
-                className="absolute -right-10 -top-8 h-[110%] w-auto pointer-events-none"
-                style={{ color: accent, opacity: 0.08 }}
-              />
-              <div className="relative">
-                <span
+              {/* Faixa fotográfica editorial no topo do card (tratamento unificado). */}
+              <div className="photo-treatment relative aspect-[16/9] overflow-hidden">
+                <img
+                  src={photo}
+                  alt={photoAlt}
+                  width={1400}
+                  height={787}
+                  loading="lazy"
+                  className={`h-full w-full object-cover ${photoTone === "grayscale" ? "grayscale-[.55] brightness-95" : ""}`}
+                />
+                <div aria-hidden className="photo-treatment__grain" />
+                <div aria-hidden className="photo-treatment__vignette" />
+                <div
+                  aria-hidden
+                  className="absolute inset-0"
+                  style={{
+                    background: photoTone === "grayscale"
+                      ? "linear-gradient(180deg, rgba(14,23,38,0.15) 0%, rgba(14,23,38,0.55) 100%)"
+                      : "linear-gradient(180deg, rgba(255,255,255,0) 40%, rgba(0,0,0,0.35) 100%)",
+                  }}
+                />
+                <span aria-hidden className="absolute bottom-0 left-0 right-0 h-px" style={{ backgroundColor: accent, opacity: 0.6 }} />
+              </div>
+
+              <div className="p-7 md:p-10 relative">
+                <Map
+                  aria-hidden
+                  className="absolute -right-10 -top-8 h-[110%] w-auto pointer-events-none"
+                  style={{ color: accent, opacity: 0.08 }}
+                />
+                <div className="relative">
+                  <span
                   className="inline-flex items-center justify-center h-8 px-3 rounded-full border font-mono-label text-[11px] tracking-[0.2em]"
                   style={{ color: accent, borderColor: `color-mix(in oklab, ${accent} 40%, transparent)` }}
                 >
@@ -247,6 +286,7 @@ export function ContrastBrasilEUA() {
                     </li>
                   ))}
                 </ul>
+                </div>
               </div>
             </div>
           ))}
@@ -292,7 +332,7 @@ export function NiwSection() {
         </div>
 
         <div className="relative">
-          <div className="aspect-video overflow-hidden rounded-2xl border border-gold/40 bg-ink-deep relative shadow-elevated">
+          <div className="photo-treatment aspect-video overflow-hidden rounded-2xl border border-gold/40 bg-ink-deep relative shadow-elevated">
             {/* Foto editorial, passaporte brasileiro + documentos sobre mesa de madeira. */}
             <img
               src={passportDocuments}
@@ -302,7 +342,9 @@ export function NiwSection() {
               loading="lazy"
               className="absolute inset-0 h-full w-full object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-tr from-ink-deep/95 via-ink-deep/70 to-ink-deep/30" />
+            <div aria-hidden className="photo-treatment__grain" />
+            <div aria-hidden className="photo-treatment__vignette" />
+            <div className="absolute inset-0 bg-gradient-to-tr from-ink-deep/90 via-ink-deep/55 to-ink-deep/15" />
             <div className="absolute inset-3 rounded-xl border border-gold/30 pointer-events-none" />
             <div className="absolute bottom-0 left-0 right-0 p-6">
               <p className="font-mono-label text-gold/80">DOSSIÊ EB-2 NIW</p>
@@ -330,8 +372,12 @@ export function VisaCards() {
       desc: "Caminho para profissionais qualificados com oferta formal de emprego nos EUA." },
   ];
   return (
-    <Reveal as="section" id="vistos-eb" className="section-ink-deep section-pad border-y border-gold/10">
-      <div className="container-x">
+    <Reveal as="section" id="vistos-eb" className="section-ink-deep section-pad border-y border-gold/10 relative overflow-hidden">
+      {/* Profundidade sutil (sem foto): textura guilloché + filete dourado no topo. */}
+      <div aria-hidden className="absolute inset-0 -z-10 guilloche opacity-60" />
+      <div aria-hidden className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold/50 to-transparent" />
+      <div className="container-x relative">
+
         <SectionHead num="03" eyebrow="VISTOS EB" title="Três caminhos. Uma estratégia para cada perfil." />
         <div className="mt-14 grid md:grid-cols-3 gap-5">
           {visas.map((v) => (
@@ -525,6 +571,31 @@ export function LegacySection() {
           title="Muito mais que um visto. Um legado."
           kicker="O Green Card pelo EB-2 NIW reconfigura o horizonte da sua família, em cinco pilares."
         />
+
+        {/* Bloco editorial de família (dobra mais emocional da Home). */}
+        <div className="mt-12 grid lg:grid-cols-[1.15fr_0.85fr] gap-8 items-center">
+          <PhotoFrame
+            src={visaFamilyFuture}
+            alt="Família brasileira com filhos em ambiente escolar americano, futuro e pertencimento"
+            ratio="16/10"
+            className="border border-gold/30 shadow-elevated"
+            width={1600}
+            height={1000}
+          />
+          <div className="relative rounded-2xl border border-gold/25 bg-ink-raise/60 p-7 md:p-9 shadow-soft">
+            <div aria-hidden className="absolute inset-0 -z-10 guilloche opacity-70 rounded-2xl" />
+            <span className="font-mono-label text-gold">FUTURO DOS FILHOS</span>
+            <p className="mt-4 font-display text-2xl md:text-[26px] leading-tight text-foreground">
+              A decisão que muda três gerações.
+            </p>
+            <p className="mt-4 text-foreground/75 leading-relaxed">
+              Green Card para cônjuge e filhos solteiros menores de 21. Escola pública de qualidade,
+              universidade a custo de residente e caminho para a cidadania americana. O que você constrói
+              hoje é a herança que seus filhos vão viver.
+            </p>
+          </div>
+        </div>
+
         <div className="mt-14 grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5">
           {pillars.map(({ icon: Icon, t, d }) => (
             <article key={t} className="relative gold-tick rounded-2xl border border-gold/25 bg-ink-raise/50 p-7 h-full shadow-soft transition-[border-color,box-shadow] hover:border-gold/55 hover:shadow-elevated">
