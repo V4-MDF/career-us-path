@@ -88,9 +88,37 @@ const PAGES: Array<{
   },
   { slug: "sobre", label: "Sobre", sections: [] },
   { slug: "contato", label: "Contato", sections: [] },
-  { slug: "eb2-niw", label: "Vistos · EB-2 NIW", sections: [] },
-  { slug: "eb1", label: "Vistos · EB-1", sections: [] },
-  { slug: "eb3", label: "Vistos · EB-3", sections: [] },
+  {
+    slug: "eb2-niw", label: "Vistos · EB-2 NIW",
+    sections: [
+      { title: "Hero (texto enxuto + vídeo)", keys: [
+        { k: "visa.eb2-niw.heroSubtitle", label: "Subtítulo curto (1–2 linhas)", multiline: true },
+        { k: "visa.eb2-niw.heroVideoUrl", label: "URL do vídeo (YouTube, Vimeo ou MP4)" },
+        { k: "visa.eb2-niw.heroVideoThumb", label: "URL da thumbnail (webp/jpg — opcional)" },
+      ]},
+    ],
+  },
+  {
+    slug: "eb1", label: "Vistos · EB-1",
+    sections: [
+      { title: "Hero (texto enxuto + vídeo)", keys: [
+        { k: "visa.eb1.heroSubtitle", label: "Subtítulo curto (1–2 linhas)", multiline: true },
+        { k: "visa.eb1.heroVideoUrl", label: "URL do vídeo (YouTube, Vimeo ou MP4)" },
+        { k: "visa.eb1.heroVideoThumb", label: "URL da thumbnail (webp/jpg — opcional)" },
+      ]},
+    ],
+  },
+  {
+    slug: "eb3", label: "Vistos · EB-3",
+    sections: [
+      { title: "Hero (texto enxuto + vídeo)", keys: [
+        { k: "visa.eb3.heroSubtitle", label: "Subtítulo curto (1–2 linhas)", multiline: true },
+        { k: "visa.eb3.heroVideoUrl", label: "URL do vídeo (YouTube, Vimeo ou MP4)" },
+        { k: "visa.eb3.heroVideoThumb", label: "URL da thumbnail (webp/jpg — opcional)" },
+      ]},
+    ],
+  },
+
 ];
 
 function ContentPage() {
