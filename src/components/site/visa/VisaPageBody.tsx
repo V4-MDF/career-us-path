@@ -84,14 +84,22 @@ export function VisaPageBody({ page, hideHero = false }: { page: VisaPage; hideH
       </section>
       )}
 
-      {/* 1 — Definição */}
+      {/* 1 — Definição — layout editorial: texto + retrato profissional */}
       <section id="definicao" aria-label="Definição" className="section-anchor section-parchment">
-        <div className="container-x section-pad grid md:grid-cols-12 gap-10">
-          <div className="md:col-span-5">
+        <div className="container-x section-pad grid md:grid-cols-12 gap-10 items-center">
+          <div className="md:col-span-7 order-2 md:order-1">
             <SectionHead num="01" eyebrow="DEFINIÇÃO" variant="parchment" title={page.whatIs.title} />
+            <p className="mt-6 text-lg leading-relaxed text-ink-text/85">{page.whatIs.body}</p>
           </div>
-          <div className="md:col-span-7">
-            <p className="text-lg leading-relaxed text-ink-text/85">{page.whatIs.body}</p>
+          <div className="md:col-span-5 order-1 md:order-2">
+            <PhotoFrame
+              src={professionalWork}
+              alt="Profissional brasileira em ambiente corporativo nos Estados Unidos"
+              ratio="4/5"
+              width={1280}
+              height={1600}
+              className="shadow-elevated ring-1 ring-gold/25"
+            />
           </div>
         </div>
       </section>
