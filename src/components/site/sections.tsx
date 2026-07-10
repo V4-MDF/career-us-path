@@ -238,19 +238,19 @@ export function ContrastBrasilEUA() {
   ] as const;
 
   return (
-    <Reveal as="section" id="brasil-vs-eua" className="section-cream-light relative py-16 md:py-20">
+    <Reveal as="section" id="brasil-vs-eua" className="section-cream-light relative py-12 md:py-16">
       <div aria-hidden className="tricolor-rule absolute inset-x-0 top-0" />
       <div className="container-x">
         <SectionHead num="01" eyebrow="POR QUE MIGRAR AGORA" title="Duas realidades. Uma decisão." />
 
-        <div className="relative mt-10 grid md:grid-cols-2 gap-5 md:gap-8">
+        <div className="relative mt-8 grid md:grid-cols-2 gap-4 md:gap-6">
           {/* Divisor central "BR → US" (md+) */}
           <div
             aria-hidden
             className="hidden md:flex absolute inset-y-4 left-1/2 -translate-x-1/2 items-center justify-center z-10 pointer-events-none"
           >
-            <span className="grid h-9 w-9 place-items-center rounded-full bg-parchment border border-gold/40 shadow-soft">
-              <ArrowRight className="h-4 w-4 text-gold" />
+            <span className="grid h-8 w-8 place-items-center rounded-full bg-parchment border border-gold/40 shadow-soft">
+              <ArrowRight className="h-3.5 w-3.5 text-gold" />
             </span>
           </div>
 
@@ -262,10 +262,10 @@ export function ContrastBrasilEUA() {
               }`}
               style={{ borderTop: `3px solid ${accent}` }}
             >
-              <div className="p-6 md:p-7">
-                <div className="flex items-center gap-3">
+              <div className="p-5 md:p-6">
+                <div className="flex items-center gap-2.5">
                   <span
-                    className="inline-flex items-center justify-center h-7 px-2.5 rounded-full border font-mono-label text-[10px] tracking-[0.2em] bg-white/80"
+                    className="inline-flex items-center justify-center h-6 px-2 rounded-full border font-mono-label text-[10px] tracking-[0.2em] bg-white/80"
                     style={{ color: accent, borderColor: `color-mix(in oklab, ${accent} 55%, transparent)` }}
                   >
                     {code}
@@ -278,16 +278,16 @@ export function ContrastBrasilEUA() {
                   </span>
                 </div>
 
-                <h3 className="mt-4 font-display text-xl md:text-2xl text-ink-text leading-tight">
+                <h3 className="mt-3 font-display uppercase tracking-[0.01em] font-bold text-[clamp(1.125rem,1.9vw,1.4rem)] text-ink-text leading-snug">
                   {cardTitle}
                 </h3>
 
-                <ul className="mt-5 space-y-2.5">
+                <ul className="mt-4 space-y-2">
                   {items.map((b) => (
-                    <li key={b} className="flex gap-2.5 text-[15px] text-ink-text/90 leading-snug">
+                    <li key={b} className="flex gap-2 text-[15px] text-ink-text/90 leading-snug">
                       <Icon
                         aria-hidden
-                        className="mt-[0.2rem] h-[17px] w-[17px] shrink-0"
+                        className="mt-[0.15rem] h-[18px] w-[18px] shrink-0"
                         strokeWidth={1.8}
                         style={{ color: accent }}
                       />
@@ -300,7 +300,7 @@ export function ContrastBrasilEUA() {
           ))}
         </div>
 
-        <p className="mt-14 max-w-3xl mx-auto text-center font-display text-xl md:text-2xl text-ink-text/70 leading-snug">
+        <p className="mt-10 max-w-3xl mx-auto text-center font-display text-lg md:text-xl text-ink-text/70 leading-snug">
           {title} <span className="text-gold italic">{subtitle}</span>
         </p>
       </div>
