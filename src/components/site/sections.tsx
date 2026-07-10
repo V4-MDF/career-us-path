@@ -137,21 +137,27 @@ export function Hero() {
         {/* Bloco editorial estático (sem parallax por scroll). */}
         <div className="relative hidden lg:block">
           <div className="relative aspect-[4/5] overflow-hidden rounded-3xl border border-gold/30 bg-ink-raise shadow-elevated">
-            {/* Fotografia editorial, família multigeracional em paisagem americana. */}
+        {/* Bloco editorial estático (sem parallax por scroll). Tratamento de cor
+            único (.photo-treatment) unifica a foto com o restante do site. */}
+        <div className="relative hidden lg:block">
+          <div className="photo-treatment relative aspect-[4/5] overflow-hidden rounded-3xl border border-gold/40 bg-ink-raise shadow-elevated">
+            {/* Fotografia editorial: família brasileira em subúrbio americano ao pôr do sol. */}
             <img
-              src={familyPortrait}
-              alt="Família brasileira em paisagem americana ao amanhecer"
-              width={1280}
-              height={1600}
+              src={familySuburbUsa}
+              alt="Família brasileira caminhando em subúrbio americano ao entardecer, casa com bandeira dos EUA ao fundo"
+              width={1600}
+              height={1200}
               loading="eager"
               className="absolute inset-0 h-full w-full object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-ink-deep via-ink-deep/70 to-ink-deep/25" />
+            <div aria-hidden className="photo-treatment__grain" />
+            <div aria-hidden className="photo-treatment__vignette" />
+            <div className="absolute inset-0 bg-gradient-to-t from-ink-deep via-ink-deep/55 to-transparent" />
             <div className="absolute inset-3 rounded-2xl border border-gold/30 pointer-events-none" />
             <div className="absolute bottom-0 left-0 right-0 p-7">
               <div className="flex items-center gap-3 mb-3">
                 <span aria-hidden className="h-px w-6 bg-gold" />
-                <span className="font-mono-label text-gold/80">RETRATO EDITORIAL</span>
+                <span className="font-mono-label text-gold/85">RETRATO EDITORIAL</span>
               </div>
               <p className="font-display text-2xl leading-tight text-foreground">
                 Uma família. Um Green Card. Um novo capítulo.
