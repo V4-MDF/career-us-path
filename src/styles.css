@@ -126,8 +126,8 @@
   --popover: var(--ink-raise);
   --popover-foreground: #ECE6D6;
 
-  --primary: var(--gold);
-  --primary-foreground: var(--ink-deep);
+  --primary: #8A6F3E;
+  --primary-foreground: #FFFFFF;
 
   --secondary: var(--ink-raise);
   --secondary-foreground: #ECE6D6;
@@ -384,7 +384,7 @@
  * font-mono-label em elementos clicáveis). */
 @utility btn-label {
   font-family: var(--font-display);
-  font-weight: 600;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.14em;
   font-size: 12px;
