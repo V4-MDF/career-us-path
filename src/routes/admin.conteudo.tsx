@@ -69,7 +69,7 @@ const PAGES: Array<{
         { k: "partners.slot6.label", label: "Slot 6 · Legenda" },
         { k: "partners.slot6.url", label: "Slot 6 · URL do logo" },
       ]},
-      { title: "Depoimentos em vídeo · Estudos de caso", keys: [
+      { title: "Depoimentos em vídeo", keys: [
         { k: "testimonials.videoEyebrow", label: "Vídeo · Eyebrow" },
         { k: "testimonials.videoTitle", label: "Vídeo · Título" },
         { k: "testimonials.helderName", label: "Slot Helder · Nome" },
@@ -81,9 +81,6 @@ const PAGES: Array<{
         { k: "testimonials.secondaryCaption", label: "Slot cliente · Legenda" },
         { k: "testimonials.secondaryVideoUrl", label: "Slot cliente · URL do vídeo (YouTube, Vimeo ou MP4)" },
         { k: "testimonials.googleReviewsUrl", label: "Link · Avaliações no Google" },
-        { k: "testimonials.caseStudiesEyebrow", label: "Estudos de caso · Eyebrow" },
-        { k: "testimonials.caseStudiesTitle", label: "Estudos de caso · Título" },
-        { k: "testimonials.caseStudiesLead", label: "Estudos de caso · Lead", multiline: true },
       ]},
     ],
   },

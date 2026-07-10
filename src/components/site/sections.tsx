@@ -737,9 +737,6 @@ export function Testimonials() {
   const secondaryRole = useContent("testimonials.secondaryRole");
   const secondaryVideoUrl = useContent("testimonials.secondaryVideoUrl");
   const googleUrl = useContent("testimonials.googleReviewsUrl");
-  const csEyebrow = useContent("testimonials.caseStudiesEyebrow");
-  const csTitle = useContent("testimonials.caseStudiesTitle");
-  const csLead = useContent("testimonials.caseStudiesLead");
 
   const videoSlots = [
     { name: helderName, role: helderRole, caption: helderCaption, url: helderVideoUrl, primary: true },
@@ -828,34 +825,6 @@ export function Testimonials() {
           )}
         </div>
 
-        {/* --- Estudos de caso (bloco preparado, casos reais em breve) --- */}
-        <div className="mt-16 rounded-2xl border border-gold/30 bg-white/80 p-8 shadow-soft">
-          <div className="flex items-center gap-3">
-            <span aria-hidden className="h-px w-8 bg-gold" />
-            <span className="font-mono-label text-oxblood">{csEyebrow}</span>
-          </div>
-          <h3 className="mt-3 font-display text-xl md:text-2xl text-ink-text">{csTitle}</h3>
-          <p className="mt-2 text-ink-text/70 text-[15px] leading-relaxed max-w-3xl">{csLead}</p>
-          <div className="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {[1, 2, 3].map((n) => (
-              <article
-                key={n}
-                className="rounded-xl border border-dashed border-ink-text/15 bg-parchment/40 p-5 min-h-[160px] flex flex-col justify-between"
-              >
-                <div className="flex items-center gap-2 text-ink-text/50">
-                  <FileText className="h-4 w-4" />
-                  <span className="font-mono-label text-[11px]">CASO #{String(n).padStart(2, "0")}</span>
-                </div>
-                <div className="mt-6">
-                  <p className="font-display text-ink-text/60 text-[15px]">Estudo em preparação</p>
-                  <p className="mt-1 font-mono-label text-ink-text/40 text-[11px]">
-                    Perfil · Estratégia · Resultado
-                  </p>
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
       </div>
     </Reveal>
   );
