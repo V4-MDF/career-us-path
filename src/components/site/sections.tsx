@@ -548,25 +548,38 @@ export function InstitutionalVideo() {
   const url = useContent("institutional.videoUrl");
 
   return (
-    <Reveal as="section" id="video-institucional" className="section-pad relative">
-      <div className="container-x max-w-5xl">
-        <div className="flex items-center gap-3">
-          <span aria-hidden className="h-px w-8 bg-gold" />
-          <span className="font-mono-label text-gold/85">{eyebrow || "VÍDEO INSTITUCIONAL"}</span>
-        </div>
-        <h2 className="mt-4 font-display text-[clamp(1.6rem,3.2vw,2.4rem)] leading-tight text-foreground max-w-3xl">
-          {title || "Conheça a Status na América."}
-        </h2>
-        {lead && (
-          <p className="mt-4 text-foreground/80 leading-relaxed max-w-2xl">{lead}</p>
-        )}
+    <Reveal as="section" id="video-institucional" className="section-pad relative bg-ink">
+      <div className="container-x">
+        <div className="grid lg:grid-cols-[0.9fr_1.1fr] gap-10 lg:gap-14 items-center">
+          {/* Coluna de texto (editorial) */}
+          <div>
+            <div className="flex items-center gap-3">
+              <span aria-hidden className="h-px w-8 bg-gold" />
+              <span className="font-mono-label text-gold/85">{eyebrow || "VÍDEO INSTITUCIONAL"}</span>
+            </div>
+            <h2 className="mt-5 font-display text-[clamp(1.8rem,3.6vw,2.8rem)] leading-[1.05] text-parchment">
+              {title || "Conheça a Status na América."}
+            </h2>
+            <div className="mt-6 h-px w-16 bg-gold/60" />
+            {lead && (
+              <p className="mt-6 text-parchment/80 leading-relaxed max-w-md">{lead}</p>
+            )}
+            <p className="mt-8 font-mono-label text-gold/70 text-[11px]">
+              FORMATO 16:9 · HORIZONTAL
+            </p>
+          </div>
 
-        <div className="mt-10 relative aspect-video w-full overflow-hidden rounded-2xl border border-gold/30 bg-ink-raise shadow-elevated ring-1 ring-gold/10">
-          <VideoPlayer url={url} title={title || "Vídeo institucional Status na América"} />
+          {/* Coluna do vídeo (moldura dourada, formato horizontal) */}
+          <div className="relative">
+            <div className="relative aspect-video w-full overflow-hidden rounded-2xl border border-gold/40 bg-ink-raise shadow-elevated ring-1 ring-gold/10">
+              <VideoPlayer url={url} title={title || "Vídeo institucional Status na América"} />
+            </div>
+            <div className="mt-4 flex items-center gap-3">
+              <span aria-hidden className="h-px w-6 bg-gold" />
+              <span className="font-mono-label text-gold/85 text-[11px]">FILME INSTITUCIONAL</span>
+            </div>
+          </div>
         </div>
-        <p className="mt-3 font-mono-label text-foreground/50 text-[11px]">
-          FORMATO 16:9 · HORIZONTAL
-        </p>
       </div>
     </Reveal>
   );
