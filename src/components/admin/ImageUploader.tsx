@@ -26,23 +26,28 @@ export interface ImageUploaderProps {
   folder: string;
   /** Dica de nome (vira parte do filename). Use algo estável por slot. */
   filenameHint?: string;
-  /** Tamanho máximo em MB. Default 5. */
+  /** Tamanho máximo em MB. Default 5 (imagem) / 20 (vídeo). */
   maxMB?: number;
-  /** Tipos aceitos. Default: jpeg/png/webp/avif/svg. */
+  /** Tipos aceitos. Default: jpeg/png/webp/avif/svg (ou mp4/webm quando kind=video). */
   accept?: string;
   /** Rótulo mostrado no header do slot. */
   label?: string;
   /** Ratio do preview (ex.: "aspect-video", "aspect-square"). */
   previewClass?: string;
+  /** Tipo de mídia. Default "image". */
+  kind?: "image" | "video";
 }
 
-const DEFAULT_ACCEPT = "image/jpeg,image/png,image/webp,image/avif,image/svg+xml";
+const DEFAULT_IMAGE_ACCEPT = "image/jpeg,image/png,image/webp,image/avif,image/svg+xml";
+const DEFAULT_VIDEO_ACCEPT = "video/mp4,video/webm";
 const EXT_BY_TYPE: Record<string, string> = {
   "image/jpeg": "jpg",
   "image/png": "png",
   "image/webp": "webp",
   "image/avif": "avif",
   "image/svg+xml": "svg",
+  "video/mp4": "mp4",
+  "video/webm": "webm",
 };
 
 function slugify(s: string) {
