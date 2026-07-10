@@ -1,20 +1,16 @@
 /**
- * PreQualResult, exibe o veredicto do teste, alternativas e CTA WhatsApp.
+ * PreQualResult, exibe o veredicto do teste, alternativas e próximos passos.
  *
  * Reutilizado em duas situações:
  *  1) imediatamente após o envio do formulário (com nome em primeira pessoa);
  *  2) na página pública compartilhável `/pre-qualificacao/r/:token` (modo
  *     "dossiê", neutro, sem auto-save).
- *
- * O WhatsApp é construído em runtime (lê `whatsapp_br` das configurações).
  */
 
-import { useEffect, useState } from "react";
-import { Check, AlertTriangle, ShieldAlert, ExternalLink, Copy } from "lucide-react";
+import { Check, AlertTriangle, ShieldAlert, Copy } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
-import { markWhatsAppOpened, publicResultUrl, whatsappMessageFor, type PreQualResponse } from "@/lib/prequal";
-import { buildWhatsAppLink } from "@/lib/whatsapp";
+import { publicResultUrl, type PreQualResponse } from "@/lib/prequal";
 import type { Verdict, VisaScore } from "@/lib/visaQualifier";
 
 interface Props {
@@ -88,21 +84,6 @@ function VisaCard({ v, primary }: { v: VisaScore; primary?: boolean }) {
 
 export function PreQualResult({ record, variant }: Props) {
   const { result, answers } = record;
-  const [waHref, setWaHref] = useState<string | null>(null);
-
-  // Constrói o link do WhatsApp lendo a configuração do número (admin).
-  useEffect(() => {
-    let active = true;
-    buildWhatsAppLink(whatsappMessageFor(record)).then((href) => {
-      if (active) setWaHref(href);
-    });
-    return () => { active = false; };
-  }, [record]);
-
-  function onOpenWhatsApp() {
-    // Marca conversão WhatsApp para métrica de engajamento no admin
-    markWhatsAppOpened(record.id).catch(() => { /* noop */ });
-  }
 
   function copyLink() {
     const url = publicResultUrl(record.id);
@@ -147,26 +128,19 @@ export function PreQualResult({ record, variant }: Props) {
         )}
       </section>
 
-      {/* CTA WhatsApp (apenas para qualificados, apto ou parcial sem blocker) */}
+      {/* Próximo passo: copiar link do resultado */}
       {qualified && (
         <section className="rounded-2xl border border-gold/30 bg-ink-raise/60 p-6 sm:p-7 shadow-soft">
           <p className="font-mono-label text-gold/80">PRÓXIMO PASSO</p>
           <h2 className="mt-2 font-display text-2xl text-foreground">
-            Converse com um consultor pelo WhatsApp
+            Guarde ou compartilhe o seu resultado
           </h2>
           <p className="mt-3 text-[15px] text-foreground/75 max-w-2xl">
-            Enviamos automaticamente o seu resultado por e-mail. Para acelerar, abra o
-            WhatsApp da Status na América, a mensagem já vai pré-preenchida com o link público abaixo.
+            Enviamos automaticamente o seu resultado por e-mail. Você também pode copiar o
+            link público para consultar depois ou compartilhar com quem acompanha sua decisão.
           </p>
 
           <div className="mt-5 flex flex-wrap gap-3">
-            {waHref && (
-              <a href={waHref} target="_blank" rel="noopener noreferrer" onClick={onOpenWhatsApp}>
-                <Button className="btn-label btn-sweep h-12 px-6 gap-2">
-                  <ExternalLink className="h-4 w-4" /> Abrir WhatsApp
-                </Button>
-              </a>
-            )}
             <Button
               type="button" variant="outline" onClick={copyLink}
               className="btn-label h-12 px-5 gap-2 border-gold/40 text-foreground hover:bg-gold/10"

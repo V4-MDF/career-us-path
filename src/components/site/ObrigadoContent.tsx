@@ -5,15 +5,13 @@
  * qual versão mostrar com base no `lastQualificationResult` do sessionStorage.
  * Assim o URL permanece discreto e não revela "qualificado" / "não qualificado".
  */
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Link } from "@tanstack/react-router";
-import { CheckCircle2, BookOpen, FileText, ChevronLeft, Mail, MessageCircle } from "lucide-react";
+import { CheckCircle2, BookOpen, FileText, ChevronLeft, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { trackLead } from "@/lib/tracking";
-import { buildWhatsAppLink, leadWhatsAppMessage, defaultWhatsAppMessage, type LeadWhatsAppInput } from "@/lib/whatsapp";
 
 const SS_QUALIFICATION = "lastQualificationResult";
-const SS_QUALIFIED_LEAD = "lastQualifiedLead";
 
 export type QualificationResult = "qualificado" | "nao_qualificado";
 
@@ -80,38 +78,8 @@ function ObrigadoShell({ children }: { children: React.ReactNode }) {
 }
 
 export function ObrigadoQualificado() {
-  const [waHref, setWaHref] = useState<string | null>(null);
-  const [popupBlocked, setPopupBlocked] = useState(false);
-
   useEffect(() => {
     trackLead({ qualification: "qualificado" });
-  }, []);
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-
-    let raw: string | null = null;
-    try { raw = window.sessionStorage.getItem(SS_QUALIFIED_LEAD); } catch { /* noop */ }
-
-    let lead: LeadWhatsAppInput | null = null;
-    if (raw) {
-      try { lead = JSON.parse(raw) as LeadWhatsAppInput; } catch { lead = null; }
-    }
-
-    const message = lead ? leadWhatsAppMessage(lead) : defaultWhatsAppMessage();
-
-    let cancelled = false;
-    buildWhatsAppLink(message).then((href) => {
-      if (cancelled) return;
-      setWaHref(href);
-      window.setTimeout(() => {
-        const win = window.open(href, "_blank", "noopener,noreferrer");
-        if (!win) setPopupBlocked(true);
-      }, 400);
-      try { window.sessionStorage.removeItem(SS_QUALIFIED_LEAD); } catch { /* noop */ }
-    }).catch(() => { /* segue sem WhatsApp */ });
-
-    return () => { cancelled = true; };
   }, []);
 
   return (
@@ -133,34 +101,10 @@ export function ObrigadoQualificado() {
 
         <p className="mt-6 text-base md:text-lg text-foreground/80 leading-relaxed max-w-[560px] mx-auto">
           Nossa equipe vai analisar o seu perfil com atenção e entrar em contato em
-          até 48h pelo canal informado. Se preferir, inicie a conversa agora pelo
-          WhatsApp.
+          até 48h pelo canal informado.
         </p>
 
-        <div className="mt-10 flex flex-col items-center gap-4">
-          {waHref ? (
-            <a href={waHref} target="_blank" rel="noopener noreferrer" className="inline-block">
-              <Button size="lg" className="btn-label h-12 px-8 gap-2">
-                <MessageCircle className="h-4 w-4" />
-                Conversar no WhatsApp
-              </Button>
-            </a>
-          ) : (
-            <Button size="lg" className="btn-label h-12 px-8 gap-2" disabled>
-              <MessageCircle className="h-4 w-4" />
-              Carregando WhatsApp…
-            </Button>
-          )}
-
-          {popupBlocked && waHref && (
-            <div className="mx-auto max-w-[520px] border border-gold/30 bg-ink-raise/40 rounded-lg p-4 text-sm text-foreground/80">
-              Seu navegador bloqueou a abertura automática. Use o botão acima para
-              falar com nossa equipe pelo WhatsApp.
-            </div>
-          )}
-        </div>
-
-        <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+        <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
           <a
             href="https://www.instagram.com/statusamerica.br/"
             target="_blank"

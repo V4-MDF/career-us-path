@@ -15,14 +15,12 @@ import { z } from "zod";
 import {
   Mail,
   MapPin,
-  MessageCircle,
   Phone,
   Instagram,
   Facebook,
   Youtube,
   CheckCircle2,
   Loader2,
-  ExternalLink,
 } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
@@ -36,7 +34,6 @@ import { useContent } from "@/lib/siteContent";
 import { getSiteSettings, defaultSettings, type SiteSettings } from "@/lib/admin/settings";
 import { newId, set } from "@/lib/dataStore";
 import { getOrigin } from "@/lib/origin";
-import { whatsappLinkFor } from "@/lib/whatsapp";
 
 export const Route = createFileRoute("/contato")({
   head: () => ({
@@ -122,21 +119,12 @@ function ContatoPage() {
     getSiteSettings().then(setSettings).catch(() => {});
   }, []);
 
-  const waHref = useMemo(
-    () =>
-      whatsappLinkFor(
-        settings.whatsapp_br || defaultSettings.whatsapp_br,
-        "Olá! Vim pela página de contato do site e gostaria de tirar uma dúvida."
-      ),
-    [settings.whatsapp_br]
-  );
-
   return (
     <>
       <Header />
       <main className="bg-parchment text-ink-text">
-        <ContatoHero eyebrow={eyebrow} title={title} subtitle={subtitle} waHref={waHref} />
-        <CanaisDiretos settings={settings} waHref={waHref} />
+        <ContatoHero eyebrow={eyebrow} title={title} subtitle={subtitle} />
+        <CanaisDiretos settings={settings} />
         <ContatoForm />
         <MapaDiscreto />
         <PartnersBadges />
@@ -153,12 +141,10 @@ function ContatoHero({
   eyebrow,
   title,
   subtitle,
-  waHref,
 }: {
   eyebrow: string;
   title: string;
   subtitle: string;
-  waHref: string;
 }) {
   return (
     <section className="relative bg-ink text-white pt-32 pb-16 md:pt-40 md:pb-20 border-b border-gold/25">
@@ -170,22 +156,12 @@ function ContatoHero({
         <h1 className="mt-4 font-display display-1 text-white">{title}</h1>
         <p className="mt-5 text-white/80 text-lg leading-relaxed max-w-2xl">{subtitle}</p>
 
-        <div className="mt-8 flex flex-col sm:flex-row gap-3">
+        <div className="mt-8">
           <Link to="/avaliacao" className="inline-flex">
             <Button size="lg" className="btn-label w-full sm:w-auto">
               Análise gratuita
             </Button>
           </Link>
-          <a href={waHref} target="_blank" rel="noopener noreferrer">
-            <Button
-              size="lg"
-              variant="outline"
-              className="btn-label w-full sm:w-auto border-white/40 text-white hover:bg-white/10"
-            >
-              <MessageCircle className="mr-2 h-4 w-4" />
-              Chamar no WhatsApp
-            </Button>
-          </a>
         </div>
       </div>
     </section>
@@ -196,10 +172,8 @@ function ContatoHero({
 
 function CanaisDiretos({
   settings,
-  waHref,
 }: {
   settings: SiteSettings;
-  waHref: string;
 }) {
   const usaTitle = useContent("contato.usa.title");
   const usaCompany = useContent("contato.usa.company");
@@ -231,33 +205,6 @@ function CanaisDiretos({
         </h2>
 
         <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {/* WhatsApp destaque */}
-          <a
-            href={waHref}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group relative rounded-xl border border-gold bg-ink text-white p-6 shadow-soft transition hover:shadow-lg lg:col-span-2"
-          >
-            <span aria-hidden className="absolute inset-x-0 top-0 h-[2px] bg-gold" />
-            <div className="flex items-start gap-4">
-              <div className="rounded-lg bg-gold/15 p-3 border border-gold/40">
-                <MessageCircle className="h-6 w-6 text-gold" />
-              </div>
-              <div className="flex-1">
-                <div className="font-mono-label text-gold text-xs">WHATSAPP</div>
-                <div className="mt-1 font-display text-xl md:text-2xl">
-                  Atendimento humano, direto com a equipe.
-                </div>
-                <div className="mt-2 text-white/70 text-sm">
-                  Resposta em horário comercial (America/New_York).
-                </div>
-                <div className="mt-4 inline-flex items-center gap-2 text-gold font-mono-label text-sm">
-                  Abrir conversa <ExternalLink className="h-3.5 w-3.5" />
-                </div>
-              </div>
-            </div>
-          </a>
-
           {/* E-mail */}
           {email ? (
             <ContactCard
@@ -272,7 +219,7 @@ function CanaisDiretos({
               icon={<Mail className="h-5 w-5 text-gold" />}
               label="E-MAIL"
               title="Envie pelo formulário abaixo"
-              caption="Ou pelo WhatsApp para retorno mais rápido."
+              caption="Responderemos em até 1 dia útil."
             />
           )}
 
