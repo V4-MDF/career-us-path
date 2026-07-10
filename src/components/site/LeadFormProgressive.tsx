@@ -258,7 +258,8 @@ export function LeadFormProgressive({
       // -------- Modo CAPTURA: cria novo lead --------
       const id = newId("lead");
       const origin = getOrigin(currentPath);
-      // Qualificação com fallback: nunca deixa uma falha aqui travar o funil.
+      // Qualificação baseada no score dinâmico do admin: >= 50 vai ao comercial.
+      // Heurística antiga preservada apenas para gerar `reasons` informativos.
       let qual: { result: QualResult; reasons: string[] };
       try {
         qual = evaluateQualification(current);
@@ -266,6 +267,18 @@ export function LeadFormProgressive({
         console.warn("[avaliacao] evaluateQualification failed", e);
         qual = { result: "qualificado", reasons: [] };
       }
+      let leadScore = 0;
+      try {
+        const model = await loadModel();
+        leadScore = computeScore(current, model).score;
+      } catch (e) {
+        console.warn("[avaliacao] score compute failed", e);
+      }
+      // Threshold canônico: score >= 50 = qualificado (comercial).
+      qual = {
+        result: leadScore >= 50 ? "qualificado" : "nao_qualificado",
+        reasons: leadScore >= 50 ? [] : qual.reasons,
+      };
       const lead = {
         ...current,
         id,
@@ -311,9 +324,7 @@ export function LeadFormProgressive({
 
       // Efeitos colaterais isolados, não bloqueiam o redirect.
       try {
-        const model = await loadModel();
-        const score = computeScore(current, model).score;
-        await markSessionConverted({ qualified: qual.result === "qualificado" || score >= 70, score });
+        await markSessionConverted({ qualified: qual.result === "qualificado", score: leadScore });
       } catch (e) { console.warn("[avaliacao] session mark failed", e); }
       if (segmentId) {
         try { await registerConversion(segmentId); }
