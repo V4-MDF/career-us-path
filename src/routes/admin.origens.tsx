@@ -54,26 +54,28 @@ const DIM_LABEL: Record<Dim, string> = {
 
 const DIRECT = "(direto / sem origem)";
 
-function unifyOrigin(o?: LeadOrigin, fallbackUtm?: Record<string, string>): LeadOrigin {
-  if (o) return o;
-  return {
-    utm: fallbackUtm ?? {},
-    internal: { from_path: null, from_title: null, referrer: null, landing_path: null, landing_ts: null },
-  };
+function unifyOrigin(o?: Partial<LeadOrigin> | null, fallbackUtm?: Record<string, string>): LeadOrigin {
+  const utm = (o?.utm ?? fallbackUtm ?? {}) as LeadOrigin["utm"];
+  const internal = (o?.internal ?? {
+    from_path: null, from_title: null, referrer: null, landing_path: null, landing_ts: null,
+  }) as LeadOrigin["internal"];
+  return { utm, internal };
 }
 
-function refHost(referrer: string | null): string | null {
+function refHost(referrer: string | null | undefined): string | null {
   if (!referrer) return null;
   try { return new URL(referrer).host; } catch { return referrer; }
 }
 
-function bucketValue(dim: Dim, origin: LeadOrigin): string {
+function bucketValue(dim: Dim, origin?: LeadOrigin | null): string {
+  const utm = origin?.utm ?? {};
+  const internal = origin?.internal ?? ({} as LeadOrigin["internal"]);
   switch (dim) {
-    case "utm_source":   return origin.utm.utm_source   || DIRECT;
-    case "utm_medium":   return origin.utm.utm_medium   || DIRECT;
-    case "utm_campaign": return origin.utm.utm_campaign || DIRECT;
-    case "referrer":     return refHost(origin.internal.referrer) || DIRECT;
-    case "from_path":    return origin.internal.from_path || origin.internal.landing_path || DIRECT;
+    case "utm_source":   return utm.utm_source   || DIRECT;
+    case "utm_medium":   return utm.utm_medium   || DIRECT;
+    case "utm_campaign": return utm.utm_campaign || DIRECT;
+    case "referrer":     return refHost(internal.referrer) || DIRECT;
+    case "from_path":    return internal.from_path || internal.landing_path || DIRECT;
   }
 }
 
