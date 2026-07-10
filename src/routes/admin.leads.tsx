@@ -10,7 +10,7 @@
  */
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
-import { Download, Search, Flame, AlertTriangle } from "lucide-react";
+import { Download, Search, Flame, AlertTriangle, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -19,7 +19,7 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription } from "
 import { Badge } from "@/components/ui/badge";
 import { Slider } from "@/components/ui/slider";
 import { PageHeader, StatCard, SectionCard } from "@/components/admin/ui";
-import { list, set } from "@/lib/dataStore";
+import { list, set, remove } from "@/lib/dataStore";
 import type { LeadOrigin } from "@/lib/origin";
 import type { LeadInput } from "@/lib/leadScoring";
 import {
@@ -201,6 +201,14 @@ function LeadsPage() {
     toast.success(`Status: ${FUNNEL_LABEL[status]}`);
   }
 
+  async function deleteLead(lead: StoredLead) {
+    if (!window.confirm(`Excluir o lead "${lead.nome}"? Esta ação não pode ser desfeita.`)) return;
+    await remove("leads", lead.id);
+    setRows((rs) => rs.filter((r) => r.id !== lead.id));
+    setOpen((o) => (o && o.id === lead.id ? null : o));
+    toast.success("Lead excluído");
+  }
+
   function exportCsv() {
     if (!model) return;
     downloadCsv(`leads_${new Date().toISOString().slice(0,10)}.csv`,
@@ -330,33 +338,34 @@ function LeadsPage() {
 
       <div className="mt-5">
         <SectionCard>
-          <div className="overflow-x-auto -mx-5">
-            <table className="w-full text-sm">
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm min-w-[1100px]">
               <thead className="text-left text-xs uppercase text-slate-500 border-b border-slate-200">
                 <tr>
-                  <th className="px-5 py-2 w-[180px]">Pontuação de qualidade do perfil</th>
-                  <th className="py-2">Nome</th>
-                  <th className="py-2">Profissão</th>
-                  <th className="py-2">Segmento</th>
-                  <th className="py-2">Variante</th>
-                  <th className="py-2">utm_source</th>
-                  <th className="py-2">Origem</th>
-                  <th className="py-2 w-[180px]">Status</th>
-                  <th className="py-2 text-right whitespace-nowrap">Data</th>
+                  <th className="px-3 py-2 w-[180px]">Pontuação de qualidade do perfil</th>
+                  <th className="px-3 py-2">Nome</th>
+                  <th className="px-3 py-2">Profissão</th>
+                  <th className="px-3 py-2">Segmento</th>
+                  <th className="px-3 py-2">Variante</th>
+                  <th className="px-3 py-2">utm_source</th>
+                  <th className="px-3 py-2">Origem</th>
+                  <th className="px-3 py-2 w-[160px]">Status</th>
+                  <th className="px-3 py-2 text-right whitespace-nowrap">Data</th>
+                  <th className="px-3 py-2 w-[60px] text-right">Ações</th>
                 </tr>
               </thead>
               <tbody>
                 {loading ? (
-                  <tr><td colSpan={9} className="px-5 py-8 text-center text-slate-400">Carregando…</td></tr>
+                  <tr><td colSpan={10} className="px-3 py-8 text-center text-slate-400">Carregando…</td></tr>
                 ) : filtered.length === 0 ? (
-                  <tr><td colSpan={9} className="px-5 py-8 text-center text-slate-400">Nenhum lead com esses filtros.</td></tr>
+                  <tr><td colSpan={10} className="px-3 py-8 text-center text-slate-400">Nenhum lead com esses filtros.</td></tr>
                 ) : filtered.map((l) => (
                   <tr key={l.id} className="border-b border-slate-100 hover:bg-slate-50">
-                    <td className="px-5 py-3 cursor-pointer" onClick={() => setOpen(l)}>
+                    <td className="px-3 py-3 cursor-pointer" onClick={() => setOpen(l)}>
                       <ScoreCell calc={l._calc} />
                     </td>
-                    <td className="py-3 font-medium cursor-pointer" onClick={() => setOpen(l)}>
-                      <div className="flex items-center gap-2">
+                    <td className="px-3 py-3 font-medium cursor-pointer" onClick={() => setOpen(l)}>
+                      <div className="flex items-center gap-2 flex-wrap">
                         {l.nome}
                         {isOriginIncomplete(l) && (
                           <Badge variant="outline" className="text-[10px] border-red-300 text-red-600 bg-red-50 gap-1">
@@ -365,12 +374,12 @@ function LeadsPage() {
                         )}
                       </div>
                     </td>
-                    <td className="py-3 text-slate-600">{l.profissao}</td>
-                    <td className="py-3 text-slate-600">{l.segmento ?? "-"}</td>
-                    <td className="py-3 text-slate-600 text-xs">{l.variante_ab ?? "-"}</td>
-                    <td className="py-3 text-slate-600">{l.utm?.utm_source ?? "-"}</td>
-                    <td className="py-3 text-slate-600 text-xs max-w-[220px] truncate" title={originSummary(l)}>{originSummary(l)}</td>
-                    <td className="py-3">
+                    <td className="px-3 py-3 text-slate-600">{l.profissao}</td>
+                    <td className="px-3 py-3 text-slate-600">{l.segmento ?? "-"}</td>
+                    <td className="px-3 py-3 text-slate-600 text-xs">{l.variante_ab ?? "-"}</td>
+                    <td className="px-3 py-3 text-slate-600">{l.utm?.utm_source ?? "-"}</td>
+                    <td className="px-3 py-3 text-slate-600 text-xs max-w-[220px] truncate" title={originSummary(l)}>{originSummary(l)}</td>
+                    <td className="px-3 py-3">
                       <Select value={l.status ?? "novo"} onValueChange={(v) => setStatus(l, v as FunnelStatus)}>
                         <SelectTrigger className="h-8 text-xs"><SelectValue /></SelectTrigger>
                         <SelectContent>
@@ -378,8 +387,19 @@ function LeadsPage() {
                         </SelectContent>
                       </Select>
                     </td>
-                    <td className="py-3 text-right text-slate-500 whitespace-nowrap text-xs">
+                    <td className="px-3 py-3 text-right text-slate-500 whitespace-nowrap text-xs">
                       {new Date(l.createdAt).toLocaleDateString("pt-BR")}
+                    </td>
+                    <td className="px-3 py-3 text-right">
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="h-8 w-8 text-slate-400 hover:text-red-600 hover:bg-red-50"
+                        onClick={(e) => { e.stopPropagation(); deleteLead(l); }}
+                        aria-label={`Excluir lead ${l.nome}`}
+                      >
+                        <Trash2 className="h-4 w-4" />
+                      </Button>
                     </td>
                   </tr>
                 ))}
@@ -401,6 +421,17 @@ function LeadsPage() {
                     {new Date(open.createdAt).toLocaleString("pt-BR")}
                   </SheetDescription>
                 </SheetHeader>
+
+                <div className="mt-4">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="text-red-600 border-red-200 hover:bg-red-50 hover:text-red-700"
+                    onClick={() => deleteLead(open)}
+                  >
+                    <Trash2 className="h-4 w-4 mr-2" /> Excluir lead
+                  </Button>
+                </div>
 
                 <div className="mt-5 space-y-5 text-sm">
                   {/* Score grande + faixa */}
