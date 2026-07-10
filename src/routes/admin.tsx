@@ -8,7 +8,7 @@ import { Outlet, Link, createFileRoute, useNavigate, useRouterState } from "@tan
 import { useEffect, useState, useSyncExternalStore } from "react";
 import {
   BarChart3, BookText, Compass, DollarSign, ExternalLink, FileText, Image as ImageIcon, LayoutDashboard,
-  Layers, Link as LinkIcon, LogOut, Menu, Search, Settings, ShieldCheck,
+  Layers, Link as LinkIcon, LogOut, Menu, Scale, Search, Settings, ShieldCheck,
   Sparkles, Tag, Target, Users, Users2, UserX, X,
 } from "lucide-react";
 
@@ -43,6 +43,7 @@ const NAV: NavItem[] = [
   { to: "/admin/blog", label: "Blog", icon: BookText },
   { to: "/admin/conteudo", label: "Textos & Conteúdo", icon: FileText },
   { to: "/admin/salarios", label: "Renda em dólar", icon: DollarSign },
+  { to: "/admin/contraste", label: "Brasil × EUA", icon: Scale },
   { to: "/admin/estrutura", label: "Estrutura de Páginas", icon: Layers },
   { to: "/admin/midia", label: "Imagens & Mídia", icon: ImageIcon },
   { to: "/admin/links", label: "Botões & Links", icon: LinkIcon },
