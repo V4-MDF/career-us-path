@@ -216,8 +216,10 @@ export function ContrastBrasilEUA() {
   const subtitle = useContent("contrast.subtitle");
 
   const cards = [
-    { code: "BR", title: ["Realidade", "no Brasil"], items: brasil, accent: "var(--brazil-green)", Map: BrazilMap },
-    { code: "US", title: ["Oportunidades", "nos EUA"], items: eua, accent: "var(--usa-blue)", Map: UsaMap },
+    { code: "BR", title: ["Realidade", "no Brasil"], items: brasil, accent: "var(--brazil-green)", Map: BrazilMap,
+      photo: brasilSomber, photoAlt: "Vista de cidade brasileira em dia cinza através de janela com chuva", photoTone: "grayscale" },
+    { code: "US", title: ["Oportunidades", "nos EUA"], items: eua, accent: "var(--usa-blue)", Map: UsaMap,
+      photo: familySuburbUsa, photoAlt: "Família brasileira em subúrbio americano ao entardecer", photoTone: "warm" },
   ] as const;
 
   return (
