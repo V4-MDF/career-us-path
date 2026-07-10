@@ -74,7 +74,7 @@ function Home() {
     <>
       <OrganizationJsonLd />
       <WebSiteJsonLd />
-      <FAQJsonLd items={HOME_FAQS.map((f) => ({ question: f.q, answer: f.a }))} />
+      <FAQJsonLd items={HOME_FAQS} />
       <Header />
       <main>
         {layout
