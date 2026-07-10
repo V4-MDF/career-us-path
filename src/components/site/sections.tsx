@@ -46,6 +46,7 @@ import familySuburbUsa from "@/assets/home-family-suburb-usa.jpg";
 import visaFamilyFuture from "@/assets/visa-family-future.jpg";
 import { PhotoFrame } from "./visa/PhotoFrame";
 import { loadSalaryList, SEED_SALARY, type SalaryRow } from "@/lib/salaryList";
+import { loadBrList, loadUsList, SEED_BR, SEED_US } from "@/lib/contrastLists";
 
 /* ============================================================
  * 1. HERO
@@ -199,20 +200,17 @@ function renderEmphasis(text: string) {
  * 3. BRASIL vs EUA
  * ============================================================ */
 export function ContrastBrasilEUA() {
-  const brasil = [
-    "Insegurança no dia a dia da família",
-    "Carga tributária alta e crescente",
-    "Instabilidade política e econômica",
-    "Oportunidades limitadas mesmo com qualificação",
-    "Futuro incerto para os filhos",
-  ];
-  const eua = [
-    "Economia estável e remuneração em dólar",
-    "Segurança e qualidade de vida para a família",
-    "Carreira valorizada por mérito e resultado",
-    "Educação e saúde entre as melhores do mundo",
-    "Caminho legal baseado em quem você já é",
-  ];
+  const [brasil, setBrasil] = useState<string[]>(SEED_BR.map((i) => i.texto));
+  const [eua, setEua] = useState<string[]>(SEED_US.map((i) => i.texto));
+  useEffect(() => {
+    let active = true;
+    Promise.all([loadBrList(), loadUsList()]).then(([br, us]) => {
+      if (!active) return;
+      setBrasil(br.filter((i) => i.ativo).map((i) => i.texto));
+      setEua(us.filter((i) => i.ativo).map((i) => i.texto));
+    });
+    return () => { active = false; };
+  }, []);
   const title = useContent("contrast.title");
   const subtitle = useContent("contrast.subtitle");
 

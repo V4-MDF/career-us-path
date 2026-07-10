@@ -40,6 +40,7 @@ import { Route as AdminLinksRouteImport } from './routes/admin.links'
 import { Route as AdminLeadsIncompletosRouteImport } from './routes/admin.leads-incompletos'
 import { Route as AdminLeadsRouteImport } from './routes/admin.leads'
 import { Route as AdminEstruturaRouteImport } from './routes/admin.estrutura'
+import { Route as AdminContrasteRouteImport } from './routes/admin.contraste'
 import { Route as AdminConteudoRouteImport } from './routes/admin.conteudo'
 import { Route as AdminConfiguracoesRouteImport } from './routes/admin.configuracoes'
 import { Route as AdminBlogRouteImport } from './routes/admin.blog'
@@ -205,6 +206,11 @@ const AdminEstruturaRoute = AdminEstruturaRouteImport.update({
   path: '/estrutura',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminContrasteRoute = AdminContrasteRouteImport.update({
+  id: '/contraste',
+  path: '/contraste',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminConteudoRoute = AdminConteudoRouteImport.update({
   id: '/conteudo',
   path: '/conteudo',
@@ -255,6 +261,7 @@ export interface FileRoutesByFullPath {
   '/admin/blog': typeof AdminBlogRoute
   '/admin/configuracoes': typeof AdminConfiguracoesRoute
   '/admin/conteudo': typeof AdminConteudoRoute
+  '/admin/contraste': typeof AdminContrasteRoute
   '/admin/estrutura': typeof AdminEstruturaRoute
   '/admin/leads': typeof AdminLeadsRoute
   '/admin/leads-incompletos': typeof AdminLeadsIncompletosRoute
@@ -294,6 +301,7 @@ export interface FileRoutesByTo {
   '/admin/blog': typeof AdminBlogRoute
   '/admin/configuracoes': typeof AdminConfiguracoesRoute
   '/admin/conteudo': typeof AdminConteudoRoute
+  '/admin/contraste': typeof AdminContrasteRoute
   '/admin/estrutura': typeof AdminEstruturaRoute
   '/admin/leads': typeof AdminLeadsRoute
   '/admin/leads-incompletos': typeof AdminLeadsIncompletosRoute
@@ -334,6 +342,7 @@ export interface FileRoutesById {
   '/admin/blog': typeof AdminBlogRoute
   '/admin/configuracoes': typeof AdminConfiguracoesRoute
   '/admin/conteudo': typeof AdminConteudoRoute
+  '/admin/contraste': typeof AdminContrasteRoute
   '/admin/estrutura': typeof AdminEstruturaRoute
   '/admin/leads': typeof AdminLeadsRoute
   '/admin/leads-incompletos': typeof AdminLeadsIncompletosRoute
@@ -376,6 +385,7 @@ export interface FileRouteTypes {
     | '/admin/blog'
     | '/admin/configuracoes'
     | '/admin/conteudo'
+    | '/admin/contraste'
     | '/admin/estrutura'
     | '/admin/leads'
     | '/admin/leads-incompletos'
@@ -415,6 +425,7 @@ export interface FileRouteTypes {
     | '/admin/blog'
     | '/admin/configuracoes'
     | '/admin/conteudo'
+    | '/admin/contraste'
     | '/admin/estrutura'
     | '/admin/leads'
     | '/admin/leads-incompletos'
@@ -454,6 +465,7 @@ export interface FileRouteTypes {
     | '/admin/blog'
     | '/admin/configuracoes'
     | '/admin/conteudo'
+    | '/admin/contraste'
     | '/admin/estrutura'
     | '/admin/leads'
     | '/admin/leads-incompletos'
@@ -718,6 +730,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminEstruturaRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/contraste': {
+      id: '/admin/contraste'
+      path: '/contraste'
+      fullPath: '/admin/contraste'
+      preLoaderRoute: typeof AdminContrasteRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/conteudo': {
       id: '/admin/conteudo'
       path: '/conteudo'
@@ -775,6 +794,7 @@ interface AdminRouteChildren {
   AdminBlogRoute: typeof AdminBlogRoute
   AdminConfiguracoesRoute: typeof AdminConfiguracoesRoute
   AdminConteudoRoute: typeof AdminConteudoRoute
+  AdminContrasteRoute: typeof AdminContrasteRoute
   AdminEstruturaRoute: typeof AdminEstruturaRoute
   AdminLeadsRoute: typeof AdminLeadsRoute
   AdminLeadsIncompletosRoute: typeof AdminLeadsIncompletosRoute
@@ -797,6 +817,7 @@ const AdminRouteChildren: AdminRouteChildren = {
   AdminBlogRoute: AdminBlogRoute,
   AdminConfiguracoesRoute: AdminConfiguracoesRoute,
   AdminConteudoRoute: AdminConteudoRoute,
+  AdminContrasteRoute: AdminContrasteRoute,
   AdminEstruturaRoute: AdminEstruturaRoute,
   AdminLeadsRoute: AdminLeadsRoute,
   AdminLeadsIncompletosRoute: AdminLeadsIncompletosRoute,

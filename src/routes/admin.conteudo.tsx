@@ -11,6 +11,7 @@ import { get, set } from "@/lib/dataStore";
 import { defaultContent } from "@/lib/siteContent";
 import { isPending } from "@/lib/pendingValidation";
 import { broadcast } from "@/lib/admin/settings";
+import { parseVideoUrl } from "@/lib/videoEmbed";
 
 export const Route = createFileRoute("/admin/conteudo")({ component: ContentPage });
 
@@ -205,6 +206,18 @@ function ContentPage() {
                           onBlur={() => save(f.k)} />
                       )}
                       <div className="mt-0.5 text-[10px] text-slate-400">Chave: {f.k} · salva ao sair do campo</div>
+                      {/^URL do vídeo/i.test(f.label) && (values[f.k] ?? "").trim() !== "" && (() => {
+                        const parsed = parseVideoUrl(values[f.k] ?? "");
+                        return parsed ? (
+                          <div className="mt-1 text-[10px] font-medium text-emerald-700">
+                            ✓ {parsed.kind === "youtube" ? "YouTube" : parsed.kind === "vimeo" ? "Vimeo" : "Arquivo de vídeo"} reconhecido
+                          </div>
+                        ) : (
+                          <div className="mt-1 text-[10px] font-medium text-oxblood">
+                            ⚠ URL inválida. Cole um link do YouTube (watch, youtu.be ou shorts), Vimeo ou .mp4/.webm. O site mostrará um placeholder até corrigir.
+                          </div>
+                        );
+                      })()}
                     </div>
                   ))}
                 </div>
