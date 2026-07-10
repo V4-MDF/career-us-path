@@ -146,11 +146,26 @@ function MobileChip({ activeLabel, onOpen }: { activeLabel: string; onOpen: () =
   const [visible, setVisible] = useState(false);
   useEffect(() => {
     if (typeof window === "undefined") return;
-    const onScroll = () => setVisible(window.scrollY > 400);
-    onScroll();
+    let ticking = false;
+    let last = false;
+    const compute = () => {
+      ticking = false;
+      const next = window.scrollY > 400;
+      if (next !== last) {
+        last = next;
+        setVisible(next);
+      }
+    };
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(compute);
+    };
+    compute();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
   return (
     <button
       onClick={onOpen}
