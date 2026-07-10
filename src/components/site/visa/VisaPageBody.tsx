@@ -36,6 +36,17 @@ import familyFuture from "@/assets/visa-family-future.jpg";
 
 
 export function VisaPageBody({ page, hideHero = false }: { page: VisaPage; hideHero?: boolean }) {
+  // Dobra "01 Definição" — imagem editável por visto (chave
+  // `visa.<slug>.definitionImage`). Mérito da carreira = mostrar o
+  // profissional beneficiário no exercício da sua competência, NÃO uma
+  // consultora/escritório de advocacia. Fallback para o retrato padrão
+  // apenas quando o visto ainda não tem imagem específica.
+  const definitionImageKey = `visa.${page.slug}.definitionImage` as const;
+  const definitionImage = useContent(definitionImageKey) || professionalWork;
+  const definitionAlt =
+    page.slug === "eb2-niw"
+      ? "Profissional brasileiro qualificado no exercício da sua área de excelência, em ambiente de trabalho americano"
+      : "Profissional brasileiro qualificado no exercício da sua competência";
   return (
     <main className={hideHero ? "pt-28" : "pt-0"}>
 
@@ -52,8 +63,8 @@ export function VisaPageBody({ page, hideHero = false }: { page: VisaPage; hideH
           </div>
           <div className="md:col-span-5 order-1 md:order-2">
             <PhotoFrame
-              src={professionalWork}
-              alt="Profissional brasileira em ambiente corporativo nos Estados Unidos"
+              src={definitionImage}
+              alt={definitionAlt}
               ratio="4/5"
               width={1280}
               height={1600}
@@ -62,6 +73,8 @@ export function VisaPageBody({ page, hideHero = false }: { page: VisaPage; hideH
           </div>
         </div>
       </section>
+
+
 
       {/* 2. Elegibilidade */}
       <section id="elegibilidade" aria-label="Elegibilidade" className="section-anchor bg-[#0E1726]">

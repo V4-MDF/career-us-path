@@ -19,6 +19,10 @@ import { get } from "./dataStore";
 import visaHeroEb2Niw from "@/assets/visa-hero-eb2-niw.jpg";
 import visaHeroEb1 from "@/assets/visa-hero-eb1.jpg";
 import visaHeroEb3 from "@/assets/visa-hero-eb3.jpg";
+// Dobra "01 Definição" — mérito da carreira = mostrar o profissional
+// beneficiário no exercício da sua competência, não a empresa/consultoria.
+// Substituir por fotografia real art-direcionada com o tratamento padrão.
+import visaDefinitionEb2Niw from "@/assets/visa-eb2-niw-definition.jpg";
 
 export const defaultContent = {
   "hero.eyebrow": "IMIGRAÇÃO PARA OS ESTADOS UNIDOS. EB-2 NIW",
@@ -98,6 +102,11 @@ export const defaultContent = {
   // fotografia real art-direcionada com o tratamento padrão — nunca imagem
   // genérica de IA; imagem específica deste visto, não compartilhada.
   "visa.eb2-niw.heroImage": visaHeroEb2Niw,
+  // Dobra 01 Definição — profissional beneficiário no exercício da sua
+  // competência (ex.: engenheiro/médico/cientista em ação). NÃO usar
+  // executiva de braços cruzados (comunica escritório de advocacia, o
+  // oposto do posicionamento). Editável no admin.
+  "visa.eb2-niw.definitionImage": visaDefinitionEb2Niw,
   "visa.eb1.heroSubtitle":
     "O Green Card para quem tem reconhecimento internacional comprovado, sem patrocinador, sem PERM.",
   "visa.eb1.heroVideoUrl": "",
@@ -107,6 +116,7 @@ export const defaultContent = {
   // Substituir por fotografia real art-direcionada com o tratamento padrão —
   // nunca imagem genérica de IA; imagem específica deste visto, não compartilhada.
   "visa.eb1.heroImage": visaHeroEb1,
+  "visa.eb1.definitionImage": "",
   "visa.eb3.heroSubtitle":
     "O Green Card com oferta formal de emprego nos EUA, exige patrocinador e PERM.",
   "visa.eb3.heroVideoUrl": "",
@@ -117,6 +127,7 @@ export const defaultContent = {
   // tratamento padrão — nunca imagem genérica de IA; imagem específica deste
   // visto, não compartilhada.
   "visa.eb3.heroImage": visaHeroEb3,
+  "visa.eb3.definitionImage": "",
 
   // ==== Página de Contato =========================================
   "contato.eyebrow": "FALE CONOSCO",

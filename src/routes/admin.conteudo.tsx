@@ -95,6 +95,9 @@ const PAGES: Array<{
         { k: "visa.eb2-niw.heroVideoUrl", label: "URL do vídeo (YouTube, Vimeo ou MP4)" },
         { k: "visa.eb2-niw.heroVideoThumb", label: "URL da thumbnail (webp/jpg, opcional)" },
       ]},
+      { title: "01 Definição (imagem)", keys: [
+        { k: "visa.eb2-niw.definitionImage", label: "URL da imagem da dobra 01 Definição — profissional beneficiário no exercício da sua competência (não usar pose corporativa de braços cruzados)" },
+      ]},
     ],
   },
   {
