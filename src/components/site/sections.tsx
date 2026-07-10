@@ -372,8 +372,12 @@ export function VisaCards() {
       desc: "Caminho para profissionais qualificados com oferta formal de emprego nos EUA." },
   ];
   return (
-    <Reveal as="section" id="vistos-eb" className="section-ink-deep section-pad border-y border-gold/10">
-      <div className="container-x">
+    <Reveal as="section" id="vistos-eb" className="section-ink-deep section-pad border-y border-gold/10 relative overflow-hidden">
+      {/* Profundidade sutil (sem foto): textura guilloché + filete dourado no topo. */}
+      <div aria-hidden className="absolute inset-0 -z-10 guilloche opacity-60" />
+      <div aria-hidden className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold/50 to-transparent" />
+      <div className="container-x relative">
+
         <SectionHead num="03" eyebrow="VISTOS EB" title="Três caminhos. Uma estratégia para cada perfil." />
         <div className="mt-14 grid md:grid-cols-3 gap-5">
           {visas.map((v) => (
