@@ -42,6 +42,9 @@ export function Header() {
   const [vistosOpen, setVistosOpen] = useState(false);
   const [vistosMobileOpen, setVistosMobileOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const avaliacaoHeaderHref = useAvaliacaoHref("header_cta");
+  const avaliacaoMobileHref = useAvaliacaoHref("header_mobile_cta");
+
 
 
   // Fecha dropdown ao clicar fora ou ao pressionar Esc
@@ -145,7 +148,7 @@ export function Header() {
 
         {/* CTA */}
         <div className="flex items-center gap-3">
-          <a href={useAvaliacaoHref("header_cta")} className="hidden sm:block">
+          <a href={avaliacaoHeaderHref} className="hidden sm:block">
             <Button size="sm" className="btn-label btn-sweep h-10 px-5">Análise gratuita</Button>
           </a>
           <button
@@ -199,7 +202,7 @@ export function Header() {
                 {n.label}
               </Link>
             ))}
-            <a href={useAvaliacaoHref("header_mobile_cta")} onClick={() => setOpen(false)} className="mt-4">
+            <a href={avaliacaoMobileHref} onClick={() => setOpen(false)} className="mt-4">
               <Button className="btn-label w-full btn-sweep min-h-11">Análise gratuita</Button>
             </a>
           </div>
