@@ -41,6 +41,10 @@ import heroSkyline from "@/assets/hero-skyline.jpg";
 import familyPortrait from "@/assets/family-portrait.jpg";
 import passportDocuments from "@/assets/passport-documents.jpg";
 import usMapEngraving from "@/assets/us-map-engraving.webp";
+import familySuburbUsa from "@/assets/home-family-suburb-usa.jpg";
+import brasilSomber from "@/assets/home-brasil-somber.jpg";
+import visaFamilyFuture from "@/assets/visa-family-future.jpg";
+import { PhotoFrame } from "./visa/PhotoFrame";
 
 /* ============================================================
  * 1. HERO
