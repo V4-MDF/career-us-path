@@ -17,7 +17,7 @@ import { Toaster } from "@/components/ui/sonner";
 import {
   getCurrentSession, isAuthenticated, isReady, initAuthListener, logout, subscribeAuth,
 } from "@/lib/admin/auth";
-import logoAsset from "@/assets/logo-status-na-america.png.asset.json";
+import logoAsset from "@/assets/logo-status-na-america.webp.asset.json";
 
 export const Route = createFileRoute("/admin")({
   component: AdminLayout,

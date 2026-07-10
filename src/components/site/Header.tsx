@@ -14,7 +14,7 @@ import { ChevronDown, Menu, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useAvaliacaoHref } from "@/lib/ctaLinks";
-import logoAsset from "@/assets/logo-status-na-america.png.asset.json";
+import logoAsset from "@/assets/logo-status-na-america.webp.asset.json";
 
 
 interface VistoItem {
