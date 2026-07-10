@@ -88,7 +88,7 @@ export function HeroBackgroundMedia({ videoUrl, posterUrl }: Props) {
             title=""
             aria-hidden
             tabIndex={-1}
-            className="pointer-events-none absolute left-1/2 top-1/2 h-[56.25vw] min-h-[100%] w-[177.78vh] min-w-[100%] -translate-x-1/2 -translate-y-1/2 opacity-[0.55] motion-safe:[mask-image:linear-gradient(to_bottom,black_45%,transparent_100%)]"
+            className="pointer-events-none absolute left-1/2 top-1/2 h-[56.25vw] min-h-[100%] w-[177.78vh] min-w-[100%] -translate-x-1/2 -translate-y-1/2 opacity-90 motion-safe:[mask-image:linear-gradient(to_bottom,black_55%,transparent_100%)]"
             src={`https://www.youtube-nocookie.com/embed/${parsed.id}?autoplay=1&mute=1&loop=1&playlist=${parsed.id}&controls=0&modestbranding=1&playsinline=1&rel=0&iv_load_policy=3&disablekb=1&fs=0`}
             allow="autoplay; encrypted-media; picture-in-picture"
             frameBorder={0}
