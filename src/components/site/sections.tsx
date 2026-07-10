@@ -755,7 +755,7 @@ export function Testimonials() {
   const secondaryCaption = useContent("testimonials.secondaryCaption");
   const secondaryRole = useContent("testimonials.secondaryRole");
   const secondaryVideoUrl = useContent("testimonials.secondaryVideoUrl");
-  const googleUrl = useContent("testimonials.googleReviewsUrl");
+  
 
   const videoSlots = [
     { name: helderName, role: helderRole, caption: helderCaption, url: helderVideoUrl, primary: true },
