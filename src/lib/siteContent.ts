@@ -102,6 +102,11 @@ export const defaultContent = {
   // fotografia real art-direcionada com o tratamento padrão — nunca imagem
   // genérica de IA; imagem específica deste visto, não compartilhada.
   "visa.eb2-niw.heroImage": visaHeroEb2Niw,
+  // Dobra 01 Definição — profissional beneficiário no exercício da sua
+  // competência (ex.: engenheiro/médico/cientista em ação). NÃO usar
+  // executiva de braços cruzados (comunica escritório de advocacia, o
+  // oposto do posicionamento). Editável no admin.
+  "visa.eb2-niw.definitionImage": visaDefinitionEb2Niw,
   "visa.eb1.heroSubtitle":
     "O Green Card para quem tem reconhecimento internacional comprovado, sem patrocinador, sem PERM.",
   "visa.eb1.heroVideoUrl": "",
