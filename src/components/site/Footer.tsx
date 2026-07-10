@@ -13,6 +13,7 @@ import { Link } from "@tanstack/react-router";
 import { Facebook, Instagram, Youtube } from "lucide-react";
 import { getSiteSettings, type SiteSettings } from "@/lib/admin/settings";
 import { FlagBR, FlagUS } from "./flags";
+import logoAsset from "@/assets/n-na-america.webp.asset.json";
 
 export function Footer() {
   const [s, setS] = useState<SiteSettings | null>(null);
