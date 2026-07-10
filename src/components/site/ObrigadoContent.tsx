@@ -12,7 +12,6 @@ import { Button } from "@/components/ui/button";
 import { trackLead } from "@/lib/tracking";
 
 const SS_QUALIFICATION = "lastQualificationResult";
-const SS_QUALIFIED_LEAD = "lastQualifiedLead";
 
 export type QualificationResult = "qualificado" | "nao_qualificado";
 
