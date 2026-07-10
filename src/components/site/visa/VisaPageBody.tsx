@@ -40,7 +40,7 @@ export function VisaPageBody({ page, hideHero = false }: { page: VisaPage; hideH
 
       {!hideHero && <VisaHero page={page} />}
 
-      )}
+
 
       {/* 1 — Definição — layout editorial: texto + retrato profissional */}
       <section id="definicao" aria-label="Definição" className="section-anchor section-parchment">
