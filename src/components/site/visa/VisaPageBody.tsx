@@ -287,7 +287,7 @@ function VisaHero({ page }: { page: VisaPage }) {
         priority
         width={1920}
         height={1088}
-        focal="65% 40%"
+        focal={page.slug === "eb1" ? "60% 25%" : page.slug === "eb3" ? "55% 30%" : "65% 30%"}
         className="!rounded-none"
       />
       {/* Overlay navy sólido, 88% (esq.) → 40% (dir.). Sem padrões sobre a foto. */}
