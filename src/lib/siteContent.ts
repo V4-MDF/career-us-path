@@ -171,7 +171,7 @@ export const defaultContent = {
   "sobre.historia.eyebrow": "NOSSA HISTÓRIA",
   "sobre.historia.title": "Um novo modelo de assessoria, feito por quem já viveu o antigo.",
   "sobre.historia.body":
-    "[Conteúdo a completar com o cliente] A Status na América nasceu da decisão da fundadora Lia de sair de um modelo antigo de assessoria migratória e construir algo mais próximo, transparente e conectado à realidade do cliente brasileiro. A empresa se estabeleceu em Orlando para acompanhar de perto quem chega aos Estados Unidos, não apenas até a aprovação do processo, mas na adaptação e nos primeiros passos da nova vida.",
+    "A Status na América nasceu da decisão da fundadora Lia de sair de um modelo antigo de assessoria migratória e construir algo mais próximo, transparente e conectado à realidade do cliente brasileiro. A empresa se estabeleceu em Orlando para acompanhar de perto quem chega aos Estados Unidos, não apenas até a aprovação do processo, mas na adaptação e nos primeiros passos da nova vida.",
   "sobre.historia.image": "",
 
   "sobre.diferencial.eyebrow": "NOSSO DIFERENCIAL",
