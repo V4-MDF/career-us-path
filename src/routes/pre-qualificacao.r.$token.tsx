@@ -1,5 +1,5 @@
 /**
- * /pre-qualificacao/r/:token — página pública compartilhável do resultado.
+ * /pre-qualificacao/r/:token, página pública compartilhável do resultado.
  *
  * Lê o registro do dataStore pelo token e renderiza o mesmo componente
  * <PreQualResult> em variante "public" (sem auto-save e sem 1ª pessoa).
@@ -8,7 +8,7 @@
  *  - lead manda o link pelo WhatsApp para o consultor;
  *  - consultor abre o resultado no celular antes da conversa.
  *
- * Não exibe dados sensíveis adicionais — só o veredicto + critérios.
+ * Não exibe dados sensíveis adicionais, só o veredicto + critérios.
  */
 
 import { useEffect, useState } from "react";
@@ -22,7 +22,7 @@ export const Route = createFileRoute("/pre-qualificacao/r/$token")({
   component: PublicResultPage,
   head: () => ({
     meta: [
-      { title: "Resultado do teste de pré-qualificação — Status na América" },
+      { title: "Resultado do teste de pré-qualificação. Status na América" },
       { name: "robots", content: "noindex, nofollow" },
     ],
   }),

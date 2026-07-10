@@ -197,13 +197,13 @@ export function ObrigadoNaoQualificado() {
         </div>
 
         <h1 className="mt-6 display-2 text-foreground">
-          Recebemos seu perfil — vamos guardar seu contato.
+          Recebemos seu perfil, vamos guardar seu contato.
         </h1>
 
         <p className="mt-6 text-base md:text-lg text-foreground/80 leading-relaxed max-w-[600px] mx-auto">
           Pelo que você compartilhou, hoje o seu perfil ainda não atende a todos os
           critérios mínimos que costumamos recomendar para os vistos EB-2 NIW ou EB-1.
-          Isso pode mudar conforme sua carreira evolui — e nós continuamos por aqui.
+          Isso pode mudar conforme sua carreira evolui, e nós continuamos por aqui.
         </p>
 
         <div className="mt-12">
@@ -250,7 +250,7 @@ export function ObrigadoNaoQualificado() {
             <a href="mailto:contato@statusnaamerica.com" className="text-gold hover:underline">
               contato@statusnaamerica.com
             </a>{" "}
-            — vamos te orientar.
+           , vamos te orientar.
           </span>
         </div>
 

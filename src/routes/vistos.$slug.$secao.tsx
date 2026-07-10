@@ -1,5 +1,5 @@
 /**
- * /vistos/$slug/$secao — sub-rota canônica por dobra de visto.
+ * /vistos/$slug/$secao, sub-rota canônica por dobra de visto.
  *
  * Renderiza a MESMA página completa (VisaPageBody), mas com:
  *  - <title>, og:* e <description> derivados da dobra (sectionMap).
@@ -44,7 +44,7 @@ export const Route = createFileRoute("/vistos/$slug/$secao")({
       return { meta: [{ title: "Seção não encontrada | Status na América" }] };
     }
     const { page, section } = d;
-    const title = `${section.label} — ${page.h1} | Status na América`;
+    const title = `${section.label}, ${page.h1} | Status na América`;
     const description = section.intent ?? page.metaDescription;
     const url = `/vistos/${page.slug}/${section.id}`;
     return {
@@ -112,7 +112,7 @@ function VisaSectionRoute() {
         ]}
       />
 
-      {/* freezeHash: estamos na sub-rota canônica — não rebobina o canonical
+      {/* freezeHash: estamos na sub-rota canônica, não rebobina o canonical
           com #hash; mantém o canonical apontando para a sub-rota inteira. */}
       <DynamicSectionHead
         sections={VISA_SECTIONS}

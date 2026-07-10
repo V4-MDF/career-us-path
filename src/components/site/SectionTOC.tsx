@@ -1,12 +1,12 @@
 /**
- * <SectionTOC> — sumário das dobras da página.
+ * <SectionTOC>, sumário das dobras da página.
  *
  * Dois layouts num único componente:
  *  - Desktop (lg+): nav sticky vertical discreto na lateral direita,
  *    estilo MDN/Stripe docs. Item ativo destacado em gold.
  *  - Mobile: chip "Nesta página" + bottom sheet com a lista completa.
  *
- * Só aparece quando `sections.length >= 4` — evita ruído em páginas curtas.
+ * Só aparece quando `sections.length >= 4`, evita ruído em páginas curtas.
  * Click rola com `scrollIntoView({ behavior: 'smooth' })` e atualiza o hash.
  */
 
@@ -83,7 +83,7 @@ export function SectionTOC({
       )}
 
 
-      {/* Mobile chip — aparece após scroll inicial */}
+      {/* Mobile chip, aparece após scroll inicial */}
       {!hideOnMobile && (
         <MobileChip
           activeLabel={sections.find((s) => s.id === activeId)?.label ?? "Nesta página"}

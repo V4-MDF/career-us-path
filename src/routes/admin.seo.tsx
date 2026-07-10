@@ -29,13 +29,13 @@ const PAGES: Array<{ slug: string; label: string; defaults: PageSeo }> = [
   { slug: "home", label: "Home", defaults: {
     id: "home",
     meta_title: "Status na América | Green Card EB-2 NIW para profissionais brasileiros",
-    meta_description: "Imigração legal para os EUA por mérito profissional. Preparação documental especializada para vistos EB-2 NIW, EB-1 e EB-3 — profissionais brasileiros consolidados.",
+    meta_description: "Imigração legal para os EUA por mérito profissional. Preparação documental especializada para vistos EB-2 NIW, EB-1 e EB-3, profissionais brasileiros consolidados.",
     og_title: "Status na América | Green Card EB-2 NIW",
     og_description: "Conquiste o Green Card americano pelo mérito da sua carreira.",
     og_image: "/og-image.jpg", canonical: "/", robots: "index,follow",
   }},
-  { slug: "sobre", label: "Sobre", defaults: { id: "sobre", meta_title: "Sobre — Status na América", meta_description: "Conheça a Status na América.", og_title: "", og_description: "", og_image: "", canonical: "/sobre", robots: "index,follow" }},
-  { slug: "contato", label: "Contato", defaults: { id: "contato", meta_title: "Contato — Status na América", meta_description: "Fale com nossa equipe.", og_title: "", og_description: "", og_image: "", canonical: "/contato", robots: "index,follow" }},
+  { slug: "sobre", label: "Sobre", defaults: { id: "sobre", meta_title: "Sobre. Status na América", meta_description: "Conheça a Status na América.", og_title: "", og_description: "", og_image: "", canonical: "/sobre", robots: "index,follow" }},
+  { slug: "contato", label: "Contato", defaults: { id: "contato", meta_title: "Contato. Status na América", meta_description: "Fale com nossa equipe.", og_title: "", og_description: "", og_image: "", canonical: "/contato", robots: "index,follow" }},
 ];
 
 function SeoPage() {
@@ -63,7 +63,7 @@ function SeoPage() {
 }
 
 /**
- * Gerar sitemap a partir do estado atual do dataStore — inclui posts do
+ * Gerar sitemap a partir do estado atual do dataStore, inclui posts do
  * blog criados via admin (que o sitemap server-side não enxerga porque vive
  * em localStorage). Faz download de um sitemap.xml pronto.
  */
@@ -177,14 +177,14 @@ function SeoEditor({ page }: { page: { slug: string; label: string; defaults: Pa
       </SectionCard>
 
       <div className="space-y-4">
-        <SectionCard title="Preview — Google">
+        <SectionCard title="Preview. Google">
           <div className="p-3 rounded-md bg-white border border-slate-100">
             <div className="text-[11px] text-emerald-700">statusnaamerica.com {v.canonical}</div>
-            <div className="text-[18px] text-[#1a0dab] leading-snug truncate">{v.meta_title || "—"}</div>
-            <div className="text-[13px] text-slate-700 line-clamp-2">{v.meta_description || "—"}</div>
+            <div className="text-[18px] text-[#1a0dab] leading-snug truncate">{v.meta_title || "-"}</div>
+            <div className="text-[13px] text-slate-700 line-clamp-2">{v.meta_description || "-"}</div>
           </div>
         </SectionCard>
-        <SectionCard title="Preview — OG (WhatsApp / Facebook)">
+        <SectionCard title="Preview. OG (WhatsApp / Facebook)">
           <div className="rounded-md border border-slate-200 overflow-hidden">
             <div className="aspect-[1.91/1] bg-slate-100 grid place-items-center text-xs text-slate-400">
               {v.og_image ? <img src={v.og_image} alt="" className="object-cover w-full h-full" /> : "OG image"}

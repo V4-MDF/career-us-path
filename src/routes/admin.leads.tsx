@@ -1,5 +1,5 @@
 /**
- * /admin/leads — pontuação de qualidade ao vivo (Prompt 7).
+ * /admin/leads, pontuação de qualidade ao vivo (Prompt 7).
  *
  * - Score 0–100 DERIVADO em runtime via scoring.computeScore(lead, model).
  *   Nunca lê score "congelado" do lead. Trocar pesos em /admin/scoring
@@ -30,7 +30,7 @@ import { downloadCsv } from "@/lib/admin/csv";
 
 export const Route = createFileRoute("/admin/leads")({ component: LeadsPage });
 
-/** Lead persistido — apenas respostas cruas + metadados. */
+/** Lead persistido, apenas respostas cruas + metadados. */
 type StoredLead = LeadInput & {
   id: string;
   createdAt: string;
@@ -354,9 +354,9 @@ function LeadsPage() {
                       </div>
                     </td>
                     <td className="py-3 text-slate-600">{l.profissao}</td>
-                    <td className="py-3 text-slate-600">{l.segmento ?? "—"}</td>
-                    <td className="py-3 text-slate-600 text-xs">{l.variante_ab ?? "—"}</td>
-                    <td className="py-3 text-slate-600">{l.utm?.utm_source ?? "—"}</td>
+                    <td className="py-3 text-slate-600">{l.segmento ?? "-"}</td>
+                    <td className="py-3 text-slate-600 text-xs">{l.variante_ab ?? "-"}</td>
+                    <td className="py-3 text-slate-600">{l.utm?.utm_source ?? "-"}</td>
                     <td className="py-3 text-slate-600 text-xs max-w-[220px] truncate" title={originSummary(l)}>{originSummary(l)}</td>
                     <td className="py-3">
                       <Select value={l.status ?? "novo"} onValueChange={(v) => setStatus(l, v as FunnelStatus)}>
@@ -450,15 +450,15 @@ function LeadsPage() {
                   <div className="grid grid-cols-2 gap-3">
                     <Field k="Email" v={open.email} />
                     <Field k="WhatsApp" v={open.whatsapp} />
-                    <Field k="Objetivo do visto" v={open.objetivo_visto ?? "—"} />
+                    <Field k="Objetivo do visto" v={open.objetivo_visto ?? "-"} />
                     {open.cidade || open.uf ? <Field k="Cidade / UF" v={`${open.cidade || ""} / ${open.uf || ""}`} /> : null}
                     <Field k="Profissão" v={open.profissao} />
                     <Field k="Faixa etária" v={open.faixaEtaria} />
                     <Field k="Formação" v={open.formacao} />
                     <Field k="Renda" v={open.renda} />
                     <Field k="Momento" v={open.momento} />
-                    <Field k="Segmento (LP)" v={open.segmento ?? "—"} />
-                    <Field k="Variante A/B" v={open.variante_ab ?? "—"} />
+                    <Field k="Segmento (LP)" v={open.segmento ?? "-"} />
+                    <Field k="Variante A/B" v={open.variante_ab ?? "-"} />
                   </div>
 
                   {/* UTMs */}
@@ -466,7 +466,7 @@ function LeadsPage() {
                     <div className="px-4 py-2 bg-muted/40 text-xs uppercase tracking-wider text-muted-foreground">UTMs</div>
                     <div className="p-4 grid grid-cols-2 gap-2 text-xs text-foreground">
                       {(["utm_source","utm_medium","utm_campaign","utm_content","utm_term"] as const).map((k) => (
-                        <div key={k}><span className="text-muted-foreground">{k}:</span> {open.utm?.[k] ?? "—"}</div>
+                        <div key={k}><span className="text-muted-foreground">{k}:</span> {open.utm?.[k] ?? "-"}</div>
                       ))}
                       {open.utm?.gclid && <div><span className="text-muted-foreground">gclid:</span> {open.utm.gclid}</div>}
                       {open.utm?.fbclid && <div><span className="text-muted-foreground">fbclid:</span> {open.utm.fbclid}</div>}
@@ -486,10 +486,10 @@ function LeadsPage() {
                   <div className="rounded-md border border-border">
                     <div className="px-4 py-2 bg-muted/40 text-xs uppercase tracking-wider text-muted-foreground">Origem do tráfego</div>
                     <div className="p-4 grid grid-cols-1 gap-2 text-xs text-foreground">
-                      <div><span className="text-muted-foreground">Referrer externo:</span> {open.origin?.internal.referrer ?? "—"}</div>
-                      <div><span className="text-muted-foreground">Página interna anterior:</span> {open.origin?.internal.from_path ?? "—"}{open.origin?.internal.from_title ? ` · ${open.origin.internal.from_title}` : ""}</div>
-                      <div><span className="text-muted-foreground">Landing (1ª página da sessão):</span> {open.origin?.internal.landing_path ?? "—"}</div>
-                      <div><span className="text-muted-foreground">Início da sessão:</span> {open.origin?.internal.landing_ts ? new Date(open.origin.internal.landing_ts).toLocaleString("pt-BR") : "—"}</div>
+                      <div><span className="text-muted-foreground">Referrer externo:</span> {open.origin?.internal.referrer ?? "-"}</div>
+                      <div><span className="text-muted-foreground">Página interna anterior:</span> {open.origin?.internal.from_path ?? "-"}{open.origin?.internal.from_title ? ` · ${open.origin.internal.from_title}` : ""}</div>
+                      <div><span className="text-muted-foreground">Landing (1ª página da sessão):</span> {open.origin?.internal.landing_path ?? "-"}</div>
+                      <div><span className="text-muted-foreground">Início da sessão:</span> {open.origin?.internal.landing_ts ? new Date(open.origin.internal.landing_ts).toLocaleString("pt-BR") : "-"}</div>
                     </div>
                   </div>
                 </div>

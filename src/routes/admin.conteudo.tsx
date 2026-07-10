@@ -94,7 +94,7 @@ const PAGES: Array<{
       { title: "Hero (texto enxuto + vídeo)", keys: [
         { k: "visa.eb2-niw.heroSubtitle", label: "Subtítulo curto (1–2 linhas)", multiline: true },
         { k: "visa.eb2-niw.heroVideoUrl", label: "URL do vídeo (YouTube, Vimeo ou MP4)" },
-        { k: "visa.eb2-niw.heroVideoThumb", label: "URL da thumbnail (webp/jpg — opcional)" },
+        { k: "visa.eb2-niw.heroVideoThumb", label: "URL da thumbnail (webp/jpg, opcional)" },
       ]},
     ],
   },
@@ -104,7 +104,7 @@ const PAGES: Array<{
       { title: "Hero (texto enxuto + vídeo)", keys: [
         { k: "visa.eb1.heroSubtitle", label: "Subtítulo curto (1–2 linhas)", multiline: true },
         { k: "visa.eb1.heroVideoUrl", label: "URL do vídeo (YouTube, Vimeo ou MP4)" },
-        { k: "visa.eb1.heroVideoThumb", label: "URL da thumbnail (webp/jpg — opcional)" },
+        { k: "visa.eb1.heroVideoThumb", label: "URL da thumbnail (webp/jpg, opcional)" },
       ]},
     ],
   },
@@ -114,7 +114,7 @@ const PAGES: Array<{
       { title: "Hero (texto enxuto + vídeo)", keys: [
         { k: "visa.eb3.heroSubtitle", label: "Subtítulo curto (1–2 linhas)", multiline: true },
         { k: "visa.eb3.heroVideoUrl", label: "URL do vídeo (YouTube, Vimeo ou MP4)" },
-        { k: "visa.eb3.heroVideoThumb", label: "URL da thumbnail (webp/jpg — opcional)" },
+        { k: "visa.eb3.heroVideoThumb", label: "URL da thumbnail (webp/jpg, opcional)" },
       ]},
     ],
   },
@@ -176,7 +176,7 @@ function ContentPage() {
             {p.sections.length === 0 ? (
               <SectionCard>
                 <p className="text-sm text-slate-500">
-                  Página stub — ainda sem dobras editáveis mapeadas. Será expandida quando a página tiver seu próprio conteúdo institucional implementado.
+                  Página stub, ainda sem dobras editáveis mapeadas. Será expandida quando a página tiver seu próprio conteúdo institucional implementado.
                 </p>
               </SectionCard>
             ) : p.sections.map((sec) => (
@@ -252,7 +252,7 @@ function PageSections() {
 
   return (
     <SectionCard title="Estrutura da Home (ordem e visibilidade)"
-      description="Configuração avançada — o site lê esta ordem (quando aplicada nos componentes).">
+      description="Configuração avançada, o site lê esta ordem (quando aplicada nos componentes).">
       <ul className="divide-y divide-slate-100">
         {order.map((s, i) => (
           <li key={s.id} className="py-2 flex items-center gap-3">

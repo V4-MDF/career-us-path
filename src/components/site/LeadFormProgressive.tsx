@@ -1,5 +1,5 @@
 /**
- * LeadFormProgressive — formulário no estilo Typeform.
+ * LeadFormProgressive, formulário no estilo Typeform.
  *
  * UX:
  *  - Uma pergunta por vez ocupa o foco; as próximas só aparecem após
@@ -55,7 +55,7 @@ interface FieldDef {
   hint?: string;
 }
 
-// Sequência exibida — usada também pelo funil do admin.
+// Sequência exibida, usada também pelo funil do admin.
 export const PROGRESSIVE_FIELDS: FieldDef[] = [
   { key: "nome",        label: "Para começarmos, qual é o seu nome completo?" },
   { key: "email",        label: "Em qual e-mail podemos te responder?", hint: "Análise enviada em até 48h." },
@@ -133,7 +133,7 @@ export function LeadFormProgressive({
   const partialIdRef = useRef<string>("");
   const containerRef = useRef<HTMLDivElement | null>(null);
   const reduce = useReducedMotion();
-  // Ref sempre apontando para o `data` mais recente — evita closures stale
+  // Ref sempre apontando para o `data` mais recente, evita closures stale
   // quando o auto-advance dos <Select> dispara via setTimeout antes do
   // próximo render propagar o novo state. Sem isso, `advance()` lê um `data`
   // antigo onde o campo recém-selecionado ainda está vazio, e o form trava.
@@ -141,7 +141,7 @@ export function LeadFormProgressive({
   useEffect(() => { dataRef.current = data; }, [data]);
 
   // Mount: garante um partial id estável e tenta restaurar respostas anteriores
-  // do dataStore (localStorage) — para que o lead não precise refazer o form
+  // do dataStore (localStorage), para que o lead não precise refazer o form
   // ao revisitar /avaliacao. Salta o stepIndex para a primeira pergunta ainda
   // pendente.
   useEffect(() => {
@@ -278,11 +278,11 @@ export function LeadFormProgressive({
         qualification: qual.result,
         qualification_reasons: qual.reasons,
       };
-      // `set` já não lança — loga warn e mantém cache local em caso de falha.
+      // `set` já não lança, loga warn e mantém cache local em caso de falha.
       await set("leads", id, lead);
 
       // Guarda payload do lead qualificado para a página de obrigado montar
-      // a mensagem do WhatsApp. Sessão apenas — limpo após uso.
+      // a mensagem do WhatsApp. Sessão apenas, limpo após uso.
       if (qual.result === "qualificado" && typeof window !== "undefined") {
         try {
           window.sessionStorage.setItem(
@@ -301,7 +301,7 @@ export function LeadFormProgressive({
               momento: current.momento,
             }),
           );
-        } catch { /* storage indisponível — segue sem WhatsApp auto */ }
+        } catch { /* storage indisponível, segue sem WhatsApp auto */ }
       }
 
       // Redireciona ANTES dos efeitos colaterais para garantir a navegação.
@@ -309,7 +309,7 @@ export function LeadFormProgressive({
       else setDone(true);
 
 
-      // Efeitos colaterais isolados — não bloqueiam o redirect.
+      // Efeitos colaterais isolados, não bloqueiam o redirect.
       try {
         const model = await loadModel();
         const score = computeScore(current, model).score;
@@ -347,7 +347,7 @@ export function LeadFormProgressive({
 
   return (
     <div className="rounded-2xl border border-gold/25 bg-ink-raise shadow-soft overflow-hidden" ref={containerRef}>
-      {/* progresso — sticky no topo do card */}
+      {/* progresso, sticky no topo do card */}
       <div className="sticky top-0 z-10 px-6 md:px-8 pt-5 pb-4 bg-ink-raise/95 backdrop-blur border-b border-border/40">
         <div className="flex items-center justify-between mb-2">
           <span className="font-mono-label text-xs text-foreground/70">
@@ -505,7 +505,7 @@ function Summary({ k, v }: { k: string; v: string }) {
   return (
     <div className="flex justify-between gap-3 border-b border-border/40 py-1">
       <dt className="text-foreground/55">{k}</dt>
-      <dd className="text-foreground/90 text-right truncate">{v || "—"}</dd>
+      <dd className="text-foreground/90 text-right truncate">{v || "-"}</dd>
     </div>
   );
 }
@@ -534,7 +534,7 @@ function CollapsedAnswer({
         <span className="text-xs font-mono-label text-foreground/45 truncate">{field.label}</span>
       </div>
       <div className="flex items-center gap-2 text-sm text-foreground/90 truncate">
-        <span className="truncate max-w-[60vw] sm:max-w-[260px]">{display || "—"}</span>
+        <span className="truncate max-w-[60vw] sm:max-w-[260px]">{display || "-"}</span>
         <Pencil className="h-3.5 w-3.5 text-foreground/40 shrink-0" />
       </div>
     </button>
@@ -552,7 +552,7 @@ function ActiveQuestion({
   const onKey = (e: React.KeyboardEvent) => {
     if (e.key === "Enter") { e.preventDefault(); onEnter(); }
   };
-  // Auto-advance ao escolher em <Select> — UX typeform.
+  // Auto-advance ao escolher em <Select>. UX typeform.
   const selectAndAdvance = <K extends keyof LeadInput>(k: K) => (v: string) => {
     update(k, v as LeadInput[K]);
     setTimeout(() => onEnter(), 180);

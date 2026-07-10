@@ -37,7 +37,7 @@ function TrackingPage() {
         actions={<Button onClick={save} className="bg-amber-400 text-slate-900 hover:bg-amber-500 gap-1.5"><Save className="h-4 w-4" />Salvar</Button>} />
 
       {/* Nota sobre os públicos de remarketing usados na LP /avaliacao */}
-      <SectionCard title="Públicos de remarketing — /avaliacao">
+      <SectionCard title="Públicos de remarketing, /avaliacao">
         <div className="text-sm text-slate-700 space-y-2 leading-relaxed">
           <p>
             A LP <code className="font-mono text-xs bg-slate-100 px-1 py-0.5 rounded">/avaliacao</code> dispara
@@ -45,12 +45,12 @@ function TrackingPage() {
           </p>
           <ul className="list-disc list-inside space-y-1">
             <li>
-              <strong>Público A — Form View</strong>: ao montar <code className="font-mono text-xs">/avaliacao</code>.
+              <strong>Público A. Form View</strong>: ao montar <code className="font-mono text-xs">/avaliacao</code>.
               Meta Pixel: <code className="font-mono text-xs">ViewContent</code> + custom <code className="font-mono text-xs">FormView</code>.
               GA4: <code className="font-mono text-xs">form_view</code>.
             </li>
             <li>
-              <strong>Público B — Lead</strong>: ao montar <code className="font-mono text-xs">/avaliacao/obrigado</code>
+              <strong>Público B. Lead</strong>: ao montar <code className="font-mono text-xs">/avaliacao/obrigado</code>
               (após submit). Meta Pixel: <code className="font-mono text-xs">Lead</code>. GA4: <code className="font-mono text-xs">generate_lead</code>.
             </li>
             <li>
@@ -69,7 +69,7 @@ function TrackingPage() {
           <SectionCard key={it.vKey as string} title={it.label}>
             <div className="flex items-center gap-2 mb-3">
               <Switch checked={t[it.enKey] as boolean} onCheckedChange={(v) => upd(it.enKey, v as never)} />
-              <span className="text-sm text-slate-600">{(t[it.enKey] as boolean) ? "Ativo — será injetado" : "Inativo"}</span>
+              <span className="text-sm text-slate-600">{(t[it.enKey] as boolean) ? "Ativo, será injetado" : "Inativo"}</span>
             </div>
             {it.multi ? (
               <Textarea rows={5} placeholder={it.placeholder} value={t[it.vKey] as string} onChange={(e) => upd(it.vKey, e.target.value as never)} className="font-mono text-xs" />

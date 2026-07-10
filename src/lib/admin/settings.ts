@@ -1,5 +1,5 @@
 /**
- * Settings store — wrappers tipados sobre a tabela `settings` (chave/valor).
+ * Settings store, wrappers tipados sobre a tabela `settings` (chave/valor).
  *
  * Centraliza branding, contatos, links sociais e tracking. Lido pelo site
  * público com fallback aos defaults abaixo; editado no admin (Links,
@@ -116,9 +116,9 @@ export const mediaSlots = [
   { id: "favicon", label: "Favicon" },
   { id: "og_default", label: "OG Image padrão" },
   { id: "hero_home", label: "Hero da Home" },
-  { id: "hero_medicos", label: "Hero — Médicos" },
-  { id: "hero_engenheiros", label: "Hero — Engenheiros" },
-  { id: "hero_empresarios", label: "Hero — Empresários" },
+  { id: "hero_medicos", label: "Hero. Médicos" },
+  { id: "hero_engenheiros", label: "Hero. Engenheiros" },
+  { id: "hero_empresarios", label: "Hero. Empresários" },
 ];
 
 export async function getMedia(slot: string): Promise<MediaAsset | null> {

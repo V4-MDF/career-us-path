@@ -1,5 +1,5 @@
 /**
- * Lead scoring — rubrica do briefing.
+ * Lead scoring, rubrica do briefing.
  * Score 0–100 + classificação A/B/C/D (não exibida ao usuário).
  */
 

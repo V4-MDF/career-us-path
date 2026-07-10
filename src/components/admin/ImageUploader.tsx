@@ -1,16 +1,16 @@
 /**
- * ImageUploader — botão de upload com preview para o admin.
+ * ImageUploader, botão de upload com preview para o admin.
  *
  * Sobe o arquivo direto para o bucket `media` do Supabase Storage (RLS:
  * leitura pública, escrita apenas para admin). Devolve a URL pública via
- * `onChange` — o formato do dado armazenado no `kv_records` continua sendo
+ * `onChange`, o formato do dado armazenado no `kv_records` continua sendo
  * uma string URL, então o site público não precisa de nenhuma mudança.
  *
  * Também aceita colar uma URL externa como fallback (para quem já hospeda
  * imagens em outro CDN).
  *
  * Detecta imagens legadas em base64 (`data:image/...`) e mostra aviso
- * pedindo re-upload — o novo pipeline nunca gera base64.
+ * pedindo re-upload, o novo pipeline nunca gera base64.
  */
 import { useEffect, useRef, useState } from "react";
 import { Loader2, Upload, X, AlertTriangle } from "lucide-react";

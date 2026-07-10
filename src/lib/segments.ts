@@ -66,7 +66,7 @@ export interface HeroVariant {
   h1: string;
   sub: string;
   cta_texto: string;
-  /** Opcional — imagem de fundo do Hero. */
+  /** Opcional, imagem de fundo do Hero. */
   imagem?: string;
 }
 
@@ -97,7 +97,7 @@ const SEED_SEGMENTS: Segment[] = [
       lado_brasil: "≈ R$ 180.000 / ano",
       lado_eua: "US$ 200.000 a 600.000 / ano",
       observacao:
-        "Valores de referência (brutos). No Brasil, impostos e encargos reduzem de forma relevante o valor líquido — nos EUA a diferença é ainda maior.",
+        "Valores de referência (brutos). No Brasil, impostos e encargos reduzem de forma relevante o valor líquido, nos EUA a diferença é ainda maior.",
     },
     dores: [
       "Plantões disputados e jornadas exaustivas",
@@ -107,7 +107,7 @@ const SEED_SEGMENTS: Segment[] = [
       "A sensação de que poderia conquistar muito mais lá fora",
     ],
     custo_adiar:
-      "Cada ano de espera é um ano de salário em dólar que não volta — e o processo já leva cerca de 2 anos. Quem decide cedo, chega na frente.",
+      "Cada ano de espera é um ano de salário em dólar que não volta, e o processo já leva cerca de 2 anos. Quem decide cedo, chega na frente.",
     checklist: [
       { texto: "Médico formado, com carreira consolidada", positivo: true },
       { texto: "Tem ou está disposto a construir um perfil forte (títulos, experiência, publicações)", positivo: true },
@@ -127,7 +127,7 @@ const SEED_SEGMENTS: Segment[] = [
     hero_default: {
       eyebrow: "PARA MÉDICOS BRASILEIROS",
       h1: "Você é médico e quer construir sua carreira nos Estados Unidos?",
-      sub: "Conquiste o Green Card pelo mérito da sua trajetória — pelo EB-2 NIW, sem patrocinador e sem loteria. Green Card também para cônjuge e filhos.",
+      sub: "Conquiste o Green Card pelo mérito da sua trajetória, pelo EB-2 NIW, sem patrocinador e sem loteria. Green Card também para cônjuge e filhos.",
       cta_texto: "Fazer minha análise gratuita",
     },
   },
@@ -147,7 +147,7 @@ const SEED_SEGMENTS: Segment[] = [
       lado_brasil: "≈ R$ 144.000 / ano",
       lado_eua: "US$ 90.000 a 150.000 / ano",
       observacao:
-        "Valores de referência (brutos). No Brasil, impostos e encargos reduzem de forma relevante o valor líquido — nos EUA a diferença é ainda maior.",
+        "Valores de referência (brutos). No Brasil, impostos e encargos reduzem de forma relevante o valor líquido, nos EUA a diferença é ainda maior.",
     },
     dores: [
       "Salário estagnado mesmo com anos de experiência",
@@ -157,7 +157,7 @@ const SEED_SEGMENTS: Segment[] = [
       "A sensação de teto na sua carreira no Brasil",
     ],
     custo_adiar:
-      "A engenharia americana paga em dólar e valoriza experiência. Cada ano adiado é ganho deixado na mesa — e o processo leva cerca de 2 anos.",
+      "A engenharia americana paga em dólar e valoriza experiência. Cada ano adiado é ganho deixado na mesa, e o processo leva cerca de 2 anos.",
     checklist: [
       { texto: "Engenheiro com formação superior e experiência sólida", positivo: true },
       { texto: "Pós-graduação/mestrado contam pontos a favor", positivo: true },
@@ -177,7 +177,7 @@ const SEED_SEGMENTS: Segment[] = [
     hero_default: {
       eyebrow: "PARA ENGENHEIROS BRASILEIROS",
       h1: "Você é engenheiro e quer levar sua carreira para os Estados Unidos?",
-      sub: "Conquiste o Green Card pelo mérito da sua trajetória em engenharia — pelo EB-2 NIW, sem patrocinador e sem loteria. Green Card também para cônjuge e filhos.",
+      sub: "Conquiste o Green Card pelo mérito da sua trajetória em engenharia, pelo EB-2 NIW, sem patrocinador e sem loteria. Green Card também para cônjuge e filhos.",
       cta_texto: "Fazer minha análise gratuita",
     },
   },
@@ -198,7 +198,7 @@ const SEED_SEGMENTS: Segment[] = [
         "Carga tributária alta, insegurança jurídica, juros altos que encarecem o crescimento, falta de apoio e incentivo do governo",
       lado_eua:
         "Ambiente pró-negócio, segurança jurídica, incentivo a quem empreende e dólar forte",
-      observacao: "Para empresários, o ganho não é só salário — é o ambiente de negócio.",
+      observacao: "Para empresários, o ganho não é só salário, é o ambiente de negócio.",
     },
     dores: [
       "Carga tributária que corrói o resultado do seu negócio",
@@ -230,7 +230,7 @@ const SEED_SEGMENTS: Segment[] = [
     hero_default: {
       eyebrow: "PARA EMPRESÁRIOS BRASILEIROS",
       h1: "Você empresário quer construir seu futuro com segurança nos Estados Unidos?",
-      sub: "Leve sua família, seu patrimônio e sua experiência empreendedora para um ambiente de negócio estável e em dólar — com o Green Card pelo EB-2 NIW.",
+      sub: "Leve sua família, seu patrimônio e sua experiência empreendedora para um ambiente de negócio estável e em dólar, com o Green Card pelo EB-2 NIW.",
       cta_texto: "Fazer minha análise gratuita",
     },
   },

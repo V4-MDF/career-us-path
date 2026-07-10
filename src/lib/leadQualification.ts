@@ -1,5 +1,5 @@
 /**
- * Lead qualification — heurística sóbria para roteamento de UX pós-submit.
+ * Lead qualification, heurística sóbria para roteamento de UX pós-submit.
  *
  * NÃO descarta leads. Apenas determina se o usuário deve ver a página de
  * obrigado "qualificado" (caminho direto à consultoria) ou "nao_qualificado"
@@ -7,7 +7,7 @@
  * dataStore.leads para que o time decida como tratar.
  *
  * O scoring tunável do admin (src/lib/scoring.ts) segue sendo a fonte
- * canônica de priorização — esta função existe só para roteamento de tela.
+ * canônica de priorização, esta função existe só para roteamento de tela.
  */
 import type { LeadInput } from "./leadScoring";
 
@@ -22,7 +22,7 @@ export function evaluateQualification(d: LeadInput): QualificationOutcome {
   const reasons: string[] = [];
 
   if (d.formacao === "sem_superior") {
-    reasons.push("Sem ensino superior — EB-2 NIW exige diploma superior + experiência ou pós.");
+    reasons.push("Sem ensino superior. EB-2 NIW exige diploma superior + experiência ou pós.");
   }
   if (d.renda === "ate_10") {
     reasons.push("Faixa de renda atual abaixo do mínimo recomendado para o investimento do processo.");

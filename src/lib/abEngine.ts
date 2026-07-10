@@ -59,7 +59,7 @@ async function bumpImpression(variant: HeroVariant) {
 
 /**
  * Retorna a variante ativa para o segmento (sticky por visitante).
- * Se não houver variantes ativas, retorna null — o caller usa o hero_default.
+ * Se não houver variantes ativas, retorna null, o caller usa o hero_default.
  */
 export async function getActiveVariant(segmentId: string): Promise<HeroVariant | null> {
   await ensureSeed();

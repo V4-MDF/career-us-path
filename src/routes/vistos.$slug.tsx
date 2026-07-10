@@ -1,5 +1,5 @@
 /**
- * /vistos/$slug — LAYOUT do pilar.
+ * /vistos/$slug. LAYOUT do pilar.
  *
  * Quando o usuário navega para /vistos/$slug          → renderiza vistos.$slug.index.tsx
  * Quando o usuário navega para /vistos/$slug/$secao   → renderiza vistos.$slug.$secao.tsx

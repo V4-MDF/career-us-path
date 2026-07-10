@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 
 /**
- * Helpers visuais do painel admin — identidade "Dossiê"
+ * Helpers visuais do painel admin, identidade "Dossiê"
  * (parchment + ink + gold, Montserrat display + Inter body).
  * Estas primitivas são usadas por todas as telas /admin/*.
  */

@@ -2,13 +2,13 @@
  * Corpo compartilhado das páginas de pilar de visto.
  *
  * Usado por:
- *  - /vistos/$slug                  (página-mãe — canonical próprio)
- *  - /vistos/$slug/$secao           (sub-rota de dobra — canonical próprio,
+ *  - /vistos/$slug                  (página-mãe, canonical próprio)
+ *  - /vistos/$slug/$secao           (sub-rota de dobra, canonical próprio,
  *                                    foco em uma seção indexada isoladamente)
  *
  * Cada `<section>` carrega `id` + `section-anchor` para o scroll-spy do
  * SectionTOC + DynamicSectionHead. Os ids batem com `VISA_SECTIONS` do
- * `sectionMap.ts` — alterar lá quebra o TOC.
+ * `sectionMap.ts`, alterar lá quebra o TOC.
  */
 
 import { Link } from "@tanstack/react-router";
@@ -27,7 +27,7 @@ import { VideoPlayer } from "@/components/site/VideoPlayer";
 import { useContent } from "@/lib/siteContent";
 // NOTA: as fotografias abaixo são placeholders art-direcionados no mesmo
 // tratamento visual do site. Substituir por fotografia real com o mesmo
-// enquadramento e a classe .photo-treatment — NUNCA usar ilustração ou
+// enquadramento e a classe .photo-treatment. NUNCA usar ilustração ou
 // imagem genérica de IA nas páginas de visto.
 import heroFamilyUsa from "@/assets/visa-hero-family-usa.jpg";
 import professionalWork from "@/assets/visa-professional-work.jpg";
@@ -42,7 +42,7 @@ export function VisaPageBody({ page, hideHero = false }: { page: VisaPage; hideH
 
 
 
-      {/* 1 — Definição — layout editorial: texto + retrato profissional */}
+      {/* 1. Definição, layout editorial: texto + retrato profissional */}
       <section id="definicao" aria-label="Definição" className="section-anchor section-parchment">
         <div className="container-x section-pad grid md:grid-cols-12 gap-10 items-center">
           <div className="md:col-span-7 order-2 md:order-1">
@@ -62,7 +62,7 @@ export function VisaPageBody({ page, hideHero = false }: { page: VisaPage; hideH
         </div>
       </section>
 
-      {/* 2 — Elegibilidade */}
+      {/* 2. Elegibilidade */}
       <section id="elegibilidade" aria-label="Elegibilidade" className="section-anchor bg-[#0E1726]">
         <div className="container-x section-pad">
           <SectionHead num="02" eyebrow="ELEGIBILIDADE" title={page.qualifies.title} kicker={page.qualifies.intro} />
@@ -79,7 +79,7 @@ export function VisaPageBody({ page, hideHero = false }: { page: VisaPage; hideH
       </section>
 
 
-      {/* 3 — Processo */}
+      {/* 3. Processo */}
       <section id="processo" aria-label="Processo" className="section-anchor section-parchment">
         <div className="container-x section-pad">
           <SectionHead num="03" eyebrow="PROCESSO" variant="parchment" title={page.process.title} />
@@ -98,7 +98,7 @@ export function VisaPageBody({ page, hideHero = false }: { page: VisaPage; hideH
         </div>
       </section>
 
-      {/* 4 — Família — dobra emocional. Foto grande da família (coração do
+      {/* 4. Família, dobra emocional. Foto grande da família (coração do
           "futuro dos filhos / legado"), texto ao lado com peso reduzido. */}
       <section id="familia" aria-label="Família" className="section-anchor bg-ink-deep">
         <div className="container-x section-pad grid md:grid-cols-12 gap-10 items-center">
@@ -119,7 +119,7 @@ export function VisaPageBody({ page, hideHero = false }: { page: VisaPage; hideH
         </div>
       </section>
 
-      {/* 5 — Comparativo */}
+      {/* 5. Comparativo */}
       <section id="comparativo" aria-label="Comparativo EB" className="section-anchor section-parchment">
         <div className="container-x section-pad">
           <SectionHead
@@ -172,7 +172,7 @@ export function VisaPageBody({ page, hideHero = false }: { page: VisaPage; hideH
         </div>
       </section>
 
-      {/* 6 — Dúvidas frequentes */}
+      {/* 6. Dúvidas frequentes */}
       <section id="duvidas-frequentes" aria-label="Dúvidas frequentes" className="section-anchor bg-ink">
         <div className="container-x section-pad max-w-4xl">
           <SectionHead num="06" eyebrow="PERGUNTAS FREQUENTES" title="O que mais perguntam sobre este visto" />
@@ -191,7 +191,7 @@ export function VisaPageBody({ page, hideHero = false }: { page: VisaPage; hideH
         </div>
       </section>
 
-      {/* 7 — Análise gratuita (CTA) */}
+      {/* 7. Análise gratuita (CTA) */}
       <section id="avaliacao-gratuita" aria-label="Análise gratuita" className="section-anchor section-parchment">
         <div className="container-x section-pad grid lg:grid-cols-12 gap-10 items-start">
           <div className="lg:col-span-7">
@@ -230,7 +230,7 @@ export function VisaPageBody({ page, hideHero = false }: { page: VisaPage; hideH
 }
 
 /* ------------------------------------------------------------------ */
-/* Hero — 2 colunas: texto enxuto à esquerda + vídeo do visto à direita.
+/* Hero, 2 colunas: texto enxuto à esquerda + vídeo do visto à direita.
    Overlay navy sólido sobre a fotografia (sem textura). Vídeo dinâmico
    por página (site_content: visa.<slug>.heroVideoUrl / heroSubtitle). */
 /* ------------------------------------------------------------------ */
@@ -261,7 +261,7 @@ function VisaHero({ page }: { page: VisaPage }) {
         focal="65% 40%"
         className="!rounded-none"
       />
-      {/* Overlay navy sólido — 88% (esq.) → 40% (dir.). Sem padrões sobre a foto. */}
+      {/* Overlay navy sólido, 88% (esq.) → 40% (dir.). Sem padrões sobre a foto. */}
       <div
         aria-hidden
         className="absolute inset-0 bg-gradient-to-r from-[#0A111C]/92 via-[#0A111C]/72 to-[#0A111C]/40"
@@ -271,7 +271,7 @@ function VisaHero({ page }: { page: VisaPage }) {
 
       <div className="container-x section-pad relative w-full">
         <div className="grid gap-10 lg:gap-14 lg:grid-cols-12 items-center">
-          {/* ESQUERDA — texto enxuto */}
+          {/* ESQUERDA, texto enxuto */}
           <div className="lg:col-span-7">
             <nav aria-label="Breadcrumb" className="font-mono-label text-foreground/70 flex items-center gap-2">
               <Link to="/" className="hover:text-gold">Início</Link>
@@ -304,7 +304,7 @@ function VisaHero({ page }: { page: VisaPage }) {
             </div>
           </div>
 
-          {/* DIREITA — moldura de vídeo */}
+          {/* DIREITA, moldura de vídeo */}
           <div className="lg:col-span-5">
             <div className="relative mx-auto max-w-xl">
               {/* Filete dourado externo (assinatura credencial). */}
@@ -345,7 +345,7 @@ function VisaHero({ page }: { page: VisaPage }) {
         </div>
       </div>
 
-      {/* Modal do vídeo — abre apenas quando há URL. */}
+      {/* Modal do vídeo, abre apenas quando há URL. */}
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent className="max-w-4xl bg-ink border-gold/30 p-0 overflow-hidden">
           <DialogTitle className="sr-only">{page.h1} · Vídeo</DialogTitle>

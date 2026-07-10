@@ -191,7 +191,7 @@ function AbPage() {
               )}
               {sumActiveWeights > 0 && sumActiveWeights !== 100 && (
                 <p className="mt-3 text-xs text-amber-700">
-                  Os pesos das variantes ativas somam {sumActiveWeights}. O motor normaliza automaticamente — para sortear 50/50, defina 50 em cada.
+                  Os pesos das variantes ativas somam {sumActiveWeights}. O motor normaliza automaticamente, para sortear 50/50, defina 50 em cada.
                 </p>
               )}
             </SectionCard>

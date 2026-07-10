@@ -141,7 +141,7 @@ function DashboardPage() {
                 </div>
                 <div className="text-right">
                   <div className="font-semibold text-amber-600">
-                    {leader ? `${(leader.rate * 100).toFixed(1)}%` : "—"}
+                    {leader ? `${(leader.rate * 100).toFixed(1)}%` : "-"}
                   </div>
                   <div className="text-[10px] text-slate-400">{all.length} variantes</div>
                 </div>
@@ -183,7 +183,7 @@ function DashboardPage() {
                       </td>
                       <td className="py-2.5 font-medium">{l.nome}</td>
                       <td className="py-2.5 text-slate-600">{l.profissao}</td>
-                      <td className="py-2.5 text-slate-600">{l.segmento ?? "—"}</td>
+                      <td className="py-2.5 text-slate-600">{l.segmento ?? "-"}</td>
                       <td className="py-2.5">
                         <Badge variant="outline" className={`text-[10px] ${TONE_CLASS[l.tone]}`}>
                           <Flame className="h-3 w-3 mr-1" /> {l.bandLabel}

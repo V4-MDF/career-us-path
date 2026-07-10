@@ -1,5 +1,5 @@
 /**
- * /admin/estrutura — reordenar e ocultar dobras de cada página do site.
+ * /admin/estrutura, reordenar e ocultar dobras de cada página do site.
  *
  * Hoje cobre a Home. Para adicionar outra página: estender PageSlug,
  * DEFAULT_LAYOUTS e o registry de componentes da rota correspondente
@@ -23,7 +23,7 @@ import {
 
 export const Route = createFileRoute("/admin/estrutura")({ component: EstruturaPage });
 
-// Hoje só Home — manter array para crescer (Vistos pillars no próximo passo).
+// Hoje só Home, manter array para crescer (Vistos pillars no próximo passo).
 const PAGES: Array<{ slug: PageSlug; label: string; hint?: string }> = [
   { slug: "home", label: "Home", hint: "Páginas Sobre/Contato ainda são stubs. Vistos virão no próximo ciclo." },
 ];
@@ -130,7 +130,7 @@ function EstruturaPage() {
       )}
 
       <SectionCard
-        title={`${activePage.label} — ${visible}/${total} dobras visíveis`}
+        title={`${activePage.label}, ${visible}/${total} dobras visíveis`}
         description="Arraste pelo punho para reordenar. Use os botões ↑↓ no teclado. A primeira dobra (Abertura) é fixa."
       >
         {loading ? (

@@ -1,19 +1,19 @@
 /**
- * visaQualifier — motor de pontuação por tipo de visto EB / O-1.
+ * visaQualifier, motor de pontuação por tipo de visto EB / O-1.
  *
  * Recebe as respostas do teste de pré-qualificação e devolve, para cada
  * visto avaliado, um score 0–100, uma classificação (apto / parcial / não
  * elegível) e a lista de critérios atendidos / lacunas. Em seguida escolhe
  * o "melhor visto" e até duas alternativas.
  *
- * IMPORTANTE — disclaimer regulatório:
+ * IMPORTANTE, disclaimer regulatório:
  *  - Esta é uma triagem orientativa, NÃO é parecer jurídico.
  *  - Para EB-1A, a regra real é "atender 3 dos 10 critérios + sustained
  *    acclaim"; aqui aproximamos via contagem de critérios mapeados.
  *  - Para EB-2 NIW usamos o framework Dhanasar (3 prongs) de forma
  *    heurística baseada em titulação + impacto declarado.
  *
- * Mantenha a lógica numérica neste arquivo isolada — testes futuros e
+ * Mantenha a lógica numérica neste arquivo isolada, testes futuros e
  * ajustes finos do produto devem viver aqui.
  */
 
@@ -37,7 +37,7 @@ export interface QualificationResult {
   best: VisaScore;
   alternatives: VisaScore[];
   all: VisaScore[];
-  blocker: string | null;   // ex.: ficha criminal — torna tudo inelegível
+  blocker: string | null;   // ex.: ficha criminal, torna tudo inelegível
   qualifiedOverall: boolean;
   topScore: number;
 }
@@ -48,19 +48,19 @@ export interface QualificationResult {
 
 const VISA_META: Record<VisaCode, { label: string; short: string }> = {
   "EB-1A": {
-    label: "EB-1A — Habilidade Extraordinária",
+    label: "EB-1A. Habilidade Extraordinária",
     short: "Green Card para profissionais com reconhecimento sustentado no topo da sua área.",
   },
   "EB-2 NIW": {
-    label: "EB-2 NIW — National Interest Waiver",
+    label: "EB-2 NIW. National Interest Waiver",
     short: "Green Card por mérito profissional, sem necessidade de patrocinador americano.",
   },
   "O-1": {
-    label: "O-1 — Visto de trabalho para talentos extraordinários",
+    label: "O-1. Visto de trabalho para talentos extraordinários",
     short: "Visto temporário (não-imigrante) para profissionais de destaque internacional.",
   },
   "EB-3": {
-    label: "EB-3 — Trabalhador qualificado com patrocínio",
+    label: "EB-3. Trabalhador qualificado com patrocínio",
     short: "Green Card via oferta de emprego nos EUA + processo de PERM (labor cert).",
   },
 };
@@ -91,7 +91,7 @@ function scoreEB1A(a: PreQualAnswers): VisaScore {
   const gaps: string[] = [];
   let s = 0;
 
-  // Reconhecimento — peso alto (EB-1A é todo sobre acclaim)
+  // Reconhecimento, peso alto (EB-1A é todo sobre acclaim)
   if (a.awards === "internacional") { s += 22; met.push("Prêmios de relevância internacional"); }
   else if (a.awards === "nacional") { s += 12; met.push("Prêmios de relevância nacional"); }
   else gaps.push("Prêmios reconhecidos (nacionais/internacionais)");
@@ -142,7 +142,7 @@ function scoreEB2NIW(a: PreQualAnswers): VisaScore {
     gaps.push("Diploma de mestrado/doutorado ou graduação + 5 anos de experiência");
   }
 
-  // Prong 2: well-positioned — experiência + senioridade + renda
+  // Prong 2: well-positioned, experiência + senioridade + renda
   if (a.experienceYears >= 10) { s += 12; met.push("Mais de 10 anos de experiência consolidada"); }
   else if (a.experienceYears >= 5) { s += 7; met.push("Experiência sólida (5+ anos)"); }
   else gaps.push("Tempo de experiência mais robusto (5+ anos)");
@@ -189,7 +189,7 @@ function scoreO1(a: PreQualAnswers): VisaScore {
   const gaps = [...eb1.gaps];
   const met = [...eb1.metCriteria];
   if (!a.usJobOffer) {
-    gaps.unshift("Patrocinador americano (empregador ou agente) — exigência do O-1");
+    gaps.unshift("Patrocinador americano (empregador ou agente), exigência do O-1");
   } else {
     met.unshift("Possui patrocinador / oferta nos EUA");
   }
@@ -206,7 +206,7 @@ function scoreO1(a: PreQualAnswers): VisaScore {
 function scoreEB3(a: PreQualAnswers): VisaScore {
   const met: string[] = [];
   const gaps: string[] = [];
-  let s = 30; // baseline — exige menos do que EB-1/EB-2
+  let s = 30; // baseline, exige menos do que EB-1/EB-2
 
   if (a.experienceYears >= 2) { s += 18; met.push("2+ anos de experiência na função"); }
   else gaps.push("Experiência mínima de 2 anos na função (skilled worker)");
@@ -216,7 +216,7 @@ function scoreEB3(a: PreQualAnswers): VisaScore {
   }
 
   if (a.usJobOffer) { s += 32; met.push("Possui oferta de emprego nos EUA (essencial para EB-3)"); }
-  else gaps.push("Oferta formal de emprego nos EUA — EB-3 exige patrocinador");
+  else gaps.push("Oferta formal de emprego nos EUA. EB-3 exige patrocinador");
 
   if (a.englishLevel === "fluente" || a.englishLevel === "avancado") {
     s += 8; met.push("Inglês avançado/fluente");

@@ -1,5 +1,5 @@
 /**
- * /avaliacao/obrigado-nao-qualificado — mantido apenas para compatibilidade.
+ * /avaliacao/obrigado-nao-qualificado, mantido apenas para compatibilidade.
  * Redireciona para a página de agradecimento discreta /avaliacao/obrigado.
  */
 import { createFileRoute, redirect } from "@tanstack/react-router";

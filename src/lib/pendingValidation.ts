@@ -2,7 +2,7 @@
  * Lista de chaves de conteúdo / estatística que estão PENDENTES de validação
  * pelo cliente (substituem o antigo placeholder "[CONFIRMAR]" que vazava no front).
  *
- * O site público NUNCA renderiza esse rótulo — exibe apenas o valor limpo.
+ * O site público NUNCA renderiza esse rótulo, exibe apenas o valor limpo.
  * O admin pode consultar essa lista para mostrar um pequeno indicador
  * "pendente de validação" ao lado do campo correspondente.
  */

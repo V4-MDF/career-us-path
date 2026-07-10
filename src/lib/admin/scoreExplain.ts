@@ -1,5 +1,5 @@
 /**
- * Detalhamento do score do lead — espelha a rubrica de leadScoring.ts.
+ * Detalhamento do score do lead, espelha a rubrica de leadScoring.ts.
  * Usado no painel de detalhe do lead para mostrar quanto cada critério somou.
  */
 import type { LeadInput } from "@/lib/leadScoring";

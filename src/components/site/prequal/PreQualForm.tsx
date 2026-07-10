@@ -1,5 +1,5 @@
 /**
- * PreQualForm — formulário do teste de pré-qualificação.
+ * PreQualForm, formulário do teste de pré-qualificação.
  *
  * Layout vertical denso (não "Typeform"): o respondente vê todas as
  * perguntas e responde como um checklist longo. Isso reduz fricção para
@@ -7,7 +7,7 @@
  *
  * Auto-save:
  *  - cada change persiste em localStorage via saveDraft();
- *  - ao montar, tenta loadDraft() — usuário não perde respostas.
+ *  - ao montar, tenta loadDraft(), usuário não perde respostas.
  *
  * O componente é "controlado por fora" via props: o `onSubmit` recebe as
  * respostas validadas; o cálculo do veredicto e a persistência final
@@ -113,7 +113,7 @@ export function PreQualForm({ onSubmit, submitting }: Props) {
   const upd = <K extends keyof PreQualAnswers>(k: K, v: PreQualAnswers[K]) =>
     setA((prev) => ({ ...prev, [k]: v }));
 
-  // Validação mínima — contato + consentimento
+  // Validação mínima, contato + consentimento
   const canSubmit = useMemo(() => {
     return (
       a.fullName.trim().length >= 3 &&
@@ -140,7 +140,7 @@ export function PreQualForm({ onSubmit, submitting }: Props) {
       {/* ========== Contato ========== */}
       <section className="space-y-4">
         <header>
-          <p className="font-mono-label text-gold/80">ETAPA 1 — IDENTIFICAÇÃO</p>
+          <p className="font-mono-label text-gold/80">ETAPA 1. IDENTIFICAÇÃO</p>
           <h2 className="font-display text-2xl mt-1">Quem está fazendo o teste</h2>
         </header>
         <div className="grid sm:grid-cols-2 gap-4">
@@ -175,7 +175,7 @@ export function PreQualForm({ onSubmit, submitting }: Props) {
       {/* ========== Perfil profissional ========== */}
       <section className="space-y-5">
         <header>
-          <p className="font-mono-label text-gold/80">ETAPA 2 — PERFIL PROFISSIONAL</p>
+          <p className="font-mono-label text-gold/80">ETAPA 2. PERFIL PROFISSIONAL</p>
           <h2 className="font-display text-2xl mt-1">Sua carreira hoje</h2>
         </header>
 
@@ -255,7 +255,7 @@ export function PreQualForm({ onSubmit, submitting }: Props) {
       {/* ========== Reconhecimento (EB-1 / O-1 / NIW) ========== */}
       <section className="space-y-5">
         <header>
-          <p className="font-mono-label text-gold/80">ETAPA 3 — RECONHECIMENTO E IMPACTO</p>
+          <p className="font-mono-label text-gold/80">ETAPA 3. RECONHECIMENTO E IMPACTO</p>
           <h2 className="font-display text-2xl mt-1">Critérios avaliados pelo USCIS</h2>
           <p className="mt-1 text-[13px] text-foreground/60">
             Responda apenas o que conseguiria comprovar com documentação.
@@ -307,13 +307,13 @@ export function PreQualForm({ onSubmit, submitting }: Props) {
       {/* ========== Situação ========== */}
       <section className="space-y-5">
         <header>
-          <p className="font-mono-label text-gold/80">ETAPA 4 — SITUAÇÃO ATUAL</p>
+          <p className="font-mono-label text-gold/80">ETAPA 4. SITUAÇÃO ATUAL</p>
           <h2 className="font-display text-2xl mt-1">Contexto migratório</h2>
         </header>
 
         <YesNo legend="Possui oferta formal de emprego nos EUA?"
           value={a.usJobOffer} onChange={(v) => upd("usJobOffer", v)}
-          hint="Relevante para O-1 e EB-3 — não é obrigatório para EB-1A nem EB-2 NIW." />
+          hint="Relevante para O-1 e EB-3, não é obrigatório para EB-1A nem EB-2 NIW." />
 
         <YesNo legend="Possui histórico criminal (no Brasil ou exterior)?"
           value={a.criminalRecord} onChange={(v) => upd("criminalRecord", v)}

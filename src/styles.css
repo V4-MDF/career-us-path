@@ -11,11 +11,11 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * Status na América — Design System "DOSSIÊ / CREDENCIAL"
+ * Status na América. Design System "DOSSIÊ / CREDENCIAL"
  * ----------------------------------------------------------------
  * Estética de documento oficial / passaporte / private banking.
  * Navy meia-noite + parchment + ouro antigo (champagne).
- * Oxblood como "lacre" — usado com extrema parcimônia (~5%).
+ * Oxblood como "lacre", usado com extrema parcimônia (~5%).
  *
  * Tipografia:
  *  - Display: Bodoni Moda (headlines, números de stat)
@@ -26,7 +26,7 @@
  * padronizados em tudo. Movimento serve à sobriedade.
  *
  * Tokens são CSS vars + mapeados via @theme inline para o Tailwind.
- * NUNCA usar cores hardcoded em componentes — sempre via tokens semânticos.
+ * NUNCA usar cores hardcoded em componentes, sempre via tokens semânticos.
  */
 
 @theme inline {
@@ -58,7 +58,7 @@
   --color-ring: var(--ring);
   --color-ring-offset-background: var(--background);
 
-  /* Tokens da marca — Dossiê */
+  /* Tokens da marca. Dossiê */
   --color-ink: var(--ink);
   --color-ink-deep: var(--ink-deep);
   --color-ink-raise: var(--ink-raise);
@@ -83,7 +83,7 @@
 
   /* Tipografia (atualizada): Montserrat para títulos (uppercase, 700/800)
    * e Inter para corpo. Trocada de Bodoni+Hanken por demanda de
-   * legibilidade — a identidade "Dossiê" agora vive em estrutura
+   * legibilidade, a identidade "Dossiê" agora vive em estrutura
    * (ink + parchment + gold + filetes), não na serifa. */
   --font-display: "Montserrat", "Inter Variable", system-ui, sans-serif;
   --font-sans: "Inter Variable", "Inter", system-ui, sans-serif;
@@ -92,9 +92,9 @@
 }
 
 :root {
-  --radius: 0.875rem; /* squircle suave — cascateia para todos os shadcn (button, card, input, dropdown, dialog) */
+  --radius: 0.875rem; /* squircle suave, cascateia para todos os shadcn (button, card, input, dropdown, dialog) */
 
-  /* Paleta Dossiê — preto carvão + ouro (sem navy) */
+  /* Paleta Dossiê, preto carvão + ouro (sem navy) */
   --ink:           #0B0B0C;
   --ink-deep:      #050506;
   --ink-raise:     #1C1C20;
@@ -108,7 +108,7 @@
   --ink-text:      #141416;
   --success:       #3F8A5F;
 
-  /* Paleta dual BR ↔ US — surfaces, filetes, borders e accents. */
+  /* Paleta dual BR ↔ US, surfaces, filetes, borders e accents. */
   --brazil-green:      #0E5C3A;
   --brazil-green-deep: #0A4A2E;
   --brazil-yellow:     #E6B84A;
@@ -117,7 +117,7 @@
   --usa-red:           #8A1F2B;
   --cream-light:       #F7F2E6;
 
-  /* Mapeamento shadcn — DARK por padrão (site é dark-first) */
+  /* Mapeamento shadcn. DARK por padrão (site é dark-first) */
   --background: var(--ink);
   --foreground: #ECE6D6;
 
@@ -147,7 +147,7 @@
 }
 
 /* ----------------------------------------------------------------
- * Variante PARCHMENT — seções claras alternadas (papel oficial).
+ * Variante PARCHMENT, seções claras alternadas (papel oficial).
  * Aplicar em <section className="section-parchment">.
  * Mantida a classe legada `.section-cream` como alias para compat.
  * ---------------------------------------------------------------- */
@@ -166,7 +166,7 @@
   --border: rgba(14, 23, 38, 0.12);
   --input: rgba(14, 23, 38, 0.16);
   --ring: rgba(122, 95, 46, 0.6);
-  /* Override gold para uso como TEXTO em parchment — o ouro claro
+  /* Override gold para uso como TEXTO em parchment, o ouro claro
    * (#B7975A) fica ~2.9:1 sobre parchment (FALHA WCAG AA). Escurece
    * para #7A5F2E (~5.4:1) enquanto mantém a leitura "ouro antigo".
    * Cascateia para text-gold, border-gold, bg-gold (CTAs seguem
@@ -180,7 +180,7 @@
 }
 
 
-/* Camada mais profunda — divisor entre dobras escuras */
+/* Camada mais profunda, divisor entre dobras escuras */
 .section-ink-deep {
   --background: var(--ink-deep);
   background-color: var(--background);
@@ -188,10 +188,10 @@
 }
 
 /* ----------------------------------------------------------------
- * Surfaces cromáticas — dualidade BR ↔ US
+ * Surfaces cromáticas, dualidade BR ↔ US
  * ---------------------------------------------------------------- */
 
-/* Cream light — parchment mais claro, "arejado", entre dobras escuras. */
+/* Cream light, parchment mais claro, "arejado", entre dobras escuras. */
 .section-cream-light {
   --background: var(--cream-light);
   --foreground: var(--ink-text);
@@ -208,7 +208,7 @@
   color: var(--foreground);
 }
 
-/* Sky — azul-céu suave (lado "EUA": renda, futuro, benefícios). */
+/* Sky, azul-céu suave (lado "EUA": renda, futuro, benefícios). */
 .section-sky {
   --background: var(--usa-blue-soft);
   --foreground: var(--ink-text);
@@ -225,7 +225,7 @@
   color: var(--foreground);
 }
 
-/* Verde-Brasil — fundo profundo (lado "BR": herança, legado, decisão). */
+/* Verde-Brasil, fundo profundo (lado "BR": herança, legado, decisão). */
 .section-verde-brasil {
   --background: var(--brazil-green-deep);
   --foreground: #F1EBD8;
@@ -243,7 +243,7 @@
   color: var(--foreground);
 }
 
-/* Filete tricolor BR-Gold-US — usar como top border em dobras de transição. */
+/* Filete tricolor BR-Gold-US, usar como top border em dobras de transição. */
 @utility tricolor-rule {
   height: 3px;
   background: linear-gradient(90deg,
@@ -308,7 +308,7 @@
     text-transform: uppercase;
   }
   h1 { font-weight: 800; }
-  /* Foco de teclado — premium, dourado, com halo para contraste AA em
+  /* Foco de teclado, premium, dourado, com halo para contraste AA em
      superfícies escuras (ink) e claras (parchment). Outline garante o
      anel dourado; o box-shadow cria um halo escuro que eleva o contraste
      do anel a >=3:1 em qualquer fundo. */
@@ -329,7 +329,7 @@
   :where(a, button, [role="button"], input, select, textarea):focus:not(:focus-visible) {
     outline: none;
   }
-  /* Skip-to-content link — invisível até receber foco por teclado. */
+  /* Skip-to-content link, invisível até receber foco por teclado. */
   .skip-link {
     position: fixed;
     top: 12px;
@@ -360,7 +360,7 @@
 }
 
 /* ----------------------------------------------------------------
- * Utilitários assinatura — eyebrow, filete, container, sistema espacial
+ * Utilitários assinatura, eyebrow, filete, container, sistema espacial
  * "Luxo silencioso" (Prompt 6): tipografia fluida, respiro generoso,
  * easing premium. Ritmo vertical base 8px → 8/16/24/40/64/96/128.
  * ---------------------------------------------------------------- */
@@ -378,7 +378,7 @@
   font-size: 11px;
 }
 
-/* btn-label — tipografia padrão para CTAs/botões.
+/* btn-label, tipografia padrão para CTAs/botões.
  * Mesmo registro de Montserrat uppercase tracked dos displays/eyebrows,
  * para que botões não destoem do resto do site (substitui usos de
  * font-mono-label em elementos clicáveis). */
@@ -408,7 +408,7 @@
 
 /* Padding vertical padronizado das dobras.
  * Valores fixos por breakpoint (não fluidos) para garantir ritmo previsível
- * no scroll — evita o efeito de "puxão" causado por clamp(vw) que muda a
+ * no scroll, evita o efeito de "puxão" causado por clamp(vw) que muda a
  * altura da dobra continuamente conforme a viewport. */
 @utility section-pad {
   padding-block: 4.5rem; /* mobile: 72px */
@@ -429,7 +429,7 @@
 }
 
 /*
- * section-anchor — usado pelo <SectionAnchor>. Compensa o header fixo
+ * section-anchor, usado pelo <SectionAnchor>. Compensa o header fixo
  * (~96px no desktop, ~80px no mobile) ao usar deep-link #hash ou ao
  * disparar scrollToSection programaticamente. Sem isso, a dobra-alvo
  * fica oculta atrás do header. Não afeta layout visual.
@@ -451,7 +451,7 @@
 
 
 
-/* Escala tipográfica fluida — Montserrat bold em uppercase nos displays
+/* Escala tipográfica fluida. Montserrat bold em uppercase nos displays
  * (titles). Tamanho ligeiramente reduzido vs Bodoni: Montserrat 800 ocupa
  * mais peso óptico que Bodoni 500, então diminuímos para preservar ritmo. */
 @utility display-1 {
@@ -493,7 +493,7 @@
   font-weight: 800;
 }
 
-/* Motivos visuais (mapa/silhuetas/passaporte/etc.) — opacidade baixa
+/* Motivos visuais (mapa/silhuetas/passaporte/etc.), opacidade baixa
  * e blend mode para fundir-se ao fundo sem competir com o conteúdo. */
 @utility motif-soft {
   opacity: 0.08;
@@ -511,7 +511,7 @@
 
 
 
-/* Filete dourado fino — 1px linha gravada */
+/* Filete dourado fino, 1px linha gravada */
 @utility gold-rule {
   height: 1px;
   background: var(--gold);
@@ -532,7 +532,7 @@
   }
 }
 
-/* Padrão guilloché (linhas finas de certificado) — usar com opacidade ≤6% */
+/* Padrão guilloché (linhas finas de certificado), usar com opacidade ≤6% */
 @utility guilloche {
   background-image:
     repeating-linear-gradient(45deg,
@@ -593,7 +593,7 @@
 }
 
 /* =========================================================================
- * Photo treatment — "família visual" única de todas as fotografias do site.
+ * Photo treatment, "família visual" única de todas as fotografias do site.
  * Warmth dourada leve + contraste elevado sutil + dessaturação discreta,
  * com grão fino e vinheta em camadas separadas. Aplicar via <PhotoFrame>
  * ou classe `.photo-treatment` no wrapper de qualquer <img>.
@@ -632,7 +632,7 @@
   --color-navy-foreground: #ECE6D6;
 }
 
-/* Sombras — calibradas para os raios maiores (radius 0.875rem).
+/* Sombras, calibradas para os raios maiores (radius 0.875rem).
  * Hierarquia: hairline (borda gold) → soft (cards) → elevated (hero/featured)
  * → elegant (selos, modais). Sempre combinar com 1px de border-gold/15-25
  * para evitar "card flutuando sem ancoragem" em fundos escuros. */
@@ -642,7 +642,7 @@
   --shadow-elegant: 0 28px 60px -28px rgba(0, 0, 0, 0.65), 0 2px 8px -4px rgba(0, 0, 0, 0.4);
 }
 
-/* media-frame — wrapper padrão para qualquer imagem/banner/thumb do site
+/* media-frame, wrapper padrão para qualquer imagem/banner/thumb do site
  * público. Cantos arredondados consistentes com --radius, hairline gold
  * sutil e overflow-hidden para clipar a imagem. Use as variantes -sm/-lg
  * para thumbs compactos ou heros amplos. */
@@ -679,7 +679,7 @@
   background-color: var(--parchment-deep);
 }
 
-/* surface-card — bloco genérico (não-shadcn) usado em LP/sections.
+/* surface-card, bloco genérico (não-shadcn) usado em LP/sections.
  * Garante cantos arredondados consistentes em qualquer wrapper que
  * antes usava border puro sem radius. */
 @utility surface-card {
@@ -689,7 +689,7 @@
 }
 
 /* ----------------------------------------------------------------
- * .prose-dossie — tipografia do corpo de posts do blog.
+ * .prose-dossie, tipografia do corpo de posts do blog.
  * Mantém Bodoni nas headlines e Hanken Grotesk no corpo, com filetes
  * dourados em blockquote e listas com bullets desenhados.
  * ---------------------------------------------------------------- */
@@ -762,7 +762,7 @@
 }
 
 /* ----------------------------------------------------------------
- * Transição de rota — fade + translateY 8px, 0.4s ease-out-expo.
+ * Transição de rota, fade + translateY 8px, 0.4s ease-out-expo.
  * Aplicado no shell raiz para suavizar mudanças de página.
  * Respeita prefers-reduced-motion via @layer base acima.
  * ---------------------------------------------------------------- */
@@ -775,7 +775,7 @@
 }
 
 /* ----------------------------------------------------------------
- * Perf — content-visibility para pular paint/layout fora da viewport.
+ * Perf, content-visibility para pular paint/layout fora da viewport.
  * Reserva ~700px de espaço estimado p/ não causar CLS na entrada.
  * ---------------------------------------------------------------- */
 .cv-auto {
@@ -796,7 +796,7 @@
   opacity: 1;
   transform: translate3d(0, 0, 0);
 }
-/* Mobile — luxo silencioso: reveal curto, deslocamento mínimo, sem will-change. */
+/* Mobile, luxo silencioso: reveal curto, deslocamento mínimo, sem will-change. */
 @media (max-width: 767px) {
   .reveal {
     opacity: 1;
@@ -810,7 +810,7 @@
 
 
 /* ----------------------------------------------------------------
- * [data-admin-shell] — isola o admin do tema dossiê (dark) do site
+ * [data-admin-shell], isola o admin do tema dossiê (dark) do site
  * público. Reescreve os tokens shadcn para uma paleta clara slate+amber
  * para que <Button>, <Card>, <Input> etc. renderizem coerentes com o
  * resto do admin (escrito em Tailwind palette).
@@ -850,7 +850,7 @@
   color: #b45309;
 }
 
-/* Admin: disabled state legível e consistente (>=4.5:1) — sobrepõe o
+/* Admin: disabled state legível e consistente (>=4.5:1), sobrepõe o
    opacity para botões com bg sólido, evitando amber/red/slate lavados.
    Ghost/link ficam apenas com opacity reduzida (herdada do Button). */
 [data-admin-shell] button:disabled[class*="bg-"],

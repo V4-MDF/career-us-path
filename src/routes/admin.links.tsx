@@ -33,8 +33,8 @@ function LinksPage() {
     ["facebook_url", "Facebook (URL)"],
     ["linkedin_url", "LinkedIn (URL)"],
     ["youtube_url", "YouTube (URL)"],
-    ["cta_hero_label", "Texto CTA — Hero"],
-    ["cta_form_label", "Texto CTA — Formulário"],
+    ["cta_hero_label", "Texto CTA. Hero"],
+    ["cta_form_label", "Texto CTA. Formulário"],
   ];
 
   return (

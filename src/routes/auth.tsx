@@ -41,7 +41,7 @@ function AuthPage() {
       if (isAdmin) {
         navigate({ to: (next as string) || "/admin", replace: true });
       } else {
-        // Sessão existe mas sem role admin — encerra para evitar loop.
+        // Sessão existe mas sem role admin, encerra para evitar loop.
         await supabase.auth.signOut();
         toast.error("Sua conta não tem acesso admin. Peça a um administrador.");
       }

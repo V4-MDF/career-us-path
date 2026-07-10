@@ -1,5 +1,5 @@
 /**
- * FlagCircleBadge — círculo com bandeira colorida (BR ou US)
+ * FlagCircleBadge, círculo com bandeira colorida (BR ou US)
  * acompanhado de um pequeno badge circular com seta diagonal
  * (ArrowUpRight) para sinalizar "travessia / movimento".
  */

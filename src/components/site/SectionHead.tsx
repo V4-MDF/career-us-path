@@ -1,5 +1,5 @@
 /**
- * SectionHead — assinatura visual do sistema "Dossiê / Credencial".
+ * SectionHead, assinatura visual do sistema "Dossiê / Credencial".
  * Filete dourado + número de seção em mono + eyebrow + título display.
  *
  * Uso:

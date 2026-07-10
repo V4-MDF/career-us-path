@@ -1,10 +1,10 @@
 /**
- * PreQualResult — exibe o veredicto do teste, alternativas e CTA WhatsApp.
+ * PreQualResult, exibe o veredicto do teste, alternativas e CTA WhatsApp.
  *
  * Reutilizado em duas situações:
  *  1) imediatamente após o envio do formulário (com nome em primeira pessoa);
  *  2) na página pública compartilhável `/pre-qualificacao/r/:token` (modo
- *     "dossiê" — neutro, sem auto-save).
+ *     "dossiê", neutro, sem auto-save).
  *
  * O WhatsApp é construído em runtime (lê `whatsapp_br` das configurações).
  */
@@ -147,7 +147,7 @@ export function PreQualResult({ record, variant }: Props) {
         )}
       </section>
 
-      {/* CTA WhatsApp (apenas para qualificados — apto ou parcial sem blocker) */}
+      {/* CTA WhatsApp (apenas para qualificados, apto ou parcial sem blocker) */}
       {qualified && (
         <section className="rounded-2xl border border-gold/30 bg-ink-raise/60 p-6 sm:p-7 shadow-soft">
           <p className="font-mono-label text-gold/80">PRÓXIMO PASSO</p>
@@ -156,7 +156,7 @@ export function PreQualResult({ record, variant }: Props) {
           </h2>
           <p className="mt-3 text-[15px] text-foreground/75 max-w-2xl">
             Enviamos automaticamente o seu resultado por e-mail. Para acelerar, abra o
-            WhatsApp da Status na América — a mensagem já vai pré-preenchida com o link público abaixo.
+            WhatsApp da Status na América, a mensagem já vai pré-preenchida com o link público abaixo.
           </p>
 
           <div className="mt-5 flex flex-wrap gap-3">
@@ -191,7 +191,7 @@ export function PreQualResult({ record, variant }: Props) {
             Aprofunde-se nos vistos EB enquanto estrutura seu caso.
           </h2>
           <p className="mt-3 text-[15px] text-foreground/75 max-w-2xl">
-            Conheça os critérios completos e leia os artigos sobre EB-2 NIW e EB-1 — a maioria
+            Conheça os critérios completos e leia os artigos sobre EB-2 NIW e EB-1, a maioria
             dos perfis aprovados leva alguns meses construindo evidências antes de dar entrada no processo.
           </p>
           <div className="mt-5 flex flex-wrap gap-3">

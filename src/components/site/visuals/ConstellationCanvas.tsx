@@ -1,5 +1,5 @@
 /**
- * ConstellationCanvas — fundo interativo de pontos (constellation) que
+ * ConstellationCanvas, fundo interativo de pontos (constellation) que
  * reagem ao mouse. Renderizado em <canvas> com requestAnimationFrame.
  *
  * Performance / acessibilidade:
@@ -108,7 +108,7 @@ export function ConstellationCanvas({
     const start = () => { if (!running) { running = true; raf = requestAnimationFrame(tick); } };
     const stop = () => { running = false; cancelAnimationFrame(raf); };
 
-    // Pausa durante scroll — o canvas é fixed inset-0, então rolar reflow não o
+    // Pausa durante scroll, o canvas é fixed inset-0, então rolar reflow não o
     // tira da tela, mas redesenhar a 60fps enquanto o usuário rola é o que mais
     // engasga o site. Pausa imediata + retoma 200ms após o último scroll.
     let scrollIdle = 0;

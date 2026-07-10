@@ -1,8 +1,8 @@
 /**
- * /sitemap.xml — gerado server-side a partir das rotas indexáveis + posts
+ * /sitemap.xml, gerado server-side a partir das rotas indexáveis + posts
  * publicados do blog. /admin e /lp/* são EXCLUÍDOS por design.
  *
- * Observação: o blog vive em localStorage (camada `dataStore`) — o handler
+ * Observação: o blog vive em localStorage (camada `dataStore`), o handler
  * server-side não tem acesso direto. Por isso o sitemap server-side lista
  * as rotas estáticas + posts-semente conhecidos. Para regenerar incluindo
  * posts criados no admin, use a ação "Gerar sitemap" em /admin/seo, que
@@ -22,7 +22,7 @@ interface SitemapEntry {
 }
 
 // Posts-semente (alinhado a src/lib/blog.ts).
-// Posts criados via admin não aparecem aqui — usar "Gerar sitemap" no admin.
+// Posts criados via admin não aparecem aqui, usar "Gerar sitemap" no admin.
 const SEED_POST_SLUGS = [
   "custo-de-vida-nos-eua-guia-realista",
   "por-que-os-eua-querem-imigrantes-qualificados",
@@ -30,7 +30,7 @@ const SEED_POST_SLUGS = [
   "emissao-de-vistos-brasileiros-2026",
 ];
 
-// Catálogo de dobras indexáveis dos pilares — duplicado aqui em vez de
+// Catálogo de dobras indexáveis dos pilares, duplicado aqui em vez de
 // importar de sectionMap.ts para evitar bundling pesado no SSR handler.
 // Manter em sincronia com VISA_SECTIONS (sectionMap.ts).
 const VISA_INDEXABLE_SECTIONS = [

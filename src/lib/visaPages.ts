@@ -3,7 +3,7 @@
  *
  * Os textos editáveis (H1, intro, CTA, FAQ) podem ser sobrescritos pelo admin
  * via tabela `site_content` (chaves abaixo). O restante (tabela comparativa,
- * etapas, listas) vive no código com fallback — pode ser promovido a
+ * etapas, listas) vive no código com fallback, pode ser promovido a
  * site_content em iterações futuras se a edição for necessária.
  *
  * REGRAS:
@@ -27,26 +27,26 @@ export interface VisaPage {
   intro: string;             // 1–2 frases citáveis
   metaTitle: string;
   metaDescription: string;
-  /** Definição objetiva ("O que é …") — texto citável para AEO. */
+  /** Definição objetiva ("O que é …"), texto citável para AEO. */
   whatIs: { title: string; body: string };
   /** Critérios de elegibilidade. */
   qualifies: { title: string; intro: string; items: { title: string; body: string }[] };
   /** Etapas do processo. */
   process: { title: string; steps: { num: string; title: string; body: string }[]; note?: string };
-  /** Família — quem é incluído. */
+  /** Família, quem é incluído. */
   family: { title: string; body: string };
   faq: VisaFaq[];
   ctaTitle: string;
   ctaSubtitle: string;
 }
 
-/** Página comparativa — mesma estrutura nas 3 páginas. */
+/** Página comparativa, mesma estrutura nas 3 páginas. */
 export const COMPARISON = {
   headers: ["", "EB-2 NIW", "EB-1", "EB-3"],
   rows: [
     {
       label: "Precisa de patrocinador?",
-      cells: ["Não", "Não", "Sim — exige oferta de emprego nos EUA"],
+      cells: ["Não", "Não", "Sim, exige oferta de emprego nos EUA"],
     },
     {
       label: "Perfil típico",
@@ -78,7 +78,7 @@ const eb2niw: VisaPage = {
   badge: "Principal",
   h1: "EB-2 NIW: o Green Card americano por mérito profissional",
   intro:
-    "O EB-2 National Interest Waiver é um Green Card concedido a profissionais brasileiros qualificados cuja atuação é de interesse nacional dos Estados Unidos — sem necessidade de empresa patrocinadora e sem oferta de emprego.",
+    "O EB-2 National Interest Waiver é um Green Card concedido a profissionais brasileiros qualificados cuja atuação é de interesse nacional dos Estados Unidos, sem necessidade de empresa patrocinadora e sem oferta de emprego.",
   metaTitle:
     "EB-2 NIW: Green Card por mérito profissional | Status na América",
   metaDescription:
@@ -86,7 +86,7 @@ const eb2niw: VisaPage = {
   whatIs: {
     title: "O que é o National Interest Waiver",
     body:
-      "O National Interest Waiver (NIW) é uma modalidade do visto EB-2 que DISPENSA tanto o empregador patrocinador quanto a labor certification (PERM), por se demonstrar que a atuação do profissional é benéfica de forma relevante aos interesses dos Estados Unidos. Na prática, o próprio profissional peticiona seu Green Card com base no mérito da sua carreira — sem depender de uma empresa americana.",
+      "O National Interest Waiver (NIW) é uma modalidade do visto EB-2 que DISPENSA tanto o empregador patrocinador quanto a labor certification (PERM), por se demonstrar que a atuação do profissional é benéfica de forma relevante aos interesses dos Estados Unidos. Na prática, o próprio profissional peticiona seu Green Card com base no mérito da sua carreira, sem depender de uma empresa americana.",
   },
   qualifies: {
     title: "Quem se qualifica para o EB-2 NIW",
@@ -101,7 +101,7 @@ const eb2niw: VisaPage = {
       {
         title: "Seu trabalho tem mérito e importância para os EUA",
         body:
-          "A atuação proposta deve ter mérito substancial e importância nacional. Não se exige que tenha alcance nacional em si — basta que os benefícios potenciais (econômicos, científicos, culturais, em saúde, em educação) extrapolem o impacto local.",
+          "A atuação proposta deve ter mérito substancial e importância nacional. Não se exige que tenha alcance nacional em si, basta que os benefícios potenciais (econômicos, científicos, culturais, em saúde, em educação) extrapolem o impacto local.",
       },
       {
         title: "Você está bem posicionado para realizar esse trabalho",
@@ -111,7 +111,7 @@ const eb2niw: VisaPage = {
       {
         title: "É vantajoso para os EUA dispensar o patrocinador no seu caso",
         body:
-          "Os EUA se beneficiam ao dispensar a exigência de oferta de emprego e PERM neste caso específico — porque a urgência, a singularidade do perfil ou o impacto justificam a flexibilização da regra geral.",
+          "Os EUA se beneficiam ao dispensar a exigência de oferta de emprego e PERM neste caso específico, porque a urgência, a singularidade do perfil ou o impacto justificam a flexibilização da regra geral.",
       },
     ],
 
@@ -123,7 +123,7 @@ const eb2niw: VisaPage = {
         num: "01",
         title: "Análise Criteriosa",
         body:
-          "Avaliamos histórico, formação, impacto e potencial para o EB-2 NIW — diagnóstico individual antes de qualquer compromisso.",
+          "Avaliamos histórico, formação, impacto e potencial para o EB-2 NIW, diagnóstico individual antes de qualquer compromisso.",
       },
       {
         num: "02",
@@ -135,7 +135,7 @@ const eb2niw: VisaPage = {
         num: "03",
         title: "Preparação Documental",
         body:
-          "Documentação meticulosa, cartas de recomendação e evidências de alto padrão — coerência técnica e narrativa em cada peça.",
+          "Documentação meticulosa, cartas de recomendação e evidências de alto padrão, coerência técnica e narrativa em cada peça.",
       },
       {
         num: "04",
@@ -171,12 +171,12 @@ const eb2niw: VisaPage = {
     {
       q: "Quanto tempo leva o processo?",
       a:
-        "Estimativa realista de aproximadamente 24 meses, considerando estruturação, processo I-140, eventual RFE e ajuste/consular. Os prazos do USCIS e dos consulados oscilam — por isso começar cedo importa. Não trabalhamos com prazos garantidos.",
+        "Estimativa realista de aproximadamente 24 meses, considerando estruturação, processo I-140, eventual RFE e ajuste/consular. Os prazos do USCIS e dos consulados oscilam, por isso começar cedo importa. Não trabalhamos com prazos garantidos.",
     },
     {
       q: "Como está a emissão de vistos para brasileiros em 2026?",
       a:
-        "Há flutuações reais na agenda consular e nos tempos de processamento, que dependem de fatores externos ao caso. Por isso planejamento antecipado importa: estruturar o processo cedo amplia a janela de manobra. Acompanhamos o cenário e conduzimos cada caso conforme as regras vigentes — sem prometer prazos.",
+        "Há flutuações reais na agenda consular e nos tempos de processamento, que dependem de fatores externos ao caso. Por isso planejamento antecipado importa: estruturar o processo cedo amplia a janela de manobra. Acompanhamos o cenário e conduzimos cada caso conforme as regras vigentes, sem prometer prazos.",
     },
     {
       q: "Quanto custa?",
@@ -202,12 +202,12 @@ const eb1: VisaPage = {
   whatIs: {
     title: "O que é o EB-1",
     body:
-      "O EB-1 é a primeira categoria de visto baseado em emprego (Employment-Based, primeira preferência). Reúne três sub-categorias — EB-1A (habilidade extraordinária), EB-1B (pesquisadores e professores notáveis) e EB-1C (executivos e gerentes multinacionais). A modalidade mais comum para profissionais brasileiros sem vínculo com multinacional é a EB-1A.",
+      "O EB-1 é a primeira categoria de visto baseado em emprego (Employment-Based, primeira preferência). Reúne três sub-categorias. EB-1A (habilidade extraordinária), EB-1B (pesquisadores e professores notáveis) e EB-1C (executivos e gerentes multinacionais). A modalidade mais comum para profissionais brasileiros sem vínculo com multinacional é a EB-1A.",
   },
   qualifies: {
     title: "Quem se qualifica para o EB-1A",
     intro:
-      "Exige demonstração de reconhecimento internacional sustentado — perfil mais alto que o EB-2 NIW. O USCIS avalia evidências em ao menos 3 dos 10 critérios oficiais, ou o equivalente a um prêmio internacional único (ex.: Nobel, Oscar, Pulitzer).",
+      "Exige demonstração de reconhecimento internacional sustentado, perfil mais alto que o EB-2 NIW. O USCIS avalia evidências em ao menos 3 dos 10 critérios oficiais, ou o equivalente a um prêmio internacional único (ex.: Nobel, Oscar, Pulitzer).",
     items: [
       { title: "Prêmios e reconhecimentos nacionais ou internacionais", body: "Distinções relevantes recebidas pela atuação profissional." },
       { title: "Associações exclusivas da área", body: "Membro de associações que exigem realizações excepcionais para admissão." },
@@ -225,7 +225,7 @@ const eb1: VisaPage = {
       { num: "03", title: "Aprovação e ajuste / consular", body: "Conclusão do processo, com Green Card para o requerente, cônjuge e filhos." },
     ],
     note:
-      "Premium Processing está disponível no EB-1, o que pode acelerar a resposta inicial do USCIS — sem garantir prazo total do processo.",
+      "Premium Processing está disponível no EB-1, o que pode acelerar a resposta inicial do USCIS, sem garantir prazo total do processo.",
   },
   family: {
     title: "Green Card para toda a família",
@@ -260,7 +260,7 @@ const eb3: VisaPage = {
   eyebrow: "VISTO EB-3 • EXIGE PATROCINADOR",
   h1: "EB-3: Green Card para profissionais qualificados com oferta de emprego nos EUA",
   intro:
-    "O EB-3 é uma categoria de Green Card que EXIGE oferta formal de emprego nos Estados Unidos e processo de labor certification (PERM). É um caminho secundário, mais dependente de terceiros — quando há vínculo concreto com um empregador americano disposto a patrocinar.",
+    "O EB-3 é uma categoria de Green Card que EXIGE oferta formal de emprego nos Estados Unidos e processo de labor certification (PERM). É um caminho secundário, mais dependente de terceiros, quando há vínculo concreto com um empregador americano disposto a patrocinar.",
   metaTitle: "EB-3: Green Card com patrocínio | Status na América",
   metaDescription:
     "EB-3 é o Green Card para profissionais qualificados com oferta de emprego nos EUA. Exige patrocinador e PERM. Entenda o fluxo e quando faz sentido.",
@@ -272,7 +272,7 @@ const eb3: VisaPage = {
   qualifies: {
     title: "Quando o EB-3 faz sentido",
     intro:
-      "O EB-3 é apropriado quando NÃO há perfil para EB-2 NIW ou EB-1 e existe um empregador americano disposto a conduzir o patrocínio — assumindo custos e prazos do PERM. É um caminho que depende fortemente da empresa.",
+      "O EB-3 é apropriado quando NÃO há perfil para EB-2 NIW ou EB-1 e existe um empregador americano disposto a conduzir o patrocínio, assumindo custos e prazos do PERM. É um caminho que depende fortemente da empresa.",
     items: [
       { title: "Há empregador disposto a patrocinar", body: "Empresa americana que aceita conduzir PERM, comprovar inexistência de mão-de-obra local e patrocinar o processo." },
       { title: "Profissional qualificado", body: "Diploma de bacharelado (professionals) ou pelo menos 2 anos de experiência/treinamento (skilled workers)." },
@@ -301,11 +301,11 @@ const eb3: VisaPage = {
     },
     {
       q: "EB-3 ou EB-2 NIW: qual escolher?",
-      a: "Quando há perfil para EB-2 NIW, ele costuma ser o caminho mais autônomo — dispensa patrocinador e PERM. EB-3 é indicado quando o perfil não se enquadra nas categorias autônomas e existe uma oferta concreta de emprego.",
+      a: "Quando há perfil para EB-2 NIW, ele costuma ser o caminho mais autônomo, dispensa patrocinador e PERM. EB-3 é indicado quando o perfil não se enquadra nas categorias autônomas e existe uma oferta concreta de emprego.",
     },
     {
       q: "Quanto tempo leva?",
-      a: "É a categoria mais dependente de terceiros — o PERM costuma ser a etapa mais longa. Não trabalhamos com prazos garantidos.",
+      a: "É a categoria mais dependente de terceiros, o PERM costuma ser a etapa mais longa. Não trabalhamos com prazos garantidos.",
     },
   ],
   ctaTitle: "Tem oferta de emprego nos EUA?",
@@ -318,7 +318,7 @@ export const VISA_PAGES: Record<VisaSlug, VisaPage> = {
   "eb3": eb3,
 };
 
-/** Chaves editáveis (site_content) por página — admin pode sobrescrever. */
+/** Chaves editáveis (site_content) por página, admin pode sobrescrever. */
 export const VISA_EDITABLE_KEYS = (slug: VisaSlug) =>
   [
     `visa.${slug}.h1`,

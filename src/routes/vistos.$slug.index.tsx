@@ -1,5 +1,5 @@
 /**
- * /vistos/$slug (index) — página-mãe do pilar de visto.
+ * /vistos/$slug (index), página-mãe do pilar de visto.
  *
  * Renderiza a página COMPLETA. Cada dobra tem id e o SectionTOC sticky
  * acompanha o scroll, atualizando #hash e <title> via DynamicSectionHead.
@@ -19,7 +19,7 @@ import { DynamicSectionHead } from "@/components/site/DynamicSectionHead";
 import { VISA_SECTIONS } from "@/lib/sectionMap";
 
 export const Route = createFileRoute("/vistos/$slug/")({
-  // Reusa o loader do pai (vistos.$slug.tsx) via lookup local — barato.
+  // Reusa o loader do pai (vistos.$slug.tsx) via lookup local, barato.
   loader: ({ params }): { page: VisaPage } => {
     const page = VISA_PAGES[params.slug as VisaSlug];
     return { page: page! };

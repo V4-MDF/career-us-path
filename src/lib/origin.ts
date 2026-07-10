@@ -1,5 +1,5 @@
 /**
- * origin.ts — captura de origem do lead (UTM + página interna).
+ * origin.ts, captura de origem do lead (UTM + página interna).
  *
  * Combina:
  *  - utm_*, gclid, fbclid, src (querystring no momento do submit)
@@ -9,7 +9,7 @@
  *  - landing path/title (primeira página vista nesta sessão)
  *
  * Persistência puramente client-side (sessionStorage). Nada aqui toca
- * scoring, A/B ou tracking — é só metadado para o admin.
+ * scoring, A/B ou tracking, é só metadado para o admin.
  */
 export interface LeadOrigin {
   utm: Record<string, string>;
@@ -31,7 +31,7 @@ const isBrowser = () => typeof window !== "undefined";
 
 /**
  * Chamado pelo __root.tsx a cada mudança de rota.
- * Antes de sobrescrever last_path, salva o anterior — esse "anterior"
+ * Antes de sobrescrever last_path, salva o anterior, esse "anterior"
  * é o que importa quando o usuário chega em /avaliacao.
  */
 export function trackRouteChange(pathname: string, title?: string) {
@@ -48,7 +48,7 @@ export function trackRouteChange(pathname: string, title?: string) {
     sessionStorage.setItem(SS_LAST_PATH, pathname);
     if (title) sessionStorage.setItem(SS_LAST_TITLE, title);
   } catch {
-    /* sessionStorage indisponível — ignorar */
+    /* sessionStorage indisponível, ignorar */
   }
 }
 

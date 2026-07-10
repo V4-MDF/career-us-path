@@ -1,5 +1,5 @@
 /**
- * Header — site público "Dossiê / Credencial".
+ * Header, site público "Dossiê / Credencial".
  *
  * Mudanças (Prompt 3.1):
  *  - Removidos os itens soltos EB-2 NIW / EB-1 / EB-3: agora vivem dentro de
@@ -61,15 +61,15 @@ export function Header() {
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-gold/20 bg-ink/95">
-      {/* Filete dourado superior — assinatura do dossiê */}
+      {/* Filete dourado superior, assinatura do dossiê */}
       <div className="h-px w-full bg-gold/40" />
 
       <div className="container-x flex h-[68px] items-center justify-between gap-6">
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-3 group" aria-label="Status na América — Início">
+        <Link to="/" className="flex items-center gap-3 group" aria-label="Status na América. Início">
           <img
             src={logoAsset.url}
-            alt="Status na América — Mobilidade Imigratória"
+            alt="Status na América. Mobilidade Imigratória"
             className="h-9 w-auto md:h-10"
             width={220}
             height={44}

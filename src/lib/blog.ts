@@ -1,8 +1,8 @@
 /**
- * Blog — tipos, helpers e seed de posts.
+ * Blog, tipos, helpers e seed de posts.
  *
  * Armazenamento via dataStore (tabela `blog_posts`). Cada post tem id = slug.
- * Status pode ser "rascunho" ou "publicado" — só publicados aparecem no site.
+ * Status pode ser "rascunho" ou "publicado", só publicados aparecem no site.
  */
 
 import { get, list, set, remove } from "./dataStore";
@@ -43,7 +43,7 @@ export interface BlogPost {
   tempo_leitura: number;    // minutos (auto)
 }
 
-/** Cálculo simples de tempo de leitura — ~220 palavras/min. */
+/** Cálculo simples de tempo de leitura, ~220 palavras/min. */
 export function calcReadingTime(markdown: string): number {
   const words = markdown.trim().split(/\s+/).filter(Boolean).length;
   return Math.max(1, Math.round(words / 220));
@@ -61,7 +61,7 @@ export function slugify(s: string): string {
 
 /**
  * Merge stored posts with seed posts. Em SSR (Cloudflare Worker) o
- * `dataStore` lê de localStorage e devolve `[]`, então caímos no seed —
+ * `dataStore` lê de localStorage e devolve `[]`, então caímos no seed .
  * isso garante que páginas-semente do blog tenham HTML pré-renderizado
  * para SEO/compartilhamento. No browser, posts criados/editados via admin
  * sobrescrevem o seed pelo mesmo slug.
@@ -121,19 +121,19 @@ const SEED_POSTS: BlogPost[] = [
     categoria: "Vida nos EUA",
     capa: coverCustoVida,
     resumo:
-      "Moradia, escola, saúde, mercado e poder de compra: o que muda quando uma família brasileira de classe média se muda para os EUA — sem fantasia e sem catastrofismo.",
+      "Moradia, escola, saúde, mercado e poder de compra: o que muda quando uma família brasileira de classe média se muda para os EUA, sem fantasia e sem catastrofismo.",
     autor: "Equipe Status na América",
     status: "publicado",
     data_publicacao: "2026-05-12",
     meta_title:
       "Custo de vida nos EUA: guia realista para famílias brasileiras",
     meta_description:
-      "Quanto custa viver nos Estados Unidos hoje? Moradia, escola, saúde e poder de compra para famílias brasileiras — comparativo objetivo.",
+      "Quanto custa viver nos Estados Unidos hoje? Moradia, escola, saúde e poder de compra para famílias brasileiras, comparativo objetivo.",
     og_image: coverCustoVida,
     tempo_leitura: 0, // calculado em save
     corpo: `## Por que esta conversa precisa ser honesta
 
-O custo de vida nos EUA é repetidamente medido por extremos: ou se vende uma fantasia, ou se ouve histórias de famílias quebradas pelo aluguel em Manhattan. A realidade é mais útil quando comparamos cenários reais — cidade média da Flórida, subúrbio do Texas, cidade pequena no Meio-Oeste — e olhamos para o poder de compra equivalente.
+O custo de vida nos EUA é repetidamente medido por extremos: ou se vende uma fantasia, ou se ouve histórias de famílias quebradas pelo aluguel em Manhattan. A realidade é mais útil quando comparamos cenários reais, cidade média da Flórida, subúrbio do Texas, cidade pequena no Meio-Oeste, e olhamos para o poder de compra equivalente.
 
 ## Moradia: o maior item do orçamento
 
@@ -141,7 +141,7 @@ Em cidades como Orlando, Tampa, Houston ou Dallas, uma casa de 3 quartos em bair
 
 ## Escola pública: o ponto que mais surpreende
 
-A rede pública americana, em bairros de classe média, é gratuita e funcional. É um dos itens em que o poder de compra de uma família brasileira efetivamente sobe — escolas particulares deixam de ser obrigatoriedade.
+A rede pública americana, em bairros de classe média, é gratuita e funcional. É um dos itens em que o poder de compra de uma família brasileira efetivamente sobe, escolas particulares deixam de ser obrigatoriedade.
 
 ## Saúde: planejamento, não loteria
 
@@ -149,7 +149,7 @@ O sistema de saúde americano funciona por planos privados, em geral subsidiados
 
 ## Mercado e estilo de vida
 
-Itens básicos custam, em média, o equivalente em dólar ao que custam em real no Brasil — o que, dada a paridade, representa um aumento absoluto. Em compensação, eletrônicos, carros, combustível e refeições em redes ficam significativamente mais baratos.
+Itens básicos custam, em média, o equivalente em dólar ao que custam em real no Brasil, o que, dada a paridade, representa um aumento absoluto. Em compensação, eletrônicos, carros, combustível e refeições em redes ficam significativamente mais baratos.
 
 <!-- expandir conteúdo -->
 `,
@@ -161,7 +161,7 @@ Itens básicos custam, em média, o equivalente em dólar ao que custam em real 
     categoria: "Vida nos EUA",
     capa: coverImigrantes,
     resumo:
-      "Imigração legal qualificada não é uma exceção americana — é um pilar histórico. Entenda por que profissionais que geram renda, impostos e empregos são exatamente o perfil que os EUA buscam atrair.",
+      "Imigração legal qualificada não é uma exceção americana, é um pilar histórico. Entenda por que profissionais que geram renda, impostos e empregos são exatamente o perfil que os EUA buscam atrair.",
     autor: "Equipe Status na América",
     status: "publicado",
     data_publicacao: "2026-05-20",
@@ -173,7 +173,7 @@ Itens básicos custam, em média, o equivalente em dólar ao que custam em real 
     tempo_leitura: 0,
     corpo: `## Imigração não é só o que aparece nas manchetes
 
-O debate público sobre imigração nos EUA é dominado pela imigração irregular na fronteira sul. Essa é uma realidade — mas é apenas um lado de uma equação muito maior. Em paralelo, os Estados Unidos mantêm um dos maiores programas de imigração legal qualificada do mundo, com categorias específicas (EB-1, EB-2, EB-3, EB-5) desenhadas para atrair perfis que somam à economia.
+O debate público sobre imigração nos EUA é dominado pela imigração irregular na fronteira sul. Essa é uma realidade, mas é apenas um lado de uma equação muito maior. Em paralelo, os Estados Unidos mantêm um dos maiores programas de imigração legal qualificada do mundo, com categorias específicas (EB-1, EB-2, EB-3, EB-5) desenhadas para atrair perfis que somam à economia.
 
 ## Por que esse interesse existe
 
@@ -185,7 +185,7 @@ O National Interest Waiver é, talvez, o exemplo mais explícito dessa lógica: 
 
 ## O que isso significa para você
 
-Se você é um profissional brasileiro consolidado — médico, engenheiro, empresário, especialista de área — é provável que se enquadre no perfil que a imigração legal americana foi desenhada para atrair. O caminho existe; o que define o resultado é a estruturação correta do caso.
+Se você é um profissional brasileiro consolidado, médico, engenheiro, empresário, especialista de área, é provável que se enquadre no perfil que a imigração legal americana foi desenhada para atrair. O caminho existe; o que define o resultado é a estruturação correta do caso.
 
 <!-- expandir conteúdo -->
 `,
@@ -210,23 +210,23 @@ Se você é um profissional brasileiro consolidado — médico, engenheiro, empr
     tempo_leitura: 0,
     corpo: `## Três categorias, três lógicas distintas
 
-Existem três categorias de Green Card baseado em emprego (Employment-Based) mais comuns para profissionais brasileiros qualificados: **EB-1**, **EB-2 NIW** e **EB-3**. A escolha não é uma questão de gosto — cada uma tem critérios próprios e atende a um perfil distinto.
+Existem três categorias de Green Card baseado em emprego (Employment-Based) mais comuns para profissionais brasileiros qualificados: **EB-1**, **EB-2 NIW** e **EB-3**. A escolha não é uma questão de gosto, cada uma tem critérios próprios e atende a um perfil distinto.
 
-## EB-1 — habilidade extraordinária
+## EB-1, habilidade extraordinária
 
 Perfil mais alto. Exige reconhecimento internacional comprovado na área (ao menos 3 dos 10 critérios oficiais do USCIS, ou um prêmio internacional único). Dispensa patrocinador e PERM. Veja a página completa em [/vistos/eb1](/vistos/eb1).
 
-## EB-2 NIW — interesse nacional
+## EB-2 NIW, interesse nacional
 
 Carro-chefe para profissionais consolidados. Exige grau avançado (ou bacharelado + 5 anos) ou habilidade excepcional, e demonstração de que a atuação é de interesse nacional (Matter of Dhanasar). DISPENSA patrocinador e PERM. Veja [/vistos/eb2-niw](/vistos/eb2-niw).
 
-## EB-3 — profissional qualificado com oferta de emprego
+## EB-3, profissional qualificado com oferta de emprego
 
 EXIGE empregador americano patrocinador e processo de PERM. É o caminho indicado quando há uma oferta concreta de trabalho e o perfil não se enquadra nas categorias autônomas. Veja [/vistos/eb3](/vistos/eb3).
 
 ## Como decidir
 
-A pergunta não é "qual é o melhor visto?" — é "qual é o melhor visto **para este perfil e este momento**?". A definição correta da categoria é a primeira etapa de um processo bem estruturado.
+A pergunta não é "qual é o melhor visto?", é "qual é o melhor visto **para este perfil e este momento**?". A definição correta da categoria é a primeira etapa de um processo bem estruturado.
 
 <!-- expandir conteúdo -->
 `,
@@ -239,7 +239,7 @@ A pergunta não é "qual é o melhor visto?" — é "qual é o melhor visto **pa
     categoria: "Vistos e Green Card",
     capa: coverVistos2026,
     resumo:
-      "Cenários consulares oscilam — e essa é exatamente a razão pela qual o planejamento antecipado importa. Uma leitura sóbria do que está acontecendo e como isso impacta projetos sérios de imigração.",
+      "Cenários consulares oscilam, e essa é exatamente a razão pela qual o planejamento antecipado importa. Uma leitura sóbria do que está acontecendo e como isso impacta projetos sérios de imigração.",
     autor: "Equipe Status na América",
     status: "publicado",
     data_publicacao: "2026-06-02",
@@ -251,7 +251,7 @@ A pergunta não é "qual é o melhor visto?" — é "qual é o melhor visto **pa
     tempo_leitura: 0,
     corpo: `## O que está realmente acontecendo
 
-Os tempos de processamento do USCIS e a agenda dos consulados americanos no Brasil oscilam ao longo do ano. Em 2025–2026, observam-se variações relevantes — algumas etapas mais lentas, outras mais ágeis — em função de fluxo, prioridades e capacidade.
+Os tempos de processamento do USCIS e a agenda dos consulados americanos no Brasil oscilam ao longo do ano. Em 2025–2026, observam-se variações relevantes, algumas etapas mais lentas, outras mais ágeis, em função de fluxo, prioridades e capacidade.
 
 ## Por que tratar isso com sobriedade importa
 

@@ -1,10 +1,10 @@
 /**
- * DualFlagIcons — SVGs inline monocromáticos das bandeiras BR e US.
+ * DualFlagIcons. SVGs inline monocromáticos das bandeiras BR e US.
  *
  * Usados como accents em eyebrows, cabeçalhos de cards e watermarks
  * discretos para reforçar a dualidade "Brasil ↔ EUA" sem colar
  * bandeiras coloridas literais (que destoariam do sistema Dossiê).
- * Cor herdada de `currentColor` — combina com qualquer surface.
+ * Cor herdada de `currentColor`, combina com qualquer surface.
  */
 
 import type { SVGProps } from "react";
@@ -52,7 +52,7 @@ export function FlagUS({ title = "Estados Unidos", className, ...rest }: FlagPro
       ))}
       {/* canton */}
       <rect x="1" y="1" width="26" height="20" fill="currentColor" fillOpacity="0.12" />
-      {/* estrelas simplificadas — pontos */}
+      {/* estrelas simplificadas, pontos */}
       {[5, 10, 15, 20].map((x) =>
         [5, 10, 15].map((y) => (
           <circle key={`${x}-${y}`} cx={x + 1.5} cy={y + 1.5} r="0.9" fill="currentColor" stroke="none" />
@@ -62,7 +62,7 @@ export function FlagUS({ title = "Estados Unidos", className, ...rest }: FlagPro
   );
 }
 
-/** Par de bandeirinhas com filete dourado entre elas — para eyebrows de dobra. */
+/** Par de bandeirinhas com filete dourado entre elas, para eyebrows de dobra. */
 export function FlagsBRUSDual({ className = "" }: { className?: string }) {
   return (
     <span className={`inline-flex items-center gap-2 ${className}`} aria-hidden>

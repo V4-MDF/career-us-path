@@ -1,5 +1,5 @@
 /**
- * Glifos de bandeiras BR e US — SVG inline, monocromáticos por padrão (currentColor)
+ * Glifos de bandeiras BR e US. SVG inline, monocromáticos por padrão (currentColor)
  * ou em cores oficiais quando `color="brand"`. Sem dependência externa.
  */
 import type { SVGProps } from "react";

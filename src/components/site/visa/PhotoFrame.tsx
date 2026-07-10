@@ -1,16 +1,16 @@
 /**
- * PhotoFrame — moldura fotográfica padrão do site "Status na América".
+ * PhotoFrame, moldura fotográfica padrão do site "Status na América".
  *
  * Aplica o tratamento visual único a QUALQUER fotografia usada nas páginas
  * de visto: warmth dourada leve, contraste elevado sutil, dessaturação
- * discreta, grão fino e vinheta — para que toda foto pareça da mesma
+ * discreta, grão fino e vinheta, para que toda foto pareça da mesma
  * "família visual" (Dossiê/Credencial).
  *
  * Uso:
  *   <PhotoFrame src={img} alt="..." ratio="4/5" priority />
  *   <PhotoFrame src={img} alt="..." fill /> // preenche o pai (position:relative)
  *
- * NUNCA usar ilustração/imagem genérica de IA — sempre fotografia real
+ * NUNCA usar ilustração/imagem genérica de IA, sempre fotografia real
  * art-direcionada com este tratamento.
  */
 import { cn } from "@/lib/utils";
@@ -22,7 +22,7 @@ interface PhotoFrameProps {
   ratio?: string;
   /** Preenche o container pai (position:absolute inset-0). */
   fill?: boolean;
-  /** LCP hint — usar apenas no hero. */
+  /** LCP hint, usar apenas no hero. */
   priority?: boolean;
   className?: string;
   width?: number;
@@ -55,7 +55,7 @@ export function PhotoFrame({
         className="h-full w-full object-cover"
         style={{ objectPosition: focal }}
       />
-      {/* Grão fino + vinheta discreta — parte do tratamento padrão. */}
+      {/* Grão fino + vinheta discreta, parte do tratamento padrão. */}
       <div aria-hidden className="photo-treatment__grain" />
       <div aria-hidden className="photo-treatment__vignette" />
     </div>

@@ -131,7 +131,7 @@ function RootComponent() {
   // de onde o lead veio (página do site, não só utm_*).
   useEffect(() => {
     trackRouteChange(pathname, typeof document !== "undefined" ? document.title : undefined);
-    // Garante uma sessão por aba — alimenta /admin/origens com total de
+    // Garante uma sessão por aba, alimenta /admin/origens com total de
     // visitantes, não só leads.
     void ensureSession(pathname);
   }, [pathname]);

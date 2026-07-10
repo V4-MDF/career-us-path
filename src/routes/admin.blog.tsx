@@ -1,5 +1,5 @@
 /**
- * /admin/blog — CRUD de posts do blog.
+ * /admin/blog. CRUD de posts do blog.
  *
  * Lista, criação, edição, publicação/despublicação e exclusão. Editor de
  * markdown com preview ao vivo (react-markdown). Capa via URL ou upload
@@ -189,7 +189,7 @@ function PostEditor({ post, onClose }: { post: BlogPost; onClose: () => void }) 
     setData(next);
   }
 
-  // Upload de capa passou a ir para o CDN via <ImageUploader /> — o componente
+  // Upload de capa passou a ir para o CDN via <ImageUploader />, o componente
   // devolve a URL pública direto no `onChange`. Base64 legado é detectado e
   // pede re-upload.
 

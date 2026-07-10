@@ -11,7 +11,7 @@ import { useAvaliacaoHref } from "@/lib/ctaLinks";
  *  - Fixed no bottom, respeita safe-area (iOS).
  *  - Não empurra layout: usa `position: fixed` + `pointer-events` gated.
  *  - Respeita prefers-reduced-motion (fade sem translate).
- *  - Renderiza null no SSR para evitar flash — só monta após primeiro effect.
+ *  - Renderiza null no SSR para evitar flash, só monta após primeiro effect.
  */
 export function StickyCta() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
