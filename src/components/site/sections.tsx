@@ -793,9 +793,9 @@ export function PartnersBadges() {
                   loading="lazy"
                 />
               ) : (
-                <div className="text-center px-2">
-                  <ShieldCheck className="h-5 w-5 text-gold/70 mx-auto" aria-hidden />
-                  <span className="mt-1 block font-mono-label text-ink-text/70 text-[10.5px] leading-tight">
+                <div className="text-center px-2 flex flex-col items-center">
+                  <PatchIcon label={s.label} />
+                  <span className="mt-1.5 block font-mono-label text-ink-text/70 text-[10.5px] leading-tight">
                     {s.label}
                   </span>
                 </div>
