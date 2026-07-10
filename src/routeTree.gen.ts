@@ -31,6 +31,7 @@ import { Route as AdminTrackingRouteImport } from './routes/admin.tracking'
 import { Route as AdminSeoRouteImport } from './routes/admin.seo'
 import { Route as AdminSegmentosRouteImport } from './routes/admin.segmentos'
 import { Route as AdminScoringRouteImport } from './routes/admin.scoring'
+import { Route as AdminSalariosRouteImport } from './routes/admin.salarios'
 import { Route as AdminPreQualificacaoRouteImport } from './routes/admin.pre-qualificacao'
 import { Route as AdminOrigensRouteImport } from './routes/admin.origens'
 import { Route as AdminMidiaRouteImport } from './routes/admin.midia'
@@ -159,6 +160,11 @@ const AdminScoringRoute = AdminScoringRouteImport.update({
   path: '/scoring',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminSalariosRoute = AdminSalariosRouteImport.update({
+  id: '/salarios',
+  path: '/salarios',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminPreQualificacaoRoute = AdminPreQualificacaoRouteImport.update({
   id: '/pre-qualificacao',
   path: '/pre-qualificacao',
@@ -257,6 +263,7 @@ export interface FileRoutesByFullPath {
   '/admin/midia': typeof AdminMidiaRoute
   '/admin/origens': typeof AdminOrigensRoute
   '/admin/pre-qualificacao': typeof AdminPreQualificacaoRoute
+  '/admin/salarios': typeof AdminSalariosRoute
   '/admin/scoring': typeof AdminScoringRoute
   '/admin/segmentos': typeof AdminSegmentosRoute
   '/admin/seo': typeof AdminSeoRoute
@@ -295,6 +302,7 @@ export interface FileRoutesByTo {
   '/admin/midia': typeof AdminMidiaRoute
   '/admin/origens': typeof AdminOrigensRoute
   '/admin/pre-qualificacao': typeof AdminPreQualificacaoRoute
+  '/admin/salarios': typeof AdminSalariosRoute
   '/admin/scoring': typeof AdminScoringRoute
   '/admin/segmentos': typeof AdminSegmentosRoute
   '/admin/seo': typeof AdminSeoRoute
@@ -334,6 +342,7 @@ export interface FileRoutesById {
   '/admin/midia': typeof AdminMidiaRoute
   '/admin/origens': typeof AdminOrigensRoute
   '/admin/pre-qualificacao': typeof AdminPreQualificacaoRoute
+  '/admin/salarios': typeof AdminSalariosRoute
   '/admin/scoring': typeof AdminScoringRoute
   '/admin/segmentos': typeof AdminSegmentosRoute
   '/admin/seo': typeof AdminSeoRoute
@@ -375,6 +384,7 @@ export interface FileRouteTypes {
     | '/admin/midia'
     | '/admin/origens'
     | '/admin/pre-qualificacao'
+    | '/admin/salarios'
     | '/admin/scoring'
     | '/admin/segmentos'
     | '/admin/seo'
@@ -413,6 +423,7 @@ export interface FileRouteTypes {
     | '/admin/midia'
     | '/admin/origens'
     | '/admin/pre-qualificacao'
+    | '/admin/salarios'
     | '/admin/scoring'
     | '/admin/segmentos'
     | '/admin/seo'
@@ -451,6 +462,7 @@ export interface FileRouteTypes {
     | '/admin/midia'
     | '/admin/origens'
     | '/admin/pre-qualificacao'
+    | '/admin/salarios'
     | '/admin/scoring'
     | '/admin/segmentos'
     | '/admin/seo'
@@ -643,6 +655,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminScoringRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/salarios': {
+      id: '/admin/salarios'
+      path: '/salarios'
+      fullPath: '/admin/salarios'
+      preLoaderRoute: typeof AdminSalariosRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/pre-qualificacao': {
       id: '/admin/pre-qualificacao'
       path: '/pre-qualificacao'
@@ -764,6 +783,7 @@ interface AdminRouteChildren {
   AdminMidiaRoute: typeof AdminMidiaRoute
   AdminOrigensRoute: typeof AdminOrigensRoute
   AdminPreQualificacaoRoute: typeof AdminPreQualificacaoRoute
+  AdminSalariosRoute: typeof AdminSalariosRoute
   AdminScoringRoute: typeof AdminScoringRoute
   AdminSegmentosRoute: typeof AdminSegmentosRoute
   AdminSeoRoute: typeof AdminSeoRoute
@@ -785,6 +805,7 @@ const AdminRouteChildren: AdminRouteChildren = {
   AdminMidiaRoute: AdminMidiaRoute,
   AdminOrigensRoute: AdminOrigensRoute,
   AdminPreQualificacaoRoute: AdminPreQualificacaoRoute,
+  AdminSalariosRoute: AdminSalariosRoute,
   AdminScoringRoute: AdminScoringRoute,
   AdminSegmentosRoute: AdminSegmentosRoute,
   AdminSeoRoute: AdminSeoRoute,
