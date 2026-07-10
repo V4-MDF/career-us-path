@@ -64,7 +64,7 @@ function AuthPage() {
           <img
             src={logoAsset.url}
             alt="Status na América"
-            className="mx-auto h-14 w-14 rounded-lg object-contain bg-parchment/5 p-1.5"
+            className="mx-auto h-12 w-auto object-contain"
           />
           <h1 className="mt-5 font-display text-lg font-bold uppercase tracking-[0.14em] text-parchment">
             Status na América

@@ -1,38 +1,30 @@
-# Suporte a YouTube nos campos de vídeo do admin
+## Diagnóstico
 
-## Estado atual
-- No admin (`/admin/conteudo` → Home → "Depoimentos em vídeo · Estudos de caso") já existem dois campos de URL de vídeo: `testimonials.helderVideoUrl` e `testimonials.secondaryVideoUrl`.
-- Porém a Home renderiza esses valores com `<video src={url}>` (em `src/components/site/sections.tsx`), que só toca arquivos de vídeo diretos (MP4/WebM). Colar um link do YouTube ali resulta em player quebrado.
-- Nenhum outro lugar do site consome vídeo hoje (fiz a busca).
+O logo hoje é servido por um único asset compartilhado: `src/assets/logo-status-na-america.png.asset.json`. Ele é o "monograma stacked" (STATUS grande + NA AMÉRICA em dourado + selo azul), diferente da versão horizontal enviada por você ("S" dourado em box + "Status. na América" em wordmark).
 
-## O que fazer
+Usos no código (todos apontam para o mesmo asset, então trocar o asset resolve os três):
 
-### 1. Utilitário `src/lib/videoEmbed.ts` (novo)
-Função `parseVideoUrl(url)` que devolve:
-- `{ kind: "youtube", embedUrl, id }` para `youtube.com/watch?v=`, `youtu.be/`, `youtube.com/shorts/`, `youtube.com/embed/`.
-- `{ kind: "vimeo", embedUrl, id }` para `vimeo.com/<id>`.
-- `{ kind: "file", src }` para URLs de arquivo direto (`.mp4`, `.webm`, `.mov`) ou qualquer outra URL http(s).
-- `null` se vazio/ inválido.
+- `src/components/site/Header.tsx` — header fixo do site inteiro
+- `src/routes/auth.tsx` — tela de login do admin
+- `src/routes/avaliacao.index.tsx` — página `/avaliacao`
 
-URLs de embed do YouTube usam `https://www.youtube-nocookie.com/embed/<id>?rel=0&modestbranding=1` (privacy-friendly, sem "vídeos relacionados" de terceiros).
+Não há outros `<img>` de logo espalhados. Favicon (`public/favicon.png`) e `og-image` são arquivos separados.
 
-### 2. Componente `src/components/site/VideoPlayer.tsx` (novo)
-Recebe `url`, `title`, `className`. Usa `parseVideoUrl`:
-- `youtube`/`vimeo` → `<iframe>` responsivo com `allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"` e `allowFullScreen`, `loading="lazy"`, `title={title}`.
-- `file` → `<video src controls preload="metadata">` (comportamento atual).
-- `null` → placeholder "VÍDEO EM BREVE" já existente (extraído do `sections.tsx`).
+## Plano
 
-### 3. Substituir o bloco `<video>` em `src/components/site/sections.tsx`
-No slot de depoimentos (linhas ~661–676), trocar o `<video>`/placeholder por `<VideoPlayer url={v.url} title={v.name} />`. O layout externo (aspect-video, ring de âncora, caption) fica igual.
+1. **Novo asset do logo** — usar a imagem que você anexou (S em box dourado + "Status. na América" em wordmark) e subir via `lovable-assets` como o novo `logo-status-na-america.png`, sobrescrevendo o pointer `src/assets/logo-status-na-america.png.asset.json`.
+   - Como o pointer é imutável (UUID único), o passo real é: gerar um novo pointer e reescrever o JSON, além de deletar o asset antigo do CDN.
+2. **Ajustar dimensões do `<img>`** onde o wordmark horizontal exige proporção diferente da stacked:
+   - `Header.tsx`: `h-8 md:h-10` (era `h-12 md:h-14`) — o wordmark horizontal fica desproporcional na altura atual.
+   - `avaliacao.index.tsx`: mesma redução proporcional no topo do formulário.
+   - `auth.tsx`: mesma redução.
+3. **Favicon e og:image** — manter como estão (não fazem parte do escopo "logo do site"). Se você quiser, posso trocar o favicon para o "S" em box num passo seguinte.
 
-### 4. Melhoria de UX no admin (`src/routes/admin.conteudo.tsx`)
-Nos dois labels de URL de vídeo (`helderVideoUrl`, `secondaryVideoUrl`), trocar de:
-- `"Slot Helder · URL do vídeo (mp4/hospedado)"` → `"Slot Helder · URL do vídeo (YouTube, Vimeo ou MP4)"`
-- idem para o slot secundário.
+## Ponto a confirmar
 
-Não precisa mudar o widget de input — segue sendo um campo de texto simples. A detecção de formato acontece na renderização.
+A imagem anexada no chat é uma captura de tela pequena e escura, não um arquivo de logo em alta resolução. Antes de subir, preciso saber:
 
-## Fora de escopo
-- Não estou adicionando upload de vídeo (só link externo).
-- Não estou tocando na hero nem em outras dobras — não há outros campos de vídeo no site hoje.
-- Sem mudança de schema no Supabase; os valores continuam em `site_content` como string.
+- **Você tem o arquivo do logo horizontal em alta resolução (PNG/SVG com fundo transparente)?** O ideal é subir esse arquivo — usar o screenshot direto vai deixar o logo serrilhado e com fundo preto sólido em vez de transparente, e o problema se repete.
+- Se não tiver o arquivo original, eu posso gerar uma versão vetorial/limpa a partir do screenshot (S dourado em box com borda + wordmark "Status. na América" sobre transparente), mas será uma reconstrução, não o arquivo oficial.
+
+Me diga qual caminho: **(a) enviar o arquivo original em alta resolução** ou **(b) reconstruir a partir do screenshot**. Aí executo a troca em um passo só.

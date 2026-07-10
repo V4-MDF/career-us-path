@@ -70,9 +70,9 @@ export function Header() {
           <img
             src={logoAsset.url}
             alt="Status na América — Mobilidade Imigratória"
-            className="h-12 w-auto md:h-14"
-            width={160}
-            height={56}
+            className="h-9 w-auto md:h-10"
+            width={220}
+            height={44}
             decoding="async"
           />
         </Link>
