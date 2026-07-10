@@ -134,13 +134,11 @@ export function Hero() {
 
         </div>
 
-        {/* Bloco editorial estático (sem parallax por scroll). */}
-        <div className="relative hidden lg:block">
-          <div className="relative aspect-[4/5] overflow-hidden rounded-3xl border border-gold/30 bg-ink-raise shadow-elevated">
-        {/* Bloco editorial estático (sem parallax por scroll). Tratamento de cor
-            único (.photo-treatment) unifica a foto com o restante do site. */}
+        {/* Bloco editorial estático. Tratamento de cor único (.photo-treatment)
+            unifica a foto com o restante do site. */}
         <div className="relative hidden lg:block">
           <div className="photo-treatment relative aspect-[4/5] overflow-hidden rounded-3xl border border-gold/40 bg-ink-raise shadow-elevated">
+
             {/* Fotografia editorial: família brasileira em subúrbio americano ao pôr do sol. */}
             <img
               src={familySuburbUsa}
