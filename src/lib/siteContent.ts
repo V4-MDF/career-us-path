@@ -34,6 +34,8 @@ export const defaultContent = {
   "hero.cta": "Fazer minha análise gratuita",
   "hero.proof":
     "+1.000 famílias atendidas · Nota 5,0 no Google · Sede em Orlando, Flórida",
+  "hero.videoUrl": "",
+  "hero.posterUrl": "",
 
   "contrast.title": "Você não precisa começar do zero.",
   "contrast.subtitle": "Precisa de um novo cenário para a carreira que você já construiu.",
