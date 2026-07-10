@@ -19,7 +19,7 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription } from "
 import { Badge } from "@/components/ui/badge";
 import { Slider } from "@/components/ui/slider";
 import { PageHeader, StatCard, SectionCard } from "@/components/admin/ui";
-import { list, set } from "@/lib/dataStore";
+import { list, set, remove } from "@/lib/dataStore";
 import type { LeadOrigin } from "@/lib/origin";
 import type { LeadInput } from "@/lib/leadScoring";
 import {
