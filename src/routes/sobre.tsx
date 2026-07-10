@@ -15,7 +15,6 @@ import {
   MapPin,
   ShieldCheck,
   BadgeCheck,
-  Users,
   Home as HomeIcon,
   Landmark,
   GraduationCap,
