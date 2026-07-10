@@ -23,6 +23,8 @@ import visaHeroEb3 from "@/assets/visa-hero-eb3.jpg";
 // beneficiário no exercício da sua competência, não a empresa/consultoria.
 // Substituir por fotografia real art-direcionada com o tratamento padrão.
 import visaDefinitionEb2Niw from "@/assets/visa-eb2-niw-definition.jpg";
+import visaDefinitionEb1 from "@/assets/visa-eb1-definition.jpg";
+import visaDefinitionEb3 from "@/assets/visa-eb3-definition.jpg";
 
 export const defaultContent = {
   "hero.eyebrow": "IMIGRAÇÃO PARA OS ESTADOS UNIDOS. EB-2 NIW",
@@ -116,7 +118,7 @@ export const defaultContent = {
   // Substituir por fotografia real art-direcionada com o tratamento padrão —
   // nunca imagem genérica de IA; imagem específica deste visto, não compartilhada.
   "visa.eb1.heroImage": visaHeroEb1,
-  "visa.eb1.definitionImage": "",
+  "visa.eb1.definitionImage": visaDefinitionEb1,
   "visa.eb3.heroSubtitle":
     "O Green Card com oferta formal de emprego nos EUA, exige patrocinador e PERM.",
   "visa.eb3.heroVideoUrl": "",
@@ -127,7 +129,7 @@ export const defaultContent = {
   // tratamento padrão — nunca imagem genérica de IA; imagem específica deste
   // visto, não compartilhada.
   "visa.eb3.heroImage": visaHeroEb3,
-  "visa.eb3.definitionImage": "",
+  "visa.eb3.definitionImage": visaDefinitionEb3,
 
   // ==== Página de Contato =========================================
   "contato.eyebrow": "FALE CONOSCO",
