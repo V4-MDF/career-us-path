@@ -325,6 +325,14 @@ const eb3: VisaPage = {
       q: "Quanto tempo leva?",
       a: "É a categoria mais dependente de terceiros, o PERM costuma ser a etapa mais longa. Não trabalhamos com prazos garantidos.",
     },
+    {
+      q: "As taxas do governo americano estão incluídas no valor da assessoria?",
+      a: "Não. Existem duas coisas diferentes: (1) as taxas oficiais do governo americano (USCIS), pagas diretamente ao órgão; e (2) o valor da nossa assessoria, que cobre a preparação e organização estratégica do seu processo. São separados. As taxas do USCIS são definidas pelo próprio governo, podem mudar e são pagas por formulário. Na fase final (Green Card), parte das taxas é individual — cônjuge e filhos têm suas próprias taxas. Na sua análise gratuita, explicamos exatamente quais taxas se aplicam ao seu caso e à sua família.",
+    },
+    {
+      q: "Preciso pagar taxas separadas para minha família?",
+      a: "Na etapa da petição inicial, a taxa é do requerente principal. Já na etapa final de Green Card, cônjuge e filhos entram com seus próprios formulários e taxas — há custos individuais por pessoa nessa fase. Detalhamos na análise, conforme o tamanho da sua família.",
+    },
   ],
   ctaTitle: "Tem oferta de emprego nos EUA?",
   ctaSubtitle: "Em 48h indicamos se o EB-3 é o caminho mais coerente ou se existe perfil para EB-2 NIW ou EB-1 (caminhos sem patrocinador).",
