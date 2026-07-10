@@ -41,7 +41,7 @@ import { HeroBackgroundMedia } from "./HeroBackgroundMedia";
 
 import passportDocuments from "@/assets/passport-documents.jpg";
 import usMapEngraving from "@/assets/us-map-engraving.webp";
-import familySuburbUsa from "@/assets/home-family-suburb-usa.jpg";
+
 
 import visaFamilyFuture from "@/assets/visa-family-future.jpg";
 import { PhotoFrame } from "./visa/PhotoFrame";
