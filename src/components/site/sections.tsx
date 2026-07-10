@@ -73,8 +73,8 @@ export function Hero() {
       {/* Fundo da hero: vídeo (desktop, sem reduced-motion) ou poster estático.
           Fallback silencioso para hero-skyline se não houver configuração no admin. */}
       <HeroBackgroundMedia videoUrl={heroVideoUrl} posterUrl={heroPosterUrl} />
-      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-[#0A111C]/95 via-[#0A111C]/85 to-[#0A111C]/60" />
-      <div className="absolute inset-0 -z-10 bg-gradient-to-r from-ink/80 via-ink/40 to-ink/50" />
+      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-[#0A111C]/70 via-[#0A111C]/45 to-[#0A111C]/25" />
+      <div className="absolute inset-0 -z-10 bg-gradient-to-r from-ink/55 via-ink/15 to-ink/25" />
 
       {/* Grão fino global para unificar a hero com o tratamento das fotos. */}
       <div aria-hidden className="absolute inset-0 -z-10 opacity-[0.06] mix-blend-overlay [background-image:radial-gradient(rgba(255,255,255,0.6)_1px,transparent_1px)] [background-size:3px_3px]" />
