@@ -10,7 +10,7 @@ import { Link } from "@tanstack/react-router";
 import { CheckCircle2, BookOpen, FileText, ChevronLeft, Mail, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { trackLead } from "@/lib/tracking";
-import { buildWhatsAppLink, leadWhatsAppMessage, type LeadWhatsAppInput } from "@/lib/whatsapp";
+import { buildWhatsAppLink, leadWhatsAppMessage, defaultWhatsAppMessage, type LeadWhatsAppInput } from "@/lib/whatsapp";
 
 const SS_QUALIFICATION = "lastQualificationResult";
 const SS_QUALIFIED_LEAD = "lastQualifiedLead";
@@ -89,15 +89,19 @@ export function ObrigadoQualificado() {
 
   useEffect(() => {
     if (typeof window === "undefined") return;
+
     let raw: string | null = null;
     try { raw = window.sessionStorage.getItem(SS_QUALIFIED_LEAD); } catch { /* noop */ }
-    if (!raw) return;
+
     let lead: LeadWhatsAppInput | null = null;
-    try { lead = JSON.parse(raw) as LeadWhatsAppInput; } catch { lead = null; }
-    if (!lead) return;
+    if (raw) {
+      try { lead = JSON.parse(raw) as LeadWhatsAppInput; } catch { lead = null; }
+    }
+
+    const message = lead ? leadWhatsAppMessage(lead) : defaultWhatsAppMessage();
 
     let cancelled = false;
-    buildWhatsAppLink(leadWhatsAppMessage(lead)).then((href) => {
+    buildWhatsAppLink(message).then((href) => {
       if (cancelled) return;
       setWaHref(href);
       window.setTimeout(() => {
@@ -129,24 +133,32 @@ export function ObrigadoQualificado() {
 
         <p className="mt-6 text-base md:text-lg text-foreground/80 leading-relaxed max-w-[560px] mx-auto">
           Nossa equipe vai analisar o seu perfil com atenção e entrar em contato em
-          até 48h pelo canal informado.
+          até 48h pelo canal informado. Se preferir, inicie a conversa agora pelo
+          WhatsApp.
         </p>
 
-        {waHref && (
-          <div className="mt-10 mx-auto max-w-[520px] border border-gold/30 bg-ink-raise/40 rounded-lg p-5">
-            <p className="text-sm text-foreground/80">
-              {popupBlocked
-                ? "Seu navegador bloqueou a abertura automática. Fale com nossa equipe agora pelo WhatsApp:"
-                : "Estamos abrindo o WhatsApp com seus dados. Se a janela não abrir, use o botão abaixo:"}
-            </p>
-            <a href={waHref} target="_blank" rel="noopener noreferrer" className="inline-block mt-4">
-              <Button size="lg" className="btn-label h-12 px-6 gap-2">
+        <div className="mt-10 flex flex-col items-center gap-4">
+          {waHref ? (
+            <a href={waHref} target="_blank" rel="noopener noreferrer" className="inline-block">
+              <Button size="lg" className="btn-label h-12 px-8 gap-2">
                 <MessageCircle className="h-4 w-4" />
-                Abrir WhatsApp agora
+                Conversar no WhatsApp
               </Button>
             </a>
-          </div>
-        )}
+          ) : (
+            <Button size="lg" className="btn-label h-12 px-8 gap-2" disabled>
+              <MessageCircle className="h-4 w-4" />
+              Carregando WhatsApp…
+            </Button>
+          )}
+
+          {popupBlocked && waHref && (
+            <div className="mx-auto max-w-[520px] border border-gold/30 bg-ink-raise/40 rounded-lg p-4 text-sm text-foreground/80">
+              Seu navegador bloqueou a abertura automática. Use o botão acima para
+              falar com nossa equipe pelo WhatsApp.
+            </div>
+          )}
+        </div>
 
         <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
           <a
@@ -158,6 +170,11 @@ export function ObrigadoQualificado() {
               Conheça nossas redes sociais
             </Button>
           </a>
+          <Link to="/">
+            <Button size="lg" variant="outline" className="btn-label h-12 px-6 border-gold/40 text-foreground hover:bg-gold/10">
+              Voltar ao site
+            </Button>
+          </Link>
         </div>
 
         <div className="mt-14 grid sm:grid-cols-3 gap-5 text-left">
