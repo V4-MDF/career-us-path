@@ -1,0 +1,24 @@
+# Status na América
+
+> Consultoria brasileira de imigração por mérito para os Estados Unidos, especializada em preparação documental para os vistos EB-2 NIW, EB-1 e EB-3 (Green Card baseado em emprego).
+
+Empresa registrada nos EUA (EIN 99-4846502, Orlando/FL) e no Brasil (CNPJ 62.917.376/0001-21). Acreditada pelo BBB e com 130+ avaliações 5★. Foco exclusivo em vistos de emprego por mérito, com Green Card estendido a cônjuge e filhos.
+
+## Páginas
+
+- [Home](/): Visão geral, elegibilidade e caminho para o Green Card EB-2 NIW.
+- [Sobre](/sobre): Quem somos, credenciais e método.
+- [Contato](/contato): Canais de atendimento.
+- [Análise gratuita](/avaliacao): Formulário para diagnóstico individual do perfil.
+- [Pré-qualificação rápida](/pre-qualificacao): Teste curto que aponta o visto mais compatível.
+
+## Vistos
+
+- [EB-2 NIW](/vistos/eb2-niw): Green Card por interesse nacional dos EUA para profissionais qualificados.
+- [EB-1](/vistos/eb1): Green Card para profissionais de habilidade extraordinária.
+- [EB-3](/vistos/eb3): Green Card por oferta de emprego para profissionais qualificados e trabalhadores.
+
+## Conteúdo
+
+- [Blog](/blog): Artigos sobre imigração, custo de vida, processo consular e critérios do USCIS.
+- [Informações para LLMs](/llm-info): Resumo estruturado sobre a empresa e serviços.

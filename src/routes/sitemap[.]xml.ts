@@ -12,7 +12,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
 
-const BASE_URL = "";
+const BASE_URL = "https://lp.statusnaamerica.com";
 
 interface SitemapEntry {
   path: string;
@@ -66,6 +66,8 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/sobre", changefreq: "monthly", priority: "0.7" },
           { path: "/contato", changefreq: "monthly", priority: "0.6" },
           { path: "/blog", changefreq: "weekly", priority: "0.7" },
+          { path: "/pre-qualificacao", changefreq: "monthly", priority: "0.8" },
+          { path: "/avaliacao", changefreq: "monthly", priority: "0.8" },
           { path: "/llm-info", changefreq: "monthly", priority: "0.5" },
           ...SEED_POST_SLUGS.map((slug) => ({
             path: `/blog/${slug}`,
