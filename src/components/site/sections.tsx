@@ -17,8 +17,8 @@ import { Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import {
   Award, Briefcase, Building2, CheckCircle2, FileText,
-  GraduationCap, Heart, Layers, MapPin, PlayCircle, ShieldCheck,
-  Sparkles, Star, Stethoscope, TrendingUp, Users, Wrench,
+  GraduationCap, Heart, Landmark, Layers, MapPin, PlayCircle, Scale, ShieldCheck,
+  Sparkles, Star, Stamp, Star as StarIcon, Stethoscope, TrendingUp, Users, Wrench,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
