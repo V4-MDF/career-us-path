@@ -148,7 +148,7 @@ export function Header() {
 
         {/* CTA */}
         <div className="flex items-center gap-3">
-          <a href={useAvaliacaoHref("header_cta")} className="hidden sm:block">
+          <a href={avaliacaoHeaderHref} className="hidden sm:block">
             <Button size="sm" className="btn-label btn-sweep h-10 px-5">Análise gratuita</Button>
           </a>
           <button
