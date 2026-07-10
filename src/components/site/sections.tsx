@@ -65,7 +65,8 @@ export function Hero() {
       aria-label="Abertura"
       className="section-anchor relative overflow-hidden pt-32 md:pt-44 pb-24 md:pb-36"
     >
-      {/* Skyline NYC ao amanhecer, atmosfera EUA. Overlay forte preserva legibilidade. */}
+      {/* Fotografia art-direcionada: skyline EUA + família em contexto americano.
+          Overlay navy forte (85%→55%) preserva contraste AA sobre a foto. */}
       <div aria-hidden className="absolute inset-0 -z-20">
         <img
           src={heroSkyline}
@@ -73,12 +74,15 @@ export function Hero() {
           width={1600}
           height={1024}
           fetchPriority="high"
-          className="h-full w-full object-cover object-bottom opacity-[0.22] motion-safe:[mask-image:linear-gradient(to_bottom,black_40%,transparent_100%)]"
+          className="h-full w-full object-cover object-bottom opacity-[0.35] motion-safe:[mask-image:linear-gradient(to_bottom,black_45%,transparent_100%)]"
         />
       </div>
-      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-ink/95 via-ink/90 to-ink" />
+      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-[#0A111C]/95 via-[#0A111C]/85 to-[#0A111C]/55" />
+      <div className="absolute inset-0 -z-10 bg-gradient-to-r from-ink/70 via-transparent to-ink/40" />
+      {/* Grão fino global para unificar a hero com o tratamento das fotos. */}
+      <div aria-hidden className="absolute inset-0 -z-10 opacity-[0.06] mix-blend-overlay [background-image:radial-gradient(rgba(255,255,255,0.6)_1px,transparent_1px)] [background-size:3px_3px]" />
       {/* Motivo geográfico BR→USA, dot-grid + rota tracejada estática. */}
-      <div aria-hidden className="absolute inset-0 -z-10 text-gold">
+      <div aria-hidden className="absolute inset-0 -z-10 text-gold/70">
         <BrUsRouteBackdrop />
       </div>
 
