@@ -119,21 +119,12 @@ function ContatoPage() {
     getSiteSettings().then(setSettings).catch(() => {});
   }, []);
 
-  const waHref = useMemo(
-    () =>
-      whatsappLinkFor(
-        settings.whatsapp_br || defaultSettings.whatsapp_br,
-        "Olá! Vim pela página de contato do site e gostaria de tirar uma dúvida."
-      ),
-    [settings.whatsapp_br]
-  );
-
   return (
     <>
       <Header />
       <main className="bg-parchment text-ink-text">
-        <ContatoHero eyebrow={eyebrow} title={title} subtitle={subtitle} waHref={waHref} />
-        <CanaisDiretos settings={settings} waHref={waHref} />
+        <ContatoHero eyebrow={eyebrow} title={title} subtitle={subtitle} />
+        <CanaisDiretos settings={settings} />
         <ContatoForm />
         <MapaDiscreto />
         <PartnersBadges />
