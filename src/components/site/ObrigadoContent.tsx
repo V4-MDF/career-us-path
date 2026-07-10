@@ -106,8 +106,6 @@ export function ObrigadoQualificado() {
         </p>
 
         <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
-
-        <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
           <a
             href="https://www.instagram.com/statusamerica.br/"
             target="_blank"
