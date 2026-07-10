@@ -35,10 +35,10 @@ export function Footer() {
             <img
               src={logoAsset.url}
               alt="Status na América"
-              width={220}
-              height={56}
+              width={280}
+              height={70}
               loading="lazy"
-              className="h-12 w-auto"
+              className="h-14 w-auto"
             />
           </Link>
           <p className="mt-6 max-w-sm text-sm text-foreground/80 leading-relaxed">
