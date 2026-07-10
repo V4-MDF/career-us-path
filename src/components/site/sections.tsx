@@ -322,7 +322,7 @@ export function NiwSection() {
   ];
   return (
     <Reveal as="section" id="eb-2-niw" className="section-pad relative">
-      <div className="absolute inset-0 -z-10 guilloche" />
+      
       <div className="container-x grid lg:grid-cols-2 gap-14 items-center">
         <div>
           <SectionHead num="02" eyebrow="CARRO-CHEFE. EB-2 NIW" title={title} />
