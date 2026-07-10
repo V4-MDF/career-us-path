@@ -217,10 +217,32 @@ export function ContrastBrasilEUA() {
   const subtitle = useContent("contrast.subtitle");
 
   const cards = [
-    { code: "BR", title: ["Realidade", "no Brasil"], items: brasil, accent: "var(--brazil-green)", Map: BrazilMap,
-      photo: brasilSomber, photoAlt: "Vista de cidade brasileira em dia cinza através de janela com chuva", photoTone: "grayscale" },
-    { code: "US", title: ["Oportunidades", "nos EUA"], items: eua, accent: "var(--usa-blue)", Map: UsaMap,
-      photo: familySuburbUsa, photoAlt: "Família brasileira em subúrbio americano ao entardecer", photoTone: "warm" },
+    {
+      code: "BR",
+      side: "from" as const,
+      eyebrow: "O QUE VOCÊ DEIXA PARA TRÁS",
+      title: ["Realidade", "no Brasil"],
+      items: brasil,
+      accent: "#9B3B47",            // oxblood contido
+      Icon: XCircle,
+      cardBg: "bg-[#F1ECE2]",       // levemente mais pesado/frio
+      photo: brasilSomber,
+      photoAlt: "Vista de cidade brasileira em dia cinza através de janela com chuva",
+      photoTone: "grayscale" as const,
+    },
+    {
+      code: "US",
+      side: "to" as const,
+      eyebrow: "O QUE VOCÊ CONQUISTA",
+      title: ["Oportunidades", "nos EUA"],
+      items: eua,
+      accent: "#2E7D5B",            // verde profundo sóbrio
+      Icon: CheckCircle2,
+      cardBg: "bg-white",
+      photo: familySuburbUsa,
+      photoAlt: "Família brasileira em subúrbio americano ao entardecer",
+      photoTone: "warm" as const,
+    },
   ] as const;
 
   return (
@@ -228,14 +250,27 @@ export function ContrastBrasilEUA() {
       <div aria-hidden className="tricolor-rule absolute inset-x-0 top-0" />
       <div className="container-x">
         <SectionHead num="01" eyebrow="POR QUE MIGRAR AGORA" title="Duas realidades. Uma decisão." />
-        <div className="mt-14 grid md:grid-cols-2 gap-6">
-          {cards.map(({ code, title: cardTitle, items, accent, Map, photo, photoAlt, photoTone }) => (
+
+        <div className="relative mt-14 grid md:grid-cols-2 gap-6 md:gap-10">
+          {/* Divisor central "BR → US" (md+) */}
+          <div
+            aria-hidden
+            className="hidden md:flex absolute inset-y-8 left-1/2 -translate-x-1/2 items-center justify-center z-10 pointer-events-none"
+          >
+            <span className="grid h-11 w-11 place-items-center rounded-full bg-parchment border border-gold/40 shadow-soft">
+              <ArrowRight className="h-5 w-5 text-gold" />
+            </span>
+          </div>
+
+          {cards.map(({ code, side, eyebrow, title: cardTitle, items, accent, Icon, cardBg, photo, photoAlt, photoTone }) => (
             <div
               key={code}
-              className="relative overflow-hidden rounded-2xl bg-white border border-ink-text/10 shadow-soft flex flex-col"
-              style={{ borderTop: `2px solid ${accent}` }}
+              className={`relative overflow-hidden rounded-2xl border border-ink-text/10 shadow-soft flex flex-col ${cardBg} ${
+                side === "to" ? "md:ring-1 md:ring-gold/25" : ""
+              }`}
+              style={{ borderTop: `3px solid ${accent}` }}
             >
-              {/* Faixa fotográfica editorial no topo do card (tratamento unificado). */}
+              {/* Faixa fotográfica editorial no topo do card. */}
               <div className="photo-treatment relative aspect-[16/9] overflow-hidden">
                 <img
                   src={photo}
@@ -256,42 +291,47 @@ export function ContrastBrasilEUA() {
                       : "linear-gradient(180deg, rgba(255,255,255,0) 40%, rgba(0,0,0,0.35) 100%)",
                   }}
                 />
-                <span aria-hidden className="absolute bottom-0 left-0 right-0 h-px" style={{ backgroundColor: accent, opacity: 0.6 }} />
+                <span aria-hidden className="absolute bottom-0 left-0 right-0 h-px" style={{ backgroundColor: accent, opacity: 0.7 }} />
               </div>
 
               <div className="p-7 md:p-10 relative">
-                <Map
-                  aria-hidden
-                  className="absolute -right-10 -top-8 h-[110%] w-auto pointer-events-none"
-                  style={{ color: accent, opacity: 0.08 }}
-                />
-                <div className="relative">
+                <div className="flex items-center gap-3">
                   <span
-                  className="inline-flex items-center justify-center h-8 px-3 rounded-full border font-mono-label text-[11px] tracking-[0.2em]"
-                  style={{ color: accent, borderColor: `color-mix(in oklab, ${accent} 40%, transparent)` }}
-                >
-                  {code}
-                </span>
+                    className="inline-flex items-center justify-center h-8 px-3 rounded-full border font-mono-label text-[11px] tracking-[0.2em] bg-white/70"
+                    style={{ color: accent, borderColor: `color-mix(in oklab, ${accent} 55%, transparent)` }}
+                  >
+                    {code}
+                  </span>
+                  <span
+                    className="font-mono-label text-[10px] tracking-[0.22em]"
+                    style={{ color: `color-mix(in oklab, ${accent} 85%, #000 15%)` }}
+                  >
+                    {eyebrow}
+                  </span>
+                </div>
+
                 <h3 className="mt-6 font-display text-2xl md:text-[28px] text-ink-text leading-tight">
                   {cardTitle[0]}<br />{cardTitle[1]}
                 </h3>
+
                 <ul className="mt-7 space-y-3.5">
                   {items.map((b) => (
-                    <li key={b} className="flex gap-4 text-ink-text/85 leading-relaxed">
-                      <span
+                    <li key={b} className="flex gap-3 text-ink-text/90 leading-relaxed">
+                      <Icon
                         aria-hidden
-                        className="mt-[0.7rem] h-px w-3 shrink-0"
-                        style={{ backgroundColor: accent }}
+                        className="mt-[0.25rem] h-[18px] w-[18px] shrink-0"
+                        strokeWidth={1.75}
+                        style={{ color: accent }}
                       />
                       <span>{b}</span>
                     </li>
                   ))}
                 </ul>
-                </div>
               </div>
             </div>
           ))}
         </div>
+
         <p className="mt-14 max-w-3xl mx-auto text-center font-display text-xl md:text-2xl text-ink-text/70 leading-snug">
           {title} <span className="text-gold italic">{subtitle}</span>
         </p>
