@@ -7,18 +7,29 @@ import {
   NiwSection, PartnersBadges, ProcessSteps,
   SalaryCompare, Testimonials, VisaCards, WhyUs,
 } from "@/components/site/sections";
-import { OrganizationJsonLd } from "@/components/site/Seo";
+import { OrganizationJsonLd, WebSiteJsonLd, FAQJsonLd } from "@/components/site/Seo";
 import { BlogStrip } from "@/components/site/BlogStrip";
 import { useOrderedSections } from "@/lib/pageStructure";
+
+const OG_IMAGE = "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/6b7cadcb-19ab-4c07-9ce9-d72d0a46c4f6/id-preview-09f8a24a--5de380e6-3aa3-4bc3-844b-02836eb26c67.lovable.app-1782844621831.png";
+
+const HOME_FAQS = [
+  { q: "A Status na América é confiável?", a: "Sim. Empresa registrada nos EUA (EIN 99-4846502), sede em Orlando/FL e filial no Brasil (CNPJ 62.917.376/0001-21), 130+ avaliações 5★ no Google e Facebook, acreditada pelo BBB com nota A." },
+  { q: "Qual a experiência de vocês?", a: "Atuamos exclusivamente na preparação de documentação para vistos de emprego por mérito: EB-1, EB-2 NIW e EB-3. Foco gera profundidade nos critérios do USCIS." },
+  { q: "Posso confiar mesmo sem ir presencialmente?", a: "Sim. A empresa é verificável por EIN, Google Business, BBB e avaliações reais. Atendimento 100% documentado e remoto, em todo o Brasil e nos EUA." },
+  { q: "Já fui enganado antes. Como sei que não é mais uma promessa?", a: "Não prometemos o que não podemos garantir. Somos honestos sobre requisitos, chances reais e prazos do USCIS e consulados." },
+  { q: "Meu caso é complicado, vale tentar?", a: "Casos complexos são onde o método faz mais diferença. Agende uma análise gratuita: se houver caminho, indicamos; se não houver, dizemos com a mesma honestidade." },
+  { q: "Não tenho dinheiro sobrando, compensa?", a: "É um investimento significativo, e por isso a análise inicial é gratuita. Valores são apresentados com clareza após o diagnóstico, sem pressão." },
+];
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Status na América | Green Card EB-2 NIW para profissionais brasileiros" },
+      { title: "Green Card EB-2 NIW para Profissionais Brasileiros" },
       {
         name: "description",
         content:
-          "Imigração legal para os EUA por mérito profissional. Preparação documental especializada para vistos EB-2 NIW, EB-1 e EB-3, profissionais brasileiros consolidados, com Green Card para cônjuge e filhos.",
+          "Imigração legal aos EUA por mérito profissional. Análise gratuita para vistos EB-2 NIW, EB-1 e EB-3, com Green Card para cônjuge e filhos.",
       },
       { name: "robots", content: "index,follow" },
       { property: "og:title", content: "Status na América | Green Card EB-2 NIW" },
@@ -28,27 +39,18 @@ export const Route = createFileRoute("/")({
           "Conquiste o Green Card americano pelo mérito da sua carreira. Análise gratuita do seu perfil EB-2 NIW.",
       },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "/" },
-      { property: "og:image", content: "/og-image.jpg" },
+      { property: "og:url", content: "https://lp.statusnaamerica.com/" },
+      { property: "og:image", content: OG_IMAGE },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Status na América | Green Card EB-2 NIW" },
       { name: "twitter:description", content: "Green Card americano por mérito profissional. Análise gratuita." },
-      { name: "twitter:image", content: "/og-image.jpg" },
+      { name: "twitter:image", content: OG_IMAGE },
     ],
-    links: [{ rel: "canonical", href: "/" }],
+    links: [{ rel: "canonical", href: "https://lp.statusnaamerica.com/" }],
   }),
   component: Home,
 });
 
-/**
- * Registry de dobras da Home: cada id do `sectionMap` mapeia para o componente.
- * A ordem efetiva e a visibilidade vêm de `useOrderedSections("home")`, que lê
- * de dataStore["page_sections"]["home"], editado em /admin/estrutura.
- *
- * Ao criar uma dobra nova: adicionar componente exportado em `sections.tsx`,
- * registrar o id em HOME_SECTIONS (sectionMap.ts), em DEFAULT_LAYOUTS.home
- * (pageStructure.ts) e neste registry.
- */
 const HOME_REGISTRY: Record<string, ComponentType> = {
   "abertura": Hero,
   "selos-parceiros": PartnersBadges,
@@ -69,9 +71,10 @@ function Home() {
   const layout = useOrderedSections("home");
 
   return (
-
     <>
       <OrganizationJsonLd />
+      <WebSiteJsonLd />
+      <FAQJsonLd items={HOME_FAQS.map((f) => ({ question: f.q, answer: f.a }))} />
       <Header />
       <main>
         {layout
@@ -86,3 +89,4 @@ function Home() {
     </>
   );
 }
+
