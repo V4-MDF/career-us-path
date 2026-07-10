@@ -117,6 +117,72 @@ export const defaultContent = {
   "contato.form.lead":
     "Para uma análise de perfil completa, use o botão “Análise gratuita”. Este canal é para dúvidas rápidas e mensagens.",
   "contato.form.success": "Recebemos sua mensagem. Retornaremos em breve.",
+
+  // ==== Página Sobre ==============================================
+  "sobre.hero.eyebrow": "QUEM SOMOS",
+  "sobre.hero.title": "Status na América. De Orlando para o Brasil.",
+  "sobre.hero.subtitle":
+    "Mais de duas décadas estruturando processos de imigração para brasileiros qualificados, com equipe presente nos Estados Unidos.",
+  "sobre.hero.image": "",
+
+  "sobre.historia.eyebrow": "NOSSA HISTÓRIA",
+  "sobre.historia.title": "Um novo modelo de assessoria, feito por quem já viveu o antigo.",
+  "sobre.historia.body":
+    "[Conteúdo a completar com o cliente] A Status na América nasceu da decisão da fundadora Lia de sair de um modelo antigo de assessoria migratória e construir algo mais próximo, transparente e conectado à realidade do cliente brasileiro. A empresa se estabeleceu em Orlando para acompanhar de perto quem chega aos Estados Unidos, não apenas até a aprovação do processo, mas na adaptação e nos primeiros passos da nova vida.",
+  "sobre.historia.image": "",
+
+  "sobre.diferencial.eyebrow": "NOSSO DIFERENCIAL",
+  "sobre.diferencial.title": "Estamos fisicamente nos Estados Unidos.",
+  "sobre.diferencial.lead":
+    "Diferente de quem opera apenas à distância, a Status tem sede em Orlando. Acompanhamos o cliente antes, durante e depois da chegada.",
+  "sobre.diferencial.p1.title": "Chegada aos EUA",
+  "sobre.diferencial.p1.text": "Recepção, orientação inicial e conexão com a rede local de suporte.",
+  "sobre.diferencial.p2.title": "Bancos e documentação",
+  "sobre.diferencial.p2.text": "Suporte para abertura de contas, SSN, ITIN e documentos essenciais.",
+  "sobre.diferencial.p3.title": "Moradia e escolas",
+  "sobre.diferencial.p3.text": "Indicações de bairros, imobiliárias parceiras e escolas para os filhos.",
+  "sobre.diferencial.p4.title": "Adaptação de família",
+  "sobre.diferencial.p4.text": "Acompanhamento humano nos primeiros meses de vida nos EUA.",
+
+  "sobre.equipe.eyebrow": "QUEM CUIDA DO SEU CASO",
+  "sobre.equipe.title": "Uma equipe presente nos dois países.",
+  "sobre.equipe.note":
+    "Fotos e biografias a substituir por conteúdo real fornecido pelo cliente.",
+  "sobre.equipe.m1.nome": "Lia",
+  "sobre.equipe.m1.papel": "Fundadora",
+  "sobre.equipe.m1.bio": "",
+  "sobre.equipe.m1.foto": "",
+  "sobre.equipe.m2.nome": "David",
+  "sobre.equipe.m2.papel": "Sócio",
+  "sobre.equipe.m2.bio": "",
+  "sobre.equipe.m2.foto": "",
+  "sobre.equipe.m3.nome": "Helder Moreira",
+  "sobre.equipe.m3.papel": "Sócio",
+  "sobre.equipe.m3.bio": "",
+  "sobre.equipe.m3.foto": "",
+  "sobre.equipe.m4.nome": "Case Managers",
+  "sobre.equipe.m4.papel": "Estrutura de atendimento",
+  "sobre.equipe.m4.bio": "",
+  "sobre.equipe.m4.foto": "",
+
+  "sobre.numeros.eyebrow": "NÚMEROS E CREDENCIAIS",
+  "sobre.numeros.title": "O que sustenta a nossa operação.",
+  "sobre.numeros.n1.valor": "25+",
+  "sobre.numeros.n1.label": "anos de experiência",
+  "sobre.numeros.n2.valor": "1.000+",
+  "sobre.numeros.n2.label": "famílias atendidas",
+  "sobre.numeros.n3.valor": "5.000+",
+  "sobre.numeros.n3.label": "processos estruturados",
+  "sobre.numeros.n4.valor": "98%",
+  "sobre.numeros.n4.label": "de satisfação",
+  "sobre.numeros.n5.valor": "130+",
+  "sobre.numeros.n5.label": "avaliações 5★",
+  "sobre.numeros.n6.valor": "A",
+  "sobre.numeros.n6.label": "acreditação BBB",
+
+  "sobre.cta.title": "Vamos estruturar o seu caso.",
+  "sobre.cta.subtitle":
+    "Comece pela análise gratuita: em até 48h retornamos com um caminho coerente com sua história.",
 };
 
 
