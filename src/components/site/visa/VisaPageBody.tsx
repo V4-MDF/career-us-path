@@ -31,7 +31,8 @@ import familyFuture from "@/assets/visa-family-future.jpg";
 
 export function VisaPageBody({ page, hideHero = false }: { page: VisaPage; hideHero?: boolean }) {
   return (
-    <main className={hideHero ? "pt-0" : "pt-28"}>
+    <main className={hideHero ? "pt-28" : "pt-0"}>
+
       {!hideHero && (
       /* Hero fotográfico — full-bleed com overlay navy forte (AA em todo
          texto). Grão + vinheta vêm do <PhotoFrame>. Fora do scroll-spy. */
