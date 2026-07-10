@@ -68,7 +68,7 @@ export function Hero() {
     <section
       id="abertura"
       aria-label="Abertura"
-      className="section-anchor relative overflow-hidden pt-32 md:pt-44 pb-24 md:pb-36"
+      className="section-anchor relative overflow-hidden pt-24 md:pt-44 pb-16 md:pb-36"
     >
       {/* Fundo da hero: vídeo (desktop, sem reduced-motion) ou poster estático.
           Fallback silencioso para hero-skyline se não houver configuração no admin. */}
@@ -83,7 +83,7 @@ export function Hero() {
         <BrUsRouteBackdrop />
       </div>
 
-      <div className="container-x grid lg:grid-cols-[1.1fr_0.9fr] gap-16 lg:gap-20 items-center">
+      <div className="container-x grid lg:grid-cols-[1.1fr_0.9fr] gap-10 md:gap-16 lg:gap-20 items-center">
         <div>
           <div className="flex items-center gap-3">
             <FlagsBRUS size={16} />
@@ -91,7 +91,7 @@ export function Hero() {
             <span className="font-mono-label text-gold">{eyebrow}</span>
           </div>
 
-          <h1 className="display-1 mt-8">
+          <h1 className="display-1 mt-6 md:mt-8 [overflow-wrap:break-word] [hyphens:auto]">
             {lines.map((ln, i) => (
               <span key={i} className="block pb-1">
                 {renderEmphasis(ln)}

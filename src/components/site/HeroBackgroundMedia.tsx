@@ -59,12 +59,12 @@ export function HeroBackgroundMedia({ videoUrl, posterUrl }: Props) {
         width={1600}
         height={1024}
         fetchPriority="high"
-        className="h-full w-full object-cover object-center opacity-80 motion-safe:[mask-image:linear-gradient(to_bottom,black_55%,transparent_100%)]"
+        className="h-full w-full object-cover object-center opacity-80 [mask-image:linear-gradient(to_bottom,black_75%,transparent_100%)]"
       />
 
       {canPlay && parsed?.kind === "file" && (
         <video
-          className="absolute inset-0 h-full w-full object-cover object-center opacity-90 motion-safe:[mask-image:linear-gradient(to_bottom,black_55%,transparent_100%)]"
+          className="absolute inset-0 h-full w-full object-cover object-center opacity-90 [mask-image:linear-gradient(to_bottom,black_75%,transparent_100%)]"
           src={parsed.src}
           poster={typeof poster === "string" ? poster : undefined}
           autoPlay
