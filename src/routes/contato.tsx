@@ -171,11 +171,7 @@ function ContatoHero({
         <p className="mt-5 text-white/80 text-lg leading-relaxed max-w-2xl">{subtitle}</p>
 
         <div className="mt-8 flex flex-col sm:flex-row gap-3">
-          <Link
-            to="/avaliacao"
-            search={(prev) => prev as Record<string, unknown>}
-            className="inline-flex"
-          >
+          <Link to="/avaliacao" className="inline-flex">
             <Button size="lg" className="btn-label w-full sm:w-auto">
               Análise gratuita
             </Button>
