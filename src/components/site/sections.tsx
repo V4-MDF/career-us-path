@@ -45,6 +45,7 @@ import familySuburbUsa from "@/assets/home-family-suburb-usa.jpg";
 import brasilSomber from "@/assets/home-brasil-somber.jpg";
 import visaFamilyFuture from "@/assets/visa-family-future.jpg";
 import { PhotoFrame } from "./visa/PhotoFrame";
+import { loadSalaryList, SEED_SALARY, type SalaryRow } from "@/lib/salaryList";
 
 /* ============================================================
  * 1. HERO
