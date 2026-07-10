@@ -94,6 +94,29 @@ export const defaultContent = {
     "O Green Card com oferta formal de emprego nos EUA, exige patrocinador e PERM.",
   "visa.eb3.heroVideoUrl": "",
   "visa.eb3.heroVideoThumb": "",
+
+  // ==== Página de Contato =========================================
+  "contato.eyebrow": "FALE CONOSCO",
+  "contato.title": "Vamos conversar sobre o seu caso.",
+  "contato.subtitle":
+    "Tire suas dúvidas com nossa equipe ou faça sua análise gratuita de perfil.",
+  "contato.usa.title": "Matriz. Estados Unidos",
+  "contato.usa.company": "Status na America LLC",
+  "contato.usa.address": "7575 KingsPointe Pkwy #4, Orlando, FL 32819",
+  "contato.usa.phone1": "+1 689 251-0985",
+  "contato.usa.phone2": "+1 689 220-9691",
+  "contato.usa.ein": "EIN 99-4846502",
+  "contato.br.title": "Filial. Brasil",
+  "contato.br.company": "Alphaville · CEA Corporate",
+  "contato.br.address": "Alameda Araguaia 2104, Barueri/SP · CEP 06455-000",
+  "contato.br.cnpj": "CNPJ 62.917.376/0001-21",
+  "contato.br.phone": "+1 689 220-9714",
+  "contato.expansao.title": "Expansão internacional",
+  "contato.expansao.text": "Portugal e Dubai · em breve.",
+  "contato.form.title": "Deixe uma mensagem",
+  "contato.form.lead":
+    "Para uma análise de perfil completa, use o botão “Análise gratuita”. Este canal é para dúvidas rápidas e mensagens.",
+  "contato.form.success": "Recebemos sua mensagem. Retornaremos em breve.",
 };
 
 
