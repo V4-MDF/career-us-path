@@ -11,6 +11,7 @@ import { OrganizationJsonLd, WebSiteJsonLd, FAQJsonLd } from "@/components/site/
 import { BlogStrip } from "@/components/site/BlogStrip";
 import { primePageSections, useOrderedSections } from "@/lib/pageStructure";
 import { getPageSectionsFn } from "@/lib/pageSections.functions";
+import { getPageSeoFn, buildSeoTags } from "@/lib/pageSeo.functions";
 
 const OG_IMAGE = "https://lp.statusnaamerica.com/__l5e/assets-v1/db6af206-dff3-4b36-b8f2-a6d534ba74a4/og-home.jpg";
 
