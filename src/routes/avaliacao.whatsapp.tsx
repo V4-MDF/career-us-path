@@ -11,7 +11,7 @@ import { useEffect, useMemo, useState } from "react";
 import { createFileRoute, Link, useSearch } from "@tanstack/react-router";
 import { ChevronLeft, MessageCircle, ShieldCheck } from "lucide-react";
 import { LeadFormProgressive } from "@/components/site/LeadFormProgressive";
-import { trackFormView, trackWhatsAppClick } from "@/lib/tracking";
+import { trackFormView, trackWhatsAppSubmit, trackWhatsAppOpened } from "@/lib/tracking";
 import { getOrigin } from "@/lib/origin";
 import { buildWhatsAppLink, leadWhatsAppMessage } from "@/lib/whatsapp";
 import { normalizeBrPhone } from "@/lib/phone";
