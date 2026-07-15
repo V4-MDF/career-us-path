@@ -1,39 +1,28 @@
-Implementar eventos de tracking "form iniciado" e "form enviado" nos formulários do site, padronizando GA4/Meta e sem quebrar os eventos existentes.
+## Objetivo
+Separar a página de obrigado em duas URLs distintas para que o Pixel (Meta) e GA4 possam disparar conversões diferentes para leads qualificados vs. não qualificados.
 
-### O que será feito
+## Mudanças
 
-1. **Expandir `src/lib/tracking.ts`**
-   - Adicionar `trackFormStart(meta?)`:
-     - GA4: `form_start` (com `form_name`)
-     - Meta: `trackCustom("FormStart")` (com `content_name`)
-   - Adicionar `trackFormSubmit(meta?)`:
-     - GA4: `form_submit` (com `form_name`)
-     - Meta: `trackCustom("FormSubmit")` (com `content_name`)
-   - Manter `trackFormView` e `trackLead` intactos (não alteram funil de remarketing atual).
+1. **`src/routes/avaliacao.obrigado-qualificado.tsx`**
+   - Remover o redirect. Renderizar `<ObrigadoQualificado />` diretamente.
+   - `head()` com título "Obrigado | Status na América" e `robots: noindex,nofollow`.
+   - No mount: disparar evento de tracking `lead_qualificado` (GA4 + Meta `Lead` custom).
 
-2. **Wire nos formulários principais**
-   - **`LeadFormProgressive.tsx`** (análise /avaliacao):
-     - `form_start` → na primeira interação real do usuário (primeira vez que um campo passa a ser válido e salva parcial).
-     - `form_submit` → no clique do botão de enviar, imediatamente antes do processamento/submit.
-   - **`PreQualForm.tsx`** (/pre-qualificacao):
-     - `form_start` → no primeiro campo de contato preenchido/editado.
-     - `form_submit` → no `handleSubmit`.
-   - **`LeadForm.tsx`** (formulário legacy de LPs, se ainda usado em algum lugar):
-     - `form_start` e `form_submit` nos momentos equivalentes.
-   - **`/routes/contato.tsx`** (formulário de mensagem):
-     - Substituir o push manual ao `dataLayer` por `trackFormSubmit({ form_name: "contato" })`.
-     - Adicionar `trackFormStart({ form_name: "contato" })` na primeira mudança de campo.
+2. **`src/routes/avaliacao.obrigado-nao-qualificado.tsx`**
+   - Remover o redirect. Renderizar `<ObrigadoNaoQualificado />` diretamente.
+   - `head()` idem, `noindex,nofollow`.
+   - No mount: disparar evento `lead_nao_qualificado`.
 
-3. **Evitar duplicidade e ruído**
-   - Cada evento dispara apenas uma vez por sessão de exibição do formulário (use ref/flag booleano).
-   - `form_start` dispara quando o usuário realmente começa a digitar/selecionar, não no mount.
-   - `form_submit` dispara no botão, independentemente de sucesso/falha de validação (o evento é sobre intenção de envio); se houver erro de validação, ainda assim conta como submit attempt.
+3. **`src/routes/avaliacao.obrigado.tsx`**
+   - Converter em roteador de compatibilidade: lê `readQualificationResult()` do sessionStorage e faz `navigate({ to: "/avaliacao/obrigado-qualificado" | "/avaliacao/obrigado-nao-qualificado", replace: true })`. Fallback → não-qualificado.
+   - Mantém acesso direto legado funcionando.
 
-4. **Teste/validação**
-   - Build (`bun run build`) passa.
-   - Verificar no console do preview que, ao preencher o form, `form_start` e `form_submit` aparecem no `dataLayer`/gtag/fbq (quando tracking estiver ativo).
+4. **`src/components/site/LeadFormProgressive.tsx`**
+   - No submit bem-sucedido, após salvar `lastQualificationResult` em sessionStorage, redirecionar já para a URL específica (`/avaliacao/obrigado-qualificado` se score ≥ 50, senão `/avaliacao/obrigado-nao-qualificado`), em vez de `/avaliacao/obrigado`. Isso garante que o Pixel veja PageView na URL correta.
 
-### Technical details
-- Arquivos alterados: `src/lib/tracking.ts`, `src/components/site/LeadFormProgressive.tsx`, `src/components/site/prequal/PreQualForm.tsx`, `src/components/site/LeadForm.tsx`, `src/routes/contato.tsx`.
-- Sem alterações no backend/data layer.
-- Sem novas dependências.
+5. **`src/lib/tracking.ts`** (se necessário)
+   - Adicionar helpers `trackLeadQualified()` e `trackLeadUnqualified()` para GA4 + Meta.
+
+## Fora de escopo
+- Não altero conteúdo visual das duas variantes (`ObrigadoQualificado` / `ObrigadoNaoQualificado`) — já existem em `ObrigadoContent.tsx`.
+- Não mexo em outros formulários (pré-qualificação/contato).
