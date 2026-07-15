@@ -50,10 +50,14 @@ function emitMetaCustom(name: string, params?: Params) {
 function emitGa(event: string, params?: Params) {
   if (!isBrowser()) return;
   try {
+    // Sempre empurra para o dataLayer como evento nativo do GTM
+    // (dispara triggers "Custom Event" com o nome exato, ex: form_submit).
+    if (!Array.isArray(window.dataLayer)) window.dataLayer = [];
+    window.dataLayer.push({ event, ...(params ?? {}) });
+    // Também envia via gtag quando o GA4 direto (gtag.js) estiver carregado,
+    // para instalações sem GTM.
     if (typeof window.gtag === "function") {
       window.gtag("event", event, params ?? {});
-    } else if (Array.isArray(window.dataLayer)) {
-      window.dataLayer.push({ event, ...(params ?? {}) });
     }
   } catch {
     /* noop */
