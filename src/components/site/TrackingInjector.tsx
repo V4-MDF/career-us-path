@@ -59,11 +59,29 @@ async function apply() {
   }
 }
 
+/**
+ * Executa `apply` fora do caminho crítico de renderização.
+ * Usa `requestIdleCallback` quando disponível (com timeout de 2 s para não
+ * atrasar demais em abas ociosas) e cai para `setTimeout` em navegadores
+ * sem suporte. Isso reduz TBT/render-blocking sem perder eventos —
+ * `dataLayer` continua sendo populado sincronamente por `emitGa`.
+ */
+function scheduleApply() {
+  if (typeof window === "undefined") return;
+  const ric = (window as unknown as { requestIdleCallback?: (cb: () => void, opts?: { timeout: number }) => void })
+    .requestIdleCallback;
+  if (typeof ric === "function") {
+    ric(() => { void apply(); }, { timeout: 2000 });
+  } else {
+    setTimeout(() => { void apply(); }, 1500);
+  }
+}
+
 export function TrackingInjector() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
-  useEffect(() => { apply(); }, [pathname]);
+  useEffect(() => { scheduleApply(); }, [pathname]);
   useEffect(() => {
-    const onChange = () => apply();
+    const onChange = () => scheduleApply();
     window.addEventListener("status:admin-change", onChange);
     window.addEventListener("storage", onChange);
     return () => {
