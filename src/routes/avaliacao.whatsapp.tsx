@@ -11,7 +11,7 @@ import { useEffect, useMemo, useState } from "react";
 import { createFileRoute, Link, useSearch } from "@tanstack/react-router";
 import { ChevronLeft, MessageCircle, ShieldCheck } from "lucide-react";
 import { LeadFormProgressive } from "@/components/site/LeadFormProgressive";
-import { trackFormView, trackWhatsAppClick } from "@/lib/tracking";
+import { trackFormView, trackWhatsAppSubmit, trackWhatsAppOpened } from "@/lib/tracking";
 import { getOrigin } from "@/lib/origin";
 import { buildWhatsAppLink, leadWhatsAppMessage } from "@/lib/whatsapp";
 import { normalizeBrPhone } from "@/lib/phone";
@@ -120,8 +120,7 @@ function AvaliacaoWhatsAppPage() {
       ? `${base}\n\n*Origem:*\n${utmLines.join("\n")}`
       : base;
 
-    // GA4 + Meta Pixel: registra o clique com UTM para atribuição.
-    trackWhatsAppClick({
+    const utmMeta = {
       utm_source: utm.utm_source ?? null,
       utm_medium: utm.utm_medium ?? null,
       utm_campaign: utm.utm_campaign ?? null,
@@ -129,7 +128,10 @@ function AvaliacaoWhatsAppPage() {
       utm_term: utm.utm_term ?? null,
       gclid: utm.gclid ?? null,
       fbclid: utm.fbclid ?? null,
-    });
+    };
+
+    // Etapa 1: intenção de envio (clique em "Enviar e abrir WhatsApp").
+    trackWhatsAppSubmit(utmMeta);
 
     let link = "";
     try {
@@ -141,9 +143,13 @@ function AvaliacaoWhatsAppPage() {
       setWaLink(link);
       // Abre em nova aba. Pode ser bloqueado por popup blocker; o fallback
       // exibe um botão manual logo abaixo.
+      let opened = false;
       try {
-        window.open(link, "_blank", "noopener,noreferrer");
+        const w = window.open(link, "_blank", "noopener,noreferrer");
+        opened = !!w;
       } catch { /* ignore */ }
+      // Etapa 2: WhatsApp efetivamente aberto (conversão da etapa).
+      if (opened) trackWhatsAppOpened(utmMeta);
     }
   };
 
@@ -224,6 +230,7 @@ function AvaliacaoWhatsAppPage() {
                   href={waLink}
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() => trackWhatsAppOpened()}
                   className="mt-6 inline-flex items-center gap-2 rounded-full bg-gold px-6 py-3 font-mono-label text-sm text-ink hover:bg-gold/90"
                 >
                   <MessageCircle className="h-4 w-4" /> Abrir WhatsApp

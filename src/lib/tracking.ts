@@ -99,11 +99,33 @@ export function trackLeadUnqualified(meta?: Params) {
   emitGa("lead_nao_qualificado", { form_name: "avaliacao", ...meta });
 }
 
-/** Clique que abre o WhatsApp com a mensagem do lead (rota /avaliacao/whatsapp). */
-export function trackWhatsAppClick(meta?: Params) {
+/**
+ * Etapa 1 — clique em "Enviar" na variante WhatsApp (intenção de envio,
+ * antes do link do WhatsApp abrir). Serve para medir a taxa de submit
+ * do formulário separadamente de aberturas reais do WhatsApp.
+ */
+export function trackWhatsAppSubmit(meta?: Params) {
+  emitMetaCustom("WhatsAppSubmit", { content_name: "Avaliacao", ...meta });
+  emitGa("whatsapp_submit", { form_name: "avaliacao", ...meta });
+}
+
+/**
+ * Etapa 2 — WhatsApp efetivamente aberto (window.open executou).
+ * Considerado a conversão principal desta variante.
+ */
+export function trackWhatsAppOpened(meta?: Params) {
   emitMeta("Lead", { content_name: "Avaliacao", channel: "whatsapp", ...meta });
-  emitMetaCustom("WhatsAppClick", { content_name: "Avaliacao", ...meta });
-  emitGa("whatsapp_click", { form_name: "avaliacao", ...meta });
+  emitMetaCustom("WhatsAppOpened", { content_name: "Avaliacao", ...meta });
+  emitGa("whatsapp_opened", { form_name: "avaliacao", ...meta });
   emitGa("generate_lead", { form_name: "avaliacao", channel: "whatsapp", ...meta });
 }
+
+/**
+ * @deprecated Use trackWhatsAppSubmit / trackWhatsAppOpened.
+ * Mantido para compatibilidade com integrações antigas.
+ */
+export function trackWhatsAppClick(meta?: Params) {
+  trackWhatsAppOpened(meta);
+}
+
 
