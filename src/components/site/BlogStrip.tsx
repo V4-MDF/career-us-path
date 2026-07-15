@@ -94,7 +94,6 @@ export function BlogStrip() {
           o próximo card "espiando". Desktop: grid 3 colunas tradicional.
         */}
         <div
-          role="list"
           aria-label="Artigos em destaque"
           className="
             mt-10 flex gap-4 overflow-x-auto snap-x snap-mandatory
@@ -112,7 +111,6 @@ export function BlogStrip() {
             return (
               <Wrapper
                 key={p.slug + p.titulo}
-                role="listitem"
                 {...props}
                 className="
                   group relative gold-tick rounded-2xl border border-gold/20 bg-ink-raise/60 shadow-soft

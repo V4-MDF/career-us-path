@@ -11,6 +11,7 @@ import { OrganizationJsonLd, WebSiteJsonLd, FAQJsonLd } from "@/components/site/
 import { BlogStrip } from "@/components/site/BlogStrip";
 import { primePageSections, useOrderedSections } from "@/lib/pageStructure";
 import { getPageSectionsFn } from "@/lib/pageSections.functions";
+import heroFamilyUrl from "@/assets/hero-family.jpg";
 
 const OG_IMAGE = "https://lp.statusnaamerica.com/__l5e/assets-v1/db6af206-dff3-4b36-b8f2-a6d534ba74a4/og-home.jpg";
 
@@ -47,7 +48,12 @@ export const Route = createFileRoute("/")({
       { name: "twitter:description", content: "Green Card americano por mérito profissional. Análise gratuita." },
       { name: "twitter:image", content: OG_IMAGE },
     ],
-    links: [{ rel: "canonical", href: "https://lp.statusnaamerica.com/" }],
+    links: [
+      { rel: "canonical", href: "https://lp.statusnaamerica.com/" },
+      // Preload the hero LCP image so the browser fetches it in parallel with
+      // the HTML — fixes NO_LCP by making the poster the clear LCP candidate.
+      { rel: "preload", as: "image", href: heroFamilyUrl, fetchpriority: "high" },
+    ],
   }),
   loader: () => getPageSectionsFn({ data: { page: "home" } }),
   component: Home,
