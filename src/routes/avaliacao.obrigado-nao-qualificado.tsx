@@ -1,11 +1,30 @@
 /**
- * /avaliacao/obrigado-nao-qualificado, mantido apenas para compatibilidade.
- * Redireciona para a página de agradecimento discreta /avaliacao/obrigado.
+ * /avaliacao/obrigado-nao-qualificado — URL dedicada para leads que não
+ * atingiram o threshold. URL própria permite excluir do público de conversão.
  */
-import { createFileRoute, redirect } from "@tanstack/react-router";
+import { useEffect } from "react";
+import { createFileRoute } from "@tanstack/react-router";
+import { ObrigadoNaoQualificado } from "@/components/site/ObrigadoContent";
+import { trackLeadUnqualified } from "@/lib/tracking";
 
 export const Route = createFileRoute("/avaliacao/obrigado-nao-qualificado")({
-  beforeLoad: () => {
-    throw redirect({ to: "/avaliacao/obrigado", replace: true });
-  },
+  head: () => ({
+    meta: [
+      { title: "Perfil recebido | Status na América" },
+      {
+        name: "description",
+        content:
+          "Recebemos seu perfil. Nossa equipe entra em contato em até 48h pelo canal informado.",
+      },
+      { name: "robots", content: "noindex,nofollow" },
+    ],
+  }),
+  component: ObrigadoNaoQualificadoPage,
 });
+
+function ObrigadoNaoQualificadoPage() {
+  useEffect(() => {
+    trackLeadUnqualified();
+  }, []);
+  return <ObrigadoNaoQualificado />;
+}
