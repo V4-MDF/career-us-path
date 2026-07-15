@@ -35,6 +35,7 @@ import { getSiteSettings, defaultSettings, type SiteSettings } from "@/lib/admin
 import { newId, set } from "@/lib/dataStore";
 import { getOrigin } from "@/lib/origin";
 import { trackFormStart, trackFormSubmit } from "@/lib/tracking";
+import { getPageSeoFn, buildSeoTags } from "@/lib/pageSeo.functions";
 
 export const Route = createFileRoute("/contato")({
   head: () => ({
