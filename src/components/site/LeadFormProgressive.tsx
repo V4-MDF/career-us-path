@@ -219,6 +219,10 @@ export function LeadFormProgressive({
     void set("leads_partial", partialIdRef.current, partial);
     // Marca a sessão como "iniciou o formulário" assim que o 1º campo é válido.
     void markSessionStartedForm();
+    if (!formStartFiredRef.current) {
+      formStartFiredRef.current = true;
+      trackFormStart({ segmento: segmentId ?? null });
+    }
   }, [data, done, segmentId, currentPath, restored]);
 
   const advance = () => {
