@@ -79,8 +79,22 @@ export function trackFormSubmit(meta?: Params) {
   emitGa("form_submit", { form_name: "avaliacao", ...meta });
 }
 
-/** Público B, preencheu o formulário (/avaliacao/obrigado). */
+/** Público B, preencheu o formulário (/avaliacao/obrigado-*). */
 export function trackLead(meta?: Params) {
   emitMeta("Lead", { content_name: "Avaliacao", ...meta });
   emitGa("generate_lead", { form_name: "avaliacao", ...meta });
+}
+
+/** Lead qualificado (score >= 50). Dispara Lead + evento custom qualificado. */
+export function trackLeadQualified(meta?: Params) {
+  emitMeta("Lead", { content_name: "Avaliacao", qualification: "qualificado", ...meta });
+  emitMetaCustom("LeadQualified", { content_name: "Avaliacao", ...meta });
+  emitGa("generate_lead", { form_name: "avaliacao", qualification: "qualificado", ...meta });
+  emitGa("lead_qualificado", { form_name: "avaliacao", ...meta });
+}
+
+/** Lead não qualificado. Evento custom separado para excluir do público de conversão. */
+export function trackLeadUnqualified(meta?: Params) {
+  emitMetaCustom("LeadUnqualified", { content_name: "Avaliacao", ...meta });
+  emitGa("lead_nao_qualificado", { form_name: "avaliacao", ...meta });
 }

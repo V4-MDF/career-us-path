@@ -1,53 +1,40 @@
 /**
- * /avaliacao/obrigado, página de agradecimento única e discreta.
+ * /avaliacao/obrigado — rota de compatibilidade.
  *
- * A variação (qualificado / não qualificado) é decidida pelo
- * `lastQualificationResult` guardado em sessionStorage no submit do formulário.
- * Dessa forma o URL não revela o resultado ao cliente.
+ * A partir de agora, o formulário redireciona diretamente para
+ * /avaliacao/obrigado-qualificado ou /avaliacao/obrigado-nao-qualificado,
+ * para que Pixel/GA4 identifiquem cada público em URL própria.
  *
- * SEO: noindex,nofollow.
+ * Esta rota permanece como fallback: lê o resultado guardado no
+ * sessionStorage e redireciona para a URL específica. Sem resultado,
+ * cai no fluxo de não-qualificado.
  */
-import { useEffect, useState } from "react";
-import { createFileRoute } from "@tanstack/react-router";
+import { useEffect } from "react";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import {
-  ObrigadoQualificado,
-  ObrigadoNaoQualificado,
   ObrigadoFallback,
   readQualificationResult,
-  type QualificationResult,
 } from "@/components/site/ObrigadoContent";
 
 export const Route = createFileRoute("/avaliacao/obrigado")({
   head: () => ({
     meta: [
       { title: "Perfil recebido | Status na América" },
-      {
-        name: "description",
-        content:
-          "Recebemos seu perfil. Nossa equipe entra em contato em até 48h pelo canal informado.",
-      },
       { name: "robots", content: "noindex,nofollow" },
     ],
   }),
-  component: ObrigadoPage,
+  component: ObrigadoRouter,
 });
 
-function ObrigadoPage() {
-  const [result, setResult] = useState<QualificationResult | "loading">("loading");
-
+function ObrigadoRouter() {
+  const navigate = useNavigate();
   useEffect(() => {
-    setResult(readQualificationResult() ?? "nao_qualificado");
-  }, []);
-
-  if (result === "loading") {
-    return (
-      <div className="min-h-screen bg-ink flex items-center justify-center">
-        <span className="font-mono-label text-sm text-foreground/80">Carregando...</span>
-      </div>
-    );
-  }
-
-  if (result === "qualificado") return <ObrigadoQualificado />;
-  if (result === "nao_qualificado") return <ObrigadoNaoQualificado />;
+    const result = readQualificationResult();
+    if (result === "qualificado") {
+      navigate({ to: "/avaliacao/obrigado-qualificado", replace: true });
+    } else if (result === "nao_qualificado") {
+      navigate({ to: "/avaliacao/obrigado-nao-qualificado", replace: true });
+    }
+  }, [navigate]);
   return <ObrigadoFallback />;
 }
