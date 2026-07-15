@@ -125,7 +125,11 @@ function OrigensPage() {
 
   const convSessionToLead = sessionsTotal ? completedTotal / sessionsTotal : 0;
   const convStartToLead = startedTotal ? completedTotal / startedTotal : 0;
-  const qualityRateTotal = sessionsTotal ? qualifiedTotal / sessionsTotal : 0;
+  const avgScoreTotal = useMemo(() => {
+    if (!model || leads.length === 0) return null;
+    const sum = leads.reduce((acc, l) => acc + computeScore(l, model).score, 0);
+    return Math.round(sum / leads.length);
+  }, [leads, model]);
 
   const rowsByDim = useMemo<Row[]>(() => {
     if (!model) return [];
@@ -224,10 +228,10 @@ function OrigensPage() {
           hint={`${startedTotal} formulários iniciados`}
         />
         <StatCard
-          label="Taxa de qualidade"
-          value={sessionsTotal ? pct(qualityRateTotal) : "-"}
+          label="Score médio dos leads"
+          value={avgScoreTotal !== null ? String(avgScoreTotal) : "-"}
           accent="yellow"
-          hint={`${qualifiedTotal} qualificados ÷ sessões`}
+          hint={`${completedTotal} leads · ${qualifiedTotal} qualificados`}
         />
       </div>
 
