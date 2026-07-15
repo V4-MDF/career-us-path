@@ -10,7 +10,7 @@
  *    próprio "contact_message" no dataLayer (se GTM estiver ativo).
  */
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { z } from "zod";
 import {
   Mail,
