@@ -14,7 +14,7 @@
  * acontecem no route container.
  */
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -23,6 +23,7 @@ import {
   emptyAnswers, loadDraft, saveDraft,
   type PreQualAnswers,
 } from "@/lib/prequal";
+import { trackFormStart, trackFormSubmit } from "@/lib/tracking";
 
 interface Props {
   onSubmit: (a: PreQualAnswers) => void;
