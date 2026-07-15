@@ -48,7 +48,12 @@ export const Route = createFileRoute("/")({
       { name: "twitter:description", content: "Green Card americano por mérito profissional. Análise gratuita." },
       { name: "twitter:image", content: OG_IMAGE },
     ],
-    links: [{ rel: "canonical", href: "https://lp.statusnaamerica.com/" }],
+    links: [
+      { rel: "canonical", href: "https://lp.statusnaamerica.com/" },
+      // Preload the hero LCP image so the browser fetches it in parallel with
+      // the HTML — fixes NO_LCP by making the poster the clear LCP candidate.
+      { rel: "preload", as: "image", href: heroFamilyUrl, fetchpriority: "high" },
+    ],
   }),
   loader: () => getPageSectionsFn({ data: { page: "home" } }),
   component: Home,
