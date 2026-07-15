@@ -325,7 +325,7 @@ export function LeadFormProgressive({
       }
 
       // Redireciona ANTES dos efeitos colaterais para garantir a navegação.
-      if (onSubmitted) onSubmitted({ id, qualification: qual.result });
+      if (onSubmitted) onSubmitted({ id, qualification: qual.result, data: current });
       else setDone(true);
 
 
