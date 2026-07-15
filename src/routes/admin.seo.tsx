@@ -48,7 +48,11 @@ function SeoPage() {
       />
       <div className="mb-4 rounded-md border border-sky-200 bg-sky-50 px-4 py-3 text-sm text-sky-900 flex gap-2">
         <Info className="h-4 w-4 mt-0.5 shrink-0" />
-        <div>SEO das LANDING PAGES (médicos, engenheiros, empresários, ...) é editado em <Link to="/admin/segmentos" className="underline font-medium">Segmentos</Link>.</div>
+        <div>
+          O que você editar aqui vai para o SSR das páginas Home, Sobre e Contato assim que você <strong>Publicar</strong> o site.
+          Google/WhatsApp/Facebook leem o SSR, então mude aqui e depois clique em Publicar. Deixe um campo vazio para usar o texto padrão do código.
+          <div className="mt-1">SEO das LANDING PAGES (médicos, engenheiros, ...) continua em <Link to="/admin/segmentos" className="underline font-medium">Segmentos</Link>.</div>
+        </div>
       </div>
       <Tabs defaultValue="home">
         <TabsList>{PAGES.map((p) => <TabsTrigger key={p.slug} value={p.slug}>{p.label}</TabsTrigger>)}</TabsList>

@@ -11,6 +11,8 @@ import { OrganizationJsonLd, WebSiteJsonLd, FAQJsonLd } from "@/components/site/
 import { BlogStrip } from "@/components/site/BlogStrip";
 import { primePageSections, useOrderedSections } from "@/lib/pageStructure";
 import { getPageSectionsFn } from "@/lib/pageSections.functions";
+import { getPageSeoFn, buildSeoTags } from "@/lib/pageSeo.functions";
+import heroFamilyUrl from "@/assets/hero-family.jpg";
 
 const OG_IMAGE = "https://lp.statusnaamerica.com/__l5e/assets-v1/db6af206-dff3-4b36-b8f2-a6d534ba74a4/og-home.jpg";
 
@@ -24,32 +26,34 @@ const HOME_FAQS = [
 ];
 
 export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: "Status na América | Mobilidade Imigratória para brasileiros" },
+  head: ({ loaderData }) => {
+    const { meta, links } = buildSeoTags(
       {
-        name: "description",
-        content:
+        title: "Status na América | Mobilidade Imigratória para brasileiros",
+        description:
           "Imigração legal aos EUA por mérito profissional. Análise gratuita para vistos EB-2 NIW, EB-1 e EB-3, com Green Card para cônjuge e filhos.",
+        canonical: "/",
+        ogImage: OG_IMAGE,
+        ogType: "website",
       },
-      { name: "robots", content: "index,follow" },
-      { property: "og:title", content: "Status na América | Mobilidade Imigratória para brasileiros" },
-      {
-        property: "og:description",
-        content:
-          "Imigração legal aos EUA por mérito profissional. Análise gratuita para vistos EB-2 NIW, EB-1 e EB-3, com Green Card para cônjuge e filhos.",
-      },
-      { property: "og:type", content: "website" },
-      { property: "og:url", content: "https://lp.statusnaamerica.com/" },
-      { property: "og:image", content: OG_IMAGE },
-      { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Status na América | Mobilidade Imigratória para brasileiros" },
-      { name: "twitter:description", content: "Imigração legal aos EUA por mérito profissional. Análise gratuita para vistos EB-2 NIW, EB-1 e EB-3, com Green Card para cônjuge e filhos." },
-      { name: "twitter:image", content: OG_IMAGE },
-    ],
-    links: [{ rel: "canonical", href: "https://lp.statusnaamerica.com/" }],
-  }),
-  loader: () => getPageSectionsFn({ data: { page: "home" } }),
+      loaderData?.seo,
+    );
+    return {
+      meta,
+      links: [
+        ...links,
+        // Preload da hero LCP image.
+        { rel: "preload", as: "image", href: heroFamilyUrl, fetchPriority: "high" },
+      ],
+    };
+  },
+  loader: async () => {
+    const [sections, seo] = await Promise.all([
+      getPageSectionsFn({ data: { page: "home" } }),
+      getPageSeoFn({ data: { page: "home" } }),
+    ]);
+    return { sections, seo };
+  },
   component: Home,
 });
 
@@ -73,7 +77,7 @@ const HOME_REGISTRY: Record<string, ComponentType> = {
 function Home() {
   // Prima o store síncrono com a ordem vinda do loader (SSR + cliente),
   // para que useOrderedSections já produza o snapshot correto no 1º render.
-  const initialSections = Route.useLoaderData();
+  const { sections: initialSections } = Route.useLoaderData();
   primePageSections("home", initialSections);
 
   const layout = useOrderedSections("home");
