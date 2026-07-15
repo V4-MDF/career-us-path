@@ -67,6 +67,18 @@ export function trackFormView(meta?: Params) {
   emitGa("form_view", { form_name: "avaliacao", ...meta });
 }
 
+/** Primeira interação real com o formulário (usuário começou a preencher). */
+export function trackFormStart(meta?: Params) {
+  emitMetaCustom("FormStart", { content_name: "Avaliacao", ...meta });
+  emitGa("form_start", { form_name: "avaliacao", ...meta });
+}
+
+/** Clique no botão de envio do formulário (intenção de submit). */
+export function trackFormSubmit(meta?: Params) {
+  emitMetaCustom("FormSubmit", { content_name: "Avaliacao", ...meta });
+  emitGa("form_submit", { form_name: "avaliacao", ...meta });
+}
+
 /** Público B, preencheu o formulário (/avaliacao/obrigado). */
 export function trackLead(meta?: Params) {
   emitMeta("Lead", { content_name: "Avaliacao", ...meta });
