@@ -46,43 +46,44 @@ export const Route = createFileRoute("/sobre")({
     return {
       meta,
       links,
-    scripts: [
-      {
-        type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "Organization",
-          name: "Status na América",
-          legalName: "Status na America LLC",
-          url: "https://lp.statusnaamerica.com",
-          taxID: "99-4846502",
-          sameAs: [
-            "https://instagram.com/status_america",
-            "https://facebook.com/statusnaamerica",
-            "https://youtube.com/@status.naamerica",
-          ],
-          address: [
-            {
-              "@type": "PostalAddress",
-              streetAddress: "7575 KingsPointe Pkwy #4",
-              addressLocality: "Orlando",
-              addressRegion: "FL",
-              postalCode: "32819",
-              addressCountry: "US",
-            },
-            {
-              "@type": "PostalAddress",
-              streetAddress: "Alameda Araguaia 2104",
-              addressLocality: "Barueri",
-              addressRegion: "SP",
-              postalCode: "06455-000",
-              addressCountry: "BR",
-            },
-          ],
-        }),
-      },
-    ],
-  }),
+      scripts: [
+        {
+          type: "application/ld+json",
+          children: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            name: "Status na América",
+            legalName: "Status na America LLC",
+            url: "https://lp.statusnaamerica.com",
+            taxID: "99-4846502",
+            sameAs: [
+              "https://instagram.com/status_america",
+              "https://facebook.com/statusnaamerica",
+              "https://youtube.com/@status.naamerica",
+            ],
+            address: [
+              {
+                "@type": "PostalAddress",
+                streetAddress: "7575 KingsPointe Pkwy #4",
+                addressLocality: "Orlando",
+                addressRegion: "FL",
+                postalCode: "32819",
+                addressCountry: "US",
+              },
+              {
+                "@type": "PostalAddress",
+                streetAddress: "Alameda Araguaia 2104",
+                addressLocality: "Barueri",
+                addressRegion: "SP",
+                postalCode: "06455-000",
+                addressCountry: "BR",
+              },
+            ],
+          }),
+        },
+      ],
+    };
+  },
   component: SobrePage,
 });
 
