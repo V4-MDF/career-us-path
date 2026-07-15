@@ -14,6 +14,7 @@ import { LeadFormProgressive } from "@/components/site/LeadFormProgressive";
 import { trackFormView, trackWhatsAppClick } from "@/lib/tracking";
 import { getOrigin } from "@/lib/origin";
 import { buildWhatsAppLink, leadWhatsAppMessage } from "@/lib/whatsapp";
+import { normalizeBrPhone } from "@/lib/phone";
 import type { LeadInput } from "@/lib/leadScoring";
 import avaliacaoBg from "@/assets/avaliacao-bg.jpg";
 import logoAsset from "@/assets/logo-status-na-america.webp.asset.json";
