@@ -9,7 +9,7 @@
  */
 
 import { useState } from "react";
-import heroFamily from "@/assets/hero-family.jpg";
+import heroFamily from "@/assets/hero-family.webp";
 
 /** Filtro para escurecer a mídia e garantir contraste do texto sobreposto. */
 const DARKEN_FILTER = "brightness(0.6) saturate(0.95)";

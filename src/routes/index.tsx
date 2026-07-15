@@ -12,7 +12,7 @@ import { BlogStrip } from "@/components/site/BlogStrip";
 import { primePageSections, useOrderedSections } from "@/lib/pageStructure";
 import { getPageSectionsFn } from "@/lib/pageSections.functions";
 import { getPageSeoFn, buildSeoTags } from "@/lib/pageSeo.functions";
-import heroFamilyUrl from "@/assets/hero-family.jpg";
+import heroFamilyUrl from "@/assets/hero-family.webp";
 
 const OG_IMAGE = "https://lp.statusnaamerica.com/__l5e/assets-v1/db6af206-dff3-4b36-b8f2-a6d534ba74a4/og-home.jpg";
 
@@ -43,7 +43,7 @@ export const Route = createFileRoute("/")({
       links: [
         ...links,
         // Preload da hero LCP image.
-        { rel: "preload", as: "image", href: heroFamilyUrl, fetchPriority: "high" },
+        { rel: "preload", as: "image", href: heroFamilyUrl, type: "image/webp", fetchPriority: "high" },
       ],
     };
   },
