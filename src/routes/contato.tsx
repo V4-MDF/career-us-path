@@ -499,7 +499,7 @@ function ContatoForm() {
               id="nome"
               label="Nome completo"
               value={values.nome}
-              onChange={(v) => setValues((s) => ({ ...s, nome: v }))}
+              onChange={(v) => updateValue("nome", v)}
               error={errors.nome}
               autoComplete="name"
             />
@@ -508,7 +508,7 @@ function ContatoForm() {
               label="E-mail"
               type="email"
               value={values.email}
-              onChange={(v) => setValues((s) => ({ ...s, email: v }))}
+              onChange={(v) => updateValue("email", v)}
               error={errors.email}
               autoComplete="email"
             />
@@ -518,7 +518,7 @@ function ContatoForm() {
               id="whatsapp"
               label="WhatsApp (com DDD)"
               value={values.whatsapp}
-              onChange={(v) => setValues((s) => ({ ...s, whatsapp: v }))}
+              onChange={(v) => updateValue("whatsapp", v)}
               error={errors.whatsapp}
               autoComplete="tel"
               placeholder="(11) 90000-0000"
@@ -532,7 +532,7 @@ function ContatoForm() {
               id="mensagem"
               rows={5}
               value={values.mensagem}
-              onChange={(e) => setValues((s) => ({ ...s, mensagem: e.target.value }))}
+              onChange={(e) => updateValue("mensagem", e.target.value)}
               maxLength={2000}
               className="mt-1"
               placeholder="Conte brevemente sua dúvida ou o motivo do contato."
