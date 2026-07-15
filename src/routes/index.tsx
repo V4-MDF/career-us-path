@@ -77,7 +77,7 @@ const HOME_REGISTRY: Record<string, ComponentType> = {
 function Home() {
   // Prima o store síncrono com a ordem vinda do loader (SSR + cliente),
   // para que useOrderedSections já produza o snapshot correto no 1º render.
-  const initialSections = Route.useLoaderData();
+  const { sections: initialSections } = Route.useLoaderData();
   primePageSections("home", initialSections);
 
   const layout = useOrderedSections("home");
