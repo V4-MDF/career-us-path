@@ -99,6 +99,7 @@ export function LeadForm({ segmentId, defaultProfissao, onSubmitted, submitLabel
   };
 
   const submit = async () => {
+    trackFormSubmit({ form_name: "avaliacao-legacy", segmento: segmentId ?? null, step });
     const err = validateStep();
     if (err) { setError(err); return; }
     setError(null);
