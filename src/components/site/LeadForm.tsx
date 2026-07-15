@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -13,6 +13,7 @@ import { CheckCircle2, ChevronRight, Loader2 } from "lucide-react";
 import { newId, set } from "@/lib/dataStore";
 import { captureUtms, type LeadInput } from "@/lib/leadScoring";
 import { getAssignedVariantId, registerConversion } from "@/lib/abEngine";
+import { trackFormStart, trackFormSubmit } from "@/lib/tracking";
 
 export interface LeadFormProps {
   /** Slug do segmento da LP (medicos, engenheiros, empresarios). */
