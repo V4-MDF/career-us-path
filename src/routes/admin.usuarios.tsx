@@ -89,7 +89,7 @@ function UsersPage() {
         actions={
           <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
-              <Button className="bg-slate-900 hover:bg-slate-800 gap-1.5">
+              <Button className="bg-amber-400 text-slate-900 hover:bg-amber-500 gap-1.5">
                 <Plus className="h-4 w-4" />Novo admin
               </Button>
             </DialogTrigger>
