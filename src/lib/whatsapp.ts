@@ -13,18 +13,29 @@ function digits(s: string): string {
 }
 
 /**
+ * Garante DDI 55 quando o número guardado no admin foi salvo apenas com
+ * DDD+local (10 ou 11 dígitos). Sem isso, wa.me abriria um número inválido.
+ */
+function ensureBrDdi(raw: string): string {
+  const d = digits(raw);
+  if (!d) return "";
+  if ((d.length === 10 || d.length === 11) && !d.startsWith("55")) return `55${d}`;
+  return d;
+}
+
+/**
  * Gera href https://wa.me/<num>?text=<msg>.
  * Lê o número configurado de forma assíncrona, para uso em handlers e effects.
  */
 export async function buildWhatsAppLink(message: string): Promise<string> {
   const s = await getSiteSettings().catch(() => defaultSettings);
-  const num = digits(s.whatsapp_br || defaultSettings.whatsapp_br);
+  const num = ensureBrDdi(s.whatsapp_br || defaultSettings.whatsapp_br);
   return `https://wa.me/${num}?text=${encodeURIComponent(message)}`;
 }
 
 /** Versão síncrona quando o caller já tem o número em mãos. */
 export function whatsappLinkFor(number: string, message: string): string {
-  return `https://wa.me/${digits(number)}?text=${encodeURIComponent(message)}`;
+  return `https://wa.me/${ensureBrDdi(number)}?text=${encodeURIComponent(message)}`;
 }
 
 /**

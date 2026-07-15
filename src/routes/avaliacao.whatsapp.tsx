@@ -14,6 +14,7 @@ import { LeadFormProgressive } from "@/components/site/LeadFormProgressive";
 import { trackFormView, trackWhatsAppClick } from "@/lib/tracking";
 import { getOrigin } from "@/lib/origin";
 import { buildWhatsAppLink, leadWhatsAppMessage } from "@/lib/whatsapp";
+import { normalizeBrPhone } from "@/lib/phone";
 import type { LeadInput } from "@/lib/leadScoring";
 import avaliacaoBg from "@/assets/avaliacao-bg.jpg";
 import logoAsset from "@/assets/logo-status-na-america.webp.asset.json";
@@ -97,10 +98,15 @@ function AvaliacaoWhatsAppPage() {
     if (utm.gclid) utmLines.push(`• gclid: ${utm.gclid}`);
     if (utm.fbclid) utmLines.push(`• fbclid: ${utm.fbclid}`);
 
+    // Normaliza o WhatsApp do lead para E.164 (+55DDNNNNNNNNN); fallback ao
+    // valor mascarado caso a normalização falhe, para não perder o dado.
+    const normalizedPhone = normalizeBrPhone(data.whatsapp);
+    const phoneForMessage = normalizedPhone?.display ?? data.whatsapp;
+
     const base = leadWhatsAppMessage({
       nome: data.nome,
       email: data.email,
-      whatsapp: data.whatsapp,
+      whatsapp: phoneForMessage,
       objetivo_visto: data.objetivo_visto,
       profissao: data.profissao,
       formacao: data.formacao,
