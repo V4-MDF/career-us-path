@@ -1,47 +1,51 @@
-## Objetivo
-Criar uma segunda versão da página de análise em `/avaliacao/whatsapp` que, ao enviar o formulário, redireciona direto para o WhatsApp com uma mensagem pré-preenchida contendo as respostas — sem passar pelas páginas de obrigado.
+## Diagnóstico (PageSpeed lp.statusnaamerica.com — mobile)
 
-## Escopo
-- Nova rota: `src/routes/avaliacao.whatsapp.tsx`
-- Reaproveita o mesmo formulário e perguntas de `/avaliacao` (Nome, Email, Telefone, Renda, Escolaridade, Profissão, etc.), mantendo o mesmo layout vertical em `bg-ink` com alto contraste.
-- Mantém o cálculo de score e salva o lead no backend normalmente (mesma persistência de `/avaliacao`), com `channel: "avaliacao-whatsapp"` para diferenciar a origem.
-- Dispara os mesmos eventos de tracking (`form_start`, `form_submit`, `Lead`) já usados hoje.
-- Não usa a lógica de qualificado/não-qualificado nem redireciona para páginas de obrigado.
+- Desempenho 97, mas **LCP = NO_LCP** e **TBT = NO_LCP**: o Lighthouse não conseguiu identificar o Largest Contentful Paint. Isso geralmente é o vídeo no hero (o `<video>`/iframe não conta como LCP) — falta um elemento LCP claro (imagem estática) acima da dobra.
+- FCP 3,0 s e Speed Index 4,2 s no 4G lento — puxados por render-blocking, imagens pesadas e cache curto.
+- Insights principais: cache ineficiente (162 KiB), entrega de imagens (270 KiB), recursos que bloqueiam render, JS legado (12 KiB), CSS/JS não usado.
+- Contraste: 1 par de cores ainda falha em WCAG AA.
+- A11y agente: um `<a role="listitem">` no BlogStrip com `role` inadequado para `<a>`.
 
-## Comportamento do envio
-Ao clicar em "Enviar":
-1. Valida campos, calcula score, salva o lead.
-2. Dispara `trackFormSubmit` + `Lead`.
-3. Monta a mensagem WhatsApp com as respostas do formulário.
-4. Abre `https://wa.me/<NUMERO>?text=<mensagem-encoded>` em nova aba (`window.open`, `target=_blank`).
-5. Exibe um estado de confirmação simples na própria página ("Abrimos o WhatsApp em uma nova aba…") com botão de fallback caso o popup seja bloqueado.
+## Plano de otimização
 
-## Formato da mensagem WhatsApp
-Texto em português, quebras de linha via `%0A`, exemplo:
-```
-Olá! Acabei de preencher a análise no site.
+### 1. Resolver o "NO_LCP" (raiz do problema)
+No hero da home (`src/routes/index.tsx` + `HeroBackgroundMedia` / `VideoPlayer`):
+- Renderizar uma **imagem de poster estática** como LCP real acima do vídeo (mesmo enquadramento, `<img>` com `fetchpriority="high"`, `decoding="async"`, `width`/`height` explícitos).
+- Só montar o `<video>`/embed depois do primeiro paint (efeito após hidratação) — o poster fica atrás como LCP estável.
+- Adicionar `<link rel="preload" as="image" href="..." fetchpriority="high">` no `head()` da rota `/` (index.tsx, não __root).
 
-Nome: {nome}
-Email: {email}
-Telefone: {telefone}
-Renda: {renda}
-Escolaridade: {escolaridade}
-Profissão: {profissao}
-Área de interesse: {visto}
+### 2. Entrega de imagens (−270 KiB)
+- Converter hero + imagens de vistos para **AVIF/WebP** via `vite-imagetools` (já permitido pelo stack). Fallback WebP.
+- Servir tamanhos responsivos com `srcset`/`sizes` no `PhotoFrame` e no hero de vistos.
+- `loading="lazy"` + `decoding="async"` em tudo abaixo da dobra (blog strip, testemunhos, contraste BR×EUA). Apenas o LCP fica `eager` + `fetchpriority="high"`.
+- Auditar OG image (`src/assets/og-home.jpg`) e logo `.webp` — garantir dimensões corretas, sem sobre-resolução.
 
-Pontuação: {score}/100
-```
+### 3. Cache de estáticos (−162 KiB por revisita)
+- Configurar cabeçalhos `Cache-Control: public, max-age=31536000, immutable` para assets com hash (`/assets/*`) via `public/_headers` (Cloudflare Pages/Workers respeita).
+- HTML permanece `no-cache`.
 
-## Número do WhatsApp
-Usar o mesmo número já configurado no site (o mesmo que era usado antes da remoção global dos botões WhatsApp — em `siteContent` / contato). Se não existir mais, ler de `site_content` com fallback para o número institucional exibido em `/contato`.
+### 4. Render-blocking + JS legado + JS/CSS não usado
+- Mover `<link>` de fontes Google para `preconnect` + `preload` da fonte crítica (Montserrat 600 + Inter 400) e `font-display: swap`. Remover pesos não usados.
+- Adicionar `defer`/`async` em scripts do TrackingInjector (GTM/Pixel) e só injetá-los **após** `requestIdleCallback` ou 2s após load — hoje bloqueiam TTI. Isso também reduz "Terceiros".
+- Rota `/` (que é o que `lp.statusnaamerica.com` serve) tem 14 dobras. Fazer **lazy import** das seções abaixo da dobra (`BlogStrip`, `Testimonials`, `ContrastBrasilEUA`, `Video institucional`, etc.) com `React.lazy` + `Suspense`, seguindo `tanstack-code-splitting` (sem exportar as funções de componente de rota).
+- Configurar `build.target: "es2020"` no `vite.config.ts` para reduzir polyfills legados (o insight "JS legado 12 KiB" aponta transforms desnecessários).
+- Purgar CSS não usado: Tailwind v4 já faz tree-shake; remover classes/utilitários mortos em `styles.css` e componentes de visuals não utilizados nesta LP (`ConstellationCanvas`, `FamilySealBackdrop` se não aparecem em `/`).
+
+### 5. Correções de acessibilidade
+- Contraste: identificar o par que falha (provavelmente texto `text-ink/70` sobre gold ou legenda em footer) e subir opacidade para ≥ 80% conforme já aplicamos em body/legal.
+- BlogStrip: trocar `<a role="listitem">` — remover o `role="listitem"` do `<a>` e envolver a lista em `<ul><li><a>...</a></li></ul>` semanticamente correto.
+
+### 6. Verificação
+- Após deploy, rodar novo PageSpeed em mobile — meta: LCP < 2,5 s medido (elemento identificado), FCP < 1,8 s, Speed Index < 3,4 s, sem "NO_LCP".
 
 ## Detalhes técnicos
-- Arquivo: `src/routes/avaliacao.whatsapp.tsx` com `createFileRoute("/avaliacao/whatsapp")`.
-- Componente derivado de `LeadFormProgressive` (ou wrapper que injeta um `onSubmit` customizado). Preferência: adicionar prop opcional `mode: "default" | "whatsapp"` em `LeadFormProgressive` para não duplicar lógica; no modo `whatsapp` ele salva o lead e retorna os dados via callback em vez de navegar para `/avaliacao/obrigado-*`.
-- `head()` próprio com title/description específicos e `robots: noindex` (rota de campanha, não canônica).
-- Sem botão WhatsApp fixo/global — apenas o CTA final desta página abre o WhatsApp (respeita a decisão anterior de remover botões WhatsApp das outras páginas).
+
+- Preload de LCP: `head().links` **na rota**, não em `__root.tsx` (senão vira sitewide).
+- Lazy sections: manter função `HomeComponent` **não exportada** e usar `const BlogStrip = lazy(() => import("@/components/site/BlogStrip"))` no topo do arquivo, com `<Suspense fallback={null}>`.
+- Cache headers: criar `public/_headers` com regras por prefixo `/assets/*` e `/_build/*` — Cloudflare respeita.
+- Terceiros (GTM/Pixel): já centralizados no `TrackingInjector`; injetar via `useEffect` com `setTimeout(..., 1500)` ou `requestIdleCallback`, mantendo `dataLayer` inicializado sincronamente para não perder eventos iniciais.
+- Nada disso mexe em backend, scoring, ou lógica de leads.
 
 ## Fora do escopo
-- Nenhuma alteração em `/avaliacao` atual, nas páginas de obrigado, ou em outras rotas.
-- Sem novos campos no formulário.
-- Sem mudança no modelo de scoring.
+- Redesign, novo conteúdo, mudanças em Admin, novas rotas ou backend.
+- Substituir o vídeo do hero — só adicionar o poster/LCP na frente dele.
