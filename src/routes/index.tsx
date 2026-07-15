@@ -43,7 +43,7 @@ export const Route = createFileRoute("/")({
       links: [
         ...links,
         // Preload da hero LCP image.
-        { rel: "preload", as: "image", href: heroFamilyUrl, fetchPriority: "high" },
+        { rel: "preload", as: "image", href: heroFamilyUrl, type: "image/webp", fetchPriority: "high" },
       ],
     };
   },
