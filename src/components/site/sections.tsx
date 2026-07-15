@@ -84,7 +84,7 @@ export function Hero() {
       </div>
 
       <div className="container-x grid lg:grid-cols-[1.1fr_0.9fr] gap-10 md:gap-16 lg:gap-20 items-center">
-        <div>
+        <div className="min-w-0">
           <div className="flex items-center gap-3">
             <FlagsBRUS size={16} />
             <span aria-hidden className="h-px w-6 bg-gold" />
@@ -134,7 +134,7 @@ export function Hero() {
         {/* Bloco editorial estático. Tratamento de cor único (.photo-treatment)
             unifica a foto com o restante do site. */}
         {/* Slot de vídeo horizontal (16:9) — substitui o retrato editorial. */}
-        <div className="relative mt-10 lg:mt-0">
+        <div className="relative mt-10 lg:mt-0 min-w-0">
           <div className="relative aspect-video w-full overflow-hidden rounded-2xl border border-gold/40 bg-ink-raise shadow-elevated ring-1 ring-gold/10">
             <VideoPlayer url={heroVideoUrl} title="Vídeo institucional Status na América" />
           </div>
