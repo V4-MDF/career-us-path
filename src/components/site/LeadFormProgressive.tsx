@@ -37,7 +37,7 @@ import { trackFormStart, trackFormSubmit } from "@/lib/tracking";
 export interface LeadFormProgressiveProps {
   segmentId?: string;
   defaultProfissao?: string;
-  onSubmitted?: (lead: { id: string; qualification: QualResult }) => void;
+  onSubmitted?: (lead: { id: string; qualification: QualResult; data: LeadInput }) => void;
   submitLabel?: string;
   /** Path da rota atual (para excluir da origem). Ex.: "/avaliacao" */
   currentPath?: string;
