@@ -94,7 +94,6 @@ export function BlogStrip() {
           o próximo card "espiando". Desktop: grid 3 colunas tradicional.
         */}
         <div
-          role="list"
           aria-label="Artigos em destaque"
           className="
             mt-10 flex gap-4 overflow-x-auto snap-x snap-mandatory
