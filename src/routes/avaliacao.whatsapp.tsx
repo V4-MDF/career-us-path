@@ -120,8 +120,7 @@ function AvaliacaoWhatsAppPage() {
       ? `${base}\n\n*Origem:*\n${utmLines.join("\n")}`
       : base;
 
-    // GA4 + Meta Pixel: registra o clique com UTM para atribuição.
-    trackWhatsAppClick({
+    const utmMeta = {
       utm_source: utm.utm_source ?? null,
       utm_medium: utm.utm_medium ?? null,
       utm_campaign: utm.utm_campaign ?? null,
@@ -129,7 +128,10 @@ function AvaliacaoWhatsAppPage() {
       utm_term: utm.utm_term ?? null,
       gclid: utm.gclid ?? null,
       fbclid: utm.fbclid ?? null,
-    });
+    };
+
+    // Etapa 1: intenção de envio (clique em "Enviar e abrir WhatsApp").
+    trackWhatsAppSubmit(utmMeta);
 
     let link = "";
     try {
@@ -141,9 +143,13 @@ function AvaliacaoWhatsAppPage() {
       setWaLink(link);
       // Abre em nova aba. Pode ser bloqueado por popup blocker; o fallback
       // exibe um botão manual logo abaixo.
+      let opened = false;
       try {
-        window.open(link, "_blank", "noopener,noreferrer");
+        const w = window.open(link, "_blank", "noopener,noreferrer");
+        opened = !!w;
       } catch { /* ignore */ }
+      // Etapa 2: WhatsApp efetivamente aberto (conversão da etapa).
+      if (opened) trackWhatsAppOpened(utmMeta);
     }
   };
 
