@@ -32,6 +32,7 @@ import { getAssignedVariantId, registerConversion } from "@/lib/abEngine";
 import { getOrigin, type LeadOrigin } from "@/lib/origin";
 import { markSessionStartedForm, markSessionConverted } from "@/lib/sessions";
 import { loadModel, computeScore } from "@/lib/scoring";
+import { trackFormStart, trackFormSubmit } from "@/lib/tracking";
 
 export interface LeadFormProgressiveProps {
   segmentId?: string;
