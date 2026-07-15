@@ -134,7 +134,7 @@ export function Hero() {
         {/* Bloco editorial estático. Tratamento de cor único (.photo-treatment)
             unifica a foto com o restante do site. */}
         {/* Slot de vídeo horizontal (16:9) — substitui o retrato editorial. */}
-        <div className="relative mt-10 lg:mt-0">
+        <div className="relative mt-10 lg:mt-0 min-w-0">
           <div className="relative aspect-video w-full overflow-hidden rounded-2xl border border-gold/40 bg-ink-raise shadow-elevated ring-1 ring-gold/10">
             <VideoPlayer url={heroVideoUrl} title="Vídeo institucional Status na América" />
           </div>
