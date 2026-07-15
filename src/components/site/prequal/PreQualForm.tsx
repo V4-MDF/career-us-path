@@ -14,7 +14,7 @@
  * acontecem no route container.
  */
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -23,6 +23,7 @@ import {
   emptyAnswers, loadDraft, saveDraft,
   type PreQualAnswers,
 } from "@/lib/prequal";
+import { trackFormStart, trackFormSubmit } from "@/lib/tracking";
 
 interface Props {
   onSubmit: (a: PreQualAnswers) => void;
@@ -100,6 +101,7 @@ function YesNo({
 export function PreQualForm({ onSubmit, submitting }: Props) {
   const [a, setA] = useState<PreQualAnswers>(emptyAnswers);
   const [restored, setRestored] = useState(false);
+  const formStartFiredRef = useRef(false);
 
   // Restaura draft uma única vez
   useEffect(() => {
@@ -107,8 +109,15 @@ export function PreQualForm({ onSubmit, submitting }: Props) {
     if (draft) { setA(draft); setRestored(true); }
   }, []);
 
-  // Auto-save a cada mudança
-  useEffect(() => { saveDraft(a); }, [a]);
+  // Auto-save a cada mudança + track "form_start" na primeira interação
+  useEffect(() => {
+    saveDraft(a);
+    const started = a.fullName.trim() || a.email.trim() || a.whatsapp.trim() || Object.values(a).some((v) => v === true);
+    if (started && !formStartFiredRef.current) {
+      formStartFiredRef.current = true;
+      trackFormStart({ form_name: "pre-qualificacao" });
+    }
+  }, [a]);
 
   const upd = <K extends keyof PreQualAnswers>(k: K, v: PreQualAnswers[K]) =>
     setA((prev) => ({ ...prev, [k]: v }));
@@ -125,6 +134,7 @@ export function PreQualForm({ onSubmit, submitting }: Props) {
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    trackFormSubmit({ form_name: "pre-qualificacao" });
     if (!canSubmit) return;
     onSubmit(a);
   }

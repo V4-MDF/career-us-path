@@ -32,6 +32,7 @@ import { getAssignedVariantId, registerConversion } from "@/lib/abEngine";
 import { getOrigin, type LeadOrigin } from "@/lib/origin";
 import { markSessionStartedForm, markSessionConverted } from "@/lib/sessions";
 import { loadModel, computeScore } from "@/lib/scoring";
+import { trackFormStart, trackFormSubmit } from "@/lib/tracking";
 
 export interface LeadFormProgressiveProps {
   segmentId?: string;
@@ -132,6 +133,7 @@ export function LeadFormProgressive({
   const [restoredCount, setRestoredCount] = useState(0);
   const partialIdRef = useRef<string>("");
   const containerRef = useRef<HTMLDivElement | null>(null);
+  const formStartFiredRef = useRef<boolean>(false);
   const reduce = useReducedMotion();
   // Ref sempre apontando para o `data` mais recente, evita closures stale
   // quando o auto-advance dos <Select> dispara via setTimeout antes do
@@ -217,6 +219,10 @@ export function LeadFormProgressive({
     void set("leads_partial", partialIdRef.current, partial);
     // Marca a sessão como "iniciou o formulário" assim que o 1º campo é válido.
     void markSessionStartedForm();
+    if (!formStartFiredRef.current) {
+      formStartFiredRef.current = true;
+      trackFormStart({ segmento: segmentId ?? null });
+    }
   }, [data, done, segmentId, currentPath, restored]);
 
   const advance = () => {
@@ -247,6 +253,7 @@ export function LeadFormProgressive({
   };
 
   const submit = async () => {
+    trackFormSubmit({ segmento: segmentId ?? null, step: stepIndex });
     const current = dataRef.current;
     if (steps.some((f) => !isFieldValid(f.key, current))) {
       setError("Complete todas as perguntas antes de enviar.");

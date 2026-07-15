@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -13,6 +13,7 @@ import { CheckCircle2, ChevronRight, Loader2 } from "lucide-react";
 import { newId, set } from "@/lib/dataStore";
 import { captureUtms, type LeadInput } from "@/lib/leadScoring";
 import { getAssignedVariantId, registerConversion } from "@/lib/abEngine";
+import { trackFormStart, trackFormSubmit } from "@/lib/tracking";
 
 export interface LeadFormProps {
   /** Slug do segmento da LP (medicos, engenheiros, empresarios). */
@@ -55,9 +56,20 @@ export function LeadForm({ segmentId, defaultProfissao, onSubmitted, submitLabel
   const [loading, setLoading] = useState(false);
   const [done, setDone] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const formStartFiredRef = useRef(false);
 
   const update = <K extends keyof LeadInput>(k: K, v: LeadInput[K]) =>
     setData((d) => ({ ...d, [k]: v }));
+
+  useEffect(() => {
+    const started =
+      data.nome.trim() || data.email.trim() || data.whatsapp.trim() ||
+      data.profissao || data.formacao || data.faixaEtaria || data.renda || data.momento;
+    if (started && !formStartFiredRef.current) {
+      formStartFiredRef.current = true;
+      trackFormStart({ form_name: "avaliacao-legacy", segmento: segmentId ?? null });
+    }
+  }, [data, segmentId]);
 
   const validateStep = (): string | null => {
     if (step === 0) {
@@ -87,6 +99,7 @@ export function LeadForm({ segmentId, defaultProfissao, onSubmitted, submitLabel
   };
 
   const submit = async () => {
+    trackFormSubmit({ form_name: "avaliacao-legacy", segmento: segmentId ?? null, step });
     const err = validateStep();
     if (err) { setError(err); return; }
     setError(null);

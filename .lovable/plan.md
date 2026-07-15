@@ -1,33 +1,39 @@
-## Objetivo
-1. Trocar o vídeo da hero por uma **foto motion** (cinemagraph curto e sutil) de uma família, priorizando um clipe leve com pouco movimento (mais próximo de uma foto viva do que de um vídeo tradicional).
-2. No painel admin (`/admin/conteudo` e onde mais aparecer), todos os campos de **imagem** (e vídeo enviável) passam a ter **upload direto para o CDN**, além da opção de colar URL.
+Implementar eventos de tracking "form iniciado" e "form enviado" nos formulários do site, padronizando GA4/Meta e sem quebrar os eventos existentes.
 
-## Passos
+### O que será feito
 
-### 1. Foto motion da família (hero da Home)
-- Sourcing em Pexels/Coverr por clipes tipo "cinemagraph family", "family portrait subtle motion", "parents children slow motion still". Critérios:
-  - Horizontal 16:9, 1920x1080.
-  - Movimento sutil (cabelo ao vento, folhas, luz) — não caminhada rápida.
-  - Tom naturalmente mais escuro / golden hour, para manter contraste do título.
-  - ≤ 8 MB, 6–12s, loop-friendly.
-- Publicar no CDN via `lovable-assets create` → `src/assets/hero-family-motion.mp4.asset.json`.
-- Deletar o asset anterior `hero-family-children.mp4` do CDN.
-- Atualizar `HeroBackgroundMedia.tsx` para apontar `DEFAULT_VIDEO_URL` ao novo pointer. Manter `filter: brightness(0.55) saturate(0.9)` e o mask-image atual.
-- Se não achar clipe adequado, aviso antes com 2–3 opções para você escolher.
+1. **Expandir `src/lib/tracking.ts`**
+   - Adicionar `trackFormStart(meta?)`:
+     - GA4: `form_start` (com `form_name`)
+     - Meta: `trackCustom("FormStart")` (com `content_name`)
+   - Adicionar `trackFormSubmit(meta?)`:
+     - GA4: `form_submit` (com `form_name`)
+     - Meta: `trackCustom("FormSubmit")` (com `content_name`)
+   - Manter `trackFormView` e `trackLead` intactos (não alteram funil de remarketing atual).
 
-### 2. Upload em campos de imagem/vídeo do admin
-- Reaproveitar `src/components/admin/ImageUploader.tsx` (já usado em `/admin/midia`) e criar um `MediaUploader` irmão que aceite também vídeo (`video/mp4`, `video/webm`), com preview em `<video muted>`.
-- Em `src/routes/admin.conteudo.tsx`, detectar por rótulo/chave se o campo é:
-  - **Imagem** (`heroImage`, `posterUrl`, `partners.slotN.url`, `heroVideoThumb`, `definitionImage`) → renderizar `ImageUploader` acima do `Input` de URL. O upload preenche o campo automaticamente e salva.
-  - **Vídeo** (`hero.videoUrl`, `heroVideoUrl`, `testimonials.*VideoUrl`) → renderizar `MediaUploader` (aceita mp4/webm) OU manter o input para colar link do YouTube/Vimeo. Ambos coexistem: uploader p/ arquivo, campo de texto p/ link externo.
-- Manter o input de URL visível e editável (nem tudo é upload — YouTube continua colando link).
-- Salvar segue o mesmo fluxo `onBlur` → `set("site_content", ...)` + `broadcast()`.
-- Não mexer em `/admin/midia` (já tem uploader); apenas garantir consistência visual.
+2. **Wire nos formulários principais**
+   - **`LeadFormProgressive.tsx`** (análise /avaliacao):
+     - `form_start` → na primeira interação real do usuário (primeira vez que um campo passa a ser válido e salva parcial).
+     - `form_submit` → no clique do botão de enviar, imediatamente antes do processamento/submit.
+   - **`PreQualForm.tsx`** (/pre-qualificacao):
+     - `form_start` → no primeiro campo de contato preenchido/editado.
+     - `form_submit` → no `handleSubmit`.
+   - **`LeadForm.tsx`** (formulário legacy de LPs, se ainda usado em algum lugar):
+     - `form_start` e `form_submit` nos momentos equivalentes.
+   - **`/routes/contato.tsx`** (formulário de mensagem):
+     - Substituir o push manual ao `dataLayer` por `trackFormSubmit({ form_name: "contato" })`.
+     - Adicionar `trackFormStart({ form_name: "contato" })` na primeira mudança de campo.
 
-## Não mexer
-- Estrutura de dobras, tipografia, `mask-image`, comportamento mobile do hero.
-- Auto-gen: `client.ts`, `types.ts`.
-- Campos de texto puro (título, subtítulo etc.) continuam como `Input`/`Textarea`.
+3. **Evitar duplicidade e ruído**
+   - Cada evento dispara apenas uma vez por sessão de exibição do formulário (use ref/flag booleano).
+   - `form_start` dispara quando o usuário realmente começa a digitar/selecionar, não no mount.
+   - `form_submit` dispara no botão, independentemente de sucesso/falha de validação (o evento é sobre intenção de envio); se houver erro de validação, ainda assim conta como submit attempt.
 
-## Detalhe técnico
-- O `ImageUploader` atual já usa storage `media` do Cloud com upload direto; `MediaUploader` para vídeo reutilizará o mesmo bucket, apenas ampliando o `accept` e o preview. Nenhuma nova tabela/migração.
+4. **Teste/validação**
+   - Build (`bun run build`) passa.
+   - Verificar no console do preview que, ao preencher o form, `form_start` e `form_submit` aparecem no `dataLayer`/gtag/fbq (quando tracking estiver ativo).
+
+### Technical details
+- Arquivos alterados: `src/lib/tracking.ts`, `src/components/site/LeadFormProgressive.tsx`, `src/components/site/prequal/PreQualForm.tsx`, `src/components/site/LeadForm.tsx`, `src/routes/contato.tsx`.
+- Sem alterações no backend/data layer.
+- Sem novas dependências.

@@ -10,7 +10,7 @@
  *    próprio "contact_message" no dataLayer (se GTM estiver ativo).
  */
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { z } from "zod";
 import {
   Mail,
@@ -34,6 +34,7 @@ import { useContent } from "@/lib/siteContent";
 import { getSiteSettings, defaultSettings, type SiteSettings } from "@/lib/admin/settings";
 import { newId, set } from "@/lib/dataStore";
 import { getOrigin } from "@/lib/origin";
+import { trackFormStart, trackFormSubmit } from "@/lib/tracking";
 
 export const Route = createFileRoute("/contato")({
   head: () => ({
@@ -387,9 +388,24 @@ function ContatoForm() {
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [status, setStatus] = useState<"idle" | "sending" | "sent">("idle");
+  const formStartFiredRef = useRef(false);
+
+  function updateValue<K extends keyof typeof values>(k: K, v: (typeof values)[K]) {
+    setValues((s) => {
+      const next = { ...s, [k]: v };
+      const started =
+        next.nome.trim() || next.email.trim() || next.whatsapp.trim() || next.mensagem.trim() || next.consent;
+      if (started && !formStartFiredRef.current) {
+        formStartFiredRef.current = true;
+        trackFormStart({ form_name: "contato" });
+      }
+      return next;
+    });
+  }
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    trackFormSubmit({ form_name: "contato" });
     const parsed = contactMessageSchema.safeParse(values);
     if (!parsed.success) {
       const map: Record<string, string> = {};
@@ -419,13 +435,6 @@ function ContatoForm() {
 
     try {
       await set("leads", id, record);
-      // Evento próprio (sem misturar com FormView/Lead do funil de qualificação)
-      if (typeof window !== "undefined") {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const w = window as any;
-        w.dataLayer = w.dataLayer || [];
-        w.dataLayer.push({ event: "contact_message", channel: "contato" });
-      }
       setStatus("sent");
     } catch {
       setStatus("idle");
@@ -490,7 +499,7 @@ function ContatoForm() {
               id="nome"
               label="Nome completo"
               value={values.nome}
-              onChange={(v) => setValues((s) => ({ ...s, nome: v }))}
+              onChange={(v) => updateValue("nome", v)}
               error={errors.nome}
               autoComplete="name"
             />
@@ -499,7 +508,7 @@ function ContatoForm() {
               label="E-mail"
               type="email"
               value={values.email}
-              onChange={(v) => setValues((s) => ({ ...s, email: v }))}
+              onChange={(v) => updateValue("email", v)}
               error={errors.email}
               autoComplete="email"
             />
@@ -509,7 +518,7 @@ function ContatoForm() {
               id="whatsapp"
               label="WhatsApp (com DDD)"
               value={values.whatsapp}
-              onChange={(v) => setValues((s) => ({ ...s, whatsapp: v }))}
+              onChange={(v) => updateValue("whatsapp", v)}
               error={errors.whatsapp}
               autoComplete="tel"
               placeholder="(11) 90000-0000"
@@ -523,7 +532,7 @@ function ContatoForm() {
               id="mensagem"
               rows={5}
               value={values.mensagem}
-              onChange={(e) => setValues((s) => ({ ...s, mensagem: e.target.value }))}
+              onChange={(e) => updateValue("mensagem", e.target.value)}
               maxLength={2000}
               className="mt-1"
               placeholder="Conte brevemente sua dúvida ou o motivo do contato."
@@ -536,9 +545,7 @@ function ContatoForm() {
           <label className="mt-5 flex items-start gap-3 text-sm text-ink-text/80">
             <Checkbox
               checked={values.consent}
-              onCheckedChange={(v) =>
-                setValues((s) => ({ ...s, consent: v === true }))
-              }
+              onCheckedChange={(v) => updateValue("consent", v === true)}
               className="mt-0.5"
             />
             <span>
