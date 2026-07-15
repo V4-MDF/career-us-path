@@ -25,32 +25,34 @@ const HOME_FAQS = [
 ];
 
 export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: "Status na América | Mobilidade Imigratória para brasileiros" },
+  head: ({ loaderData }) => {
+    const { meta, links } = buildSeoTags(
       {
-        name: "description",
-        content:
+        title: "Status na América | Mobilidade Imigratória para brasileiros",
+        description:
           "Imigração legal aos EUA por mérito profissional. Análise gratuita para vistos EB-2 NIW, EB-1 e EB-3, com Green Card para cônjuge e filhos.",
+        canonical: "/",
+        ogImage: OG_IMAGE,
+        ogType: "website",
       },
-      { name: "robots", content: "index,follow" },
-      { property: "og:title", content: "Status na América | Mobilidade Imigratória para brasileiros" },
-      {
-        property: "og:description",
-        content:
-          "Imigração legal aos EUA por mérito profissional. Análise gratuita para vistos EB-2 NIW, EB-1 e EB-3, com Green Card para cônjuge e filhos.",
-      },
-      { property: "og:type", content: "website" },
-      { property: "og:url", content: "https://lp.statusnaamerica.com/" },
-      { property: "og:image", content: OG_IMAGE },
-      { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Status na América | Mobilidade Imigratória para brasileiros" },
-      { name: "twitter:description", content: "Imigração legal aos EUA por mérito profissional. Análise gratuita para vistos EB-2 NIW, EB-1 e EB-3, com Green Card para cônjuge e filhos." },
-      { name: "twitter:image", content: OG_IMAGE },
-    ],
-    links: [{ rel: "canonical", href: "https://lp.statusnaamerica.com/" }],
-  }),
-  loader: () => getPageSectionsFn({ data: { page: "home" } }),
+      loaderData?.seo,
+    );
+    return {
+      meta,
+      links: [
+        ...links,
+        // Preload da hero LCP image.
+        { rel: "preload", as: "image", href: heroFamilyUrl, fetchpriority: "high" },
+      ],
+    };
+  },
+  loader: async () => {
+    const [sections, seo] = await Promise.all([
+      getPageSectionsFn({ data: { page: "home" } }),
+      getPageSeoFn({ data: { page: "home" } }),
+    ]);
+    return { sections, seo };
+  },
   component: Home,
 });
 
