@@ -26,6 +26,7 @@ import { Footer } from "@/components/site/Footer";
 import { PartnersBadges } from "@/components/site/sections";
 import { Button } from "@/components/ui/button";
 import { useContent } from "@/lib/siteContent";
+import { getPageSeoFn, buildSeoTags } from "@/lib/pageSeo.functions";
 
 export const Route = createFileRoute("/sobre")({
   head: () => ({
