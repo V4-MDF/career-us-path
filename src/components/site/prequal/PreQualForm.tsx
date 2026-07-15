@@ -134,6 +134,7 @@ export function PreQualForm({ onSubmit, submitting }: Props) {
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    trackFormSubmit({ form_name: "pre-qualificacao" });
     if (!canSubmit) return;
     onSubmit(a);
   }
