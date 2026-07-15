@@ -253,6 +253,7 @@ export function LeadFormProgressive({
   };
 
   const submit = async () => {
+    trackFormSubmit({ segmento: segmentId ?? null, step: stepIndex });
     const current = dataRef.current;
     if (steps.some((f) => !isFieldValid(f.key, current))) {
       setError("Complete todas as perguntas antes de enviar.");
