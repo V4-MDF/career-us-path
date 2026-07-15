@@ -85,7 +85,19 @@ function AvaliacaoWhatsAppPage() {
     : "Fale com nossa equipe pelo WhatsApp após responder.";
 
   const handleSubmitted = async ({ data }: { id: string; data: LeadInput }) => {
-    const message = leadWhatsAppMessage({
+    // UTMs da sessão (utm_source/medium/campaign/content/term + gclid/fbclid).
+    const origin = getOrigin("/avaliacao/whatsapp");
+    const utm = origin.utm ?? {};
+    const utmLines: string[] = [];
+    if (utm.utm_source) utmLines.push(`• utm_source: ${utm.utm_source}`);
+    if (utm.utm_medium) utmLines.push(`• utm_medium: ${utm.utm_medium}`);
+    if (utm.utm_campaign) utmLines.push(`• utm_campaign: ${utm.utm_campaign}`);
+    if (utm.utm_content) utmLines.push(`• utm_content: ${utm.utm_content}`);
+    if (utm.utm_term) utmLines.push(`• utm_term: ${utm.utm_term}`);
+    if (utm.gclid) utmLines.push(`• gclid: ${utm.gclid}`);
+    if (utm.fbclid) utmLines.push(`• fbclid: ${utm.fbclid}`);
+
+    const base = leadWhatsAppMessage({
       nome: data.nome,
       email: data.email,
       whatsapp: data.whatsapp,
@@ -98,6 +110,21 @@ function AvaliacaoWhatsAppPage() {
       renda: data.renda,
       momento: data.momento,
     });
+    const message = utmLines.length
+      ? `${base}\n\n*Origem:*\n${utmLines.join("\n")}`
+      : base;
+
+    // GA4 + Meta Pixel: registra o clique com UTM para atribuição.
+    trackWhatsAppClick({
+      utm_source: utm.utm_source ?? null,
+      utm_medium: utm.utm_medium ?? null,
+      utm_campaign: utm.utm_campaign ?? null,
+      utm_content: utm.utm_content ?? null,
+      utm_term: utm.utm_term ?? null,
+      gclid: utm.gclid ?? null,
+      fbclid: utm.fbclid ?? null,
+    });
+
     let link = "";
     try {
       link = await buildWhatsAppLink(message);
@@ -113,6 +140,7 @@ function AvaliacaoWhatsAppPage() {
       } catch { /* ignore */ }
     }
   };
+
 
   return (
     <div className="min-h-screen bg-ink text-foreground flex flex-col">
