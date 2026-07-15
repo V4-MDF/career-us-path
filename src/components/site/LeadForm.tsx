@@ -56,6 +56,7 @@ export function LeadForm({ segmentId, defaultProfissao, onSubmitted, submitLabel
   const [loading, setLoading] = useState(false);
   const [done, setDone] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const formStartFiredRef = useRef(false);
 
   const update = <K extends keyof LeadInput>(k: K, v: LeadInput[K]) =>
     setData((d) => ({ ...d, [k]: v }));
