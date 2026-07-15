@@ -98,3 +98,12 @@ export function trackLeadUnqualified(meta?: Params) {
   emitMetaCustom("LeadUnqualified", { content_name: "Avaliacao", ...meta });
   emitGa("lead_nao_qualificado", { form_name: "avaliacao", ...meta });
 }
+
+/** Clique que abre o WhatsApp com a mensagem do lead (rota /avaliacao/whatsapp). */
+export function trackWhatsAppClick(meta?: Params) {
+  emitMeta("Lead", { content_name: "Avaliacao", channel: "whatsapp", ...meta });
+  emitMetaCustom("WhatsAppClick", { content_name: "Avaliacao", ...meta });
+  emitGa("whatsapp_click", { form_name: "avaliacao", ...meta });
+  emitGa("generate_lead", { form_name: "avaliacao", channel: "whatsapp", ...meta });
+}
+
