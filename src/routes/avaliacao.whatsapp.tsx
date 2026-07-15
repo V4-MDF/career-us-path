@@ -230,6 +230,7 @@ function AvaliacaoWhatsAppPage() {
                   href={waLink}
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() => trackWhatsAppOpened()}
                   className="mt-6 inline-flex items-center gap-2 rounded-full bg-gold px-6 py-3 font-mono-label text-sm text-ink hover:bg-gold/90"
                 >
                   <MessageCircle className="h-4 w-4" /> Abrir WhatsApp
