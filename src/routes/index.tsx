@@ -11,7 +11,6 @@ import { OrganizationJsonLd, WebSiteJsonLd, FAQJsonLd } from "@/components/site/
 import { BlogStrip } from "@/components/site/BlogStrip";
 import { primePageSections, useOrderedSections } from "@/lib/pageStructure";
 import { getPageSectionsFn } from "@/lib/pageSections.functions";
-import heroFamilyUrl from "@/assets/hero-family.jpg";
 
 const OG_IMAGE = "https://lp.statusnaamerica.com/__l5e/assets-v1/db6af206-dff3-4b36-b8f2-a6d534ba74a4/og-home.jpg";
 
@@ -27,33 +26,28 @@ const HOME_FAQS = [
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Green Card EB-2 NIW para Profissionais Brasileiros" },
+      { title: "Status na América | Mobilidade Imigratória para brasileiros" },
       {
         name: "description",
         content:
           "Imigração legal aos EUA por mérito profissional. Análise gratuita para vistos EB-2 NIW, EB-1 e EB-3, com Green Card para cônjuge e filhos.",
       },
       { name: "robots", content: "index,follow" },
-      { property: "og:title", content: "Status na América | Green Card EB-2 NIW" },
+      { property: "og:title", content: "Status na América | Mobilidade Imigratória para brasileiros" },
       {
         property: "og:description",
         content:
-          "Conquiste o Green Card americano pelo mérito da sua carreira. Análise gratuita do seu perfil EB-2 NIW.",
+          "Imigração legal aos EUA por mérito profissional. Análise gratuita para vistos EB-2 NIW, EB-1 e EB-3, com Green Card para cônjuge e filhos.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "https://lp.statusnaamerica.com/" },
       { property: "og:image", content: OG_IMAGE },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Status na América | Green Card EB-2 NIW" },
-      { name: "twitter:description", content: "Green Card americano por mérito profissional. Análise gratuita." },
+      { name: "twitter:title", content: "Status na América | Mobilidade Imigratória para brasileiros" },
+      { name: "twitter:description", content: "Imigração legal aos EUA por mérito profissional. Análise gratuita para vistos EB-2 NIW, EB-1 e EB-3, com Green Card para cônjuge e filhos." },
       { name: "twitter:image", content: OG_IMAGE },
     ],
-    links: [
-      { rel: "canonical", href: "https://lp.statusnaamerica.com/" },
-      // Preload the hero LCP image so the browser fetches it in parallel with
-      // the HTML — fixes NO_LCP by making the poster the clear LCP candidate.
-      { rel: "preload", as: "image", href: heroFamilyUrl, fetchpriority: "high" },
-    ],
+    links: [{ rel: "canonical", href: "https://lp.statusnaamerica.com/" }],
   }),
   loader: () => getPageSectionsFn({ data: { page: "home" } }),
   component: Home,
