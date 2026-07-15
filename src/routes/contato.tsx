@@ -545,9 +545,7 @@ function ContatoForm() {
           <label className="mt-5 flex items-start gap-3 text-sm text-ink-text/80">
             <Checkbox
               checked={values.consent}
-              onCheckedChange={(v) =>
-                setValues((s) => ({ ...s, consent: v === true }))
-              }
+              onCheckedChange={(v) => updateValue("consent", v === true)}
               className="mt-0.5"
             />
             <span>
