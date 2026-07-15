@@ -38,68 +38,68 @@ import { trackFormStart, trackFormSubmit } from "@/lib/tracking";
 import { getPageSeoFn, buildSeoTags } from "@/lib/pageSeo.functions";
 
 export const Route = createFileRoute("/contato")({
-  head: () => ({
-    meta: [
-      { title: "Contato | Status na América" },
+  loader: () => getPageSeoFn({ data: { page: "contato" } }),
+  head: ({ loaderData }) => {
+    const { meta, links } = buildSeoTags(
       {
-        name: "description",
-        content:
+        title: "Contato | Status na América",
+        description:
           "Fale com a Status na América. WhatsApp, e-mail e endereços da matriz em Orlando e filial no Brasil. Análise gratuita de perfil para imigração legal aos EUA.",
-      },
-      { property: "og:title", content: "Contato | Status na América" },
-      {
-        property: "og:description",
-        content:
+        ogTitle: "Contato | Status na América",
+        ogDescription:
           "WhatsApp, e-mail e endereços. Matriz em Orlando/FL e filial em Barueri/SP.",
+        canonical: "/contato",
       },
-      { property: "og:url", content: "https://lp.statusnaamerica.com/contato" },
-      { property: "og:type", content: "website" },
-    ],
-    links: [{ rel: "canonical", href: "https://lp.statusnaamerica.com/contato" }],
-    scripts: [
-      {
-        type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "Organization",
-          name: "Status na América",
-          url: "https://lp.statusnaamerica.com",
-          sameAs: [
-            "https://instagram.com/status_america",
-            "https://facebook.com/statusnaamerica",
-            "https://youtube.com/@status.naamerica",
-          ],
-          address: [
-            {
-              "@type": "PostalAddress",
-              streetAddress: "7575 KingsPointe Pkwy #4",
-              addressLocality: "Orlando",
-              addressRegion: "FL",
-              postalCode: "32819",
-              addressCountry: "US",
-            },
-            {
-              "@type": "PostalAddress",
-              streetAddress: "Alameda Araguaia 2104",
-              addressLocality: "Barueri",
-              addressRegion: "SP",
-              postalCode: "06455-000",
-              addressCountry: "BR",
-            },
-          ],
-          contactPoint: [
-            {
-              "@type": "ContactPoint",
-              telephone: "+1-689-251-0985",
-              contactType: "customer service",
-              areaServed: ["US", "BR"],
-              availableLanguage: ["Portuguese", "English"],
-            },
-          ],
-        }),
-      },
-    ],
-  }),
+      loaderData,
+    );
+    return {
+      meta,
+      links,
+      scripts: [
+        {
+          type: "application/ld+json",
+          children: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            name: "Status na América",
+            url: "https://lp.statusnaamerica.com",
+            sameAs: [
+              "https://instagram.com/status_america",
+              "https://facebook.com/statusnaamerica",
+              "https://youtube.com/@status.naamerica",
+            ],
+            address: [
+              {
+                "@type": "PostalAddress",
+                streetAddress: "7575 KingsPointe Pkwy #4",
+                addressLocality: "Orlando",
+                addressRegion: "FL",
+                postalCode: "32819",
+                addressCountry: "US",
+              },
+              {
+                "@type": "PostalAddress",
+                streetAddress: "Alameda Araguaia 2104",
+                addressLocality: "Barueri",
+                addressRegion: "SP",
+                postalCode: "06455-000",
+                addressCountry: "BR",
+              },
+            ],
+            contactPoint: [
+              {
+                "@type": "ContactPoint",
+                telephone: "+1-689-251-0985",
+                contactType: "customer service",
+                areaServed: ["US", "BR"],
+                availableLanguage: ["Portuguese", "English"],
+              },
+            ],
+          }),
+        },
+      ],
+    };
+  },
   component: ContatoPage,
 });
 
