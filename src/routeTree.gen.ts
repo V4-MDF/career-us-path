@@ -23,6 +23,7 @@ import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as VistosSlugRouteImport } from './routes/vistos.$slug'
 import { Route as LpSlugRouteImport } from './routes/lp.$slug'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
+import { Route as AvaliacaoWhatsappRouteImport } from './routes/avaliacao.whatsapp'
 import { Route as AvaliacaoObrigadoQualificadoRouteImport } from './routes/avaliacao.obrigado-qualificado'
 import { Route as AvaliacaoObrigadoNaoQualificadoRouteImport } from './routes/avaliacao.obrigado-nao-qualificado'
 import { Route as AvaliacaoObrigadoRouteImport } from './routes/avaliacao.obrigado'
@@ -118,6 +119,11 @@ const BlogSlugRoute = BlogSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
   getParentRoute: () => BlogRoute,
+} as any)
+const AvaliacaoWhatsappRoute = AvaliacaoWhatsappRouteImport.update({
+  id: '/avaliacao/whatsapp',
+  path: '/avaliacao/whatsapp',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const AvaliacaoObrigadoQualificadoRoute =
   AvaliacaoObrigadoQualificadoRouteImport.update({
@@ -279,6 +285,7 @@ export interface FileRoutesByFullPath {
   '/avaliacao/obrigado': typeof AvaliacaoObrigadoRoute
   '/avaliacao/obrigado-nao-qualificado': typeof AvaliacaoObrigadoNaoQualificadoRoute
   '/avaliacao/obrigado-qualificado': typeof AvaliacaoObrigadoQualificadoRoute
+  '/avaliacao/whatsapp': typeof AvaliacaoWhatsappRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/lp/$slug': typeof LpSlugRoute
   '/vistos/$slug': typeof VistosSlugRouteWithChildren
@@ -319,6 +326,7 @@ export interface FileRoutesByTo {
   '/avaliacao/obrigado': typeof AvaliacaoObrigadoRoute
   '/avaliacao/obrigado-nao-qualificado': typeof AvaliacaoObrigadoNaoQualificadoRoute
   '/avaliacao/obrigado-qualificado': typeof AvaliacaoObrigadoQualificadoRoute
+  '/avaliacao/whatsapp': typeof AvaliacaoWhatsappRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/lp/$slug': typeof LpSlugRoute
   '/admin': typeof AdminIndexRoute
@@ -360,6 +368,7 @@ export interface FileRoutesById {
   '/avaliacao/obrigado': typeof AvaliacaoObrigadoRoute
   '/avaliacao/obrigado-nao-qualificado': typeof AvaliacaoObrigadoNaoQualificadoRoute
   '/avaliacao/obrigado-qualificado': typeof AvaliacaoObrigadoQualificadoRoute
+  '/avaliacao/whatsapp': typeof AvaliacaoWhatsappRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/lp/$slug': typeof LpSlugRoute
   '/vistos/$slug': typeof VistosSlugRouteWithChildren
@@ -403,6 +412,7 @@ export interface FileRouteTypes {
     | '/avaliacao/obrigado'
     | '/avaliacao/obrigado-nao-qualificado'
     | '/avaliacao/obrigado-qualificado'
+    | '/avaliacao/whatsapp'
     | '/blog/$slug'
     | '/lp/$slug'
     | '/vistos/$slug'
@@ -443,6 +453,7 @@ export interface FileRouteTypes {
     | '/avaliacao/obrigado'
     | '/avaliacao/obrigado-nao-qualificado'
     | '/avaliacao/obrigado-qualificado'
+    | '/avaliacao/whatsapp'
     | '/blog/$slug'
     | '/lp/$slug'
     | '/admin'
@@ -483,6 +494,7 @@ export interface FileRouteTypes {
     | '/avaliacao/obrigado'
     | '/avaliacao/obrigado-nao-qualificado'
     | '/avaliacao/obrigado-qualificado'
+    | '/avaliacao/whatsapp'
     | '/blog/$slug'
     | '/lp/$slug'
     | '/vistos/$slug'
@@ -506,6 +518,7 @@ export interface RootRouteChildren {
   AvaliacaoObrigadoRoute: typeof AvaliacaoObrigadoRoute
   AvaliacaoObrigadoNaoQualificadoRoute: typeof AvaliacaoObrigadoNaoQualificadoRoute
   AvaliacaoObrigadoQualificadoRoute: typeof AvaliacaoObrigadoQualificadoRoute
+  AvaliacaoWhatsappRoute: typeof AvaliacaoWhatsappRoute
   LpSlugRoute: typeof LpSlugRoute
   VistosSlugRoute: typeof VistosSlugRouteWithChildren
   AvaliacaoIndexRoute: typeof AvaliacaoIndexRoute
@@ -610,6 +623,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/blog/$slug'
       preLoaderRoute: typeof BlogSlugRouteImport
       parentRoute: typeof BlogRoute
+    }
+    '/avaliacao/whatsapp': {
+      id: '/avaliacao/whatsapp'
+      path: '/avaliacao/whatsapp'
+      fullPath: '/avaliacao/whatsapp'
+      preLoaderRoute: typeof AvaliacaoWhatsappRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/avaliacao/obrigado-qualificado': {
       id: '/avaliacao/obrigado-qualificado'
@@ -886,6 +906,7 @@ const rootRouteChildren: RootRouteChildren = {
   AvaliacaoObrigadoRoute: AvaliacaoObrigadoRoute,
   AvaliacaoObrigadoNaoQualificadoRoute: AvaliacaoObrigadoNaoQualificadoRoute,
   AvaliacaoObrigadoQualificadoRoute: AvaliacaoObrigadoQualificadoRoute,
+  AvaliacaoWhatsappRoute: AvaliacaoWhatsappRoute,
   LpSlugRoute: LpSlugRoute,
   VistosSlugRoute: VistosSlugRouteWithChildren,
   AvaliacaoIndexRoute: AvaliacaoIndexRoute,
