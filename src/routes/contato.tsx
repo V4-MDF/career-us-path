@@ -388,6 +388,7 @@ function ContatoForm() {
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [status, setStatus] = useState<"idle" | "sending" | "sent">("idle");
+  const formStartFiredRef = useRef(false);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
