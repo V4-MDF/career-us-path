@@ -101,6 +101,7 @@ function YesNo({
 export function PreQualForm({ onSubmit, submitting }: Props) {
   const [a, setA] = useState<PreQualAnswers>(emptyAnswers);
   const [restored, setRestored] = useState(false);
+  const formStartFiredRef = useRef(false);
 
   // Restaura draft uma única vez
   useEffect(() => {
@@ -108,8 +109,15 @@ export function PreQualForm({ onSubmit, submitting }: Props) {
     if (draft) { setA(draft); setRestored(true); }
   }, []);
 
-  // Auto-save a cada mudança
-  useEffect(() => { saveDraft(a); }, [a]);
+  // Auto-save a cada mudança + track "form_start" na primeira interação
+  useEffect(() => {
+    saveDraft(a);
+    const started = a.fullName.trim() || a.email.trim() || a.whatsapp.trim() || Object.values(a).some((v) => v === true);
+    if (started && !formStartFiredRef.current) {
+      formStartFiredRef.current = true;
+      trackFormStart({ form_name: "pre-qualificacao" });
+    }
+  }, [a]);
 
   const upd = <K extends keyof PreQualAnswers>(k: K, v: PreQualAnswers[K]) =>
     setA((prev) => ({ ...prev, [k]: v }));
