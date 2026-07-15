@@ -112,7 +112,6 @@ export function BlogStrip() {
             return (
               <Wrapper
                 key={p.slug + p.titulo}
-                role="listitem"
                 {...props}
                 className="
                   group relative gold-tick rounded-2xl border border-gold/20 bg-ink-raise/60 shadow-soft
