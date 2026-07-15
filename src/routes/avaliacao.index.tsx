@@ -93,7 +93,12 @@ function AvaliacaoPage() {
 
   const goToThanks = (qualification: QualResult) => {
     saveQualificationResult(qualification as QualificationResult);
-    navigate({ to: "/avaliacao/obrigado", replace: true });
+    navigate({
+      to: qualification === "qualificado"
+        ? "/avaliacao/obrigado-qualificado"
+        : "/avaliacao/obrigado-nao-qualificado",
+      replace: true,
+    });
   };
 
   return (
