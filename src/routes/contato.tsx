@@ -34,6 +34,7 @@ import { useContent } from "@/lib/siteContent";
 import { getSiteSettings, defaultSettings, type SiteSettings } from "@/lib/admin/settings";
 import { newId, set } from "@/lib/dataStore";
 import { getOrigin } from "@/lib/origin";
+import { trackFormStart, trackFormSubmit } from "@/lib/tracking";
 
 export const Route = createFileRoute("/contato")({
   head: () => ({
