@@ -61,6 +61,16 @@ export function LeadForm({ segmentId, defaultProfissao, onSubmitted, submitLabel
   const update = <K extends keyof LeadInput>(k: K, v: LeadInput[K]) =>
     setData((d) => ({ ...d, [k]: v }));
 
+  useEffect(() => {
+    const started =
+      data.nome.trim() || data.email.trim() || data.whatsapp.trim() ||
+      data.profissao || data.formacao || data.faixaEtaria || data.renda || data.momento;
+    if (started && !formStartFiredRef.current) {
+      formStartFiredRef.current = true;
+      trackFormStart({ form_name: "avaliacao-legacy", segmento: segmentId ?? null });
+    }
+  }, [data, segmentId]);
+
   const validateStep = (): string | null => {
     if (step === 0) {
       if (!data.nome.trim()) return "Informe seu nome.";
