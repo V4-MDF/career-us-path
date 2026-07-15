@@ -133,6 +133,7 @@ export function LeadFormProgressive({
   const [restoredCount, setRestoredCount] = useState(0);
   const partialIdRef = useRef<string>("");
   const containerRef = useRef<HTMLDivElement | null>(null);
+  const formStartFiredRef = useRef<boolean>(false);
   const reduce = useReducedMotion();
   // Ref sempre apontando para o `data` mais recente, evita closures stale
   // quando o auto-advance dos <Select> dispara via setTimeout antes do
