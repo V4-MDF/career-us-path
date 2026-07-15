@@ -390,8 +390,22 @@ function ContatoForm() {
   const [status, setStatus] = useState<"idle" | "sending" | "sent">("idle");
   const formStartFiredRef = useRef(false);
 
+  function updateValue<K extends keyof typeof values>(k: K, v: (typeof values)[K]) {
+    setValues((s) => {
+      const next = { ...s, [k]: v };
+      const started =
+        next.nome.trim() || next.email.trim() || next.whatsapp.trim() || next.mensagem.trim() || next.consent;
+      if (started && !formStartFiredRef.current) {
+        formStartFiredRef.current = true;
+        trackFormStart({ form_name: "contato" });
+      }
+      return next;
+    });
+  }
+
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    trackFormSubmit({ form_name: "contato" });
     const parsed = contactMessageSchema.safeParse(values);
     if (!parsed.success) {
       const map: Record<string, string> = {};
@@ -411,8 +425,7 @@ function ContatoForm() {
       channel: "contato" as const,
       type: "mensagem",
       nome: parsed.data.nome,
-      email: parsed.data.email,
-      whatsapp: parsed.data.whatsapp,
+      email: parsed.data.whatsapp,
       mensagem: parsed.data.mensagem,
       consent: true,
       origin,
@@ -421,13 +434,6 @@ function ContatoForm() {
 
     try {
       await set("leads", id, record);
-      // Evento próprio (sem misturar com FormView/Lead do funil de qualificação)
-      if (typeof window !== "undefined") {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const w = window as any;
-        w.dataLayer = w.dataLayer || [];
-        w.dataLayer.push({ event: "contact_message", channel: "contato" });
-      }
       setStatus("sent");
     } catch {
       setStatus("idle");
