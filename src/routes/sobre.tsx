@@ -29,24 +29,23 @@ import { useContent } from "@/lib/siteContent";
 import { getPageSeoFn, buildSeoTags } from "@/lib/pageSeo.functions";
 
 export const Route = createFileRoute("/sobre")({
-  head: () => ({
-    meta: [
-      { title: "Sobre | Status na América — assessoria de imigração em Orlando" },
+  loader: () => getPageSeoFn({ data: { page: "sobre" } }),
+  head: ({ loaderData }) => {
+    const { meta, links } = buildSeoTags(
       {
-        name: "description",
-        content:
+        title: "Sobre | Status na América — assessoria de imigração em Orlando",
+        description:
           "Conheça a Status na América: assessoria de imigração para brasileiros com sede em Orlando/FL e filial no Brasil. Mais de duas décadas estruturando processos EB-1, EB-2 NIW e EB-3.",
-      },
-      { property: "og:title", content: "Sobre | Status na América" },
-      {
-        property: "og:description",
-        content:
+        ogTitle: "Sobre | Status na América",
+        ogDescription:
           "Assessoria de imigração para brasileiros com equipe presente nos Estados Unidos. Orlando/FL e Barueri/SP.",
+        canonical: "/sobre",
       },
-      { property: "og:url", content: "https://lp.statusnaamerica.com/sobre" },
-      { property: "og:type", content: "website" },
-    ],
-    links: [{ rel: "canonical", href: "https://lp.statusnaamerica.com/sobre" }],
+      loaderData,
+    );
+    return {
+      meta,
+      links,
     scripts: [
       {
         type: "application/ld+json",
