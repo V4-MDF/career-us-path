@@ -228,10 +228,10 @@ function OrigensPage() {
           hint={`${startedTotal} formulários iniciados`}
         />
         <StatCard
-          label="Taxa de qualidade"
-          value={sessionsTotal ? pct(qualityRateTotal) : "-"}
+          label="Score médio dos leads"
+          value={avgScoreTotal !== null ? String(avgScoreTotal) : "-"}
           accent="yellow"
-          hint={`${qualifiedTotal} qualificados ÷ sessões`}
+          hint={`${completedTotal} leads · ${qualifiedTotal} qualificados`}
         />
       </div>
 
