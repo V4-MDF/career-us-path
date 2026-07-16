@@ -3,8 +3,8 @@
  *
  * Prompt 5: dados reais + CTAs apontando para LP /avaliacao com src/seg/utms.
  *  - ProcessSteps: substituído pelo processo real EB-2 NIW (4 etapas).
- *  - WhyUs: estatísticas reais (5.000+ processos, 98% satisfação,
- *           1.000+ famílias, 130+ avaliações 5★, BBB nota A).
+ *  - WhyUs: estatísticas institucionais (todas pendentes de validação
+ *           documental — ver src/config/credentials.ts).
  *  - Testimonials: vídeos de casos reais (Helder + slot secundário).
  *  - FAQ: perguntas reais (confiança, experiência, atendimento remoto, valor).
  *  - LegacySection: nova dobra "Muito mais que um visto. Um legado.".
