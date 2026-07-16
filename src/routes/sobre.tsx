@@ -35,7 +35,7 @@ export const Route = createFileRoute("/sobre")({
       {
         title: "Sobre | Status na América — assessoria de imigração em Orlando",
         description:
-          "Conheça a Status na América: assessoria de imigração para brasileiros com sede em Orlando/FL e filial no Brasil. Mais de duas décadas estruturando processos EB-1, EB-2 NIW e EB-3.",
+          "Conheça a Status na América: assessoria de imigração para brasileiros com sede em Orlando/FL e filial no Brasil. Equipe dedicada à preparação documental de processos EB-1, EB-2 NIW e EB-3.",
         ogTitle: "Sobre | Status na América",
         ogDescription:
           "Assessoria de imigração para brasileiros com equipe presente nos Estados Unidos. Orlando/FL e Barueri/SP.",
