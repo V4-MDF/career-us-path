@@ -21,6 +21,7 @@ import { PreQualResult } from "@/components/site/prequal/PreQualResult";
 import { qualifyVisas } from "@/lib/visaQualifier";
 import { saveResponse, type PreQualAnswers, type PreQualResponse } from "@/lib/prequal";
 import { getOrigin } from "@/lib/origin";
+import { LegalDisclaimer } from "@/components/legal/LegalDisclaimer";
 
 export const Route = createFileRoute("/pre-qualificacao")({
   component: PreQualPage,
@@ -52,36 +53,39 @@ function PreQualPage() {
   }
 
   return (
-    <main className="bg-ink min-h-screen pt-[68px]">
-      {/* Glow gold sutil no topo */}
-      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-[68px] h-64 bg-gradient-to-b from-gold/[0.06] to-transparent" />
+    <>
+      <main className="bg-ink min-h-screen pt-[68px]">
+        {/* Glow gold sutil no topo */}
+        <div aria-hidden className="pointer-events-none absolute inset-x-0 top-[68px] h-64 bg-gradient-to-b from-gold/[0.06] to-transparent" />
 
-      <div className="container-x py-12 sm:py-16 max-w-3xl relative">
-        <Link to="/" className="inline-flex items-center gap-1.5 text-[13px] text-foreground/80 hover:text-gold mb-8">
-          <ChevronLeft className="h-3.5 w-3.5" /> Voltar ao site
-        </Link>
+        <div className="container-x py-12 sm:py-16 max-w-3xl relative">
+          <Link to="/" className="inline-flex items-center gap-1.5 text-[13px] text-foreground/80 hover:text-gold mb-8">
+            <ChevronLeft className="h-3.5 w-3.5" /> Voltar ao site
+          </Link>
 
-        {!record && (
-          <>
-            <header className="mb-10">
-              <p className="font-mono-label text-gold/80">PRÉ-QUALIFICAÇÃO · 4 ETAPAS · ~5 MIN</p>
-              <h1 className="mt-3 font-display text-3xl sm:text-4xl leading-tight text-foreground">
-                Descubra qual visto americano tem mais afinidade com o seu perfil.
-              </h1>
-              <p className="mt-4 text-foreground/75 max-w-2xl">
-                Avaliamos seu perfil contra os critérios dos vistos <strong>EB-1A</strong>,
-                <strong> EB-2 NIW</strong>, <strong>O-1</strong> e <strong>EB-3</strong>. Ao final você
-                recebe um resultado imediato, com pontos fortes, lacunas e um link público
-                para consultar depois.
-              </p>
-            </header>
+          {!record && (
+            <>
+              <header className="mb-10">
+                <p className="font-mono-label text-gold/80">PRÉ-QUALIFICAÇÃO · 4 ETAPAS · ~5 MIN</p>
+                <h1 className="mt-3 font-display text-3xl sm:text-4xl leading-tight text-foreground">
+                  Descubra qual visto americano tem mais afinidade com o seu perfil.
+                </h1>
+                <p className="mt-4 text-foreground/75 max-w-2xl">
+                  Avaliamos seu perfil contra os critérios dos vistos <strong>EB-1A</strong>,
+                  <strong> EB-2 NIW</strong>, <strong>O-1</strong> e <strong>EB-3</strong>. Ao final você
+                  recebe um resultado imediato, com pontos fortes, lacunas e um link público
+                  para consultar depois.
+                </p>
+              </header>
 
-            <PreQualForm onSubmit={handleSubmit} submitting={submitting} />
-          </>
-        )}
+              <PreQualForm onSubmit={handleSubmit} submitting={submitting} />
+            </>
+          )}
 
-        {record && <PreQualResult record={record} variant="personal" />}
-      </div>
-    </main>
+          {record && <PreQualResult record={record} variant="personal" />}
+        </div>
+      </main>
+      <LegalDisclaimer />
+    </>
   );
 }
