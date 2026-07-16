@@ -68,7 +68,6 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/blog", changefreq: "weekly", priority: "0.7" },
           { path: "/pre-qualificacao", changefreq: "monthly", priority: "0.8" },
           { path: "/avaliacao", changefreq: "monthly", priority: "0.8" },
-          { path: "/llm-info", changefreq: "monthly", priority: "0.5" },
           ...SEED_POST_SLUGS.map((slug) => ({
             path: `/blog/${slug}`,
             changefreq: "monthly" as const,

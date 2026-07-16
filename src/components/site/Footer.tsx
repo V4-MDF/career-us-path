@@ -126,9 +126,6 @@ export function Footer() {
               <Link to="/blog" className="hover:text-gold">Blog</Link>
               <Link to="/privacidade" className="hover:text-gold">Privacidade</Link>
               <Link to="/termos" className="hover:text-gold">Termos</Link>
-              <Link to="/llm-info" className="hover:text-gold" title="Resumo factual para sistemas de IA">
-                llm-info
-              </Link>
             </div>
           </div>
         </div>
