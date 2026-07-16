@@ -187,12 +187,14 @@ function AvaliacaoPage() {
           </div>
 
 
-          {/* Credenciais, faixa horizontal compacta abaixo do form */}
+          {/* Credenciais, faixa horizontal compacta abaixo do form.
+              COMPLIANCE: valores centralizados em src/config/credentials.ts,
+              todos PENDENTES DE VALIDAÇÃO documental. */}
           <ul className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-4">
             {[
-              { v: "A", l: "BBB ACCREDITED" },
-              { v: "130+", l: "AVALIAÇÕES 5★" },
-              { v: "5.000+", l: "PROCESSOS" },
+              { v: "—", l: BBB_LABEL.toUpperCase() },
+              { v: CLAIM_AVALIACOES.value, l: `${CLAIM_AVALIACOES.label.toUpperCase()} NO GOOGLE` },
+              { v: CLAIM_PROCESSOS.value, l: CLAIM_PROCESSOS.label.toUpperCase() },
             ].map((c) => (
               <li key={c.l} className="border-l-2 border-gold/60 pl-3">
                 <div className="font-display text-xl text-foreground leading-none">{c.v}</div>
