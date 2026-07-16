@@ -257,6 +257,10 @@ export function LeadFormProgressive({
   };
 
   const submit = async () => {
+    if (!consent) {
+      setError("É necessário autorizar o tratamento dos dados para prosseguir.");
+      return;
+    }
     trackFormSubmit({ segmento: segmentId ?? null, step: stepIndex });
     const current = dataRef.current;
     if (steps.some((f) => !isFieldValid(f.key, current))) {
