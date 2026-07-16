@@ -44,14 +44,13 @@ export interface VisaPage {
 
 /** Página comparativa, mesma estrutura nas 3 páginas. */
 export const COMPARISON = {
-  headers: ["", "EB-2 NIW", "EB-1", "EB-3", "O-1"],
+  headers: ["", "EB-2 NIW", "EB-1", "O-1"],
   rows: [
     {
       label: "Precisa de patrocinador?",
       cells: [
         "Não",
         "Não",
-        "Sim, exige oferta de emprego nos EUA",
         "Exige peticionário nos EUA — empregador ou agente. Não exige oferta permanente.",
       ],
     },
@@ -60,27 +59,24 @@ export const COMPARISON = {
       cells: [
         "Profissional consolidado com mestrado ou habilidade excepcional",
         "Reconhecimento internacional comprovado na área",
-        "Profissional qualificado com oferta formal de emprego",
         "Habilidade extraordinária em ciências, artes, educação, negócios, atletismo, cinema ou TV",
       ],
     },
     {
       label: "Labor certification (PERM)?",
-      cells: ["Dispensada", "Dispensada", "Necessária", "Não se aplica (visto temporário)"],
+      cells: ["Dispensada", "Dispensada", "Não se aplica (visto temporário)"],
     },
     {
       label: "Tempo estimado",
       cells: [
         "~24 meses",
         "~12 a 24 meses",
-        "Dependente do empregador e PERM",
         "Alguns meses (Premium Processing disponível)",
       ],
     },
     {
       label: "Green Card para cônjuge e filhos, junto do requerente principal",
       cells: [
-        "Sim",
         "Sim",
         "Sim",
         "Não — é visto temporário; cônjuge e filhos entram como O-3, sem autorização de trabalho",
