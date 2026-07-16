@@ -59,6 +59,8 @@ const PAGES: Array<{
         { k: "institutional.title", label: "Título" },
         { k: "institutional.lead", label: "Lead / descrição curta", multiline: true },
         { k: "institutional.videoUrl", label: "URL do vídeo (YouTube, Vimeo ou MP4) — deixe vazio para manter o placeholder" },
+        { k: "institutional.videoHidden", label: "Ocultar dobra do vídeo institucional" },
+
       ]},
       { title: "Processo", keys: [
         { k: "process.title", label: "Título" },
