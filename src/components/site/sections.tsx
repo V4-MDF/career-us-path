@@ -916,7 +916,7 @@ export function FAQ() {
   const faqs = [
     {
       q: "A Status na América é confiável?",
-      a: "Sim. Somos uma empresa registrada nos Estados Unidos (EIN 99-4846502), com sede em Orlando/FL e filial no Brasil (CNPJ 62.917.376/0001-21). Acumulamos 130+ avaliações 5★ no Google e no Facebook e somos acreditados pelo BBB com nota A. Transparência é regra: qualquer informação institucional pode ser verificada publicamente.",
+      a: `Sim. Somos uma empresa registrada nos Estados Unidos (EIN ${EIN}), com sede em Orlando/FL e filial no Brasil (CNPJ ${CNPJ}). Contamos com avaliações 5★ no Google e no Facebook e registro no BBB (${BBB_LABEL}). Transparência é regra: qualquer informação institucional pode ser verificada publicamente.`,
     },
     {
       q: "Qual a experiência de vocês?",
