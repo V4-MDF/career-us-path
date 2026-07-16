@@ -99,7 +99,6 @@ function SobrePage() {
         <PartnersBadges />
         <OndeEstamos />
         <CtaFinal />
-        <Disclaimer />
       </main>
       <Footer />
     </>
@@ -437,18 +436,7 @@ function CtaFinal() {
   );
 }
 
-/* ------------------------------ Disclaimer ------------------------------ */
+/* Disclaimer institucional removido: substituído pelo componente
+ * <LegalDisclaimer /> global renderizado acima do <Footer />. Ver
+ * src/components/legal/LegalDisclaimer.tsx. */
 
-function Disclaimer() {
-  return (
-    <section className="bg-ink text-white/70 py-10">
-      <div className="container-x max-w-3xl text-center text-sm leading-relaxed">
-        A Status na América é uma empresa de consultoria em documentação e
-        estratégia migratória. Não somos escritório de advocacia e não prestamos
-        aconselhamento jurídico. Trabalhamos em parceria com advogados de
-        imigração licenciados nos Estados Unidos quando a natureza do caso exige
-        representação legal.
-      </div>
-    </section>
-  );
-}
