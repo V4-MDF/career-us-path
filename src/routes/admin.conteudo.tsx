@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { PageHeader, SectionCard } from "@/components/admin/ui";
-import { get, set } from "@/lib/dataStore";
+import { get, set, list } from "@/lib/dataStore";
 import { defaultContent } from "@/lib/siteContent";
 import { isPending } from "@/lib/pendingValidation";
 import { broadcast } from "@/lib/admin/settings";
@@ -163,10 +163,24 @@ function ContentPage() {
 
   useEffect(() => {
     (async () => {
+      // Uma \u00fanica consulta traz todas as linhas de site_content. Sequencial
+      // (uma por chave) fica minutos em branco com ~90 campos.
+      const rows = await list<{ value?: string; id: string }>("site_content");
+      const dbMap: Record<string, string> = {};
+      for (const r of rows) {
+        if (typeof r.value === "string") dbMap[r.id] = r.value;
+      }
       const map: Record<string, string> = {};
       for (const k of Object.keys(defaultContent) as (keyof typeof defaultContent)[]) {
-        const row = await get<{ value: string }>("site_content", k);
-        map[k] = row?.value ?? defaultContent[k];
+        // Valor vazio no banco cai para o default (mesmo comportamento do useContent p\u00fablico).
+        // Toggles Hidden preservam a string vazia (significa "vis\u00edvel").
+        const isHiddenToggle = /Hidden$/.test(String(k));
+        const dbVal = dbMap[k];
+        if (isHiddenToggle) {
+          map[k] = dbVal ?? defaultContent[k];
+        } else {
+          map[k] = dbVal && dbVal.length > 0 ? dbVal : defaultContent[k];
+        }
       }
       setValues(map);
     })();
