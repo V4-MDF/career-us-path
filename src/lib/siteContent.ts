@@ -224,18 +224,21 @@ export const defaultContent = {
   "sobre.equipe.m4.bio": "",
   "sobre.equipe.m4.foto": "",
 
+  // COMPLIANCE: números vêm de src/config/credentials.ts (fonte única).
+  // Todos marcados como PENDENTES DE VALIDAÇÃO até o cliente confirmar
+  // com documento (ver pendingValidation.ts).
   "sobre.numeros.eyebrow": "NÚMEROS E CREDENCIAIS",
   "sobre.numeros.title": "O que sustenta a nossa operação.",
-  "sobre.numeros.n1.valor": "1.000+",
-  "sobre.numeros.n1.label": "famílias atendidas",
-  "sobre.numeros.n2.valor": "5.000+",
-  "sobre.numeros.n2.label": "processos estruturados",
-  "sobre.numeros.n3.valor": "98%",
-  "sobre.numeros.n3.label": "de satisfação",
-  "sobre.numeros.n4.valor": "130+",
-  "sobre.numeros.n4.label": "avaliações 5★",
-  "sobre.numeros.n5.valor": "A",
-  "sobre.numeros.n5.label": "acreditação BBB",
+  "sobre.numeros.n1.valor": CLAIM_FAMILIAS.value,
+  "sobre.numeros.n1.label": CLAIM_FAMILIAS.label,
+  "sobre.numeros.n2.valor": CLAIM_PROCESSOS.value,
+  "sobre.numeros.n2.label": CLAIM_PROCESSOS.label,
+  "sobre.numeros.n3.valor": CLAIM_SATISFACAO.value,
+  "sobre.numeros.n3.label": CLAIM_SATISFACAO.label,
+  "sobre.numeros.n4.valor": CLAIM_AVALIACOES.value,
+  "sobre.numeros.n4.label": CLAIM_AVALIACOES.label,
+  "sobre.numeros.n5.valor": "—",
+  "sobre.numeros.n5.label": BBB_LABEL,
 
   "sobre.cta.title": "Vamos estruturar o seu caso.",
   "sobre.cta.subtitle":
