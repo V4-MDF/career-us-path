@@ -326,7 +326,7 @@ export function NiwSection() {
             <div className="absolute bottom-0 left-0 right-0 p-6">
               <p className="font-mono-label text-gold/80">DOSSIÊ EB-2 NIW</p>
               <p className="mt-1 font-display text-lg text-foreground">
-                Documentação preparada com o rigor exigido pelo USCIS.
+                Documentação organizada segundo os requisitos publicados pelo USCIS.
               </p>
             </div>
           </div>
@@ -861,7 +861,7 @@ export function PartnersBadges() {
           {title}
         </h2>
 
-        <ul className="mt-8 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+        <ul className="mt-8 grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {slots.map((s, idx) => (
             <li
               key={idx}
