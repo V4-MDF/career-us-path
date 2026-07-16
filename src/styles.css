@@ -117,6 +117,16 @@
   --usa-red:           #8A1F2B;
   --cream-light:       #F7F2E6;
 
+  /* CTA chamativa (chamada principal). Amarelo vivido com gradiente e halo.
+     NÃO usar o brazil-yellow (E6B84A) que é dourado editorial e some no fundo escuro. */
+  --cta:               #FFD447;
+  --cta-hi:            #FFEB7A;
+  --cta-deep:          #F5A623;
+  --cta-ink:           #1A1204;
+  --cta-glow:          0 10px 32px -8px rgba(255, 179, 0, 0.55), 0 0 0 1px rgba(255, 235, 122, 0.35) inset;
+  --cta-glow-hover:    0 14px 44px -8px rgba(255, 179, 0, 0.75), 0 0 0 1px rgba(255, 255, 200, 0.55) inset;
+
+
   /* Mapeamento shadcn. DARK por padrão (site é dark-first) */
   --background: var(--ink);
   --foreground: #ECE6D6;
@@ -780,6 +790,35 @@
 }
 .route-fade {
   animation: route-fade-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* CTA principal chamativa — gradiente vivido + halo + pulse suave. */
+.btn-cta {
+  background: linear-gradient(135deg, var(--cta-hi) 0%, var(--cta) 45%, var(--cta-deep) 100%);
+  color: var(--cta-ink);
+  border: 1px solid rgba(255, 240, 160, 0.6);
+  box-shadow: var(--cta-glow);
+  transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 200ms ease, filter 200ms ease;
+  animation: cta-pulse 2.6s ease-in-out infinite;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+.btn-cta:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--cta-glow-hover);
+  filter: saturate(1.08) brightness(1.03);
+}
+.btn-cta:active { transform: translateY(0); }
+.btn-cta:focus-visible {
+  outline: 2px solid var(--cta-hi);
+  outline-offset: 3px;
+}
+@keyframes cta-pulse {
+  0%, 100% { box-shadow: var(--cta-glow); }
+  50%      { box-shadow: var(--cta-glow-hover); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .btn-cta { animation: none; }
 }
 
 /* ----------------------------------------------------------------
