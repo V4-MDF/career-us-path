@@ -215,7 +215,7 @@ const eb2niw: VisaPage = {
   ],
   ctaTitle: "Entenda como o seu perfil se posiciona diante dos critérios do USCIS para o EB-2 NIW.",
   ctaSubtitle:
-    "Análise gratuita e confidencial. Em até 48h nossa equipe analisa sua trajetória e indica o caminho mais coerente.",
+    "Análise gratuita e confidencial. Em até 48h nossa equipe organiza as informações do seu perfil e apresenta um panorama das categorias de visto aplicáveis.",
 };
 
 /* ---------------- EB-1 ---------------- */
