@@ -472,17 +472,19 @@ export function WhyUs() {
   const title = useContent("why.title");
   const lead = useContent("why.lead");
 
-  // Stats reais (Prompt 5), internamente "pendentes de validação" (admin)
+  // COMPLIANCE (FTC §5 / FDUTPA): números vêm de src/config/credentials.ts
+  // e estão PENDENTES DE VALIDAÇÃO até o cliente enviar documento de lastro.
   const stats = [
-    { value: "5.000+", label: "PROCESSOS" },
-    { value: "98%", label: "DE SATISFAÇÃO" },
-    { value: "1.000+", label: "FAMÍLIAS ATENDIDAS" },
+    { value: CLAIM_PROCESSOS.value, label: CLAIM_PROCESSOS.label.toUpperCase() },
+    { value: CLAIM_SATISFACAO.value, label: CLAIM_SATISFACAO.label.toUpperCase() },
+    { value: CLAIM_FAMILIAS.value, label: CLAIM_FAMILIAS.label.toUpperCase() },
   ];
   const items = [
-    { icon: MapPin, t: "Sede própria em Orlando, Flórida (EIN 99-4846502)" },
-    { icon: Users, t: "Filial no Brasil em Barueri/SP (CNPJ 62.917.376/0001-21)" },
-    { icon: ShieldCheck, t: "Acreditação BBB, nota A" },
-    { icon: Star, t: "130+ avaliações 5★ no Google e Facebook" },
+    { icon: MapPin, t: `Sede própria em Orlando, Flórida (EIN ${EIN})` },
+    { icon: Users, t: `Filial no Brasil em Barueri/SP (CNPJ ${CNPJ})` },
+    // PENDENTE (cliente): confirmar "BBB Accredited Business" vs "BBB Rating A".
+    { icon: ShieldCheck, t: BBB_LABEL },
+    { icon: Star, t: `${CLAIM_AVALIACOES.value} ${CLAIM_AVALIACOES.label} no Google e Facebook` },
   ];
   return (
     <Reveal as="section" id="por-que-status" className="section-pad relative">
