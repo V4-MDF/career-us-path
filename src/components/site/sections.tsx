@@ -117,7 +117,7 @@ export function Hero() {
 
           <div className="mt-10 flex flex-wrap gap-3">
             <Link to={useAvaliacaoHref("home_hero")} aria-label="Ir para o formulário de análise gratuita">
-              <Button size="lg" className="btn-label btn-sweep h-12 px-7 text-[15px] active:scale-[0.98]">
+              <Button size="lg" variant="cta" className="btn-label btn-sweep h-12 px-7 text-[15px] active:scale-[0.98]">
                 {cta}
               </Button>
             </Link>
@@ -381,6 +381,14 @@ export function VisaCards() {
             </Link>
           ))}
         </div>
+
+        <div className="mt-12 flex justify-center">
+          <a href={useAvaliacaoHref("home_vistos")}>
+            <Button size="lg" variant="cta" className="btn-label btn-sweep h-12 px-7 w-full sm:w-auto">
+              Analisar meu perfil
+            </Button>
+          </a>
+        </div>
       </div>
     </Reveal>
   );
@@ -459,6 +467,14 @@ export function ProcessSteps() {
               <p className="mt-2 text-ink-text/75 text-[15px] leading-relaxed">{d}</p>
             </div>
           ))}
+        </div>
+
+        <div className="mt-12 flex justify-center">
+          <a href={useAvaliacaoHref("home_processo")}>
+            <Button size="lg" variant="cta" className="btn-label btn-sweep h-12 px-7 w-full sm:w-auto">
+              Receber o mapa do meu processo
+            </Button>
+          </a>
         </div>
       </div>
     </Reveal>
@@ -762,6 +778,14 @@ export function SalaryCompare() {
           licenciamento nos EUA, independente do status imigratório. Impostos e encargos reduzem
           o valor líquido em ambos os países.
         </p>
+
+        <div className="mt-10 flex justify-start md:justify-center">
+          <a href={useAvaliacaoHref("home_salarios")}>
+            <Button size="lg" variant="cta" className="btn-label btn-sweep h-12 px-7 w-full sm:w-auto">
+              Analisar meu potencial nos EUA
+            </Button>
+          </a>
+        </div>
       </div>
     </Reveal>
   );
@@ -846,6 +870,13 @@ export function Testimonials() {
           </div>
         </div>
 
+        <div className="mt-12 flex justify-center">
+          <a href={useAvaliacaoHref("home_depoimentos")}>
+            <Button size="lg" variant="cta" className="btn-label btn-sweep h-12 px-7 w-full sm:w-auto">
+              Quero meu caso também
+            </Button>
+          </a>
+        </div>
 
       </div>
     </Reveal>
@@ -989,6 +1020,17 @@ export function FAQ() {
             </AccordionItem>
           ))}
         </Accordion>
+
+        <div className="mt-12 flex flex-col items-center text-center">
+          <p className="text-foreground/80 mb-5 max-w-md">
+            Ainda tem dúvidas? Peça uma análise gratuita do seu perfil.
+          </p>
+          <a href={useAvaliacaoHref("home_faq")}>
+            <Button size="lg" variant="cta" className="btn-label btn-sweep h-12 px-7 w-full sm:w-auto">
+              Falar com um especialista
+            </Button>
+          </a>
+        </div>
       </div>
     </Reveal>
   );
@@ -1040,7 +1082,7 @@ export function CtaBanner() {
               ))}
             </ul>
             <a href={useAvaliacaoHref("home_cta_final")} className="mt-7 block sm:inline-block">
-              <Button size="lg" className="btn-label btn-sweep h-12 px-4 sm:px-7 w-full sm:w-auto whitespace-normal text-center leading-tight">
+              <Button size="lg" variant="cta" className="btn-label btn-sweep h-12 px-4 sm:px-7 w-full sm:w-auto whitespace-normal text-center leading-tight">
                 Fazer minha análise gratuita
               </Button>
             </a>
