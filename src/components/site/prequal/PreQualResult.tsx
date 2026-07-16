@@ -99,22 +99,22 @@ export function PreQualResult({ record, variant }: Props) {
 
   return (
     <div className="space-y-8">
-      {/* Cabeçalho do veredicto */}
+      {/* Cabeçalho do mapeamento */}
       <header className="border-l-2 border-gold pl-5">
-        <p className="font-mono-label text-gold/80">RESULTADO DO TESTE</p>
+        <p className="font-mono-label text-gold/80">MAPA DAS CATEGORIAS APLICÁVEIS</p>
         <h1 className="mt-2 font-display text-3xl sm:text-4xl text-foreground">
           {variant === "personal" ? `${firstName}, ` : ""}
           {qualified
-            ? "seu perfil mostra afinidade com pelo menos um visto EB."
-            : "ainda não identificamos afinidade clara com os vistos avaliados."}
+            ? "veja como o seu perfil se posiciona diante dos critérios de cada categoria."
+            : "ainda não identificamos afinidade clara com as categorias avaliadas."}
         </h1>
         <p className="mt-3 text-foreground/70 max-w-2xl">
           {qualified
-            ? "Abaixo está o visto com maior compatibilidade segundo as respostas, junto das alternativas viáveis e dos critérios que ainda podem ser fortalecidos."
-            : "Esta triagem é uma fotografia inicial. Vale conhecer os pré-requisitos de cada visto e voltar quando puder responder com mais documentação em mãos."}
+            ? "Abaixo estão as categorias com maior afinidade segundo as respostas, os critérios que o seu perfil já cobre e os pontos que ainda precisam de documentação."
+            : "Esta triagem é uma fotografia inicial. Vale conhecer os critérios de cada categoria e voltar quando puder responder com mais documentação em mãos."}
         </p>
         {result.blocker && (
-          <div className="mt-4 border border-rose-400/40 bg-rose-500/10 text-rose-200 px-4 py-3 text-[14px]">
+          <div className="mt-4 border border-amber-400/40 bg-amber-500/10 text-amber-200 px-4 py-3 text-[14px]">
             <strong className="font-medium">Atenção:</strong> {result.blocker}
           </div>
         )}
