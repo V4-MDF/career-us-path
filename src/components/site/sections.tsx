@@ -616,9 +616,13 @@ export function LegacySection() {
               A decisão que muda três gerações.
             </p>
             <p className="mt-4 text-foreground/75 leading-relaxed">
-              Green Card para cônjuge e filhos solteiros menores de 21. Escola pública de qualidade,
-              universidade a custo de residente e caminho para a cidadania americana. O que você constrói
-              hoje é a herança que seus filhos vão viver.
+              Green Card para cônjuge e filhos solteiros menores de 21, junto do requerente
+              principal. A idade do filho é apurada segundo as regras do Child Status
+              Protection Act, que em determinados casos preserva o benefício mesmo após os
+              21 anos — o tempo de processamento influencia esse cálculo. Escola pública
+              de qualidade, universidade a custo de residente e, após cinco anos como
+              residente permanente, é possível solicitar a naturalização, cumpridos os
+              requisitos do USCIS.
             </p>
           </div>
         </div>
