@@ -681,7 +681,7 @@ export function SalaryCompare() {
           num="08"
           eyebrow="RENDA EM DÓLAR"
           title="A mesma carreira. Outro patamar de remuneração."
-          kicker="Profissões em alta demanda nos EUA. Referência de mercado, brutos, no formato usual de cada país."
+          kicker="Profissões em alta demanda nos EUA. Referência de mercado, valores brutos anuais nas duas colunas."
           variant="parchment"
         />
 
@@ -689,22 +689,35 @@ export function SalaryCompare() {
         <div className="mt-14 hidden md:block rounded-2xl border border-gold/25 overflow-hidden shadow-soft bg-white/70">
           <div className="grid grid-cols-[1.6fr_1fr_1fr] bg-[#16223A] px-6 py-4">
             <span className="font-mono-label text-parchment/90">PROFISSÃO</span>
-            <span className="font-mono-label text-parchment/90">NO BRASIL · POR MÊS</span>
+            <span className="font-mono-label text-parchment/90">NO BRASIL · POR ANO</span>
             <span className="font-mono-label text-gold">NOS EUA · POR ANO</span>
           </div>
           {rows.map((r, i) => (
             <div
               key={r.id}
-              className={`grid grid-cols-[1.6fr_1fr_1fr] items-center px-6 py-5 border-t border-ink-text/5 ${
+              className={`grid grid-cols-[1.6fr_1fr_1fr] items-start px-6 py-5 border-t border-ink-text/5 ${
                 i % 2 === 1 ? "bg-ink-text/[0.03]" : "bg-transparent"
               }`}
             >
-              <span className="font-display text-lg text-ink-text">{r.profissao}</span>
-              <span className="text-ink-text/75 font-mono text-sm">{r.br_mensal} <span className="text-ink-text/45">/ mês</span></span>
-              <span className="text-gold font-mono text-sm flex items-center gap-2">
-                <TrendingUp className="h-4 w-4 shrink-0" />
-                <span>{r.eua_anual} <span className="text-gold/70">/ ano</span></span>
+              <div className="pr-4">
+                <span className="font-display text-lg text-ink-text">{r.profissao}</span>
+                {r.regulamentada && (
+                  <span className="mt-2 inline-flex items-start gap-1.5 rounded border border-oxblood/40 bg-oxblood/5 px-2 py-1 text-[11px] leading-snug text-oxblood">
+                    <ShieldCheck className="h-3 w-3 mt-[2px] shrink-0" />
+                    <span>Exige licenciamento nos EUA. Para médicos, envolve ECFMG/USMLE e residência americana.</span>
+                  </span>
+                )}
+              </div>
+              <span className="text-ink-text/75 font-mono text-sm">
+                {r.br_anual} <span className="text-ink-text/45">/ ano</span>
               </span>
+              <div className="text-gold font-mono text-sm">
+                <div className="flex items-center gap-2">
+                  <TrendingUp className="h-4 w-4 shrink-0" />
+                  <span>{r.eua_anual} <span className="text-gold/70">/ ano</span></span>
+                </div>
+                <div className="mt-1 text-[11px] font-mono-label text-ink-text/55">{r.fonte}</div>
+              </div>
             </div>
           ))}
         </div>
@@ -714,10 +727,16 @@ export function SalaryCompare() {
           {rows.map((r) => (
             <div key={r.id} className="rounded-xl border border-gold/25 bg-white/70 p-4 shadow-soft">
               <p className="font-display text-lg text-ink-text leading-tight">{r.profissao}</p>
+              {r.regulamentada && (
+                <p className="mt-2 inline-flex items-start gap-1.5 rounded border border-oxblood/40 bg-oxblood/5 px-2 py-1 text-[11px] leading-snug text-oxblood">
+                  <ShieldCheck className="h-3 w-3 mt-[2px] shrink-0" />
+                  <span>Exige licenciamento nos EUA. Para médicos, envolve ECFMG/USMLE e residência americana.</span>
+                </p>
+              )}
               <div className="mt-3 grid grid-cols-2 gap-3 text-sm">
                 <div>
-                  <div className="font-mono-label text-ink-text/55 text-[10px]">NO BRASIL · POR MÊS</div>
-                  <div className="mt-1 font-mono text-ink-text/85">{r.br_mensal}</div>
+                  <div className="font-mono-label text-ink-text/55 text-[10px]">NO BRASIL · POR ANO</div>
+                  <div className="mt-1 font-mono text-ink-text/85">{r.br_anual}</div>
                 </div>
                 <div>
                   <div className="font-mono-label text-gold text-[10px]">NOS EUA · POR ANO</div>
@@ -727,14 +746,17 @@ export function SalaryCompare() {
                   </div>
                 </div>
               </div>
+              <div className="mt-3 text-[11px] font-mono-label text-ink-text/55">{r.fonte}</div>
             </div>
           ))}
         </div>
 
-        <p className="mt-6 text-sm text-ink-text/60 leading-relaxed max-w-3xl">
-          Valores de referência (brutos), no formato usual de cada país. No Brasil o salário costuma ser
-          mensal; nos EUA, anual. Impostos e encargos reduzem o valor líquido, e a diferença de poder de
-          compra tende a ser ainda maior a favor dos EUA.
+        <p className="mt-6 text-base text-ink-text/75 leading-relaxed max-w-3xl">
+          Valores brutos de referência, em base anual, para fins comparativos. Não são promessa
+          nem estimativa de renda. A remuneração efetiva depende de licenciamento profissional,
+          região, empregador e experiência local. Profissões regulamentadas exigem processo de
+          licenciamento nos EUA, independente do status imigratório. Impostos e encargos reduzem
+          o valor líquido em ambos os países.
         </p>
       </div>
     </Reveal>
