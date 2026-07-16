@@ -311,7 +311,8 @@ function VisaHero({ page }: { page: VisaPage }) {
       <div className="container-x section-pad relative w-full">
         <div className="grid gap-10 lg:gap-14 lg:grid-cols-12 items-center">
           {/* ESQUERDA, texto enxuto */}
-          <div className="lg:col-span-7">
+          <div className={showVideoSlot ? "lg:col-span-7" : "lg:col-span-12 max-w-3xl"}>
+
             <nav aria-label="Breadcrumb" className="font-mono-label text-foreground/70 flex items-center gap-2">
               <Link to="/" className="hover:text-gold">Início</Link>
               <ChevronRight className="h-3 w-3" />
