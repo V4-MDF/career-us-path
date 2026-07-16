@@ -234,7 +234,32 @@ function ContentPage() {
                           </span>
                         )}
                       </div>
-                      {f.multiline ? (
+                      {isHiddenToggle ? (
+                        (() => {
+                          const on = (values[f.k] ?? "") === "1";
+                          return (
+                            <div className="mt-1 flex items-center gap-2">
+                              <Button
+                                type="button"
+                                size="sm"
+                                variant={on ? "secondary" : "outline"}
+                                onClick={async () => {
+                                  const next = on ? "" : "1";
+                                  setValues((v) => ({ ...v, [f.k]: next }));
+                                  await set("site_content", f.k, { value: next });
+                                  broadcast();
+                                  toast.success(on ? "Vídeo visível." : "Vídeo oculto.");
+                                }}
+                              >
+                                {on ? "Oculto" : "Visível"}
+                              </Button>
+                              <span className="text-[11px] text-slate-500">
+                                {on ? "Este vídeo está OCULTO no site." : "Este vídeo está VISÍVEL no site."}
+                              </span>
+                            </div>
+                          );
+                        })()
+                      ) : f.multiline ? (
                         <Textarea rows={2} value={values[f.k] ?? ""} className="mt-1"
                           onChange={(e) => setValues({ ...values, [f.k]: e.target.value })}
                           onBlur={() => save(f.k)} />
@@ -280,7 +305,9 @@ function ContentPage() {
                         );
                       })()}
                     </div>
-                  ))}
+                    );
+                  })}
+
                 </div>
               </SectionCard>
             ))}
