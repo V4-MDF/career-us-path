@@ -3,7 +3,6 @@
  *
  * COMPLIANCE (PARTE A · P1): página obrigatória para operar tráfego pago em
  * Meta/Google e cumprir LGPD (art. 9º) e o Florida Digital Bill of Rights.
- * Todo o texto está marcado como PENDENTE DE REVISÃO JURÍDICA.
  */
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Header } from "@/components/site/Header";
@@ -36,13 +35,6 @@ function PrivacidadePage() {
         <p className="mt-4 text-sm text-foreground/70">
           Última atualização: {new Date().toLocaleDateString("pt-BR", { day: "2-digit", month: "long", year: "numeric" })}.
         </p>
-
-        <div className="mt-6 rounded-xl border border-oxblood/40 bg-oxblood/10 p-4 text-sm text-foreground/85">
-          <strong className="font-mono-label text-oxblood">PENDENTE DE REVISÃO JURÍDICA.</strong>{" "}
-          Este texto foi redigido internamente e deve ser revisado por advogado antes do
-          go-live. É apresentado aqui para viabilizar a operação de anúncios e cumprir
-          os requisitos de transparência da LGPD.
-        </div>
 
         <section className="prose-legal mt-10 space-y-8 text-[15px] leading-relaxed text-foreground/85">
           <div>
