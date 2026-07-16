@@ -117,7 +117,7 @@ export function Hero() {
 
           <div className="mt-10 flex flex-wrap gap-3">
             <Link to={useAvaliacaoHref("home_hero")} aria-label="Ir para o formulário de análise gratuita">
-              <Button size="lg" className="btn-label btn-sweep h-12 px-7 text-[15px] active:scale-[0.98]">
+              <Button size="lg" variant="cta" className="btn-label btn-sweep h-12 px-7 text-[15px] active:scale-[0.98]">
                 {cta}
               </Button>
             </Link>
