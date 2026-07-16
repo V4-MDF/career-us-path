@@ -15,6 +15,7 @@ import { useEffect, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ChevronLeft } from "lucide-react";
 import { PreQualResult } from "@/components/site/prequal/PreQualResult";
+import { LegalDisclaimer } from "@/components/legal/LegalDisclaimer";
 import { get } from "@/lib/dataStore";
 import type { PreQualResponse } from "@/lib/prequal";
 
