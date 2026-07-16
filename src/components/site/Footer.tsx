@@ -120,10 +120,12 @@ export function Footer() {
             <p className="text-[11px] font-mono-label text-foreground/80">
               © {new Date().getFullYear()} STATUS NA AMÉRICA · TODOS OS DIREITOS RESERVADOS
             </p>
-            <div className="flex gap-6 font-mono-label text-foreground/80">
+            <div className="flex flex-wrap gap-x-6 gap-y-2 font-mono-label text-foreground/80">
               <Link to="/contato" className="hover:text-gold">Contato</Link>
               <Link to="/sobre" className="hover:text-gold">Sobre</Link>
               <Link to="/blog" className="hover:text-gold">Blog</Link>
+              <Link to="/privacidade" className="hover:text-gold">Privacidade</Link>
+              <Link to="/termos" className="hover:text-gold">Termos</Link>
               <Link to="/llm-info" className="hover:text-gold" title="Resumo factual para sistemas de IA">
                 llm-info
               </Link>

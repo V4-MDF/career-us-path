@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TermosRouteImport } from './routes/termos'
 import { Route as SobreRouteImport } from './routes/sobre'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as PrivacidadeRouteImport } from './routes/privacidade'
@@ -51,6 +52,11 @@ import { Route as VistosSlugIndexRouteImport } from './routes/vistos.$slug.index
 import { Route as VistosSlugSecaoRouteImport } from './routes/vistos.$slug.$secao'
 import { Route as PreQualificacaoRTokenRouteImport } from './routes/pre-qualificacao.r.$token'
 
+const TermosRoute = TermosRouteImport.update({
+  id: '/termos',
+  path: '/termos',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SobreRoute = SobreRouteImport.update({
   id: '/sobre',
   path: '/sobre',
@@ -270,6 +276,7 @@ export interface FileRoutesByFullPath {
   '/privacidade': typeof PrivacidadeRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sobre': typeof SobreRoute
+  '/termos': typeof TermosRoute
   '/admin/ab': typeof AdminAbRoute
   '/admin/blog': typeof AdminBlogRoute
   '/admin/configuracoes': typeof AdminConfiguracoesRoute
@@ -312,6 +319,7 @@ export interface FileRoutesByTo {
   '/privacidade': typeof PrivacidadeRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sobre': typeof SobreRoute
+  '/termos': typeof TermosRoute
   '/admin/ab': typeof AdminAbRoute
   '/admin/blog': typeof AdminBlogRoute
   '/admin/configuracoes': typeof AdminConfiguracoesRoute
@@ -355,6 +363,7 @@ export interface FileRoutesById {
   '/privacidade': typeof PrivacidadeRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sobre': typeof SobreRoute
+  '/termos': typeof TermosRoute
   '/admin/ab': typeof AdminAbRoute
   '/admin/blog': typeof AdminBlogRoute
   '/admin/configuracoes': typeof AdminConfiguracoesRoute
@@ -400,6 +409,7 @@ export interface FileRouteTypes {
     | '/privacidade'
     | '/sitemap.xml'
     | '/sobre'
+    | '/termos'
     | '/admin/ab'
     | '/admin/blog'
     | '/admin/configuracoes'
@@ -442,6 +452,7 @@ export interface FileRouteTypes {
     | '/privacidade'
     | '/sitemap.xml'
     | '/sobre'
+    | '/termos'
     | '/admin/ab'
     | '/admin/blog'
     | '/admin/configuracoes'
@@ -484,6 +495,7 @@ export interface FileRouteTypes {
     | '/privacidade'
     | '/sitemap.xml'
     | '/sobre'
+    | '/termos'
     | '/admin/ab'
     | '/admin/blog'
     | '/admin/configuracoes'
@@ -528,6 +540,7 @@ export interface RootRouteChildren {
   PrivacidadeRoute: typeof PrivacidadeRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   SobreRoute: typeof SobreRoute
+  TermosRoute: typeof TermosRoute
   AvaliacaoObrigadoRoute: typeof AvaliacaoObrigadoRoute
   AvaliacaoObrigadoNaoQualificadoRoute: typeof AvaliacaoObrigadoNaoQualificadoRoute
   AvaliacaoObrigadoQualificadoRoute: typeof AvaliacaoObrigadoQualificadoRoute
@@ -539,6 +552,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/termos': {
+      id: '/termos'
+      path: '/termos'
+      fullPath: '/termos'
+      preLoaderRoute: typeof TermosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/sobre': {
       id: '/sobre'
       path: '/sobre'
@@ -924,6 +944,7 @@ const rootRouteChildren: RootRouteChildren = {
   PrivacidadeRoute: PrivacidadeRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   SobreRoute: SobreRoute,
+  TermosRoute: TermosRoute,
   AvaliacaoObrigadoRoute: AvaliacaoObrigadoRoute,
   AvaliacaoObrigadoNaoQualificadoRoute: AvaliacaoObrigadoNaoQualificadoRoute,
   AvaliacaoObrigadoQualificadoRoute: AvaliacaoObrigadoQualificadoRoute,
