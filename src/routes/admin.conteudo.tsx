@@ -42,7 +42,9 @@ const PAGES: Array<{
         { k: "hero.cta", label: "Texto do CTA" },
         { k: "hero.proof", label: "Prova social", multiline: true },
         { k: "hero.videoUrl", label: "Vídeo de fundo (YouTube ou URL MP4/WebM) — opcional, só desktop" },
+        { k: "hero.videoHidden", label: "Ocultar vídeo do hero da Home" },
         { k: "hero.posterUrl", label: "Poster/imagem de fallback (URL) — usada no mobile e enquanto o vídeo carrega" },
+
       ]},
       { title: "Contraste BR vs EUA", keys: [
         { k: "contrast.title", label: "Título" },
@@ -57,6 +59,8 @@ const PAGES: Array<{
         { k: "institutional.title", label: "Título" },
         { k: "institutional.lead", label: "Lead / descrição curta", multiline: true },
         { k: "institutional.videoUrl", label: "URL do vídeo (YouTube, Vimeo ou MP4) — deixe vazio para manter o placeholder" },
+        { k: "institutional.videoHidden", label: "Ocultar dobra do vídeo institucional" },
+
       ]},
       { title: "Processo", keys: [
         { k: "process.title", label: "Título" },
@@ -106,6 +110,7 @@ const PAGES: Array<{
         { k: "visa.eb2-niw.heroSubtitle", label: "Subtítulo curto (1–2 linhas)", multiline: true },
         { k: "visa.eb2-niw.heroVideoUrl", label: "URL do vídeo (YouTube, Vimeo ou MP4)" },
         { k: "visa.eb2-niw.heroVideoThumb", label: "URL da thumbnail (webp/jpg, opcional)" },
+        { k: "visa.eb2-niw.heroVideoHidden", label: "Ocultar vídeo desta página" },
       ]},
       { title: "01 Definição (imagem)", keys: [
         { k: "visa.eb2-niw.definitionImage", label: "URL da imagem da dobra 01 Definição — profissional beneficiário no exercício da sua competência (não usar pose corporativa de braços cruzados)" },
@@ -120,22 +125,37 @@ const PAGES: Array<{
         { k: "visa.eb1.heroSubtitle", label: "Subtítulo curto (1–2 linhas)", multiline: true },
         { k: "visa.eb1.heroVideoUrl", label: "URL do vídeo (YouTube, Vimeo ou MP4)" },
         { k: "visa.eb1.heroVideoThumb", label: "URL da thumbnail (webp/jpg, opcional)" },
+        { k: "visa.eb1.heroVideoHidden", label: "Ocultar vídeo desta página" },
       ]},
     ],
   },
   {
-    slug: "eb3", label: "Vistos · EB-3",
+    slug: "o1", label: "Vistos · O-1",
+    sections: [
+      { title: "Hero (imagem + texto enxuto + vídeo)", keys: [
+        { k: "visa.o1.heroImage", label: "URL da imagem de fundo do hero (webp/jpg) — específica deste visto" },
+        { k: "visa.o1.heroSubtitle", label: "Subtítulo curto (1–2 linhas)", multiline: true },
+        { k: "visa.o1.heroVideoUrl", label: "URL do vídeo (YouTube, Vimeo ou MP4)" },
+        { k: "visa.o1.heroVideoThumb", label: "URL da thumbnail (webp/jpg, opcional)" },
+        { k: "visa.o1.heroVideoHidden", label: "Ocultar vídeo desta página" },
+      ]},
+    ],
+  },
+  {
+    slug: "eb3", label: "Vistos · EB-3 (redireciona p/ O-1)",
     sections: [
       { title: "Hero (imagem + texto enxuto + vídeo)", keys: [
         { k: "visa.eb3.heroImage", label: "URL da imagem de fundo do hero (webp/jpg) — específica deste visto" },
         { k: "visa.eb3.heroSubtitle", label: "Subtítulo curto (1–2 linhas)", multiline: true },
         { k: "visa.eb3.heroVideoUrl", label: "URL do vídeo (YouTube, Vimeo ou MP4)" },
         { k: "visa.eb3.heroVideoThumb", label: "URL da thumbnail (webp/jpg, opcional)" },
+        { k: "visa.eb3.heroVideoHidden", label: "Ocultar vídeo desta página" },
       ]},
     ],
   },
 
 ];
+
 
 function ContentPage() {
   const [page, setPage] = useState("home");
@@ -198,8 +218,11 @@ function ContentPage() {
             ) : p.sections.map((sec) => (
               <SectionCard key={sec.title} title={sec.title}>
                 <div className="space-y-3">
-                  {sec.keys.map((f) => (
+                  {sec.keys.map((f) => {
+                    const isHiddenToggle = /Hidden$/.test(String(f.k)) || /^Ocultar /i.test(f.label);
+                    return (
                     <div key={f.k}>
+
                       <div className="flex items-center justify-between">
                         <label className="text-xs text-slate-500">{f.label}</label>
                         {isPending(f.k) && (
@@ -211,7 +234,32 @@ function ContentPage() {
                           </span>
                         )}
                       </div>
-                      {f.multiline ? (
+                      {isHiddenToggle ? (
+                        (() => {
+                          const on = (values[f.k] ?? "") === "1";
+                          return (
+                            <div className="mt-1 flex items-center gap-2">
+                              <Button
+                                type="button"
+                                size="sm"
+                                variant={on ? "secondary" : "outline"}
+                                onClick={async () => {
+                                  const next = on ? "" : "1";
+                                  setValues((v) => ({ ...v, [f.k]: next }));
+                                  await set("site_content", f.k, { value: next });
+                                  broadcast();
+                                  toast.success(on ? "Vídeo visível." : "Vídeo oculto.");
+                                }}
+                              >
+                                {on ? "Oculto" : "Visível"}
+                              </Button>
+                              <span className="text-[11px] text-slate-500">
+                                {on ? "Este vídeo está OCULTO no site." : "Este vídeo está VISÍVEL no site."}
+                              </span>
+                            </div>
+                          );
+                        })()
+                      ) : f.multiline ? (
                         <Textarea rows={2} value={values[f.k] ?? ""} className="mt-1"
                           onChange={(e) => setValues({ ...values, [f.k]: e.target.value })}
                           onBlur={() => save(f.k)} />
@@ -257,7 +305,9 @@ function ContentPage() {
                         );
                       })()}
                     </div>
-                  ))}
+                    );
+                  })}
+
                 </div>
               </SectionCard>
             ))}

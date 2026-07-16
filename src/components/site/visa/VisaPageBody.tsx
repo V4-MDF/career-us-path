@@ -261,12 +261,17 @@ function VisaHero({ page }: { page: VisaPage }) {
   const videoKey = `visa.${page.slug}.heroVideoUrl` as const;
   const thumbKey = `visa.${page.slug}.heroVideoThumb` as const;
   const imageKey = `visa.${page.slug}.heroImage` as const;
+  const hiddenKey = `visa.${page.slug}.heroVideoHidden` as const;
   const heroSubtitle = useContent(subtitleKey);
   const videoUrl = useContent(videoKey);
   const videoThumb = useContent(thumbKey);
   const heroImage = useContent(imageKey);
+  const videoHiddenRaw = useContent(hiddenKey);
+  const videoHidden = videoHiddenRaw === "1" || videoHiddenRaw === "true";
   const [open, setOpen] = useState(false);
-  const hasVideo = Boolean(videoUrl && videoUrl.trim().length > 0);
+  const hasVideo = !videoHidden && Boolean(videoUrl && videoUrl.trim().length > 0);
+  const showVideoSlot = !videoHidden;
+
 
   // Alt específico por visto (a imagem não é compartilhada — cada visto tem
   // a sua cena; alt reflete o perfil daquela categoria).
@@ -306,7 +311,8 @@ function VisaHero({ page }: { page: VisaPage }) {
       <div className="container-x section-pad relative w-full">
         <div className="grid gap-10 lg:gap-14 lg:grid-cols-12 items-center">
           {/* ESQUERDA, texto enxuto */}
-          <div className="lg:col-span-7">
+          <div className={showVideoSlot ? "lg:col-span-7" : "lg:col-span-12 max-w-3xl"}>
+
             <nav aria-label="Breadcrumb" className="font-mono-label text-foreground/70 flex items-center gap-2">
               <Link to="/" className="hover:text-gold">Início</Link>
               <ChevronRight className="h-3 w-3" />
@@ -338,9 +344,10 @@ function VisaHero({ page }: { page: VisaPage }) {
             </div>
           </div>
 
-          {/* DIREITA, moldura de vídeo */}
-          <div className="lg:col-span-5">
-            <div className="relative mx-auto max-w-xl">
+          {/* DIREITA, moldura de vídeo — oculta via admin quando videoHidden = "1" */}
+          {showVideoSlot && (
+            <div className="lg:col-span-5">
+              <div className="relative mx-auto max-w-xl">
               {/* Filete dourado externo (assinatura credencial). */}
               <div aria-hidden className="absolute -inset-2 rounded-2xl border border-gold/25 pointer-events-none" />
               <button
@@ -374,8 +381,10 @@ function VisaHero({ page }: { page: VisaPage }) {
               <p className="mt-3 text-center font-mono-label text-[10px] tracking-[0.18em] text-foreground/80">
                 Saiba mais sobre o Visto
               </p>
+              </div>
             </div>
-          </div>
+          )}
+
         </div>
       </div>
 

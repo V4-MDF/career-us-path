@@ -69,7 +69,10 @@ export function Hero() {
   const proof = useContent("hero.proof");
   const heroVideoUrl = useContent("hero.videoUrl");
   const heroPosterUrl = useContent("hero.posterUrl");
+  const heroVideoHiddenRaw = useContent("hero.videoHidden");
+  const heroVideoHidden = heroVideoHiddenRaw === "1" || heroVideoHiddenRaw === "true";
   const lines = splitHeadline(title);
+
 
 
 
@@ -93,7 +96,7 @@ export function Hero() {
         <BrUsRouteBackdrop />
       </div>
 
-      <div className="container-x grid lg:grid-cols-[1fr_1.35fr] gap-10 md:gap-16 lg:gap-12 items-center">
+      <div className={`container-x grid gap-10 md:gap-16 lg:gap-12 items-center ${heroVideoHidden ? "" : "lg:grid-cols-[1fr_1.35fr]"}`}>
         <div className="min-w-0">
           <div className="flex items-center gap-3">
             <FlagsBRUS size={16} />
@@ -143,14 +146,15 @@ export function Hero() {
 
         {/* Bloco editorial estático. Tratamento de cor único (.photo-treatment)
             unifica a foto com o restante do site. */}
-        {/* Slot de vídeo horizontal (16:9) — substitui o retrato editorial. */}
-        <div className="relative mt-10 lg:mt-0 min-w-0">
-          <div className="relative aspect-video w-full overflow-hidden rounded-2xl border border-gold/40 bg-ink-raise shadow-elevated ring-1 ring-gold/10">
-            <VideoPlayer url={heroVideoUrl} title="Vídeo institucional Status na América" />
+        {/* Slot de vídeo horizontal (16:9) — pode ser ocultado no admin (hero.videoHidden). */}
+        {!heroVideoHidden && (
+          <div className="relative mt-10 lg:mt-0 min-w-0">
+            <div className="relative aspect-video w-full overflow-hidden rounded-2xl border border-gold/40 bg-ink-raise shadow-elevated ring-1 ring-gold/10">
+              <VideoPlayer url={heroVideoUrl} title="Vídeo institucional Status na América" />
+            </div>
           </div>
+        )}
 
-
-        </div>
       </div>
     </section>
   );
@@ -546,6 +550,10 @@ export function InstitutionalVideo() {
   const title = useContent("institutional.title");
   const lead = useContent("institutional.lead");
   const url = useContent("institutional.videoUrl");
+  const hiddenRaw = useContent("institutional.videoHidden");
+  const hidden = hiddenRaw === "1" || hiddenRaw === "true";
+  if (hidden) return null;
+
 
   return (
     <Reveal as="section" id="video-institucional" className="section-pad relative bg-ink">
