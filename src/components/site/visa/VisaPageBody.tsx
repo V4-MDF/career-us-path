@@ -344,9 +344,10 @@ function VisaHero({ page }: { page: VisaPage }) {
             </div>
           </div>
 
-          {/* DIREITA, moldura de vídeo */}
-          <div className="lg:col-span-5">
-            <div className="relative mx-auto max-w-xl">
+          {/* DIREITA, moldura de vídeo — oculta via admin quando videoHidden = "1" */}
+          {showVideoSlot && (
+            <div className="lg:col-span-5">
+              <div className="relative mx-auto max-w-xl">
               {/* Filete dourado externo (assinatura credencial). */}
               <div aria-hidden className="absolute -inset-2 rounded-2xl border border-gold/25 pointer-events-none" />
               <button
@@ -380,8 +381,10 @@ function VisaHero({ page }: { page: VisaPage }) {
               <p className="mt-3 text-center font-mono-label text-[10px] tracking-[0.18em] text-foreground/80">
                 Saiba mais sobre o Visto
               </p>
+              </div>
             </div>
-          </div>
+          )}
+
         </div>
       </div>
 
