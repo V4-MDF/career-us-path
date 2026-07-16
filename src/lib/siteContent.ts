@@ -37,7 +37,7 @@ export const defaultContent = {
   "hero.eyebrow": "IMIGRAÇÃO PARA OS ESTADOS UNIDOS. EB-2 NIW",
   "hero.title": "Transforme a sua carreira em um Green Card americano.",
   "hero.subtitle":
-    "A Status na América ajuda profissionais brasileiros consolidados a conquistar a residência permanente nos EUA pelo EB-2 NIW, sem patrocinador, sem loteria, com Green Card para o cônjuge e os filhos.",
+    "A Status na América ajuda profissionais brasileiros consolidados a conquistar a residência permanente nos EUA pelo EB-2 NIW, sem patrocinador, sem loteria, com Green Card para o cônjuge e os filhos, junto do requerente principal.",
   "hero.cta": "Fazer minha análise gratuita",
   // COMPLIANCE: números removidos até validação documental (ver src/config/credentials.ts).
   "hero.proof":
