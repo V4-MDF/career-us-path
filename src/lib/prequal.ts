@@ -90,7 +90,7 @@ export const emptyAnswers: PreQualAnswers = {
   leadershipRole: false,
   highSalary: false,
   usJobOffer: false,
-  criminalRecord: false,
+  priorVisaDenial: false,
   consent: false,
 };
 
