@@ -140,7 +140,7 @@ export function VisaPageBody({ page, hideHero = false }: { page: VisaPage; hideH
             num="05"
             eyebrow="COMPARATIVO"
             variant="parchment"
-            title="EB-2 NIW vs EB-1 vs EB-3"
+            title="EB-2 NIW vs EB-1 vs O-1"
             kicker="Três caminhos legítimos, três perfis distintos."
           />
           <div className="mt-10 overflow-x-auto rounded-2xl border border-ink-text/15 bg-white shadow-soft">
@@ -177,9 +177,9 @@ export function VisaPageBody({ page, hideHero = false }: { page: VisaPage; hideH
                 → Página EB-1
               </Link>
             )}
-            {page.slug !== "eb3" && (
-              <Link to="/vistos/$slug" params={{ slug: "eb3" }} className="underline text-ink-text hover:text-gold">
-                → Página EB-3
+            {page.slug !== "o1" && (
+              <Link to="/vistos/$slug" params={{ slug: "o1" }} className="underline text-ink-text hover:text-gold">
+                → Página O-1
               </Link>
             )}
             {page.slug !== "o1" && (
