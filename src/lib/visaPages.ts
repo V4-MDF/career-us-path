@@ -78,7 +78,7 @@ export const COMPARISON = {
       ],
     },
     {
-      label: "Green Card para cônjuge e filhos",
+      label: "Green Card para cônjuge e filhos, junto do requerente principal",
       cells: [
         "Sim",
         "Sim",
