@@ -133,6 +133,8 @@ export function LeadFormProgressive({
   const [error, setError] = useState<string | null>(null);
   const [restored, setRestored] = useState(false);
   const [restoredCount, setRestoredCount] = useState(0);
+  // COMPLIANCE (LGPD art. 7º I): consentimento obrigatório para envio.
+  const [consent, setConsent] = useState(false);
   const partialIdRef = useRef<string>("");
   const containerRef = useRef<HTMLDivElement | null>(null);
   const formStartFiredRef = useRef<boolean>(false);
