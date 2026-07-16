@@ -17,7 +17,7 @@ import heroFamilyUrl from "@/assets/hero-family.webp";
 const OG_IMAGE = "https://lp.statusnaamerica.com/__l5e/assets-v1/db6af206-dff3-4b36-b8f2-a6d534ba74a4/og-home.jpg";
 
 const HOME_FAQS = [
-  { q: "A Status na América é confiável?", a: "Sim. Empresa registrada nos EUA (EIN 99-4846502), sede em Orlando/FL e filial no Brasil (CNPJ 62.917.376/0001-21), 130+ avaliações 5★ no Google e Facebook, acreditada pelo BBB com nota A." },
+  { q: "A Status na América é confiável?", a: "Sim. Empresa registrada nos EUA (EIN 99-4846502), sede em Orlando/FL e filial no Brasil (CNPJ 62.917.376/0001-21), com avaliações 5★ no Google e Facebook e registro no BBB." },
   { q: "Qual a experiência de vocês?", a: "Atuamos exclusivamente na preparação de documentação para vistos de emprego por mérito: EB-1, EB-2 NIW e EB-3. Foco gera profundidade nos critérios do USCIS." },
   { q: "Posso confiar mesmo sem ir presencialmente?", a: "Sim. A empresa é verificável por EIN, Google Business, BBB e avaliações reais. Atendimento 100% documentado e remoto, em todo o Brasil e nos EUA." },
   { q: "Já fui enganado antes. Como sei que não é mais uma promessa?", a: "Não prometemos o que não podemos garantir. Somos honestos sobre requisitos, chances reais e prazos do USCIS e consulados." },
