@@ -260,7 +260,7 @@ const eb1: VisaPage = {
   family: {
     title: "Green Card para toda a família",
     body:
-      "Como nas demais categorias EB, cônjuge e filhos solteiros menores de 21 anos são incluídos como derivados e recebem Green Card junto com o requerente principal.",
+      "Como nas demais categorias EB, cônjuge e filhos solteiros menores de 21 anos são incluídos como derivados e recebem Green Card junto do requerente principal. A idade do filho é apurada segundo as regras do Child Status Protection Act, que em determinados casos preserva o benefício mesmo após os 21 anos — o tempo de processamento influencia esse cálculo.",
   },
   faq: [
     {
