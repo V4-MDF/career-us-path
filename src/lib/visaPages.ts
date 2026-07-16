@@ -289,7 +289,7 @@ const eb1: VisaPage = {
     },
   ],
   ctaTitle: "Tem reconhecimento internacional? Avalie o EB-1.",
-  ctaSubtitle: "Em até 48h analisamos as evidências do seu perfil e indicamos a melhor categoria EB para o seu caso.",
+  ctaSubtitle: "Em até 48h organizamos as informações do seu perfil e apresentamos um panorama das categorias EB aplicáveis ao seu caso.",
 };
 
 /* ---------------- EB-3 ---------------- */
