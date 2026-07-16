@@ -468,6 +468,14 @@ export function ProcessSteps() {
             </div>
           ))}
         </div>
+
+        <div className="mt-12 flex justify-center">
+          <a href={useAvaliacaoHref("home_processo")}>
+            <Button size="lg" variant="cta" className="btn-label btn-sweep h-12 px-7 w-full sm:w-auto">
+              Receber o mapa do meu processo
+            </Button>
+          </a>
+        </div>
       </div>
     </Reveal>
   );
