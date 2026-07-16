@@ -1,35 +1,30 @@
-## Problema
+Objetivo: aumentar a conversão da home adicionando botões de chamada às dobras principais e transformando o CTA central (hero e dobra final) em um botão de alto contraste.
 
-No hero da Home (`src/components/site/sections.tsx`, linha 137), o slot do vídeo está com `hidden lg:block`. Isso esconde o vídeo em qualquer tela < 1024px — inclusive celular e tablet.
+Escopo aprovado:
+- Dobras principais que recebem CTA: Vistos (03), Processo EB-2 NIW (05), Renda em Dólar (08), Depoimentos (09) e FAQ (10).
+- Botão central: CTA primário da hero e CTA primário da dobra final de fechamento.
 
-## Correção
+Alterações propostas:
 
-**Arquivo:** `src/components/site/sections.tsx` (linha ~137)
+1. Novo estilo de botão de alto impacto
+- Criar uma variante de botão `cta` (ou classe `btn-cta`) no design system: fundo gold (`--gold`), texto ink (`--ink-deep`), borda sutil e shadow/dimensão elevada.
+- Garantir que funcione nas seções escuras (hero, CTA final, NIW, perfis) e respeite o hover state.
+- Aplicar essa variante ao botão principal do hero e ao botão principal da dobra final, substituindo o estilo primário atual mais apagado.
 
-Trocar:
-```tsx
-<div className="relative hidden lg:block">
-  <div className="relative aspect-video w-full overflow-hidden rounded-2xl border border-gold/40 ...">
-    <VideoPlayer url={heroVideoUrl} title="Vídeo institucional Status na América" />
-  </div>
-</div>
-```
+2. CTAs adicionais nas dobras principais
+- Vistos (03): adicionar CTA textual ou botão após a grade de cards, levando para `/avaliacao` com src `home_vistos`.
+- Processo EB-2 NIW (05): botão abaixo das 4 etapas, com src `home_processo`.
+- Renda em Dólar (08): botão abaixo da tabela/cards, com src `home_salarios`.
+- Depoimentos (09): botão abaixo dos vídeos, com src `home_depoimentos`.
+- FAQ (10): botão ao final do acordeão, com src `home_faq`.
+- Todos os CTAs usam `avaliacaoHref` / `useAvaliacaoHref` para preservar UTMs e segmentação.
 
-Por uma versão sempre visível, mas com ordem responsiva: em mobile o vídeo aparece **abaixo** do headline/CTA (ordem natural, mais leve para o LCP da imagem hero de fundo); em desktop mantém a coluna direita.
+3. Ajustes de responsividade
+- Botões em mobile devem ocupar largura total (`w-full`) e ter altura confortável (h-12/h-14).
+- Manter alinhamento e espaçamento consistentes com o grid existente.
 
-- Remover `hidden lg:block`.
-- Adicionar `mt-10 lg:mt-0` para respirar em mobile.
-- Envelope mantém `aspect-video` (16:9), então funciona em qualquer largura sem quebrar layout.
-- O `<iframe>` do YouTube/Vimeo já tem `loading="lazy"`, então não prejudica o LCP mobile (que agora é a imagem `hero-family.webp` preloaded).
+4. Verificação
+- Rodar build/typecheck para garantir que não haja imports quebrados ou classes inválidas.
+- Validar visualmente no preview desktop e mobile.
 
-Nada mais muda: sem alteração no `VideoPlayer`, sem mexer no tracking, no LCP preload, ou nas outras seções (o vídeo institucional da dobra ~544 já aparece em mobile normalmente).
-
-## Verificação
-
-Após aplicar, checar no viewport 390×844 (o que você está usando) que o quadro 16:9 aparece logo abaixo dos botões, com o player carregando o YouTube/Vimeo/MP4 configurado no admin.
-
-## Fora do escopo
-
-- Redesenhar o hero mobile.
-- Trocar player ou hospedagem do vídeo.
-- Alterar o preload/LCP da imagem de fundo.
+Sem alterações de backend: mudanças restritas aos componentes de apresentação da home (`src/components/site/sections.tsx`, `src/components/ui/button.tsx` e `src/styles.css`).
