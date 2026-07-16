@@ -1,23 +1,19 @@
-## Problema
+## Verificação do toggle "Ocultar vídeo"
 
-No `/admin/conteudo`, os campos aparecem vazios (sem os textos atuais do site). Não é problema de gravação, é de **carregamento**: a função de load faz ~90 SELECTs sequenciais ao Postgres (um por chave), e o formulário fica em branco enquanto isso. Além disso, se uma chave já foi salva com valor `""` no banco (como aconteceu com `hero.videoHidden`, `hero.videoUrl`, `hero.posterUrl`), o operador `??` mantém a string vazia em vez de cair no default do código — reforçando a sensação de "sem informação".
+Estado atual no banco: `hero.videoHidden = ""` (vídeo VISÍVEL — condiz com o print).
 
-## Correção
+Vou rodar um teste ponta a ponta com Playwright no preview local para confirmar que o toggle está de fato:
 
-**`src/routes/admin.conteudo.tsx` — função `ContentPage` (useEffect de load):**
+1. Abre `/admin/conteudo` autenticado, expande a seção **Hero**.
+2. Lê o estado inicial do toggle `hero.videoHidden` (deve exibir "Visível").
+3. Clica em **Ocultar** e verifica:
+   - PATCH em `kv_records` com `{value:"1"}` volta 204;
+   - o rótulo muda para "Oculto";
+   - recarrega a página e o estado persiste (confirma que o novo loader com `list()` está lendo o valor gravado);
+   - a Home (`/`) não exibe mais a dobra do vídeo do hero.
+4. Repete o clique para reverter para "Visível" e confere que a dobra do vídeo volta na Home.
+5. Faz o mesmo ciclo com **um** toggle de página de visto (`visa.eb2-niw.heroVideoHidden`) para garantir que a lógica genérica `/Hidden$/` funciona além do da Home.
 
-1. Trocar o `for` sequencial por **uma única chamada** `list("site_content")` (já existe em `dataStore.ts` e traz todas as linhas em um SELECT).
-2. Montar um mapa `{record_id → value}` a partir do retorno.
-3. Para cada chave de `defaultContent`, usar:
-   - `dbMap[k].value` quando existir E for **não-vazio**
-   - `defaultContent[k]` caso contrário
-   
-   (isso resolve o caso de valor `""` gravado antigamente — comportamento consistente com o `useContent` público, que já ignora string vazia).
+Screenshots são salvos em `/tmp/browser/toggle-video/` a cada passo para inspeção.
 
-Resultado: o formulário carrega instantaneamente com os textos atuais, o operador pode revisar/editar, e "Salvar tudo" continua funcionando normalmente.
-
-## Escopo
-
-- Só `src/routes/admin.conteudo.tsx` é alterado.
-- Nenhuma mudança em `siteContent.ts`, `dataStore.ts`, componentes do site público, ou dados existentes no banco.
-- Sem migrations.
+Se algum passo falhar, corrijo o toggle correspondente. Se todos passarem, respondo com o resultado — nenhuma alteração de código será feita.
