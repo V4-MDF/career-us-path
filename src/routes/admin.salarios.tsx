@@ -54,7 +54,7 @@ function SalariosAdmin() {
   const add = () => {
     setRows((prev) => [
       ...prev,
-      { id: uid(), profissao: "Nova profissão", br_mensal: "R$ 0", eua_anual: "US$ 0", ordem: prev.length + 1, ativo: true },
+      { id: uid(), profissao: "Nova profissão", br_anual: "R$ 0", eua_anual: "US$ 0", fonte: "Fonte: U.S. BLS — OEWS", regulamentada: false, ordem: prev.length + 1, ativo: true },
     ]);
   };
   const resetSeed = () => setRows(SEED_SALARY);
