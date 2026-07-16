@@ -597,7 +597,7 @@ export function LegacySection() {
           num="07"
           eyebrow="O QUE VOCÊ CONQUISTA"
           title="Muito mais que um visto. Um legado."
-          kicker="O Green Card pelo EB-2 NIW reconfigura o horizonte da sua família, em cinco pilares."
+          kicker="Com o Green Card aprovado pelo EB-2 NIW, cinco coisas mudam para a sua família."
         />
 
         {/* Bloco editorial de família (dobra mais emocional da Home). */}
