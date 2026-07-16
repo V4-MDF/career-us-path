@@ -67,9 +67,13 @@ export const defaultContent = {
   // e o admin cola a URL da imagem no /admin/conteudo.
   "partners.eyebrow": "CREDENCIAIS E PARCEIROS",
   "partners.title": "Registros e presença institucional.",
-  "partners.slot1.label": "BBB · Nota A",
+  // COMPLIANCE: rótulos BBB e Google — ver src/config/credentials.ts.
+  // PENDENTE (cliente): confirmar se é "BBB Accredited Business" (acreditação)
+  // ou apenas "BBB Rating A" (nota). São coisas diferentes; hoje usamos o mais
+  // conservador. Não cravar nota do Google em texto estático.
+  "partners.slot1.label": "BBB Rating A",
   "partners.slot1.url": "",
-  "partners.slot2.label": "Google Business · 5,0",
+  "partners.slot2.label": "Avaliações 5★ no Google",
   "partners.slot2.url": "",
   "partners.slot3.label": "EIN 99-4846502",
   "partners.slot3.url": "",
