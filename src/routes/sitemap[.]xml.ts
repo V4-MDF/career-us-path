@@ -41,7 +41,7 @@ const VISA_INDEXABLE_SECTIONS = [
   "comparativo",
   "duvidas-frequentes",
 ];
-const VISA_SLUGS = ["eb2-niw", "eb1", "eb3"];
+const VISA_SLUGS = ["eb2-niw", "eb1", "eb3", "o1"];
 
 export const Route = createFileRoute("/sitemap.xml")({
   server: {
