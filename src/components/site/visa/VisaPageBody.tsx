@@ -182,6 +182,11 @@ export function VisaPageBody({ page, hideHero = false }: { page: VisaPage; hideH
                 → Página EB-3
               </Link>
             )}
+            {page.slug !== "o1" && (
+              <Link to="/vistos/$slug" params={{ slug: "o1" }} className="underline text-ink-text hover:text-gold">
+                → Página O-1
+              </Link>
+            )}
           </div>
         </div>
       </section>
