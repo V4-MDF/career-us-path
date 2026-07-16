@@ -47,7 +47,7 @@ export const defaultContent = {
 
   "niw.title": "EB-2 NIW: o Green Card por mérito profissional",
   "niw.lead":
-    "O National Interest Waiver permite que profissionais altamente qualificados solicitem a residência permanente nos EUA sem patrocinador, demonstrando que sua atuação é de interesse nacional americano, geração de renda, impostos e empregos.",
+    "O National Interest Waiver permite que profissionais altamente qualificados solicitem a residência permanente nos EUA sem patrocinador, demonstrando que a atuação proposta tem mérito substancial e importância nacional para os Estados Unidos.",
 
   "process.title": "Um método. Três passos. Acompanhamento até a aprovação.",
 

@@ -29,8 +29,10 @@ export interface VisaPage {
   metaDescription: string;
   /** Definição objetiva ("O que é …"), texto citável para AEO. */
   whatIs: { title: string; body: string };
-  /** Critérios avaliados pelo USCIS. */
-  qualifies: { title: string; intro: string; items: { title: string; body: string }[] };
+  /** Critérios avaliados pelo USCIS. `legalBasis` é a legenda de base
+   *  legal exibida abaixo da lista de critérios — obrigatória e específica
+   *  por visto (Dhanasar só se aplica ao NIW). */
+  qualifies: { title: string; intro: string; legalBasis: string; items: { title: string; body: string }[] };
   /** Etapas do processo. */
   process: { title: string; steps: { num: string; title: string; body: string }[]; note?: string };
   /** Família, quem é incluído. */

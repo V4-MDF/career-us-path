@@ -88,7 +88,7 @@ export function VisaPageBody({ page, hideHero = false }: { page: VisaPage; hideH
               </li>
             ))}
           </ul>
-          <p className="mt-6 text-xs text-foreground/80">Critérios baseados no precedente Matter of Dhanasar (2016).</p>
+          <p className="mt-6 text-xs text-foreground/80">{page.qualifies.legalBasis}</p>
         </div>
       </section>
 
