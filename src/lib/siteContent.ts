@@ -53,8 +53,9 @@ export const defaultContent = {
   "process.title": "Um método. Três passos. Acompanhamento até a aprovação.",
 
   "why.title": "Por que a Status na América",
+  // COMPLIANCE: "duas décadas" removido — sem lastro documental (FTC/FDUTPA).
   "why.lead":
-    "Sede própria em Orlando, equipe dedicada e mais de duas décadas estruturando casos de mobilidade migratória para brasileiros.",
+    "Equipe com trajetória consolidada em processos de imigração, com sede própria em Orlando desde 2022.",
 
   "cta.title": "Entenda como o seu perfil se posiciona diante dos critérios do USCIS.",
   "cta.subtitle":
