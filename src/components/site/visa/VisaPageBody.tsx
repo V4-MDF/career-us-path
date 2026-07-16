@@ -76,10 +76,10 @@ export function VisaPageBody({ page, hideHero = false }: { page: VisaPage; hideH
 
 
 
-      {/* 2. Elegibilidade */}
-      <section id="elegibilidade" aria-label="Elegibilidade" className="section-anchor bg-[#0E1726]">
+      {/* 2. Critérios do USCIS */}
+      <section id="criterios" aria-label="Critérios do USCIS" className="section-anchor bg-[#0E1726]">
         <div className="container-x section-pad">
-          <SectionHead num="02" eyebrow="ELEGIBILIDADE" title={page.qualifies.title} kicker={page.qualifies.intro} />
+          <SectionHead num="02" eyebrow="CRITÉRIOS DO USCIS" title={page.qualifies.title} kicker={page.qualifies.intro} />
           <ul className="mt-12 grid gap-5 md:grid-cols-2">
             {page.qualifies.items.map((it) => (
               <li key={it.title} className="gold-tick rounded-2xl border border-gold/20 bg-[#16223A] p-7 pt-9 shadow-soft transition-[border-color,box-shadow] hover:border-gold/45 hover:shadow-elevated">
@@ -213,7 +213,7 @@ export function VisaPageBody({ page, hideHero = false }: { page: VisaPage; hideH
             <ul className="mt-8 space-y-3 text-ink-text/80">
               {[
                 "Análise individual do perfil em até 48h",
-                "Indicação da categoria EB mais coerente",
+                "Panorama das categorias EB aplicáveis ao seu perfil",
                 "Sem custo · 100% confidencial",
               ].map((t) => (
                 <li key={t} className="flex items-start gap-2">

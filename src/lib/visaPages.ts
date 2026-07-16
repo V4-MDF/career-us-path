@@ -29,7 +29,7 @@ export interface VisaPage {
   metaDescription: string;
   /** Definição objetiva ("O que é …"), texto citável para AEO. */
   whatIs: { title: string; body: string };
-  /** Critérios de elegibilidade. */
+  /** Critérios avaliados pelo USCIS. */
   qualifies: { title: string; intro: string; items: { title: string; body: string }[] };
   /** Etapas do processo. */
   process: { title: string; steps: { num: string; title: string; body: string }[]; note?: string };
@@ -89,9 +89,9 @@ const eb2niw: VisaPage = {
       "O National Interest Waiver (NIW) é uma modalidade do visto EB-2 que DISPENSA tanto o empregador patrocinador quanto a labor certification (PERM), por se demonstrar que a atuação do profissional é benéfica de forma relevante aos interesses dos Estados Unidos. Na prática, o próprio profissional peticiona seu Green Card com base no mérito da sua carreira, sem depender de uma empresa americana.",
   },
   qualifies: {
-    title: "Quem se qualifica para o EB-2 NIW",
+    title: "O que o USCIS avalia no EB-2 NIW",
     intro:
-      "São dois grupos de elegibilidade no EB-2; em seguida, o caso é avaliado por três critérios definidos pela legislação imigratória americana.",
+      "O EB-2 admite duas portas de entrada. Além delas, o USCIS avalia o pedido de dispensa por três critérios estabelecidos em precedente administrativo.",
     items: [
       {
         title: "Grau avançado OU habilidade excepcional",
@@ -194,7 +194,7 @@ const eb2niw: VisaPage = {
         "Na etapa da petição inicial, a taxa é do requerente principal. Já na etapa final de Green Card, cônjuge e filhos entram com seus próprios formulários e taxas — portanto, há custos individuais por pessoa nessa fase. Detalhamos isso na análise, conforme o tamanho da sua família.",
     },
   ],
-  ctaTitle: "Descubra se você já tem perfil para o EB-2 NIW.",
+  ctaTitle: "Entenda como o seu perfil se posiciona diante dos critérios do USCIS para o EB-2 NIW.",
   ctaSubtitle:
     "Análise gratuita e confidencial. Em até 48h nossa equipe analisa sua trajetória e indica o caminho mais coerente.",
 };
@@ -215,7 +215,7 @@ const eb1: VisaPage = {
       "O EB-1 é a primeira categoria de visto baseado em emprego (Employment-Based, primeira preferência). Reúne três sub-categorias. EB-1A (habilidade extraordinária), EB-1B (pesquisadores e professores notáveis) e EB-1C (executivos e gerentes multinacionais). A modalidade mais comum para profissionais brasileiros sem vínculo com multinacional é a EB-1A.",
   },
   qualifies: {
-    title: "Quem se qualifica para o EB-1A",
+    title: "O que o USCIS avalia no EB-1A",
     intro:
       "Exige demonstração de reconhecimento internacional sustentado, perfil mais alto que o EB-2 NIW. O USCIS avalia evidências em ao menos 3 dos 10 critérios oficiais, ou o equivalente a um prêmio internacional único (ex.: Nobel, Oscar, Pulitzer).",
     items: [
@@ -230,7 +230,7 @@ const eb1: VisaPage = {
   process: {
     title: "Como funciona o processo",
     steps: [
-      { num: "01", title: "Diagnóstico de elegibilidade", body: "Mapeamento de evidências objetivas em pelo menos 3 dos critérios oficiais." },
+      { num: "01", title: "Diagnóstico de critérios", body: "Mapeamento de evidências objetivas em pelo menos 3 dos critérios oficiais." },
       { num: "02", title: "Processo I-140", body: "Organização do conjunto documental para protocolo, conduzido pelo requerente ou pelo advogado responsável." },
       { num: "03", title: "Aprovação e ajuste / consular", body: "Conclusão do processo, com Green Card para o requerente, cônjuge e filhos." },
     ],
@@ -288,7 +288,7 @@ const eb3: VisaPage = {
       "O EB-3 é a terceira preferência de vistos baseados em emprego. Abrange três subgrupos: skilled workers (2+ anos de experiência), professionals (com diploma de bacharelado) e other workers (não-qualificados). Em qualquer hipótese, exige (a) oferta formal e contínua de emprego nos EUA e (b) labor certification (PERM) emitida pelo Departamento do Trabalho.",
   },
   qualifies: {
-    title: "Quando o EB-3 faz sentido",
+    title: "O que o USCIS exige no EB-3",
     intro:
       "O EB-3 é apropriado quando NÃO há perfil para EB-2 NIW ou EB-1 e existe um empregador americano disposto a conduzir o patrocínio, assumindo custos e prazos do PERM. É um caminho que depende fortemente da empresa.",
     items: [

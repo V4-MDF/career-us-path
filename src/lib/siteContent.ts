@@ -55,7 +55,7 @@ export const defaultContent = {
   "why.lead":
     "Sede própria em Orlando, equipe dedicada e mais de duas décadas estruturando casos de mobilidade migratória para brasileiros.",
 
-  "cta.title": "Descubra se você já tem perfil para o Green Card.",
+  "cta.title": "Entenda como o seu perfil se posiciona diante dos critérios do USCIS.",
   "cta.subtitle":
     "Análise gratuita e confidencial. Em até 48h nossa equipe organiza as informações do seu perfil e apresenta um panorama das categorias de visto aplicáveis.",
 

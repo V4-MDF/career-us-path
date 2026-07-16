@@ -35,7 +35,7 @@ const SEED_POST_SLUGS = [
 // Manter em sincronia com VISA_SECTIONS (sectionMap.ts).
 const VISA_INDEXABLE_SECTIONS = [
   "definicao",
-  "elegibilidade",
+  "criterios",
   "processo",
   "familia",
   "comparativo",
