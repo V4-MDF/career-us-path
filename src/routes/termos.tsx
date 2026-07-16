@@ -2,7 +2,6 @@
  * /termos — Termos de Uso.
  *
  * COMPLIANCE (PARTE A · P1): documento obrigatório para operar tráfego pago.
- * PENDENTE DE REVISÃO JURÍDICA.
  */
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Header } from "@/components/site/Header";
