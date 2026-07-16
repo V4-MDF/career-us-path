@@ -91,7 +91,7 @@ function AvaliacaoPage() {
 
   const headline = segKey
     ? SEG_DEFAULTS[segKey].headline
-    : "Descubra se você tem perfil para o Green Card americano por mérito.";
+    : "Entenda como o seu perfil se posiciona diante dos critérios do USCIS.";
 
   const goToThanks = (qualification: QualResult) => {
     saveQualificationResult(qualification as QualificationResult);
