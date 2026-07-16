@@ -26,6 +26,16 @@ import {
 } from "@/components/ui/accordion";
 import { useContent } from "@/lib/siteContent";
 import { avaliacaoHref, useAvaliacaoHref } from "@/lib/ctaLinks";
+import {
+  CLAIM_FAMILIAS,
+  CLAIM_PROCESSOS,
+  CLAIM_SATISFACAO,
+  CLAIM_AVALIACOES,
+  BBB_LABEL,
+  GOOGLE_RATING_LABEL,
+  EIN,
+  CNPJ,
+} from "@/config/credentials";
 import { SectionHead } from "./SectionHead";
 import { BrUsRouteBackdrop } from "./visuals/BrUsRouteBackdrop";
 import { VideoPlayer } from "./VideoPlayer";
