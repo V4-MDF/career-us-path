@@ -31,8 +31,8 @@ const PLACEHOLDERS: Card[] = [
   { slug: "#", titulo: "Vida em Orlando: o que ninguém te conta no primeiro ano",
     resumo: "Custos reais, escolas, healthcare e a curva de adaptação de famílias brasileiras.",
     categoria: "Vida nos EUA", tempo_leitura: 8, capa: coverFamily, placeholder: true },
-  { slug: "#", titulo: "Médicos brasileiros nos EUA: caminhos sem refazer residência",
-    resumo: "Estratégias EB-2 NIW para perfis clínicos com atuação reconhecida.",
+  { slug: "#", titulo: "Médicos brasileiros nos EUA: o que o Green Card resolve e o que o licenciamento exige",
+    resumo: "O que muda com o EB-2 NIW e quais etapas de licenciamento continuam existindo.",
     categoria: "Carreira e Mercado", tempo_leitura: 7, capa: coverSkyline, placeholder: true },
 ];
 
