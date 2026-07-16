@@ -76,7 +76,7 @@ export const VISA_SECTIONS: SectionDef[] = [
   {
     id: "comparativo",
     label: "Comparativo EB",
-    intent: "Comparação entre EB-2 NIW, EB-1 e EB-3 lado a lado.",
+    intent: "Comparação entre EB-2 NIW, EB-1 e O-1 lado a lado.",
     indexable: true,
   },
   {

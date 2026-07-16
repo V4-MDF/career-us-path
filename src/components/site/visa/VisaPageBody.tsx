@@ -275,9 +275,7 @@ function VisaHero({ page }: { page: VisaPage }) {
       ? "Profissional brasileiro consolidado em contexto residencial americano, com família ao fundo — Green Card por mérito EB-2 NIW"
       : page.slug === "eb1"
         ? "Executivo sênior com reconhecimento internacional em escritório de alto padrão — Green Card EB-1 por habilidade extraordinária"
-        : page.slug === "o1"
-          ? "Profissional brasileiro de habilidade extraordinária em contexto profissional americano — visto O-1 temporário"
-          : "Profissional qualificada em ambiente de trabalho americano — Green Card EB-3 com oferta formal de emprego";
+        : "Profissional brasileiro de habilidade extraordinária em contexto profissional americano — visto O-1 temporário";
 
   return (
     <section
