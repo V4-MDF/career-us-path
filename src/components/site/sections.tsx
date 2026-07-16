@@ -1020,6 +1020,17 @@ export function FAQ() {
             </AccordionItem>
           ))}
         </Accordion>
+
+        <div className="mt-12 flex flex-col items-center text-center">
+          <p className="text-foreground/80 mb-5 max-w-md">
+            Ainda tem dúvidas? Peça uma análise gratuita do seu perfil.
+          </p>
+          <a href={useAvaliacaoHref("home_faq")}>
+            <Button size="lg" variant="cta" className="btn-label btn-sweep h-12 px-7 w-full sm:w-auto">
+              Falar com um especialista
+            </Button>
+          </a>
+        </div>
       </div>
     </Reveal>
   );
