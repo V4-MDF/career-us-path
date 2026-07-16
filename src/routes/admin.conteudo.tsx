@@ -42,7 +42,9 @@ const PAGES: Array<{
         { k: "hero.cta", label: "Texto do CTA" },
         { k: "hero.proof", label: "Prova social", multiline: true },
         { k: "hero.videoUrl", label: "Vídeo de fundo (YouTube ou URL MP4/WebM) — opcional, só desktop" },
+        { k: "hero.videoHidden", label: "Ocultar vídeo do hero da Home" },
         { k: "hero.posterUrl", label: "Poster/imagem de fallback (URL) — usada no mobile e enquanto o vídeo carrega" },
+
       ]},
       { title: "Contraste BR vs EUA", keys: [
         { k: "contrast.title", label: "Título" },
