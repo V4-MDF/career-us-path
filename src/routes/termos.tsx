@@ -2,7 +2,6 @@
  * /termos — Termos de Uso.
  *
  * COMPLIANCE (PARTE A · P1): documento obrigatório para operar tráfego pago.
- * PENDENTE DE REVISÃO JURÍDICA.
  */
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Header } from "@/components/site/Header";
@@ -35,12 +34,6 @@ function TermosPage() {
         <p className="mt-4 text-sm text-foreground/70">
           Última atualização: {new Date().toLocaleDateString("pt-BR", { day: "2-digit", month: "long", year: "numeric" })}.
         </p>
-
-        <div className="mt-6 rounded-xl border border-oxblood/40 bg-oxblood/10 p-4 text-sm text-foreground/85">
-          <strong className="font-mono-label text-oxblood">PENDENTE DE REVISÃO JURÍDICA.</strong>{" "}
-          Este texto foi redigido internamente e deve ser revisado por advogado antes do
-          go-live.
-        </div>
 
         <section className="mt-10 space-y-8 text-[15px] leading-relaxed text-foreground/85">
           <div>
