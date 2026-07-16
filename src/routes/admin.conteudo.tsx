@@ -218,8 +218,11 @@ function ContentPage() {
             ) : p.sections.map((sec) => (
               <SectionCard key={sec.title} title={sec.title}>
                 <div className="space-y-3">
-                  {sec.keys.map((f) => (
+                  {sec.keys.map((f) => {
+                    const isHiddenToggle = /Hidden$/.test(String(f.k)) || /^Ocultar /i.test(f.label);
+                    return (
                     <div key={f.k}>
+
                       <div className="flex items-center justify-between">
                         <label className="text-xs text-slate-500">{f.label}</label>
                         {isPending(f.k) && (
