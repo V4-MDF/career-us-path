@@ -100,7 +100,7 @@ const eb2niw: VisaPage = {
   metaTitle:
     "EB-2 NIW: Green Card por mérito profissional | Status na América",
   metaDescription:
-    "Entenda o EB-2 National Interest Waiver: critérios, prova de interesse nacional, etapas e prazos. Sem patrocinador. Green Card para cônjuge e filhos.",
+    "Entenda o EB-2 National Interest Waiver: critérios, prova de interesse nacional, etapas e prazos. Sem patrocinador. Green Card para cônjuge e filhos, junto do requerente principal.",
   whatIs: {
     title: "O que é o National Interest Waiver",
     body:
