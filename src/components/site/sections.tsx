@@ -341,12 +341,12 @@ export function NiwSection() {
  * ============================================================ */
 export function VisaCards() {
   const visas = [
-    { slug: "eb2-niw", tag: "EM DESTAQUE", title: "EB-2 NIW",
-      desc: "Green Card por mérito profissional. Sem patrocinador, com a família inclusa.", featured: true },
     { slug: "eb1", tag: "HABILIDADE EXTRAORDINÁRIA", title: "EB-1",
-      desc: "Para profissionais com reconhecimento internacional comprovado em sua área." },
-    { slug: "eb3", tag: "EXIGE PATROCINADOR", title: "EB-3",
-      desc: "Caminho para profissionais qualificados com oferta formal de emprego nos EUA." },
+      desc: "Para profissionais com reconhecimento internacional comprovado na área." },
+    { slug: "eb2-niw", tag: "EM DESTAQUE", title: "EB-2 NIW",
+      desc: "Green Card por mérito profissional, sem patrocinador, com a família inclusa.", featured: true },
+    { slug: "o1", tag: "SEM PATROCINADOR OBRIGATÓRIO", title: "O-1",
+      desc: "Visto temporário para profissionais de habilidade extraordinária, sem depender de oferta de emprego." },
   ];
   return (
     <Reveal as="section" id="vistos-eb" className="section-ink-deep section-pad border-y border-gold/10 relative overflow-hidden">
