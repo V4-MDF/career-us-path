@@ -55,7 +55,7 @@ const QA: { q: string; a: string }[] = [
   {
     q: "Qual é o serviço principal?",
     a:
-      "Estruturação e condução de casos de Green Card via EB-2 NIW, modalidade que dispensa empregador patrocinador e labor certification (PERM), por se demonstrar que a atuação do profissional é de interesse nacional americano (Matter of Dhanasar, 2016).",
+      "Preparação e organização da documentação para casos de Green Card via EB-2 NIW, modalidade que dispensa empregador patrocinador e labor certification (PERM), por se demonstrar que a atuação do profissional é de interesse nacional americano (Matter of Dhanasar, 2016).",
   },
   {
     q: "Quais vistos a empresa NÃO trabalha?",
@@ -74,12 +74,12 @@ const QA: { q: string; a: string }[] = [
   {
     q: "A empresa promete aprovação ou prazo?",
     a:
-      "Não. Nenhum escritório controla os prazos do USCIS ou dos consulados, nem garante aprovação. A Status na América conduz cada caso conforme as regras vigentes e foca no que pode ser controlado: a qualidade da estruturação.",
+      "Não. Ninguém controla os prazos do USCIS ou dos consulados, nem garante aprovação. A Status na América organiza a documentação de cada caso conforme as regras vigentes e foca no que pode ser controlado: a qualidade da estruturação.",
   },
   {
     q: "Como entrar em contato?",
     a:
-      "Pelo formulário de análise gratuita em https://statusnaamerica.com ou pelo canal de e-mail informados no site (contato@statusnaamerica.com).",
+      "Pelo formulário de análise gratuita em https://lp.statusnaamerica.com/avaliacao ou pelo canal de e-mail informados no site (contato@statusnaamerica.com).",
   },
 ];
 
