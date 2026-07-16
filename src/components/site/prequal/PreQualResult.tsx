@@ -40,7 +40,7 @@ function VisaCard({ v, primary }: { v: VisaScore; primary?: boolean }) {
     <article className={`border p-6 ${primary ? "border-gold bg-ink-raise/70" : "border-gold/20 bg-ink-raise/40"}`}>
       <header className="flex items-start justify-between gap-3">
         <div>
-          <p className="font-mono-label text-gold/80">{primary ? "VISTO RECOMENDADO" : "ALTERNATIVA"}</p>
+          <p className="font-mono-label text-gold/80">{primary ? "MAIOR AFINIDADE" : "OUTRA CATEGORIA MAPEADA"}</p>
           <h3 className="mt-1 font-display text-xl">{v.label}</h3>
         </div>
         <span className={`inline-flex items-center gap-1.5 border px-2 py-1 text-[11px] uppercase tracking-wider ${meta.cls}`}>
@@ -48,7 +48,9 @@ function VisaCard({ v, primary }: { v: VisaScore; primary?: boolean }) {
         </span>
       </header>
 
-      <p className="mt-3 text-[14px] text-foreground/75">{v.short}</p>
+      <p className="mt-3 text-[14px] text-foreground/75">
+        O seu perfil apresenta afinidade com os critérios de <strong>{v.label}</strong>. {v.short}
+      </p>
 
       <div className="mt-4">
         <div className="flex justify-between font-mono-label text-[10px] text-foreground/80">
