@@ -439,7 +439,7 @@ export function ProcessSteps() {
     { n: "01", icon: GraduationCap, t: "Análise Criteriosa",
       d: "Organizamos e revisamos histórico, formação e evidências de impacto para o EB-2 NIW." },
     { n: "02", icon: Layers, t: "Arquitetura Estratégica",
-      d: "Organizamos a documentação que evidencia o seu perfil profissional para o interesse nacional americano." },
+      d: "Organizamos a documentação demonstrando que a atuação proposta tem mérito substancial e importância nacional para os Estados Unidos." },
     { n: "03", icon: FileText, t: "Preparação Documental",
       d: "Documentação meticulosa, cartas de recomendação e evidências de alto padrão." },
     { n: "04", icon: Briefcase, t: "Revisão Final",
