@@ -169,7 +169,7 @@ const eb2niw: VisaPage = {
   family: {
     title: "Green Card para toda a família",
     body:
-      "O processo EB-2 NIW inclui cônjuge e filhos solteiros menores de 21 anos, que recebem Green Card derivado junto com o requerente principal. O cônjuge passa a poder trabalhar livremente nos EUA, e os filhos têm acesso à educação pública americana nas mesmas condições de residentes.",
+      "O processo EB-2 NIW inclui cônjuge e filhos solteiros menores de 21 anos, que recebem Green Card derivado junto do requerente principal. Uma vez concedida a residência permanente, o cônjuge pode trabalhar livremente nos EUA, e os filhos têm acesso à educação pública americana nas mesmas condições de residentes. A idade do filho é apurada segundo as regras do Child Status Protection Act (CSPA), que em determinados casos preserva o benefício mesmo após os 21 anos — o tempo de processamento influencia esse cálculo.",
   },
   faq: [
     {
