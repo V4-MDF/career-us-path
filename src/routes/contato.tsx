@@ -451,7 +451,7 @@ function ContatoForm() {
             <CheckCircle2 className="h-10 w-10 text-gold mx-auto" />
             <h2 className="mt-4 font-display text-2xl">{successMsg}</h2>
             <p className="mt-3 text-white/70">
-              Se sua dúvida é sobre elegibilidade e caminhos de visto, adiante o processo
+              Se sua dúvida é sobre critérios do USCIS e caminhos de visto, adiante o processo
               com a análise gratuita de perfil.
             </p>
             <div className="mt-6">
@@ -479,7 +479,7 @@ function ContatoForm() {
           <p className="mt-4 text-white/75 leading-relaxed">{lead}</p>
           <div className="mt-6 rounded-lg border border-gold/30 bg-white/[0.04] p-4 text-sm text-white/80">
             Para uma <strong className="text-gold">análise de perfil completa</strong>{" "}
-            (elegibilidade, visto recomendado, próximos passos), use o caminho oficial:
+            (critérios do USCIS, visto recomendado, próximos passos), use o caminho oficial:
             <div className="mt-3">
               <Link to="/avaliacao">
                 <Button size="sm" className="btn-label">

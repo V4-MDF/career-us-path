@@ -56,9 +56,9 @@ export const VISA_SECTIONS: SectionDef[] = [
     indexable: true,
   },
   {
-    id: "elegibilidade",
-    label: "Quem se qualifica",
-    intent: "Critérios oficiais de elegibilidade para este visto.",
+    id: "criterios",
+    label: "O que o USCIS avalia",
+    intent: "Critérios avaliados pelo USCIS para este visto.",
     indexable: true,
   },
   {
