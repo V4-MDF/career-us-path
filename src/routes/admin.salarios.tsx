@@ -100,7 +100,7 @@ function SalariosAdmin() {
             {rows.map((r, i) => (
               <div
                 key={r.id}
-                className="grid grid-cols-1 lg:grid-cols-[minmax(0,2.2fr)_minmax(0,1fr)_minmax(0,1fr)_auto_auto] gap-3 rounded-lg border border-ink-text/10 bg-white/60 p-3"
+                className="grid grid-cols-1 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)_minmax(0,1fr)_minmax(0,1.2fr)_auto_auto_auto] gap-3 rounded-lg border border-ink-text/10 bg-white/60 p-3"
               >
                 <div className="min-w-0">
                   <label className="text-[10px] font-mono uppercase tracking-widest text-ink-text/55">Profissão</label>
@@ -110,11 +110,11 @@ function SalariosAdmin() {
                   />
                 </div>
                 <div>
-                  <label className="text-[10px] font-mono uppercase tracking-widest text-ink-text/55">Brasil · por mês</label>
+                  <label className="text-[10px] font-mono uppercase tracking-widest text-ink-text/55">Brasil · por ano</label>
                   <Input
-                    value={r.br_mensal}
-                    placeholder="R$ 25.000"
-                    onChange={(e) => update(r.id, { br_mensal: e.target.value })}
+                    value={r.br_anual}
+                    placeholder="R$ 300.000"
+                    onChange={(e) => update(r.id, { br_anual: e.target.value })}
                   />
                 </div>
                 <div>
@@ -124,6 +124,18 @@ function SalariosAdmin() {
                     placeholder="US$ 280.000"
                     onChange={(e) => update(r.id, { eua_anual: e.target.value })}
                   />
+                </div>
+                <div>
+                  <label className="text-[10px] font-mono uppercase tracking-widest text-ink-text/55">Fonte</label>
+                  <Input
+                    value={r.fonte}
+                    placeholder="Fonte: U.S. BLS — OEWS"
+                    onChange={(e) => update(r.id, { fonte: e.target.value })}
+                  />
+                </div>
+                <div className="flex items-center gap-2 lg:pt-5">
+                  <Switch checked={r.regulamentada} onCheckedChange={(v) => update(r.id, { regulamentada: v })} />
+                  <span className="text-xs text-ink-text/70">regulamentada</span>
                 </div>
                 <div className="flex items-center gap-2 lg:pt-5">
                   <Switch checked={r.ativo} onCheckedChange={(v) => update(r.id, { ativo: v })} />
