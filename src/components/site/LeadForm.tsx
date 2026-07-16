@@ -302,7 +302,9 @@ export function LeadForm({ segmentId, defaultProfissao, onSubmitted, submitLabel
       </div>
 
       <p className="mt-4 text-xs text-muted-foreground">
-        Seus dados são tratados de forma confidencial. Não enviamos spam.
+        Dados tratados conforme a nossa Política de Privacidade. A Status na América
+        não é escritório de advocacia — as informações enviadas não são protegidas
+        por sigilo advogado-cliente.
       </p>
     </div>
   );
