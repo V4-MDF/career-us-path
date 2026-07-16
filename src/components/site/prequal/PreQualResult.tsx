@@ -130,15 +130,15 @@ export function PreQualResult({ record, variant }: Props) {
         )}
       </section>
 
-      {/* Próximo passo: copiar link do resultado */}
+      {/* Próximo passo: copiar link do mapeamento */}
       {qualified && (
         <section className="rounded-2xl border border-gold/30 bg-ink-raise/60 p-6 sm:p-7 shadow-soft">
           <p className="font-mono-label text-gold/80">PRÓXIMO PASSO</p>
           <h2 className="mt-2 font-display text-2xl text-foreground">
-            Guarde ou compartilhe o seu resultado
+            Guarde ou compartilhe o seu mapeamento
           </h2>
           <p className="mt-3 text-[15px] text-foreground/75 max-w-2xl">
-            Enviamos automaticamente o seu resultado por e-mail. Você também pode copiar o
+            Enviamos automaticamente o mapa por e-mail. Você também pode copiar o
             link público para consultar depois ou compartilhar com quem acompanha sua decisão.
           </p>
 
@@ -147,7 +147,7 @@ export function PreQualResult({ record, variant }: Props) {
               type="button" variant="outline" onClick={copyLink}
               className="btn-label h-12 px-5 gap-2 border-gold/40 text-foreground hover:bg-gold/10"
             >
-              <Copy className="h-4 w-4" /> Copiar link do resultado
+              <Copy className="h-4 w-4" /> Copiar link do mapeamento
             </Button>
           </div>
 
@@ -159,12 +159,12 @@ export function PreQualResult({ record, variant }: Props) {
         </section>
       )}
 
-      {/* Não qualificado: convida a conhecer o conteúdo */}
+      {/* Sem afinidade clara: convida a conhecer o conteúdo */}
       {!qualified && (
         <section className="rounded-2xl border border-gold/20 bg-ink-raise/40 p-6 sm:p-7 shadow-soft">
           <p className="font-mono-label text-gold/80">CONTINUE EXPLORANDO</p>
           <h2 className="mt-2 font-display text-2xl text-foreground">
-            Aprofunde-se nos vistos EB enquanto estrutura seu caso.
+            Aprofunde-se nas categorias EB enquanto estrutura seu caso.
           </h2>
           <p className="mt-3 text-[15px] text-foreground/75 max-w-2xl">
             Conheça os critérios completos e leia os artigos sobre EB-2 NIW e EB-1, a maioria
@@ -177,9 +177,10 @@ export function PreQualResult({ record, variant }: Props) {
         </section>
       )}
 
-      <p className="text-[12px] text-foreground/80">
-        Esta avaliação é orientativa e baseada nas respostas declaradas. Não substitui parecer
-        jurídico individual sobre o caso.
+      <p className="text-[13px] text-foreground/80 leading-relaxed border-t border-gold/15 pt-5">
+        Este é um mapeamento informativo baseado nas suas respostas. Não é análise jurídica
+        e não determina qualificação. Somente um advogado de imigração licenciado pode
+        avaliar o seu caso.
       </p>
     </div>
   );
