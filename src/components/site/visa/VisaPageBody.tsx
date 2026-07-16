@@ -140,7 +140,7 @@ export function VisaPageBody({ page, hideHero = false }: { page: VisaPage; hideH
             num="05"
             eyebrow="COMPARATIVO"
             variant="parchment"
-            title="EB-2 NIW vs EB-1 vs EB-3"
+            title="EB-2 NIW vs EB-1 vs O-1"
             kicker="Três caminhos legítimos, três perfis distintos."
           />
           <div className="mt-10 overflow-x-auto rounded-2xl border border-ink-text/15 bg-white shadow-soft">
@@ -177,9 +177,9 @@ export function VisaPageBody({ page, hideHero = false }: { page: VisaPage; hideH
                 → Página EB-1
               </Link>
             )}
-            {page.slug !== "eb3" && (
-              <Link to="/vistos/$slug" params={{ slug: "eb3" }} className="underline text-ink-text hover:text-gold">
-                → Página EB-3
+            {page.slug !== "o1" && (
+              <Link to="/vistos/$slug" params={{ slug: "o1" }} className="underline text-ink-text hover:text-gold">
+                → Página O-1
               </Link>
             )}
             {page.slug !== "o1" && (
@@ -275,9 +275,7 @@ function VisaHero({ page }: { page: VisaPage }) {
       ? "Profissional brasileiro consolidado em contexto residencial americano, com família ao fundo — Green Card por mérito EB-2 NIW"
       : page.slug === "eb1"
         ? "Executivo sênior com reconhecimento internacional em escritório de alto padrão — Green Card EB-1 por habilidade extraordinária"
-        : page.slug === "o1"
-          ? "Profissional brasileiro de habilidade extraordinária em contexto profissional americano — visto O-1 temporário"
-          : "Profissional qualificada em ambiente de trabalho americano — Green Card EB-3 com oferta formal de emprego";
+        : "Profissional brasileiro de habilidade extraordinária em contexto profissional americano — visto O-1 temporário";
 
   return (
     <section
