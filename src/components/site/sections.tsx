@@ -778,6 +778,14 @@ export function SalaryCompare() {
           licenciamento nos EUA, independente do status imigratório. Impostos e encargos reduzem
           o valor líquido em ambos os países.
         </p>
+
+        <div className="mt-10 flex justify-start md:justify-center">
+          <a href={useAvaliacaoHref("home_salarios")}>
+            <Button size="lg" variant="cta" className="btn-label btn-sweep h-12 px-7 w-full sm:w-auto">
+              Analisar meu potencial nos EUA
+            </Button>
+          </a>
+        </div>
       </div>
     </Reveal>
   );
