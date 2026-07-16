@@ -57,7 +57,7 @@ export const defaultContent = {
 
   "cta.title": "Descubra se você já tem perfil para o Green Card.",
   "cta.subtitle":
-    "Análise gratuita e confidencial. Em até 48h nossa equipe analisa seu perfil e indica o caminho mais coerente com sua história.",
+    "Análise gratuita e confidencial. Em até 48h nossa equipe organiza as informações do seu perfil e apresenta um panorama das categorias de visto aplicáveis.",
 
   // ==== Selos e parceiros (Correções 3) ============================
   // Faixa de credenciais tratada como selos oficiais. Slots com `.url`

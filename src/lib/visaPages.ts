@@ -117,19 +117,19 @@ const eb2niw: VisaPage = {
 
   },
   process: {
-    title: "Como conduzimos o seu processo",
+    title: "Como preparamos a sua documentação",
     steps: [
       {
         num: "01",
         title: "Análise Criteriosa",
         body:
-          "Avaliamos histórico, formação, impacto e potencial para o EB-2 NIW, diagnóstico individual antes de qualquer compromisso.",
+          "Organizamos e revisamos histórico, formação e evidências de impacto para o EB-2 NIW, diagnóstico individual antes de qualquer compromisso.",
       },
       {
         num: "02",
         title: "Arquitetura Estratégica",
         body:
-          "Estruturamos a narrativa do seu perfil profissional para evidenciar o interesse nacional americano.",
+          "Organizamos a documentação que evidencia o seu perfil profissional para o interesse nacional americano.",
       },
       {
         num: "03",
@@ -231,7 +231,7 @@ const eb1: VisaPage = {
     title: "Como funciona o processo",
     steps: [
       { num: "01", title: "Diagnóstico de elegibilidade", body: "Mapeamento de evidências objetivas em pelo menos 3 dos critérios oficiais." },
-      { num: "02", title: "Processo I-140", body: "Submissão ao USCIS com a documentação probatória completa e o memorando jurídico." },
+      { num: "02", title: "Processo I-140", body: "Organização do conjunto documental para protocolo, conduzido pelo requerente ou pelo advogado responsável." },
       { num: "03", title: "Aprovação e ajuste / consular", body: "Conclusão do processo, com Green Card para o requerente, cônjuge e filhos." },
     ],
     note:
@@ -335,7 +335,7 @@ const eb3: VisaPage = {
     },
   ],
   ctaTitle: "Tem oferta de emprego nos EUA?",
-  ctaSubtitle: "Em 48h indicamos se o EB-3 é o caminho mais coerente ou se existe perfil para EB-2 NIW ou EB-1 (caminhos sem patrocinador).",
+  ctaSubtitle: "Em 48h apresentamos um panorama das categorias aplicáveis ao seu contexto (EB-3, EB-2 NIW ou EB-1).",
 };
 
 export const VISA_PAGES: Record<VisaSlug, VisaPage> = {

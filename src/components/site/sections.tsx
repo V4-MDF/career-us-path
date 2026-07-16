@@ -427,9 +427,9 @@ export function PersonaCards() {
 export function ProcessSteps() {
   const steps = [
     { n: "01", icon: GraduationCap, t: "Análise Criteriosa",
-      d: "Avaliamos histórico, formação, impacto e potencial para o EB-2 NIW." },
+      d: "Organizamos e revisamos histórico, formação e evidências de impacto para o EB-2 NIW." },
     { n: "02", icon: Layers, t: "Arquitetura Estratégica",
-      d: "Estruturamos a narrativa do seu perfil profissional para evidenciar o interesse nacional americano." },
+      d: "Organizamos a documentação que evidencia o seu perfil profissional para o interesse nacional americano." },
     { n: "03", icon: FileText, t: "Preparação Documental",
       d: "Documentação meticulosa, cartas de recomendação e evidências de alto padrão." },
     { n: "04", icon: Briefcase, t: "Revisão Final",
