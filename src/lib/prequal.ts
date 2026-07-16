@@ -185,8 +185,8 @@ export function whatsappMessageFor(record: PreQualResponse): string {
   const link = publicResultUrl(record.id);
   return [
     `Olá! Sou ${name}.`,
-    `Acabei de fazer o teste de pré-qualificação da Status na América e gostaria de conversar sobre o resultado.`,
-    `Visto recomendado: ${visa}.`,
-    `Resultado completo: ${link}`,
+    `Acabei de fazer o teste de pré-qualificação da Status na América e gostaria de conversar sobre o mapeamento.`,
+    `Categoria com maior afinidade no meu perfil: ${visa}.`,
+    `Mapa completo: ${link}`,
   ].join("\n\n");
 }
