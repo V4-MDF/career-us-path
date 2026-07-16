@@ -110,6 +110,7 @@ const PAGES: Array<{
         { k: "visa.eb2-niw.heroSubtitle", label: "Subtítulo curto (1–2 linhas)", multiline: true },
         { k: "visa.eb2-niw.heroVideoUrl", label: "URL do vídeo (YouTube, Vimeo ou MP4)" },
         { k: "visa.eb2-niw.heroVideoThumb", label: "URL da thumbnail (webp/jpg, opcional)" },
+        { k: "visa.eb2-niw.heroVideoHidden", label: "Ocultar vídeo desta página" },
       ]},
       { title: "01 Definição (imagem)", keys: [
         { k: "visa.eb2-niw.definitionImage", label: "URL da imagem da dobra 01 Definição — profissional beneficiário no exercício da sua competência (não usar pose corporativa de braços cruzados)" },
@@ -124,22 +125,37 @@ const PAGES: Array<{
         { k: "visa.eb1.heroSubtitle", label: "Subtítulo curto (1–2 linhas)", multiline: true },
         { k: "visa.eb1.heroVideoUrl", label: "URL do vídeo (YouTube, Vimeo ou MP4)" },
         { k: "visa.eb1.heroVideoThumb", label: "URL da thumbnail (webp/jpg, opcional)" },
+        { k: "visa.eb1.heroVideoHidden", label: "Ocultar vídeo desta página" },
       ]},
     ],
   },
   {
-    slug: "eb3", label: "Vistos · EB-3",
+    slug: "o1", label: "Vistos · O-1",
+    sections: [
+      { title: "Hero (imagem + texto enxuto + vídeo)", keys: [
+        { k: "visa.o1.heroImage", label: "URL da imagem de fundo do hero (webp/jpg) — específica deste visto" },
+        { k: "visa.o1.heroSubtitle", label: "Subtítulo curto (1–2 linhas)", multiline: true },
+        { k: "visa.o1.heroVideoUrl", label: "URL do vídeo (YouTube, Vimeo ou MP4)" },
+        { k: "visa.o1.heroVideoThumb", label: "URL da thumbnail (webp/jpg, opcional)" },
+        { k: "visa.o1.heroVideoHidden", label: "Ocultar vídeo desta página" },
+      ]},
+    ],
+  },
+  {
+    slug: "eb3", label: "Vistos · EB-3 (redireciona p/ O-1)",
     sections: [
       { title: "Hero (imagem + texto enxuto + vídeo)", keys: [
         { k: "visa.eb3.heroImage", label: "URL da imagem de fundo do hero (webp/jpg) — específica deste visto" },
         { k: "visa.eb3.heroSubtitle", label: "Subtítulo curto (1–2 linhas)", multiline: true },
         { k: "visa.eb3.heroVideoUrl", label: "URL do vídeo (YouTube, Vimeo ou MP4)" },
         { k: "visa.eb3.heroVideoThumb", label: "URL da thumbnail (webp/jpg, opcional)" },
+        { k: "visa.eb3.heroVideoHidden", label: "Ocultar vídeo desta página" },
       ]},
     ],
   },
 
 ];
+
 
 function ContentPage() {
   const [page, setPage] = useState("home");
