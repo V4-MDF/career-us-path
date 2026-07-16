@@ -295,8 +295,8 @@ export function NiwSection() {
   const bullets = [
     { icon: ShieldCheck, t: "Sem necessidade de empregador patrocinador" },
     { icon: Award, t: "Baseado no seu histórico e contribuição profissional" },
-    { icon: Heart, t: "Green Card para cônjuge e filhos" },
-    { icon: Sparkles, t: "Caminho para a cidadania americana após 5 anos" },
+    { icon: Heart, t: "Green Card para cônjuge e filhos, junto do requerente principal" },
+    { icon: Sparkles, t: "Após cinco anos como residente permanente, é possível solicitar a naturalização, cumpridos os requisitos de residência contínua, presença física e demais exigências do USCIS." },
   ];
   return (
     <Reveal as="section" id="eb-2-niw" className="section-pad relative">
