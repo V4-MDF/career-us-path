@@ -148,7 +148,7 @@ const eb2niw: VisaPage = {
         num: "02",
         title: "Arquitetura Estratégica",
         body:
-          "Organizamos a documentação que evidencia o seu perfil profissional para o interesse nacional americano.",
+          "Organizamos a documentação demonstrando que a atuação proposta tem mérito substancial e importância nacional para os Estados Unidos.",
       },
       {
         num: "03",
