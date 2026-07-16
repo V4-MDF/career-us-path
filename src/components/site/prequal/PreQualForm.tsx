@@ -325,9 +325,9 @@ export function PreQualForm({ onSubmit, submitting }: Props) {
           value={a.usJobOffer} onChange={(v) => upd("usJobOffer", v)}
           hint="Relevante para O-1 e EB-3, não é obrigatório para EB-1A nem EB-2 NIW." />
 
-        <YesNo legend="Possui histórico criminal (no Brasil ou exterior)?"
-          value={a.criminalRecord} onChange={(v) => upd("criminalRecord", v)}
-          hint="Sinaliza necessidade de análise jurídica individual antes de qualquer recomendação." />
+        <YesNo legend="Já teve visto americano negado anteriormente?"
+          value={a.priorVisaDenial} onChange={(v) => upd("priorVisaDenial", v)}
+          hint="Ajuda a triagem a entender o histórico consular; não impede o mapeamento." />
       </section>
 
       {/* ========== Consentimento + envio ========== */}
