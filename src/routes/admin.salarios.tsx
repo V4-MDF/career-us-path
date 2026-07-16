@@ -76,7 +76,7 @@ function SalariosAdmin() {
     <>
       <PageHeader
         title="Renda em dólar · Lista de profissões"
-        description="Dobra pública da Home. Brasil = valor mensal · EUA = valor anual (formato usual de cada país). Estes números são referências pendentes de validação."
+        description="Dobra pública da Home. Ambas as colunas em base ANUAL (US$/ano e R$/ano). Cada linha inclui a fonte (padrão: U.S. BLS — OEWS) e um marcador de profissão regulamentada. Números pendentes de validação contra o BLS antes do go-live."
         actions={
           <>
             <Button variant="outline" onClick={resetSeed}>Restaurar sugestão</Button>
