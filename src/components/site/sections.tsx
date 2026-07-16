@@ -83,7 +83,7 @@ export function Hero() {
         <BrUsRouteBackdrop />
       </div>
 
-      <div className="container-x grid lg:grid-cols-[1.1fr_0.9fr] gap-10 md:gap-16 lg:gap-20 items-center">
+      <div className="container-x grid lg:grid-cols-[1fr_1.35fr] gap-10 md:gap-16 lg:gap-12 items-center">
         <div className="min-w-0">
           <div className="flex items-center gap-3">
             <FlagsBRUS size={16} />
