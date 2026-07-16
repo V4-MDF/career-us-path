@@ -172,8 +172,9 @@ export const defaultContent = {
   // ==== Página Sobre ==============================================
   "sobre.hero.eyebrow": "QUEM SOMOS",
   "sobre.hero.title": "Status na América. De Orlando para o Brasil.",
+  // COMPLIANCE: "duas décadas" removido — sem lastro documental.
   "sobre.hero.subtitle":
-    "Mais de duas décadas estruturando processos de imigração para brasileiros qualificados, com equipe presente nos Estados Unidos.",
+    "Equipe com trajetória consolidada em processos de imigração, com sede própria em Orlando desde 2022.",
   "sobre.hero.image": "",
 
   "sobre.historia.eyebrow": "NOSSA HISTÓRIA",
