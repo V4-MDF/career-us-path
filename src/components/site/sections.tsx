@@ -1052,16 +1052,16 @@ export function CtaBanner() {
               <p className="font-mono-label text-gold/80">RESPOSTA NA HORA</p>
             </div>
             <h3 className="mt-3 font-display text-2xl leading-tight break-words">
-              Teste rápido: seu encaixe em 2 minutos.
+              Teste rápido: um mapa do seu perfil em 2 minutos.
             </h3>
             <p className="mt-3 text-foreground/70 text-[15px] leading-relaxed">
               Poucas perguntas objetivas sobre formação e experiência. Ao final,
-              o visto mais compatível. EB-1A, EB-2 NIW, O-1 ou EB-3.
+              um mapa de como o seu perfil se posiciona diante das categorias EB-1A, EB-2 NIW, O-1 e EB-3.
             </p>
             <ul className="mt-5 space-y-2 text-[14px] text-foreground/75">
               {[
                 "Resultado imediato",
-                "Indicação do visto ideal",
+                "Mapa das categorias aplicáveis",
                 "Sem cadastro inicial",
               ].map((i) => (
                 <li key={i} className="flex gap-2.5">
@@ -1169,7 +1169,7 @@ export function HeroAssessment() {
           <ul className="mt-7 space-y-3 text-sm text-foreground/80">
             {[
               "Sem compromisso, 100% confidencial",
-              "Indicação do visto mais coerente (EB-2 NIW, EB-1, EB-3)",
+              "Mapa das categorias com maior afinidade (EB-2 NIW, EB-1, EB-3)",
               "Análise feita por equipe especializada em vistos EB",
             ].map((i) => (
               <li key={i} className="flex gap-3 border-l border-gold/40 pl-3">

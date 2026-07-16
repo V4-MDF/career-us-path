@@ -28,7 +28,7 @@ export const Route = createFileRoute("/pre-qualificacao")({
   head: () => ({
     meta: [
       { title: "Teste de pré-qualificação. Status na América" },
-      { name: "description", content: "Descubra em minutos qual visto americano (EB-1A, EB-2 NIW, O-1 ou EB-3) tem mais afinidade com o seu perfil." },
+      { name: "description", content: "Veja como o seu perfil se posiciona diante dos critérios de cada categoria de visto americano (EB-1A, EB-2 NIW, O-1, EB-3)." },
       { name: "robots", content: "noindex, nofollow" },
     ],
   }),
@@ -68,13 +68,17 @@ function PreQualPage() {
               <header className="mb-10">
                 <p className="font-mono-label text-gold/80">PRÉ-QUALIFICAÇÃO · 4 ETAPAS · ~5 MIN</p>
                 <h1 className="mt-3 font-display text-3xl sm:text-4xl leading-tight text-foreground">
-                  Descubra qual visto americano tem mais afinidade com o seu perfil.
+                  Veja como o seu perfil se posiciona diante dos critérios de cada categoria.
                 </h1>
                 <p className="mt-4 text-foreground/75 max-w-2xl">
-                  Avaliamos seu perfil contra os critérios dos vistos <strong>EB-1A</strong>,
+                  Esta triagem é orientativa e não substitui parecer jurídico individual.
+                  Somente um advogado de imigração licenciado pode avaliar o seu caso.
+                </p>
+                <p className="mt-4 text-foreground/75 max-w-2xl">
+                  Comparamos suas respostas com os critérios das categorias <strong>EB-1A</strong>,
                   <strong> EB-2 NIW</strong>, <strong>O-1</strong> e <strong>EB-3</strong>. Ao final você
-                  recebe um resultado imediato, com pontos fortes, lacunas e um link público
-                  para consultar depois.
+                  recebe um mapa das categorias, com os pontos que o seu perfil já cobre e
+                  os que ainda precisam de documentação.
                 </p>
               </header>
 

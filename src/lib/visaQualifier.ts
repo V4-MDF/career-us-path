@@ -237,18 +237,18 @@ function scoreEB3(a: PreQualAnswers): VisaScore {
  * ============================================================ */
 
 export function qualifyVisas(a: PreQualAnswers): QualificationResult {
-  // Bloqueadores absolutos (declarados pelo próprio respondente)
+  // Sinalizações informativas declaradas pelo próprio respondente.
+  // Não bloqueiam o mapeamento — indicam apenas que a conversa 1:1 com
+  // um advogado licenciado é necessária para avaliar o caso.
   let blocker: string | null = null;
-  if (a.criminalRecord) {
-    blocker = "Histórico criminal declarado exige análise jurídica individual antes de qualquer recomendação.";
+  if (a.priorVisaDenial) {
+    blocker = "Você declarou já ter tido um visto americano negado. Esse histórico precisa ser revisado por um advogado de imigração antes de qualquer passo formal.";
   }
 
   const all: VisaScore[] = [scoreEB1A(a), scoreEB2NIW(a), scoreO1(a), scoreEB3(a)];
 
-  // Quando há blocker, mantém os scores (para o admin ver) mas força verdict
-  if (blocker) {
-    all.forEach((v) => { v.verdict = "nao_elegivel"; });
-  }
+  // Sinalização informativa não altera o mapeamento das categorias.
+
 
   const sorted = [...all].sort((x, y) => y.score - x.score);
   const best = sorted[0];

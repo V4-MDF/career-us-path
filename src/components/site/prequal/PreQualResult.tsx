@@ -40,7 +40,7 @@ function VisaCard({ v, primary }: { v: VisaScore; primary?: boolean }) {
     <article className={`border p-6 ${primary ? "border-gold bg-ink-raise/70" : "border-gold/20 bg-ink-raise/40"}`}>
       <header className="flex items-start justify-between gap-3">
         <div>
-          <p className="font-mono-label text-gold/80">{primary ? "VISTO RECOMENDADO" : "ALTERNATIVA"}</p>
+          <p className="font-mono-label text-gold/80">{primary ? "MAIOR AFINIDADE" : "OUTRA CATEGORIA MAPEADA"}</p>
           <h3 className="mt-1 font-display text-xl">{v.label}</h3>
         </div>
         <span className={`inline-flex items-center gap-1.5 border px-2 py-1 text-[11px] uppercase tracking-wider ${meta.cls}`}>
@@ -48,7 +48,9 @@ function VisaCard({ v, primary }: { v: VisaScore; primary?: boolean }) {
         </span>
       </header>
 
-      <p className="mt-3 text-[14px] text-foreground/75">{v.short}</p>
+      <p className="mt-3 text-[14px] text-foreground/75">
+        O seu perfil apresenta afinidade com os critérios de <strong>{v.label}</strong>. {v.short}
+      </p>
 
       <div className="mt-4">
         <div className="flex justify-between font-mono-label text-[10px] text-foreground/80">
@@ -97,22 +99,22 @@ export function PreQualResult({ record, variant }: Props) {
 
   return (
     <div className="space-y-8">
-      {/* Cabeçalho do veredicto */}
+      {/* Cabeçalho do mapeamento */}
       <header className="border-l-2 border-gold pl-5">
-        <p className="font-mono-label text-gold/80">RESULTADO DO TESTE</p>
+        <p className="font-mono-label text-gold/80">MAPA DAS CATEGORIAS APLICÁVEIS</p>
         <h1 className="mt-2 font-display text-3xl sm:text-4xl text-foreground">
           {variant === "personal" ? `${firstName}, ` : ""}
           {qualified
-            ? "seu perfil mostra afinidade com pelo menos um visto EB."
-            : "ainda não identificamos afinidade clara com os vistos avaliados."}
+            ? "veja como o seu perfil se posiciona diante dos critérios de cada categoria."
+            : "ainda não identificamos afinidade clara com as categorias avaliadas."}
         </h1>
         <p className="mt-3 text-foreground/70 max-w-2xl">
           {qualified
-            ? "Abaixo está o visto com maior compatibilidade segundo as respostas, junto das alternativas viáveis e dos critérios que ainda podem ser fortalecidos."
-            : "Esta triagem é uma fotografia inicial. Vale conhecer os pré-requisitos de cada visto e voltar quando puder responder com mais documentação em mãos."}
+            ? "Abaixo estão as categorias com maior afinidade segundo as respostas, os critérios que o seu perfil já cobre e os pontos que ainda precisam de documentação."
+            : "Esta triagem é uma fotografia inicial. Vale conhecer os critérios de cada categoria e voltar quando puder responder com mais documentação em mãos."}
         </p>
         {result.blocker && (
-          <div className="mt-4 border border-rose-400/40 bg-rose-500/10 text-rose-200 px-4 py-3 text-[14px]">
+          <div className="mt-4 border border-amber-400/40 bg-amber-500/10 text-amber-200 px-4 py-3 text-[14px]">
             <strong className="font-medium">Atenção:</strong> {result.blocker}
           </div>
         )}
@@ -128,15 +130,15 @@ export function PreQualResult({ record, variant }: Props) {
         )}
       </section>
 
-      {/* Próximo passo: copiar link do resultado */}
+      {/* Próximo passo: copiar link do mapeamento */}
       {qualified && (
         <section className="rounded-2xl border border-gold/30 bg-ink-raise/60 p-6 sm:p-7 shadow-soft">
           <p className="font-mono-label text-gold/80">PRÓXIMO PASSO</p>
           <h2 className="mt-2 font-display text-2xl text-foreground">
-            Guarde ou compartilhe o seu resultado
+            Guarde ou compartilhe o seu mapeamento
           </h2>
           <p className="mt-3 text-[15px] text-foreground/75 max-w-2xl">
-            Enviamos automaticamente o seu resultado por e-mail. Você também pode copiar o
+            Enviamos automaticamente o mapa por e-mail. Você também pode copiar o
             link público para consultar depois ou compartilhar com quem acompanha sua decisão.
           </p>
 
@@ -145,7 +147,7 @@ export function PreQualResult({ record, variant }: Props) {
               type="button" variant="outline" onClick={copyLink}
               className="btn-label h-12 px-5 gap-2 border-gold/40 text-foreground hover:bg-gold/10"
             >
-              <Copy className="h-4 w-4" /> Copiar link do resultado
+              <Copy className="h-4 w-4" /> Copiar link do mapeamento
             </Button>
           </div>
 
@@ -157,12 +159,12 @@ export function PreQualResult({ record, variant }: Props) {
         </section>
       )}
 
-      {/* Não qualificado: convida a conhecer o conteúdo */}
+      {/* Sem afinidade clara: convida a conhecer o conteúdo */}
       {!qualified && (
         <section className="rounded-2xl border border-gold/20 bg-ink-raise/40 p-6 sm:p-7 shadow-soft">
           <p className="font-mono-label text-gold/80">CONTINUE EXPLORANDO</p>
           <h2 className="mt-2 font-display text-2xl text-foreground">
-            Aprofunde-se nos vistos EB enquanto estrutura seu caso.
+            Aprofunde-se nas categorias EB enquanto estrutura seu caso.
           </h2>
           <p className="mt-3 text-[15px] text-foreground/75 max-w-2xl">
             Conheça os critérios completos e leia os artigos sobre EB-2 NIW e EB-1, a maioria
@@ -175,9 +177,10 @@ export function PreQualResult({ record, variant }: Props) {
         </section>
       )}
 
-      <p className="text-[12px] text-foreground/80">
-        Esta avaliação é orientativa e baseada nas respostas declaradas. Não substitui parecer
-        jurídico individual sobre o caso.
+      <p className="text-[13px] text-foreground/80 leading-relaxed border-t border-gold/15 pt-5">
+        Este é um mapeamento informativo baseado nas suas respostas. Não é análise jurídica
+        e não determina qualificação. Somente um advogado de imigração licenciado pode
+        avaliar o seu caso.
       </p>
     </div>
   );

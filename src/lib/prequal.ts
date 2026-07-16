@@ -66,7 +66,7 @@ export interface PreQualAnswers {
 
   // Situação
   usJobOffer: boolean;
-  criminalRecord: boolean;
+  priorVisaDenial: boolean;
 
   // LGPD
   consent: boolean;
@@ -90,7 +90,7 @@ export const emptyAnswers: PreQualAnswers = {
   leadershipRole: false,
   highSalary: false,
   usJobOffer: false,
-  criminalRecord: false,
+  priorVisaDenial: false,
   consent: false,
 };
 
@@ -185,8 +185,8 @@ export function whatsappMessageFor(record: PreQualResponse): string {
   const link = publicResultUrl(record.id);
   return [
     `Olá! Sou ${name}.`,
-    `Acabei de fazer o teste de pré-qualificação da Status na América e gostaria de conversar sobre o resultado.`,
-    `Visto recomendado: ${visa}.`,
-    `Resultado completo: ${link}`,
+    `Acabei de fazer o teste de pré-qualificação da Status na América e gostaria de conversar sobre o mapeamento.`,
+    `Categoria com maior afinidade no meu perfil: ${visa}.`,
+    `Mapa completo: ${link}`,
   ].join("\n\n");
 }
