@@ -1040,7 +1040,7 @@ export function CtaBanner() {
               ))}
             </ul>
             <a href={useAvaliacaoHref("home_cta_final")} className="mt-7 block sm:inline-block">
-              <Button size="lg" className="btn-label btn-sweep h-12 px-4 sm:px-7 w-full sm:w-auto whitespace-normal text-center leading-tight">
+              <Button size="lg" variant="cta" className="btn-label btn-sweep h-12 px-4 sm:px-7 w-full sm:w-auto whitespace-normal text-center leading-tight">
                 Fazer minha análise gratuita
               </Button>
             </a>
