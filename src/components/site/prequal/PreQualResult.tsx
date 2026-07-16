@@ -21,7 +21,7 @@ interface Props {
 const VERDICT_STYLES: Record<Verdict, { label: string; cls: string; icon: typeof Check }> = {
   apto:           { label: "Perfil apto",        cls: "border-emerald-400/40 bg-emerald-500/10 text-emerald-200", icon: Check },
   parcial:        { label: "Perfil parcial",     cls: "border-amber-400/40 bg-amber-500/10 text-amber-200", icon: AlertTriangle },
-  nao_elegivel:   { label: "Ainda não elegível", cls: "border-rose-400/40 bg-rose-500/10 text-rose-200", icon: ShieldAlert },
+  nao_elegivel:   { label: "Perfil ainda não atende os critérios", cls: "border-rose-400/40 bg-rose-500/10 text-rose-200", icon: ShieldAlert },
 };
 
 function ScoreBar({ value }: { value: number }) {
