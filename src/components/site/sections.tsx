@@ -69,7 +69,10 @@ export function Hero() {
   const proof = useContent("hero.proof");
   const heroVideoUrl = useContent("hero.videoUrl");
   const heroPosterUrl = useContent("hero.posterUrl");
+  const heroVideoHiddenRaw = useContent("hero.videoHidden");
+  const heroVideoHidden = heroVideoHiddenRaw === "1" || heroVideoHiddenRaw === "true";
   const lines = splitHeadline(title);
+
 
 
 
