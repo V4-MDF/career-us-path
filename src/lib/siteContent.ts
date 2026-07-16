@@ -64,19 +64,15 @@ export const defaultContent = {
   // vazio renderizam moldura placeholder, o cliente envia os arquivos
   // e o admin cola a URL da imagem no /admin/conteudo.
   "partners.eyebrow": "CREDENCIAIS E PARCEIROS",
-  "partners.title": "Reconhecimentos oficiais que sustentam nossa operação.",
+  "partners.title": "Registros e presença institucional.",
   "partners.slot1.label": "BBB · Nota A",
   "partners.slot1.url": "",
   "partners.slot2.label": "Google Business · 5,0",
   "partners.slot2.url": "",
   "partners.slot3.label": "EIN 99-4846502",
   "partners.slot3.url": "",
-  "partners.slot4.label": "AILA (parceiro)",
+  "partners.slot4.label": "CNPJ 62.917.376/0001-21",
   "partners.slot4.url": "",
-  "partners.slot5.label": "USCIS · Documentação",
-  "partners.slot5.url": "",
-  "partners.slot6.label": "Parceiro (placeholder)",
-  "partners.slot6.url": "",
 
   // ==== Depoimentos em vídeo + estudos de caso =====================
   // O caso EB-2 on-message é o do Helder (sócio que obteve Green Card
