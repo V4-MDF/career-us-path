@@ -66,7 +66,7 @@ export interface PreQualAnswers {
 
   // Situação
   usJobOffer: boolean;
-  criminalRecord: boolean;
+  priorVisaDenial: boolean;
 
   // LGPD
   consent: boolean;
