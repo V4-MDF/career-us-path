@@ -381,6 +381,14 @@ export function VisaCards() {
             </Link>
           ))}
         </div>
+
+        <div className="mt-12 flex justify-center">
+          <a href={useAvaliacaoHref("home_vistos")}>
+            <Button size="lg" variant="cta" className="btn-label btn-sweep h-12 px-7 w-full sm:w-auto">
+              Analisar meu perfil
+            </Button>
+          </a>
+        </div>
       </div>
     </Reveal>
   );
