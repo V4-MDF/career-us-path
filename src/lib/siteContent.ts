@@ -118,6 +118,7 @@ export const defaultContent = {
     "O Green Card por mérito profissional, sem empresa patrocinadora e sem oferta de emprego.",
   "visa.eb2-niw.heroVideoUrl": "",
   "visa.eb2-niw.heroVideoThumb": "",
+  "visa.eb2-niw.heroVideoHidden": "",
   // EB-2 NIW (carro-chefe): profissional brasileiro 40+ consolidado com toque
   // de família ao fundo em contexto americano aspiracional. Substituir por
   // fotografia real art-direcionada com o tratamento padrão — nunca imagem
@@ -132,6 +133,7 @@ export const defaultContent = {
     "O Green Card para quem tem reconhecimento internacional comprovado, sem patrocinador, sem PERM.",
   "visa.eb1.heroVideoUrl": "",
   "visa.eb1.heroVideoThumb": "",
+  "visa.eb1.heroVideoHidden": "",
   // EB-1 (habilidade extraordinária): figura de excelência/liderança em
   // ambiente de alto padrão (escritório executivo, laboratório, palco).
   // Substituir por fotografia real art-direcionada com o tratamento padrão —
@@ -142,6 +144,7 @@ export const defaultContent = {
     "O Green Card com oferta formal de emprego nos EUA, exige patrocinador e PERM.",
   "visa.eb3.heroVideoUrl": "",
   "visa.eb3.heroVideoThumb": "",
+  "visa.eb3.heroVideoHidden": "",
   // EB-3 (profissional qualificado): profissional em ambiente de trabalho
   // americano concreto (hospital, indústria, empresa). Tom mão-na-massa /
   // oportunidade real. Substituir por fotografia real art-direcionada com o
@@ -153,8 +156,10 @@ export const defaultContent = {
     "Visto temporário para habilidade extraordinária. Admite empregador ou agente peticionário — sem exigência de oferta permanente.",
   "visa.o1.heroVideoUrl": "",
   "visa.o1.heroVideoThumb": "",
+  "visa.o1.heroVideoHidden": "",
   "visa.o1.heroImage": visaHeroEb1,
   "visa.o1.definitionImage": visaDefinitionEb1,
+
 
   // ==== Página de Contato =========================================
   "contato.eyebrow": "FALE CONOSCO",
