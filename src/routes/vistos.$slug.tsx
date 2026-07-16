@@ -35,8 +35,8 @@ export const Route = createFileRoute("/vistos/$slug")({
         <ul className="mt-4 space-y-2">
           <li><Link to="/vistos/$slug" params={{ slug: "eb2-niw" }} className="text-gold underline">EB-2 NIW</Link></li>
           <li><Link to="/vistos/$slug" params={{ slug: "eb1" }} className="text-gold underline">EB-1</Link></li>
-          <li><Link to="/vistos/$slug" params={{ slug: "eb3" }} className="text-gold underline">EB-3</Link></li>
           <li><Link to="/vistos/$slug" params={{ slug: "o1" }} className="text-gold underline">O-1</Link></li>
+
         </ul>
       </main>
       <Footer />
