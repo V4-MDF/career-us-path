@@ -25,8 +25,8 @@ interface VistoItem {
 }
 
 const VISTOS: VistoItem[] = [
-  { label: "Visto EB-2 NIW", hint: "Sem patrocinador", badge: "Principal", to: "/vistos/eb2-niw" },
   { label: "Visto EB-1", hint: "Habilidade extraordinária", to: "/vistos/eb1" },
+  { label: "Visto EB-2 NIW", hint: "Sem patrocinador", badge: "Principal", to: "/vistos/eb2-niw" },
   { label: "Visto O-1", hint: "Habilidade extraordinária temporária", to: "/vistos/o1" },
 ];
 
