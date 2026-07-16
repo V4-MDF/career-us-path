@@ -133,6 +133,12 @@ export const defaultContent = {
   // visto, não compartilhada.
   "visa.eb3.heroImage": visaHeroEb3,
   "visa.eb3.definitionImage": visaDefinitionEb3,
+  "visa.o1.heroSubtitle":
+    "Visto temporário para habilidade extraordinária. Admite empregador ou agente peticionário — sem exigência de oferta permanente.",
+  "visa.o1.heroVideoUrl": "",
+  "visa.o1.heroVideoThumb": "",
+  "visa.o1.heroImage": visaHeroEb1,
+  "visa.o1.definitionImage": visaDefinitionEb1,
 
   // ==== Página de Contato =========================================
   "contato.eyebrow": "FALE CONOSCO",
