@@ -479,7 +479,7 @@ function ContatoForm() {
           <p className="mt-4 text-white/75 leading-relaxed">{lead}</p>
           <div className="mt-6 rounded-lg border border-gold/30 bg-white/[0.04] p-4 text-sm text-white/80">
             Para uma <strong className="text-gold">análise de perfil completa</strong>{" "}
-            (critérios do USCIS, visto recomendado, próximos passos), use o caminho oficial:
+            (critérios do USCIS, mapa das categorias aplicáveis, próximos passos), use o caminho oficial:
             <div className="mt-3">
               <Link to="/avaliacao">
                 <Button size="sm" className="btn-label">
