@@ -255,7 +255,7 @@ Os tempos de processamento do USCIS e a agenda dos consulados americanos no Bras
 
 ## Por que tratar isso com sobriedade importa
 
-Promessas de prazo são, em qualquer cenário, irresponsáveis. Nenhum escritório controla a janela consular ou a fila do USCIS. O que pode ser controlado é a **qualidade da estruturação do caso** e o **momento de iniciar**.
+Promessas de prazo são, em qualquer cenário, irresponsáveis. Ninguém controla os prazos do USCIS ou dos consulados. O que pode ser controlado é a **qualidade da estruturação do caso** e o **momento de iniciar**.
 
 ## Por que planejar com antecedência
 
