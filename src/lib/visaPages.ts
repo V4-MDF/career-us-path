@@ -12,7 +12,7 @@
  *  - PT-BR em todo o conteúdo.
  */
 
-export type VisaSlug = "eb2-niw" | "eb1" | "eb3";
+export type VisaSlug = "eb2-niw" | "eb1" | "eb3" | "o1";
 
 export interface VisaFaq {
   q: string;
