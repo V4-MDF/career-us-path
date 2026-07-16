@@ -843,8 +843,6 @@ export function PartnersBadges() {
     { label: useContent("partners.slot2.label"), url: useContent("partners.slot2.url") },
     { label: useContent("partners.slot3.label"), url: useContent("partners.slot3.url") },
     { label: useContent("partners.slot4.label"), url: useContent("partners.slot4.url") },
-    { label: useContent("partners.slot5.label"), url: useContent("partners.slot5.url") },
-    { label: useContent("partners.slot6.label"), url: useContent("partners.slot6.url") },
   ];
 
   return (
