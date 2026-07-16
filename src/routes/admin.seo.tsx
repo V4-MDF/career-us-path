@@ -79,7 +79,7 @@ function SitemapDownloadButton() {
       { path: "/", priority: "1.0", changefreq: "weekly" },
       { path: "/vistos/eb2-niw", priority: "0.9", changefreq: "monthly" },
       { path: "/vistos/eb1", priority: "0.8", changefreq: "monthly" },
-      { path: "/vistos/eb3", priority: "0.8", changefreq: "monthly" },
+      { path: "/vistos/o1", priority: "0.8", changefreq: "monthly" },
       { path: "/sobre", priority: "0.7", changefreq: "monthly" },
       { path: "/contato", priority: "0.6", changefreq: "monthly" },
       { path: "/blog", priority: "0.7", changefreq: "weekly" },
