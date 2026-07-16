@@ -550,6 +550,10 @@ export function InstitutionalVideo() {
   const title = useContent("institutional.title");
   const lead = useContent("institutional.lead");
   const url = useContent("institutional.videoUrl");
+  const hiddenRaw = useContent("institutional.videoHidden");
+  const hidden = hiddenRaw === "1" || hiddenRaw === "true";
+  if (hidden) return null;
+
 
   return (
     <Reveal as="section" id="video-institucional" className="section-pad relative bg-ink">
