@@ -35,12 +35,6 @@ function TermosPage() {
           Última atualização: {new Date().toLocaleDateString("pt-BR", { day: "2-digit", month: "long", year: "numeric" })}.
         </p>
 
-        <div className="mt-6 rounded-xl border border-oxblood/40 bg-oxblood/10 p-4 text-sm text-foreground/85">
-          <strong className="font-mono-label text-oxblood">PENDENTE DE REVISÃO JURÍDICA.</strong>{" "}
-          Este texto foi redigido internamente e deve ser revisado por advogado antes do
-          go-live.
-        </div>
-
         <section className="mt-10 space-y-8 text-[15px] leading-relaxed text-foreground/85">
           <div>
             <h2 className="font-display text-2xl text-foreground">1. Aceitação</h2>
