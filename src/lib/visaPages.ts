@@ -359,10 +359,88 @@ const eb3: VisaPage = {
   ctaSubtitle: "Em 48h apresentamos um panorama das categorias aplicáveis ao seu contexto (EB-3, EB-2 NIW ou EB-1).",
 };
 
+/* ---------------- O-1 (não-imigrante, ponte para EB-1A) ---------------- */
+const o1: VisaPage = {
+  slug: "o1",
+  eyebrow: "VISTO O-1",
+  h1: "O-1: visto temporário para profissionais de habilidade extraordinária",
+  intro:
+    "O O-1 é um visto de não-imigrante destinado a pessoas com habilidade extraordinária em ciências, artes, educação, negócios ou atletismo (O-1A) ou em cinema e televisão (O-1B). É temporário — não é Green Card — e admite peticionário na forma de empregador OU agente nos EUA, sem exigir oferta de emprego permanente.",
+  metaTitle: "O-1: visto temporário por habilidade extraordinária | Status na América",
+  metaDescription:
+    "O-1 é o visto de não-imigrante para habilidade extraordinária. Admite empregador ou agente peticionário, sem exigir oferta permanente. Entenda critérios, processo e limites.",
+  whatIs: {
+    title: "O que é o O-1",
+    body:
+      "O O-1 é um visto de não-imigrante (temporário) para pessoas com habilidade extraordinária. A subcategoria O-1A cobre ciências, educação, negócios e atletismo; a O-1B cobre artes, cinema e televisão. Diferente do EB-1A, o O-1 exige um peticionário nos Estados Unidos — pode ser um empregador americano OU um agente, o que permite que profissionais autônomos utilizem a categoria. Não é Green Card e não confere residência permanente, mas é frequentemente utilizado como ponte enquanto se constrói o caso do EB-1A.",
+  },
+  qualifies: {
+    title: "O que o USCIS avalia no O-1",
+    intro:
+      "Exige-se demonstração de habilidade extraordinária, mediante evidências em ao menos 3 dos 8 critérios oficiais — ou, alternativamente, um prêmio internacional único de alto porte. A lista abaixo é um resumo; a relação completa está no regulamento federal.",
+    legalBasis: "Critérios definidos no regulamento federal 8 CFR 214.2(o)(3).",
+    items: [
+      { title: "Prêmios ou reconhecimentos nacionais/internacionais", body: "Distinções relevantes recebidas pela atuação na área." },
+      { title: "Associações que exigem realizações excepcionais", body: "Filiação a entidades que admitem membros por conquistas de destaque." },
+      { title: "Publicações sobre o profissional em mídia especializada ou de grande circulação", body: "Matérias tratando do trabalho da pessoa, não escritas por ela." },
+      { title: "Atuação como julgador do trabalho de pares", body: "Participação em bancas, revisões por pares, comitês de avaliação." },
+      { title: "Contribuições originais de grande significância", body: "Métodos, pesquisas, obras, produtos ou processos com impacto comprovado." },
+      { title: "Autoria de artigos acadêmicos ou profissionais", body: "Publicações em veículos especializados na área." },
+      { title: "Papel crítico ou essencial em organizações de destaque", body: "Função de liderança comprovada em entidades reconhecidas." },
+      { title: "Remuneração elevada ou outros indicadores da área", body: "Salário/cachê acima da média do setor ou sucesso comercial (para artes)." },
+    ],
+  },
+  process: {
+    title: "Como preparamos a sua documentação",
+    steps: [
+      { num: "01", title: "Diagnóstico do perfil", body: "Mapeamento das evidências disponíveis, identificação do peticionário viável (empregador ou agente) e do enquadramento O-1A ou O-1B." },
+      { num: "02", title: "Organização documental", body: "Preparação das evidências, cartas de consulta (advisory opinion) da associação da área e do dossiê de suporte." },
+      { num: "03", title: "Processo I-129", body: "Organização do conjunto documental para protocolo, conduzido pelo peticionário nos EUA. Premium Processing disponível." },
+      { num: "04", title: "Emissão do visto", body: "Aprovada a petição, o profissional obtém o visto no consulado; cônjuge e filhos entram com O-3." },
+    ],
+    note:
+      "O O-1 é geralmente concedido por até 3 anos, com renovações por períodos de até 1 ano. É comum ser utilizado como ponte enquanto o EB-1A é preparado. Não trabalhamos com prazos garantidos.",
+  },
+  family: {
+    title: "Família em status O-3",
+    body:
+      "Cônjuge e filhos solteiros menores de 21 anos podem acompanhar o titular como O-3. Este é um ponto crítico do O-1: o status O-3 NÃO autoriza trabalho nos Estados Unidos. Os dependentes podem estudar, mas não podem exercer atividade remunerada — diferença essencial em relação às categorias EB (EB-1, EB-2 NIW e EB-3), em que cônjuge e filhos recebem Green Card e podem trabalhar livremente.",
+  },
+  faq: [
+    {
+      q: "O-1 é Green Card?",
+      a: "Não. O O-1 é um visto temporário (não-imigrante). Ele autoriza estadia e trabalho no perfil da petição, mas não confere residência permanente. Muitos profissionais utilizam o O-1 como ponte enquanto constroem o caso do EB-1A (Green Card por habilidade extraordinária).",
+    },
+    {
+      q: "Preciso de empregador para o O-1?",
+      a: "Precisa de peticionário nos EUA, mas ele pode ser um empregador OU um agente. O modelo de agente permite que profissionais autônomos utilizem a categoria, sem depender de oferta de emprego permanente. É uma flexibilidade que o EB-3 não oferece.",
+    },
+    {
+      q: "Meu cônjuge pode trabalhar com O-3?",
+      a: "Não. O status O-3 (para cônjuge e filhos) autoriza permanência e estudo nos EUA, mas não autoriza trabalho. Se o casal precisa que ambos trabalhem, o caminho mais adequado costuma ser uma categoria EB, em que o cônjuge recebe Green Card e pode trabalhar sem restrição.",
+    },
+    {
+      q: "Qual a diferença entre O-1 e EB-1A?",
+      a: "Ambos exigem habilidade extraordinária, mas o EB-1A é Green Card (permanente) e dispensa peticionário — o próprio profissional peticiona. O O-1 é temporário e exige peticionário (empregador ou agente). Na prática, muitos casos começam pelo O-1 (mais rápido, com Premium Processing) e evoluem para o EB-1A.",
+    },
+    {
+      q: "Quanto tempo leva?",
+      a: "A preparação documental leva algumas semanas a alguns meses, conforme a complexidade das evidências. O USCIS costuma decidir a I-129 em prazos que podem ser encurtados por Premium Processing. Depois vem o processamento consular. Não trabalhamos com prazos garantidos.",
+    },
+    {
+      q: "As taxas do governo americano estão incluídas no valor da assessoria?",
+      a: "Não. Existem duas coisas diferentes: (1) as taxas oficiais do governo americano (USCIS), pagas diretamente ao órgão; e (2) o valor da nossa assessoria, que cobre a preparação e organização estratégica do seu processo. São separados. As taxas do USCIS são definidas pelo próprio governo, podem mudar e são pagas por formulário. Na sua análise gratuita, explicamos exatamente quais taxas se aplicam ao seu caso e à sua família.",
+    },
+  ],
+  ctaTitle: "Entenda como o seu perfil se posiciona diante dos critérios do USCIS para o O-1.",
+  ctaSubtitle: "Análise gratuita e confidencial. Em até 48h nossa equipe organiza um panorama das categorias aplicáveis — O-1, EB-1A e correlatas.",
+};
+
 export const VISA_PAGES: Record<VisaSlug, VisaPage> = {
   "eb2-niw": eb2niw,
   "eb1": eb1,
   "eb3": eb3,
+  "o1": o1,
 };
 
 /** Chaves editáveis (site_content) por página, admin pode sobrescrever. */
