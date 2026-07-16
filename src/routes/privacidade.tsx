@@ -3,7 +3,6 @@
  *
  * COMPLIANCE (PARTE A · P1): página obrigatória para operar tráfego pago em
  * Meta/Google e cumprir LGPD (art. 9º) e o Florida Digital Bill of Rights.
- * Todo o texto está marcado como PENDENTE DE REVISÃO JURÍDICA.
  */
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Header } from "@/components/site/Header";
