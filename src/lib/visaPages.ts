@@ -29,8 +29,10 @@ export interface VisaPage {
   metaDescription: string;
   /** Definição objetiva ("O que é …"), texto citável para AEO. */
   whatIs: { title: string; body: string };
-  /** Critérios avaliados pelo USCIS. */
-  qualifies: { title: string; intro: string; items: { title: string; body: string }[] };
+  /** Critérios avaliados pelo USCIS. `legalBasis` é a legenda de base
+   *  legal exibida abaixo da lista de critérios — obrigatória e específica
+   *  por visto (Dhanasar só se aplica ao NIW). */
+  qualifies: { title: string; intro: string; legalBasis: string; items: { title: string; body: string }[] };
   /** Etapas do processo. */
   process: { title: string; steps: { num: string; title: string; body: string }[]; note?: string };
   /** Família, quem é incluído. */
@@ -92,6 +94,7 @@ const eb2niw: VisaPage = {
     title: "O que o USCIS avalia no EB-2 NIW",
     intro:
       "O EB-2 admite duas portas de entrada. Além delas, o USCIS avalia o pedido de dispensa por três critérios estabelecidos em precedente administrativo.",
+    legalBasis: "Critérios do National Interest Waiver conforme o precedente Matter of Dhanasar (AAO, 2016).",
     items: [
       {
         title: "Grau avançado OU habilidade excepcional",
@@ -217,7 +220,8 @@ const eb1: VisaPage = {
   qualifies: {
     title: "O que o USCIS avalia no EB-1A",
     intro:
-      "Exige demonstração de reconhecimento internacional sustentado, perfil mais alto que o EB-2 NIW. O USCIS avalia evidências em ao menos 3 dos 10 critérios oficiais, ou o equivalente a um prêmio internacional único (ex.: Nobel, Oscar, Pulitzer).",
+      "Exige demonstração de reconhecimento internacional sustentado, perfil mais alto que o EB-2 NIW. O USCIS avalia evidências em ao menos 3 dos 10 critérios oficiais, ou o equivalente a um prêmio internacional único (ex.: Nobel, Oscar, Pulitzer). A lista abaixo é um resumo; a relação completa dos dez critérios está no regulamento federal.",
+    legalBasis: "Critérios definidos no regulamento federal 8 CFR 204.5(h)(3).",
     items: [
       { title: "Prêmios e reconhecimentos nacionais ou internacionais", body: "Distinções relevantes recebidas pela atuação profissional." },
       { title: "Associações exclusivas da área", body: "Membro de associações que exigem realizações excepcionais para admissão." },
@@ -291,6 +295,7 @@ const eb3: VisaPage = {
     title: "O que o USCIS exige no EB-3",
     intro:
       "O EB-3 é apropriado quando NÃO há perfil para EB-2 NIW ou EB-1 e existe um empregador americano disposto a conduzir o patrocínio, assumindo custos e prazos do PERM. É um caminho que depende fortemente da empresa.",
+    legalBasis: "Requisitos definidos no regulamento federal 8 CFR 204.5(l) e no processo de labor certification (20 CFR 656), conduzido pelo Departamento do Trabalho.",
     items: [
       { title: "Há empregador disposto a patrocinar", body: "Empresa americana que aceita conduzir PERM, comprovar inexistência de mão-de-obra local e patrocinar o processo." },
       { title: "Profissional qualificado", body: "Diploma de bacharelado (professionals) ou pelo menos 2 anos de experiência/treinamento (skilled workers)." },
