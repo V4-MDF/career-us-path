@@ -117,6 +117,16 @@
   --usa-red:           #8A1F2B;
   --cream-light:       #F7F2E6;
 
+  /* CTA chamativa (chamada principal). Amarelo vivido com gradiente e halo.
+     NÃO usar o brazil-yellow (E6B84A) que é dourado editorial e some no fundo escuro. */
+  --cta:               #FFD447;
+  --cta-hi:            #FFEB7A;
+  --cta-deep:          #F5A623;
+  --cta-ink:           #1A1204;
+  --cta-glow:          0 10px 32px -8px rgba(255, 179, 0, 0.55), 0 0 0 1px rgba(255, 235, 122, 0.35) inset;
+  --cta-glow-hover:    0 14px 44px -8px rgba(255, 179, 0, 0.75), 0 0 0 1px rgba(255, 255, 200, 0.55) inset;
+
+
   /* Mapeamento shadcn. DARK por padrão (site é dark-first) */
   --background: var(--ink);
   --foreground: #ECE6D6;
