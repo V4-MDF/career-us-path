@@ -261,12 +261,17 @@ function VisaHero({ page }: { page: VisaPage }) {
   const videoKey = `visa.${page.slug}.heroVideoUrl` as const;
   const thumbKey = `visa.${page.slug}.heroVideoThumb` as const;
   const imageKey = `visa.${page.slug}.heroImage` as const;
+  const hiddenKey = `visa.${page.slug}.heroVideoHidden` as const;
   const heroSubtitle = useContent(subtitleKey);
   const videoUrl = useContent(videoKey);
   const videoThumb = useContent(thumbKey);
   const heroImage = useContent(imageKey);
+  const videoHiddenRaw = useContent(hiddenKey);
+  const videoHidden = videoHiddenRaw === "1" || videoHiddenRaw === "true";
   const [open, setOpen] = useState(false);
-  const hasVideo = Boolean(videoUrl && videoUrl.trim().length > 0);
+  const hasVideo = !videoHidden && Boolean(videoUrl && videoUrl.trim().length > 0);
+  const showVideoSlot = !videoHidden;
+
 
   // Alt específico por visto (a imagem não é compartilhada — cada visto tem
   // a sua cena; alt reflete o perfil daquela categoria).
