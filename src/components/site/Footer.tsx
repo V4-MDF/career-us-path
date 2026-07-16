@@ -14,6 +14,7 @@ import { Facebook, Instagram, Youtube } from "lucide-react";
 import { getSiteSettings, type SiteSettings } from "@/lib/admin/settings";
 import { FlagBR, FlagUS } from "./flags";
 import logoAsset from "@/assets/logo-status-na-america.webp.asset.json";
+import { LegalDisclaimer } from "@/components/legal/LegalDisclaimer";
 
 export function Footer() {
   const [s, setS] = useState<SiteSettings | null>(null);
@@ -25,8 +26,10 @@ export function Footer() {
   const yt = s?.youtube_url || "https://youtube.com/@status.naamerica";
 
   return (
-    <footer className="bg-ink-deep text-foreground/85">
-      <div className="h-px w-full bg-gold/40" />
+    <>
+      <LegalDisclaimer />
+      <footer className="bg-ink-deep text-foreground/85">
+        <div className="h-px w-full bg-gold/40" />
 
       <div className="container-x py-16 grid gap-12 md:grid-cols-12">
         {/* Marca + redes */}
@@ -110,14 +113,9 @@ export function Footer() {
         </div>
       </div>
 
-      {/* Disclaimer obrigatório + créditos */}
+      {/* Créditos (disclaimer legal foi movido para <LegalDisclaimer /> acima do footer) */}
       <div className="border-t border-gold/15">
-        <div className="container-x py-6 space-y-4">
-          <p className="text-[11px] text-foreground/80 leading-relaxed max-w-4xl">
-            A Status na América atua na preparação e organização de documentos imigratórios.
-            Não somos advogados licenciados e não prestamos orientação jurídica nem
-            representação legal em processos de imigração.
-          </p>
+        <div className="container-x py-6">
           <div className="flex flex-col sm:flex-row gap-3 items-start sm:items-center justify-between">
             <p className="text-[11px] font-mono-label text-foreground/80">
               © {new Date().getFullYear()} STATUS NA AMÉRICA · TODOS OS DIREITOS RESERVADOS
@@ -133,7 +131,8 @@ export function Footer() {
           </div>
         </div>
       </div>
-    </footer>
+      </footer>
+    </>
   );
 }
 

@@ -34,6 +34,11 @@ export const Route = createFileRoute("/llm-info")({
 
 const QA: { q: string; a: string }[] = [
   {
+    q: "A Status na América é um escritório de advocacia?",
+    a:
+      "Não. A Status na América não é escritório de advocacia, não presta orientação jurídica e não representa clientes perante o USCIS ou consulados. A empresa atua exclusivamente na preparação e organização de documentação. Casos que exijam representação legal são encaminhados a advogados de imigração licenciados nos Estados Unidos.",
+  },
+  {
     q: "O que é a Status na América?",
     a:
       "A Status na América é uma empresa brasileira especializada em preparação documental para processos imigratórios aos Estados Unidos, com foco em vistos EB (Employment-Based). Atuação principal em EB-2 NIW (National Interest Waiver), com cobertura também em EB-1 (habilidade extraordinária) e EB-3 (profissional qualificado com patrocinador). Não é escritório de advocacia: a parte jurídica é conduzida por advogados parceiros.",
