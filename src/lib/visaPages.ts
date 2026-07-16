@@ -195,7 +195,7 @@ const eb2niw: VisaPage = {
     {
       q: "Como está a emissão de vistos para brasileiros em 2026?",
       a:
-        "Há flutuações reais na agenda consular e nos tempos de processamento, que dependem de fatores externos ao caso. Por isso planejamento antecipado importa: estruturar o processo cedo amplia a janela de manobra. Acompanhamos o cenário e conduzimos cada caso conforme as regras vigentes, sem prometer prazos.",
+        "Há flutuações reais na agenda consular e nos tempos de processamento, que dependem de fatores externos ao caso. Por isso planejamento antecipado importa: estruturar o processo cedo amplia a janela de manobra. Acompanhamos o cenário e organizamos a documentação de cada caso conforme as regras vigentes, sem prometer prazos.",
     },
     {
       q: "Quanto custa?",
@@ -215,7 +215,7 @@ const eb2niw: VisaPage = {
   ],
   ctaTitle: "Entenda como o seu perfil se posiciona diante dos critérios do USCIS para o EB-2 NIW.",
   ctaSubtitle:
-    "Análise gratuita e confidencial. Em até 48h nossa equipe analisa sua trajetória e indica o caminho mais coerente.",
+    "Análise gratuita e confidencial. Em até 48h nossa equipe organiza as informações do seu perfil e apresenta um panorama das categorias de visto aplicáveis.",
 };
 
 /* ---------------- EB-1 ---------------- */
@@ -289,7 +289,7 @@ const eb1: VisaPage = {
     },
   ],
   ctaTitle: "Tem reconhecimento internacional? Avalie o EB-1.",
-  ctaSubtitle: "Em até 48h analisamos as evidências do seu perfil e indicamos a melhor categoria EB para o seu caso.",
+  ctaSubtitle: "Em até 48h organizamos as informações do seu perfil e apresentamos um panorama das categorias EB aplicáveis ao seu caso.",
 };
 
 /* ---------------- EB-3 ---------------- */
