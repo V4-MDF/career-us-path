@@ -28,7 +28,7 @@ export const Route = createFileRoute("/pre-qualificacao")({
   head: () => ({
     meta: [
       { title: "Teste de pré-qualificação. Status na América" },
-      { name: "description", content: "Descubra em minutos qual visto americano (EB-1A, EB-2 NIW, O-1 ou EB-3) tem mais afinidade com o seu perfil." },
+      { name: "description", content: "Veja como o seu perfil se posiciona diante dos critérios de cada categoria de visto americano (EB-1A, EB-2 NIW, O-1, EB-3)." },
       { name: "robots", content: "noindex, nofollow" },
     ],
   }),
