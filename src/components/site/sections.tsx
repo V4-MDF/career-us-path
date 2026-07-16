@@ -1215,7 +1215,7 @@ export function HeroAssessment() {
           <ul className="mt-7 space-y-3 text-sm text-foreground/80">
             {[
               "Sem compromisso, 100% confidencial",
-              "Mapa das categorias com maior afinidade (EB-2 NIW, EB-1, EB-3)",
+              "Mapa das categorias com maior afinidade (EB-2 NIW, EB-1, O-1)",
               "Análise feita por equipe especializada em vistos EB",
             ].map((i) => (
               <li key={i} className="flex gap-3 border-l border-gold/40 pl-3">
