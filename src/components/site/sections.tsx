@@ -1102,7 +1102,7 @@ export function CtaBanner() {
             </h3>
             <p className="mt-3 text-foreground/70 text-[15px] leading-relaxed">
               Poucas perguntas objetivas sobre formação e experiência. Ao final,
-              um mapa de como o seu perfil se posiciona diante das categorias EB-1A, EB-2 NIW, O-1 e EB-3.
+              um mapa de como o seu perfil se posiciona diante das categorias EB-1A, EB-2 NIW e O-1.
             </p>
             <ul className="mt-5 space-y-2 text-[14px] text-foreground/75">
               {[
