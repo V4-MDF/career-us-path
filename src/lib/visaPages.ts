@@ -331,7 +331,7 @@ const eb3: VisaPage = {
   family: {
     title: "Green Card para a família",
     body:
-      "Cônjuge e filhos solteiros menores de 21 anos são incluídos como derivados.",
+      "Cônjuge e filhos solteiros menores de 21 anos são incluídos como derivados, junto do requerente principal. A idade do filho é apurada segundo as regras do Child Status Protection Act, que em determinados casos preserva o benefício mesmo após os 21 anos — o tempo de processamento influencia esse cálculo.",
   },
   faq: [
     {
