@@ -182,6 +182,11 @@ export function VisaPageBody({ page, hideHero = false }: { page: VisaPage; hideH
                 → Página EB-3
               </Link>
             )}
+            {page.slug !== "o1" && (
+              <Link to="/vistos/$slug" params={{ slug: "o1" }} className="underline text-ink-text hover:text-gold">
+                → Página O-1
+              </Link>
+            )}
           </div>
         </div>
       </section>
@@ -270,7 +275,9 @@ function VisaHero({ page }: { page: VisaPage }) {
       ? "Profissional brasileiro consolidado em contexto residencial americano, com família ao fundo — Green Card por mérito EB-2 NIW"
       : page.slug === "eb1"
         ? "Executivo sênior com reconhecimento internacional em escritório de alto padrão — Green Card EB-1 por habilidade extraordinária"
-        : "Profissional qualificada em ambiente de trabalho americano — Green Card EB-3 com oferta formal de emprego";
+        : page.slug === "o1"
+          ? "Profissional brasileiro de habilidade extraordinária em contexto profissional americano — visto O-1 temporário"
+          : "Profissional qualificada em ambiente de trabalho americano — Green Card EB-3 com oferta formal de emprego";
 
   return (
     <section
