@@ -977,7 +977,7 @@ export function FAQ() {
     },
     {
       q: "Qual a experiência de vocês?",
-      a: "Atuamos exclusivamente na preparação de documentação para vistos de emprego por mérito. EB-1, EB-2 NIW e EB-3. Esse foco gera profundidade nos critérios do USCIS. Não somos generalistas: cada caso é construído por uma equipe que já estruturou centenas de processos semelhantes.",
+      a: "Atuamos exclusivamente na preparação de documentação para vistos de emprego por mérito. EB-1, EB-2 NIW e O-1. Esse foco gera profundidade nos critérios do USCIS. Não somos generalistas: cada caso é construído por uma equipe que já estruturou centenas de processos semelhantes.",
     },
     {
       q: "Posso confiar mesmo sem ir presencialmente?",
@@ -1102,7 +1102,7 @@ export function CtaBanner() {
             </h3>
             <p className="mt-3 text-foreground/70 text-[15px] leading-relaxed">
               Poucas perguntas objetivas sobre formação e experiência. Ao final,
-              um mapa de como o seu perfil se posiciona diante das categorias EB-1A, EB-2 NIW, O-1 e EB-3.
+              um mapa de como o seu perfil se posiciona diante das categorias EB-1A, EB-2 NIW e O-1.
             </p>
             <ul className="mt-5 space-y-2 text-[14px] text-foreground/75">
               {[
@@ -1215,7 +1215,7 @@ export function HeroAssessment() {
           <ul className="mt-7 space-y-3 text-sm text-foreground/80">
             {[
               "Sem compromisso, 100% confidencial",
-              "Mapa das categorias com maior afinidade (EB-2 NIW, EB-1, EB-3)",
+              "Mapa das categorias com maior afinidade (EB-2 NIW, EB-1, O-1)",
               "Análise feita por equipe especializada em vistos EB",
             ].map((i) => (
               <li key={i} className="flex gap-3 border-l border-gold/40 pl-3">
