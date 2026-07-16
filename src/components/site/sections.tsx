@@ -3,8 +3,8 @@
  *
  * Prompt 5: dados reais + CTAs apontando para LP /avaliacao com src/seg/utms.
  *  - ProcessSteps: substituído pelo processo real EB-2 NIW (4 etapas).
- *  - WhyUs: estatísticas reais (5.000+ processos, 98% satisfação,
- *           1.000+ famílias, 130+ avaliações 5★, BBB nota A).
+ *  - WhyUs: estatísticas institucionais (todas pendentes de validação
+ *           documental — ver src/config/credentials.ts).
  *  - Testimonials: vídeos de casos reais (Helder + slot secundário).
  *  - FAQ: perguntas reais (confiança, experiência, atendimento remoto, valor).
  *  - LegacySection: nova dobra "Muito mais que um visto. Um legado.".
@@ -26,6 +26,16 @@ import {
 } from "@/components/ui/accordion";
 import { useContent } from "@/lib/siteContent";
 import { avaliacaoHref, useAvaliacaoHref } from "@/lib/ctaLinks";
+import {
+  CLAIM_FAMILIAS,
+  CLAIM_PROCESSOS,
+  CLAIM_SATISFACAO,
+  CLAIM_AVALIACOES,
+  BBB_LABEL,
+  GOOGLE_RATING_LABEL,
+  EIN,
+  CNPJ,
+} from "@/config/credentials";
 import { SectionHead } from "./SectionHead";
 import { BrUsRouteBackdrop } from "./visuals/BrUsRouteBackdrop";
 import { VideoPlayer } from "./VideoPlayer";
@@ -462,17 +472,19 @@ export function WhyUs() {
   const title = useContent("why.title");
   const lead = useContent("why.lead");
 
-  // Stats reais (Prompt 5), internamente "pendentes de validação" (admin)
+  // COMPLIANCE (FTC §5 / FDUTPA): números vêm de src/config/credentials.ts
+  // e estão PENDENTES DE VALIDAÇÃO até o cliente enviar documento de lastro.
   const stats = [
-    { value: "5.000+", label: "PROCESSOS" },
-    { value: "98%", label: "DE SATISFAÇÃO" },
-    { value: "1.000+", label: "FAMÍLIAS ATENDIDAS" },
+    { value: CLAIM_PROCESSOS.value, label: CLAIM_PROCESSOS.label.toUpperCase() },
+    { value: CLAIM_SATISFACAO.value, label: CLAIM_SATISFACAO.label.toUpperCase() },
+    { value: CLAIM_FAMILIAS.value, label: CLAIM_FAMILIAS.label.toUpperCase() },
   ];
   const items = [
-    { icon: MapPin, t: "Sede própria em Orlando, Flórida (EIN 99-4846502)" },
-    { icon: Users, t: "Filial no Brasil em Barueri/SP (CNPJ 62.917.376/0001-21)" },
-    { icon: ShieldCheck, t: "Acreditação BBB, nota A" },
-    { icon: Star, t: "130+ avaliações 5★ no Google e Facebook" },
+    { icon: MapPin, t: `Sede própria em Orlando, Flórida (EIN ${EIN})` },
+    { icon: Users, t: `Filial no Brasil em Barueri/SP (CNPJ ${CNPJ})` },
+    // PENDENTE (cliente): confirmar "BBB Accredited Business" vs "BBB Rating A".
+    { icon: ShieldCheck, t: BBB_LABEL },
+    { icon: Star, t: `${CLAIM_AVALIACOES.value} ${CLAIM_AVALIACOES.label} no Google e Facebook` },
   ];
   return (
     <Reveal as="section" id="por-que-status" className="section-pad relative">
@@ -904,7 +916,7 @@ export function FAQ() {
   const faqs = [
     {
       q: "A Status na América é confiável?",
-      a: "Sim. Somos uma empresa registrada nos Estados Unidos (EIN 99-4846502), com sede em Orlando/FL e filial no Brasil (CNPJ 62.917.376/0001-21). Acumulamos 130+ avaliações 5★ no Google e no Facebook e somos acreditados pelo BBB com nota A. Transparência é regra: qualquer informação institucional pode ser verificada publicamente.",
+      a: `Sim. Somos uma empresa registrada nos Estados Unidos (EIN ${EIN}), com sede em Orlando/FL e filial no Brasil (CNPJ ${CNPJ}). Contamos com avaliações 5★ no Google e no Facebook e registro no BBB (${BBB_LABEL}). Transparência é regra: qualquer informação institucional pode ser verificada publicamente.`,
     },
     {
       q: "Qual a experiência de vocês?",

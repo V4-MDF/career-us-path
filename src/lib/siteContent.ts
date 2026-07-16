@@ -12,6 +12,13 @@
 
 import { useEffect, useState } from "react";
 import { get } from "./dataStore";
+import {
+  CLAIM_FAMILIAS,
+  CLAIM_PROCESSOS,
+  CLAIM_SATISFACAO,
+  CLAIM_AVALIACOES,
+  BBB_LABEL,
+} from "@/config/credentials";
 // Fotografias hero por página de visto (defaults). Placeholders
 // art-direcionados no tratamento padrão do site — substituir por foto real
 // específica de cada visto, nunca imagem genérica de IA, nunca compartilhar
@@ -32,8 +39,9 @@ export const defaultContent = {
   "hero.subtitle":
     "A Status na América ajuda profissionais brasileiros consolidados a conquistar a residência permanente nos EUA pelo EB-2 NIW, sem patrocinador, sem loteria, com Green Card para o cônjuge e os filhos.",
   "hero.cta": "Fazer minha análise gratuita",
+  // COMPLIANCE: números removidos até validação documental (ver src/config/credentials.ts).
   "hero.proof":
-    "+1.000 famílias atendidas · Nota 5,0 no Google · Sede em Orlando, Flórida",
+    "Avaliações 5★ no Google · Sede em Orlando, Flórida",
   "hero.videoUrl": "",
   "hero.posterUrl": "",
 
@@ -52,8 +60,9 @@ export const defaultContent = {
   "process.title": "Um método. Três passos. Acompanhamento até a aprovação.",
 
   "why.title": "Por que a Status na América",
+  // COMPLIANCE: "duas décadas" removido — sem lastro documental (FTC/FDUTPA).
   "why.lead":
-    "Sede própria em Orlando, equipe dedicada e mais de duas décadas estruturando casos de mobilidade migratória para brasileiros.",
+    "Equipe com trajetória consolidada em processos de imigração, com sede própria em Orlando desde 2022.",
 
   "cta.title": "Entenda como o seu perfil se posiciona diante dos critérios do USCIS.",
   "cta.subtitle":
@@ -65,9 +74,13 @@ export const defaultContent = {
   // e o admin cola a URL da imagem no /admin/conteudo.
   "partners.eyebrow": "CREDENCIAIS E PARCEIROS",
   "partners.title": "Registros e presença institucional.",
-  "partners.slot1.label": "BBB · Nota A",
+  // COMPLIANCE: rótulos BBB e Google — ver src/config/credentials.ts.
+  // PENDENTE (cliente): confirmar se é "BBB Accredited Business" (acreditação)
+  // ou apenas "BBB Rating A" (nota). São coisas diferentes; hoje usamos o mais
+  // conservador. Não cravar nota do Google em texto estático.
+  "partners.slot1.label": "BBB Rating A",
   "partners.slot1.url": "",
-  "partners.slot2.label": "Google Business · 5,0",
+  "partners.slot2.label": "Avaliações 5★ no Google",
   "partners.slot2.url": "",
   "partners.slot3.label": "EIN 99-4846502",
   "partners.slot3.url": "",
@@ -166,8 +179,9 @@ export const defaultContent = {
   // ==== Página Sobre ==============================================
   "sobre.hero.eyebrow": "QUEM SOMOS",
   "sobre.hero.title": "Status na América. De Orlando para o Brasil.",
+  // COMPLIANCE: "duas décadas" removido — sem lastro documental.
   "sobre.hero.subtitle":
-    "Mais de duas décadas estruturando processos de imigração para brasileiros qualificados, com equipe presente nos Estados Unidos.",
+    "Equipe com trajetória consolidada em processos de imigração, com sede própria em Orlando desde 2022.",
   "sobre.hero.image": "",
 
   "sobre.historia.eyebrow": "NOSSA HISTÓRIA",
@@ -210,18 +224,21 @@ export const defaultContent = {
   "sobre.equipe.m4.bio": "",
   "sobre.equipe.m4.foto": "",
 
+  // COMPLIANCE: números vêm de src/config/credentials.ts (fonte única).
+  // Todos marcados como PENDENTES DE VALIDAÇÃO até o cliente confirmar
+  // com documento (ver pendingValidation.ts).
   "sobre.numeros.eyebrow": "NÚMEROS E CREDENCIAIS",
   "sobre.numeros.title": "O que sustenta a nossa operação.",
-  "sobre.numeros.n1.valor": "1.000+",
-  "sobre.numeros.n1.label": "famílias atendidas",
-  "sobre.numeros.n2.valor": "5.000+",
-  "sobre.numeros.n2.label": "processos estruturados",
-  "sobre.numeros.n3.valor": "98%",
-  "sobre.numeros.n3.label": "de satisfação",
-  "sobre.numeros.n4.valor": "130+",
-  "sobre.numeros.n4.label": "avaliações 5★",
-  "sobre.numeros.n5.valor": "A",
-  "sobre.numeros.n5.label": "acreditação BBB",
+  "sobre.numeros.n1.valor": CLAIM_FAMILIAS.value,
+  "sobre.numeros.n1.label": CLAIM_FAMILIAS.label,
+  "sobre.numeros.n2.valor": CLAIM_PROCESSOS.value,
+  "sobre.numeros.n2.label": CLAIM_PROCESSOS.label,
+  "sobre.numeros.n3.valor": CLAIM_SATISFACAO.value,
+  "sobre.numeros.n3.label": CLAIM_SATISFACAO.label,
+  "sobre.numeros.n4.valor": CLAIM_AVALIACOES.value,
+  "sobre.numeros.n4.label": CLAIM_AVALIACOES.label,
+  "sobre.numeros.n5.valor": "—",
+  "sobre.numeros.n5.label": BBB_LABEL,
 
   "sobre.cta.title": "Vamos estruturar o seu caso.",
   "sobre.cta.subtitle":
