@@ -78,7 +78,7 @@ export const COMPARISON = {
       ],
     },
     {
-      label: "Green Card para cônjuge e filhos",
+      label: "Green Card para cônjuge e filhos, junto do requerente principal",
       cells: [
         "Sim",
         "Sim",
@@ -100,7 +100,7 @@ const eb2niw: VisaPage = {
   metaTitle:
     "EB-2 NIW: Green Card por mérito profissional | Status na América",
   metaDescription:
-    "Entenda o EB-2 National Interest Waiver: critérios, prova de interesse nacional, etapas e prazos. Sem patrocinador. Green Card para cônjuge e filhos.",
+    "Entenda o EB-2 National Interest Waiver: critérios, prova de interesse nacional, etapas e prazos. Sem patrocinador. Green Card para cônjuge e filhos, junto do requerente principal.",
   whatIs: {
     title: "O que é o National Interest Waiver",
     body:
@@ -169,7 +169,7 @@ const eb2niw: VisaPage = {
   family: {
     title: "Green Card para toda a família",
     body:
-      "O processo EB-2 NIW inclui cônjuge e filhos solteiros menores de 21 anos, que recebem Green Card derivado junto com o requerente principal. O cônjuge passa a poder trabalhar livremente nos EUA, e os filhos têm acesso à educação pública americana nas mesmas condições de residentes.",
+      "O processo EB-2 NIW inclui cônjuge e filhos solteiros menores de 21 anos, que recebem Green Card derivado junto do requerente principal. Uma vez concedida a residência permanente, o cônjuge pode trabalhar livremente nos EUA, e os filhos têm acesso à educação pública americana nas mesmas condições de residentes. A idade do filho é apurada segundo as regras do Child Status Protection Act (CSPA), que em determinados casos preserva o benefício mesmo após os 21 anos — o tempo de processamento influencia esse cálculo.",
   },
   faq: [
     {
@@ -260,7 +260,7 @@ const eb1: VisaPage = {
   family: {
     title: "Green Card para toda a família",
     body:
-      "Como nas demais categorias EB, cônjuge e filhos solteiros menores de 21 anos são incluídos como derivados e recebem Green Card junto com o requerente principal.",
+      "Como nas demais categorias EB, cônjuge e filhos solteiros menores de 21 anos são incluídos como derivados e recebem Green Card junto do requerente principal. A idade do filho é apurada segundo as regras do Child Status Protection Act, que em determinados casos preserva o benefício mesmo após os 21 anos — o tempo de processamento influencia esse cálculo.",
   },
   faq: [
     {
@@ -331,7 +331,7 @@ const eb3: VisaPage = {
   family: {
     title: "Green Card para a família",
     body:
-      "Cônjuge e filhos solteiros menores de 21 anos são incluídos como derivados.",
+      "Cônjuge e filhos solteiros menores de 21 anos são incluídos como derivados, junto do requerente principal. A idade do filho é apurada segundo as regras do Child Status Protection Act, que em determinados casos preserva o benefício mesmo após os 21 anos — o tempo de processamento influencia esse cálculo.",
   },
   faq: [
     {

@@ -295,8 +295,8 @@ export function NiwSection() {
   const bullets = [
     { icon: ShieldCheck, t: "Sem necessidade de empregador patrocinador" },
     { icon: Award, t: "Baseado no seu histórico e contribuição profissional" },
-    { icon: Heart, t: "Green Card para cônjuge e filhos" },
-    { icon: Sparkles, t: "Caminho para a cidadania americana após 5 anos" },
+    { icon: Heart, t: "Green Card para cônjuge e filhos, junto do requerente principal" },
+    { icon: Sparkles, t: "Após cinco anos como residente permanente, é possível solicitar a naturalização, cumpridos os requisitos de residência contínua, presença física e demais exigências do USCIS." },
   ];
   return (
     <Reveal as="section" id="eb-2-niw" className="section-pad relative">
@@ -570,9 +570,9 @@ export function LegacySection() {
     { icon: Briefcase, t: "Independência Profissional",
       d: "Trabalhe para quem quiser, abra empresa ou mude de área sem comprometer seu status." },
     { icon: ShieldCheck, t: "Green Card Direto",
-      d: "Residência permanente para você e a família, caminho para a cidadania americana." },
+      d: "Com a residência permanente concedida, você e a família passam a residir legalmente nos EUA; após cinco anos, cumpridos os requisitos do USCIS, é possível solicitar a naturalização." },
     { icon: Heart, t: "Segurança Familiar",
-      d: "Cônjuge com autorização de trabalho e filhos solteiros menores de 21 com os mesmos benefícios." },
+      d: "Uma vez concedida a residência permanente ao cônjuge, ele pode trabalhar livremente nos EUA. Filhos solteiros menores de 21 entram como derivados; a idade é apurada segundo as regras do Child Status Protection Act, que em determinados casos preserva o benefício mesmo após os 21 anos." },
     { icon: GraduationCap, t: "Futuro dos Filhos",
       d: "Educação de ponta e segurança para os seus filhos crescerem, com os mesmos direitos de residência." },
     { icon: Sparkles, t: "Previsibilidade",
@@ -597,7 +597,7 @@ export function LegacySection() {
           num="07"
           eyebrow="O QUE VOCÊ CONQUISTA"
           title="Muito mais que um visto. Um legado."
-          kicker="O Green Card pelo EB-2 NIW reconfigura o horizonte da sua família, em cinco pilares."
+          kicker="Com o Green Card aprovado pelo EB-2 NIW, cinco coisas mudam para a sua família."
         />
 
         {/* Bloco editorial de família (dobra mais emocional da Home). */}
@@ -616,9 +616,13 @@ export function LegacySection() {
               A decisão que muda três gerações.
             </p>
             <p className="mt-4 text-foreground/75 leading-relaxed">
-              Green Card para cônjuge e filhos solteiros menores de 21. Escola pública de qualidade,
-              universidade a custo de residente e caminho para a cidadania americana. O que você constrói
-              hoje é a herança que seus filhos vão viver.
+              Green Card para cônjuge e filhos solteiros menores de 21, junto do requerente
+              principal. A idade do filho é apurada segundo as regras do Child Status
+              Protection Act, que em determinados casos preserva o benefício mesmo após os
+              21 anos — o tempo de processamento influencia esse cálculo. Escola pública
+              de qualidade, universidade a custo de residente e, após cinco anos como
+              residente permanente, é possível solicitar a naturalização, cumpridos os
+              requisitos do USCIS.
             </p>
           </div>
         </div>

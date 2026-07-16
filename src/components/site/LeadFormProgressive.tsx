@@ -18,8 +18,10 @@
  */
 import { useEffect, useMemo, useRef, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
+import { Link } from "@tanstack/react-router";
 import { CheckCircle2, ChevronRight, Loader2, Pencil } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
@@ -131,6 +133,8 @@ export function LeadFormProgressive({
   const [error, setError] = useState<string | null>(null);
   const [restored, setRestored] = useState(false);
   const [restoredCount, setRestoredCount] = useState(0);
+  // COMPLIANCE (LGPD art. 7º I): consentimento obrigatório para envio.
+  const [consent, setConsent] = useState(false);
   const partialIdRef = useRef<string>("");
   const containerRef = useRef<HTMLDivElement | null>(null);
   const formStartFiredRef = useRef<boolean>(false);
@@ -253,6 +257,10 @@ export function LeadFormProgressive({
   };
 
   const submit = async () => {
+    if (!consent) {
+      setError("É necessário autorizar o tratamento dos dados para prosseguir.");
+      return;
+    }
     trackFormSubmit({ segmento: segmentId ?? null, step: stepIndex });
     const current = dataRef.current;
     if (steps.some((f) => !isFieldValid(f.key, current))) {
@@ -451,6 +459,30 @@ export function LeadFormProgressive({
           </motion.div>
         )}
 
+        {/* Consentimento LGPD — obrigatório no envio (mostrado no resumo final). */}
+        {stepIndex >= totalFields && (
+          <label className="flex items-start gap-3 text-sm text-foreground/85">
+            <Checkbox
+              checked={consent}
+              onCheckedChange={(v) => setConsent(v === true)}
+              className="mt-0.5 border-gold/40 data-[state=checked]:bg-gold data-[state=checked]:text-ink"
+              aria-label="Autorização de tratamento de dados"
+            />
+            <span>
+              Autorizo a Status na América a tratar os meus dados para a finalidade desta
+              análise, em conformidade com a LGPD e com a{" "}
+              <Link
+                to="/privacidade"
+                target="_blank"
+                className="text-gold underline underline-offset-4 hover:text-gold/80"
+              >
+                Política de Privacidade
+              </Link>
+              .
+            </span>
+          </label>
+        )}
+
         {error && <p className="text-sm text-destructive">{error}</p>}
 
         <div className="pt-2 flex items-center justify-center sm:justify-end">
@@ -459,15 +491,26 @@ export function LeadFormProgressive({
               Continuar <ChevronRight className="h-4 w-4" />
             </Button>
           ) : (
-            <Button className="btn-label w-full sm:w-auto" onClick={submit} disabled={loading} size="lg">
+            <Button
+              className="btn-label w-full sm:w-auto disabled:opacity-50"
+              onClick={submit}
+              disabled={loading || !consent}
+              size="lg"
+            >
               {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : (submitLabel ?? "Enviar para análise")}
             </Button>
           )}
         </div>
 
         <p className="text-xs text-muted-foreground">
-          Dados tratados de forma confidencial. Não enviamos spam.
+          Dados tratados conforme a nossa{" "}
+          <Link to="/privacidade" className="text-gold underline underline-offset-4 hover:text-gold/80">
+            Política de Privacidade
+          </Link>
+          . A Status na América não é escritório de advocacia — as informações
+          enviadas não são protegidas por sigilo advogado-cliente.
         </p>
+
       </div>
     </div>
   );

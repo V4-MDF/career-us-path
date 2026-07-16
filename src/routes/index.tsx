@@ -31,7 +31,7 @@ export const Route = createFileRoute("/")({
       {
         title: "Status na América | Mobilidade Imigratória para brasileiros",
         description:
-          "Imigração legal aos EUA por mérito profissional. Análise gratuita para vistos EB-2 NIW, EB-1 e EB-3, com Green Card para cônjuge e filhos.",
+          "Imigração legal aos EUA por mérito profissional. Análise gratuita para vistos EB-2 NIW, EB-1 e EB-3, com Green Card para cônjuge e filhos, junto do requerente principal.",
         canonical: "/",
         ogImage: OG_IMAGE,
         ogType: "website",

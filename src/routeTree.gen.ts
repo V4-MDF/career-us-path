@@ -9,8 +9,10 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TermosRouteImport } from './routes/termos'
 import { Route as SobreRouteImport } from './routes/sobre'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as PrivacidadeRouteImport } from './routes/privacidade'
 import { Route as PreQualificacaoRouteImport } from './routes/pre-qualificacao'
 import { Route as LlmInfoRouteImport } from './routes/llm-info'
 import { Route as ContatoRouteImport } from './routes/contato'
@@ -50,6 +52,11 @@ import { Route as VistosSlugIndexRouteImport } from './routes/vistos.$slug.index
 import { Route as VistosSlugSecaoRouteImport } from './routes/vistos.$slug.$secao'
 import { Route as PreQualificacaoRTokenRouteImport } from './routes/pre-qualificacao.r.$token'
 
+const TermosRoute = TermosRouteImport.update({
+  id: '/termos',
+  path: '/termos',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SobreRoute = SobreRouteImport.update({
   id: '/sobre',
   path: '/sobre',
@@ -58,6 +65,11 @@ const SobreRoute = SobreRouteImport.update({
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacidadeRoute = PrivacidadeRouteImport.update({
+  id: '/privacidade',
+  path: '/privacidade',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PreQualificacaoRoute = PreQualificacaoRouteImport.update({
@@ -261,8 +273,10 @@ export interface FileRoutesByFullPath {
   '/contato': typeof ContatoRoute
   '/llm-info': typeof LlmInfoRoute
   '/pre-qualificacao': typeof PreQualificacaoRouteWithChildren
+  '/privacidade': typeof PrivacidadeRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sobre': typeof SobreRoute
+  '/termos': typeof TermosRoute
   '/admin/ab': typeof AdminAbRoute
   '/admin/blog': typeof AdminBlogRoute
   '/admin/configuracoes': typeof AdminConfiguracoesRoute
@@ -302,8 +316,10 @@ export interface FileRoutesByTo {
   '/contato': typeof ContatoRoute
   '/llm-info': typeof LlmInfoRoute
   '/pre-qualificacao': typeof PreQualificacaoRouteWithChildren
+  '/privacidade': typeof PrivacidadeRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sobre': typeof SobreRoute
+  '/termos': typeof TermosRoute
   '/admin/ab': typeof AdminAbRoute
   '/admin/blog': typeof AdminBlogRoute
   '/admin/configuracoes': typeof AdminConfiguracoesRoute
@@ -344,8 +360,10 @@ export interface FileRoutesById {
   '/contato': typeof ContatoRoute
   '/llm-info': typeof LlmInfoRoute
   '/pre-qualificacao': typeof PreQualificacaoRouteWithChildren
+  '/privacidade': typeof PrivacidadeRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sobre': typeof SobreRoute
+  '/termos': typeof TermosRoute
   '/admin/ab': typeof AdminAbRoute
   '/admin/blog': typeof AdminBlogRoute
   '/admin/configuracoes': typeof AdminConfiguracoesRoute
@@ -388,8 +406,10 @@ export interface FileRouteTypes {
     | '/contato'
     | '/llm-info'
     | '/pre-qualificacao'
+    | '/privacidade'
     | '/sitemap.xml'
     | '/sobre'
+    | '/termos'
     | '/admin/ab'
     | '/admin/blog'
     | '/admin/configuracoes'
@@ -429,8 +449,10 @@ export interface FileRouteTypes {
     | '/contato'
     | '/llm-info'
     | '/pre-qualificacao'
+    | '/privacidade'
     | '/sitemap.xml'
     | '/sobre'
+    | '/termos'
     | '/admin/ab'
     | '/admin/blog'
     | '/admin/configuracoes'
@@ -470,8 +492,10 @@ export interface FileRouteTypes {
     | '/contato'
     | '/llm-info'
     | '/pre-qualificacao'
+    | '/privacidade'
     | '/sitemap.xml'
     | '/sobre'
+    | '/termos'
     | '/admin/ab'
     | '/admin/blog'
     | '/admin/configuracoes'
@@ -513,8 +537,10 @@ export interface RootRouteChildren {
   ContatoRoute: typeof ContatoRoute
   LlmInfoRoute: typeof LlmInfoRoute
   PreQualificacaoRoute: typeof PreQualificacaoRouteWithChildren
+  PrivacidadeRoute: typeof PrivacidadeRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   SobreRoute: typeof SobreRoute
+  TermosRoute: typeof TermosRoute
   AvaliacaoObrigadoRoute: typeof AvaliacaoObrigadoRoute
   AvaliacaoObrigadoNaoQualificadoRoute: typeof AvaliacaoObrigadoNaoQualificadoRoute
   AvaliacaoObrigadoQualificadoRoute: typeof AvaliacaoObrigadoQualificadoRoute
@@ -526,6 +552,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/termos': {
+      id: '/termos'
+      path: '/termos'
+      fullPath: '/termos'
+      preLoaderRoute: typeof TermosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/sobre': {
       id: '/sobre'
       path: '/sobre'
@@ -538,6 +571,13 @@ declare module '@tanstack/react-router' {
       path: '/sitemap.xml'
       fullPath: '/sitemap.xml'
       preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacidade': {
+      id: '/privacidade'
+      path: '/privacidade'
+      fullPath: '/privacidade'
+      preLoaderRoute: typeof PrivacidadeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/pre-qualificacao': {
@@ -901,8 +941,10 @@ const rootRouteChildren: RootRouteChildren = {
   ContatoRoute: ContatoRoute,
   LlmInfoRoute: LlmInfoRoute,
   PreQualificacaoRoute: PreQualificacaoRouteWithChildren,
+  PrivacidadeRoute: PrivacidadeRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   SobreRoute: SobreRoute,
+  TermosRoute: TermosRoute,
   AvaliacaoObrigadoRoute: AvaliacaoObrigadoRoute,
   AvaliacaoObrigadoNaoQualificadoRoute: AvaliacaoObrigadoNaoQualificadoRoute,
   AvaliacaoObrigadoQualificadoRoute: AvaliacaoObrigadoQualificadoRoute,
