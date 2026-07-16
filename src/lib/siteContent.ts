@@ -12,6 +12,13 @@
 
 import { useEffect, useState } from "react";
 import { get } from "./dataStore";
+import {
+  CLAIM_FAMILIAS,
+  CLAIM_PROCESSOS,
+  CLAIM_SATISFACAO,
+  CLAIM_AVALIACOES,
+  BBB_LABEL,
+} from "@/config/credentials";
 // Fotografias hero por página de visto (defaults). Placeholders
 // art-direcionados no tratamento padrão do site — substituir por foto real
 // específica de cada visto, nunca imagem genérica de IA, nunca compartilhar
