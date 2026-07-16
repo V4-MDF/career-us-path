@@ -80,10 +80,6 @@ const PAGES: Array<{
         { k: "partners.slot3.url", label: "Slot 3 · URL do logo" },
         { k: "partners.slot4.label", label: "Slot 4 · Legenda" },
         { k: "partners.slot4.url", label: "Slot 4 · URL do logo" },
-        { k: "partners.slot5.label", label: "Slot 5 · Legenda" },
-        { k: "partners.slot5.url", label: "Slot 5 · URL do logo" },
-        { k: "partners.slot6.label", label: "Slot 6 · Legenda" },
-        { k: "partners.slot6.url", label: "Slot 6 · URL do logo" },
       ]},
       { title: "Depoimentos em vídeo", keys: [
         { k: "testimonials.videoEyebrow", label: "Vídeo · Eyebrow" },
