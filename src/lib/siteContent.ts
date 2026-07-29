@@ -119,7 +119,7 @@ export const defaultContent = {
   "visa.eb2-niw.heroVideoUrl": "",
   "visa.eb2-niw.heroVideoThumb": "",
   "visa.eb2-niw.heroVideoHidden": "",
-  // EB-2 NIW (carro-chefe): profissional brasileiro 40+ consolidado com toque
+  // EB-2 NIW: profissional brasileiro 40+ consolidado com toque
   // de família ao fundo em contexto americano aspiracional. Substituir por
   // fotografia real art-direcionada com o tratamento padrão — nunca imagem
   // genérica de IA; imagem específica deste visto, não compartilhada.

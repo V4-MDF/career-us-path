@@ -85,7 +85,7 @@ export const COMPARISON = {
   ],
 };
 
-/* ---------------- EB-2 NIW (carro-chefe) ---------------- */
+/* ---------------- EB-2 NIW ---------------- */
 const eb2niw: VisaPage = {
   slug: "eb2-niw",
   eyebrow: "VISTO EB-2 NIW",
