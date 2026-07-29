@@ -35,15 +35,15 @@ export function SectionHead({
 
   return (
     <div className={align === "center" ? "text-center mx-auto max-w-3xl" : "max-w-3xl"}>
-      <div className={`flex items-center gap-3 ${align === "center" ? "justify-center" : ""}`}>
-        <span aria-hidden className="h-px w-10 bg-gold/70" />
+      {/* Eyebrow mantido no DOM (SEO/leitores de tela), oculto visualmente. */}
+      <div className="sr-only">
         <span className={`font-mono-label ${eyebrowClass}`}>
           {num && <span className="mr-2 text-gold">{num}</span>}
           {eyebrow}
         </span>
       </div>
       {title && (
-        <h2 className={`display-2 mt-6 ${titleClass}`}>
+        <h2 className={`display-2 ${titleClass}`}>
           {title}
         </h2>
       )}
