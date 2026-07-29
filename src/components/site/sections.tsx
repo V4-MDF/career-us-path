@@ -668,8 +668,8 @@ export function LegacySection() {
                 className="snap-start shrink-0 w-[76%] gold-tick rounded-2xl border border-gold/25 bg-ink-raise/50 p-5 shadow-soft"
               >
                 <Icon className="h-5 w-5 text-gold" />
-                <h3 className="mt-4 font-display text-lg">{t}</h3>
-                <p className="mt-2 text-foreground/75 leading-snug text-[14px]">{d}</p>
+                <h3 className="mt-4 font-display text-[17px]">{t}</h3>
+                <p className="mt-2 text-foreground/75 leading-snug text-[13px]">{d}</p>
               </article>
             ))}
           </div>
@@ -685,8 +685,8 @@ export function LegacySection() {
           {pillars.map(({ icon: Icon, t, d }) => (
             <article key={t} className="relative gold-tick rounded-2xl border border-gold/25 bg-ink-raise/50 p-5 h-full shadow-soft transition-[border-color,box-shadow] hover:border-gold/55 hover:shadow-elevated">
               <Icon className="h-5 w-5 text-gold" />
-              <h3 className="mt-4 font-display text-lg">{t}</h3>
-              <p className="mt-2 text-foreground/75 leading-snug text-[14px]">{d}</p>
+              <h3 className="mt-4 font-display text-[17px]">{t}</h3>
+              <p className="mt-2 text-foreground/75 leading-snug text-[13px]">{d}</p>
             </article>
           ))}
         </div>
