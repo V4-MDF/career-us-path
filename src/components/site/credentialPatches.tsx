@@ -65,24 +65,24 @@ export function PatchGoogle() {
   );
 }
 
-/** Bandeira dos EUA em selo circular — referência ao EIN (registro nos EUA). */
+/** Bandeira dos EUA em selo — referência ao EIN (registro nos EUA). */
 export function PatchEIN() {
   return (
     <Frame>
       <span className="flex flex-col items-center gap-[3px]">
-        <FlagUS className="w-7 rounded-[2px] ring-1 ring-black/10" style={{ height: 13 }} />
+        <FlagUS className="w-7 rounded-[2px]" style={{ height: 13 }} />
         <span className="font-mono-label text-[7.5px] text-ink-text/70">USA</span>
       </span>
     </Frame>
   );
 }
 
-/** Bandeira do Brasil em selo circular — referência ao CNPJ (registro no Brasil). */
+/** Bandeira do Brasil em selo — referência ao CNPJ (registro no Brasil). */
 export function PatchCNPJ() {
   return (
     <Frame>
       <span className="flex flex-col items-center gap-[3px]">
-        <FlagBR className="w-7 rounded-[2px] ring-1 ring-black/10" style={{ height: 13 }} />
+        <FlagBR className="w-7 rounded-[2px]" style={{ height: 13 }} />
         <span className="font-mono-label text-[7.5px] text-ink-text/70">BRASIL</span>
       </span>
     </Frame>
