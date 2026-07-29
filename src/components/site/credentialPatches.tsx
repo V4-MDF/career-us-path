@@ -13,7 +13,7 @@ const RING = "absolute inset-0 rounded-full border border-gold/60";
 
 function Frame({ children }: { children: React.ReactNode }) {
   return (
-    <span className="relative inline-grid place-items-center h-14 w-14 rounded-full bg-white shadow-soft">
+    <span className="relative inline-grid place-items-center h-20 w-20 rounded-full bg-white shadow-soft">
       <span aria-hidden className={RING} />
       <span aria-hidden className="absolute inset-[3px] rounded-full border border-gold/25" />
       {children}
