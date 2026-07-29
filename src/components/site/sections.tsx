@@ -604,11 +604,11 @@ export function LegacySection() {
     { icon: Briefcase, t: "Independência Profissional",
       d: "Trabalhe para quem quiser, abra empresa ou mude de área sem comprometer seu status." },
     { icon: ShieldCheck, t: "Green Card Direto",
-      d: "Com a residência permanente concedida, você e a família passam a residir legalmente nos EUA; após cinco anos, cumpridos os requisitos do USCIS, é possível solicitar a naturalização." },
+      d: "Residência permanente para você e família. Após cinco anos, cumpridos os requisitos, é possível solicitar a naturalização." },
     { icon: Heart, t: "Segurança Familiar",
-      d: "Uma vez concedida a residência permanente ao cônjuge, ele pode trabalhar livremente nos EUA. Filhos solteiros menores de 21 entram como derivados; a idade é apurada segundo as regras do Child Status Protection Act, que em determinados casos preserva o benefício mesmo após os 21 anos." },
+      d: "Cônjuge e filhos solteiros menores de 21 acompanham o requerente principal. A idade pode ser protegida pelo CSPA." },
     { icon: GraduationCap, t: "Futuro dos Filhos",
-      d: "Educação de ponta e segurança para os seus filhos crescerem, com os mesmos direitos de residência." },
+      d: "Educação de qualidade e universidade a custo de residente, com os mesmos direitos de quem já mora nos EUA." },
     { icon: Sparkles, t: "Previsibilidade",
       d: "Controle do seu futuro imigratório, sem loterias e sem depender de empresas." },
   ];
@@ -644,34 +644,32 @@ export function LegacySection() {
             width={1600}
             height={1000}
           />
-          <div className="relative rounded-2xl border border-gold/25 bg-[#16223A] p-7 md:p-9 shadow-soft">
+          <div className="relative rounded-2xl border border-gold/25 bg-[#16223A] p-6 md:p-8 shadow-soft">
             <span className="font-mono-label text-gold">FUTURO DOS FILHOS</span>
-            <p className="mt-4 font-display text-2xl md:text-[26px] leading-tight text-foreground">
+            <p className="mt-3 font-display text-xl md:text-2xl leading-tight text-foreground">
               A decisão que muda três gerações.
             </p>
-            <p className="mt-4 text-foreground/75 leading-relaxed">
+            <p className="mt-3 text-foreground/75 text-[15px] leading-relaxed">
               Green Card para cônjuge e filhos solteiros menores de 21, junto do requerente
-              principal. A idade do filho é apurada segundo as regras do Child Status
-              Protection Act, que em determinados casos preserva o benefício mesmo após os
-              21 anos — o tempo de processamento influencia esse cálculo. Escola pública
-              de qualidade, universidade a custo de residente e, após cinco anos como
-              residente permanente, é possível solicitar a naturalização, cumpridos os
-              requisitos do USCIS.
+              principal. A idade é protegida pelo Child Status Protection Act, que pode preservar
+              o benefício mesmo após os 21 anos — o tempo de processamento influencia esse cálculo.
+              Escola pública de qualidade, universidade a custo de residente e, após cinco anos,
+              é possível solicitar a naturalização, cumpridos os requisitos do USCIS.
             </p>
           </div>
         </div>
 
         {/* Mobile: carrossel horizontal com snap */}
-        <div className="mt-14 md:hidden -mx-4 px-4 overflow-x-auto snap-x snap-mandatory scroll-smooth scrollbar-hide">
-          <div className="flex gap-4 pb-2">
+        <div className="mt-12 md:hidden -mx-4 px-4 overflow-x-auto snap-x snap-mandatory scroll-smooth scrollbar-hide">
+          <div className="flex gap-3 pb-2">
             {pillars.map(({ icon: Icon, t, d }) => (
               <article
                 key={t}
-                className="snap-start shrink-0 w-[82%] gold-tick rounded-2xl border border-gold/25 bg-ink-raise/50 p-6 shadow-soft"
+                className="snap-start shrink-0 w-[76%] gold-tick rounded-2xl border border-gold/25 bg-ink-raise/50 p-5 shadow-soft"
               >
-                <Icon className="h-6 w-6 text-gold" />
-                <h3 className="mt-5 font-display text-xl">{t}</h3>
-                <p className="mt-3 text-foreground/75 leading-relaxed text-[15px]">{d}</p>
+                <Icon className="h-5 w-5 text-gold" />
+                <h3 className="mt-4 font-display text-[17px]">{t}</h3>
+                <p className="mt-2 text-foreground/75 leading-snug text-[13px]">{d}</p>
               </article>
             ))}
           </div>
@@ -683,12 +681,12 @@ export function LegacySection() {
         </div>
 
         {/* Desktop/tablet: grid */}
-        <div className="mt-14 hidden md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5">
+        <div className="mt-12 hidden md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
           {pillars.map(({ icon: Icon, t, d }) => (
-            <article key={t} className="relative gold-tick rounded-2xl border border-gold/25 bg-ink-raise/50 p-7 h-full shadow-soft transition-[border-color,box-shadow] hover:border-gold/55 hover:shadow-elevated">
-              <Icon className="h-6 w-6 text-gold" />
-              <h3 className="mt-5 font-display text-xl">{t}</h3>
-              <p className="mt-3 text-foreground/75 leading-relaxed text-[15px]">{d}</p>
+            <article key={t} className="relative gold-tick rounded-2xl border border-gold/25 bg-ink-raise/50 p-5 h-full shadow-soft transition-[border-color,box-shadow] hover:border-gold/55 hover:shadow-elevated">
+              <Icon className="h-5 w-5 text-gold" />
+              <h3 className="mt-4 font-display text-[17px]">{t}</h3>
+              <p className="mt-2 text-foreground/75 leading-snug text-[13px]">{d}</p>
             </article>
           ))}
         </div>
