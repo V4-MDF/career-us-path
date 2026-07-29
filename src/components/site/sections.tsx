@@ -916,8 +916,8 @@ function PatchIcon({ label }: { label: string }) {
   else if (l.includes("orlando") || l.includes("sede")) { Icon = Landmark; tint = "text-ink-text"; }
   else if (l.includes("parceiro")) { Icon = Users; tint = "text-oxblood"; }
   return (
-    <span className={`inline-grid place-items-center h-12 w-12 rounded-full border border-gold/50 bg-white shadow-soft ${tint}`}>
-      <Icon className="h-6 w-6" strokeWidth={1.5} aria-hidden />
+    <span className={`inline-grid place-items-center h-16 w-16 rounded-full border border-gold/50 bg-white shadow-soft ${tint}`}>
+      <Icon className="h-9 w-9" strokeWidth={1.5} aria-hidden />
     </span>
   );
 }
