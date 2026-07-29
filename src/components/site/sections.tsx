@@ -916,8 +916,8 @@ function PatchIcon({ label }: { label: string }) {
   else if (l.includes("orlando") || l.includes("sede")) { Icon = Landmark; tint = "text-ink-text"; }
   else if (l.includes("parceiro")) { Icon = Users; tint = "text-oxblood"; }
   return (
-    <span className={`inline-grid place-items-center h-12 w-12 rounded-full border border-gold/50 bg-white shadow-soft ${tint}`}>
-      <Icon className="h-6 w-6" strokeWidth={1.5} aria-hidden />
+    <span className={`inline-grid place-items-center h-16 w-16 rounded-full border border-gold/50 bg-white shadow-soft ${tint}`}>
+      <Icon className="h-9 w-9" strokeWidth={1.5} aria-hidden />
     </span>
   );
 }
@@ -953,7 +953,7 @@ export function PartnersBadges() {
           {slots.map((s, idx) => (
             <li
               key={idx}
-              className="group relative rounded-xl border border-gold/50 bg-white/70 p-3 aspect-[3/2] flex items-center justify-center shadow-soft"
+              className="group relative rounded-xl border border-gold/50 bg-white/70 p-5 aspect-[3/2] flex items-center justify-center shadow-soft"
               style={{
                 boxShadow: "inset 0 0 0 1px rgba(196,161,72,0.25)",
               }}
@@ -971,7 +971,7 @@ export function PartnersBadges() {
               ) : (
                 <div className="text-center px-2 flex flex-col items-center">
                   <PatchIcon label={s.label} />
-                  <span className="mt-1.5 block font-mono-label text-ink-text/70 text-[10.5px] leading-tight">
+                  <span className="mt-2 block font-mono-label text-ink-text/70 text-[13px] leading-tight">
                     {s.label}
                   </span>
                 </div>
