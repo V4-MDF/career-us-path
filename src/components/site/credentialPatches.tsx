@@ -25,7 +25,7 @@ function Frame({ children }: { children: React.ReactNode }) {
 export function PatchBBB() {
   return (
     <Frame>
-      <svg viewBox="0 0 40 40" className="h-8 w-8" aria-hidden>
+      <svg viewBox="0 0 40 40" className="h-12 w-12" aria-hidden>
         <path
           d="M20 4l11 4v11c0 8-5.4 13.4-11 16-5.6-2.6-11-8-11-16V8l11-4z"
           fill="none"
@@ -38,7 +38,7 @@ export function PatchBBB() {
           y="24"
           textAnchor="middle"
           className="fill-oxblood"
-          style={{ font: "700 15px ui-serif, Georgia, serif" }}
+          style={{ font: "700 22px ui-serif, Georgia, serif" }}
         >
           A
         </text>
