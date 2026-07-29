@@ -716,7 +716,7 @@ export function SalaryCompare() {
         <SectionHead
           num="08"
           eyebrow="RENDA EM DÓLAR"
-          title="A mesma carreira. Outro patamar de remuneração."
+          title="A mesma carreira. Outra faixa de remuneração."
           kicker="Profissões em alta demanda nos EUA. Referência de mercado, valores brutos anuais nas duas colunas."
           variant="parchment"
         />
