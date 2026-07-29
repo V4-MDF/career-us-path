@@ -510,7 +510,7 @@ export function WhyUs() {
     { icon: MapPin, t: `Sede própria em Orlando, Flórida (EIN ${EIN})` },
     { icon: Users, t: `Filial no Brasil em Barueri/SP (CNPJ ${CNPJ})` },
     // PENDENTE (cliente): confirmar "BBB Accredited Business" vs "BBB Rating A".
-    { icon: ShieldCheck, t: BBB_LABEL },
+    { icon: ShieldCheck, t: BBB_LABEL, desc: "Better Business Bureau: órgão privado dos EUA/Canadá que avalia a ética e confiabilidade das empresas." },
     { icon: Star, t: `${CLAIM_AVALIACOES.value} ${CLAIM_AVALIACOES.label} no Google e Facebook` },
   ];
   return (
