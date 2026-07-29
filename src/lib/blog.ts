@@ -218,7 +218,7 @@ Perfil mais alto. Exige reconhecimento internacional comprovado na área (ao men
 
 ## EB-2 NIW, interesse nacional
 
-Carro-chefe para profissionais consolidados. Exige grau avançado (ou bacharelado + 5 anos) ou habilidade excepcional, e demonstração de que a atuação é de interesse nacional (Matter of Dhanasar). DISPENSA patrocinador e PERM. Veja [/vistos/eb2-niw](/vistos/eb2-niw).
+Categoria principal para profissionais consolidados. Exige grau avançado (ou bacharelado + 5 anos) ou habilidade excepcional, e demonstração de que a atuação é de interesse nacional (Matter of Dhanasar). DISPENSA patrocinador e PERM. Veja [/vistos/eb2-niw](/vistos/eb2-niw).
 
 ## EB-3, profissional qualificado com oferta de emprego
 

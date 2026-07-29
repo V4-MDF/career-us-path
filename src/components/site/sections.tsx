@@ -296,7 +296,7 @@ export function ContrastBrasilEUA() {
 }
 
 /* ============================================================
- * 4. EB-2 NIW (carro-chefe)
+ * 4. EB-2 NIW
  * ============================================================ */
 export function NiwSection() {
   const title = useContent("niw.title");
@@ -312,7 +312,7 @@ export function NiwSection() {
       
       <div className="container-x grid lg:grid-cols-2 gap-14 items-center">
         <div>
-          <SectionHead num="02" eyebrow="CARRO-CHEFE. EB-2 NIW" title={title} />
+          <SectionHead num="02" eyebrow="VISTO EB-2 NIW" title={title} />
           <p className="mt-6 text-[17px] text-foreground/80 leading-relaxed max-w-xl">{lead}</p>
           <ul className="mt-9 grid sm:grid-cols-2 gap-3">
             {bullets.map(({ icon: Icon, t }) => (
