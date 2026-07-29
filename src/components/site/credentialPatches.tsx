@@ -53,13 +53,13 @@ export function PatchGoogle() {
   return (
     <Frame>
       <span className="flex flex-col items-center leading-none">
-        <svg viewBox="0 0 24 24" className="h-5 w-5" aria-hidden>
+        <svg viewBox="0 0 24 24" className="h-8 w-8" aria-hidden>
           <path fill="#4285F4" d="M23 12.2c0-.8-.07-1.6-.2-2.3H12v4.4h6.1a5.3 5.3 0 01-2.3 3.5v2.9h3.7c2.2-2 3.5-5 3.5-8.5z" />
           <path fill="#34A853" d="M12 24c3.1 0 5.7-1 7.6-2.8l-3.7-2.9c-1 .7-2.3 1.1-3.9 1.1-3 0-5.6-2-6.5-4.8H1.7v3A12 12 0 0012 24z" />
           <path fill="#FBBC05" d="M5.5 14.6a7.2 7.2 0 010-4.6v-3H1.7a12 12 0 000 10.6l3.8-3z" />
           <path fill="#EA4335" d="M12 4.8c1.7 0 3.2.6 4.4 1.7l3.3-3.3A11.6 11.6 0 0012 0 12 12 0 001.7 6l3.8 3C6.4 6.7 9 4.8 12 4.8z" />
         </svg>
-        <span aria-hidden className="mt-[2px] text-[7px] tracking-[0.1em] text-[#F5A623]">★★★★★</span>
+        <span aria-hidden className="mt-1 text-[10px] tracking-[0.1em] text-[#F5A623]">★★★★★</span>
       </span>
     </Frame>
   );
