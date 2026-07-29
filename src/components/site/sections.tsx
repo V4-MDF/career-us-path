@@ -901,12 +901,15 @@ export function Testimonials() {
  * ============================================================ */
 function PatchIcon({ label }: { label: string }) {
   const l = (label || "").toLowerCase();
+  // Patches desenhados referenciando o conteúdo do campo
+  if (l.includes("bbb")) return <PatchBBB />;
+  if (l.includes("google")) return <PatchGoogle />;
+  if (l.includes("ein")) return <PatchEIN />;
+  if (l.includes("cnpj")) return <PatchCNPJ />;
+
   let Icon: typeof ShieldCheck = ShieldCheck;
   let tint = "text-gold";
-  if (l.includes("bbb")) { Icon = Award; tint = "text-oxblood"; }
-  else if (l.includes("google")) { Icon = StarIcon; tint = "text-gold"; }
-  else if (l.includes("ein") || l.includes("cnpj")) { Icon = Building2; tint = "text-ink-text"; }
-  else if (l.includes("aila")) { Icon = Scale; tint = "text-oxblood"; }
+  if (l.includes("aila")) { Icon = Scale; tint = "text-oxblood"; }
   else if (l.includes("uscis") || l.includes("document")) { Icon = Stamp; tint = "text-gold"; }
   else if (l.includes("orlando") || l.includes("sede")) { Icon = Landmark; tint = "text-ink-text"; }
   else if (l.includes("parceiro")) { Icon = Users; tint = "text-oxblood"; }
@@ -916,6 +919,7 @@ function PatchIcon({ label }: { label: string }) {
     </span>
   );
 }
+
 
 export function PartnersBadges() {
   const eyebrow = useContent("partners.eyebrow");
