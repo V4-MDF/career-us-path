@@ -43,8 +43,8 @@ import { FamilySealBackdrop } from "./visuals/FamilySealBackdrop";
 import { ProcessIconStrip } from "./visuals/ProcessIconStrip";
 import { LeadFormProgressive } from "./LeadFormProgressive";
 import { useLocation } from "@tanstack/react-router";
-import { FlagsBRUS } from "./flags";
-import { FlagBR, FlagUS, FlagsBRUSDual } from "./visuals/DualFlagIcons";
+import { FlagsBRUS, FlagBR, FlagUS } from "./flags";
+import { FlagsBRUSDual } from "./visuals/DualFlagIcons";
 
 
 import { HeroBackgroundMedia } from "./HeroBackgroundMedia";
@@ -247,10 +247,15 @@ export function ContrastBrasilEUA() {
               <div className="p-5 md:p-6">
                 <div className="flex items-center gap-2.5">
                   <span
-                    className="inline-flex items-center justify-center h-6 px-2 rounded-full border font-mono-label text-[10px] tracking-[0.2em] bg-white/80"
-                    style={{ color: accent, borderColor: `color-mix(in oklab, ${accent} 55%, transparent)` }}
+                    className="inline-flex items-center justify-center h-7 px-1.5 rounded-full border bg-white/80 shadow-sm"
+                    style={{ borderColor: `color-mix(in oklab, ${accent} 55%, transparent)` }}
+                    aria-label={code === "BR" ? "Brasil" : "Estados Unidos"}
                   >
-                    {code}
+                    {code === "BR" ? (
+                      <FlagBR color="brand" style={{ width: 22, height: 15 }} />
+                    ) : (
+                      <FlagUS color="brand" style={{ width: 22, height: 15 }} />
+                    )}
                   </span>
                   <span
                     className="font-mono-label text-[10px] tracking-[0.22em]"
