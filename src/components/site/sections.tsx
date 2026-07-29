@@ -43,8 +43,8 @@ import { FamilySealBackdrop } from "./visuals/FamilySealBackdrop";
 import { ProcessIconStrip } from "./visuals/ProcessIconStrip";
 import { LeadFormProgressive } from "./LeadFormProgressive";
 import { useLocation } from "@tanstack/react-router";
-import { FlagsBRUS } from "./flags";
-import { FlagBR, FlagUS, FlagsBRUSDual } from "./visuals/DualFlagIcons";
+import { FlagsBRUS, FlagBR, FlagUS } from "./flags";
+import { FlagsBRUSDual } from "./visuals/DualFlagIcons";
 
 
 import { HeroBackgroundMedia } from "./HeroBackgroundMedia";
