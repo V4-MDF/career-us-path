@@ -63,9 +63,9 @@ export function FlagUS({ color = "brand", ...p }: FlagProps) {
 export function FlagsBRUS({ className = "", size = 18 }: { className?: string; size?: number }) {
   return (
     <span className={`inline-flex items-center gap-2 ${className}`}>
-      <FlagBR style={{ width: size * 1.4, height: size }} className="ring-1 ring-black/10" />
+      <FlagBR style={{ width: size * 1.4, height: size }} />
       <span aria-hidden className="text-gold/70 text-xs">→</span>
-      <FlagUS style={{ width: size * 1.4, height: size }} className="ring-1 ring-black/10" />
+      <FlagUS style={{ width: size * 1.4, height: size }} />
     </span>
   );
 }
