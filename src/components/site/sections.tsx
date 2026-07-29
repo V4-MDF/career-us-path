@@ -1099,7 +1099,7 @@ export function CtaBanner() {
               Diagnóstico do seu perfil em até 48h.
             </h3>
             <p className="mt-3 text-foreground/75 text-[15px] leading-relaxed">
-              Você envia seus dados e nossa equipe responde por e-mail com a indicação
+              Você envia seus dados e nossa equipe responde por e-mail com a sugestão
               do caminho mais coerente com a sua história.
             </p>
             <ul className="mt-5 space-y-2 text-[14px] text-foreground/80">
