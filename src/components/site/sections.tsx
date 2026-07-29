@@ -1096,7 +1096,7 @@ export function CtaBanner() {
             </span>
             <p className="font-mono-label text-gold/85">ANÁLISE COMPLETA</p>
             <h3 className="mt-3 font-display text-2xl leading-tight break-words">
-              Descubra seu caminho para os EUA em até 48h.
+              Descubra seu caminho para os EUA.
             </h3>
             <p className="mt-3 text-foreground/75 text-[15px] leading-relaxed">
               Preencha o formulário. Nossa equipe analisa seu perfil e aponta a categoria EB
@@ -1105,7 +1105,7 @@ export function CtaBanner() {
             <ul className="mt-5 space-y-2 text-[14px] text-foreground/80">
               {[
                 "Análise estratégica gratuita",
-                "Resposta personalizada em até 48h",
+                "Resposta personalizada",
                 "Confidencial e sem compromisso",
               ].map((i) => (
                 <li key={i} className="flex gap-2.5">
