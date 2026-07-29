@@ -69,9 +69,9 @@ export function PatchGoogle() {
 export function PatchEIN() {
   return (
     <Frame>
-      <span className="flex flex-col items-center gap-[3px]">
-        <FlagUS className="w-7 rounded-[2px]" style={{ height: 13 }} />
-        <span className="font-mono-label text-[7.5px] text-ink-text/70">USA</span>
+      <span className="flex flex-col items-center gap-1">
+        <FlagUS className="w-10 rounded-[2px]" style={{ height: 18 }} />
+        <span className="font-mono-label text-[10px] text-ink-text/70">USA</span>
       </span>
     </Frame>
   );
@@ -81,9 +81,9 @@ export function PatchEIN() {
 export function PatchCNPJ() {
   return (
     <Frame>
-      <span className="flex flex-col items-center gap-[3px]">
-        <FlagBR className="w-7 rounded-[2px]" style={{ height: 13 }} />
-        <span className="font-mono-label text-[7.5px] text-ink-text/70">BRASIL</span>
+      <span className="flex flex-col items-center gap-1">
+        <FlagBR className="w-10 rounded-[2px]" style={{ height: 18 }} />
+        <span className="font-mono-label text-[10px] text-ink-text/70">BRASIL</span>
       </span>
     </Frame>
   );
