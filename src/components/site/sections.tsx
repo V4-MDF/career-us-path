@@ -986,6 +986,7 @@ export function PartnersBadges() {
                   <span className="mt-2 block font-mono-label text-ink-text/70 text-[13px] leading-tight">
                     {s.label}
                   </span>
+                  <CredentialDescription label={s.label} />
                 </div>
               )}
             </li>
