@@ -662,16 +662,16 @@ export function LegacySection() {
         </div>
 
         {/* Mobile: carrossel horizontal com snap */}
-        <div className="mt-14 md:hidden -mx-4 px-4 overflow-x-auto snap-x snap-mandatory scroll-smooth scrollbar-hide">
-          <div className="flex gap-4 pb-2">
+        <div className="mt-12 md:hidden -mx-4 px-4 overflow-x-auto snap-x snap-mandatory scroll-smooth scrollbar-hide">
+          <div className="flex gap-3 pb-2">
             {pillars.map(({ icon: Icon, t, d }) => (
               <article
                 key={t}
-                className="snap-start shrink-0 w-[82%] gold-tick rounded-2xl border border-gold/25 bg-ink-raise/50 p-6 shadow-soft"
+                className="snap-start shrink-0 w-[76%] gold-tick rounded-2xl border border-gold/25 bg-ink-raise/50 p-5 shadow-soft"
               >
-                <Icon className="h-6 w-6 text-gold" />
-                <h3 className="mt-5 font-display text-xl">{t}</h3>
-                <p className="mt-3 text-foreground/75 leading-relaxed text-[15px]">{d}</p>
+                <Icon className="h-5 w-5 text-gold" />
+                <h3 className="mt-4 font-display text-lg">{t}</h3>
+                <p className="mt-2 text-foreground/75 leading-snug text-[14px]">{d}</p>
               </article>
             ))}
           </div>
@@ -683,12 +683,12 @@ export function LegacySection() {
         </div>
 
         {/* Desktop/tablet: grid */}
-        <div className="mt-14 hidden md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5">
+        <div className="mt-12 hidden md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
           {pillars.map(({ icon: Icon, t, d }) => (
-            <article key={t} className="relative gold-tick rounded-2xl border border-gold/25 bg-ink-raise/50 p-7 h-full shadow-soft transition-[border-color,box-shadow] hover:border-gold/55 hover:shadow-elevated">
-              <Icon className="h-6 w-6 text-gold" />
-              <h3 className="mt-5 font-display text-xl">{t}</h3>
-              <p className="mt-3 text-foreground/75 leading-relaxed text-[15px]">{d}</p>
+            <article key={t} className="relative gold-tick rounded-2xl border border-gold/25 bg-ink-raise/50 p-5 h-full shadow-soft transition-[border-color,box-shadow] hover:border-gold/55 hover:shadow-elevated">
+              <Icon className="h-5 w-5 text-gold" />
+              <h3 className="mt-4 font-display text-lg">{t}</h3>
+              <p className="mt-2 text-foreground/75 leading-snug text-[14px]">{d}</p>
             </article>
           ))}
         </div>
