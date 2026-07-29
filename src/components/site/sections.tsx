@@ -922,6 +922,18 @@ function PatchIcon({ label }: { label: string }) {
   );
 }
 
+function CredentialDescription({ label }: { label: string }) {
+  const l = (label || "").toLowerCase();
+  if (l.includes("bbb")) {
+    return (
+      <span className="mt-1 block max-w-[95%] font-body text-ink-text/60 text-[11px] leading-snug">
+        Órgão privado dos EUA/Canadá que avalia a confiabilidade e ética empresarial.
+      </span>
+    );
+  }
+  return null;
+}
+
 
 export function PartnersBadges() {
   const eyebrow = useContent("partners.eyebrow");
