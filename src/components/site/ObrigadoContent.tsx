@@ -124,7 +124,7 @@ export function ObrigadoQualificado() {
         <div className="mt-14 grid sm:grid-cols-3 gap-5 text-left">
           {[
             { n: "01", t: "Análise individual", d: "Olhamos o seu histórico, formação, impacto e contexto familiar." },
-            { n: "02", t: "Indicação de caminho", d: "Sinalizamos a categoria EB mais coerente com o seu perfil." },
+            { n: "02", t: "Sugestão de caminho", d: "Sinalizamos a categoria EB mais coerente com o seu perfil." },
             { n: "03", t: "Próximos passos", d: "Se fizer sentido, agendamos uma conversa estratégica." },
           ].map((s) => (
             <div key={s.n} className="border border-gold/20 bg-ink-raise/40 p-5 rounded-lg">
