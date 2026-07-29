@@ -523,10 +523,13 @@ export function WhyUs() {
             <p className="mt-6 text-foreground/80 leading-relaxed max-w-md">{lead}</p>
           </div>
           <ul className="grid sm:grid-cols-2 gap-3 self-end">
-            {items.map(({ icon: Icon, t }) => (
+            {items.map(({ icon: Icon, t, desc }) => (
               <li key={t} className="rounded-xl border border-gold/20 bg-ink-raise/50 p-5 flex gap-3">
                 <Icon className="h-5 w-5 text-gold shrink-0 mt-0.5" />
-                <span className="leading-snug text-foreground/85">{t}</span>
+                <span className="leading-snug text-foreground/85">
+                  {t}
+                  {desc && <span className="block mt-1 text-foreground/60 text-sm">{desc}</span>}
+                </span>
               </li>
             ))}
           </ul>
