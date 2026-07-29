@@ -1096,11 +1096,11 @@ export function CtaBanner() {
             </span>
             <p className="font-mono-label text-gold/85">ANÁLISE COMPLETA</p>
             <h3 className="mt-3 font-display text-2xl leading-tight break-words">
-              Diagnóstico do seu perfil em até 48h.
+              Descubra seu caminho para os EUA em até 48h.
             </h3>
             <p className="mt-3 text-foreground/75 text-[15px] leading-relaxed">
-              Você envia seus dados e nossa equipe responde por e-mail com a sugestão
-              do caminho mais coerente com a sua história.
+              Preencha o formulário. Nossa equipe analisa seu perfil e aponta a categoria EB
+              mais alinhada com a sua história.
             </p>
             <ul className="mt-5 space-y-2 text-[14px] text-foreground/80">
               {[
@@ -1116,7 +1116,7 @@ export function CtaBanner() {
             </ul>
             <a href={useAvaliacaoHref("home_cta_final")} className="mt-7 block sm:inline-block">
               <Button size="lg" variant="cta" className="btn-label btn-sweep h-12 px-4 sm:px-7 w-full sm:w-auto whitespace-normal text-center leading-tight">
-                Fazer minha análise gratuita
+                Quero minha análise gratuita
               </Button>
             </a>
             <p className="mt-3 text-[12px] text-foreground/80">
