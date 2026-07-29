@@ -1105,7 +1105,7 @@ export function CtaBanner() {
             <ul className="mt-5 space-y-2 text-[14px] text-foreground/80">
               {[
                 "Análise estratégica gratuita",
-                "Resposta personalizada em até 48h",
+                "Resposta personalizada",
                 "Confidencial e sem compromisso",
               ].map((i) => (
                 <li key={i} className="flex gap-2.5">
