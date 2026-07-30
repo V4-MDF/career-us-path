@@ -28,7 +28,7 @@ export const Route = createFileRoute("/pre-qualificacao")({
   head: () => ({
     meta: [
       { title: "Teste de pré-qualificação. Status na América" },
-      { name: "description", content: "Veja como o seu perfil se posiciona diante dos critérios de cada categoria de visto americano (EB-1A, EB-2 NIW, O-1, EB-3)." },
+      { name: "description", content: "Veja quais documentos costumam ser exigidos em cada categoria de visto americano (EB-1A, EB-2 NIW, O-1, EB-3)." },
       { name: "robots", content: "noindex, nofollow" },
     ],
   }),
@@ -68,7 +68,7 @@ function PreQualPage() {
               <header className="mb-10">
                 <p className="font-mono-label text-gold/80">PRÉ-QUALIFICAÇÃO · 4 ETAPAS · ~5 MIN</p>
                 <h1 className="mt-3 font-display text-3xl sm:text-4xl leading-tight text-foreground">
-                  Veja como o seu perfil se posiciona diante dos critérios de cada categoria.
+                  Veja quais documentos costumam ser exigidos em cada categoria.
                 </h1>
                 <p className="mt-4 text-foreground/75 max-w-2xl">
                   Esta triagem é orientativa e não substitui parecer jurídico individual.

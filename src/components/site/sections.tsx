@@ -1099,8 +1099,8 @@ export function CtaBanner() {
               Descubra seu caminho para os EUA.
             </h3>
             <p className="mt-3 text-foreground/75 text-[15px] leading-relaxed">
-              Preencha o formulário. Nossa equipe analisa seu perfil e aponta a categoria EB
-              mais alinhada com a sua história.
+              Preencha o formulário. Nossa equipe retornará explicando os serviços de preparação
+              documental disponíveis e as próximas etapas.
             </p>
             <ul className="mt-5 space-y-2 text-[14px] text-foreground/80">
               {[
@@ -1135,7 +1135,7 @@ export function CtaBanner() {
             </h3>
             <p className="mt-3 text-foreground/70 text-[15px] leading-relaxed">
               Poucas perguntas objetivas sobre formação e experiência. Ao final,
-              um mapa de como o seu perfil se posiciona diante das categorias EB-1A, EB-2 NIW e O-1.
+              um mapa de quais documentos costumam ser exigidos nas categorias EB-1A, EB-2 NIW e O-1.
             </p>
             <ul className="mt-5 space-y-2 text-[14px] text-foreground/75">
               {[

@@ -67,7 +67,7 @@ export const defaultContent = {
   "why.lead":
     "Equipe com trajetória consolidada em processos de imigração, com sede própria em Orlando desde 2022.",
 
-  "cta.title": "Entenda como o seu perfil se posiciona diante dos critérios do USCIS.",
+  "cta.title": "Entenda quais documentos costumam ser exigidos pelo USCIS em cada categoria.",
   "cta.subtitle":
     "Levantamento inicial de informações, gratuito e confidencial. Em até 48h nossa equipe organiza as informações do seu perfil e apresenta um panorama das categorias de visto aplicáveis.",
 
@@ -248,9 +248,9 @@ export const defaultContent = {
   "sobre.numeros.n5.valor": "—",
   "sobre.numeros.n5.label": BBB_LABEL,
 
-  "sobre.cta.title": "Vamos estruturar o seu caso.",
+  "sobre.cta.title": "Vamos organizar a sua documentação.",
   "sobre.cta.subtitle":
-    "Comece pela análise gratuita: em até 48h retornamos com um caminho coerente com sua história.",
+    "Comece pela análise gratuita: nossa equipe retornará para esclarecer as próximas etapas administrativas e os serviços de preparação documental disponíveis.",
 };
 
 
