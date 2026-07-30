@@ -460,7 +460,7 @@ export function ProcessSteps() {
     { n: "02", icon: Layers, t: "Arquitetura Estratégica",
       d: "Organizamos a documentação demonstrando que a atuação proposta tem mérito substancial e importância nacional para os Estados Unidos." },
     { n: "03", icon: FileText, t: "Preparação Documental",
-      d: "Auxiliamos na organização, revisão e preparação da documentação apresentada por você, sem assumir a autoria do conteúdo." },
+      d: "Auxiliamos na organização, revisão e preparação da documentação apresentada por você, sem assumir a autoria do conteúdo. Inclui organização e revisão das cartas de recomendação apresentadas pelo cliente." },
     { n: "04", icon: Briefcase, t: "Revisão Final",
       d: "Organização completa e criteriosa do seu processo, dentro dos padrões exigidos pelo USCIS." },
   ];
