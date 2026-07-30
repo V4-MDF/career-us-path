@@ -458,9 +458,9 @@ export function ProcessSteps() {
     { n: "01", icon: GraduationCap, t: "Análise Criteriosa",
       d: "Organizamos e revisamos histórico, formação e evidências de impacto para o EB-2 NIW." },
     { n: "02", icon: Layers, t: "Organização Documental",
-      d: "Organizamos a documentação demonstrando que a atuação proposta tem mérito substancial e importância nacional para os Estados Unidos." },
+      d: "Organizamos a documentação que demonstra mérito substancial e importância nacional da atuação proposta." },
     { n: "03", icon: FileText, t: "Preparação Documental",
-      d: "Auxiliamos na organização, revisão e preparação da documentação apresentada por você, sem assumir a autoria do conteúdo. Inclui organização e revisão das cartas de recomendação apresentadas pelo cliente." },
+      d: "Auxiliamos na organização e revisão da documentação e das cartas apresentadas por você, sem assumir autoria do conteúdo." },
     { n: "04", icon: Briefcase, t: "Revisão Final",
       d: "Organização completa e criteriosa do seu processo, dentro dos padrões exigidos pelo USCIS." },
   ];
@@ -469,13 +469,14 @@ export function ProcessSteps() {
       <div aria-hidden className="absolute inset-0 text-ink-text/10"><ProcessIconStrip /></div>
       <div className="container-x relative">
         <SectionHead num="05" eyebrow="PROCESSO EB-2 NIW" title="Quatro etapas. Conduzidas com rigor." variant="parchment" />
-        <div className="mt-14 grid md:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className="mt-14 grid md:grid-cols-2 lg:grid-cols-4 gap-5 auto-rows-fr items-stretch">
           {steps.map(({ n, icon: Icon, t, d }) => (
-            <div key={n} className="relative gold-tick rounded-2xl bg-white border border-ink-text/10 p-7 flex flex-col h-full shadow-soft">
-              <span className="font-display text-[48px] leading-none text-gold">{n}</span>
-              <Icon className="h-5 w-5 text-ink-text/60 mt-5" />
-              <h3 className="mt-3 font-display text-lg text-ink-text">{t}</h3>
-              <p className="mt-2 text-ink-text/75 text-[15px] leading-relaxed">{d}</p>
+            <div key={n} className="relative gold-tick rounded-2xl bg-white border border-ink-text/10 p-6 flex flex-col h-full shadow-soft">
+              <span className="font-display text-[40px] leading-none text-gold">{n}</span>
+              <Icon className="h-5 w-5 text-ink-text/60 mt-4" />
+              <h3 className="mt-3 font-display text-base text-ink-text min-h-[3rem]">{t}</h3>
+              <p className="mt-1 text-ink-text/75 text-[14px] leading-relaxed">{d}</p>
+
             </div>
           ))}
         </div>
