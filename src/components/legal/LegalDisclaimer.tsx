@@ -17,6 +17,21 @@ const ANTIQUE_GOLD = "#C8A24B";
 const EN =
   "i am not an attorney licensed to practice law and may not give legal advice or accept fees for legal advice. i am not accredited to represent you in immigration matters.";
 
+/** Texto canônico do aviso (inglês, minúsculas). Reutilizar em qualquer aviso do site. */
+export const LEGAL_NOTICE_EN = EN;
+
+/**
+ * Variante inline e discreta do mesmo aviso, para uso dentro de formulários
+ * e seções. Mesmo texto, mesmo tom, sem faixa de fundo.
+ */
+export function LegalNoteInline({ className = "" }: { className?: string }) {
+  return (
+    <p lang="en" className={`text-[12px] leading-relaxed text-muted-foreground ${className}`}>
+      {EN}
+    </p>
+  );
+}
+
 export function LegalDisclaimer() {
   return (
     <aside
