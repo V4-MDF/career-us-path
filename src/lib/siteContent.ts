@@ -38,7 +38,7 @@ export const defaultContent = {
   "hero.title": "Transforme a sua carreira em um Green Card americano.",
   "hero.subtitle":
     "A Status na América ajuda profissionais brasileiros consolidados a conquistar a residência permanente nos EUA pelo EB-2 NIW, sem patrocinador, sem loteria, com Green Card para o cônjuge e os filhos, junto do requerente principal.",
-  "hero.cta": "Fazer minha análise gratuita",
+  "hero.cta": "Iniciar pré-qualificação documental",
   // COMPLIANCE: números removidos até validação documental (ver src/config/credentials.ts).
   "hero.proof":
     "Avaliações 5★ no Google · Sede em Orlando, Flórida",
@@ -69,7 +69,7 @@ export const defaultContent = {
 
   "cta.title": "Entenda como o seu perfil se posiciona diante dos critérios do USCIS.",
   "cta.subtitle":
-    "Análise gratuita e confidencial. Em até 48h nossa equipe organiza as informações do seu perfil e apresenta um panorama das categorias de visto aplicáveis.",
+    "Levantamento inicial de informações, gratuito e confidencial. Em até 48h nossa equipe organiza as informações do seu perfil e apresenta um panorama das categorias de visto aplicáveis.",
 
   // ==== Selos e parceiros (Correções 3) ============================
   // Faixa de credenciais tratada como selos oficiais. Slots com `.url`
@@ -165,7 +165,7 @@ export const defaultContent = {
   "contato.eyebrow": "FALE CONOSCO",
   "contato.title": "Vamos conversar sobre o seu caso.",
   "contato.subtitle":
-    "Tire suas dúvidas com nossa equipe ou faça sua análise gratuita de perfil.",
+    "Tire suas dúvidas com nossa equipe ou faça seu levantamento inicial de informações.",
   "contato.usa.title": "Matriz. Estados Unidos",
   "contato.usa.company": "Status na America LLC",
   "contato.usa.address": "7575 KingsPointe Pkwy #4, Orlando, FL 32819",
@@ -181,7 +181,7 @@ export const defaultContent = {
   "contato.expansao.text": "Portugal e Dubai · em breve.",
   "contato.form.title": "Deixe uma mensagem",
   "contato.form.lead":
-    "Para uma análise de perfil completa, use o botão “Análise gratuita”. Este canal é para dúvidas rápidas e mensagens.",
+    "Para um levantamento inicial de informações completo, use o botão “Análise gratuita”. Este canal é para dúvidas rápidas e mensagens.",
   "contato.form.success": "Recebemos sua mensagem. Retornaremos em breve.",
 
   // ==== Página Sobre ==============================================

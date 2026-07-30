@@ -22,7 +22,7 @@ const HOME_FAQS = [
   { q: "Posso confiar mesmo sem ir presencialmente?", a: "Sim. A empresa é verificável por EIN, Google Business, BBB e avaliações reais. Atendimento 100% documentado e remoto, em todo o Brasil e nos EUA." },
   { q: "Já fui enganado antes. Como sei que não é mais uma promessa?", a: "Não prometemos o que não podemos garantir. Somos honestos sobre requisitos, chances reais e prazos do USCIS e consulados." },
   { q: "Meu caso é complicado, vale tentar?", a: "Casos complexos são onde o método faz mais diferença. Agende uma análise gratuita: se houver caminho, indicamos; se não houver, dizemos com a mesma honestidade." },
-  { q: "Não tenho dinheiro sobrando, compensa?", a: "É um investimento significativo, e por isso a análise inicial é gratuita. Valores são apresentados com clareza após o diagnóstico, sem pressão." },
+  { q: "Não tenho dinheiro sobrando, compensa?", a: "É um investimento significativo, e por isso a análise inicial é gratuita. Valores são apresentados com clareza após a pré-qualificação documental, sem pressão." },
 ];
 
 export const Route = createFileRoute("/")({

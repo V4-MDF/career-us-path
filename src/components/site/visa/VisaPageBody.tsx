@@ -229,14 +229,14 @@ export function VisaPageBody({ page, hideHero = false }: { page: VisaPage; hideH
             <div className="rounded-2xl border border-ink-text/15 bg-white p-8 shadow-elevated">
               <p className="font-mono-label text-gold">PRÓXIMO PASSO</p>
               <h3 className="mt-3 font-display text-2xl text-ink-text">
-                Comece pela análise gratuita do seu perfil.
+                Comece pelo levantamento inicial de informações.
               </h3>
               <p className="mt-3 text-ink-text/70 text-[15px] leading-relaxed">
                 Em poucos minutos enviamos sua análise para a equipe dedicada à preparação
                 documental para vistos EB. Resposta em até 48h por e-mail.
               </p>
               <a href={avaliacaoHref(`visto_${page.slug}_cta`)} className="mt-7 inline-block">
-                <Button size="lg" className="btn-label btn-sweep h-12 px-7">Fazer minha análise gratuita</Button>
+                <Button size="lg" className="btn-label btn-sweep h-12 px-7">Iniciar pré-qualificação documental</Button>
               </a>
             </div>
           </div>

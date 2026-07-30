@@ -128,7 +128,7 @@ const SEED_SEGMENTS: Segment[] = [
       eyebrow: "PARA MÉDICOS BRASILEIROS",
       h1: "Você é médico e quer construir sua carreira nos Estados Unidos?",
       sub: "Conquiste o Green Card pelo mérito da sua trajetória, pelo EB-2 NIW, sem patrocinador e sem loteria. Green Card também para cônjuge e filhos.",
-      cta_texto: "Fazer minha análise gratuita",
+      cta_texto: "Iniciar pré-qualificação documental",
     },
   },
   {
@@ -173,12 +173,12 @@ const SEED_SEGMENTS: Segment[] = [
     ],
     meta_title: "Green Card para engenheiros brasileiros | EB-2 NIW | Status na América",
     meta_description:
-      "Engenheiro e quer carreira nos EUA? Conquiste o Green Card por mérito pelo EB-2 NIW, sem patrocinador. Análise gratuita do seu perfil.",
+      "Engenheiro e quer carreira nos EUA? Conquiste o Green Card por mérito pelo EB-2 NIW, sem patrocinador. Levantamento inicial de informações.",
     hero_default: {
       eyebrow: "PARA ENGENHEIROS BRASILEIROS",
       h1: "Você é engenheiro e quer levar sua carreira para os Estados Unidos?",
       sub: "Conquiste o Green Card pelo mérito da sua trajetória em engenharia, pelo EB-2 NIW, sem patrocinador e sem loteria. Green Card também para cônjuge e filhos.",
-      cta_texto: "Fazer minha análise gratuita",
+      cta_texto: "Iniciar pré-qualificação documental",
     },
   },
   {
@@ -226,12 +226,12 @@ const SEED_SEGMENTS: Segment[] = [
     ],
     meta_title: "Green Card para empresários brasileiros | EB-2 NIW | Status na América",
     meta_description:
-      "Empresário e quer migrar com a família para os EUA? Green Card por mérito pelo EB-2 NIW. Análise gratuita do seu perfil.",
+      "Empresário e quer migrar com a família para os EUA? Green Card por mérito pelo EB-2 NIW. Levantamento inicial de informações.",
     hero_default: {
       eyebrow: "PARA EMPRESÁRIOS BRASILEIROS",
       h1: "Você empresário quer construir seu futuro com segurança nos Estados Unidos?",
       sub: "Leve sua família, seu patrimônio e sua experiência empreendedora para um ambiente de negócio estável e em dólar, com o Green Card pelo EB-2 NIW.",
-      cta_texto: "Fazer minha análise gratuita",
+      cta_texto: "Iniciar pré-qualificação documental",
     },
   },
 ];

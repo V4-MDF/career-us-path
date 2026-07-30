@@ -138,7 +138,7 @@ const eb2niw: VisaPage = {
         num: "01",
         title: "Análise Criteriosa",
         body:
-          "Organizamos e revisamos histórico, formação e evidências de impacto para o EB-2 NIW, diagnóstico individual antes de qualquer compromisso.",
+          "Organizamos e revisamos histórico, formação e evidências de impacto para o EB-2 NIW, pré-qualificação documental antes de qualquer compromisso.",
       },
       {
         num: "02",
@@ -196,7 +196,7 @@ const eb2niw: VisaPage = {
     {
       q: "Quanto custa?",
       a:
-        "A análise inicial do perfil é gratuita. O investimento da preparação documental varia conforme a composição da família, a complexidade da documentação e o estágio do caso. O valor da assessoria é separado das taxas oficiais do governo americano (USCIS), que são pagas diretamente ao órgão e podem variar. Apresentamos a proposta e o panorama completo de custos após o diagnóstico.",
+        "A análise inicial do perfil é gratuita. O investimento da preparação documental varia conforme a composição da família, a complexidade da documentação e o estágio do caso. O valor da assessoria é separado das taxas oficiais do governo americano (USCIS), que são pagas diretamente ao órgão e podem variar. Apresentamos a proposta e o panorama completo de custos após a pré-qualificação documental.",
     },
     {
       q: "As taxas do governo americano estão incluídas no valor da assessoria?",
@@ -211,7 +211,7 @@ const eb2niw: VisaPage = {
   ],
   ctaTitle: "Entenda como o seu perfil se posiciona diante dos critérios do USCIS para o EB-2 NIW.",
   ctaSubtitle:
-    "Análise gratuita e confidencial. Em até 48h nossa equipe organiza as informações do seu perfil e apresenta um panorama das categorias de visto aplicáveis.",
+    "Levantamento inicial de informações, gratuito e confidencial. Em até 48h nossa equipe organiza as informações do seu perfil e apresenta um panorama das categorias de visto aplicáveis.",
 };
 
 /* ---------------- EB-1 ---------------- */
@@ -246,7 +246,7 @@ const eb1: VisaPage = {
   process: {
     title: "Como funciona o processo",
     steps: [
-      { num: "01", title: "Diagnóstico de critérios", body: "Mapeamento de evidências objetivas em pelo menos 3 dos critérios oficiais." },
+      { num: "01", title: "Pré-qualificação documental de critérios", body: "Mapeamento de evidências objetivas em pelo menos 3 dos critérios oficiais." },
       { num: "02", title: "Processo I-140", body: "Organização do conjunto documental para protocolo, conduzido pelo requerente ou pelo advogado responsável." },
       { num: "03", title: "Aprovação e ajuste / consular", body: "Conclusão do processo, com Green Card para o requerente, cônjuge e filhos." },
     ],
@@ -389,7 +389,7 @@ const o1: VisaPage = {
   process: {
     title: "Como preparamos a sua documentação",
     steps: [
-      { num: "01", title: "Diagnóstico do perfil", body: "Mapeamento das evidências disponíveis, identificação do peticionário viável (empregador ou agente) e do enquadramento O-1A ou O-1B." },
+      { num: "01", title: "Pré-qualificação documental", body: "Mapeamento das evidências disponíveis, identificação do peticionário viável (empregador ou agente) e do enquadramento O-1A ou O-1B." },
       { num: "02", title: "Organização documental", body: "Preparação das evidências, cartas de consulta (advisory opinion) da associação da área e do dossiê de suporte." },
       { num: "03", title: "Processo I-129", body: "Organização do conjunto documental para protocolo, conduzido pelo peticionário nos EUA. Premium Processing disponível." },
       { num: "04", title: "Emissão do visto", body: "Aprovada a petição, o profissional obtém o visto no consulado; cônjuge e filhos entram com O-3." },
@@ -429,7 +429,7 @@ const o1: VisaPage = {
     },
   ],
   ctaTitle: "Entenda como o seu perfil se posiciona diante dos critérios do USCIS para o O-1.",
-  ctaSubtitle: "Análise gratuita e confidencial. Em até 48h nossa equipe organiza um panorama das categorias aplicáveis — O-1, EB-1A e correlatas.",
+  ctaSubtitle: "Levantamento inicial de informações, gratuito e confidencial. Em até 48h nossa equipe organiza um panorama das categorias aplicáveis — O-1, EB-1A e correlatas.",
 };
 
 export const VISA_PAGES: Record<VisaSlug, VisaPage> = {
