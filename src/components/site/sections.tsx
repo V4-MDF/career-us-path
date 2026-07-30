@@ -602,16 +602,12 @@ export function InstitutionalVideo() {
  * ============================================================ */
 export function LegacySection() {
   const pillars = [
-    { icon: Briefcase, t: "Independência Profissional",
-      d: "Trabalhe para quem quiser, abra empresa ou mude de área sem comprometer seu status." },
     { icon: ShieldCheck, t: "Green Card Direto",
       d: "Residência permanente para você e família. Após cinco anos, cumpridos os requisitos, é possível solicitar a naturalização." },
     { icon: Heart, t: "Segurança Familiar",
       d: "Cônjuge e filhos solteiros menores de 21 acompanham o requerente principal. A idade pode ser protegida pelo CSPA." },
     { icon: GraduationCap, t: "Futuro dos Filhos",
       d: "Educação de qualidade e universidade a custo de residente, com os mesmos direitos de quem já mora nos EUA." },
-    { icon: Sparkles, t: "Previsibilidade",
-      d: "Controle do seu futuro imigratório, sem loterias e sem depender de empresas." },
   ];
   return (
     <Reveal as="section" id="legado" className="section-verde-brasil section-pad border-y border-gold/25 relative overflow-hidden">
@@ -632,7 +628,7 @@ export function LegacySection() {
           num="07"
           eyebrow="O QUE VOCÊ CONQUISTA"
           title="Muito mais que um visto. Um legado."
-          kicker="Com o Green Card aprovado pelo EB-2 NIW, cinco coisas mudam para a sua família."
+          kicker="Com o Green Card aprovado pelo EB-2 NIW, três coisas mudam para a sua família."
         />
 
         {/* Bloco editorial de família (dobra mais emocional da Home). */}
@@ -682,7 +678,7 @@ export function LegacySection() {
         </div>
 
         {/* Desktop/tablet: grid */}
-        <div className="mt-12 hidden md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
+        <div className="mt-12 hidden md:grid md:grid-cols-3 gap-4">
           {pillars.map(({ icon: Icon, t, d }) => (
             <article key={t} className="relative gold-tick rounded-2xl border border-gold/25 bg-ink-raise/50 p-5 h-full shadow-soft transition-[border-color,box-shadow] hover:border-gold/55 hover:shadow-elevated">
               <Icon className="h-5 w-5 text-gold" />
