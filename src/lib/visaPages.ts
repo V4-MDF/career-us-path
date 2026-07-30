@@ -150,7 +150,7 @@ const eb2niw: VisaPage = {
         num: "03",
         title: "Preparação Documental",
         body:
-          "Documentação meticulosa, cartas de recomendação e evidências de alto padrão, coerência técnica e narrativa em cada peça.",
+          "Auxiliamos na organização, revisão e preparação da documentação apresentada por você, sem assumir a autoria do conteúdo.",
       },
       {
         num: "04",
