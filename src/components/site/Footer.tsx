@@ -45,7 +45,7 @@ export function Footer() {
             />
           </Link>
           <p className="mt-6 max-w-sm text-sm text-foreground/80 leading-relaxed">
-            Especialistas em preparação documental para mobilidade migratória, para
+            Equipe dedicada à preparação documental para mobilidade migratória, para
             profissionais brasileiros que escolheram construir o próximo capítulo nos Estados Unidos.
           </p>
           <div className="mt-7 flex gap-3 text-foreground/80">

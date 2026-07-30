@@ -232,8 +232,8 @@ export function VisaPageBody({ page, hideHero = false }: { page: VisaPage; hideH
                 Comece pela análise gratuita do seu perfil.
               </h3>
               <p className="mt-3 text-ink-text/70 text-[15px] leading-relaxed">
-                Em poucos minutos enviamos sua análise para a equipe especializada
-                em vistos EB. Resposta em até 48h por e-mail.
+                Em poucos minutos enviamos sua análise para a equipe dedicada à preparação
+                documental para vistos EB. Resposta em até 48h por e-mail.
               </p>
               <a href={avaliacaoHref(`visto_${page.slug}_cta`)} className="mt-7 inline-block">
                 <Button size="lg" className="btn-label btn-sweep h-12 px-7">Fazer minha análise gratuita</Button>
