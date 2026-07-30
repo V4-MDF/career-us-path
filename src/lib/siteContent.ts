@@ -181,7 +181,7 @@ export const defaultContent = {
   "contato.expansao.text": "Portugal e Dubai · em breve.",
   "contato.form.title": "Deixe uma mensagem",
   "contato.form.lead":
-    "Para um levantamento inicial de informações completo, use o botão “Análise gratuita”. Este canal é para dúvidas rápidas e mensagens.",
+    "Para um levantamento inicial de informações completo, use o botão “Iniciar pré-qualificação documental”. Este canal é para dúvidas rápidas e mensagens.",
   "contato.form.success": "Recebemos sua mensagem. Retornaremos em breve.",
 
   // ==== Página Sobre ==============================================
@@ -250,7 +250,7 @@ export const defaultContent = {
 
   "sobre.cta.title": "Vamos organizar a sua documentação.",
   "sobre.cta.subtitle":
-    "Comece pela análise gratuita: nossa equipe retornará para esclarecer as próximas etapas administrativas e os serviços de preparação documental disponíveis.",
+    "Comece pela pré-qualificação documental: nossa equipe retornará para esclarecer as próximas etapas administrativas e os serviços de preparação documental disponíveis.",
 };
 
 
