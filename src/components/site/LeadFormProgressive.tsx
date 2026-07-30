@@ -16,6 +16,7 @@
  *
  * Não altera scoring (sempre derivado ao vivo em /admin) nem A/B.
  */
+import { LegalNoteInline } from "@/components/legal/LegalDisclaimer";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { Link } from "@tanstack/react-router";
@@ -502,14 +503,7 @@ export function LeadFormProgressive({
           )}
         </div>
 
-        <p className="text-xs text-muted-foreground">
-          Dados tratados conforme a nossa{" "}
-          <Link to="/privacidade" className="text-gold underline underline-offset-4 hover:text-gold/80">
-            Política de Privacidade
-          </Link>
-          . A Status na América não é escritório de advocacia — as informações
-          enviadas não são protegidas por sigilo advogado-cliente.
-        </p>
+        <LegalNoteInline />
 
       </div>
     </div>
