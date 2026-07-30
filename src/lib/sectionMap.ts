@@ -41,7 +41,7 @@ export const HOME_SECTIONS: SectionDef[] = [
   { id: "renda-em-dolar",       label: "Renda em dólar" },
   { id: "depoimentos",          label: "Depoimentos" },
   { id: "duvidas-frequentes",   label: "Dúvidas frequentes" },
-  { id: "avaliacao-gratuita",   label: "Análise gratuita" },
+  { id: "avaliacao-gratuita",   label: "Levantamento inicial de informações" },
 ];
 
 // ============================================================
@@ -115,7 +115,7 @@ export const CONTATO_SECTIONS: SectionDef[] = [
 export const BLOG_POST_SECTIONS: SectionDef[] = [
   { id: "introducao",  label: "Introdução" },
   { id: "conteudo",    label: "Conteúdo" },
-  { id: "avaliacao",   label: "Avaliação" },
+  { id: "avaliacao",   label: "Pré-qualificação documental" },
 ];
 
 // ============================================================

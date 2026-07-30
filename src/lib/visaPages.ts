@@ -124,7 +124,7 @@ const eb2niw: VisaPage = {
           "O profissional precisa estar bem posicionado para efetivamente avançar nesta atuação nos EUA: histórico de realizações, plano consistente, recursos, formação compatível e demanda no mercado americano.",
       },
       {
-        title: "É vantajoso para os EUA dispensar o patrocinador no seu caso",
+        title: "É vantajoso para os EUA dispensar o patrocinador no seu perfil",
         body:
           "Os EUA se beneficiam ao dispensar a exigência de oferta de emprego e PERM neste caso específico, porque a urgência, a singularidade do perfil ou o impacto justificam a flexibilização da regra geral.",
       },
@@ -142,7 +142,7 @@ const eb2niw: VisaPage = {
       },
       {
         num: "02",
-        title: "Arquitetura Estratégica",
+        title: "Organização Documental",
         body:
           "Organizamos a documentação demonstrando que a atuação proposta tem mérito substancial e importância nacional para os Estados Unidos.",
       },
@@ -201,7 +201,7 @@ const eb2niw: VisaPage = {
     {
       q: "As taxas do governo americano estão incluídas no valor da assessoria?",
       a:
-        "Não. Existem duas coisas diferentes: (1) as taxas oficiais do governo americano (USCIS), pagas diretamente ao órgão; e (2) o valor da nossa assessoria, que cobre a preparação e organização estratégica do seu processo. São separados. As taxas do USCIS são definidas pelo próprio governo, podem mudar e são pagas por formulário. Na fase final (Green Card), parte das taxas é individual — ou seja, cônjuge e filhos têm suas próprias taxas. Na sua análise gratuita, explicamos exatamente quais taxas se aplicam ao seu caso e à sua família.",
+        "Não. Existem duas coisas diferentes: (1) as taxas oficiais do governo americano (USCIS), pagas diretamente ao órgão; e (2) o valor da nossa assessoria, que cobre a preparação e organização documental do seu processo. São separados. As taxas do USCIS são definidas pelo próprio governo, podem mudar e são pagas por formulário. Na fase final (Green Card), parte das taxas é individual — ou seja, cônjuge e filhos têm suas próprias taxas. No levantamento inicial de informações, explicamos quais taxas costumam se aplicar ao seu perfil e à sua família.",
     },
     {
       q: "Preciso pagar taxas separadas para minha família?",
@@ -277,7 +277,7 @@ const eb1: VisaPage = {
     },
     {
       q: "As taxas do governo americano estão incluídas no valor da assessoria?",
-      a: "Não. Existem duas coisas diferentes: (1) as taxas oficiais do governo americano (USCIS), pagas diretamente ao órgão; e (2) o valor da nossa assessoria, que cobre a preparação e organização estratégica do seu processo. São separados. As taxas do USCIS são definidas pelo próprio governo, podem mudar e são pagas por formulário. Na fase final (Green Card), parte das taxas é individual — cônjuge e filhos têm suas próprias taxas. Na sua análise gratuita, explicamos exatamente quais taxas se aplicam ao seu caso e à sua família.",
+      a: "Não. Existem duas coisas diferentes: (1) as taxas oficiais do governo americano (USCIS), pagas diretamente ao órgão; e (2) o valor da nossa assessoria, que cobre a preparação e organização documental do seu processo. São separados. As taxas do USCIS são definidas pelo próprio governo, podem mudar e são pagas por formulário. Na fase final (Green Card), parte das taxas é individual — cônjuge e filhos têm suas próprias taxas. No levantamento inicial de informações, explicamos quais taxas costumam se aplicar ao seu perfil e à sua família.",
     },
     {
       q: "Preciso pagar taxas separadas para minha família?",
@@ -285,7 +285,7 @@ const eb1: VisaPage = {
     },
   ],
   ctaTitle: "Tem reconhecimento internacional? Avalie o EB-1.",
-  ctaSubtitle: "Em até 48h organizamos as informações do seu perfil e apresentamos um panorama das categorias EB aplicáveis ao seu caso.",
+  ctaSubtitle: "Em até 48h organizamos as informações do seu perfil e apresentamos um panorama das categorias EB e dos documentos normalmente exigidos.",
 };
 
 /* ---------------- EB-3 ---------------- */
@@ -344,7 +344,7 @@ const eb3: VisaPage = {
     },
     {
       q: "As taxas do governo americano estão incluídas no valor da assessoria?",
-      a: "Não. Existem duas coisas diferentes: (1) as taxas oficiais do governo americano (USCIS), pagas diretamente ao órgão; e (2) o valor da nossa assessoria, que cobre a preparação e organização estratégica do seu processo. São separados. As taxas do USCIS são definidas pelo próprio governo, podem mudar e são pagas por formulário. Na fase final (Green Card), parte das taxas é individual — cônjuge e filhos têm suas próprias taxas. Na sua análise gratuita, explicamos exatamente quais taxas se aplicam ao seu caso e à sua família.",
+      a: "Não. Existem duas coisas diferentes: (1) as taxas oficiais do governo americano (USCIS), pagas diretamente ao órgão; e (2) o valor da nossa assessoria, que cobre a preparação e organização documental do seu processo. São separados. As taxas do USCIS são definidas pelo próprio governo, podem mudar e são pagas por formulário. Na fase final (Green Card), parte das taxas é individual — cônjuge e filhos têm suas próprias taxas. No levantamento inicial de informações, explicamos quais taxas costumam se aplicar ao seu perfil e à sua família.",
     },
     {
       q: "Preciso pagar taxas separadas para minha família?",
@@ -425,7 +425,7 @@ const o1: VisaPage = {
     },
     {
       q: "As taxas do governo americano estão incluídas no valor da assessoria?",
-      a: "Não. Existem duas coisas diferentes: (1) as taxas oficiais do governo americano (USCIS), pagas diretamente ao órgão; e (2) o valor da nossa assessoria, que cobre a preparação e organização estratégica do seu processo. São separados. As taxas do USCIS são definidas pelo próprio governo, podem mudar e são pagas por formulário. Na sua análise gratuita, explicamos exatamente quais taxas se aplicam ao seu caso e à sua família.",
+      a: "Não. Existem duas coisas diferentes: (1) as taxas oficiais do governo americano (USCIS), pagas diretamente ao órgão; e (2) o valor da nossa assessoria, que cobre a preparação e organização documental do seu processo. São separados. As taxas do USCIS são definidas pelo próprio governo, podem mudar e são pagas por formulário. No levantamento inicial de informações, explicamos quais taxas costumam se aplicar ao seu perfil e à sua família.",
     },
   ],
   ctaTitle: "Entenda quais documentos costumam ser exigidos pelo USCIS em cada categoria, incluindo o O-1.",

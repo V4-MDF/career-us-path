@@ -138,7 +138,7 @@ function SobreHero() {
         <div className="mt-8">
           <Link to="/avaliacao">
             <Button size="lg" className="btn-label">
-              Análise gratuita <ArrowRight className="ml-2 h-4 w-4" />
+              Iniciar pré-qualificação documental <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </Link>
         </div>
@@ -418,7 +418,7 @@ function CtaFinal() {
         <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
           <Link to="/avaliacao">
             <Button size="lg" className="btn-label w-full sm:w-auto">
-              Análise gratuita <ArrowRight className="ml-2 h-4 w-4" />
+              Iniciar pré-qualificação documental <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </Link>
           <Link to="/contato">

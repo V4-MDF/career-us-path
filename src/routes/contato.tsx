@@ -649,7 +649,7 @@ function Disclaimer() {
   return (
     <section className="bg-ink text-white/70 py-10">
       <div className="container-x max-w-3xl text-center text-sm leading-relaxed">
-        Status na América é uma empresa de consultoria em documentação e estratégia
+        Status na América é uma empresa de preparação e organização de documentação
         migratória. Não somos escritório de advocacia e não prestamos aconselhamento
         jurídico. Trabalhamos em parceria com advogados de imigração licenciados nos
         Estados Unidos quando a natureza do caso exige representação legal.

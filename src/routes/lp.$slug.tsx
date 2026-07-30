@@ -18,7 +18,7 @@ const slugDefaults: Record<string, { title: string; description: string }> = {
   medicos: {
     title: "Green Card para médicos brasileiros | EB-2 NIW | Status na América",
     description:
-      "Médico e quer construir carreira nos EUA? Veja como conquistar o Green Card por mérito pelo EB-2 NIW, sem patrocinador. Análise gratuita.",
+      "Médico e quer construir carreira nos EUA? Veja como conquistar o Green Card por mérito pelo EB-2 NIW, sem patrocinador. Levantamento inicial de informações gratuito.",
   },
   engenheiros: {
     title: "Green Card para engenheiros brasileiros | EB-2 NIW | Status na América",

@@ -13,7 +13,7 @@
  *
  * Compartilhamento público:
  *  - cada resposta gera /pre-qualificacao/r/:token para o lead reabrir e
- *    enviar via WhatsApp ao consultor. Não exibe dados sensíveis (CPF etc.)
+ *    enviar via WhatsApp à nossa equipe. Não exibe dados sensíveis (CPF etc.)
  *    porque não os coletamos aqui.
  */
 
@@ -178,7 +178,7 @@ export function publicResultUrl(id: string): string {
   return `${window.location.origin}/pre-qualificacao/r/${id}`;
 }
 
-/** Mensagem padrão pré-preenchida no WhatsApp do lead → consultor. */
+/** Mensagem padrão pré-preenchida no WhatsApp do lead → nossa equipe. */
 export function whatsappMessageFor(record: PreQualResponse): string {
   const visa: VisaCode = record.result.best.code;
   const name = record.answers.fullName.split(" ")[0] || "Olá";

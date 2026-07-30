@@ -206,7 +206,7 @@ export function VisaPageBody({ page, hideHero = false }: { page: VisaPage; hideH
       </section>
 
       {/* 7. Análise gratuita (CTA) */}
-      <section id="avaliacao-gratuita" aria-label="Análise gratuita" className="section-anchor section-parchment">
+      <section id="avaliacao-gratuita" aria-label="Levantamento inicial de informações" className="section-anchor section-parchment">
         <div className="container-x section-pad grid lg:grid-cols-12 gap-10 items-start">
           <div className="lg:col-span-7">
             <SectionHead num="07" eyebrow="ANÁLISE GRATUITA" variant="parchment" title={page.ctaTitle} kicker={page.ctaSubtitle} />

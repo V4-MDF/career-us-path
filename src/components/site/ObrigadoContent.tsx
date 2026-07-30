@@ -125,7 +125,7 @@ export function ObrigadoQualificado() {
           {[
             { n: "01", t: "Análise individual", d: "Olhamos o seu histórico, formação, impacto e contexto familiar." },
             { n: "02", t: "Sugestão de caminho", d: "Sinalizamos a categoria EB mais coerente com o seu perfil." },
-            { n: "03", t: "Próximos passos", d: "Se fizer sentido, agendamos uma conversa estratégica." },
+            { n: "03", t: "Próximos passos", d: "Se fizer sentido, agendamos uma conversa sobre a preparação documental." },
           ].map((s) => (
             <div key={s.n} className="border border-gold/20 bg-ink-raise/40 p-5 rounded-lg">
               <div className="font-display text-3xl text-gold leading-none">{s.n}</div>

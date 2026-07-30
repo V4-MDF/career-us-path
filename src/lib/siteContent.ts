@@ -163,7 +163,7 @@ export const defaultContent = {
 
   // ==== Página de Contato =========================================
   "contato.eyebrow": "FALE CONOSCO",
-  "contato.title": "Vamos conversar sobre o seu caso.",
+  "contato.title": "Vamos conversar sobre a sua documentação.",
   "contato.subtitle":
     "Tire suas dúvidas com nossa equipe ou faça seu levantamento inicial de informações.",
   "contato.usa.title": "Matriz. Estados Unidos",
@@ -211,7 +211,7 @@ export const defaultContent = {
   "sobre.diferencial.p4.title": "Adaptação de família",
   "sobre.diferencial.p4.text": "Acompanhamento humano nos primeiros meses de vida nos EUA.",
 
-  "sobre.equipe.eyebrow": "QUEM CUIDA DO SEU CASO",
+  "sobre.equipe.eyebrow": "QUEM CUIDA DA SUA DOCUMENTAÇÃO",
   "sobre.equipe.title": "Uma equipe presente nos dois países.",
   "sobre.equipe.note":
     "Fotos e biografias a substituir por conteúdo real fornecido pelo cliente.",

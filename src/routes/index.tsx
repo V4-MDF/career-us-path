@@ -21,7 +21,7 @@ const HOME_FAQS = [
   { q: "Qual a experiência de vocês?", a: "Atuamos exclusivamente na preparação de documentação para vistos de emprego por mérito: EB-1, EB-2 NIW e EB-3. Foco gera profundidade nos critérios do USCIS." },
   { q: "Posso confiar mesmo sem ir presencialmente?", a: "Sim. A empresa é verificável por EIN, Google Business, BBB e avaliações reais. Atendimento 100% documentado e remoto, em todo o Brasil e nos EUA." },
   { q: "Já fui enganado antes. Como sei que não é mais uma promessa?", a: "Não prometemos o que não podemos garantir. Somos honestos sobre requisitos, chances reais e prazos do USCIS e consulados." },
-  { q: "Meu caso é complicado, vale tentar?", a: "Casos complexos são onde o método faz mais diferença. Agende uma análise gratuita: se houver caminho, indicamos; se não houver, dizemos com a mesma honestidade." },
+  { q: "Meu perfil tem pontos sensíveis, vale tentar?", a: "Perfis com pontos sensíveis exigem documentação mais bem organizada. No levantamento inicial de informações mostramos quais documentos costumam ser exigidos e quais serviços de preparação documental estão disponíveis, com a mesma transparência quando não houver aderência." },
   { q: "Não tenho dinheiro sobrando, compensa?", a: "É um investimento significativo, e por isso a análise inicial é gratuita. Valores são apresentados com clareza após a pré-qualificação documental, sem pressão." },
 ];
 
@@ -31,7 +31,7 @@ export const Route = createFileRoute("/")({
       {
         title: "Status na América | Mobilidade Imigratória para brasileiros",
         description:
-          "Imigração legal aos EUA por mérito profissional. Análise gratuita para vistos EB-2 NIW, EB-1 e EB-3, com Green Card para cônjuge e filhos, junto do requerente principal.",
+          "Imigração legal aos EUA por mérito profissional. Levantamento inicial de informações para vistos EB-2 NIW, EB-1 e EB-3, com Green Card para cônjuge e filhos, junto do requerente principal.",
         canonical: "/",
         ogImage: OG_IMAGE,
         ogType: "website",

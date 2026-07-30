@@ -25,7 +25,7 @@ interface Card {
 const FALLBACK_COVERS = [coverSkyline, coverPassport, coverFamily];
 
 const PLACEHOLDERS: Card[] = [
-  { slug: "#", titulo: "Como o EB-2 NIW avalia o seu impacto profissional",
+  { slug: "#", titulo: "Quais documentos o EB-2 NIW costuma exigir sobre o seu impacto profissional",
     resumo: "Os três pilares Dhanasar e como construir evidências de mérito.",
     categoria: "Vistos e Green Card", tempo_leitura: 6, capa: coverPassport, placeholder: true },
   { slug: "#", titulo: "Vida em Orlando: o que ninguém te conta no primeiro ano",
