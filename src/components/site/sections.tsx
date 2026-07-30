@@ -1060,7 +1060,7 @@ export function FAQ() {
           </p>
           <a href={useAvaliacaoHref("home_faq")}>
             <Button size="lg" variant="cta" className="btn-label btn-sweep h-12 px-7 w-full sm:w-auto">
-              Falar com um especialista
+              Fale com a nossa equipe
             </Button>
           </a>
         </div>
