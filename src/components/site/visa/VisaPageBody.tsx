@@ -205,11 +205,11 @@ export function VisaPageBody({ page, hideHero = false }: { page: VisaPage; hideH
         </div>
       </section>
 
-      {/* 7. Análise gratuita (CTA) */}
+      {/* 7. Levantamento inicial de informações (CTA) */}
       <section id="avaliacao-gratuita" aria-label="Levantamento inicial de informações" className="section-anchor section-parchment">
         <div className="container-x section-pad grid lg:grid-cols-12 gap-10 items-start">
           <div className="lg:col-span-7">
-            <SectionHead num="07" eyebrow="ANÁLISE GRATUITA" variant="parchment" title={page.ctaTitle} kicker={page.ctaSubtitle} />
+            <SectionHead num="07" eyebrow="LEVANTAMENTO INICIAL DE INFORMAÇÕES" variant="parchment" title={page.ctaTitle} kicker={page.ctaSubtitle} />
             <ul className="mt-8 space-y-3 text-ink-text/80">
               {[
                 "Análise individual do perfil em até 48h",
@@ -222,7 +222,7 @@ export function VisaPageBody({ page, hideHero = false }: { page: VisaPage; hideH
               ))}
             </ul>
             <p className="mt-6 text-xs text-ink-text/60 leading-relaxed max-w-md">
-              O valor da assessoria é separado das taxas oficiais do governo americano (USCIS), que são pagas diretamente ao órgão e podem variar. Apresentamos o panorama completo de custos na sua análise gratuita.
+              O valor da assessoria é separado das taxas oficiais do governo americano (USCIS), que são pagas diretamente ao órgão e podem variar. Apresentamos o panorama de custos no levantamento inicial de informações.
             </p>
           </div>
           <div className="lg:col-span-5">
@@ -333,7 +333,7 @@ function VisaHero({ page }: { page: VisaPage }) {
             <div className="mt-8">
               <a href={avaliacaoHref(`visto_${page.slug}_hero`)}>
                 <Button size="lg" className="btn-label btn-sweep h-12 px-7 text-base">
-                  Análise gratuita
+                  Iniciar pré-qualificação documental
                 </Button>
               </a>
             </div>

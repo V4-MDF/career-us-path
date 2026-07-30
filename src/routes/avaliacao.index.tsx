@@ -35,15 +35,15 @@ interface AvaliacaoSearch {
 
 const SEG_DEFAULTS: Record<SegKey, { headline: string; profissao: string }> = {
   medicos: {
-    headline: "Análise gratuita para médicos brasileiros.",
+    headline: "Pré-qualificação documental para médicos brasileiros.",
     profissao: "medico",
   },
   engenheiros: {
-    headline: "Análise gratuita para engenheiros brasileiros.",
+    headline: "Pré-qualificação documental para engenheiros brasileiros.",
     profissao: "engenheiro",
   },
   empresarios: {
-    headline: "Análise gratuita para empresários brasileiros.",
+    headline: "Pré-qualificação documental para empresários brasileiros.",
     profissao: "empresario",
   },
 };
@@ -157,7 +157,7 @@ function AvaliacaoPage() {
             <div className="inline-flex items-center gap-3">
               <span aria-hidden className="h-px w-8 bg-gold" />
               <span className="font-mono-label text-[11px] tracking-wider text-gold">
-                ANÁLISE GRATUITA · 100% CONFIDENCIAL
+                LEVANTAMENTO INICIAL DE INFORMAÇÕES · 100% CONFIDENCIAL
               </span>
               <span aria-hidden className="h-px w-8 bg-gold" />
             </div>

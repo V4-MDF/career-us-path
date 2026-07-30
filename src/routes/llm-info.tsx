@@ -79,7 +79,7 @@ const QA: { q: string; a: string }[] = [
   {
     q: "Como entrar em contato?",
     a:
-      "Pelo formulário de análise gratuita em https://lp.statusnaamerica.com/avaliacao ou pelo canal de e-mail informados no site (contato@statusnaamerica.com).",
+      "Pelo formulário de pré-qualificação documental em https://lp.statusnaamerica.com/avaliacao ou pelo canal de e-mail informados no site (contato@statusnaamerica.com).",
   },
 ];
 

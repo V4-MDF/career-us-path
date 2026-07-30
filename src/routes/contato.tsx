@@ -161,7 +161,7 @@ function ContatoHero({
         <div className="mt-8">
           <Link to="/avaliacao" className="inline-flex">
             <Button size="lg" className="btn-label w-full sm:w-auto">
-              Análise gratuita
+              Iniciar pré-qualificação documental
             </Button>
           </Link>
         </div>
@@ -483,7 +483,7 @@ function ContatoForm() {
             <div className="mt-3">
               <Link to="/avaliacao">
                 <Button size="sm" className="btn-label">
-                  Análise gratuita
+                  Iniciar pré-qualificação documental
                 </Button>
               </Link>
             </div>

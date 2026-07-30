@@ -123,7 +123,7 @@ const SEED_SEGMENTS: Segment[] = [
     ],
     meta_title: "Green Card para médicos brasileiros | EB-2 NIW | Status na América",
     meta_description:
-      "Médico e quer construir carreira nos EUA? Veja como conquistar o Green Card por mérito pelo EB-2 NIW, sem patrocinador. Análise gratuita.",
+      "Médico e quer construir carreira nos EUA? Veja como conquistar o Green Card por mérito pelo EB-2 NIW, sem patrocinador. Levantamento inicial de informações gratuito.",
     hero_default: {
       eyebrow: "PARA MÉDICOS BRASILEIROS",
       h1: "Você é médico e quer construir sua carreira nos Estados Unidos?",

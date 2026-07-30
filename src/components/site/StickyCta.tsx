@@ -3,7 +3,7 @@ import { Link, useRouterState } from "@tanstack/react-router";
 import { useAvaliacaoHref } from "@/lib/ctaLinks";
 
 /**
- * CTA sticky (rodapé) para "Análise gratuita". Aparece após o usuário rolar
+ * CTA sticky (rodapé) para a pré-qualificação documental. Aparece após o usuário rolar
  * ~ 60% da viewport e some quando ele chega perto do rodapé ou já está numa
  * página onde o CTA seria redundante (/avaliacao, /pre-qualificacao, /admin, /auth).
  *
@@ -73,10 +73,10 @@ export function StickyCta() {
     >
       <Link
         to={href}
-        aria-label="Iniciar análise gratuita"
+        aria-label="Iniciar pré-qualificação documental"
         className="btn-label btn-sweep inline-flex h-12 items-center gap-2 rounded-full border border-gold/40 bg-gold px-6 text-[13px] text-ink shadow-elevated hover:bg-gold/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
       >
-        Análise gratuita
+        Pré-qualificação documental
         <span aria-hidden>→</span>
       </Link>
     </div>

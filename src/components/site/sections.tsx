@@ -1071,7 +1071,7 @@ export function FAQ() {
 
 /* ============================================================
  * 12. CTA FINAL, dobra única de fechamento com duas ofertas.
- * Fusão do antigo CtaBanner (Análise gratuita) + PreQualPromo,
+ * Fusão do antigo CtaBanner (levantamento inicial de informações) + PreQualPromo,
  * apresentando as duas rotas como escolha lado a lado.
  * ============================================================ */
 export function CtaBanner() {
@@ -1089,7 +1089,7 @@ export function CtaBanner() {
         </div>
 
         <div className="mt-12 grid lg:grid-cols-2 gap-6 lg:gap-8 items-stretch">
-          {/* Oferta principal. Análise gratuita */}
+          {/* Oferta principal. Levantamento inicial de informações */}
           <div className="relative min-w-0 rounded-2xl border border-gold/40 bg-ink-raise/60 p-5 sm:p-7 lg:p-9 shadow-elevated flex flex-col">
             <span className="absolute -top-3 left-5 sm:left-6 rounded-full bg-gold px-3 py-1 font-mono-label text-[10px] text-ink">
               RECOMENDADO
@@ -1236,7 +1236,7 @@ export function HeroAssessment() {
     >
       <div className="container-x grid lg:grid-cols-[0.9fr_1.1fr] gap-10 lg:gap-14 items-start">
         <div>
-          <p className="font-mono-label text-gold">ANÁLISE GRATUITA</p>
+          <p className="font-mono-label text-gold">LEVANTAMENTO INICIAL DE INFORMAÇÕES</p>
           <h2 className="mt-4 font-display text-[clamp(1.75rem,3.4vw,2.6rem)] leading-tight">
             Comece sua análise aqui mesmo.
           </h2>
