@@ -523,13 +523,13 @@ export function WhyUs() {
             <SectionHead num="06" eyebrow="POR QUE A STATUS" title={title} />
             <p className="mt-6 text-foreground/80 leading-relaxed max-w-md">{lead}</p>
           </div>
-          <ul className="grid sm:grid-cols-2 gap-3 self-end">
+          <ul className="grid auto-rows-fr sm:grid-cols-2 gap-3 self-end">
             {items.map(({ icon: Icon, t, desc }) => (
-              <li key={t} className="rounded-xl border border-gold/20 bg-ink-raise/50 p-5 flex gap-3">
+              <li key={t} className="flex h-full min-h-44 gap-4 rounded-xl border border-gold/20 bg-ink-raise/50 p-5 sm:min-h-48">
                 <Icon className="h-5 w-5 text-gold shrink-0 mt-0.5" />
-                <span className="leading-snug text-foreground/85">
+                <span className="min-w-0 text-[15px] leading-snug text-foreground/85">
                   {t}
-                  {desc && <span className="block mt-1 text-foreground/60 text-sm">{desc}</span>}
+                  {desc && <span className="mt-2 block text-sm leading-relaxed text-foreground/60">{desc}</span>}
                 </span>
               </li>
             ))}
