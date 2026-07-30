@@ -312,7 +312,7 @@ export function NiwSection() {
   return (
     <Reveal as="section" id="eb-2-niw" className="section-pad relative">
 
-      <div className="container-x grid lg:grid-cols-2 gap-10 lg:gap-12 items-start">
+      <div className="container-x grid lg:grid-cols-2 gap-10 lg:gap-12 items-center">
         <div>
           <SectionHead num="02" eyebrow="VISTO EB-2 NIW" title={title} />
           <p className="mt-6 text-[17px] text-foreground/80 leading-relaxed max-w-xl">{lead}</p>
@@ -329,8 +329,8 @@ export function NiwSection() {
           </a>
         </div>
 
-        <div className="relative lg:sticky lg:top-28">
-          <div className="photo-treatment aspect-[4/3] overflow-hidden rounded-2xl border border-gold/40 bg-ink-deep relative shadow-elevated">
+        <div className="relative">
+          <div className="photo-treatment aspect-[4/3] overflow-hidden rounded-2xl border border-gold/40 bg-ink-deep relative shadow-elevated max-h-[420px]">
             {/* Foto editorial, passaporte brasileiro + documentos sobre mesa de madeira. */}
             <img
               src={passportDocuments}
@@ -345,8 +345,8 @@ export function NiwSection() {
             <div className="absolute inset-0 bg-gradient-to-tr from-ink-deep/90 via-ink-deep/55 to-ink-deep/15" />
             <div className="absolute inset-3 rounded-xl border border-gold/30 pointer-events-none" />
             <div className="absolute bottom-0 left-0 right-0 p-4 md:p-5">
-              <p className="font-mono-label text-gold/80 text-[11px]">DOSSIÊ EB-2 NIW</p>
-              <p className="mt-1 font-display text-base text-foreground">
+              <p className="font-mono-label text-gold/80 text-[11px] tracking-wider">DOSSIÊ EB-2 NIW</p>
+              <p className="mt-1 text-sm text-foreground leading-snug">
                 Documentação organizada segundo os requisitos publicados pelo USCIS.
               </p>
             </div>
