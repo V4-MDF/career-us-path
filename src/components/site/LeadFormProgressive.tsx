@@ -465,7 +465,7 @@ export function LeadFormProgressive({
             <Button
               className="btn-label w-full sm:w-auto disabled:opacity-50"
               onClick={submit}
-              disabled={loading || !consent}
+              disabled={loading}
               size="lg"
             >
               {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : (submitLabel ?? "Enviar para análise")}
