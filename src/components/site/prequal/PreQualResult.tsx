@@ -105,7 +105,7 @@ export function PreQualResult({ record, variant }: Props) {
         <h1 className="mt-2 font-display text-3xl sm:text-4xl text-foreground">
           {variant === "personal" ? `${firstName}, ` : ""}
           {qualified
-            ? "veja como o seu perfil se posiciona diante dos critérios de cada categoria."
+            ? "veja quais documentos costumam ser exigidos em cada categoria."
             : "ainda não identificamos afinidade clara com as categorias avaliadas."}
         </h1>
         <p className="mt-3 text-foreground/70 max-w-2xl">

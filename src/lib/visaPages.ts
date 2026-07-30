@@ -209,7 +209,7 @@ const eb2niw: VisaPage = {
         "Na etapa da petição inicial, a taxa é do requerente principal. Já na etapa final de Green Card, cônjuge e filhos entram com seus próprios formulários e taxas — portanto, há custos individuais por pessoa nessa fase. Detalhamos isso na análise, conforme o tamanho da sua família.",
     },
   ],
-  ctaTitle: "Entenda como o seu perfil se posiciona diante dos critérios do USCIS para o EB-2 NIW.",
+  ctaTitle: "Entenda quais documentos costumam ser exigidos pelo USCIS em cada categoria, incluindo o EB-2 NIW.",
   ctaSubtitle:
     "Levantamento inicial de informações, gratuito e confidencial. Em até 48h nossa equipe organiza as informações do seu perfil e apresenta um panorama das categorias de visto aplicáveis.",
 };
@@ -428,7 +428,7 @@ const o1: VisaPage = {
       a: "Não. Existem duas coisas diferentes: (1) as taxas oficiais do governo americano (USCIS), pagas diretamente ao órgão; e (2) o valor da nossa assessoria, que cobre a preparação e organização estratégica do seu processo. São separados. As taxas do USCIS são definidas pelo próprio governo, podem mudar e são pagas por formulário. Na sua análise gratuita, explicamos exatamente quais taxas se aplicam ao seu caso e à sua família.",
     },
   ],
-  ctaTitle: "Entenda como o seu perfil se posiciona diante dos critérios do USCIS para o O-1.",
+  ctaTitle: "Entenda quais documentos costumam ser exigidos pelo USCIS em cada categoria, incluindo o O-1.",
   ctaSubtitle: "Levantamento inicial de informações, gratuito e confidencial. Em até 48h nossa equipe organiza um panorama das categorias aplicáveis — O-1, EB-1A e correlatas.",
 };
 

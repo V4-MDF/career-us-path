@@ -91,7 +91,7 @@ function AvaliacaoPage() {
 
   const headline = segKey
     ? SEG_DEFAULTS[segKey].headline
-    : "Entenda como o seu perfil se posiciona diante dos critérios do USCIS.";
+    : "Entenda quais documentos costumam ser exigidos pelo USCIS em cada categoria.";
 
   const goToThanks = (qualification: QualResult) => {
     saveQualificationResult(qualification as QualificationResult);
