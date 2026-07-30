@@ -220,10 +220,10 @@ const eb1: VisaPage = {
   eyebrow: "VISTO EB-1",
   h1: "EB-1: Green Card para habilidade extraordinária",
   intro:
-    "O EB-1 é o Green Card destinado a profissionais com habilidade extraordinária, reconhecimento internacional comprovado em sua área. Também dispensa patrocinador e PERM.",
+    "O EB-1A é destinado a quem demonstra estar entre o pequeno percentual que alcançou o topo da sua área. O reconhecimento pode ser nacional ou internacional, desde que devidamente comprovado por documentação. Também dispensa patrocinador e PERM.",
   metaTitle: "EB-1: Green Card por habilidade extraordinária | Status na América",
   metaDescription:
-    "EB-1 é o Green Card para perfis com reconhecimento internacional comprovado. Sem patrocinador, sem PERM. Veja critérios, processo e como avaliar seu perfil.",
+    "EB-1 é o Green Card para quem está entre o pequeno percentual do topo da sua área, com reconhecimento nacional ou internacional comprovado por documentação. Sem patrocinador, sem PERM.",
   whatIs: {
     title: "O que é o EB-1",
     body:
@@ -232,7 +232,7 @@ const eb1: VisaPage = {
   qualifies: {
     title: "O que o USCIS avalia no EB-1A",
     intro:
-      "Exige demonstração de reconhecimento internacional sustentado, perfil mais alto que o EB-2 NIW. O USCIS avalia evidências em ao menos 3 dos 10 critérios oficiais, ou o equivalente a um prêmio internacional único (ex.: Nobel, Oscar, Pulitzer). A lista abaixo é um resumo; a relação completa dos dez critérios está no regulamento federal.",
+      "O EB-1A é destinado a quem demonstra estar entre o pequeno percentual que alcançou o topo da sua área. O reconhecimento pode ser nacional ou internacional, desde que devidamente comprovado por documentação. O USCIS avalia evidências em ao menos 3 dos 10 critérios oficiais, ou o equivalente a um prêmio internacional único (ex.: Nobel, Oscar, Pulitzer). A lista abaixo é um resumo; a relação completa dos dez critérios está no regulamento federal.",
     legalBasis: "Critérios definidos no regulamento federal 8 CFR 204.5(h)(3).",
     items: [
       { title: "Prêmios e reconhecimentos nacionais ou internacionais", body: "Distinções relevantes recebidas pela atuação profissional." },
@@ -247,8 +247,8 @@ const eb1: VisaPage = {
     title: "Como funciona o processo",
     steps: [
       { num: "01", title: "Pré-qualificação documental de critérios", body: "Mapeamento de evidências objetivas em pelo menos 3 dos critérios oficiais." },
-      { num: "02", title: "Processo I-140", body: "Organização do conjunto documental para protocolo, conduzido pelo requerente ou pelo advogado responsável." },
-      { num: "03", title: "Aprovação e ajuste / consular", body: "Conclusão do processo, com Green Card para o requerente, cônjuge e filhos." },
+      { num: "02", title: "Processo I-140", body: "Protocolo da petição perante o USCIS." },
+      { num: "03", title: "Decisão do USCIS", body: "A continuidade do processo depende da aprovação do USCIS e do cumprimento de todos os requisitos legais. Não há garantia de aprovação." },
     ],
     note:
       "Premium Processing está disponível no EB-1, o que pode acelerar a resposta inicial do USCIS, sem garantir prazo total do processo.",
@@ -265,7 +265,7 @@ const eb1: VisaPage = {
     },
     {
       q: "Qual a diferença entre EB-1 e EB-2 NIW?",
-      a: "Ambos dispensam patrocinador (EB-1A/EB-2 NIW). O EB-1 exige perfil mais alto: reconhecimento internacional comprovado. O EB-2 NIW exige interesse nacional da atuação, com critérios mais acessíveis a profissionais consolidados.",
+      a: "Ambos dispensam patrocinador (EB-1A/EB-2 NIW). O EB-1 exige perfil mais alto: estar entre o pequeno percentual do topo da área, com reconhecimento nacional ou internacional comprovado por documentação. O EB-2 NIW exige interesse nacional da atuação, com critérios mais acessíveis a profissionais consolidados.",
     },
     {
       q: "Qual o tempo estimado?",
