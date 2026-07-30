@@ -62,7 +62,7 @@ export const Route = createFileRoute("/avaliacao/")({
       {
         name: "description",
         content:
-          "Análise gratuita e confidencial do seu perfil para o EB-2 NIW. Resposta em até 48h.",
+          "Análise gratuita e confidencial do seu perfil para o EB-2 NIW.",
       },
       { name: "robots", content: "noindex,nofollow" },
     ],
