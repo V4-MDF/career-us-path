@@ -165,7 +165,7 @@ export const defaultContent = {
   "contato.eyebrow": "FALE CONOSCO",
   "contato.title": "Vamos conversar sobre o seu caso.",
   "contato.subtitle":
-    "Tire suas dúvidas com nossa equipe ou faça sua levantamento inicial de informações.",
+    "Tire suas dúvidas com nossa equipe ou faça seu levantamento inicial de informações.",
   "contato.usa.title": "Matriz. Estados Unidos",
   "contato.usa.company": "Status na America LLC",
   "contato.usa.address": "7575 KingsPointe Pkwy #4, Orlando, FL 32819",
@@ -181,7 +181,7 @@ export const defaultContent = {
   "contato.expansao.text": "Portugal e Dubai · em breve.",
   "contato.form.title": "Deixe uma mensagem",
   "contato.form.lead":
-    "Para uma levantamento inicial de informações completa, use o botão “Análise gratuita”. Este canal é para dúvidas rápidas e mensagens.",
+    "Para um levantamento inicial de informações completo, use o botão “Análise gratuita”. Este canal é para dúvidas rápidas e mensagens.",
   "contato.form.success": "Recebemos sua mensagem. Retornaremos em breve.",
 
   // ==== Página Sobre ==============================================

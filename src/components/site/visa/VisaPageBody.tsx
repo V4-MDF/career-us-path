@@ -229,7 +229,7 @@ export function VisaPageBody({ page, hideHero = false }: { page: VisaPage; hideH
             <div className="rounded-2xl border border-ink-text/15 bg-white p-8 shadow-elevated">
               <p className="font-mono-label text-gold">PRÓXIMO PASSO</p>
               <h3 className="mt-3 font-display text-2xl text-ink-text">
-                Comece pela levantamento inicial de informações.
+                Comece pelo levantamento inicial de informações.
               </h3>
               <p className="mt-3 text-ink-text/70 text-[15px] leading-relaxed">
                 Em poucos minutos enviamos sua análise para a equipe dedicada à preparação

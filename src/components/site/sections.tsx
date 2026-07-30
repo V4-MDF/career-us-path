@@ -1056,7 +1056,7 @@ export function FAQ() {
 
         <div className="mt-12 flex flex-col items-center text-center">
           <p className="text-foreground/80 mb-5 max-w-md">
-            Ainda tem dúvidas? Peça uma levantamento inicial de informações.
+            Ainda tem dúvidas? Peça um levantamento inicial de informações.
           </p>
           <a href={useAvaliacaoHref("home_faq")}>
             <Button size="lg" variant="cta" className="btn-label btn-sweep h-12 px-7 w-full sm:w-auto">
@@ -1120,7 +1120,7 @@ export function CtaBanner() {
               </Button>
             </a>
             <p className="mt-3 text-[12px] text-foreground/80">
-              Para quem quer um pré-qualificação documental completo do perfil.
+              Para quem quer uma pré-qualificação documental completa do perfil.
             </p>
           </div>
 

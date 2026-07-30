@@ -83,7 +83,7 @@ function PrivacidadePage() {
             <h2 className="font-display text-2xl text-foreground">3. Finalidade e base legal</h2>
             <p className="mt-3">Tratamos os dados acima para as seguintes finalidades, tendo como base legal o <strong>consentimento</strong> do titular (art. 7º, I da LGPD) manifestado ao enviar cada formulário:</p>
             <ul className="mt-3 list-disc pl-6 space-y-2">
-              <li>Realizar a levantamento inicial de informações e retornar por e-mail ou WhatsApp em até 48h.</li>
+              <li>Realizar o levantamento inicial de informações e retornar por e-mail ou WhatsApp em até 48h.</li>
               <li>Gerar o mapa informativo de categorias na pré-qualificação.</li>
               <li>Responder à mensagem enviada pelo canal de contato.</li>
               <li>Medir o desempenho de campanhas de marketing e melhorar o site.</li>

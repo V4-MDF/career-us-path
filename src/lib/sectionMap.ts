@@ -88,7 +88,7 @@ export const VISA_SECTIONS: SectionDef[] = [
   {
     id: "avaliacao-gratuita",
     label: "Análise gratuita",
-    intent: "Como solicitar a levantamento inicial de informações.",
+    intent: "Como solicitar o levantamento inicial de informações.",
     indexable: false, // CTA, não vale a pena indexar isolado
   },
 ];

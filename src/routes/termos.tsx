@@ -85,7 +85,7 @@ function TermosPage() {
           <div>
             <h2 className="font-display text-2xl text-foreground">4. Análise gratuita</h2>
             <p className="mt-3">
-              A levantamento inicial de informações oferecida no site é <strong>não
+              O levantamento inicial de informações oferecido no site é <strong>não
               vinculante</strong> e tem como objetivo indicar se o perfil do usuário
               apresenta afinidade com os critérios das categorias de visto trabalhadas
               pela empresa. Não constitui contrato, proposta comercial nem parecer
