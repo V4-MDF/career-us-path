@@ -44,7 +44,7 @@ export const Route = createFileRoute("/contato")({
       {
         title: "Contato | Status na América",
         description:
-          "Fale com a Status na América. WhatsApp, e-mail e endereços da matriz em Orlando e filial no Brasil. Análise gratuita de perfil para imigração legal aos EUA.",
+          "Fale com a Status na América. WhatsApp, e-mail e endereços da matriz em Orlando e filial no Brasil. Levantamento inicial de informações para imigração legal aos EUA.",
         ogTitle: "Contato | Status na América",
         ogDescription:
           "WhatsApp, e-mail e endereços. Matriz em Orlando/FL e filial em Barueri/SP.",
@@ -452,12 +452,12 @@ function ContatoForm() {
             <h2 className="mt-4 font-display text-2xl">{successMsg}</h2>
             <p className="mt-3 text-white/70">
               Se sua dúvida é sobre critérios do USCIS e caminhos de visto, adiante o processo
-              com a análise gratuita de perfil.
+              com a levantamento inicial de informações.
             </p>
             <div className="mt-6">
               <Link to="/avaliacao">
                 <Button size="lg" className="btn-label">
-                  Fazer análise gratuita
+                  Iniciar pré-qualificação documental
                 </Button>
               </Link>
             </div>
@@ -478,7 +478,7 @@ function ContatoForm() {
           <h2 className="mt-3 font-display display-2 text-white">{title}</h2>
           <p className="mt-4 text-white/75 leading-relaxed">{lead}</p>
           <div className="mt-6 rounded-lg border border-gold/30 bg-white/[0.04] p-4 text-sm text-white/80">
-            Para uma <strong className="text-gold">análise de perfil completa</strong>{" "}
+            Para uma <strong className="text-gold">levantamento inicial de informações completa</strong>{" "}
             (critérios do USCIS, mapa das categorias aplicáveis, próximos passos), use o caminho oficial:
             <div className="mt-3">
               <Link to="/avaliacao">

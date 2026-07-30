@@ -1026,7 +1026,7 @@ export function FAQ() {
     },
     {
       q: "Não tenho dinheiro sobrando, compensa?",
-      a: "É um investimento significativo, e por isso a análise inicial é gratuita: para que a decisão seja informada. Valores são apresentados com clareza após o diagnóstico, sem pressão e sem letras miúdas. Não trabalhamos com promessas de ganho garantido.",
+      a: "É um investimento significativo, e por isso a análise inicial é gratuita: para que a decisão seja informada. Valores são apresentados com clareza após a pré-qualificação documental, sem pressão e sem letras miúdas. Não trabalhamos com promessas de ganho garantido.",
     },
     {
       q: "As taxas do governo americano estão incluídas no valor da assessoria?",
@@ -1056,7 +1056,7 @@ export function FAQ() {
 
         <div className="mt-12 flex flex-col items-center text-center">
           <p className="text-foreground/80 mb-5 max-w-md">
-            Ainda tem dúvidas? Peça uma análise gratuita do seu perfil.
+            Ainda tem dúvidas? Peça uma levantamento inicial de informações.
           </p>
           <a href={useAvaliacaoHref("home_faq")}>
             <Button size="lg" variant="cta" className="btn-label btn-sweep h-12 px-7 w-full sm:w-auto">
@@ -1116,11 +1116,11 @@ export function CtaBanner() {
             </ul>
             <a href={useAvaliacaoHref("home_cta_final")} className="mt-7 block sm:inline-block">
               <Button size="lg" variant="cta" className="btn-label btn-sweep h-12 px-4 sm:px-7 w-full sm:w-auto whitespace-normal text-center leading-tight">
-                Quero minha análise gratuita
+                Iniciar pré-qualificação documental
               </Button>
             </a>
             <p className="mt-3 text-[12px] text-foreground/80">
-              Para quem quer um diagnóstico completo do perfil.
+              Para quem quer um pré-qualificação documental completo do perfil.
             </p>
           </div>
 
@@ -1155,7 +1155,7 @@ export function CtaBanner() {
                 variant="outline"
                 className="btn-label h-12 px-4 sm:px-7 w-full sm:w-auto whitespace-normal text-center leading-tight border-gold/50 text-gold hover:bg-gold/10 hover:text-gold"
               >
-                Iniciar pré-qualificação
+                Iniciar pré-qualificação documental
               </Button>
             </Link>
             <p className="mt-3 text-[12px] text-foreground/80">
@@ -1231,7 +1231,7 @@ export function HeroAssessment() {
   return (
     <section
       id="avaliacao-rapida"
-      aria-label="Análise gratuita do seu perfil"
+      aria-label="Levantamento inicial de informações"
       className="section-anchor section-pad relative border-t border-gold/15"
     >
       <div className="container-x grid lg:grid-cols-[0.9fr_1.1fr] gap-10 lg:gap-14 items-start">

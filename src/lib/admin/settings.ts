@@ -64,8 +64,8 @@ export const defaultSettings: SiteSettings = {
   linkedin_url: "",
   youtube_url: "https://youtube.com/@status.naamerica",
 
-  cta_hero_label: "Fazer minha análise gratuita",
-  cta_form_label: "Quero minha análise gratuita",
+  cta_hero_label: "Iniciar pré-qualificação documental",
+  cta_form_label: "Iniciar pré-qualificação documental",
 };
 
 export const defaultTracking: TrackingSettings = {

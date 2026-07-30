@@ -58,11 +58,11 @@ export const Route = createFileRoute("/avaliacao/")({
   },
   head: () => ({
     meta: [
-      { title: "Análise gratuita do seu perfil EB-2 NIW | Status na América" },
+      { title: "Levantamento inicial de informações EB-2 NIW | Status na América" },
       {
         name: "description",
         content:
-          "Análise gratuita e confidencial do seu perfil para o EB-2 NIW.",
+          "Levantamento inicial de informações, gratuito e confidencial para o EB-2 NIW.",
       },
       { name: "robots", content: "noindex,nofollow" },
     ],

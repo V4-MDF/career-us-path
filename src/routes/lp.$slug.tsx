@@ -23,12 +23,12 @@ const slugDefaults: Record<string, { title: string; description: string }> = {
   engenheiros: {
     title: "Green Card para engenheiros brasileiros | EB-2 NIW | Status na América",
     description:
-      "Engenheiro e quer carreira nos EUA? Conquiste o Green Card por mérito pelo EB-2 NIW, sem patrocinador. Análise gratuita do seu perfil.",
+      "Engenheiro e quer carreira nos EUA? Conquiste o Green Card por mérito pelo EB-2 NIW, sem patrocinador. Levantamento inicial de informações.",
   },
   empresarios: {
     title: "Green Card para empresários brasileiros | EB-2 NIW | Status na América",
     description:
-      "Empresário e quer migrar com a família para os EUA? Green Card por mérito pelo EB-2 NIW. Análise gratuita do seu perfil.",
+      "Empresário e quer migrar com a família para os EUA? Green Card por mérito pelo EB-2 NIW. Levantamento inicial de informações.",
   },
 };
 
