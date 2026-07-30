@@ -83,7 +83,7 @@ function TermosPage() {
           </div>
 
           <div>
-            <h2 className="font-display text-2xl text-foreground">4. Análise gratuita</h2>
+            <h2 className="font-display text-2xl text-foreground">4. Levantamento inicial de informações</h2>
             <p className="mt-3">
               O levantamento inicial de informações oferecido no site é <strong>não
               vinculante</strong> e tem como objetivo indicar se o perfil do usuário

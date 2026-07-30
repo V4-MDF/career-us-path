@@ -163,7 +163,7 @@ export const defaultContent = {
 
   // ==== Página de Contato =========================================
   "contato.eyebrow": "FALE CONOSCO",
-  "contato.title": "Vamos conversar sobre o seu caso.",
+  "contato.title": "Vamos conversar sobre a sua documentação.",
   "contato.subtitle":
     "Tire suas dúvidas com nossa equipe ou faça seu levantamento inicial de informações.",
   "contato.usa.title": "Matriz. Estados Unidos",
@@ -181,7 +181,7 @@ export const defaultContent = {
   "contato.expansao.text": "Portugal e Dubai · em breve.",
   "contato.form.title": "Deixe uma mensagem",
   "contato.form.lead":
-    "Para um levantamento inicial de informações completo, use o botão “Análise gratuita”. Este canal é para dúvidas rápidas e mensagens.",
+    "Para um levantamento inicial de informações completo, use o botão “Iniciar pré-qualificação documental”. Este canal é para dúvidas rápidas e mensagens.",
   "contato.form.success": "Recebemos sua mensagem. Retornaremos em breve.",
 
   // ==== Página Sobre ==============================================
@@ -211,7 +211,7 @@ export const defaultContent = {
   "sobre.diferencial.p4.title": "Adaptação de família",
   "sobre.diferencial.p4.text": "Acompanhamento humano nos primeiros meses de vida nos EUA.",
 
-  "sobre.equipe.eyebrow": "QUEM CUIDA DO SEU CASO",
+  "sobre.equipe.eyebrow": "QUEM CUIDA DA SUA DOCUMENTAÇÃO",
   "sobre.equipe.title": "Uma equipe presente nos dois países.",
   "sobre.equipe.note":
     "Fotos e biografias a substituir por conteúdo real fornecido pelo cliente.",
@@ -250,7 +250,7 @@ export const defaultContent = {
 
   "sobre.cta.title": "Vamos organizar a sua documentação.",
   "sobre.cta.subtitle":
-    "Comece pela análise gratuita: nossa equipe retornará para esclarecer as próximas etapas administrativas e os serviços de preparação documental disponíveis.",
+    "Comece pela pré-qualificação documental: nossa equipe retornará para esclarecer as próximas etapas administrativas e os serviços de preparação documental disponíveis.",
 };
 
 

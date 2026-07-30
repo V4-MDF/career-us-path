@@ -2,7 +2,7 @@
  * Lead qualification, heurística sóbria para roteamento de UX pós-submit.
  *
  * NÃO descarta leads. Apenas determina se o usuário deve ver a página de
- * obrigado "qualificado" (caminho direto à consultoria) ou "nao_qualificado"
+ * obrigado "qualificado" (caminho direto ao atendimento) ou "nao_qualificado"
  * (acolher + convidar a estudar antes). O lead é sempre persistido em
  * dataStore.leads para que o time decida como tratar.
  *

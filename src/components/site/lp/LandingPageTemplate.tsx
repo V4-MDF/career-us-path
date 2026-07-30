@@ -36,7 +36,7 @@ function ConversionHeader({ segmentId }: { segmentId: string }) {
         </Link>
         <div className="flex items-center gap-2">
           <a href={avaliacaoHref(`lp_${segmentId}_header`, segmentId)}>
-            <Button className="btn-label" size="sm">Análise gratuita</Button>
+            <Button className="btn-label" size="sm">Iniciar pré-qualificação documental</Button>
           </a>
         </div>
       </div>

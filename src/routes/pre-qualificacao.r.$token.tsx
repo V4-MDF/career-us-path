@@ -5,8 +5,8 @@
  * <PreQualResult> em variante "public" (sem auto-save e sem 1ª pessoa).
  *
  * Casos de uso:
- *  - lead manda o link pelo WhatsApp para o consultor;
- *  - consultor abre o resultado no celular antes da conversa.
+ *  - lead manda o link pelo WhatsApp para a nossa equipe;
+ *  - nossa equipe abre o resultado no celular antes da conversa.
  *
  * Não exibe dados sensíveis adicionais, só o veredicto + critérios.
  */

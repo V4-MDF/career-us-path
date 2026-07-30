@@ -121,7 +121,7 @@ export function Hero() {
           </p>
 
           <div className="mt-10 flex flex-wrap gap-3">
-            <Link to={useAvaliacaoHref("home_hero")} aria-label="Ir para o formulário de análise gratuita">
+            <Link to={useAvaliacaoHref("home_hero")} aria-label="Ir para o formulário de pré-qualificação documental">
               <Button size="lg" variant="cta" className="btn-label btn-sweep h-12 px-7 text-[15px] active:scale-[0.98]">
                 {cta}
               </Button>
@@ -375,7 +375,7 @@ export function VisaCards() {
       <div aria-hidden className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold/50 to-transparent" />
       <div className="container-x relative">
 
-        <SectionHead num="03" eyebrow="VISTOS EB" title="Três caminhos. Uma estratégia para cada perfil." />
+        <SectionHead num="03" eyebrow="VISTOS EB" title="Três caminhos. Uma preparação documental para cada perfil." />
         <div className="mt-14 grid md:grid-cols-3 gap-5">
           {visas.map((v) => (
             <Link key={v.slug} to="/vistos/$slug" params={{ slug: v.slug }} className="group block">
@@ -457,7 +457,7 @@ export function ProcessSteps() {
   const steps = [
     { n: "01", icon: GraduationCap, t: "Análise Criteriosa",
       d: "Organizamos e revisamos histórico, formação e evidências de impacto para o EB-2 NIW." },
-    { n: "02", icon: Layers, t: "Arquitetura Estratégica",
+    { n: "02", icon: Layers, t: "Organização Documental",
       d: "Organizamos a documentação demonstrando que a atuação proposta tem mérito substancial e importância nacional para os Estados Unidos." },
     { n: "03", icon: FileText, t: "Preparação Documental",
       d: "Auxiliamos na organização, revisão e preparação da documentação apresentada por você, sem assumir a autoria do conteúdo. Inclui organização e revisão das cartas de recomendação apresentadas pelo cliente." },
@@ -1030,7 +1030,7 @@ export function FAQ() {
     },
     {
       q: "As taxas do governo americano estão incluídas no valor da assessoria?",
-      a: "Não. Existem duas coisas diferentes: (1) as taxas oficiais do governo americano (USCIS), pagas diretamente ao órgão; e (2) o valor da nossa assessoria, que cobre a preparação e organização estratégica do seu processo. São separados. As taxas do USCIS são definidas pelo próprio governo, podem mudar e são pagas por formulário. Na fase final (Green Card), parte das taxas é individual — ou seja, cônjuge e filhos têm suas próprias taxas. Na sua análise gratuita, explicamos exatamente quais taxas se aplicam ao seu caso e à sua família.",
+      a: "Não. Existem duas coisas diferentes: (1) as taxas oficiais do governo americano (USCIS), pagas diretamente ao órgão; e (2) o valor da nossa assessoria, que cobre a preparação e organização documental do seu processo. São separados. As taxas do USCIS são definidas pelo próprio governo, podem mudar e são pagas por formulário. Na fase final (Green Card), parte das taxas é individual — ou seja, cônjuge e filhos têm suas próprias taxas. No levantamento inicial de informações, explicamos quais taxas costumam se aplicar ao seu perfil e à sua família.",
     },
     {
       q: "Preciso pagar taxas separadas para minha família?",
@@ -1071,7 +1071,7 @@ export function FAQ() {
 
 /* ============================================================
  * 12. CTA FINAL, dobra única de fechamento com duas ofertas.
- * Fusão do antigo CtaBanner (Análise gratuita) + PreQualPromo,
+ * Fusão do antigo CtaBanner (levantamento inicial de informações) + PreQualPromo,
  * apresentando as duas rotas como escolha lado a lado.
  * ============================================================ */
 export function CtaBanner() {
@@ -1089,7 +1089,7 @@ export function CtaBanner() {
         </div>
 
         <div className="mt-12 grid lg:grid-cols-2 gap-6 lg:gap-8 items-stretch">
-          {/* Oferta principal. Análise gratuita */}
+          {/* Oferta principal. Levantamento inicial de informações */}
           <div className="relative min-w-0 rounded-2xl border border-gold/40 bg-ink-raise/60 p-5 sm:p-7 lg:p-9 shadow-elevated flex flex-col">
             <span className="absolute -top-3 left-5 sm:left-6 rounded-full bg-gold px-3 py-1 font-mono-label text-[10px] text-ink">
               RECOMENDADO
@@ -1104,7 +1104,7 @@ export function CtaBanner() {
             </p>
             <ul className="mt-5 space-y-2 text-[14px] text-foreground/80">
               {[
-                "Análise estratégica gratuita",
+                "Levantamento inicial de informações, gratuito",
                 "Resposta personalizada",
                 "Confidencial e sem compromisso",
               ].map((i) => (
@@ -1236,7 +1236,7 @@ export function HeroAssessment() {
     >
       <div className="container-x grid lg:grid-cols-[0.9fr_1.1fr] gap-10 lg:gap-14 items-start">
         <div>
-          <p className="font-mono-label text-gold">ANÁLISE GRATUITA</p>
+          <p className="font-mono-label text-gold">LEVANTAMENTO INICIAL DE INFORMAÇÕES</p>
           <h2 className="mt-4 font-display text-[clamp(1.75rem,3.4vw,2.6rem)] leading-tight">
             Comece sua análise aqui mesmo.
           </h2>

@@ -161,7 +161,7 @@ function ContatoHero({
         <div className="mt-8">
           <Link to="/avaliacao" className="inline-flex">
             <Button size="lg" className="btn-label w-full sm:w-auto">
-              Análise gratuita
+              Iniciar pré-qualificação documental
             </Button>
           </Link>
         </div>
@@ -483,7 +483,7 @@ function ContatoForm() {
             <div className="mt-3">
               <Link to="/avaliacao">
                 <Button size="sm" className="btn-label">
-                  Análise gratuita
+                  Iniciar pré-qualificação documental
                 </Button>
               </Link>
             </div>
@@ -649,7 +649,7 @@ function Disclaimer() {
   return (
     <section className="bg-ink text-white/70 py-10">
       <div className="container-x max-w-3xl text-center text-sm leading-relaxed">
-        Status na América é uma empresa de consultoria em documentação e estratégia
+        Status na América é uma empresa de preparação e organização de documentação
         migratória. Não somos escritório de advocacia e não prestamos aconselhamento
         jurídico. Trabalhamos em parceria com advogados de imigração licenciados nos
         Estados Unidos quando a natureza do caso exige representação legal.

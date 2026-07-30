@@ -164,7 +164,7 @@ export function PreQualResult({ record, variant }: Props) {
         <section className="rounded-2xl border border-gold/20 bg-ink-raise/40 p-6 sm:p-7 shadow-soft">
           <p className="font-mono-label text-gold/80">CONTINUE EXPLORANDO</p>
           <h2 className="mt-2 font-display text-2xl text-foreground">
-            Aprofunde-se nas categorias EB enquanto estrutura seu caso.
+            Aprofunde-se nas categorias EB enquanto organiza a sua documentação.
           </h2>
           <p className="mt-3 text-[15px] text-foreground/75 max-w-2xl">
             Conheça os critérios completos e leia os artigos sobre EB-2 NIW e EB-1, a maioria

@@ -151,10 +151,10 @@ function PostPage() {
 
               {/* CTA final */}
               <div className="mt-12 rounded-2xl border border-gold/30 bg-ink-raise/50 p-8 shadow-soft">
-                <h2 className="font-display text-2xl">Pronto para avaliar o seu perfil?</h2>
+                <h2 className="font-display text-2xl">Pronto para iniciar a pré-qualificação documental?</h2>
                 <p className="mt-2 text-foreground/75">Análise individual e gratuita em até 48h.</p>
                 <a href={avaliacaoHref(`blog_${post.slug}`)} className="mt-5 inline-block">
-                  <Button size="lg" className="btn-label btn-sweep h-12 px-7">Análise gratuita</Button>
+                  <Button size="lg" className="btn-label btn-sweep h-12 px-7">Iniciar pré-qualificação documental</Button>
                 </a>
               </div>
             </div>

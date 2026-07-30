@@ -118,12 +118,12 @@ const SEED_SEGMENTS: Segment[] = [
     faq_segmento: [
       {
         q: "Preciso revalidar o diploma antes do visto?",
-        a: "São processos distintos; na análise explicamos a ordem ideal para o seu caso.",
+        a: "São processos distintos; no levantamento inicial de informações explicamos a ordem documental de cada etapa.",
       },
     ],
     meta_title: "Green Card para médicos brasileiros | EB-2 NIW | Status na América",
     meta_description:
-      "Médico e quer construir carreira nos EUA? Veja como conquistar o Green Card por mérito pelo EB-2 NIW, sem patrocinador. Análise gratuita.",
+      "Médico e quer construir carreira nos EUA? Veja como conquistar o Green Card por mérito pelo EB-2 NIW, sem patrocinador. Levantamento inicial de informações gratuito.",
     hero_default: {
       eyebrow: "PARA MÉDICOS BRASILEIROS",
       h1: "Você é médico e quer construir sua carreira nos Estados Unidos?",
@@ -168,7 +168,7 @@ const SEED_SEGMENTS: Segment[] = [
     faq_segmento: [
       {
         q: "Minha área de engenharia se encaixa no EB-2 NIW?",
-        a: "A maioria das engenharias tem boa aderência; avaliamos seu perfil específico gratuitamente.",
+        a: "A maioria das engenharias tem boa aderência; o levantamento inicial de informações é gratuito e indica os documentos normalmente exigidos.",
       },
     ],
     meta_title: "Green Card para engenheiros brasileiros | EB-2 NIW | Status na América",
@@ -210,7 +210,7 @@ const SEED_SEGMENTS: Segment[] = [
       "Preocupação com o futuro e a segurança dos filhos",
     ],
     custo_adiar:
-      "Enquanto a decisão fica para depois, o ambiente de negócio e a moeda seguem trabalhando contra. Estruturar a saída cedo é estratégia, não pressa.",
+      "Enquanto a decisão fica para depois, o ambiente de negócio e a moeda seguem trabalhando contra. Organizar a documentação cedo é preparação, não pressa.",
     checklist: [
       { texto: "Empresário consolidado, com histórico comprovável", positivo: true },
       { texto: "Capacidade de demonstrar geração de renda, impostos e empregos", positivo: true },
@@ -221,7 +221,7 @@ const SEED_SEGMENTS: Segment[] = [
     faq_segmento: [
       {
         q: "Preciso abrir empresa nos EUA para o EB-2 NIW?",
-        a: "Não necessariamente. O EB-2 NIW é por mérito próprio; avaliamos a melhor estratégia para o seu caso.",
+        a: "Não necessariamente. O EB-2 NIW é por mérito próprio; no levantamento inicial de informações mostramos os documentos normalmente exigidos nessa categoria.",
       },
     ],
     meta_title: "Green Card para empresários brasileiros | EB-2 NIW | Status na América",

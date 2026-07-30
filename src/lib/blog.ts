@@ -185,7 +185,7 @@ O National Interest Waiver é, talvez, o exemplo mais explícito dessa lógica: 
 
 ## O que isso significa para você
 
-Se você é um profissional brasileiro consolidado, médico, engenheiro, empresário, especialista de área, é provável que se enquadre no perfil que a imigração legal americana foi desenhada para atrair. O caminho existe; o que define o resultado é a estruturação correta do caso.
+Se você é um profissional brasileiro consolidado, médico, engenheiro, empresário, especialista de área, é provável que se enquadre no perfil que a imigração legal americana foi desenhada para atrair. O caminho existe; o que faz diferença é a organização correta da documentação.
 
 <!-- expandir conteúdo -->
 `,
@@ -263,7 +263,7 @@ A maior parte do tempo de um projeto sério de Green Card está na fase de prepa
 
 ## O que isso muda no seu plano
 
-Se sua decisão de mudar para os EUA é firme, a recomendação é objetiva: começar a avaliação agora. O processo é longo por natureza; o que cabe ao profissional é não somar a esse tempo a demora da decisão.
+Se sua decisão de mudar para os EUA é firme, a recomendação é objetiva: começar a organização da documentação agora. O processo é longo por natureza; o que cabe ao profissional é não somar a esse tempo a demora da decisão.
 
 <!-- expandir conteúdo -->
 `,
