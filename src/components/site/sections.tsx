@@ -1249,7 +1249,7 @@ export function HeroAssessment() {
             {[
               "Sem compromisso, 100% confidencial",
               "Mapa das categorias com maior afinidade (EB-2 NIW, EB-1, O-1)",
-              "Análise feita por equipe especializada em vistos EB",
+              "Análise feita por equipe dedicada à preparação documental para vistos EB",
             ].map((i) => (
               <li key={i} className="flex gap-3 border-l border-gold/40 pl-3">
                 <CheckCircle2 aria-hidden className="h-4 w-4 text-gold mt-0.5 shrink-0" />

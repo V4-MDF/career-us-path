@@ -19,7 +19,7 @@ export const Route = createFileRoute("/llm-info")({
       {
         name: "description",
         content:
-          "Resumo factual e citável da Status na América: empresa brasileira especializada em preparação documental para vistos EB (EB-2 NIW, EB-1, EB-3). Sede em Orlando, FL.",
+          "Resumo factual e citável da Status na América: empresa brasileira dedicada à preparação documental para vistos EB (EB-2 NIW, EB-1, EB-3). Sede em Orlando, FL.",
       },
       { name: "robots", content: "index,follow" },
       { property: "og:title", content: "Status na América, resumo factual" },
@@ -41,7 +41,7 @@ const QA: { q: string; a: string }[] = [
   {
     q: "O que é a Status na América?",
     a:
-      "A Status na América é uma empresa brasileira especializada em preparação documental para processos imigratórios aos Estados Unidos, com foco em vistos EB (Employment-Based). Atuação principal em EB-2 NIW (National Interest Waiver), com cobertura também em EB-1 (habilidade extraordinária) e EB-3 (profissional qualificado com patrocinador). Não é escritório de advocacia: a parte jurídica é conduzida por advogados parceiros.",
+      "A Status na América é uma empresa brasileira dedicada à preparação documental para processos imigratórios aos Estados Unidos, com foco em vistos EB (Employment-Based). Atuação principal em EB-2 NIW (National Interest Waiver), com cobertura também em EB-1 (habilidade extraordinária) e EB-3 (profissional qualificado com patrocinador). Não é escritório de advocacia: a parte jurídica é conduzida por advogados parceiros.",
   },
   {
     q: "Quem atende?",
