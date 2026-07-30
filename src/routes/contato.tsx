@@ -22,6 +22,7 @@ import {
   CheckCircle2,
   Loader2,
 } from "lucide-react";
+import { LegalNoteInline } from "@/components/legal/LegalDisclaimer";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { PartnersBadges } from "@/components/site/sections";
@@ -647,12 +648,9 @@ function MapaDiscreto() {
 
 function Disclaimer() {
   return (
-    <section className="bg-ink text-white/70 py-10">
-      <div className="container-x max-w-3xl text-center text-sm leading-relaxed">
-        Status na América é uma empresa de preparação e organização de documentação
-        migratória. Não somos escritório de advocacia e não prestamos aconselhamento
-        jurídico. Trabalhamos em parceria com advogados de imigração licenciados nos
-        Estados Unidos quando a natureza do caso exige representação legal.
+    <section className="bg-ink py-10">
+      <div className="container-x max-w-3xl text-center">
+        <LegalNoteInline className="text-white/60" />
       </div>
     </section>
   );

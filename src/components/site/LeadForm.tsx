@@ -1,3 +1,4 @@
+import { LegalNoteInline } from "@/components/legal/LegalDisclaimer";
 import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -301,11 +302,7 @@ export function LeadForm({ segmentId, defaultProfissao, onSubmitted, submitLabel
         )}
       </div>
 
-      <p className="mt-4 text-xs text-muted-foreground">
-        Dados tratados conforme a nossa Política de Privacidade. A Status na América
-        não é escritório de advocacia — as informações enviadas não são protegidas
-        por sigilo advogado-cliente.
-      </p>
+      <LegalNoteInline className="mt-4" />
     </div>
   );
 }
