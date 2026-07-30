@@ -962,16 +962,17 @@ export function PartnersBadges() {
           {title}
         </h2>
 
-        <ul className="mt-8 grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <ul className="mt-8 grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 auto-rows-fr items-stretch">
           {slots.map((s, idx) => (
             <li
               key={idx}
-              className="group relative rounded-xl border border-gold/50 bg-white/70 p-5 aspect-[3/2] flex items-center justify-center shadow-soft"
+              className="group relative h-full min-h-[196px] rounded-xl border border-gold/50 bg-white/70 p-5 flex items-center justify-center shadow-soft"
               style={{
                 boxShadow: "inset 0 0 0 1px rgba(196,161,72,0.25)",
               }}
               title={s.label}
             >
+
               {/* moldura dourada dupla estilo credencial */}
               <span aria-hidden className="absolute inset-1 rounded-lg border border-gold/25 pointer-events-none" />
               {s.url ? (
