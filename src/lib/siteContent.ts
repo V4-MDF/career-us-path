@@ -11,7 +11,7 @@
  */
 
 import { useEffect, useState } from "react";
-import { get } from "./dataStore";
+import { list } from "./dataStore";
 import {
   CLAIM_FAMILIAS,
   CLAIM_PROCESSOS,
