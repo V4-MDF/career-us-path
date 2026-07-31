@@ -11,7 +11,7 @@
  */
 
 import { useEffect, useState } from "react";
-import { get } from "./dataStore";
+import { list } from "./dataStore";
 import {
   CLAIM_FAMILIAS,
   CLAIM_PROCESSOS,
@@ -257,14 +257,94 @@ export const defaultContent = {
 
 export type ContentKey = keyof typeof defaultContent;
 
-export function useContent(key: ContentKey): string {
-  const [value, setValue] = useState<string>(defaultContent[key]);
+/* ============================================================
+ * Store único de site_content.
+ *
+ * Antes cada `useContent(key)` disparava a sua própria consulta e começava
+ * com o default. Para `*.videoHidden` isso significava renderizar a moldura
+ * do vídeo e removê-la segundos depois ("flash"). Agora:
+ *  - uma única leitura de `site_content` para todas as chaves;
+ *  - cache em memória compartilhado entre componentes;
+ *  - flag `ready` para os blocos que não podem piscar (slots de vídeo).
+ * ============================================================ */
+
+type ContentMap = Partial<Record<string, string>>;
+
+let contentCache: ContentMap | null = null;
+let contentPromise: Promise<ContentMap> | null = null;
+const listeners = new Set<() => void>();
+
+function emit() {
+  listeners.forEach((l) => l());
+}
+
+async function loadContent(): Promise<ContentMap> {
+  if (contentCache) return contentCache;
+  if (contentPromise) return contentPromise;
+  contentPromise = (async () => {
+    const map: ContentMap = {};
+    try {
+      const rows = await list<{ value?: string }>("site_content");
+      for (const row of rows) {
+        if (row?.value) map[row.id] = row.value;
+      }
+    } catch { /* mantém defaults */ }
+    contentCache = map;
+    emit();
+    return map;
+  })();
+  return contentPromise;
+}
+
+/** Invalida o cache (usado pelo admin após salvar conteúdo). */
+export function refreshContentCache() {
+  contentCache = null;
+  contentPromise = null;
+  void loadContent();
+}
+
+// O admin dispara `status:admin-change` (src/lib/admin/settings.ts) ao salvar.
+if (typeof window !== "undefined") {
+  window.addEventListener("status:admin-change", () => refreshContentCache());
+}
+
+function useContentStore(): { map: ContentMap; ready: boolean } {
+  const [state, setState] = useState<{ map: ContentMap; ready: boolean }>(() =>
+    contentCache ? { map: contentCache, ready: true } : { map: {}, ready: false },
+  );
+
   useEffect(() => {
     let active = true;
-    get<{ value: string }>("site_content", key).then((row) => {
-      if (active && row?.value) setValue(row.value);
-    });
-    return () => { active = false; };
-  }, [key]);
-  return value;
+    const sync = () => {
+      if (active) setState({ map: contentCache ?? {}, ready: contentCache !== null });
+    };
+    listeners.add(sync);
+    if (contentCache) sync();
+    else void loadContent().then(sync);
+    return () => { active = false; listeners.delete(sync); };
+  }, []);
+
+  return state;
 }
+
+export function useContent(key: ContentKey): string {
+  const { map } = useContentStore();
+  return map[key] ?? defaultContent[key];
+}
+
+/**
+ * Igual a `useContent`, mas informa se o valor já veio do banco.
+ * Enquanto `ready` for false, blocos ocultáveis (vídeo) não devem renderizar.
+ */
+export function useContentResolved(key: ContentKey): { value: string; ready: boolean } {
+  const { map, ready } = useContentStore();
+  return { value: map[key] ?? defaultContent[key], ready };
+}
+
+/** Conveniência: true somente quando o conteúdo já foi resolvido E não está oculto. */
+export function useVisibleSlot(hiddenKey: ContentKey): boolean {
+  const { value, ready } = useContentResolved(hiddenKey);
+  const hidden = value === "1" || value === "true";
+  return ready && !hidden;
+}
+

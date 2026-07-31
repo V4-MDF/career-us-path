@@ -24,7 +24,7 @@ import { avaliacaoHref } from "@/lib/ctaLinks";
 import { COMPARISON, type VisaPage } from "@/lib/visaPages";
 import { PhotoFrame } from "@/components/site/visa/PhotoFrame";
 import { VideoPlayer } from "@/components/site/VideoPlayer";
-import { useContent } from "@/lib/siteContent";
+import { useContent, useVisibleSlot } from "@/lib/siteContent";
 // NOTA: as fotografias abaixo são placeholders art-direcionados no mesmo
 // tratamento visual do site. Substituir por fotografia real com o mesmo
 // enquadramento e a classe .photo-treatment. NUNCA usar ilustração ou
@@ -261,11 +261,11 @@ function VisaHero({ page }: { page: VisaPage }) {
   const videoUrl = useContent(videoKey);
   const videoThumb = useContent(thumbKey);
   const heroImage = useContent(imageKey);
-  const videoHiddenRaw = useContent(hiddenKey);
-  const videoHidden = videoHiddenRaw === "1" || videoHiddenRaw === "true";
+  // Slot só é montado quando o conteúdo já foi resolvido (evita o flash).
+  const showVideoSlot = useVisibleSlot(hiddenKey);
+  
   const [open, setOpen] = useState(false);
-  const hasVideo = !videoHidden && Boolean(videoUrl && videoUrl.trim().length > 0);
-  const showVideoSlot = !videoHidden;
+  const hasVideo = showVideoSlot && Boolean(videoUrl && videoUrl.trim().length > 0);
 
 
   // Alt específico por visto (a imagem não é compartilhada — cada visto tem
