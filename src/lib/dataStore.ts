@@ -11,7 +11,70 @@
  * gerenciados por este módulo.
  */
 
-import { supabase } from "@/integrations/supabase/client";
+import { createClient } from "@supabase/supabase-js";
+
+/**
+ * Cliente anônimo com header `x-client-token`.
+ *
+ * As policies de UPDATE anônimo em `sessions`, `ab_stats` e `leads_partial`
+ * exigem que o header `x-client-token` bata com `data->>'client_token'`.
+ * Sem isso, o UPDATE é silenciosamente negado e apenas o primeiro INSERT
+ * (ex.: só o nome do lead) fica salvo. Por isso todo acesso ao kv_records
+ * passa por este cliente, que envia o token em todas as requisições.
+ */
+const CLIENT_TOKEN_KEY = "sna_client_token";
+
+function getClientToken(): string {
+  if (typeof window === "undefined") return "ssr";
+  try {
+    let t = window.localStorage.getItem(CLIENT_TOKEN_KEY);
+    if (!t) {
+      t = `ct_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 10)}`;
+      window.localStorage.setItem(CLIENT_TOKEN_KEY, t);
+    }
+    return t;
+  } catch {
+    return "anon";
+  }
+}
+
+const SUPABASE_URL =
+  (import.meta.env.VITE_SUPABASE_URL as string) || (process.env.SUPABASE_URL as string);
+const SUPABASE_KEY =
+  (import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY as string) ||
+  (process.env.SUPABASE_PUBLISHABLE_KEY as string);
+
+function isNewApiKey(v: string) {
+  return v.startsWith("sb_publishable_") || v.startsWith("sb_secret_");
+}
+
+// Sem `storageKey` custom: compartilha a sessão de auth do cliente gerado,
+// para que gravações do admin continuem valendo como `authenticated`.
+const supabase = createClient(SUPABASE_URL, SUPABASE_KEY, {
+  auth: {
+    storage: typeof window !== "undefined" ? window.localStorage : undefined,
+    persistSession: typeof window !== "undefined",
+    autoRefreshToken: typeof window !== "undefined",
+  },
+  global: {
+    headers: { "x-client-token": getClientToken() },
+    fetch: (input, init) => {
+      const headers = new Headers(
+        typeof Request !== "undefined" && input instanceof Request ? input.headers : undefined,
+      );
+      if (init?.headers) new Headers(init.headers).forEach((v, k) => headers.set(k, v));
+      if (isNewApiKey(SUPABASE_KEY) && headers.get("Authorization") === `Bearer ${SUPABASE_KEY}`) {
+        headers.delete("Authorization");
+      }
+      headers.set("apikey", SUPABASE_KEY);
+      headers.set("x-client-token", getClientToken());
+      return fetch(input, { ...init, headers });
+    },
+  },
+});
+
+/** Tabelas cuja policy de UPDATE anônimo exige `client_token` no payload. */
+const TOKEN_SCOPED: ReadonlyArray<string> = ["sessions", "ab_stats", "leads_partial"];
 
 export type TableName =
   | "leads"
@@ -95,15 +158,25 @@ export async function set<T = unknown>(table: TableName, id: string, value: T): 
   // o role, o que quebra o INSERT anônimo em tabelas como `leads` /
   // `prequal_responses` (onde por design não há UPDATE para anon).
   // Estratégia: INSERT; em caso de conflito de unique (23505), UPDATE.
+  //
+  // Em tabelas "rolling" (sessions / ab_stats / leads_partial) o payload precisa
+  // carregar `client_token`, senão a policy de UPDATE anônimo nega a gravação e
+  // só o primeiro INSERT sobrevive.
+  const payload = (
+    TOKEN_SCOPED.includes(table) && value && typeof value === "object"
+      ? { ...(value as object), client_token: getClientToken() }
+      : value
+  ) as T;
+
   const insert = await supabase
     .from("kv_records")
-    .insert({ table_name: table, record_id: id, data: value as never });
+    .insert({ table_name: table, record_id: id, data: payload as never });
 
   if (insert.error) {
     if (insert.error.code === "23505") {
       const update = await supabase
         .from("kv_records")
-        .update({ data: value as never, updated_at: new Date().toISOString() })
+        .update({ data: payload as never, updated_at: new Date().toISOString() })
         .eq("table_name", table)
         .eq("record_id", id);
       if (update.error) {
@@ -116,7 +189,7 @@ export async function set<T = unknown>(table: TableName, id: string, value: T): 
   }
 
   const cache = cacheRead<T>(table);
-  cache[id] = value;
+  cache[id] = payload;
   cacheWrite(table, cache);
 }
 

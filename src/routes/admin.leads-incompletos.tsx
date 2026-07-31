@@ -37,6 +37,7 @@ const FIELD_LABEL: Record<string, string> = {
   nome: "Nome",
   email: "E-mail",
   whatsapp: "WhatsApp",
+  objetivo_visto: "Objetivo nos EUA",
   profissao: "Profissão",
   formacao: "Formação",
   faixaEtaria: "Faixa etária",
