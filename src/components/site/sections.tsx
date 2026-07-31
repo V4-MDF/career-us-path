@@ -24,7 +24,7 @@ import { Button } from "@/components/ui/button";
 import {
   Accordion, AccordionContent, AccordionItem, AccordionTrigger,
 } from "@/components/ui/accordion";
-import { useContent } from "@/lib/siteContent";
+import { useContent, useVisibleSlot } from "@/lib/siteContent";
 import { avaliacaoHref, useAvaliacaoHref } from "@/lib/ctaLinks";
 import {
   CLAIM_FAMILIAS,
