@@ -24,7 +24,7 @@ import { avaliacaoHref } from "@/lib/ctaLinks";
 import { COMPARISON, type VisaPage } from "@/lib/visaPages";
 import { PhotoFrame } from "@/components/site/visa/PhotoFrame";
 import { VideoPlayer } from "@/components/site/VideoPlayer";
-import { useContent } from "@/lib/siteContent";
+import { useContent, useVisibleSlot } from "@/lib/siteContent";
 // NOTA: as fotografias abaixo são placeholders art-direcionados no mesmo
 // tratamento visual do site. Substituir por fotografia real com o mesmo
 // enquadramento e a classe .photo-treatment. NUNCA usar ilustração ou
