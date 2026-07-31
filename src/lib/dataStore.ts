@@ -158,15 +158,25 @@ export async function set<T = unknown>(table: TableName, id: string, value: T): 
   // o role, o que quebra o INSERT anônimo em tabelas como `leads` /
   // `prequal_responses` (onde por design não há UPDATE para anon).
   // Estratégia: INSERT; em caso de conflito de unique (23505), UPDATE.
+  //
+  // Em tabelas "rolling" (sessions / ab_stats / leads_partial) o payload precisa
+  // carregar `client_token`, senão a policy de UPDATE anônimo nega a gravação e
+  // só o primeiro INSERT sobrevive.
+  const payload = (
+    TOKEN_SCOPED.includes(table) && value && typeof value === "object"
+      ? { ...(value as object), client_token: getClientToken() }
+      : value
+  ) as T;
+
   const insert = await supabase
     .from("kv_records")
-    .insert({ table_name: table, record_id: id, data: value as never });
+    .insert({ table_name: table, record_id: id, data: payload as never });
 
   if (insert.error) {
     if (insert.error.code === "23505") {
       const update = await supabase
         .from("kv_records")
-        .update({ data: value as never, updated_at: new Date().toISOString() })
+        .update({ data: payload as never, updated_at: new Date().toISOString() })
         .eq("table_name", table)
         .eq("record_id", id);
       if (update.error) {
@@ -179,7 +189,7 @@ export async function set<T = unknown>(table: TableName, id: string, value: T): 
   }
 
   const cache = cacheRead<T>(table);
-  cache[id] = value;
+  cache[id] = payload;
   cacheWrite(table, cache);
 }
 
