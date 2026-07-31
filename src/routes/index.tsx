@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import type { ComponentType } from "react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
+import { WhatsAppFloat } from "@/components/site/WhatsAppFloat";
 import {
   ContrastBrasilEUA, CtaBanner, FAQ, Hero, InstitutionalVideo, LegacySection,
   NiwSection, PartnersBadges, ProcessSteps,
