@@ -38,17 +38,39 @@ function getClientToken(): string {
   }
 }
 
-const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL as string;
-const SUPABASE_KEY = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY as string;
+const SUPABASE_URL =
+  (import.meta.env.VITE_SUPABASE_URL as string) || (process.env.SUPABASE_URL as string);
+const SUPABASE_KEY =
+  (import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY as string) ||
+  (process.env.SUPABASE_PUBLISHABLE_KEY as string);
 
+function isNewApiKey(v: string) {
+  return v.startsWith("sb_publishable_") || v.startsWith("sb_secret_");
+}
+
+// Sem `storageKey` custom: compartilha a sessão de auth do cliente gerado,
+// para que gravações do admin continuem valendo como `authenticated`.
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY, {
   auth: {
     storage: typeof window !== "undefined" ? window.localStorage : undefined,
     persistSession: typeof window !== "undefined",
     autoRefreshToken: typeof window !== "undefined",
-    storageKey: "sb-lovable-auth-token",
   },
-  global: { headers: { "x-client-token": getClientToken() } },
+  global: {
+    headers: { "x-client-token": getClientToken() },
+    fetch: (input, init) => {
+      const headers = new Headers(
+        typeof Request !== "undefined" && input instanceof Request ? input.headers : undefined,
+      );
+      if (init?.headers) new Headers(init.headers).forEach((v, k) => headers.set(k, v));
+      if (isNewApiKey(SUPABASE_KEY) && headers.get("Authorization") === `Bearer ${SUPABASE_KEY}`) {
+        headers.delete("Authorization");
+      }
+      headers.set("apikey", SUPABASE_KEY);
+      headers.set("x-client-token", getClientToken());
+      return fetch(input, { ...init, headers });
+    },
+  },
 });
 
 /** Tabelas cuja policy de UPDATE anônimo exige `client_token` no payload. */
