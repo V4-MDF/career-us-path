@@ -154,15 +154,7 @@ function AvaliacaoPage() {
         <div className="relative mx-auto w-full max-w-[680px] px-5 md:px-6 py-10 md:py-14">
           {/* Intro */}
           <div className="text-center">
-            <div className="inline-flex items-center gap-3">
-              <span aria-hidden className="h-px w-8 bg-gold" />
-              <span className="font-mono-label text-[11px] tracking-wider text-gold">
-                LEVANTAMENTO INICIAL DE INFORMAÇÕES · 100% CONFIDENCIAL
-              </span>
-              <span aria-hidden className="h-px w-8 bg-gold" />
-            </div>
-
-            <h1 className="mt-5 display-2 text-foreground">
+            <h1 className="display-2 text-foreground">
               {headline}
             </h1>
 
