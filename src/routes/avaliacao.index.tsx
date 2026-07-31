@@ -23,7 +23,7 @@ import { saveQualificationResult, type QualificationResult } from "@/components/
 import avaliacaoBg from "@/assets/avaliacao-bg.jpg";
 import logoAsset from "@/assets/logo-status-na-america.webp.asset.json";
 import { LegalDisclaimer } from "@/components/legal/LegalDisclaimer";
-import { CLAIM_AVALIACOES, CLAIM_PROCESSOS, BBB_LABEL } from "@/config/credentials";
+
 
 type SegKey = "medicos" | "engenheiros" | "empresarios";
 
