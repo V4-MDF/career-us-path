@@ -1,35 +1,28 @@
-## Contexto
-A dobra 07 da home (`LegacySection` — "Muito mais que um visto. Um legado.") usa 5 cards de benefícios. Os textos de descrição dos cards `Green Card Direto` e `Segurança Familiar` são longos e estão quebrando a proporção visual na grade, especialmente no desktop. Os cards também usam padding e ícones relativamente grandes, o que faz a dobra parecer desproporcional.
+## O que está acontecendo
 
-## Objetivo
-Reduzir os textos e as proporções dos cards para deixá-los mais uniformes, compactos e visualmente equilibrados na dobra, sem perder a informação jurídica essencial.
+Confirmado no código: `useContent()` (em `src/lib/siteContent.ts`) inicia sempre com o valor **padrão** da chave e só depois busca o valor real no banco, de forma assíncrona e **uma requisição por chave**.
 
-## Alterações propostas
+Como o padrão de `hero.videoHidden` / `institutional.videoHidden` / `visa.<slug>.heroVideoHidden` é "vazio" (= visível), na primeira renderização o site sempre desenha a moldura do vídeo e só a remove quando a resposta do banco chega — daí o quadro aparecer por alguns segundos e sumir.
 
-### 1. Reduzir textos dos cards de benefícios
-- **Green Card Direto**: resumir a frase longa. Manter a ideia de residência permanente e a possibilidade de naturalização após 5 anos, mas em uma linha mais curta.
-- **Segurança Familiar**: resumir o texto sobre CSPA e trabalho do cônjuge. Manter as referências legais, mas de forma mais concisa.
-- **Previsibilidade / Independência Profissional / Futuro dos Filhos**: ajustar pequenos excessos de texto para manter consistência.
+O mesmo padrão também gera dezenas de requisições paralelas ao abrir a Home (uma por texto editável), o que agrava o atraso.
 
-### 2. Reduzir proporções visuais dos cards
-- Diminuir o padding interno dos cards (`p-7` → `p-5` no desktop, ajustar no mobile).
-- Diminuir o tamanho do ícone dos cards (`h-6 w-6` → `h-5 w-5`).
-- Diminuir o espaçamento entre título e descrição (`mt-5` / `mt-3` → valores menores).
-- Reduzir levemente o tamanho da descrição (`text-[15px]` → `text-[14px]`) para melhorar a densidade.
-- Manter a altura uniforme quando em grid, mas permitir que o card respire melhor.
+## O que vou fazer
 
-### 3. Ajustar a grade desktop
-Avaliar se `xl:grid-cols-5` ainda funciona bem com textos menores. Se necessário, manter 5 colunas em xl, mas garantir que o card não fique esticado verticalmente por causa de um texto muito longo.
+1. **Carregar o conteúdo do site em um único bloco**
+   Criar um cache compartilhado em `src/lib/siteContent.ts` que busca todos os registros de `site_content` de uma vez (em vez de uma chamada por chave) e serve todas as leituras a partir dele.
 
-### 4. Manter acessibilidade
-- Os textos reduzidos devem continuar claros para leitores de tela.
-- Não remover informações de compliance (CSPA, 5 anos, requisitos do USCIS) — apenas condensar.
+2. **Hidratar instantaneamente a partir do cache local**
+   O conteúdo já carregado fica guardado no navegador; em visitas seguintes o valor correto (oculto/visível) fica disponível já na primeira renderização, sem piscar.
 
-## Arquivos alterados
-- `src/components/site/sections.tsx` — `LegacySection` (cards e grid de benefícios).
-- Opcionalmente `src/styles.css` se for criar um utilitário de altura uniforme, mas a mudança deve ser feita com classes Tailwind existentes.
+3. **Não renderizar o slot de vídeo enquanto a configuração não for conhecida**
+   Expor um indicador de "conteúdo pronto". Nos três pontos que exibem vídeo — hero da Home, dobra institucional e hero das páginas de visto — a moldura só é montada depois que a configuração é conhecida. Ou seja, na dúvida o vídeo **não** aparece (comportamento oposto ao atual). Como o vídeo não é conteúdo indexável, isso não afeta SEO nem o restante do layout.
 
-## Validação
-- Build (`vite build` ou `bun run build`) sem erros.
-- Verificar visualmente no preview mobile e desktop que os cards ficaram menores, alinhados e sem textos quebrados estranhamente.
-- Confirmar que nenhum texto de compliance foi perdido.
+4. **Verificação**
+   Abrir a Home e uma página de visto com o vídeo marcado como oculto no admin e confirmar, via navegador automatizado, que nenhuma moldura de vídeo aparece em nenhum momento do carregamento — e que, com o vídeo ativo, ele continua aparecendo normalmente.
+
+## Detalhes técnicos
+
+- `useContent(key)` passa a ler de um store único (`list("site_content")` + cache do `dataStore`), mantendo a mesma assinatura para não alterar os ~100 pontos de uso.
+- Novo `useContentReady()` (ou retorno `{ value, ready }` interno) usado apenas pelos blocos de vídeo em `src/components/site/sections.tsx` (`Hero`, `InstitutionalVideo`) e `src/components/site/visa/VisaPageBody.tsx`.
+- A leitura do cache local acontece após a hidratação (não durante o render SSR) para evitar divergência de hidratação; o slot só monta quando `ready === true`.
+- Nenhuma mudança de schema, de política do banco ou do painel admin.
