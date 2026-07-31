@@ -473,8 +473,6 @@ export function LeadFormProgressive({
           )}
         </div>
 
-        <LegalNoteInline />
-
       </div>
     </div>
   );
