@@ -563,9 +563,9 @@ export function InstitutionalVideo() {
   const title = useContent("institutional.title");
   const lead = useContent("institutional.lead");
   const url = useContent("institutional.videoUrl");
-  const hiddenRaw = useContent("institutional.videoHidden");
-  const hidden = hiddenRaw === "1" || hiddenRaw === "true";
-  if (hidden) return null;
+  // Enquanto o conteúdo não é resolvido a dobra não é montada.
+  const visible = useVisibleSlot("institutional.videoHidden");
+  if (!visible) return null;
 
 
   return (
