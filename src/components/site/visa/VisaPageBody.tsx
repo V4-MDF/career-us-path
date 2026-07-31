@@ -263,7 +263,7 @@ function VisaHero({ page }: { page: VisaPage }) {
   const heroImage = useContent(imageKey);
   // Slot só é montado quando o conteúdo já foi resolvido (evita o flash).
   const showVideoSlot = useVisibleSlot(hiddenKey);
-  const videoHidden = !showVideoSlot;
+  
   const [open, setOpen] = useState(false);
   const hasVideo = showVideoSlot && Boolean(videoUrl && videoUrl.trim().length > 0);
 
