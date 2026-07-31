@@ -303,6 +303,11 @@ export function refreshContentCache() {
   void loadContent();
 }
 
+// O admin dispara `status:admin-change` (src/lib/admin/settings.ts) ao salvar.
+if (typeof window !== "undefined") {
+  window.addEventListener("status:admin-change", () => refreshContentCache());
+}
+
 function useContentStore(): { map: ContentMap; ready: boolean } {
   const [state, setState] = useState<{ map: ContentMap; ready: boolean }>(() =>
     contentCache ? { map: contentCache, ready: true } : { map: {}, ready: false },
