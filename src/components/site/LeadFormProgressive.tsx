@@ -16,7 +16,6 @@
  *
  * Não altera scoring (sempre derivado ao vivo em /admin) nem A/B.
  */
-import { LegalNoteInline } from "@/components/legal/LegalDisclaimer";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 
@@ -472,8 +471,6 @@ export function LeadFormProgressive({
             </Button>
           )}
         </div>
-
-        <LegalNoteInline />
 
       </div>
     </div>
