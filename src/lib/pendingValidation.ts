@@ -15,7 +15,6 @@ export const PENDING_VALIDATION: Record<string, true> = {
   "salary.engenheiro": true,
   "salary.ti": true,
   // Footer / contato
-  "contact.whatsapp_br": true,
   "contact.whatsapp_us": true,
   "contact.cnpj": true,
   "contact.address_us": true,

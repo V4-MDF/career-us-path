@@ -50,8 +50,8 @@ export const defaultSettings: SiteSettings = {
   primary_color: "#C9A24B",
   accent_color: "#0B0B0C",
 
-  // Contatos reais (Prompt 5). WhatsApp Brasil ainda pendente de validação.
-  whatsapp_br: "16892209714",
+  // Contatos reais (Prompt 5). WhatsApp Brasil configurado para triagem via /avaliacao/whatsapp.
+  whatsapp_br: "5531973386303",
   whatsapp_us: "16892209714",
   email: "",
   phone_br: "",
