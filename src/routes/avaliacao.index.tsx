@@ -179,21 +179,7 @@ function AvaliacaoPage() {
           </div>
 
 
-          {/* Credenciais, faixa horizontal compacta abaixo do form.
-              COMPLIANCE: valores centralizados em src/config/credentials.ts,
-              todos PENDENTES DE VALIDAÇÃO documental. */}
-          <ul className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-4">
-            {[
-              { v: "—", l: BBB_LABEL.toUpperCase() },
-              { v: CLAIM_AVALIACOES.value, l: `${CLAIM_AVALIACOES.label.toUpperCase()} NO GOOGLE` },
-              { v: CLAIM_PROCESSOS.value, l: CLAIM_PROCESSOS.label.toUpperCase() },
-            ].map((c) => (
-              <li key={c.l} className="border-l-2 border-gold/60 pl-3">
-                <div className="font-display text-xl text-foreground leading-none">{c.v}</div>
-                <div className="mt-2 font-mono-label text-[10px] text-foreground/80">{c.l}</div>
-              </li>
-            ))}
-          </ul>
+
 
           <div className="mt-8 flex items-start gap-3 text-xs text-foreground/80 border-l border-gold/40 pl-4">
             <ShieldCheck className="h-4 w-4 text-gold mt-0.5 shrink-0" />
