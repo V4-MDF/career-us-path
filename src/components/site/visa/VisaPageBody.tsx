@@ -261,11 +261,11 @@ function VisaHero({ page }: { page: VisaPage }) {
   const videoUrl = useContent(videoKey);
   const videoThumb = useContent(thumbKey);
   const heroImage = useContent(imageKey);
-  const videoHiddenRaw = useContent(hiddenKey);
-  const videoHidden = videoHiddenRaw === "1" || videoHiddenRaw === "true";
+  // Slot só é montado quando o conteúdo já foi resolvido (evita o flash).
+  const showVideoSlot = useVisibleSlot(hiddenKey);
+  const videoHidden = !showVideoSlot;
   const [open, setOpen] = useState(false);
-  const hasVideo = !videoHidden && Boolean(videoUrl && videoUrl.trim().length > 0);
-  const showVideoSlot = !videoHidden;
+  const hasVideo = showVideoSlot && Boolean(videoUrl && videoUrl.trim().length > 0);
 
 
   // Alt específico por visto (a imagem não é compartilhada — cada visto tem
