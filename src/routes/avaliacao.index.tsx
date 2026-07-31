@@ -22,7 +22,6 @@ import type { QualResult } from "@/lib/leadQualification";
 import { saveQualificationResult, type QualificationResult } from "@/components/site/ObrigadoContent";
 import avaliacaoBg from "@/assets/avaliacao-bg.jpg";
 import logoAsset from "@/assets/logo-status-na-america.webp.asset.json";
-import { LegalDisclaimer } from "@/components/legal/LegalDisclaimer";
 
 
 type SegKey = "medicos" | "engenheiros" | "empresarios";
@@ -191,7 +190,6 @@ function AvaliacaoPage() {
         </div>
       </main>
 
-      <LegalDisclaimer />
       <footer className="border-t border-gold/15 bg-ink-deep">
         <div className="container-x py-8 text-xs text-foreground/80 leading-relaxed max-w-4xl">
           <p className="font-mono-label text-foreground/80">
