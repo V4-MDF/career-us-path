@@ -99,6 +99,7 @@ function Home() {
           })}
       </main>
       <Footer />
+      <WhatsAppFloat />
     </>
   );
 }
