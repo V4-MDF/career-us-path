@@ -11,7 +11,48 @@
  * gerenciados por este módulo.
  */
 
-import { supabase } from "@/integrations/supabase/client";
+import { createClient } from "@supabase/supabase-js";
+
+/**
+ * Cliente anônimo com header `x-client-token`.
+ *
+ * As policies de UPDATE anônimo em `sessions`, `ab_stats` e `leads_partial`
+ * exigem que o header `x-client-token` bata com `data->>'client_token'`.
+ * Sem isso, o UPDATE é silenciosamente negado e apenas o primeiro INSERT
+ * (ex.: só o nome do lead) fica salvo. Por isso todo acesso ao kv_records
+ * passa por este cliente, que envia o token em todas as requisições.
+ */
+const CLIENT_TOKEN_KEY = "sna_client_token";
+
+function getClientToken(): string {
+  if (typeof window === "undefined") return "ssr";
+  try {
+    let t = window.localStorage.getItem(CLIENT_TOKEN_KEY);
+    if (!t) {
+      t = `ct_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 10)}`;
+      window.localStorage.setItem(CLIENT_TOKEN_KEY, t);
+    }
+    return t;
+  } catch {
+    return "anon";
+  }
+}
+
+const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL as string;
+const SUPABASE_KEY = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY as string;
+
+const supabase = createClient(SUPABASE_URL, SUPABASE_KEY, {
+  auth: {
+    storage: typeof window !== "undefined" ? window.localStorage : undefined,
+    persistSession: typeof window !== "undefined",
+    autoRefreshToken: typeof window !== "undefined",
+    storageKey: "sb-lovable-auth-token",
+  },
+  global: { headers: { "x-client-token": getClientToken() } },
+});
+
+/** Tabelas cuja policy de UPDATE anônimo exige `client_token` no payload. */
+const TOKEN_SCOPED: ReadonlyArray<string> = ["sessions", "ab_stats", "leads_partial"];
 
 export type TableName =
   | "leads"
