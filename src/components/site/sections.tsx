@@ -71,8 +71,10 @@ export function Hero() {
   const proof = useContent("hero.proof");
   const heroVideoUrl = useContent("hero.videoUrl");
   const heroPosterUrl = useContent("hero.posterUrl");
-  const heroVideoHiddenRaw = useContent("hero.videoHidden");
-  const heroVideoHidden = heroVideoHiddenRaw === "1" || heroVideoHiddenRaw === "true";
+  // Só renderiza o slot depois que o conteúdo foi resolvido: enquanto não
+  // sabemos, o vídeo NÃO aparece (evita o flash do slot oculto).
+  const showHeroVideo = useVisibleSlot("hero.videoHidden");
+  const heroVideoHidden = !showHeroVideo;
   const lines = splitHeadline(title);
 
 
