@@ -48,13 +48,25 @@ function isNewApiKey(v: string) {
   return v.startsWith("sb_publishable_") || v.startsWith("sb_secret_");
 }
 
-// Sem `storageKey` custom: compartilha a sessão de auth do cliente gerado,
-// para que gravações do admin continuem valendo como `authenticated`.
+// IMPORTANTE: este cliente NÃO gerencia sessão de auth. Dois GoTrueClient com
+// o mesmo storageKey disputam o lock de refresh do token e travam
+// `auth.getSession()` (painel admin ficava preso em "Carregando…").
+// Aqui apenas reaproveitamos o access token do cliente gerado.
+let accessToken: string | null = null;
+if (typeof window !== "undefined") {
+  void authClient.auth.getSession().then(({ data }) => {
+    accessToken = data.session?.access_token ?? null;
+  });
+  authClient.auth.onAuthStateChange((_e, session) => {
+    accessToken = session?.access_token ?? null;
+  });
+}
+
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY, {
   auth: {
-    storage: typeof window !== "undefined" ? window.localStorage : undefined,
-    persistSession: typeof window !== "undefined",
-    autoRefreshToken: typeof window !== "undefined",
+    persistSession: false,
+    autoRefreshToken: false,
+    detectSessionInUrl: false,
   },
   global: {
     headers: { "x-client-token": getClientToken() },
@@ -68,10 +80,12 @@ const supabase = createClient(SUPABASE_URL, SUPABASE_KEY, {
       }
       headers.set("apikey", SUPABASE_KEY);
       headers.set("x-client-token", getClientToken());
+      if (accessToken) headers.set("Authorization", `Bearer ${accessToken}`);
       return fetch(input, { ...init, headers });
     },
   },
 });
+
 
 /** Tabelas cuja policy de UPDATE anônimo exige `client_token` no payload. */
 const TOKEN_SCOPED: ReadonlyArray<string> = ["sessions", "ab_stats", "leads_partial"];
