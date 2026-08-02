@@ -13,6 +13,8 @@
 
 import { createClient } from "@supabase/supabase-js";
 
+import { supabase as authClient } from "@/integrations/supabase/client";
+
 /**
  * Cliente anônimo com header `x-client-token`.
  *
