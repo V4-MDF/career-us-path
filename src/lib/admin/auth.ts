@@ -46,7 +46,15 @@ async function refreshRole(userId: string): Promise<boolean> {
 }
 
 async function hydrateFromSession() {
-  const { data } = await supabase.auth.getSession();
+  // Timeout defensivo: se o getSession travar, liberamos a UI em vez de
+  // deixar o painel preso em "Carregando…".
+  const result = await Promise.race([
+    supabase.auth.getSession(),
+    new Promise<{ data: { session: null } }>((r) =>
+      setTimeout(() => r({ data: { session: null } }), 6000),
+    ),
+  ]);
+  const data = result.data;
   const s = data.session;
   if (!s?.user) {
     cachedSession = null;
