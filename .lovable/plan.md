@@ -1,28 +1,19 @@
-## O que está acontecendo
+# Vídeo do hero: player inline com capa do próprio vídeo
 
-Confirmado no código: `useContent()` (em `src/lib/siteContent.ts`) inicia sempre com o valor **padrão** da chave e só depois busca o valor real no banco, de forma assíncrona e **uma requisição por chave**.
+## O que muda
 
-Como o padrão de `hero.videoHidden` / `institutional.videoHidden` / `visa.<slug>.heroVideoHidden` é "vazio" (= visível), na primeira renderização o site sempre desenha a moldura do vídeo e só a remove quando a resposta do banco chega — daí o quadro aparecer por alguns segundos e sumir.
+Hoje o slot de vídeo nas páginas de visto é só um botão: ao clicar, abre um pop-up (modal) e, se nenhuma imagem de capa foi enviada no admin, aparece um fundo escuro sem thumbnail.
 
-O mesmo padrão também gera dezenas de requisições paralelas ao abrir a Home (uma por texto editável), o que agrava o atraso.
+Ajustes:
 
-## O que vou fazer
-
-1. **Carregar o conteúdo do site em um único bloco**
-   Criar um cache compartilhado em `src/lib/siteContent.ts` que busca todos os registros de `site_content` de uma vez (em vez de uma chamada por chave) e serve todas as leituras a partir dele.
-
-2. **Hidratar instantaneamente a partir do cache local**
-   O conteúdo já carregado fica guardado no navegador; em visitas seguintes o valor correto (oculto/visível) fica disponível já na primeira renderização, sem piscar.
-
-3. **Não renderizar o slot de vídeo enquanto a configuração não for conhecida**
-   Expor um indicador de "conteúdo pronto". Nos três pontos que exibem vídeo — hero da Home, dobra institucional e hero das páginas de visto — a moldura só é montada depois que a configuração é conhecida. Ou seja, na dúvida o vídeo **não** aparece (comportamento oposto ao atual). Como o vídeo não é conteúdo indexável, isso não afeta SEO nem o restante do layout.
-
-4. **Verificação**
-   Abrir a Home e uma página de visto com o vídeo marcado como oculto no admin e confirmar, via navegador automatizado, que nenhuma moldura de vídeo aparece em nenhum momento do carregamento — e que, com o vídeo ativo, ele continua aparecendo normalmente.
+1. **Sem pop-up.** O player passa a tocar no próprio quadro do hero, no lugar da moldura dourada. O modal é removido.
+2. **Capa automática do YouTube/Vimeo.** Quando não houver capa enviada no admin, a imagem de capa é buscada automaticamente do próprio vídeo (thumbnail oficial do YouTube; Vimeo idem). Uma capa enviada manualmente no admin continua tendo prioridade.
+3. **Um clique para tocar.** A capa + botão de play continuam aparecendo (bom para velocidade de carregamento); ao clicar, o vídeo começa a tocar ali mesmo, já em reprodução automática, sem segundo clique.
+4. Se não houver vídeo configurado, o comportamento atual ("VÍDEO EM BREVE") é mantido.
 
 ## Detalhes técnicos
 
-- `useContent(key)` passa a ler de um store único (`list("site_content")` + cache do `dataStore`), mantendo a mesma assinatura para não alterar os ~100 pontos de uso.
-- Novo `useContentReady()` (ou retorno `{ value, ready }` interno) usado apenas pelos blocos de vídeo em `src/components/site/sections.tsx` (`Hero`, `InstitutionalVideo`) e `src/components/site/visa/VisaPageBody.tsx`.
-- A leitura do cache local acontece após a hidratação (não durante o render SSR) para evitar divergência de hidratação; o slot só monta quando `ready === true`.
-- Nenhuma mudança de schema, de política do banco ou do painel admin.
+- `src/lib/videoEmbed.ts`: adicionar `thumbnailUrl` ao retorno de `parseVideoUrl` para YouTube (`https://i.ytimg.com/vi/<id>/maxresdefault.jpg`, com fallback para `hqdefault.jpg` no `onError`) e expor o id para Vimeo.
+- `src/components/site/VideoPlayer.tsx`: aceitar props `autoPlay` e `poster`, montar a facade (capa + play) internamente e, no clique, renderizar o iframe com `autoplay=1` (YouTube e Vimeo) ou `<video autoPlay controls>` para arquivo direto. Sem `Dialog`.
+- `src/components/site/visa/VisaPageBody.tsx` (`VisaHero`): remover `Dialog`/`useState open` e renderizar `<VideoPlayer>` dentro da moldura `aspect-video`, passando `poster={videoThumb}`. Manter o filete dourado e a legenda "Saiba mais sobre o Visto".
+- Vimeo não tem URL de thumb estável sem API; nesse caso mantém o gradiente atual como fundo da facade.
