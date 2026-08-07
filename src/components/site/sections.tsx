@@ -365,7 +365,7 @@ export function NiwSection() {
 export function VisaCards() {
   const visas = [
     { slug: "eb1", tag: "HABILIDADE EXTRAORDINÁRIA", title: "EB-1",
-      desc: "Para profissionais com reconhecimento internacional comprovado na área." },
+      desc: "Para profissionais com habilidade extraordinária comprovada na área." },
     { slug: "eb2-niw", tag: "EM DESTAQUE", title: "EB-2 NIW",
       desc: "Green Card por mérito profissional, sem patrocinador, com a família inclusa.", featured: true },
     { slug: "o1", tag: "SEM PATROCINADOR OBRIGATÓRIO", title: "O-1",

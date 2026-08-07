@@ -130,7 +130,7 @@ export const defaultContent = {
   // oposto do posicionamento). Editável no admin.
   "visa.eb2-niw.definitionImage": visaDefinitionEb2Niw,
   "visa.eb1.heroSubtitle":
-    "O Green Card para quem tem reconhecimento internacional comprovado, sem patrocinador, sem PERM.",
+    "O Green Card para profissionais com habilidade extraordinária comprovada, sem patrocinador, sem PERM.",
   "visa.eb1.heroVideoUrl": "",
   "visa.eb1.heroVideoThumb": "",
   "visa.eb1.heroVideoHidden": "",
