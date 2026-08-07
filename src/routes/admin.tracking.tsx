@@ -64,6 +64,48 @@ function TrackingPage() {
         </div>
       </SectionCard>
 
+      <SectionCard title="Webhook de Leads">
+        <div className="flex items-center gap-2 mb-3">
+          <Switch checked={t.webhook_enabled} onCheckedChange={(v) => upd("webhook_enabled", v)} />
+          <span className="text-sm text-slate-600">{t.webhook_enabled ? "Ativo, cada lead novo será enviado" : "Inativo"}</span>
+        </div>
+        <div className="flex flex-col sm:flex-row gap-2">
+          <Input
+            placeholder="https://hooks.zapier.com/hooks/catch/..."
+            value={t.webhook_url}
+            onChange={(e) => upd("webhook_url", e.target.value)}
+            className="font-mono text-xs"
+          />
+          <Button
+            variant="outline"
+            disabled={testing}
+            onClick={async () => {
+              const url = t.webhook_url.trim();
+              if (!url.startsWith("https://")) { toast.error("Informe uma URL https:// válida."); return; }
+              setTesting(true);
+              try {
+                await testLeadWebhook(url);
+                toast.success("Webhook respondeu com sucesso. Verifique o destino.");
+              } catch (e) {
+                toast.error(e instanceof Error ? e.message : "Falha ao chamar o webhook.");
+              } finally {
+                setTesting(false);
+              }
+            }}
+            className="gap-1.5 shrink-0"
+          >
+            <Send className="h-4 w-4" />{testing ? "Enviando…" : "Testar webhook"}
+          </Button>
+        </div>
+        <p className="mt-3 text-xs text-slate-500">
+          Enviamos um <code className="font-mono">POST</code> em JSON para essa URL a cada lead completo
+          do formulário (<code className="font-mono">/avaliacao</code> e variantes), com
+          <code className="font-mono"> event: "lead.created"</code> e todos os dados do lead (nome, contato,
+          respostas, score, qualificação, origem/UTM). Se o destino falhar, o lead continua salvo e o
+          visitante segue normalmente.
+        </p>
+      </SectionCard>
+
       <div className="grid md:grid-cols-2 gap-4">
         {items.map((it) => (
           <SectionCard key={it.vKey as string} title={it.label}>
