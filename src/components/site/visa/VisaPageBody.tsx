@@ -345,34 +345,23 @@ function VisaHero({ page }: { page: VisaPage }) {
               <div className="relative mx-auto max-w-xl">
               {/* Filete dourado externo (assinatura credencial). */}
               <div aria-hidden className="absolute -inset-2 rounded-2xl border border-gold/25 pointer-events-none" />
-              <button
-                type="button"
-                onClick={() => hasVideo && setOpen(true)}
-                disabled={!hasVideo}
-                aria-label={hasVideo ? `Assistir vídeo: ${page.h1}` : "Vídeo em breve"}
-                className="group relative block w-full overflow-hidden rounded-xl ring-1 ring-gold/40 shadow-elevated bg-ink-raise aspect-video focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold"
-              >
-                {videoThumb ? (
-                  <img
-                    src={videoThumb}
-                    alt=""
-                    width={1280}
-                    height={720}
-                    loading="lazy"
-                    decoding="async"
-                    className="absolute inset-0 h-full w-full object-cover"
+              <div className="relative w-full overflow-hidden rounded-xl ring-1 ring-gold/40 shadow-elevated bg-ink-raise aspect-video">
+                {hasVideo ? (
+                  <VideoPlayer
+                    url={videoUrl}
+                    title={page.h1}
+                    facade
+                    poster={videoThumb}
                   />
                 ) : (
-                  <div className="absolute inset-0 bg-gradient-to-br from-[#16223A] to-[#0A111C]" />
+                  <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-gradient-to-br from-[#16223A] to-[#0A111C]">
+                    <PlayCircle className="h-16 w-16 text-gold/70" aria-hidden />
+                    <span className="font-mono-label text-gold/80 text-[10px] tracking-[0.2em]">
+                      VÍDEO EM BREVE
+                    </span>
+                  </div>
                 )}
-                <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent" />
-                <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 text-foreground">
-                  <PlayCircle className="h-16 w-16 text-gold drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)] transition-transform group-hover:scale-105" aria-hidden />
-                  <span className="font-mono-label text-gold text-[10px] tracking-[0.2em]">
-                    {hasVideo ? "ASSISTIR VÍDEO" : "VÍDEO EM BREVE"}
-                  </span>
-                </div>
-              </button>
+              </div>
               <p className="mt-3 text-center font-mono-label text-[10px] tracking-[0.18em] text-foreground/80">
                 Saiba mais sobre o Visto
               </p>
@@ -383,15 +372,6 @@ function VisaHero({ page }: { page: VisaPage }) {
         </div>
       </div>
 
-      {/* Modal do vídeo, abre apenas quando há URL. */}
-      <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className="max-w-4xl bg-ink border-gold/30 p-0 overflow-hidden">
-          <DialogTitle className="sr-only">{page.h1} · Vídeo</DialogTitle>
-          <div className="relative aspect-video w-full bg-black">
-            {open && <VideoPlayer url={videoUrl} title={`${page.h1} · vídeo`} />}
-          </div>
-        </DialogContent>
-      </Dialog>
     </section>
   );
 }
