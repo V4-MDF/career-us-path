@@ -58,7 +58,7 @@ export const COMPARISON = {
       label: "Perfil típico",
       cells: [
         "Profissional consolidado com mestrado ou habilidade excepcional",
-        "Reconhecimento internacional comprovado na área",
+        "Reconhecimento sólido e documentado na área de atuação",
         "Habilidade extraordinária em ciências, artes, educação, negócios, atletismo, cinema ou TV",
       ],
     },
