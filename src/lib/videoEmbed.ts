@@ -6,10 +6,13 @@
  * - Vimeo: vimeo.com/<id>
  * - Arquivos diretos (mp4/webm/mov/m4v) e qualquer outra URL http(s) → tratada como arquivo
  * - Vazio/inválido → null
+ *
+ * `thumbnailUrl` traz a capa oficial do próprio vídeo quando existe URL
+ * estável (YouTube). Vimeo exige API → sem thumb.
  */
 export type ParsedVideo =
-  | { kind: "youtube"; id: string; embedUrl: string }
-  | { kind: "vimeo"; id: string; embedUrl: string }
+  | { kind: "youtube"; id: string; embedUrl: string; autoplayUrl: string; thumbnailUrl: string; thumbnailFallbackUrl: string }
+  | { kind: "vimeo"; id: string; embedUrl: string; autoplayUrl: string }
   | { kind: "file"; src: string };
 
 const YT_HOSTS = new Set([
@@ -63,10 +66,14 @@ export function parseVideoUrl(raw: string | null | undefined): ParsedVideo | nul
   if (YT_HOSTS.has(host)) {
     const id = ytId(u);
     if (id) {
+      const base = `https://www.youtube-nocookie.com/embed/${id}?rel=0&modestbranding=1`;
       return {
         kind: "youtube",
         id,
-        embedUrl: `https://www.youtube-nocookie.com/embed/${id}?rel=0&modestbranding=1`,
+        embedUrl: base,
+        autoplayUrl: `${base}&autoplay=1&playsinline=1`,
+        thumbnailUrl: `https://i.ytimg.com/vi/${id}/maxresdefault.jpg`,
+        thumbnailFallbackUrl: `https://i.ytimg.com/vi/${id}/hqdefault.jpg`,
       };
     }
   }
@@ -74,10 +81,12 @@ export function parseVideoUrl(raw: string | null | undefined): ParsedVideo | nul
   if (VIMEO_HOSTS.has(host)) {
     const id = vimeoId(u);
     if (id) {
+      const base = `https://player.vimeo.com/video/${id}?dnt=1`;
       return {
         kind: "vimeo",
         id,
-        embedUrl: `https://player.vimeo.com/video/${id}?dnt=1`,
+        embedUrl: base,
+        autoplayUrl: `${base}&autoplay=1&playsinline=1`,
       };
     }
   }
@@ -87,5 +96,14 @@ export function parseVideoUrl(raw: string | null | undefined): ParsedVideo | nul
     return { kind: "file", src: trimmed };
   }
 
+  return null;
+}
+
+/** Capa do próprio vídeo, quando disponível. */
+export function videoThumbnail(parsed: ParsedVideo | null): { src: string; fallback?: string } | null {
+  if (!parsed) return null;
+  if (parsed.kind === "youtube") {
+    return { src: parsed.thumbnailUrl, fallback: parsed.thumbnailFallbackUrl };
+  }
   return null;
 }
