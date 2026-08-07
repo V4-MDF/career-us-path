@@ -340,12 +340,14 @@ function VisaHero({ page }: { page: VisaPage }) {
 
           {/* DIREITA, moldura de vídeo — oculta via admin quando videoHidden = "1" */}
           {showVideoSlot && (
-            <div className="lg:col-span-5">
-              <div className="relative mx-auto max-w-xl">
-              {/* Filete dourado externo (assinatura credencial). */}
-              <div aria-hidden className="absolute -inset-2 rounded-2xl border border-gold/25 pointer-events-none" />
+            <div className="lg:col-span-5 min-w-0">
+              <div className="relative mx-auto w-full max-w-full sm:max-w-xl">
+              {/* Filete dourado (assinatura credencial) — dentro do quadro no
+                  mobile para não estourar a largura da tela. */}
+              <div aria-hidden className="absolute inset-0 sm:-inset-2 rounded-2xl border border-gold/25 pointer-events-none" />
               <div className="relative w-full overflow-hidden rounded-xl ring-1 ring-gold/40 shadow-elevated bg-ink-raise aspect-video">
                 {hasVideo ? (
+
                   <VideoPlayer
                     url={videoUrl}
                     title={page.h1}
