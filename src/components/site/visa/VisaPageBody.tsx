@@ -263,9 +263,9 @@ function VisaHero({ page }: { page: VisaPage }) {
   const heroImage = useContent(imageKey);
   // Slot só é montado quando o conteúdo já foi resolvido (evita o flash).
   const showVideoSlot = useVisibleSlot(hiddenKey);
-  
-  const [open, setOpen] = useState(false);
+
   const hasVideo = showVideoSlot && Boolean(videoUrl && videoUrl.trim().length > 0);
+
 
 
   // Alt específico por visto (a imagem não é compartilhada — cada visto tem
