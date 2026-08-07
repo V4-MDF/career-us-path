@@ -284,7 +284,7 @@ const eb1: VisaPage = {
       a: "Na etapa da petição inicial, a taxa é do requerente principal. Já na etapa final de Green Card, cônjuge e filhos entram com seus próprios formulários e taxas — há custos individuais por pessoa nessa fase. Detalhamos na análise, conforme o tamanho da sua família.",
     },
   ],
-  ctaTitle: "Tem reconhecimento internacional? Avalie o EB-1.",
+  ctaTitle: "Tem habilidade extraordinária comprovada? Avalie o EB-1.",
   ctaSubtitle: "Em até 48h organizamos as informações do seu perfil e apresentamos um panorama das categorias EB e dos documentos normalmente exigidos.",
 };
 
