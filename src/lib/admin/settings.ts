@@ -42,6 +42,7 @@ export interface TrackingSettings {
   gsc_verification: string; gsc_enabled: boolean;
   rdstation_id: string;    rdstation_enabled: boolean;
   custom_head: string;     custom_head_enabled: boolean;
+  webhook_url: string;     webhook_enabled: boolean;
 }
 
 export const defaultSettings: SiteSettings = {
