@@ -76,6 +76,7 @@ export const defaultTracking: TrackingSettings = {
   gsc_verification: "", gsc_enabled: false,
   rdstation_id: "", rdstation_enabled: false,
   custom_head: "", custom_head_enabled: false,
+  webhook_url: "", webhook_enabled: false,
 };
 
 const SETTINGS_KEY = "site";
