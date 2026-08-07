@@ -470,7 +470,7 @@ export function ProcessSteps() {
     <Reveal as="section" id="processo-eb-2-niw" className="section-parchment section-pad relative overflow-hidden">
       <div aria-hidden className="absolute inset-0 text-ink-text/10"><ProcessIconStrip /></div>
       <div className="container-x relative">
-        <SectionHead num="05" eyebrow="PROCESSO EB-2 NIW" title="Quatro etapas. Conduzidas com rigor." variant="parchment" />
+        <SectionHead num="05" eyebrow="PROCESSO EB-2 NIW" title="Quatro etapas, conduzidas com rigor." variant="parchment" />
         <div className="mt-14 grid md:grid-cols-2 lg:grid-cols-4 gap-5 auto-rows-fr items-stretch">
           {steps.map(({ n, icon: Icon, t, d }) => (
             <div key={n} className="relative gold-tick rounded-2xl bg-white border border-ink-text/10 p-6 flex flex-col h-full shadow-soft">
