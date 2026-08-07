@@ -150,7 +150,7 @@ const eb2niw: VisaPage = {
         num: "03",
         title: "Preparação Documental",
         body:
-          "Auxiliamos na organização, revisão e preparação da documentação apresentada por você, sem assumir a autoria do conteúdo. Cartas de recomendação — auxiliamos na organização, revisão e preparação das cartas de recomendação fornecidas pelo cliente e por seus recomendadores, garantindo que estejam completas e no formato adequado para envio.",
+          "Auxiliamos na organização, revisão e preparação das cartas de recomendação fornecidas pelo cliente e por seus recomendadores, garantindo que estejam completas e no formato adequado para envio.",
       },
       {
         num: "04",
