@@ -34,6 +34,7 @@ import { getOrigin, type LeadOrigin } from "@/lib/origin";
 import { markSessionStartedForm, markSessionConverted } from "@/lib/sessions";
 import { loadModel, computeScore } from "@/lib/scoring";
 import { trackFormStart, trackFormSubmit } from "@/lib/tracking";
+import { sendLeadWebhook } from "@/lib/leadWebhook";
 
 export interface LeadFormProgressiveProps {
   segmentId?: string;
