@@ -8,11 +8,13 @@ import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
 import { PageHeader, SectionCard } from "@/components/admin/ui";
 import { getTrackingSettings, saveTrackingSettings, type TrackingSettings } from "@/lib/admin/settings";
+import { testLeadWebhook } from "@/lib/leadWebhook";
 
 export const Route = createFileRoute("/admin/tracking")({ component: TrackingPage });
 
 function TrackingPage() {
   const [t, setT] = useState<TrackingSettings | null>(null);
+  const [testing, setTesting] = useState(false);
   useEffect(() => { getTrackingSettings().then(setT); }, []);
   if (!t) return null;
   const upd = <K extends keyof TrackingSettings>(k: K, v: TrackingSettings[K]) => setT({ ...t, [k]: v });
