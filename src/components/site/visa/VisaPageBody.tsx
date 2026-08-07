@@ -13,13 +13,12 @@
 
 import { Link } from "@tanstack/react-router";
 import { Check, ChevronRight, PlayCircle } from "lucide-react";
-import { useState } from "react";
 import { SectionHead } from "@/components/site/SectionHead";
 import { Button } from "@/components/ui/button";
 import {
   Accordion, AccordionContent, AccordionItem, AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
+
 import { avaliacaoHref } from "@/lib/ctaLinks";
 import { COMPARISON, type VisaPage } from "@/lib/visaPages";
 import { PhotoFrame } from "@/components/site/visa/PhotoFrame";
