@@ -305,7 +305,7 @@ function VisaHero({ page }: { page: VisaPage }) {
       <div className="container-x section-pad relative w-full">
         <div className="grid gap-10 lg:gap-14 lg:grid-cols-12 items-center">
           {/* ESQUERDA, texto enxuto */}
-          <div className={showVideoSlot ? "lg:col-span-7" : "lg:col-span-12 max-w-3xl"}>
+          <div className={showVideoSlot ? "lg:col-span-7 min-w-0" : "lg:col-span-12 min-w-0 max-w-3xl"}>
 
             <nav aria-label="Breadcrumb" className="font-mono-label text-foreground/70 flex items-center gap-2">
               <Link to="/" className="hover:text-gold">Início</Link>
@@ -330,22 +330,25 @@ function VisaHero({ page }: { page: VisaPage }) {
               {heroSubtitle}
             </p>
             <div className="mt-8">
-              <a href={avaliacaoHref(`visto_${page.slug}_hero`)}>
-                <Button size="lg" className="btn-label btn-sweep h-12 px-7 text-base">
+              <a href={avaliacaoHref(`visto_${page.slug}_hero`)} className="block sm:inline-block">
+                <Button size="lg" className="btn-label btn-sweep h-auto min-h-12 w-full sm:w-auto whitespace-normal px-5 py-3 text-sm leading-snug sm:px-7 sm:text-base">
                   Iniciar pré-qualificação documental
                 </Button>
               </a>
             </div>
+
           </div>
 
           {/* DIREITA, moldura de vídeo — oculta via admin quando videoHidden = "1" */}
           {showVideoSlot && (
-            <div className="lg:col-span-5">
-              <div className="relative mx-auto max-w-xl">
-              {/* Filete dourado externo (assinatura credencial). */}
-              <div aria-hidden className="absolute -inset-2 rounded-2xl border border-gold/25 pointer-events-none" />
+            <div className="lg:col-span-5 min-w-0">
+              <div className="relative mx-auto w-full max-w-full sm:max-w-xl">
+              {/* Filete dourado (assinatura credencial) — dentro do quadro no
+                  mobile para não estourar a largura da tela. */}
+              <div aria-hidden className="absolute inset-0 sm:-inset-2 rounded-2xl border border-gold/25 pointer-events-none" />
               <div className="relative w-full overflow-hidden rounded-xl ring-1 ring-gold/40 shadow-elevated bg-ink-raise aspect-video">
                 {hasVideo ? (
+
                   <VideoPlayer
                     url={videoUrl}
                     title={page.h1}

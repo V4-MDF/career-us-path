@@ -67,14 +67,15 @@ export function VideoPlayer({ url, title, className, facade = false, poster }: V
         ) : (
           <div aria-hidden className="absolute inset-0 bg-gradient-to-br from-[#16223A] to-[#0A111C]" />
         )}
-        <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent" />
+        <div aria-hidden className="absolute inset-0 bg-black/25" />
         <div className="absolute inset-0 flex flex-col items-center justify-center gap-2">
           <PlayCircle
-            className="h-16 w-16 text-gold drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)] transition-transform group-hover:scale-105"
+            className="h-12 w-12 sm:h-16 sm:w-16 text-gold drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)] transition-transform group-hover:scale-105"
             aria-hidden
           />
-          <span className="font-mono-label text-gold text-[10px] tracking-[0.2em]">ASSISTIR VÍDEO</span>
+          <span className="hidden sm:block font-mono-label text-gold text-[10px] tracking-[0.2em]">ASSISTIR VÍDEO</span>
         </div>
+
       </button>
     );
   }
