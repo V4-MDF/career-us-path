@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { Save } from "lucide-react";
+import { Save, Send } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -8,11 +8,13 @@ import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
 import { PageHeader, SectionCard } from "@/components/admin/ui";
 import { getTrackingSettings, saveTrackingSettings, type TrackingSettings } from "@/lib/admin/settings";
+import { testLeadWebhook } from "@/lib/leadWebhook";
 
 export const Route = createFileRoute("/admin/tracking")({ component: TrackingPage });
 
 function TrackingPage() {
   const [t, setT] = useState<TrackingSettings | null>(null);
+  const [testing, setTesting] = useState(false);
   useEffect(() => { getTrackingSettings().then(setT); }, []);
   if (!t) return null;
   const upd = <K extends keyof TrackingSettings>(k: K, v: TrackingSettings[K]) => setT({ ...t, [k]: v });
@@ -62,6 +64,48 @@ function TrackingPage() {
             Os eventos só disparam se Pixel/GA4 estiverem ativos abaixo. Sem ID configurado, são no-op (não há erro).
           </p>
         </div>
+      </SectionCard>
+
+      <SectionCard title="Webhook de Leads">
+        <div className="flex items-center gap-2 mb-3">
+          <Switch checked={t.webhook_enabled} onCheckedChange={(v) => upd("webhook_enabled", v)} />
+          <span className="text-sm text-slate-600">{t.webhook_enabled ? "Ativo, cada lead novo será enviado" : "Inativo"}</span>
+        </div>
+        <div className="flex flex-col sm:flex-row gap-2">
+          <Input
+            placeholder="https://hooks.zapier.com/hooks/catch/..."
+            value={t.webhook_url}
+            onChange={(e) => upd("webhook_url", e.target.value)}
+            className="font-mono text-xs"
+          />
+          <Button
+            variant="outline"
+            disabled={testing}
+            onClick={async () => {
+              const url = t.webhook_url.trim();
+              if (!url.startsWith("https://")) { toast.error("Informe uma URL https:// válida."); return; }
+              setTesting(true);
+              try {
+                await testLeadWebhook(url);
+                toast.success("Webhook respondeu com sucesso. Verifique o destino.");
+              } catch (e) {
+                toast.error(e instanceof Error ? e.message : "Falha ao chamar o webhook.");
+              } finally {
+                setTesting(false);
+              }
+            }}
+            className="gap-1.5 shrink-0"
+          >
+            <Send className="h-4 w-4" />{testing ? "Enviando…" : "Testar webhook"}
+          </Button>
+        </div>
+        <p className="mt-3 text-xs text-slate-500">
+          Enviamos um <code className="font-mono">POST</code> em JSON para essa URL a cada lead completo
+          do formulário (<code className="font-mono">/avaliacao</code> e variantes), com
+          <code className="font-mono"> event: "lead.created"</code> e todos os dados do lead (nome, contato,
+          respostas, score, qualificação, origem/UTM). Se o destino falhar, o lead continua salvo e o
+          visitante segue normalmente.
+        </p>
       </SectionCard>
 
       <div className="grid md:grid-cols-2 gap-4">

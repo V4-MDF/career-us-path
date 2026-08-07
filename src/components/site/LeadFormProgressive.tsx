@@ -34,6 +34,7 @@ import { getOrigin, type LeadOrigin } from "@/lib/origin";
 import { markSessionStartedForm, markSessionConverted } from "@/lib/sessions";
 import { loadModel, computeScore } from "@/lib/scoring";
 import { trackFormStart, trackFormSubmit } from "@/lib/tracking";
+import { sendLeadWebhook } from "@/lib/leadWebhook";
 
 export interface LeadFormProgressiveProps {
   segmentId?: string;
@@ -301,6 +302,9 @@ export function LeadFormProgressive({
       };
       // `set` já não lança, loga warn e mantém cache local em caso de falha.
       await set("leads", id, lead);
+
+      // Webhook externo (Admin › Tracking). Fire-and-forget, não bloqueia.
+      void sendLeadWebhook(lead as unknown as Record<string, unknown>);
 
       // Guarda payload do lead qualificado para a página de obrigado montar
       // a mensagem do WhatsApp. Sessão apenas, limpo após uso.

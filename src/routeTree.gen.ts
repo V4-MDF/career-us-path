@@ -51,6 +51,7 @@ import { Route as AdminAbRouteImport } from './routes/admin.ab'
 import { Route as VistosSlugIndexRouteImport } from './routes/vistos.$slug.index'
 import { Route as VistosSlugSecaoRouteImport } from './routes/vistos.$slug.$secao'
 import { Route as PreQualificacaoRTokenRouteImport } from './routes/pre-qualificacao.r.$token'
+import { Route as ApiPublicLeadWebhookRouteImport } from './routes/api/public/lead-webhook'
 
 const TermosRoute = TermosRouteImport.update({
   id: '/termos',
@@ -264,6 +265,11 @@ const PreQualificacaoRTokenRoute = PreQualificacaoRTokenRouteImport.update({
   path: '/r/$token',
   getParentRoute: () => PreQualificacaoRoute,
 } as any)
+const ApiPublicLeadWebhookRoute = ApiPublicLeadWebhookRouteImport.update({
+  id: '/api/public/lead-webhook',
+  path: '/api/public/lead-webhook',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -305,6 +311,7 @@ export interface FileRoutesByFullPath {
   '/vistos/$slug': typeof VistosSlugRouteWithChildren
   '/admin/': typeof AdminIndexRoute
   '/avaliacao/': typeof AvaliacaoIndexRoute
+  '/api/public/lead-webhook': typeof ApiPublicLeadWebhookRoute
   '/pre-qualificacao/r/$token': typeof PreQualificacaoRTokenRoute
   '/vistos/$slug/$secao': typeof VistosSlugSecaoRoute
   '/vistos/$slug/': typeof VistosSlugIndexRoute
@@ -347,6 +354,7 @@ export interface FileRoutesByTo {
   '/lp/$slug': typeof LpSlugRoute
   '/admin': typeof AdminIndexRoute
   '/avaliacao': typeof AvaliacaoIndexRoute
+  '/api/public/lead-webhook': typeof ApiPublicLeadWebhookRoute
   '/pre-qualificacao/r/$token': typeof PreQualificacaoRTokenRoute
   '/vistos/$slug/$secao': typeof VistosSlugSecaoRoute
   '/vistos/$slug': typeof VistosSlugIndexRoute
@@ -392,6 +400,7 @@ export interface FileRoutesById {
   '/vistos/$slug': typeof VistosSlugRouteWithChildren
   '/admin/': typeof AdminIndexRoute
   '/avaliacao/': typeof AvaliacaoIndexRoute
+  '/api/public/lead-webhook': typeof ApiPublicLeadWebhookRoute
   '/pre-qualificacao/r/$token': typeof PreQualificacaoRTokenRoute
   '/vistos/$slug/$secao': typeof VistosSlugSecaoRoute
   '/vistos/$slug/': typeof VistosSlugIndexRoute
@@ -438,6 +447,7 @@ export interface FileRouteTypes {
     | '/vistos/$slug'
     | '/admin/'
     | '/avaliacao/'
+    | '/api/public/lead-webhook'
     | '/pre-qualificacao/r/$token'
     | '/vistos/$slug/$secao'
     | '/vistos/$slug/'
@@ -480,6 +490,7 @@ export interface FileRouteTypes {
     | '/lp/$slug'
     | '/admin'
     | '/avaliacao'
+    | '/api/public/lead-webhook'
     | '/pre-qualificacao/r/$token'
     | '/vistos/$slug/$secao'
     | '/vistos/$slug'
@@ -524,6 +535,7 @@ export interface FileRouteTypes {
     | '/vistos/$slug'
     | '/admin/'
     | '/avaliacao/'
+    | '/api/public/lead-webhook'
     | '/pre-qualificacao/r/$token'
     | '/vistos/$slug/$secao'
     | '/vistos/$slug/'
@@ -548,6 +560,7 @@ export interface RootRouteChildren {
   LpSlugRoute: typeof LpSlugRoute
   VistosSlugRoute: typeof VistosSlugRouteWithChildren
   AvaliacaoIndexRoute: typeof AvaliacaoIndexRoute
+  ApiPublicLeadWebhookRoute: typeof ApiPublicLeadWebhookRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -846,6 +859,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PreQualificacaoRTokenRouteImport
       parentRoute: typeof PreQualificacaoRoute
     }
+    '/api/public/lead-webhook': {
+      id: '/api/public/lead-webhook'
+      path: '/api/public/lead-webhook'
+      fullPath: '/api/public/lead-webhook'
+      preLoaderRoute: typeof ApiPublicLeadWebhookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -952,17 +972,8 @@ const rootRouteChildren: RootRouteChildren = {
   LpSlugRoute: LpSlugRoute,
   VistosSlugRoute: VistosSlugRouteWithChildren,
   AvaliacaoIndexRoute: AvaliacaoIndexRoute,
+  ApiPublicLeadWebhookRoute: ApiPublicLeadWebhookRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
