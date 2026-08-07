@@ -525,7 +525,7 @@ export function WhyUs() {
             <SectionHead num="06" eyebrow="POR QUE A STATUS" title={title} />
             <p className="mt-6 text-foreground/80 leading-relaxed max-w-md">{lead}</p>
           </div>
-          <ul className="grid auto-rows-fr sm:grid-cols-2 gap-3 self-end">
+          <ul className="grid sm:grid-cols-2 gap-3">
             {items.map(({ icon: Icon, t, desc }) => (
               <li key={t} className="flex gap-3 rounded-xl border border-gold/20 bg-ink-raise/50 p-4 items-start">
                 <Icon className="h-5 w-5 text-gold shrink-0 mt-0.5" />
