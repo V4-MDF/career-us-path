@@ -128,6 +128,9 @@ export function LeadForm({ segmentId, defaultProfissao, onSubmitted, submitLabel
         status: "novo",
       };
       await set("leads", id, lead);
+      // Webhook externo (Admin › Tracking). Fire-and-forget, não bloqueia.
+      void sendLeadWebhook(lead as unknown as Record<string, unknown>);
+
       if (segmentId) {
         await registerConversion(segmentId);
       }
