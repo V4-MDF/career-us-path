@@ -15,6 +15,8 @@ import { newId, set } from "@/lib/dataStore";
 import { captureUtms, type LeadInput } from "@/lib/leadScoring";
 import { getAssignedVariantId, registerConversion } from "@/lib/abEngine";
 import { trackFormStart, trackFormSubmit } from "@/lib/tracking";
+import { sendLeadWebhook } from "@/lib/leadWebhook";
+
 
 export interface LeadFormProps {
   /** Slug do segmento da LP (medicos, engenheiros, empresarios). */
@@ -128,6 +130,9 @@ export function LeadForm({ segmentId, defaultProfissao, onSubmitted, submitLabel
         status: "novo",
       };
       await set("leads", id, lead);
+      // Webhook externo (Admin › Tracking). Fire-and-forget, não bloqueia.
+      void sendLeadWebhook(lead as unknown as Record<string, unknown>);
+
       if (segmentId) {
         await registerConversion(segmentId);
       }

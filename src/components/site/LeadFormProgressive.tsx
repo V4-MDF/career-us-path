@@ -35,6 +35,8 @@ import { markSessionStartedForm, markSessionConverted } from "@/lib/sessions";
 import { loadModel, computeScore } from "@/lib/scoring";
 import { trackFormStart, trackFormSubmit } from "@/lib/tracking";
 import { sendLeadWebhook } from "@/lib/leadWebhook";
+import { LEAD_OPTION_LABELS } from "@/lib/leadWebhookPayload";
+
 
 export interface LeadFormProgressiveProps {
   segmentId?: string;
@@ -292,7 +294,9 @@ export function LeadFormProgressive({
         ...current,
         id,
         createdAt: new Date().toISOString(),
+        score: leadScore,
         utm: origin.utm,
+
         origin,
         segmento: segmentId,
         variante_ab: segmentId ? getAssignedVariantId(segmentId) : null,
@@ -495,37 +499,8 @@ function errorFor(k: FieldKey): string {
   }
 }
 
-const LABELS: Record<string, Record<string, string>> = {
-  objetivo_visto: {
-    morar: "Morar definitivamente",
-    trabalhar: "Trabalhar",
-    estudar: "Estudar",
-    turismo: "Turismo",
-  },
-  profissao: {
-    medico: "Médico", dentista: "Dentista", engenheiro: "Engenheiro",
-    advogado: "Advogado", empresario: "Empresário", ti: "Tecnologia / TI",
-    outra_qualificada: "Outra área qualificada", outra: "Outra",
-  },
-  formacao: {
-    doutorado: "Doutorado", mestrado: "Mestrado", pos: "Pós-graduação",
-    superior: "Ensino superior", sem_superior: "Sem ensino superior",
-  },
-  faixaEtaria: {
-    "ate_29": "Até 29 anos", "30_39": "30 a 39", "40_49": "40 a 49", "50_mais": "50+",
-  },
-  renda: {
-    "ate_10": "Até R$ 10 mil",
-    "10_20": "R$ 10–20 mil",
-    "20_40": "R$ 20–40 mil",
-    "40_80": "R$ 40–80 mil",
-    "80_150": "R$ 80–150 mil",
-    "150_mais": "Acima de R$ 150 mil",
-  },
-  momento: {
-    ja_decidi: "Já decidi", proximos_1_2: "Próximos 1–2 anos", sonho: "Pesquisando / sonho",
-  },
-};
+const LABELS: Record<string, Record<string, string>> = LEAD_OPTION_LABELS;
+
 
 function Summary({ k, v }: { k: string; v: string }) {
   return (

@@ -102,10 +102,21 @@ function TrackingPage() {
         <p className="mt-3 text-xs text-slate-500">
           Enviamos um <code className="font-mono">POST</code> em JSON para essa URL a cada lead completo
           do formulário (<code className="font-mono">/avaliacao</code> e variantes), com
-          <code className="font-mono"> event: "lead.created"</code> e todos os dados do lead (nome, contato,
-          respostas, score, qualificação, origem/UTM). Se o destino falhar, o lead continua salvo e o
-          visitante segue normalmente.
+          <code className="font-mono"> event: "lead.created"</code> e todos os campos em formato plano:
+          <code className="font-mono"> id</code>, <code className="font-mono">created_at</code>,
+          <code className="font-mono"> nome</code>, <code className="font-mono">email</code>,
+          <code className="font-mono"> whatsapp</code> / <code className="font-mono">whatsapp_e164</code>,
+          as respostas (<code className="font-mono">objetivo_visto</code>, <code className="font-mono">profissao</code>,
+          <code className="font-mono"> formacao</code>, <code className="font-mono">faixa_etaria</code>,
+          <code className="font-mono"> renda</code>, <code className="font-mono">momento</code>) sempre com
+          o código e o texto legível em <code className="font-mono">*_label</code>,
+          <code className="font-mono"> score</code>, <code className="font-mono">qualification</code>,
+          e a origem (<code className="font-mono">landing_page</code>, <code className="font-mono">referrer</code>,
+          <code className="font-mono"> utm_source</code>, <code className="font-mono">utm_campaign</code>, etc.).
+          O objeto original completo vai em <code className="font-mono">lead_raw</code>. Se o destino falhar,
+          o lead continua salvo e o visitante segue normalmente.
         </p>
+
       </SectionCard>
 
       <div className="grid md:grid-cols-2 gap-4">
