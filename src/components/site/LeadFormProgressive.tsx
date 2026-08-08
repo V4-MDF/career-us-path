@@ -294,7 +294,9 @@ export function LeadFormProgressive({
         ...current,
         id,
         createdAt: new Date().toISOString(),
+        score: leadScore,
         utm: origin.utm,
+
         origin,
         segmento: segmentId,
         variante_ab: segmentId ? getAssignedVariantId(segmentId) : null,
