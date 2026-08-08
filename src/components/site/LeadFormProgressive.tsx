@@ -35,6 +35,8 @@ import { markSessionStartedForm, markSessionConverted } from "@/lib/sessions";
 import { loadModel, computeScore } from "@/lib/scoring";
 import { trackFormStart, trackFormSubmit } from "@/lib/tracking";
 import { sendLeadWebhook } from "@/lib/leadWebhook";
+import { LEAD_OPTION_LABELS } from "@/lib/leadWebhookPayload";
+
 
 export interface LeadFormProgressiveProps {
   segmentId?: string;
