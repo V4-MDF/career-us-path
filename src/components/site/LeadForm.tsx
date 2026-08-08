@@ -15,6 +15,8 @@ import { newId, set } from "@/lib/dataStore";
 import { captureUtms, type LeadInput } from "@/lib/leadScoring";
 import { getAssignedVariantId, registerConversion } from "@/lib/abEngine";
 import { trackFormStart, trackFormSubmit } from "@/lib/tracking";
+import { sendLeadWebhook } from "@/lib/leadWebhook";
+
 
 export interface LeadFormProps {
   /** Slug do segmento da LP (medicos, engenheiros, empresarios). */
