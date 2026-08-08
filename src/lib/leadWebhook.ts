@@ -4,6 +4,7 @@
  * (/api/public/lead-webhook) para evitar bloqueio de CORS no destino.
  */
 import { getTrackingSettings } from "@/lib/admin/settings";
+import { buildLeadWebhookPayload } from "@/lib/leadWebhookPayload";
 
 async function post(url: string, payload: unknown) {
   const res = await fetch("/api/public/lead-webhook", {
@@ -23,7 +24,7 @@ export async function sendLeadWebhook(lead: Record<string, unknown>): Promise<vo
   try {
     const t = await getTrackingSettings();
     if (!t.webhook_enabled || !t.webhook_url.trim()) return;
-    await post(t.webhook_url.trim(), { event: "lead.created", lead });
+    await post(t.webhook_url.trim(), buildLeadWebhookPayload(lead, "lead.created"));
   } catch (e) {
     console.warn("[webhook] envio do lead falhou", e);
   }
@@ -31,15 +32,37 @@ export async function sendLeadWebhook(lead: Record<string, unknown>): Promise<vo
 
 /** Usado pelo botão "Testar webhook" no admin. Lança em caso de erro. */
 export async function testLeadWebhook(url: string): Promise<void> {
-  await post(url, {
-    event: "lead.test",
-    lead: {
-      id: "lead_teste",
-      nome: "Lead de Teste",
-      email: "teste@statusnaamerica.com.br",
-      whatsapp: "5531973386303",
-      qualification: "qualificado",
-      createdAt: new Date().toISOString(),
+  const exemplo: Record<string, unknown> = {
+    id: "lead_teste",
+    createdAt: new Date().toISOString(),
+    nome: "Lead de Teste",
+    email: "teste@statusnaamerica.com.br",
+    whatsapp: "(31) 97338-6303",
+    objetivo_visto: "morar",
+    profissao: "medico",
+    formacao: "mestrado",
+    faixaEtaria: "40_49",
+    renda: "40_80",
+    momento: "ja_decidi",
+    cidade: "",
+    uf: "",
+    score: 85,
+    qualification: "qualificado",
+    qualification_reasons: [],
+    status: "novo",
+    segmento: null,
+    variante_ab: null,
+    utm: { utm_source: "teste", utm_medium: "admin", utm_campaign: "webhook_test" },
+    origin: {
+      utm: {},
+      internal: {
+        from_path: "/",
+        from_title: "Home",
+        referrer: "",
+        landing_path: "/",
+        landing_ts: new Date().toISOString(),
+      },
     },
-  });
+  };
+  await post(url, buildLeadWebhookPayload(exemplo, "lead.test"));
 }
