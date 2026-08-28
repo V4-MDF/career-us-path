@@ -72,7 +72,7 @@ export const FUNNEL_LABEL: Record<FunnelStatus, string> = {
  * DEFAULT MODEL, defaults do briefing (pesos somam 100).
  * ---------------------------------------------------------------- */
 export const DEFAULT_MODEL: ScoringModel = {
-  version: 2,
+  version: 3,
   updatedAt: new Date(0).toISOString(),
   factors: [
     {
@@ -80,14 +80,26 @@ export const DEFAULT_MODEL: ScoringModel = {
       label: "Renda",
       field: "renda",
       peso: 35,
-      valores: { "40_mais": 1.0, "20_40": 0.7, "10_20": 0.4, ate_10: 0.12 },
+      valores: {
+        "150_mais": 1.0,
+        "80_150": 0.95,
+        "40_80": 0.85,
+        "40_mais": 0.85,
+        "20_40": 0.6,
+        "10_20": 0.35,
+        ate_10: 0.1,
+      },
       labels: {
-        "40_mais": "R$ 40k+",
-        "20_40": "R$ 20–40k",
-        "10_20": "R$ 10–20k",
-        ate_10: "Até R$ 10k",
+        "150_mais": "Acima de R$ 150 mil",
+        "80_150": "R$ 80–150 mil",
+        "40_80": "R$ 40–80 mil",
+        "40_mais": "R$ 40 mil+ (legado)",
+        "20_40": "R$ 20–40 mil",
+        "10_20": "R$ 10–20 mil",
+        ate_10: "Até R$ 10 mil",
       },
     },
+
     {
       key: "profissao",
       label: "Profissão",
