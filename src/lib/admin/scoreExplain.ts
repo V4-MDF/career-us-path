@@ -16,7 +16,9 @@ const IDADE: Record<string, number> = {
 };
 const RENDA: Record<string, number> = {
   ate_10: 3, "10_20": 10, "20_40": 18, "40_mais": 25,
+  "40_80": 25, "80_150": 25, "150_mais": 25,
 };
+
 const MOMENTO: Record<string, number> = {
   ja_decidi: 15, proximos_1_2: 9, sonho: 3,
 };
