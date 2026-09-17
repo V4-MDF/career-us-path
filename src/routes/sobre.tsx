@@ -360,6 +360,9 @@ function OndeEstamos() {
             <div className="mt-3 font-mono-label text-[11px] text-ink-text/60">
               EIN 42-4745152
             </div>
+            <div className="mt-1 font-mono-label text-[11px] text-ink-text/60">
+              Meagan Zabadal · NY Bar 5797303 · AZ Bar 040403
+            </div>
             <a
               href={mapsUrl}
               target="_blank"
