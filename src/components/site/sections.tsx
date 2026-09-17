@@ -38,7 +38,6 @@ import {
   CNPJ,
 } from "@/config/credentials";
 import { SectionHead } from "./SectionHead";
-import { BrUsRouteBackdrop } from "./visuals/BrUsRouteBackdrop";
 import { VideoPlayer } from "./VideoPlayer";
 import { FamilySealBackdrop } from "./visuals/FamilySealBackdrop";
 import { ProcessIconStrip } from "./visuals/ProcessIconStrip";
@@ -69,7 +68,6 @@ export function Hero() {
   const cta = useContent("hero.cta");
   const proof = useContent("hero.proof");
   const heroVideoUrl = useContent("hero.videoUrl");
-  const heroPosterUrl = useContent("hero.posterUrl");
   // Só renderiza o slot depois que o conteúdo foi resolvido: enquanto não
   // sabemos, o vídeo NÃO aparece (evita o flash do slot oculto).
   const showHeroVideo = useVisibleSlot("hero.videoHidden");
@@ -80,11 +78,7 @@ export function Hero() {
       aria-label="Abertura"
       className="section-anchor relative overflow-hidden pt-32 md:pt-44 pb-16 md:pb-28 min-h-[92vh] flex items-center"
     >
-      <Velaris
-        className="pointer-events-none absolute inset-0 -z-10"
-        bg="#FCFCFB"
-        colors={["#FFFFFF", "#EADFBF", "#B7934F", "#DAD7CF"]}
-      />
+      <Velaris className="pointer-events-none absolute inset-0 -z-10" />
       <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-background/20 via-transparent to-background/85" />
 
       <div className={`container-x grid gap-10 md:gap-16 lg:gap-12 items-center ${heroVideoHidden ? "" : "lg:grid-cols-[1fr_1.1fr]"}`}>
