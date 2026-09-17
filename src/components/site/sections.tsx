@@ -463,27 +463,32 @@ export function PersonaCards() {
     <Reveal as="section" id="perfis-atendidos" className="section-pad">
       <div className="container-x">
         <SectionHead num="04" eyebrow="PERFIS QUE ATENDEMOS" title="Profissões consolidadas têm caminho mais curto pelo EB-2 NIW." />
-        <div className="mt-14 grid md:grid-cols-3 gap-5">
+        <CardRail
+          className="mt-10 md:mt-14"
+          mdClassName="md:grid md:grid-cols-3 md:gap-5"
+          count={personas.length}
+          ariaLabel="Perfis atendidos"
+        >
           {personas.map((p) => {
             const Icon = p.icon;
             return (
-              <article key={p.title} className={`liquid-card glass-interactive relative rounded-2xl border-t-2 p-6 transition-[border-color,box-shadow,transform] ${p.accent}`}>
-                <span className="grid h-12 w-12 place-items-center rounded-lg border border-current/50">
-                  <Icon className="h-6 w-6" />
+              <article key={p.title} className={`liquid-card glass-interactive relative h-full rounded-2xl border-t-2 p-5 sm:p-6 transition-[border-color,box-shadow,transform] ${p.accent}`}>
+                <span className="grid h-11 w-11 place-items-center rounded-lg border border-current/50">
+                  <Icon className="h-5 w-5" />
                 </span>
-                <h3 className="mt-6 font-display text-2xl text-foreground">{p.title}</h3>
+                <h3 className="mt-5 font-display text-2xl text-foreground">{p.title}</h3>
                 <p className="mt-3 text-foreground/75 leading-relaxed">{p.headline}</p>
                 {/* CTA leva à LP /avaliacao com seg + src, preserva utms da URL atual. */}
                 <a
                   href={avaliacaoHref(`home_persona_${p.seg}`, p.seg)}
-                  className="mt-7 inline-flex items-center text-sm text-gold hover:text-gold"
+                  className="mt-6 inline-flex items-center text-sm text-gold hover:text-gold"
                 >
                   Analisar meu perfil <span aria-hidden className="ml-2">→</span>
                 </a>
               </article>
             );
           })}
-        </div>
+        </CardRail>
       </div>
     </Reveal>
   );
