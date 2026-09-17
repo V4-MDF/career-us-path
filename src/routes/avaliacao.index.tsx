@@ -143,7 +143,7 @@ function AvaliacaoPage() {
         </div>
 
 
-        <div className="relative mx-auto w-full max-w-[680px] px-5 md:px-6 py-10 md:py-14">
+        <div className="relative mx-auto w-full max-w-[680px] px-5 md:px-6 py-10 md:py-12">
           {/* Intro */}
           <div className="text-center">
             <h1 className="display-2 text-foreground">
@@ -183,7 +183,7 @@ function AvaliacaoPage() {
         </div>
       </main>
 
-      <footer className="border-t border-gold/15 bg-ink-deep">
+      <footer className="border-t border-gold/15 bg-champagne">
         <div className="container-x py-8 text-xs text-foreground/80 leading-relaxed max-w-4xl">
           <p className="font-mono-label text-foreground/80">
             © {new Date().getFullYear()} STATUS IMMIGRATION LAW FIRM LLC · EIN 99-4846502

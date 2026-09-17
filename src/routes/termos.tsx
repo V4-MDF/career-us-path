@@ -26,7 +26,7 @@ function TermosPage() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Header />
-      <main className="container-x py-16 md:py-24 max-w-3xl">
+      <main className="container-x pb-16 pt-32 md:pb-20 md:pt-40 max-w-4xl">
         <p className="font-mono-label text-gold/85">DOCUMENTO LEGAL</p>
         <h1 className="mt-3 font-display text-4xl md:text-5xl leading-tight">
           Termos de Uso
@@ -35,7 +35,7 @@ function TermosPage() {
           Última atualização: {new Date().toLocaleDateString("pt-BR", { day: "2-digit", month: "long", year: "numeric" })}.
         </p>
 
-        <section className="mt-10 space-y-8 text-[15px] leading-relaxed text-foreground/85">
+        <section className="legal-sheet mt-10 space-y-8 text-[15px] leading-relaxed text-foreground/85">
           <div>
             <h2 className="font-display text-2xl text-foreground">1. Aceitação</h2>
             <p className="mt-3">

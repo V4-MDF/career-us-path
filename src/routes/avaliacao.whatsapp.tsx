@@ -156,8 +156,8 @@ function AvaliacaoWhatsAppPage() {
 
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col">
-      <header className="sticky top-0 z-20 border-b border-gold/15 bg-background/75 backdrop-blur-xl">
-        <div className="container-x flex h-[64px] items-center justify-between">
+      <header className="sticky top-0 z-20 px-3 pt-3">
+        <div className="liquid-glass container-x flex h-[64px] items-center justify-between rounded-full">
           <Link to="/" className="flex items-center" aria-label="Status Immigration Law Firm. Início">
             <BrandLogo priority className="h-12 w-12" />
           </Link>
@@ -191,7 +191,7 @@ function AvaliacaoWhatsAppPage() {
           />
         </div>
 
-        <div className="relative mx-auto w-full max-w-[680px] px-5 md:px-6 py-10 md:py-14">
+        <div className="relative mx-auto w-full max-w-[680px] px-5 md:px-6 py-10 md:py-12">
           <div className="text-center">
             <div className="inline-flex items-center gap-3">
               <span aria-hidden className="h-px w-8 bg-gold" />
@@ -212,9 +212,9 @@ function AvaliacaoWhatsAppPage() {
 
           <div className="mt-6">
             {waLink ? (
-              <div className="liquid-card rounded-3xl p-8 text-center">
+              <div className="liquid-card rounded-2xl p-6 text-center">
                 <MessageCircle className="mx-auto h-12 w-12 text-gold" />
-                <h3 className="mt-4 font-serif text-2xl">Abrimos o WhatsApp em uma nova aba.</h3>
+                <h3 className="mt-4 font-display text-2xl">Abrimos o WhatsApp em uma nova aba.</h3>
                 <p className="mt-2 text-foreground/80">
                   Se nada aconteceu, o navegador pode ter bloqueado a janela. Toque no
                   botão abaixo para continuar.
@@ -224,7 +224,7 @@ function AvaliacaoWhatsAppPage() {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => trackWhatsAppOpened()}
-                  className="mt-6 inline-flex items-center gap-2 rounded-full bg-gold px-6 py-3 font-mono-label text-sm text-ink hover:bg-gold/90"
+                  className="btn-sweep mt-6 inline-flex items-center gap-2 rounded-lg bg-gold px-6 py-3 font-mono-label text-sm text-primary-foreground hover:bg-gold/90"
                 >
                   <MessageCircle className="h-4 w-4" /> Abrir WhatsApp
                 </a>
@@ -250,7 +250,7 @@ function AvaliacaoWhatsAppPage() {
         </div>
       </main>
 
-      <footer className="border-t border-gold/15 bg-ink-deep">
+      <footer className="border-t border-gold/15 bg-champagne">
         <div className="container-x py-8 text-xs text-foreground/80 leading-relaxed max-w-4xl">
           <p>
             Status Immigration Law Firm é um escritório de advocacia especializado em imigração federal.

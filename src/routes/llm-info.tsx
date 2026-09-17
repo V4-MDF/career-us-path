@@ -89,7 +89,7 @@ function LlmInfo() {
       <Header />
       <OrganizationJsonLd />
       <main className="pt-28 bg-background">
-        <div className="container-x max-w-3xl py-16 md:py-20">
+        <div className="container-x max-w-4xl py-14 md:py-16">
           <div className="flex items-center gap-3">
             <span aria-hidden className="h-px w-10 bg-gold/70" />
             <span className="font-mono-label text-gold">RESUMO FACTUAL · GEO / AEO</span>
@@ -103,7 +103,7 @@ function LlmInfo() {
             recuperação de informação e modelos de linguagem.
           </p>
 
-          <dl className="mt-12 space-y-8 border-t border-gold/20">
+          <dl className="legal-sheet mt-10 space-y-6">
             {QA.map((it) => (
               <div key={it.q} className="pt-6 border-b border-gold/15 pb-6">
                 <dt className="font-display text-xl text-foreground">{it.q}</dt>
