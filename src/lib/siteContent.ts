@@ -37,11 +37,11 @@ export const defaultContent = {
   "hero.eyebrow": "IMIGRAÇÃO PARA OS ESTADOS UNIDOS. EB-2 NIW",
   "hero.title": "Transforme a sua carreira em um Green Card americano.",
   "hero.subtitle":
-    "A Status Immigration Law Firm ajuda profissionais brasileiros consolidados a conquistar a residência permanente nos EUA pelo EB-2 NIW, sem patrocinador, sem loteria, com Green Card para o cônjuge e os filhos, junto do requerente principal.",
+    "Advocacia de imigração para profissionais e famílias brasileiras. Análise jurídica, estratégia e acompanhamento em processos EB-1, EB-2 NIW e O-1.",
   "hero.cta": "Iniciar triagem do meu caso",
   // COMPLIANCE: números removidos até validação documental (ver src/config/credentials.ts).
   "hero.proof":
-    "Avaliações 5★ no Google · Sede em Orlando, Flórida",
+    "Licensed in NY and AZ · Federal immigration practice only",
   "hero.videoUrl": "",
   "hero.posterUrl": "",
   "hero.videoHidden": "",
@@ -83,7 +83,7 @@ export const defaultContent = {
   // conservador. Não cravar nota do Google em texto estático.
   "partners.slot1.label": "BBB Rating A",
   "partners.slot1.url": "",
-  "partners.slot2.label": "Avaliações 5★ no Google",
+  "partners.slot2.label": "Licensed in NY and AZ",
   "partners.slot2.url": "",
   "partners.slot3.label": "EIN 99-4846502",
   "partners.slot3.url": "",
