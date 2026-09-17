@@ -23,3 +23,8 @@
 - [x] Exibir a logo em formato circular no rodapé.
 - [x] Corrigir quebras de texto e cortes de layout no celular em todas as páginas públicas.
 
+
+## Mobile: trilhas deslizantes (2026-09-17)
+- `CardRail` + utilitário `.card-rail` (mobile swipe com snap, grid a partir de md) em Vistos, Perfis, Processo, Depoimentos, Legado e Credenciais.
+- `.clamp-mobile` + `MobileClamp` ("ler mais") em textos longos (Por que a Status, Legado).
+- Novos CTAs ao fim das dobras Por que a Status e Legado.
