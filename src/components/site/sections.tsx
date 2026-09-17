@@ -113,7 +113,7 @@ export function Hero() {
           </p>
 
           <div className={`mt-10 grid gap-3 sm:flex sm:flex-wrap ${heroVideoHidden ? "sm:justify-center" : ""}`}>
-            <Link to={useAvaliacaoHref("home_hero")} aria-label="Ir para o formulário de pré-qualificação documental">
+            <Link to={useAvaliacaoHref("home_hero")} aria-label="Ir para o formulário de triagem inicial">
                <Button size="lg" variant="cta" className="btn-label btn-sweep h-12 w-full px-7 text-[13px] sm:w-auto sm:text-[15px] active:scale-[0.98]">
                 {cta}
               </Button>
@@ -1069,7 +1069,7 @@ export function FAQ() {
     },
     {
       q: "Não tenho dinheiro sobrando, compensa?",
-      a: "É um investimento significativo, e por isso a análise inicial é gratuita: para que a decisão seja informada. Valores são apresentados com clareza após a pré-qualificação documental, sem pressão e sem letras miúdas. Não trabalhamos com promessas de ganho garantido.",
+      a: "É um investimento significativo, e por isso a análise inicial é gratuita: para que a decisão seja informada. Valores são apresentados com clareza após a triagem inicial, sem pressão e sem letras miúdas. Não trabalhamos com promessas de ganho garantido.",
     },
     {
       q: "As taxas do governo americano estão incluídas nos honorários?",
@@ -1159,11 +1159,11 @@ export function CtaBanner() {
             </ul>
             <a href={useAvaliacaoHref("home_cta_final")} className="mt-7 block sm:inline-block">
               <Button size="lg" variant="cta" className="btn-label btn-sweep h-12 px-4 sm:px-7 w-full sm:w-auto whitespace-normal text-center leading-tight">
-                Iniciar pré-qualificação documental
+                Iniciar triagem do meu caso
               </Button>
             </a>
             <p className="mt-3 text-[12px] text-foreground/80">
-              Para quem quer uma pré-qualificação documental completa do perfil.
+              Para quem quer uma triagem inicial completa do perfil.
             </p>
           </div>
 
@@ -1198,7 +1198,7 @@ export function CtaBanner() {
                 variant="outline"
                 className="btn-label h-12 px-4 sm:px-7 w-full sm:w-auto whitespace-normal text-center leading-tight border-gold/50 text-gold hover:bg-gold/10 hover:text-gold"
               >
-                Iniciar pré-qualificação documental
+                Iniciar triagem do meu caso
               </Button>
             </Link>
             <p className="mt-3 text-[12px] text-foreground/80">

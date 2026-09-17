@@ -29,15 +29,15 @@ interface AvaliacaoSearch {
 
 const SEG_DEFAULTS: Record<SegKey, { headline: string; profissao: string }> = {
   medicos: {
-    headline: "Pré-qualificação documental para médicos brasileiros.",
+    headline: "Triagem inicial para médicos brasileiros.",
     profissao: "medico",
   },
   engenheiros: {
-    headline: "Pré-qualificação documental para engenheiros brasileiros.",
+    headline: "Triagem inicial para engenheiros brasileiros.",
     profissao: "engenheiro",
   },
   empresarios: {
-    headline: "Pré-qualificação documental para empresários brasileiros.",
+    headline: "Triagem inicial para empresários brasileiros.",
     profissao: "empresario",
   },
 };

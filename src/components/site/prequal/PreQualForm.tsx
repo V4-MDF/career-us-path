@@ -339,8 +339,9 @@ export function PreQualForm({ onSubmit, submitting }: Props) {
             className="mt-0.5 border-gold/40 data-[state=checked]:bg-gold data-[state=checked]:text-ink"
           />
           <span>
-            Autorizo a Status Immigration Law Firm a tratar meus dados para gerar o mapa deste
-            teste, em conformidade com a LGPD.
+            Autorizo a Status Immigration Law Firm a tratar meus dados para esta triagem e
+            entrar em contato, em conformidade com a LGPD. Entendo que o envio não cria,
+            por si só, uma relação advogado-cliente.
           </span>
         </label>
 

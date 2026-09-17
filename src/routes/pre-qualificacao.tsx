@@ -71,8 +71,8 @@ function PreQualPage() {
                   Veja quais documentos costumam ser exigidos em cada categoria.
                 </h1>
                 <p className="mt-4 text-foreground/75 max-w-2xl">
-                  Esta triagem é orientativa e não substitui parecer jurídico individual.
-                  Somente um advogado de imigração licenciado pode avaliar o seu caso.
+                  Esta triagem é orientativa e não constitui parecer jurídico individual.
+                  Quando houver aderência, o caso poderá ser encaminhado para análise pela advogada.
                 </p>
                 <p className="mt-4 text-foreground/75 max-w-2xl">
                   Comparamos suas respostas com os critérios das categorias <strong>EB-1A</strong>,
