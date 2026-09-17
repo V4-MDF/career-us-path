@@ -727,7 +727,7 @@ export function LegacySection() {
         </CardRail>
 
         <div className="mt-10 flex justify-center">
-          <a href={avaliacaoHref("home_legado")} className="w-full sm:w-auto">
+          <a href={useAvaliacaoHref("home_legado")} className="w-full sm:w-auto">
             <Button size="lg" variant="cta" className="btn-label btn-sweep h-12 px-7 w-full sm:w-auto">
               Analisar meu perfil
             </Button>
