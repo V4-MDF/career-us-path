@@ -410,22 +410,27 @@ export function VisaCards() {
       <div className="container-x relative">
 
         <SectionHead num="03" eyebrow="CAMINHOS IMIGRATÓRIOS" title="Três caminhos. Uma estratégia jurídica para cada perfil." />
-        <div className="mt-14 grid md:grid-cols-3 gap-5">
+        <CardRail
+          className="mt-10 md:mt-14"
+          mdClassName="md:grid md:grid-cols-3 md:gap-5"
+          count={visas.length}
+          ariaLabel="Caminhos imigratórios"
+        >
           {visas.map((v) => (
             <Link key={v.slug} to="/vistos/$slug" params={{ slug: v.slug }} className="group block">
-              <article className={`liquid-card relative gold-tick h-full rounded-2xl p-6 transition-colors ${
+              <article className={`liquid-card relative gold-tick h-full rounded-2xl p-5 sm:p-6 transition-colors ${
                 v.featured ? "border-gold" : "hover:border-gold/60"
               }`}>
                 <span className="font-mono-label text-gold">{v.tag}</span>
-                <h3 className="mt-4 font-display text-[40px] leading-none">{v.title}</h3>
-                <p className="mt-5 text-sm text-foreground/75 leading-relaxed">{v.desc}</p>
-                <span className="mt-7 inline-flex items-center text-sm text-gold">
+                <h3 className="mt-4 font-display text-[34px] sm:text-[40px] leading-none">{v.title}</h3>
+                <p className="mt-4 text-sm text-foreground/75 leading-relaxed">{v.desc}</p>
+                <span className="mt-6 inline-flex items-center text-sm text-gold">
                   Conhecer este visto <span aria-hidden className="ml-2 transition-transform group-hover:translate-x-1">→</span>
                 </span>
               </article>
             </Link>
           ))}
-        </div>
+        </CardRail>
 
         <div className="mt-12 flex justify-center">
           <a href={useAvaliacaoHref("home_vistos")}>
