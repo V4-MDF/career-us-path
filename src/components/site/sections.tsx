@@ -47,6 +47,7 @@ import { FlagsBRUS, FlagBR, FlagUS } from "./flags";
 import { PatchBBB, PatchGoogle, PatchEIN, PatchCNPJ } from "./credentialPatches";
 
 import { FlagsBRUSDual } from "./visuals/DualFlagIcons";
+import { CardRail } from "./CardRail";
 
 
 import passportDocuments from "@/assets/passport-documents.jpg";
