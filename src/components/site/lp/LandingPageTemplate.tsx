@@ -47,7 +47,7 @@ function ConversionHeader({ segmentId }: { segmentId: string }) {
 
 function LpFooter() {
   return (
-    <footer className="border-t border-border/40 bg-surface py-10">
+    <footer className="border-t border-gold/15 bg-champagne py-8">
       <div className="container-x flex flex-col sm:flex-row gap-4 items-center justify-between text-xs text-muted-foreground">
         <p className="max-w-2xl leading-relaxed">
           © {new Date().getFullYear()} Status Immigration Law Firm. Escritório de advocacia

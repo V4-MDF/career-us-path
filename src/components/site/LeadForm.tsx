@@ -250,7 +250,7 @@ export function LeadForm({ segmentId, defaultProfissao, onSubmitted, submitLabel
 
       {step === 2 && (
         <div className="space-y-4">
-          <h3 className="font-serif text-2xl">Contexto e momento</h3>
+          <h3 className="font-display text-2xl">Contexto e momento</h3>
           <div className="grid sm:grid-cols-[1fr_120px] gap-4">
             <div>
               <Label htmlFor="cidade">Cidade</Label>

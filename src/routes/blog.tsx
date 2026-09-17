@@ -141,7 +141,7 @@ function BlogIndex() {
             {rest.length === 0 ? (
               <p className="text-foreground/80">Nenhum post nesta categoria.</p>
             ) : (
-              <ul className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+              <ul className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
                 {rest.map((p) => (
                   <li key={p.id}>
                     <Link

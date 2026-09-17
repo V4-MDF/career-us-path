@@ -102,7 +102,7 @@ export function SectionTOC({
         >
           <div className="absolute inset-0 bg-ink-text/20 backdrop-blur-sm" />
           <div
-            className="liquid-glass absolute bottom-0 left-0 right-0 max-h-[70vh] overflow-y-auto rounded-t-3xl px-5 pt-5 pb-8"
+            className="liquid-glass absolute bottom-0 left-0 right-0 max-h-[70vh] overflow-y-auto rounded-t-2xl px-5 pt-5 pb-8"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center justify-between mb-4">

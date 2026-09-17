@@ -629,7 +629,7 @@ function MapaDiscreto() {
     address
   )}`;
   return (
-    <section className="bg-parchment py-14 border-b border-gold/20">
+    <section className="section-champagne py-10 border-b border-gold/15">
       <div className="container-x flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div>
           <div className="font-mono-label text-oxblood text-xs">SEDE ORLANDO</div>

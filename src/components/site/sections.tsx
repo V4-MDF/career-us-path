@@ -130,7 +130,7 @@ export function Hero() {
         {/* Slot de vídeo horizontal (16:9) — pode ser ocultado no admin (hero.videoHidden). */}
         {!heroVideoHidden && (
           <div className="relative mt-10 lg:mt-0 min-w-0">
-            <div className="liquid-glass relative aspect-video w-full overflow-hidden rounded-3xl ring-1 ring-gold/10">
+            <div className="liquid-glass relative aspect-video w-full overflow-hidden rounded-2xl ring-1 ring-gold/10">
               <VideoPlayer url={heroVideoUrl} title="Vídeo institucional Status Immigration Law Firm" />
             </div>
           </div>
@@ -361,7 +361,7 @@ export function NiwSection() {
         </div>
 
         <div className="relative">
-          <div className="photo-treatment aspect-[4/3] overflow-hidden rounded-2xl border border-gold/40 bg-ink-deep relative shadow-elevated max-h-[420px]">
+          <div className="photo-treatment aspect-[4/3] overflow-hidden rounded-2xl border border-gold/30 bg-champagne relative shadow-soft max-h-[420px]">
             {/* Foto editorial, passaporte brasileiro + documentos sobre mesa de madeira. */}
             <img
               src={passportDocuments}
@@ -401,7 +401,7 @@ export function VisaCards() {
       desc: "Visto temporário para profissionais de habilidade extraordinária, sem depender de oferta de emprego." },
   ];
   return (
-    <Reveal as="section" id="vistos-eb" className="section-ink-deep section-pad border-y border-gold/10 relative overflow-hidden">
+    <Reveal as="section" id="vistos-eb" className="section-champagne-deep section-pad border-y border-gold/10 relative overflow-hidden">
       {/* Profundidade limpa: filete dourado no topo (sem padrão de fundo). */}
       <div aria-hidden className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold/50 to-transparent" />
       <div className="container-x relative">
@@ -459,7 +459,7 @@ export function PersonaCards() {
           {personas.map((p) => {
             const Icon = p.icon;
             return (
-              <article key={p.title} className={`liquid-card relative rounded-2xl border-t-4 p-8 transition-[border-color,box-shadow] hover:shadow-elevated ${p.accent}`}>
+              <article key={p.title} className={`liquid-card glass-interactive relative rounded-2xl border-t-2 p-6 transition-[border-color,box-shadow,transform] ${p.accent}`}>
                 <span className="grid h-12 w-12 place-items-center rounded-lg border border-current/50">
                   <Icon className="h-6 w-6" />
                 </span>
@@ -502,7 +502,7 @@ export function ProcessSteps() {
         <SectionHead num="05" eyebrow="PROCESSO EB-2 NIW" title="Quatro etapas, conduzidas com rigor." variant="parchment" />
         <div className="mt-14 grid md:grid-cols-2 lg:grid-cols-4 gap-5 auto-rows-fr items-stretch">
           {steps.map(({ n, icon: Icon, t, d }) => (
-            <div key={n} className="relative gold-tick rounded-2xl bg-white border border-ink-text/10 p-6 flex flex-col h-full shadow-soft">
+              <div key={n} className="relative gold-tick rounded-2xl bg-white/90 border border-gold/15 p-5 flex flex-col h-full shadow-soft">
               <span className="font-display text-[40px] leading-none text-gold">{n}</span>
               <Icon className="h-5 w-5 text-ink-text/60 mt-4" />
               <h3 className="mt-3 font-display text-base text-ink-text min-h-[3rem]">{t}</h3>
@@ -596,7 +596,7 @@ export function InstitutionalVideo() {
 
 
   return (
-    <Reveal as="section" id="video-institucional" className="section-pad relative section-ink-deep">
+    <Reveal as="section" id="video-institucional" className="section-pad relative section-champagne-deep border-y border-gold/10">
       <div className="container-x">
         <div className="grid lg:grid-cols-[0.9fr_1.1fr] gap-10 lg:gap-14 items-center">
           {/* Coluna de texto (editorial) */}
@@ -616,7 +616,7 @@ export function InstitutionalVideo() {
 
           {/* Coluna do vídeo (moldura dourada, formato horizontal) */}
           <div className="relative">
-            <div className="liquid-glass relative aspect-video w-full overflow-hidden rounded-3xl ring-1 ring-gold/10">
+            <div className="liquid-glass relative aspect-video w-full overflow-hidden rounded-2xl ring-1 ring-gold/10">
               <VideoPlayer url={url} title={title || "Vídeo institucional Status Immigration Law Firm"} />
             </div>
           </div>

@@ -180,13 +180,13 @@ function AvaliacaoWhatsAppPage() {
             alt=""
             width={1920}
             height={1280}
-            className="w-full h-full object-cover opacity-[0.12] brightness-110 saturate-50"
+            className="w-full h-full object-cover opacity-[0.07] brightness-110 saturate-50"
           />
           <div
             className="absolute inset-0"
             style={{
               background:
-                "linear-gradient(to bottom, color-mix(in oklab, var(--ink) 75%, transparent) 0%, color-mix(in oklab, var(--ink) 88%, transparent) 45%, var(--ink) 100%), radial-gradient(ellipse at 50% 0%, color-mix(in oklab, var(--gold) 10%, transparent) 0%, transparent 65%)",
+                "linear-gradient(to bottom, color-mix(in oklab, white 76%, transparent) 0%, color-mix(in oklab, var(--champagne) 88%, transparent) 55%, var(--background) 100%), radial-gradient(ellipse at 50% 0%, color-mix(in oklab, var(--gold) 12%, transparent) 0%, transparent 65%)",
             }}
           />
         </div>
