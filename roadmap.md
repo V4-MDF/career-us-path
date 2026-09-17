@@ -21,3 +21,5 @@
 - [x] Validar todas as páginas públicas no computador e no celular.
 - [x] Corrigir o botão flutuante do WhatsApp para acompanhar a rolagem da Home.
 - [x] Exibir a logo em formato circular no rodapé.
+- [x] Corrigir quebras de texto e cortes de layout no celular em todas as páginas públicas.
+
