@@ -37,7 +37,7 @@ function VisaCard({ v, primary }: { v: VisaScore; primary?: boolean }) {
   const meta = VERDICT_STYLES[v.verdict];
   const Icon = meta.icon;
   return (
-    <article className={`border p-6 ${primary ? "border-gold bg-ink-raise/70" : "border-gold/20 bg-ink-raise/40"}`}>
+    <article className={`liquid-card rounded-2xl p-6 ${primary ? "border-gold" : "border-gold/20"}`}>
       <header className="flex items-start justify-between gap-3">
         <div>
           <p className="font-mono-label text-gold/80">{primary ? "MAIOR AFINIDADE" : "OUTRA CATEGORIA MAPEADA"}</p>
@@ -132,7 +132,7 @@ export function PreQualResult({ record, variant }: Props) {
 
       {/* Próximo passo: copiar link do mapeamento */}
       {qualified && (
-        <section className="rounded-2xl border border-gold/30 bg-ink-raise/60 p-6 sm:p-7 shadow-soft">
+        <section className="liquid-card rounded-3xl p-6 sm:p-7">
           <p className="font-mono-label text-gold/80">PRÓXIMO PASSO</p>
           <h2 className="mt-2 font-display text-2xl text-foreground">
             Guarde ou compartilhe o seu mapeamento
@@ -161,7 +161,7 @@ export function PreQualResult({ record, variant }: Props) {
 
       {/* Sem afinidade clara: convida a conhecer o conteúdo */}
       {!qualified && (
-        <section className="rounded-2xl border border-gold/20 bg-ink-raise/40 p-6 sm:p-7 shadow-soft">
+        <section className="liquid-card rounded-3xl p-6 sm:p-7">
           <p className="font-mono-label text-gold/80">CONTINUE EXPLORANDO</p>
           <h2 className="mt-2 font-display text-2xl text-foreground">
             Aprofunde-se nas categorias EB enquanto organiza a sua documentação.

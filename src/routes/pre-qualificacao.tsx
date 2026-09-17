@@ -54,7 +54,7 @@ function PreQualPage() {
 
   return (
     <>
-      <main className="bg-ink min-h-screen pt-[68px]">
+      <main className="bg-background min-h-screen pt-[68px]">
         {/* Glow gold sutil no topo */}
         <div aria-hidden className="pointer-events-none absolute inset-x-0 top-[68px] h-64 bg-gradient-to-b from-gold/[0.06] to-transparent" />
 

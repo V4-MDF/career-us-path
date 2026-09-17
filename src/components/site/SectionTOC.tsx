@@ -100,9 +100,9 @@ export function SectionTOC({
           aria-labelledby="toc-sheet-title"
           onClick={() => setSheetOpen(false)}
         >
-          <div className="absolute inset-0 bg-ink-deep/70 backdrop-blur-sm" />
+          <div className="absolute inset-0 bg-ink-text/20 backdrop-blur-sm" />
           <div
-            className="absolute bottom-0 left-0 right-0 max-h-[70vh] overflow-y-auto bg-ink border-t border-gold/30 px-5 pt-5 pb-8"
+            className="liquid-glass absolute bottom-0 left-0 right-0 max-h-[70vh] overflow-y-auto rounded-t-3xl px-5 pt-5 pb-8"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center justify-between mb-4">
@@ -169,7 +169,7 @@ function MobileChip({ activeLabel, onOpen }: { activeLabel: string; onOpen: () =
   return (
     <button
       onClick={onOpen}
-      className={`lg:hidden fixed bottom-5 left-1/2 -translate-x-1/2 z-40 inline-flex items-center gap-2 rounded-full border border-gold/40 bg-ink-deep/90 backdrop-blur px-4 h-10 text-sm text-foreground shadow-elevated transition-opacity ${
+      className={`liquid-glass lg:hidden fixed bottom-5 left-1/2 -translate-x-1/2 z-40 inline-flex items-center gap-2 rounded-full px-4 h-10 text-sm text-foreground transition-opacity ${
         visible ? "opacity-100" : "pointer-events-none opacity-0"
       }`}
       aria-label="Abrir sumário desta página"

@@ -46,7 +46,7 @@ function PublicResultPage() {
 
   return (
     <>
-      <main className="bg-ink min-h-screen pt-[68px]">
+      <main className="bg-background min-h-screen pt-[68px]">
         <div className="container-x py-12 sm:py-16 max-w-3xl">
           <Link to="/" className="inline-flex items-center gap-1.5 text-[13px] text-foreground/80 hover:text-gold mb-8">
             <ChevronLeft className="h-3.5 w-3.5" /> Voltar ao site
@@ -57,7 +57,7 @@ function PublicResultPage() {
           )}
 
           {!loading && !record && (
-            <div className="rounded-2xl border border-gold/20 bg-ink-raise/40 p-8 text-center shadow-soft">
+            <div className="liquid-card rounded-3xl p-8 text-center">
               <h1 className="font-display text-2xl text-foreground">Mapeamento não encontrado</h1>
               <p className="mt-3 text-foreground/70">
                 O link pode ter expirado ou ter sido aberto em outro dispositivo. Faça novamente o

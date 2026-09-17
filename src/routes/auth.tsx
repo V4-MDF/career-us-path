@@ -52,7 +52,7 @@ function AuthPage() {
   }, [navigate, next]);
 
   return (
-    <div className="min-h-screen grid place-items-center px-4 bg-ink text-parchment relative overflow-hidden">
+    <div className="min-h-screen grid place-items-center px-4 bg-background text-foreground relative overflow-hidden">
       {/* Backdrop dourado sutil */}
       <div
         aria-hidden
@@ -65,7 +65,7 @@ function AuthPage() {
       <div className="w-full max-w-sm relative">
         <div className="text-center mb-8">
           <BrandLogo priority className="mx-auto h-20 w-20" />
-          <h1 className="mt-5 font-display text-lg font-bold uppercase tracking-[0.14em] text-parchment">
+          <h1 className="mt-5 font-display text-lg font-bold uppercase tracking-[0.14em] text-foreground">
             Status Immigration Law Firm
           </h1>
           <div className="mx-auto mt-3 h-px w-10 bg-gold" />
@@ -76,11 +76,11 @@ function AuthPage() {
 
         <SignInForm nextUrl={(next as string) || "/admin"} />
 
-        <div className="mt-5 flex items-start gap-2 text-[11px] text-parchment/60">
+        <div className="mt-5 flex items-start gap-2 text-[11px] text-foreground/60">
           <ShieldCheck className="h-3.5 w-3.5 text-gold mt-0.5 shrink-0" />
           <p>
             Acesso restrito. Novos usuários são criados exclusivamente por um
-            administrador em <em className="text-parchment/80">/admin/usuarios</em>.
+            administrador em <em className="text-foreground/80">/admin/usuarios</em>.
           </p>
         </div>
       </div>
@@ -110,7 +110,7 @@ function SignInForm({ nextUrl }: { nextUrl: string }) {
   return (
     <form
       onSubmit={onSubmit}
-      className="relative rounded-2xl border border-gold/20 bg-parchment text-ink-text p-6 space-y-4 shadow-[0_20px_60px_-30px_rgba(0,0,0,0.6)]"
+      className="liquid-card relative rounded-3xl text-ink-text p-6 space-y-4"
     >
       {/* Filete dourado no topo */}
       <div aria-hidden className="absolute top-0 inset-x-6 h-px bg-gold/60" />
@@ -136,7 +136,7 @@ function SignInForm({ nextUrl }: { nextUrl: string }) {
       </div>
       <Button
         type="submit"
-        className="w-full bg-ink hover:bg-ink-raise text-parchment font-display uppercase tracking-[0.14em] text-xs font-semibold"
+        className="w-full font-display uppercase tracking-[0.14em] text-xs font-semibold"
         disabled={loading}
       >
         {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : "Entrar"}

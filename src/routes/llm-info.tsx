@@ -88,7 +88,7 @@ function LlmInfo() {
     <>
       <Header />
       <OrganizationJsonLd />
-      <main className="pt-28 bg-ink">
+      <main className="pt-28 bg-background">
         <div className="container-x max-w-3xl py-16 md:py-20">
           <div className="flex items-center gap-3">
             <span aria-hidden className="h-px w-10 bg-gold/70" />

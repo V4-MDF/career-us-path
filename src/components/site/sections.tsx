@@ -85,13 +85,13 @@ export function Hero() {
     <section
       id="abertura"
       aria-label="Abertura"
-      className="section-anchor relative overflow-hidden pt-24 md:pt-44 pb-16 md:pb-36"
+      className="section-anchor relative overflow-hidden pt-32 md:pt-44 pb-16 md:pb-28 min-h-[92vh] flex items-center"
     >
       {/* Fundo da hero: vídeo (desktop, sem reduced-motion) ou poster estático.
           Fallback silencioso para hero-skyline se não houver configuração no admin. */}
       <HeroBackgroundMedia videoUrl={heroVideoUrl} posterUrl={heroPosterUrl} />
-      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-[#0A111C]/70 via-[#0A111C]/45 to-[#0A111C]/25" />
-      <div className="absolute inset-0 -z-10 bg-gradient-to-r from-ink/55 via-ink/15 to-ink/25" />
+      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-parchment/70 via-parchment/65 to-background/95" />
+      <div className="absolute inset-0 -z-10 bg-gradient-to-r from-background/95 via-background/72 to-background/55" />
 
       {/* Grão fino global para unificar a hero com o tratamento das fotos. */}
       <div aria-hidden className="absolute inset-0 -z-10 opacity-[0.06] mix-blend-overlay [background-image:radial-gradient(rgba(255,255,255,0.6)_1px,transparent_1px)] [background-size:3px_3px]" />
@@ -100,9 +100,9 @@ export function Hero() {
         <BrUsRouteBackdrop />
       </div>
 
-      <div className={`container-x grid gap-10 md:gap-16 lg:gap-12 items-center ${heroVideoHidden ? "" : "lg:grid-cols-[1fr_1.35fr]"}`}>
-        <div className="min-w-0">
-          <div className="flex items-center gap-3">
+      <div className={`container-x grid gap-10 md:gap-16 lg:gap-12 items-center ${heroVideoHidden ? "" : "lg:grid-cols-[1fr_1.1fr]"}`}>
+        <div className={`min-w-0 ${heroVideoHidden ? "mx-auto max-w-4xl text-center" : ""}`}>
+          <div className={`flex items-center gap-3 ${heroVideoHidden ? "justify-center" : ""}`}>
             <FlagsBRUS size={16} />
             <span aria-hidden className="h-px w-6 bg-gold" />
             <span className="font-mono-label text-gold">{eyebrow}</span>
@@ -122,7 +122,7 @@ export function Hero() {
             {sub}
           </p>
 
-          <div className="mt-10 flex flex-wrap gap-3">
+          <div className={`mt-10 flex flex-wrap gap-3 ${heroVideoHidden ? "justify-center" : ""}`}>
             <Link to={useAvaliacaoHref("home_hero")} aria-label="Ir para o formulário de pré-qualificação documental">
               <Button size="lg" variant="cta" className="btn-label btn-sweep h-12 px-7 text-[15px] active:scale-[0.98]">
                 {cta}
@@ -139,7 +139,7 @@ export function Hero() {
             </a>
           </div>
 
-          <div className="mt-14 flex items-start gap-3 text-sm text-foreground/80 border-l border-gold/50 pl-4 max-w-md">
+          <div className={`mt-14 flex items-start gap-3 text-sm text-foreground/80 border-l border-gold/50 pl-4 max-w-md ${heroVideoHidden ? "mx-auto text-left" : ""}`}>
             <Star className="h-4 w-4 text-gold mt-0.5 shrink-0 fill-gold" />
             <span>{proof}</span>
           </div>
@@ -153,7 +153,7 @@ export function Hero() {
         {/* Slot de vídeo horizontal (16:9) — pode ser ocultado no admin (hero.videoHidden). */}
         {!heroVideoHidden && (
           <div className="relative mt-10 lg:mt-0 min-w-0">
-            <div className="relative aspect-video w-full overflow-hidden rounded-2xl border border-gold/40 bg-ink-raise shadow-elevated ring-1 ring-gold/10">
+            <div className="liquid-glass relative aspect-video w-full overflow-hidden rounded-3xl ring-1 ring-gold/10">
               <VideoPlayer url={heroVideoUrl} title="Vídeo institucional Status Immigration Law Firm" />
             </div>
           </div>
@@ -381,8 +381,8 @@ export function VisaCards() {
         <div className="mt-14 grid md:grid-cols-3 gap-5">
           {visas.map((v) => (
             <Link key={v.slug} to="/vistos/$slug" params={{ slug: v.slug }} className="group block">
-              <article className={`relative gold-tick h-full border p-8 transition-colors ${
-                v.featured ? "border-gold bg-ink-raise" : "border-gold/20 bg-ink-raise/60 hover:border-gold/60"
+              <article className={`liquid-card relative gold-tick h-full rounded-2xl p-8 transition-colors ${
+                v.featured ? "border-gold" : "hover:border-gold/60"
               }`}>
                 <span className="font-mono-label text-gold">{v.tag}</span>
                 <h3 className="mt-4 font-display text-[40px] leading-none">{v.title}</h3>
@@ -430,7 +430,7 @@ export function PersonaCards() {
           {personas.map((p) => {
             const Icon = p.icon;
             return (
-              <article key={p.title} className={`relative rounded-2xl border-t-4 border-x border-b border-gold/25 bg-ink-raise/60 p-8 shadow-soft transition-[border-color,box-shadow] hover:shadow-elevated ${p.accent}`}>
+              <article key={p.title} className={`liquid-card relative rounded-2xl border-t-4 p-8 transition-[border-color,box-shadow] hover:shadow-elevated ${p.accent}`}>
                 <span className="grid h-12 w-12 place-items-center rounded-lg border border-current/50">
                   <Icon className="h-6 w-6" />
                 </span>
@@ -527,7 +527,7 @@ export function WhyUs() {
           </div>
           <ul className="grid sm:grid-cols-2 gap-3">
             {items.map(({ icon: Icon, t, desc }) => (
-              <li key={t} className="flex gap-3 rounded-xl border border-gold/20 bg-ink-raise/50 p-4 items-start">
+              <li key={t} className="liquid-card flex gap-3 rounded-2xl p-4 items-start">
                 <Icon className="h-5 w-5 text-gold shrink-0 mt-0.5" />
                 <span className="min-w-0 text-[15px] leading-snug text-foreground/85">
                   {t}
@@ -569,7 +569,7 @@ export function InstitutionalVideo() {
 
 
   return (
-    <Reveal as="section" id="video-institucional" className="section-pad relative bg-ink">
+    <Reveal as="section" id="video-institucional" className="section-pad relative section-ink-deep">
       <div className="container-x">
         <div className="grid lg:grid-cols-[0.9fr_1.1fr] gap-10 lg:gap-14 items-center">
           {/* Coluna de texto (editorial) */}
@@ -578,18 +578,18 @@ export function InstitutionalVideo() {
               <span aria-hidden className="h-px w-8 bg-gold" />
               <span className="font-mono-label text-gold/85">{eyebrow || "VÍDEO INSTITUCIONAL"}</span>
             </div>
-            <h2 className="mt-5 font-display text-[clamp(1.8rem,3.6vw,2.8rem)] leading-[1.05] text-parchment">
+            <h2 className="mt-5 font-display text-[clamp(1.8rem,3.6vw,2.8rem)] leading-[1.05] text-foreground">
               {title || "Conheça a Status Immigration Law Firm."}
             </h2>
             <div className="mt-6 h-px w-16 bg-gold/60" />
             {lead && (
-              <p className="mt-6 text-parchment/80 leading-relaxed max-w-md">{lead}</p>
+              <p className="mt-6 text-foreground/80 leading-relaxed max-w-md">{lead}</p>
             )}
           </div>
 
           {/* Coluna do vídeo (moldura dourada, formato horizontal) */}
           <div className="relative">
-            <div className="relative aspect-video w-full overflow-hidden rounded-2xl border border-gold/40 bg-ink-raise shadow-elevated ring-1 ring-gold/10">
+            <div className="liquid-glass relative aspect-video w-full overflow-hidden rounded-3xl ring-1 ring-gold/10">
               <VideoPlayer url={url} title={title || "Vídeo institucional Status Immigration Law Firm"} />
             </div>
           </div>
@@ -621,7 +621,7 @@ export function LegacySection() {
           width={1600}
           height={1024}
           loading="lazy"
-          className="w-[120%] max-w-none opacity-[0.07] mix-blend-screen select-none"
+          className="w-[120%] max-w-none opacity-[0.05] mix-blend-multiply select-none"
         />
       </div>
       <div aria-hidden className="absolute inset-0 text-gold"><FamilySealBackdrop /></div>
@@ -643,7 +643,7 @@ export function LegacySection() {
             width={1600}
             height={1000}
           />
-          <div className="relative rounded-2xl border border-gold/25 bg-[#16223A] p-6 md:p-8 shadow-soft">
+          <div className="liquid-card relative rounded-2xl p-6 md:p-8">
             <span className="font-mono-label text-gold">FUTURO DOS FILHOS</span>
             <p className="mt-3 font-display text-xl md:text-2xl leading-tight text-foreground">
               A decisão que muda três gerações.
@@ -664,7 +664,7 @@ export function LegacySection() {
             {pillars.map(({ icon: Icon, t, d }) => (
               <article
                 key={t}
-                className="snap-start shrink-0 w-[76%] gold-tick rounded-2xl border border-gold/25 bg-ink-raise/50 p-5 shadow-soft"
+                className="liquid-card snap-start shrink-0 w-[76%] gold-tick rounded-2xl p-5"
               >
                 <Icon className="h-5 w-5 text-gold" />
                 <h3 className="mt-4 font-display text-[17px]">{t}</h3>
@@ -682,7 +682,7 @@ export function LegacySection() {
         {/* Desktop/tablet: grid */}
         <div className="mt-12 hidden md:grid md:grid-cols-3 gap-4">
           {pillars.map(({ icon: Icon, t, d }) => (
-            <article key={t} className="relative gold-tick rounded-2xl border border-gold/25 bg-ink-raise/50 p-5 h-full shadow-soft transition-[border-color,box-shadow] hover:border-gold/55 hover:shadow-elevated">
+            <article key={t} className="liquid-card relative gold-tick rounded-2xl p-5 h-full transition-[border-color,box-shadow] hover:border-gold/55 hover:shadow-elevated">
               <Icon className="h-5 w-5 text-gold" />
               <h3 className="mt-4 font-display text-[17px]">{t}</h3>
               <p className="mt-2 text-foreground/75 leading-snug text-[13px]">{d}</p>
@@ -721,10 +721,10 @@ export function SalaryCompare() {
         />
 
         {/* Tabela (md+) */}
-        <div className="mt-14 hidden md:block rounded-2xl border border-gold/25 overflow-hidden shadow-soft bg-white/70">
-          <div className="grid grid-cols-[1.6fr_1fr_1fr] bg-[#16223A] px-6 py-4">
-            <span className="font-mono-label text-parchment/90">PROFISSÃO</span>
-            <span className="font-mono-label text-parchment/90">NO BRASIL · POR ANO</span>
+        <div className="liquid-card mt-14 hidden md:block rounded-2xl overflow-hidden">
+          <div className="grid grid-cols-[1.6fr_1fr_1fr] bg-parchment-deep px-6 py-4">
+            <span className="font-mono-label text-ink-text/70">PROFISSÃO</span>
+            <span className="font-mono-label text-ink-text/70">NO BRASIL · POR ANO</span>
             <span className="font-mono-label text-gold">NOS EUA · POR ANO</span>
           </div>
           {rows.map((r, i) => (
@@ -1090,7 +1090,7 @@ export function CtaBanner() {
 
         <div className="mt-12 grid lg:grid-cols-2 gap-6 lg:gap-8 items-stretch">
           {/* Oferta principal. Levantamento inicial de informações */}
-          <div className="relative min-w-0 rounded-2xl border border-gold/40 bg-ink-raise/60 p-5 sm:p-7 lg:p-9 shadow-elevated flex flex-col">
+          <div className="liquid-card relative min-w-0 rounded-3xl border-gold/40 p-5 sm:p-7 lg:p-9 flex flex-col">
             <span className="absolute -top-3 left-5 sm:left-6 rounded-full bg-gold px-3 py-1 font-mono-label text-[10px] text-ink">
               RECOMENDADO
             </span>
@@ -1125,7 +1125,7 @@ export function CtaBanner() {
           </div>
 
           {/* Oferta secundária. Pré-qualificação */}
-          <div className="min-w-0 rounded-2xl border border-gold/20 bg-ink-raise/30 p-5 sm:p-7 lg:p-9 flex flex-col">
+          <div className="liquid-card min-w-0 rounded-3xl p-5 sm:p-7 lg:p-9 flex flex-col">
             <div className="flex items-center gap-2 text-gold/80">
               <Sparkles className="h-4 w-4 shrink-0" />
               <p className="font-mono-label text-gold/80">RESPOSTA NA HORA</p>

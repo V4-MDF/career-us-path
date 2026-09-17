@@ -150,14 +150,14 @@ function ContatoHero({
   subtitle: string;
 }) {
   return (
-    <section className="relative bg-ink text-white pt-32 pb-16 md:pt-40 md:pb-20 border-b border-gold/25">
+    <section className="relative bg-background text-foreground pt-32 pb-16 md:pt-40 md:pb-20 border-b border-gold/25">
       <div className="container-x max-w-3xl">
         <div className="flex items-center gap-3">
           <span aria-hidden className="h-px w-10 bg-gold" />
           <span className="font-mono-label text-gold">{eyebrow}</span>
         </div>
-        <h1 className="mt-4 font-display display-1 text-white">{title}</h1>
-        <p className="mt-5 text-white/80 text-lg leading-relaxed max-w-2xl">{subtitle}</p>
+        <h1 className="mt-4 font-display display-1 text-foreground">{title}</h1>
+        <p className="mt-5 text-foreground/80 text-lg leading-relaxed max-w-2xl">{subtitle}</p>
 
         <div className="mt-8">
           <Link to="/avaliacao" className="inline-flex">
@@ -446,12 +446,12 @@ function ContatoForm() {
 
   if (status === "sent") {
     return (
-      <section className="bg-ink text-white py-16 md:py-24 border-b border-gold/25">
+      <section className="section-ink-deep py-16 md:py-24 border-b border-gold/25">
         <div className="container-x max-w-2xl">
           <div className="rounded-xl border border-gold/40 bg-white/5 p-8 text-center">
             <CheckCircle2 className="h-10 w-10 text-gold mx-auto" />
             <h2 className="mt-4 font-display text-2xl">{successMsg}</h2>
-            <p className="mt-3 text-white/70">
+            <p className="mt-3 text-foreground/70">
               Se sua dúvida é sobre critérios do USCIS e caminhos de visto, adiante o processo
               com o levantamento inicial de informações.
             </p>
@@ -469,16 +469,16 @@ function ContatoForm() {
   }
 
   return (
-    <section className="bg-ink text-white py-16 md:py-24 border-b border-gold/25">
+    <section className="bg-background text-foreground py-16 md:py-24 border-b border-gold/25">
       <div className="container-x grid gap-10 lg:grid-cols-[1fr_1.2fr] items-start">
         <div>
           <div className="flex items-center gap-3">
             <span aria-hidden className="h-px w-10 bg-gold" />
             <span className="font-mono-label text-gold">MENSAGEM RÁPIDA</span>
           </div>
-          <h2 className="mt-3 font-display display-2 text-white">{title}</h2>
-          <p className="mt-4 text-white/75 leading-relaxed">{lead}</p>
-          <div className="mt-6 rounded-lg border border-gold/30 bg-white/[0.04] p-4 text-sm text-white/80">
+          <h2 className="mt-3 font-display display-2 text-foreground">{title}</h2>
+          <p className="mt-4 text-foreground/75 leading-relaxed">{lead}</p>
+          <div className="liquid-card mt-6 rounded-2xl p-4 text-sm text-foreground/80">
             Para um <strong className="text-gold">levantamento inicial de informações completo</strong>{" "}
             (critérios do USCIS, mapa das categorias aplicáveis, próximos passos), use o caminho oficial:
             <div className="mt-3">
@@ -648,9 +648,9 @@ function MapaDiscreto() {
 
 function Disclaimer() {
   return (
-    <section className="bg-ink py-10">
+    <section className="bg-background py-10">
       <div className="container-x max-w-3xl text-center">
-        <LegalNoteInline className="text-white/60" />
+        <LegalNoteInline className="text-foreground/60" />
       </div>
     </section>
   );

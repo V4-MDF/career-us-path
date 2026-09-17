@@ -93,7 +93,7 @@ function PostPage() {
       <main className="pt-28">
         <article>
           {/* Header do post */}
-          <header className="bg-ink">
+          <header className="bg-background">
             <div className="container-x max-w-3xl py-12 md:py-16">
               <nav aria-label="Breadcrumb" className="font-mono-label text-foreground/80 flex items-center gap-2 flex-wrap">
                 <Link to="/" className="hover:text-gold">Início</Link>
@@ -123,7 +123,7 @@ function PostPage() {
 
           {/* Capa */}
           {post.capa && (
-            <div className="bg-ink-deep">
+            <div className="bg-parchment-deep/70">
               <div className="container-x max-w-5xl py-8">
                 <img
                   src={post.capa}
@@ -138,7 +138,7 @@ function PostPage() {
           )}
 
           {/* Corpo */}
-          <div className="bg-ink">
+          <div className="bg-background">
             <div className="container-x max-w-3xl py-12 md:py-16">
               <div className="prose-dossie">
                 <ReactMarkdown remarkPlugins={[remarkGfm]}>
@@ -150,7 +150,7 @@ function PostPage() {
               <ShareRow url={`/blog/${post.slug}`} title={post.titulo} />
 
               {/* CTA final */}
-              <div className="mt-12 rounded-2xl border border-gold/30 bg-ink-raise/50 p-8 shadow-soft">
+              <div className="liquid-card mt-12 rounded-3xl p-8">
                 <h2 className="font-display text-2xl">Pronto para iniciar a pré-qualificação documental?</h2>
                 <p className="mt-2 text-foreground/75">Análise individual e gratuita em até 48h.</p>
                 <a href={avaliacaoHref(`blog_${post.slug}`)} className="mt-5 inline-block">

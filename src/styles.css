@@ -88,24 +88,24 @@
   --font-display: "Montserrat", "Inter Variable", system-ui, sans-serif;
   --font-sans: "Inter Variable", "Inter", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", "JetBrains Mono Variable", ui-monospace, monospace;
-  --font-serif: "Montserrat", "Inter Variable", system-ui, sans-serif;
+  --font-serif: Georgia, "Times New Roman", serif;
 }
 
 :root {
   --radius: 0.875rem; /* squircle suave, cascateia para todos os shadcn (button, card, input, dropdown, dialog) */
 
-  /* Paleta Dossiê, preto carvão + ouro (sem navy) */
-  --ink:           #0B0B0C;
-  --ink-deep:      #050506;
-  --ink-raise:     #1C1C20;
-  --parchment:     #EFE9DA;
-  --parchment-deep:#E4DCC8;
-  --gold:          #B7975A;
-  --gold-soft:     rgba(183, 151, 90, 0.22);
-  --gold-foreground: #050506;
+  /* Paleta Minimalist Liquid Gold: branco óptico, grafite e champagne. */
+  --ink:           #FCFCFB;
+  --ink-deep:      #F3F2EF;
+  --ink-raise:     rgba(255, 255, 255, 0.72);
+  --parchment:     #FFFFFF;
+  --parchment-deep:#F3F1EB;
+  --gold:          #9A7836;
+  --gold-soft:     rgba(154, 120, 54, 0.20);
+  --gold-foreground: #FFFFFF;
   --oxblood:       #6E2233;
-  --slate:         #B8B2A4;
-  --ink-text:      #141416;
+  --slate:         #666661;
+  --ink-text:      #181816;
   --success:       #3F8A5F;
 
   /* Paleta dual BR ↔ US, surfaces, filetes, borders e accents. */
@@ -117,32 +117,30 @@
   --usa-red:           #8A1F2B;
   --cream-light:       #F7F2E6;
 
-  /* CTA chamativa (chamada principal). Amarelo vivido com gradiente e halo.
-     NÃO usar o brazil-yellow (E6B84A) que é dourado editorial e some no fundo escuro. */
-  --cta:               #FFD447;
-  --cta-hi:            #FFEB7A;
-  --cta-deep:          #F5A623;
-  --cta-ink:           #1A1204;
-  --cta-glow:          0 10px 32px -8px rgba(255, 179, 0, 0.55), 0 0 0 1px rgba(255, 235, 122, 0.35) inset;
-  --cta-glow-hover:    0 14px 44px -8px rgba(255, 179, 0, 0.75), 0 0 0 1px rgba(255, 255, 200, 0.55) inset;
+  --cta:               #B7934F;
+  --cta-hi:            #D2B878;
+  --cta-deep:          #8E6B2E;
+  --cta-ink:           #FFFFFF;
+  --cta-glow:          0 14px 34px -18px rgba(142, 107, 46, 0.48), 0 1px 0 rgba(255,255,255,0.35) inset;
+  --cta-glow-hover:    0 18px 42px -18px rgba(142, 107, 46, 0.60), 0 1px 0 rgba(255,255,255,0.5) inset;
 
 
-  /* Mapeamento shadcn. DARK por padrão (site é dark-first) */
+  /* Mapeamento shadcn claro por padrão. */
   --background: var(--ink);
-  --foreground: #ECE6D6;
+  --foreground: var(--ink-text);
 
   --card: var(--ink-raise);
-  --card-foreground: #ECE6D6;
+  --card-foreground: var(--ink-text);
   --popover: var(--ink-raise);
-  --popover-foreground: #ECE6D6;
+  --popover-foreground: var(--ink-text);
 
-  --primary: #8A6F3E;
+  --primary: #9A7836;
   --primary-foreground: #FFFFFF;
 
   --secondary: var(--ink-raise);
-  --secondary-foreground: #ECE6D6;
+  --secondary-foreground: var(--ink-text);
 
-  --muted: #1B1B1F;
+  --muted: #F0EFEC;
   --muted-foreground: var(--slate);
 
   --accent: var(--gold);
@@ -151,8 +149,8 @@
   --destructive: var(--oxblood);
   --destructive-foreground: #F7EFE0;
 
-  --border: var(--gold-soft);
-  --input: rgba(236, 230, 214, 0.14);
+  --border: rgba(24, 24, 22, 0.12);
+  --input: rgba(24, 24, 22, 0.16);
   --ring: rgba(183, 151, 90, 0.65);
 }
 
@@ -163,13 +161,13 @@
  * ---------------------------------------------------------------- */
 .section-parchment,
 .section-cream {
-  --background: var(--parchment);
+  --background: #FFFFFF;
   --foreground: var(--ink-text);
   --card: #FFFFFF;
   --card-foreground: var(--ink-text);
   --popover: #FFFFFF;
   --popover-foreground: var(--ink-text);
-  --muted: var(--parchment-deep);
+  --muted: #F3F2EF;
   --muted-foreground: #4A5567;
   --secondary: var(--parchment-deep);
   --secondary-foreground: var(--ink-text);
@@ -203,7 +201,7 @@
 
 /* Cream light, parchment mais claro, "arejado", entre dobras escuras. */
 .section-cream-light {
-  --background: var(--cream-light);
+  --background: #F7F7F5;
   --foreground: var(--ink-text);
   --card: #FFFFFF;
   --card-foreground: var(--ink-text);
@@ -220,7 +218,7 @@
 
 /* Sky, azul-céu suave (lado "EUA": renda, futuro, benefícios). */
 .section-sky {
-  --background: var(--usa-blue-soft);
+  --background: #F4F6F7;
   --foreground: var(--ink-text);
   --card: #FFFFFF;
   --card-foreground: var(--ink-text);
@@ -237,17 +235,17 @@
 
 /* Verde-Brasil, fundo profundo (lado "BR": herança, legado, decisão). */
 .section-verde-brasil {
-  --background: var(--brazil-green-deep);
-  --foreground: #F1EBD8;
-  --card: rgba(255, 255, 255, 0.04);
-  --card-foreground: #F1EBD8;
-  --muted: rgba(255, 255, 255, 0.06);
-  --muted-foreground: #C8C1AE;
+  --background: #F7F7F5;
+  --foreground: var(--ink-text);
+  --card: rgba(255, 255, 255, 0.72);
+  --card-foreground: var(--ink-text);
+  --muted: rgba(24, 24, 22, 0.05);
+  --muted-foreground: #666661;
   --border: rgba(230, 184, 74, 0.28);
   --gold: var(--brazil-yellow);
   --gold-soft: rgba(230, 184, 74, 0.22);
   --primary: var(--brazil-yellow);
-  --primary-foreground: var(--brazil-green-deep);
+  --primary-foreground: #FFFFFF;
   --accent: var(--brazil-yellow);
   background-color: var(--background);
   color: var(--foreground);
@@ -331,10 +329,10 @@
     font-family: var(--font-display);
     letter-spacing: 0.005em;
     line-height: 1.15;
-    font-weight: 700;
-    text-transform: uppercase;
+    font-weight: 600;
+    text-transform: none;
   }
-  h1 { font-weight: 800; }
+  h1 { font-weight: 600; }
   /* Foco de teclado, premium, dourado, com halo para contraste AA em
      superfícies escuras (ink) e claras (parchment). Outline garante o
      anel dourado; o box-shadow cria um halo escuro que eleva o contraste
@@ -486,24 +484,24 @@
   font-size: clamp(2.25rem, 5vw, 3.75rem); /* 36 → 60 */
   line-height: 1.08;
   letter-spacing: 0.002em;
-  font-weight: 800;
-  text-transform: uppercase;
+  font-weight: 600;
+  text-transform: none;
 }
 @utility display-2 {
   font-family: var(--font-display);
   font-size: clamp(1.625rem, 3.2vw, 2.5rem); /* 26 → 40 */
   line-height: 1.15;
   letter-spacing: 0.005em;
-  font-weight: 700;
-  text-transform: uppercase;
+  font-weight: 600;
+  text-transform: none;
 }
 @utility display-3 {
   font-family: var(--font-display);
   font-size: clamp(1.25rem, 2.2vw, 1.75rem); /* 20 → 28 */
   line-height: 1.22;
   letter-spacing: 0.01em;
-  font-weight: 700;
-  text-transform: uppercase;
+  font-weight: 600;
+  text-transform: none;
 }
 @utility lead {
   font-family: var(--font-sans);
@@ -617,13 +615,13 @@
  * ou classe `.photo-treatment` no wrapper de qualquer <img>.
  * ========================================================================= */
 .photo-treatment > img {
-  filter: saturate(0.92) contrast(1.06) brightness(0.98) sepia(0.08);
+  filter: saturate(0.88) contrast(1.01) brightness(1.08) sepia(0.05);
 }
 .photo-treatment__grain {
   pointer-events: none;
   position: absolute;
   inset: 0;
-  opacity: 0.10;
+  opacity: 0.035;
   mix-blend-mode: overlay;
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.72  0 0 0 0 0.59  0 0 0 0 0.35  0 0 0 1 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
   background-size: 140px 140px;
@@ -634,7 +632,7 @@
   inset: 0;
   background: radial-gradient(ellipse at center,
     transparent 55%,
-    rgba(10, 17, 28, 0.35) 100%);
+    rgba(24, 24, 22, 0.12) 100%);
 }
 @media (prefers-reduced-motion: reduce) {
   .photo-treatment__grain { opacity: 0.06; }
@@ -647,7 +645,7 @@
   --color-cream: var(--parchment);
   --color-cream-foreground: var(--ink-text);
   --color-navy: var(--ink);
-  --color-navy-foreground: #ECE6D6;
+  --color-navy-foreground: var(--ink-text);
 }
 
 /* Sombras, calibradas para os raios maiores (radius 0.875rem).
@@ -655,9 +653,9 @@
  * → elegant (selos, modais). Sempre combinar com 1px de border-gold/15-25
  * para evitar "card flutuando sem ancoragem" em fundos escuros. */
 @theme inline {
-  --shadow-soft: 0 6px 18px -12px rgba(0, 0, 0, 0.45), 0 1px 0 0 rgba(183, 151, 90, 0.06) inset;
-  --shadow-elevated: 0 18px 40px -22px rgba(0, 0, 0, 0.55), 0 2px 6px -3px rgba(0, 0, 0, 0.35);
-  --shadow-elegant: 0 28px 60px -28px rgba(0, 0, 0, 0.65), 0 2px 8px -4px rgba(0, 0, 0, 0.4);
+  --shadow-soft: 0 12px 32px -22px rgba(24, 24, 22, 0.22), 0 1px 0 rgba(255,255,255,0.75) inset;
+  --shadow-elevated: 0 22px 56px -28px rgba(24, 24, 22, 0.25), 0 1px 0 rgba(255,255,255,0.8) inset;
+  --shadow-elegant: 0 30px 72px -34px rgba(24, 24, 22, 0.28), 0 1px 0 rgba(255,255,255,0.85) inset;
 }
 
 /* media-frame, wrapper padrão para qualquer imagem/banner/thumb do site
@@ -669,7 +667,7 @@
   overflow: hidden;
   border-radius: var(--radius-xl);
   border: 1px solid color-mix(in oklab, var(--gold) 22%, transparent);
-  background-color: var(--ink-deep);
+  background-color: var(--parchment-deep);
   isolation: isolate;
 }
 @utility media-frame-sm {
@@ -677,14 +675,14 @@
   overflow: hidden;
   border-radius: var(--radius-lg);
   border: 1px solid color-mix(in oklab, var(--gold) 18%, transparent);
-  background-color: var(--ink-deep);
+  background-color: var(--parchment-deep);
 }
 @utility media-frame-lg {
   position: relative;
   overflow: hidden;
   border-radius: var(--radius-2xl);
   border: 1px solid color-mix(in oklab, var(--gold) 28%, transparent);
-  background-color: var(--ink-deep);
+  background-color: var(--parchment-deep);
   box-shadow: var(--shadow-elevated);
 }
 .section-parchment .media-frame,
@@ -703,7 +701,8 @@
 @utility surface-card {
   border-radius: var(--radius-xl);
   border: 1px solid color-mix(in oklab, var(--gold) 22%, transparent);
-  background-color: color-mix(in oklab, var(--ink-raise) 92%, transparent);
+  background-color: color-mix(in oklab, white 72%, transparent);
+  backdrop-filter: blur(22px) saturate(135%);
 }
 
 /* ----------------------------------------------------------------
@@ -712,7 +711,7 @@
  * dourados em blockquote e listas com bullets desenhados.
  * ---------------------------------------------------------------- */
 .prose-dossie {
-  color: rgba(236, 230, 214, 0.88);
+  color: color-mix(in oklab, var(--ink-text) 88%, transparent);
   font-size: 17px;
   line-height: 1.75;
   max-width: 68ch;
@@ -723,7 +722,7 @@
   font-size: 1.85em;
   line-height: 1.15;
   margin-top: 2em;
-  color: #ECE6D6;
+  color: var(--ink-text);
 }
 .prose-dossie h2::before {
   content: "";
@@ -738,7 +737,7 @@
   font-size: 1.4em;
   line-height: 1.2;
   margin-top: 1.6em;
-  color: #ECE6D6;
+  color: var(--ink-text);
 }
 .prose-dossie a {
   color: var(--gold);
@@ -746,12 +745,12 @@
   text-underline-offset: 3px;
   text-decoration-thickness: 1px;
 }
-.prose-dossie strong { color: #ECE6D6; font-weight: 600; }
+.prose-dossie strong { color: var(--ink-text); font-weight: 600; }
 .prose-dossie blockquote {
   border-left: 2px solid var(--gold);
   padding-left: 1.2em;
   font-style: italic;
-  color: rgba(236, 230, 214, 0.75);
+  color: color-mix(in oklab, var(--ink-text) 75%, transparent);
 }
 .prose-dossie ul, .prose-dossie ol { padding-left: 1.4em; }
 .prose-dossie ul li { list-style: none; position: relative; }
@@ -792,16 +791,38 @@
   animation: route-fade-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-/* CTA principal chamativa — gradiente vivido + halo + pulse suave. */
+/* CTA Liquid Gold, metálico e contido. */
 .btn-cta {
   background: linear-gradient(135deg, var(--cta-hi) 0%, var(--cta) 45%, var(--cta-deep) 100%);
   color: var(--cta-ink);
   border: 1px solid rgba(255, 240, 160, 0.6);
   box-shadow: var(--cta-glow);
   transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 200ms ease, filter 200ms ease;
-  animation: cta-pulse 2.6s ease-in-out infinite;
+  animation: none;
   font-weight: 700;
   letter-spacing: 0.01em;
+}
+
+/* Superfície óptica reutilizável, inspirada em vidro polido. */
+@utility liquid-glass {
+  background: color-mix(in oklab, white 76%, transparent);
+  backdrop-filter: blur(24px) saturate(140%);
+  border: 1px solid color-mix(in oklab, white 72%, var(--gold) 28%);
+  box-shadow: var(--shadow-elevated);
+}
+
+@utility liquid-card {
+  background: color-mix(in oklab, white 84%, transparent);
+  backdrop-filter: blur(18px) saturate(125%);
+  border: 1px solid color-mix(in oklab, var(--gold) 22%, transparent);
+  box-shadow: var(--shadow-soft);
+}
+
+/* Compatibilidade visual: classes históricas escuras agora apontam para luz. */
+.section-ink-deep,
+.bg-ink,
+.bg-ink-deep {
+  color: var(--ink-text);
 }
 .btn-cta:hover {
   transform: translateY(-1px);

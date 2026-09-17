@@ -35,8 +35,8 @@ export function readQualificationResult(): QualificationResult | null {
 /** Layout compartilhado: header, footer e container central. */
 function ObrigadoShell({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-screen bg-ink text-foreground flex flex-col">
-      <header className="sticky top-0 z-20 border-b border-gold/15 bg-ink/85 backdrop-blur">
+    <div className="min-h-screen bg-background text-foreground flex flex-col">
+      <header className="sticky top-0 z-20 border-b border-gold/15 bg-background/75 backdrop-blur-xl">
         <div className="container-x flex h-[64px] items-center justify-between">
           <Link to="/" className="flex items-center gap-3" aria-label="Status Immigration Law Firm">
             <BrandLogo priority className="h-12 w-12" />
@@ -127,7 +127,7 @@ export function ObrigadoQualificado() {
             { n: "02", t: "Sugestão de caminho", d: "Sinalizamos a categoria EB mais coerente com o seu perfil." },
             { n: "03", t: "Próximos passos", d: "Se fizer sentido, agendamos uma conversa sobre a preparação documental." },
           ].map((s) => (
-            <div key={s.n} className="border border-gold/20 bg-ink-raise/40 p-5 rounded-lg">
+            <div key={s.n} className="liquid-card p-5 rounded-2xl">
               <div className="font-display text-3xl text-gold leading-none">{s.n}</div>
               <h3 className="mt-3 font-display text-base">{s.t}</h3>
               <p className="mt-2 text-sm text-foreground/70 leading-relaxed">{s.d}</p>
@@ -147,7 +147,7 @@ export function ObrigadoNaoQualificado() {
   return (
     <ObrigadoShell>
       <div className="text-center">
-        <div className="mx-auto grid h-16 w-16 place-items-center border border-border bg-ink-raise text-foreground/80 rounded-full">
+        <div className="mx-auto grid h-16 w-16 place-items-center border border-border bg-card text-foreground/80 rounded-full shadow-soft">
           <CheckCircle2 className="h-8 w-8" />
         </div>
 
@@ -176,7 +176,7 @@ export function ObrigadoNaoQualificado() {
             <Link
               to="/vistos/$slug"
               params={{ slug: "eb2-niw" }}
-              className="group border border-gold/25 bg-ink-raise/60 p-6 rounded-lg hover:border-gold/60 hover:bg-ink-raise transition-colors"
+              className="liquid-card group p-6 rounded-2xl hover:border-gold/60 transition-colors"
             >
               <FileText className="h-6 w-6 text-gold" />
               <h3 className="mt-4 font-display text-lg text-foreground">Guia do EB-2 NIW</h3>
@@ -190,7 +190,7 @@ export function ObrigadoNaoQualificado() {
 
             <Link
               to="/blog"
-              className="group border border-gold/25 bg-ink-raise/60 p-6 rounded-lg hover:border-gold/60 hover:bg-ink-raise transition-colors"
+              className="liquid-card group p-6 rounded-2xl hover:border-gold/60 transition-colors"
             >
               <BookOpen className="h-6 w-6 text-gold" />
               <h3 className="mt-4 font-display text-lg text-foreground">Artigos do blog</h3>

@@ -114,25 +114,25 @@ function SobreHero() {
   const image = useContent("sobre.hero.image");
 
   return (
-    <section className="relative bg-ink text-white pt-32 pb-16 md:pt-40 md:pb-24 border-b border-gold/25 overflow-hidden">
+    <section className="relative bg-background text-foreground pt-32 pb-16 md:pt-40 md:pb-24 border-b border-gold/25 overflow-hidden">
       {image && (
         <div
           aria-hidden
-          className="absolute inset-0 bg-cover bg-center opacity-40"
+          className="absolute inset-0 bg-cover bg-center opacity-20 saturate-50 brightness-110"
           style={{ backgroundImage: `url(${image})` }}
         />
       )}
       <div
         aria-hidden
-        className="absolute inset-0 bg-gradient-to-b from-ink/85 via-ink/70 to-ink"
+        className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/82 to-background"
       />
       <div className="container-x relative max-w-3xl">
         <div className="flex items-center gap-3">
           <span aria-hidden className="h-px w-10 bg-gold" />
           <span className="font-mono-label text-gold">{eyebrow}</span>
         </div>
-        <h1 className="mt-4 font-display display-1 text-white">{title}</h1>
-        <p className="mt-5 text-white/80 text-lg leading-relaxed max-w-2xl">
+        <h1 className="mt-4 font-display display-1 text-foreground">{title}</h1>
+        <p className="mt-5 text-foreground/80 text-lg leading-relaxed max-w-2xl">
           {subtitle}
         </p>
         <div className="mt-8">
@@ -228,29 +228,29 @@ function DiferencialEUA() {
   ];
 
   return (
-    <section className="bg-ink text-white py-16 md:py-24 border-b border-gold/25">
+    <section className="section-ink-deep py-16 md:py-24 border-b border-gold/25">
       <div className="container-x">
         <div className="max-w-3xl">
           <div className="flex items-center gap-3">
             <span aria-hidden className="h-px w-10 bg-gold" />
             <span className="font-mono-label text-gold">{eyebrow}</span>
           </div>
-          <h2 className="mt-3 font-display display-2 text-white">{title}</h2>
-          <p className="mt-4 text-white/80 leading-relaxed">{lead}</p>
+          <h2 className="mt-3 font-display display-2 text-foreground">{title}</h2>
+          <p className="mt-4 text-foreground/80 leading-relaxed">{lead}</p>
         </div>
 
         <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
           {pontos.map((p, i) => (
             <div
               key={i}
-              className="rounded-xl border border-gold/40 bg-white/[0.04] p-6 relative"
+              className="liquid-card rounded-2xl p-6 relative"
             >
               <span aria-hidden className="absolute inset-x-0 top-0 h-[2px] bg-gold" />
               <div className="rounded-lg border border-gold/40 bg-gold/10 w-10 h-10 flex items-center justify-center">
                 {p.icon}
               </div>
-              <div className="mt-4 font-display text-lg text-white">{p.title}</div>
-              <div className="mt-2 text-sm text-white/75 leading-relaxed">
+              <div className="mt-4 font-display text-lg text-foreground">{p.title}</div>
+              <div className="mt-2 text-sm text-foreground/75 leading-relaxed">
                 {p.text}
               </div>
             </div>
@@ -292,13 +292,13 @@ function NumerosCredenciais() {
   ];
 
   return (
-    <section className="bg-ink text-white py-16 md:py-24 border-b border-gold/25">
+    <section className="bg-background text-foreground py-16 md:py-24 border-b border-gold/25">
       <div className="container-x">
         <div className="flex items-center gap-3">
           <span aria-hidden className="h-px w-10 bg-gold" />
           <span className="font-mono-label text-gold">{eyebrow}</span>
         </div>
-        <h2 className="mt-3 font-display display-2 text-white max-w-2xl">
+        <h2 className="mt-3 font-display display-2 text-foreground max-w-2xl">
           {title}
         </h2>
 
@@ -306,13 +306,13 @@ function NumerosCredenciais() {
           {stats.map((s, i) => (
             <li
               key={i}
-              className="rounded-xl border border-gold/40 bg-white/[0.04] p-5 text-center relative"
+              className="liquid-card rounded-2xl p-5 text-center relative"
             >
               <span aria-hidden className="absolute inset-x-0 top-0 h-[2px] bg-gold" />
               <div className="font-display text-[clamp(1.8rem,3.2vw,2.6rem)] leading-none text-gold">
                 {s.v}
               </div>
-              <div className="mt-2 font-mono-label text-[11px] text-white/70 leading-tight">
+              <div className="mt-2 font-mono-label text-[11px] text-foreground/70 leading-tight">
                 {s.l}
               </div>
             </li>
@@ -410,11 +410,11 @@ function CtaFinal() {
   const title = useContent("sobre.cta.title");
   const subtitle = useContent("sobre.cta.subtitle");
   return (
-    <section className="bg-ink text-white py-20 border-b border-gold/25">
+    <section className="section-ink-deep py-20 border-b border-gold/25">
       <div className="container-x max-w-3xl text-center">
         <ShieldCheck className="h-8 w-8 text-gold mx-auto" />
-        <h2 className="mt-4 font-display display-2 text-white">{title}</h2>
-        <p className="mt-4 text-white/75 leading-relaxed">{subtitle}</p>
+        <h2 className="mt-4 font-display display-2 text-foreground">{title}</h2>
+        <p className="mt-4 text-foreground/75 leading-relaxed">{subtitle}</p>
         <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
           <Link to="/avaliacao">
             <Button size="lg" className="btn-label w-full sm:w-auto">
@@ -425,7 +425,7 @@ function CtaFinal() {
             <Button
               size="lg"
               variant="outline"
-              className="btn-label w-full sm:w-auto border-white/40 text-white hover:bg-white/10"
+              className="btn-label w-full sm:w-auto border-gold/40 text-foreground hover:bg-gold/10"
             >
               <BadgeCheck className="mr-2 h-4 w-4" /> Fale com a equipe
             </Button>

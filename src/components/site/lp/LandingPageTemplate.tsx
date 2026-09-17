@@ -30,8 +30,8 @@ interface Props {
 /* Header de conversão enxuto, sem menu para não vazar tráfego pago */
 function ConversionHeader({ segmentId }: { segmentId: string }) {
   return (
-    <header className="fixed top-0 inset-x-0 z-50 border-b border-border/40 bg-background/85 backdrop-blur">
-      <div className="container-x flex h-16 items-center justify-between">
+    <header className="fixed top-0 inset-x-0 z-50 px-3 pt-3 md:px-6">
+      <div className="liquid-glass mx-auto flex h-16 max-w-6xl items-center justify-between rounded-full px-5 md:px-8">
         <Link to="/" aria-label="Status Immigration Law Firm. Início">
           <BrandLogo priority className="h-12 w-12" />
         </Link>
@@ -85,15 +85,15 @@ export function LandingPageTemplate({ segment, variant }: Props) {
       <ConversionHeader segmentId={segment.id} />
       <main className="pt-16">
         {/* 1. HERO, única dobra específica do segmento/variante */}
-        <section className="relative overflow-hidden pt-16 md:pt-24 pb-20">
+        <section className="relative overflow-hidden pt-20 md:pt-28 pb-20">
           <div className="absolute inset-0 -z-10">
             <div className="absolute inset-0 stars-pattern opacity-25" />
             <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/85 to-background" />
             <div className="absolute -top-32 right-1/4 h-[36rem] w-[36rem] rounded-full bg-gold/10 blur-3xl" />
           </div>
 
-          <div className="container-x grid lg:grid-cols-[1.05fr_0.95fr] gap-12 items-center">
-            <div>
+          <div className="container-x grid lg:grid-cols-[1fr_1fr] gap-12 items-center">
+            <div className="lg:text-center">
               <p className="inline-flex items-center gap-2 text-[11px] tracking-[0.22em] text-gold">
                 <span className="h-px w-8 bg-gold/60" />
                 {hero.eyebrow}
@@ -104,7 +104,7 @@ export function LandingPageTemplate({ segment, variant }: Props) {
               <p className="mt-6 text-lg text-foreground/80 max-w-xl leading-relaxed">
                 {hero.sub}
               </p>
-              <div className="mt-8 flex flex-wrap gap-3">
+              <div className="mt-8 flex flex-wrap gap-3 lg:justify-center">
                 <a href={ctaHref}>
                   <Button size="lg" className="btn-label text-base">{hero.cta_texto}</Button>
                 </a>
@@ -118,11 +118,11 @@ export function LandingPageTemplate({ segment, variant }: Props) {
             </div>
 
             <div className="relative hidden lg:block">
-              <div className="aspect-[4/5] rounded-2xl overflow-hidden border border-gold/20 bg-surface shadow-elegant">
+              <div className="liquid-glass aspect-[4/5] rounded-3xl overflow-hidden">
                 {hero.imagem ? (
                   <img src={hero.imagem} alt="" width={800} height={1000} loading="lazy" decoding="async" className="h-full w-full object-cover" />
                 ) : (
-                  <div className="h-full w-full bg-gradient-to-br from-ink via-ink-raise to-ink-deep flex items-end p-6">
+                  <div className="h-full w-full bg-gradient-to-br from-parchment via-background to-parchment-deep flex items-end p-6">
                     <div className="text-xs uppercase tracking-[0.2em] text-gold/80">
                       Imagem placeholder<br />
                       <span className="text-foreground/80 normal-case tracking-normal text-sm">
