@@ -29,7 +29,7 @@ const PAGES: Array<{ slug: string; label: string; defaults: PageSeo }> = [
   { slug: "home", label: "Home", defaults: {
     id: "home",
     meta_title: "Status Immigration Law Firm | Green Card EB-2 NIW para profissionais brasileiros",
-    meta_description: "Imigração legal para os EUA por mérito profissional. Preparação documental dedicada para vistos EB-2 NIW, EB-1 e O-1, profissionais brasileiros consolidados.",
+    meta_description: "Escritório de advocacia especializado em imigração federal. Análise jurídica para EB-1, EB-2 NIW e O-1, com atendimento a brasileiros.",
     og_title: "Status Immigration Law Firm | Green Card EB-2 NIW",
     og_description: "Conquiste o Green Card americano pelo mérito da sua carreira.",
     og_image: "/og-image.jpg", canonical: "/", robots: "index,follow",

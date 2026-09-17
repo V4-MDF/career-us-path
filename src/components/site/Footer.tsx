@@ -5,7 +5,7 @@
  *   - Matriz Orlando (EIN) e filial Brasil (CNPJ).
  *   - Expansão Portugal/Dubai marcadas "em breve".
  *   - Redes sociais reais. Campos ocultos quando vazios (ex.: e-mail).
- *   - Disclaimer obrigatório de não-advogado em texto pequeno.
+ *   - Assinatura institucional de licenciamento.
  */
 
 import { useEffect, useState } from "react";
@@ -38,8 +38,8 @@ export function Footer() {
             <BrandLogo className="h-28 w-28" />
           </Link>
           <p className="mt-6 max-w-sm text-sm text-foreground/80 leading-relaxed">
-            Equipe dedicada à preparação documental para mobilidade migratória, para
-            profissionais brasileiros que escolheram construir o próximo capítulo nos Estados Unidos.
+            Escritório de advocacia especializado em imigração federal, com análise jurídica,
+            construção de dossiês e acompanhamento para profissionais e famílias brasileiras.
           </p>
           <div className="mt-7 flex gap-3 text-foreground/80">
             {[
@@ -70,6 +70,7 @@ export function Footer() {
           </h4>
           <div className="mt-4 space-y-1.5 text-sm text-foreground/75 leading-relaxed">
             <p className="font-display text-foreground">Status Immigration Law Firm LLC</p>
+            <p className="text-xs text-gold">Licensed in NY and AZ · Federal immigration practice only</p>
             <p>7575 KingsPointe Pkwy #4</p>
             <p>Orlando, FL 32819</p>
             <p className="font-mono text-xs text-foreground/80 mt-2">EIN 99-4846502</p>

@@ -17,7 +17,7 @@ export function ProcessIconStrip({ className = "" }: { className?: string }) {
           className="font-mono-label tracking-[0.35em] text-[11px] sm:text-[12px] whitespace-nowrap"
           style={{ fontFamily: "JetBrains Mono, monospace" }}
         >
-          PREPARAÇÃO DOCUMENTAL · EB-2 NIW
+          ESTRATÉGIA JURÍDICA · EB-2 NIW
         </span>
         <span className="h-px w-16 bg-current" />
       </div>
