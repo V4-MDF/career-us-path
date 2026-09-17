@@ -27,7 +27,7 @@ import visaHeroEb2Niw from "@/assets/visa-hero-eb2-niw.jpg";
 import visaHeroEb1 from "@/assets/visa-hero-eb1.jpg";
 import visaHeroEb3 from "@/assets/visa-hero-eb3.jpg";
 // Dobra "01 Definição" — mérito da carreira = mostrar o profissional
-// beneficiário no exercício da sua competência, não a empresa/consultoria.
+// beneficiário no exercício da sua competência, não o escritório.
 // Substituir por fotografia real art-direcionada com o tratamento padrão.
 import visaDefinitionEb2Niw from "@/assets/visa-eb2-niw-definition.jpg";
 import visaDefinitionEb1 from "@/assets/visa-eb1-definition.jpg";
@@ -38,7 +38,7 @@ export const defaultContent = {
   "hero.title": "Transforme a sua carreira em um Green Card americano.",
   "hero.subtitle":
     "A Status Immigration Law Firm ajuda profissionais brasileiros consolidados a conquistar a residência permanente nos EUA pelo EB-2 NIW, sem patrocinador, sem loteria, com Green Card para o cônjuge e os filhos, junto do requerente principal.",
-  "hero.cta": "Iniciar pré-qualificação documental",
+  "hero.cta": "Iniciar triagem do meu caso",
   // COMPLIANCE: números removidos até validação documental (ver src/config/credentials.ts).
   "hero.proof":
     "Avaliações 5★ no Google · Sede em Orlando, Flórida",
@@ -181,7 +181,7 @@ export const defaultContent = {
   "contato.expansao.text": "Portugal e Dubai · em breve.",
   "contato.form.title": "Deixe uma mensagem",
   "contato.form.lead":
-    "Para um levantamento inicial de informações completo, use o botão “Iniciar pré-qualificação documental”. Este canal é para dúvidas rápidas e mensagens.",
+    "Para uma triagem inicial completa, use o botão “Iniciar triagem do meu caso”. Este canal é para dúvidas rápidas e mensagens.",
   "contato.form.success": "Recebemos sua mensagem. Retornaremos em breve.",
 
   // ==== Página Sobre ==============================================
@@ -189,13 +189,13 @@ export const defaultContent = {
   "sobre.hero.title": "Status Immigration Law Firm. De Orlando para o Brasil.",
   // COMPLIANCE: "duas décadas" removido — sem lastro documental.
   "sobre.hero.subtitle":
-    "Equipe com trajetória consolidada em processos de imigração, com sede própria em Orlando desde 2022.",
+    "Escritório de advocacia especializado exclusivamente em imigração federal, com sede em Orlando e atendimento em português.",
   "sobre.hero.image": "",
 
   "sobre.historia.eyebrow": "NOSSA HISTÓRIA",
-  "sobre.historia.title": "Um novo modelo de assessoria, feito por quem já viveu o antigo.",
+  "sobre.historia.title": "Uma estrutura jurídica dedicada exclusivamente à imigração.",
   "sobre.historia.body":
-    "A Status Immigration Law Firm nasceu da decisão da fundadora Lia de sair de um modelo antigo de assessoria migratória e construir algo mais próximo, transparente e conectado à realidade do cliente brasileiro. A empresa se estabeleceu em Orlando para acompanhar de perto quem chega aos Estados Unidos, não apenas até a aprovação do processo, mas na adaptação e nos primeiros passos da nova vida.",
+    "A Status Immigration Law Firm reúne a experiência da operação que a antecedeu em uma nova estrutura de advocacia de imigração. Com sede em Orlando, atuação jurídica liderada por Meagan Zabadal e atendimento em português, o escritório acompanha profissionais e famílias do enquadramento do caso à decisão, com clareza sobre limites, riscos e próximos passos.",
   "sobre.historia.image": "",
 
   "sobre.diferencial.eyebrow": "NOSSO DIFERENCIAL",
@@ -211,8 +211,8 @@ export const defaultContent = {
   "sobre.diferencial.p4.title": "Adaptação de família",
   "sobre.diferencial.p4.text": "Acompanhamento humano nos primeiros meses de vida nos EUA.",
 
-  "sobre.equipe.eyebrow": "QUEM CUIDA DA SUA DOCUMENTAÇÃO",
-  "sobre.equipe.title": "Uma equipe presente nos dois países.",
+  "sobre.equipe.eyebrow": "QUEM CUIDA DO SEU CASO",
+  "sobre.equipe.title": "Estratégia jurídica e operação presentes nos dois países.",
   "sobre.equipe.note":
     "Fotos e biografias a substituir por conteúdo real fornecido pelo cliente.",
   "sobre.equipe.m1.nome": "Lia",
@@ -248,9 +248,9 @@ export const defaultContent = {
   "sobre.numeros.n5.valor": "—",
   "sobre.numeros.n5.label": BBB_LABEL,
 
-  "sobre.cta.title": "Vamos organizar a sua documentação.",
+  "sobre.cta.title": "Entenda as possibilidades jurídicas do seu caso.",
   "sobre.cta.subtitle":
-    "Comece pela pré-qualificação documental: nossa equipe retornará para esclarecer as próximas etapas administrativas e os serviços de preparação documental disponíveis.",
+    "Comece pela triagem inicial. Quando houver aderência, sua situação poderá ser encaminhada para análise jurídica individualizada.",
 };
 
 

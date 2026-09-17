@@ -61,8 +61,9 @@ export const Route = createFileRoute("/contato")({
           type: "application/ld+json",
           children: JSON.stringify({
             "@context": "https://schema.org",
-            "@type": "Organization",
+            "@type": "LegalService",
             name: "Status Immigration Law Firm",
+            description: "Escritório de advocacia especializado em imigração federal. Licensed in NY and AZ.",
             url: "https://lp.statusnaamerica.com",
             sameAs: [
               "https://instagram.com/status_america",

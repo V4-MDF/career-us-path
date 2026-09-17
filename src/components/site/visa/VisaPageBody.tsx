@@ -220,8 +220,8 @@ export function VisaPageBody({ page, hideHero = false }: { page: VisaPage; hideH
                 </li>
               ))}
             </ul>
-            <p className="mt-6 text-xs text-ink-text/60 leading-relaxed max-w-md">
-              O valor da assessoria é separado das taxas oficiais do governo americano (USCIS), que são pagas diretamente ao órgão e podem variar. Apresentamos o panorama de custos no levantamento inicial de informações.
+             <p className="mt-6 text-xs text-ink-text/60 leading-relaxed max-w-md">
+               Os honorários profissionais são separados das taxas oficiais do governo americano, que são pagas diretamente aos órgãos e podem variar. O escopo e os custos são apresentados antes da contratação.
             </p>
           </div>
           <div className="lg:col-span-5">
@@ -231,11 +231,11 @@ export function VisaPageBody({ page, hideHero = false }: { page: VisaPage; hideH
                 Comece pelo levantamento inicial de informações.
               </h3>
               <p className="mt-3 text-ink-text/70 text-[15px] leading-relaxed">
-                Em poucos minutos enviamos sua análise para a equipe dedicada à preparação
-                documental para vistos EB. Resposta em até 48h por e-mail.
+                 Em poucos minutos você envia suas informações para a triagem inicial.
+                 Quando houver aderência, o caso poderá seguir para análise jurídica individualizada.
               </p>
               <a href={avaliacaoHref(`visto_${page.slug}_cta`)} className="mt-7 inline-block">
-                <Button size="lg" className="btn-label btn-sweep h-12 px-7">Iniciar pré-qualificação documental</Button>
+                 <Button size="lg" className="btn-label btn-sweep h-12 px-7">Iniciar triagem do meu caso</Button>
               </a>
             </div>
           </div>

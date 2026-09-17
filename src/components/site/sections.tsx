@@ -171,22 +171,22 @@ export function CompanyIntroduction() {
     {
       icon: Building2,
       eyebrow: "QUEM SOMOS",
-      title: "Presença nos EUA e no Brasil.",
-      text: "A Status Immigration Law Firm é uma empresa de preparação documental com sede em Orlando e filial em Barueri, atendendo brasileiros nos Estados Unidos e no Brasil.",
+      title: "Advocacia de imigração, dos EUA para o Brasil.",
+      text: "A Status Immigration Law Firm é um escritório de advocacia especializado exclusivamente em imigração federal, com sede em Orlando e atendimento em português no Brasil e nos Estados Unidos.",
       className: "md:col-span-2",
     },
     {
       icon: FileText,
       eyebrow: "O QUE FAZEMOS",
-      title: "Documentação clara e organizada.",
-      text: "Auxiliamos na organização, revisão e preparação dos documentos exigidos em processos imigratórios, sempre com transparência sobre cada etapa.",
+      title: "Estratégia jurídica e dossiê completo.",
+      text: "Atuamos do enquadramento jurídico à construção do dossiê, incluindo formulários, business plan, respostas a RFE e acompanhamento até a decisão.",
       className: "",
     },
     {
       icon: Award,
       eyebrow: "ESPECIALIDADES",
       title: "EB-1, EB-2 NIW e O-1.",
-      text: "Nossa atuação é concentrada em categorias baseadas em mérito e trajetória profissional, conforme os critérios publicados pelo USCIS.",
+      text: "Nossa atuação para brasileiros é concentrada em EB-1, EB-2 NIW e O-1, conforme os requisitos publicados pelo USCIS.",
       className: "",
     },
   ];
@@ -197,9 +197,9 @@ export function CompanyIntroduction() {
       <div className="container-x">
         <div className="mx-auto max-w-3xl text-center">
           <span className="font-mono-label text-gold">STATUS IMMIGRATION LAW FIRM</span>
-          <h2 className="display-2 mt-5 text-balance">Preparação documental para projetos de imigração aos Estados Unidos.</h2>
+          <h2 className="display-2 mt-5 text-balance">Segurança jurídica para a sua mobilidade imigratória.</h2>
           <p className="lead mx-auto mt-6 max-w-2xl text-balance">
-            Estrutura, organização e acompanhamento documental para profissionais brasileiros que desejam construir um plano migratório consistente.
+            Entenda suas possibilidades ainda no Brasil com um escritório dedicado exclusivamente à imigração federal.
           </p>
         </div>
 
@@ -420,7 +420,7 @@ export function VisaCards() {
       <div aria-hidden className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold/50 to-transparent" />
       <div className="container-x relative">
 
-        <SectionHead num="03" eyebrow="VISTOS EB" title="Três caminhos. Uma preparação documental para cada perfil." />
+        <SectionHead num="03" eyebrow="CAMINHOS IMIGRATÓRIOS" title="Três caminhos. Uma estratégia jurídica para cada perfil." />
         <div className="mt-14 grid md:grid-cols-3 gap-5">
           {visas.map((v) => (
             <Link key={v.slug} to="/vistos/$slug" params={{ slug: v.slug }} className="group block">
@@ -500,14 +500,14 @@ export function PersonaCards() {
  * ============================================================ */
 export function ProcessSteps() {
   const steps = [
-    { n: "01", icon: GraduationCap, t: "Análise Criteriosa",
-      d: "Organizamos e revisamos histórico, formação e evidências de impacto para o EB-2 NIW." },
+    { n: "01", icon: GraduationCap, t: "Análise Jurídica",
+      d: "A advogada avalia histórico, formação, objetivos e evidências para definir o enquadramento possível." },
     { n: "02", icon: Layers, t: "Organização Documental",
       d: "Organizamos a documentação que demonstra mérito substancial e importância nacional da atuação proposta." },
-    { n: "03", icon: FileText, t: "Preparação Documental",
-      d: "Auxiliamos na organização e revisão da documentação e das cartas apresentadas por você, sem assumir autoria do conteúdo." },
-    { n: "04", icon: Briefcase, t: "Revisão Final",
-      d: "Organização completa e criteriosa do seu processo, dentro dos padrões exigidos pelo USCIS." },
+    { n: "03", icon: FileText, t: "Construção do Dossiê",
+      d: "Preparamos formulários, evidências, cartas e demais peças necessárias para apresentar o caso com clareza." },
+    { n: "04", icon: Briefcase, t: "Protocolo e Acompanhamento",
+      d: "Revisamos o conjunto final e acompanhamos o processo, inclusive em eventual solicitação de evidências." },
   ];
   return (
     <Reveal as="section" id="processo-eb-2-niw" className="section-parchment section-pad relative overflow-hidden">
@@ -1053,7 +1053,7 @@ export function FAQ() {
     },
     {
       q: "Qual a experiência de vocês?",
-      a: "Atuamos exclusivamente na preparação de documentação para vistos de emprego por mérito. EB-1, EB-2 NIW e O-1. Esse foco gera profundidade nos critérios do USCIS. Não somos generalistas: cada caso é construído por uma equipe que já estruturou centenas de processos semelhantes.",
+      a: "Somos um escritório de advocacia especializado exclusivamente em imigração federal, com foco em EB-1, EB-2 NIW e O-1. A análise jurídica é conduzida por Meagan Zabadal, licenciada em Nova York e Arizona.",
     },
     {
       q: "Posso confiar mesmo sem ir presencialmente?",
@@ -1061,7 +1061,7 @@ export function FAQ() {
     },
     {
       q: "Já fui enganado antes. Como sei que não é mais uma promessa?",
-      a: "Não prometemos o que não podemos garantir. Somos honestos sobre requisitos, sobre as chances reais do seu perfil e sobre os prazos do USCIS e dos consulados, que não dependem de nenhum escritório. Nosso compromisso é com a qualidade da estruturação, não com retórica.",
+      a: "Não prometemos o que nenhum escritório pode garantir. Explicamos requisitos, limites e riscos com clareza; prazos e decisões pertencem ao USCIS e aos consulados. Nosso compromisso é com a análise jurídica e a qualidade do dossiê.",
     },
     {
       q: "Meu caso é complicado, vale tentar?",
@@ -1072,8 +1072,8 @@ export function FAQ() {
       a: "É um investimento significativo, e por isso a análise inicial é gratuita: para que a decisão seja informada. Valores são apresentados com clareza após a pré-qualificação documental, sem pressão e sem letras miúdas. Não trabalhamos com promessas de ganho garantido.",
     },
     {
-      q: "As taxas do governo americano estão incluídas no valor da assessoria?",
-      a: "Não. Existem duas coisas diferentes: (1) as taxas oficiais do governo americano (USCIS), pagas diretamente ao órgão; e (2) o valor da nossa assessoria, que cobre a preparação e organização documental do seu processo. São separados. As taxas do USCIS são definidas pelo próprio governo, podem mudar e são pagas por formulário. Na fase final (Green Card), parte das taxas é individual — ou seja, cônjuge e filhos têm suas próprias taxas. No levantamento inicial de informações, explicamos quais taxas costumam se aplicar ao seu perfil e à sua família.",
+      q: "As taxas do governo americano estão incluídas nos honorários?",
+      a: "Não. As taxas oficiais do governo americano são pagas separadamente e podem mudar. Os honorários profissionais cobrem o escopo jurídico definido no contrato. Na triagem inicial, explicamos quais custos costumam se aplicar ao perfil e à família.",
     },
     {
       q: "Preciso pagar taxas separadas para minha família?",
@@ -1292,7 +1292,7 @@ export function HeroAssessment() {
             {[
               "Sem compromisso, 100% confidencial",
               "Mapa das categorias com maior afinidade (EB-2 NIW, EB-1, O-1)",
-              "Análise feita por equipe dedicada à preparação documental para vistos EB",
+              "Triagem inicial com possibilidade de encaminhamento para análise jurídica",
             ].map((i) => (
               <li key={i} className="flex gap-3 border-l border-gold/40 pl-3">
                 <CheckCircle2 aria-hidden className="h-4 w-4 text-gold mt-0.5 shrink-0" />
