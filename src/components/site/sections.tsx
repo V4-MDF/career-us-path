@@ -700,13 +700,13 @@ export function LegacySection() {
             <p className="mt-3 font-display text-xl md:text-2xl leading-tight text-foreground">
               A decisão que muda três gerações.
             </p>
-            <p className="mt-3 text-foreground/75 text-[15px] leading-relaxed">
+            <MobileClamp className="mt-3 text-foreground/75 text-[15px] leading-relaxed">
               Green Card para cônjuge e filhos solteiros menores de 21, junto do requerente
               principal. A idade é protegida pelo Child Status Protection Act, que pode preservar
               o benefício mesmo após os 21 anos — o tempo de processamento influencia esse cálculo.
               Escola pública de qualidade, universidade a custo de residente e, após cinco anos,
               é possível solicitar a naturalização, cumpridos os requisitos do USCIS.
-            </p>
+            </MobileClamp>
           </div>
         </div>
 
