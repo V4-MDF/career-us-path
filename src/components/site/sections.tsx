@@ -85,13 +85,13 @@ export function Hero() {
     <section
       id="abertura"
       aria-label="Abertura"
-      className="section-anchor relative overflow-hidden pt-24 md:pt-44 pb-16 md:pb-36"
+      className="section-anchor relative overflow-hidden pt-32 md:pt-44 pb-16 md:pb-28 min-h-[92vh] flex items-center"
     >
       {/* Fundo da hero: vídeo (desktop, sem reduced-motion) ou poster estático.
           Fallback silencioso para hero-skyline se não houver configuração no admin. */}
       <HeroBackgroundMedia videoUrl={heroVideoUrl} posterUrl={heroPosterUrl} />
-      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-[#0A111C]/70 via-[#0A111C]/45 to-[#0A111C]/25" />
-      <div className="absolute inset-0 -z-10 bg-gradient-to-r from-ink/55 via-ink/15 to-ink/25" />
+      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-parchment/70 via-parchment/65 to-background/95" />
+      <div className="absolute inset-0 -z-10 bg-gradient-to-r from-background/95 via-background/72 to-background/55" />
 
       {/* Grão fino global para unificar a hero com o tratamento das fotos. */}
       <div aria-hidden className="absolute inset-0 -z-10 opacity-[0.06] mix-blend-overlay [background-image:radial-gradient(rgba(255,255,255,0.6)_1px,transparent_1px)] [background-size:3px_3px]" />
@@ -100,9 +100,9 @@ export function Hero() {
         <BrUsRouteBackdrop />
       </div>
 
-      <div className={`container-x grid gap-10 md:gap-16 lg:gap-12 items-center ${heroVideoHidden ? "" : "lg:grid-cols-[1fr_1.35fr]"}`}>
-        <div className="min-w-0">
-          <div className="flex items-center gap-3">
+      <div className={`container-x grid gap-10 md:gap-16 lg:gap-12 items-center ${heroVideoHidden ? "" : "lg:grid-cols-[1fr_1.1fr]"}`}>
+        <div className={`min-w-0 ${heroVideoHidden ? "mx-auto max-w-4xl text-center" : ""}`}>
+          <div className={`flex items-center gap-3 ${heroVideoHidden ? "justify-center" : ""}`}>
             <FlagsBRUS size={16} />
             <span aria-hidden className="h-px w-6 bg-gold" />
             <span className="font-mono-label text-gold">{eyebrow}</span>
@@ -122,7 +122,7 @@ export function Hero() {
             {sub}
           </p>
 
-          <div className="mt-10 flex flex-wrap gap-3">
+          <div className={`mt-10 flex flex-wrap gap-3 ${heroVideoHidden ? "justify-center" : ""}`}>
             <Link to={useAvaliacaoHref("home_hero")} aria-label="Ir para o formulário de pré-qualificação documental">
               <Button size="lg" variant="cta" className="btn-label btn-sweep h-12 px-7 text-[15px] active:scale-[0.98]">
                 {cta}
@@ -139,7 +139,7 @@ export function Hero() {
             </a>
           </div>
 
-          <div className="mt-14 flex items-start gap-3 text-sm text-foreground/80 border-l border-gold/50 pl-4 max-w-md">
+          <div className={`mt-14 flex items-start gap-3 text-sm text-foreground/80 border-l border-gold/50 pl-4 max-w-md ${heroVideoHidden ? "mx-auto text-left" : ""}`}>
             <Star className="h-4 w-4 text-gold mt-0.5 shrink-0 fill-gold" />
             <span>{proof}</span>
           </div>
@@ -153,7 +153,7 @@ export function Hero() {
         {/* Slot de vídeo horizontal (16:9) — pode ser ocultado no admin (hero.videoHidden). */}
         {!heroVideoHidden && (
           <div className="relative mt-10 lg:mt-0 min-w-0">
-            <div className="relative aspect-video w-full overflow-hidden rounded-2xl border border-gold/40 bg-ink-raise shadow-elevated ring-1 ring-gold/10">
+            <div className="liquid-glass relative aspect-video w-full overflow-hidden rounded-3xl ring-1 ring-gold/10">
               <VideoPlayer url={heroVideoUrl} title="Vídeo institucional Status Immigration Law Firm" />
             </div>
           </div>
@@ -381,8 +381,8 @@ export function VisaCards() {
         <div className="mt-14 grid md:grid-cols-3 gap-5">
           {visas.map((v) => (
             <Link key={v.slug} to="/vistos/$slug" params={{ slug: v.slug }} className="group block">
-              <article className={`relative gold-tick h-full border p-8 transition-colors ${
-                v.featured ? "border-gold bg-ink-raise" : "border-gold/20 bg-ink-raise/60 hover:border-gold/60"
+              <article className={`liquid-card relative gold-tick h-full rounded-2xl p-8 transition-colors ${
+                v.featured ? "border-gold" : "hover:border-gold/60"
               }`}>
                 <span className="font-mono-label text-gold">{v.tag}</span>
                 <h3 className="mt-4 font-display text-[40px] leading-none">{v.title}</h3>
@@ -430,7 +430,7 @@ export function PersonaCards() {
           {personas.map((p) => {
             const Icon = p.icon;
             return (
-              <article key={p.title} className={`relative rounded-2xl border-t-4 border-x border-b border-gold/25 bg-ink-raise/60 p-8 shadow-soft transition-[border-color,box-shadow] hover:shadow-elevated ${p.accent}`}>
+              <article key={p.title} className={`liquid-card relative rounded-2xl border-t-4 p-8 transition-[border-color,box-shadow] hover:shadow-elevated ${p.accent}`}>
                 <span className="grid h-12 w-12 place-items-center rounded-lg border border-current/50">
                   <Icon className="h-6 w-6" />
                 </span>

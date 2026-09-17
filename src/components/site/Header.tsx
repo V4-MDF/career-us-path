@@ -62,14 +62,11 @@ export function Header() {
   }, [vistosOpen]);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-gold/20 bg-ink/95">
-      {/* Filete dourado superior, assinatura do dossiê */}
-      <div className="h-px w-full bg-gold/40" />
-
-      <div className="container-x flex h-[68px] items-center justify-between gap-6">
+    <header className="fixed inset-x-0 top-0 z-50 px-3 pt-3 md:px-6 md:pt-5">
+      <div className="liquid-glass mx-auto flex h-[64px] max-w-6xl items-center justify-between gap-6 rounded-full px-5 md:px-8">
         {/* Logo */}
         <Link to="/" className="flex items-center" aria-label="Status Immigration Law Firm. Início">
-          <span className="flex flex-col leading-none text-foreground">
+          <span className="flex flex-col leading-none text-ink-text">
             <span className="font-display text-[15px] md:text-[17px] font-semibold uppercase">Status Immigration</span>
             <span className="mt-1 font-mono-label text-[9px] uppercase text-gold">Law Firm</span>
           </span>
@@ -101,9 +98,9 @@ export function Header() {
                 id="vistos-menu"
                 role="menu"
                 aria-label="Tipos de visto"
-                className="absolute left-1/2 top-full -translate-x-1/2 pt-3 animate-in fade-in slide-in-from-top-2 duration-200"
+                className="absolute left-1/2 top-full -translate-x-1/2 pt-4 animate-in fade-in slide-in-from-top-2 duration-200"
               >
-                <div className="w-[340px] rounded-xl border border-gold/30 bg-ink-deep p-2 shadow-elegant">
+                <div className="liquid-glass relative w-[340px] rounded-2xl p-2">
                   {/* Filete superior dourado */}
                   <div aria-hidden className="absolute left-6 right-6 top-0 h-[3px] w-10 bg-gold" />
                   {VISTOS.map((v) => (
@@ -161,8 +158,8 @@ export function Header() {
 
       {/* Menu mobile */}
       {open && (
-        <nav id="mobile-menu" aria-label="Navegação móvel" className="lg:hidden border-t border-gold/20 bg-ink">
-          <div className="container-x flex flex-col py-5 gap-1">
+        <nav id="mobile-menu" aria-label="Navegação móvel" className="liquid-glass mx-auto mt-3 max-w-6xl rounded-3xl lg:hidden">
+          <div className="flex flex-col gap-1 px-6 py-5">
             {NAV.slice(0, 1).map((n) => (
               <Link key={n.to} to={n.to} onClick={() => setOpen(false)} className="min-h-11 flex items-center text-foreground border-b border-gold/10" activeProps={{ "aria-current": "page" }}>
                 {n.label}

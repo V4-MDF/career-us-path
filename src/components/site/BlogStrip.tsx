@@ -113,7 +113,7 @@ export function BlogStrip() {
                 key={p.slug + p.titulo}
                 {...props}
                 className="
-                  group relative gold-tick rounded-2xl border border-gold/20 bg-ink-raise/60 shadow-soft
+                  liquid-card group relative gold-tick rounded-2xl
                   hover:border-gold/60 hover:shadow-elevated transition-[border-color,box-shadow]
                   flex flex-col overflow-hidden
                   w-[80vw] max-w-[340px] shrink-0 snap-start
@@ -121,7 +121,7 @@ export function BlogStrip() {
                 "
               >
                 {/* Capa */}
-                <div className="relative aspect-[16/10] w-full overflow-hidden bg-ink-deep rounded-t-2xl">
+                <div className="relative aspect-[16/10] w-full overflow-hidden bg-parchment-deep rounded-t-2xl">
                   <img
                     src={p.capa}
                     alt=""
@@ -131,7 +131,7 @@ export function BlogStrip() {
                   />
                   <div
                     aria-hidden
-                    className="absolute inset-0 bg-gradient-to-t from-ink-deep/85 via-ink-deep/15 to-transparent"
+                    className="absolute inset-0 bg-gradient-to-t from-ink-text/35 via-transparent to-transparent"
                   />
                 </div>
 
