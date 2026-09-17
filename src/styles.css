@@ -104,6 +104,13 @@
   --gold:          #9A7836;
   --gold-soft:     rgba(154, 120, 54, 0.20);
   --gold-foreground: #FFFFFF;
+  --champagne:     #F6F1E7;
+  --champagne-deep:#E8DDC6;
+  --velaris-bg:    #FCFCFB;
+  --velaris-light: #FFFFFF;
+  --velaris-soft:  #EADFBF;
+  --velaris-gold:  #B7934F;
+  --velaris-mist:  #DAD7CF;
   --oxblood:       #6E2233;
   --slate:         #666661;
   --ink-text:      #181816;
@@ -191,7 +198,7 @@
 
 /* Camada mais profunda, divisor entre dobras escuras */
 .section-ink-deep {
-  --background: var(--ink-deep);
+  --background: var(--champagne);
   background-color: var(--background);
   color: var(--foreground);
 }
@@ -202,7 +209,7 @@
 
 /* Cream light, parchment mais claro, "arejado", entre dobras escuras. */
 .section-cream-light {
-  --background: #F7F7F5;
+  --background: #FFFFFF;
   --foreground: var(--ink-text);
   --card: #FFFFFF;
   --card-foreground: var(--ink-text);
@@ -219,7 +226,7 @@
 
 /* Sky, azul-céu suave (lado "EUA": renda, futuro, benefícios). */
 .section-sky {
-  --background: #F4F6F7;
+  --background: var(--champagne);
   --foreground: var(--ink-text);
   --card: #FFFFFF;
   --card-foreground: var(--ink-text);
@@ -236,7 +243,7 @@
 
 /* Verde-Brasil, fundo profundo (lado "BR": herança, legado, decisão). */
 .section-verde-brasil {
-  --background: #F7F7F5;
+  --background: #FFFFFF;
   --foreground: var(--ink-text);
   --card: rgba(255, 255, 255, 0.72);
   --card-foreground: var(--ink-text);
@@ -248,6 +255,19 @@
   --primary: var(--brazil-yellow);
   --primary-foreground: #FFFFFF;
   --accent: var(--brazil-yellow);
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+/* Superfície champagne mais marcada para separar dobras sem escurecer a marca. */
+@utility section-champagne {
+  --background: var(--champagne);
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+@utility section-champagne-deep {
+  --background: color-mix(in oklab, var(--champagne-deep) 62%, white 38%);
   background-color: var(--background);
   color: var(--foreground);
 }
@@ -437,13 +457,13 @@
  * no scroll, evita o efeito de "puxão" causado por clamp(vw) que muda a
  * altura da dobra continuamente conforme a viewport. */
 @utility section-pad {
-  padding-block: 3.5rem; /* mobile: 56px */
+  padding-block: 3rem;
 }
 @media (min-width: 768px) {
-  .section-pad { padding-block: 4.5rem; } /* tablet: 72px */
+  .section-pad { padding-block: 4rem; }
 }
 @media (min-width: 1024px) {
-  .section-pad { padding-block: 6rem; } /* desktop: 96px, teto reduzido para caber em notebook */
+  .section-pad { padding-block: 5rem; }
 }
 
 /* Variante compacta para dobras promocionais/transição (blog, pré-qual). */
@@ -839,11 +859,39 @@
     transform: translateX(-160%) skewX(-18deg);
   }
   &:hover {
-    transform: translateY(-5px);
+    transform: translateY(-2px);
     border-color: color-mix(in oklab, var(--gold) 48%, white 52%);
     box-shadow: 0 28px 70px -38px rgba(24, 24, 22, 0.42), inset 0 1px 0 rgba(255,255,255,1);
   }
   &:hover::after { animation: glass-glint 1.15s ease-out; }
+}
+
+@utility compact-info-card {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.25rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid color-mix(in oklab, var(--gold) 20%, transparent);
+  background: color-mix(in oklab, white 88%, transparent);
+  box-shadow: var(--shadow-soft);
+  transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1), border-color 300ms ease, box-shadow 300ms ease;
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 3px;
+    background: color-mix(in oklab, var(--gold) 28%, transparent);
+    transition: background-color 300ms ease;
+  }
+  &:hover {
+    transform: translateY(-2px);
+    border-color: color-mix(in oklab, var(--gold) 42%, transparent);
+    box-shadow: var(--shadow-elevated);
+  }
+  &:hover::before { background: var(--gold); }
 }
 
 .hero-glass-halo {
