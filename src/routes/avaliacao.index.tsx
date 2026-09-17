@@ -21,7 +21,6 @@ import { getOrigin } from "@/lib/origin";
 import type { QualResult } from "@/lib/leadQualification";
 import { saveQualificationResult, type QualificationResult } from "@/components/site/ObrigadoContent";
 import avaliacaoBg from "@/assets/avaliacao-bg.jpg";
-import logoAsset from "@/assets/logo-status-na-america.webp.asset.json";
 
 
 type SegKey = "medicos" | "engenheiros" | "empresarios";
@@ -108,14 +107,10 @@ function AvaliacaoPage() {
       <header className="sticky top-0 z-20 border-b border-gold/15 bg-ink/85 backdrop-blur">
         <div className="container-x flex h-[64px] items-center justify-between">
           <Link to="/" className="flex items-center" aria-label="Status Immigration Law Firm. Início">
-            <img
-              src={logoAsset.url}
-              alt="Status Immigration Law Firm"
-              className="h-10 md:h-12 w-auto"
-              width={240}
-              height={48}
-              decoding="async"
-            />
+            <span className="flex flex-col leading-none text-foreground">
+              <span className="font-display text-sm md:text-base font-semibold uppercase">Status Immigration</span>
+              <span className="mt-1 font-mono-label text-[9px] uppercase text-gold">Law Firm</span>
+            </span>
           </Link>
           <Link
             to="/"
