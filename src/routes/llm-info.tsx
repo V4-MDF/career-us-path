@@ -105,10 +105,11 @@ function LlmInfo() {
 
           <dl className="legal-sheet mt-10 space-y-6">
             {QA.map((it) => (
-              <div key={it.q} className="pt-6 border-b border-gold/15 pb-6">
-                <dt className="font-display text-xl text-foreground">{it.q}</dt>
-                <dd className="mt-3 text-foreground/80 leading-relaxed">{it.a}</dd>
+              <div key={it.q} className="min-w-0 pt-6 border-b border-gold/15 pb-6">
+                <dt className="font-display text-xl text-foreground break-words">{it.q}</dt>
+                <dd className="mt-3 text-foreground/80 leading-relaxed break-words">{it.a}</dd>
               </div>
+
             ))}
           </dl>
 

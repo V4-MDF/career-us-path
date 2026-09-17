@@ -194,9 +194,10 @@ function BlogIndex() {
                 Análise individual e gratuita em até 48h.
               </p>
             </div>
-            <Link to="/" hash="avaliacao">
-              <Button size="lg" className="btn-label btn-sweep h-12 px-7">Iniciar triagem do meu caso</Button>
+            <Link to="/" hash="avaliacao" className="block w-full sm:inline-block sm:w-auto">
+              <Button size="lg" className="btn-label btn-sweep h-12 w-full px-7 sm:w-auto">Iniciar triagem do meu caso</Button>
             </Link>
+
           </div>
         </section>
       </main>

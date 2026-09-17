@@ -161,12 +161,13 @@ function ContatoHero({
         <p className="mt-5 text-foreground/80 text-lg leading-relaxed max-w-2xl">{subtitle}</p>
 
         <div className="mt-8">
-          <Link to="/avaliacao" className="inline-flex">
+          <Link to="/avaliacao" className="block sm:inline-flex">
             <Button size="lg" className="btn-label w-full sm:w-auto">
               Iniciar triagem do meu caso
             </Button>
           </Link>
         </div>
+
       </div>
     </section>
   );
@@ -483,12 +484,13 @@ function ContatoForm() {
             Para um <strong className="text-gold">levantamento inicial de informações completo</strong>{" "}
             (critérios do USCIS, mapa das categorias aplicáveis, próximos passos), use o caminho oficial:
             <div className="mt-3">
-              <Link to="/avaliacao">
-                <Button size="sm" className="btn-label">
+              <Link to="/avaliacao" className="block sm:inline-block">
+                <Button size="sm" className="btn-label w-full sm:w-auto">
                   Iniciar triagem do meu caso
                 </Button>
               </Link>
             </div>
+
           </div>
         </div>
 
@@ -635,11 +637,12 @@ function MapaDiscreto() {
           <div className="font-mono-label text-oxblood text-xs">SEDE ORLANDO</div>
           <div className="mt-1 font-display text-lg text-ink-text">{address}</div>
         </div>
-        <a href={mapsUrl} target="_blank" rel="noopener noreferrer">
-          <Button variant="outline" className="btn-label border-gold/50">
+        <a href={mapsUrl} target="_blank" rel="noopener noreferrer" className="block sm:inline-block">
+          <Button variant="outline" className="btn-label w-full border-gold/50 sm:w-auto">
             <MapPin className="mr-2 h-4 w-4" /> Ver no Google Maps
           </Button>
         </a>
+
       </div>
     </section>
   );

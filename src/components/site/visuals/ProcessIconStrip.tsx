@@ -9,18 +9,19 @@ export function ProcessIconStrip({ className = "" }: { className?: string }) {
   return (
     <div
       aria-hidden
-      className={`absolute inset-x-0 bottom-0 w-full h-[160px] motif-soft flex items-end justify-center pb-8 ${className}`}
+      className={`absolute inset-x-0 bottom-0 w-full h-[160px] motif-soft flex items-end justify-center px-5 pb-8 ${className}`}
     >
-      <div className="flex items-center gap-4 opacity-70">
-        <span className="h-px w-16 bg-current" />
+      <div className="flex w-full max-w-full items-center justify-center gap-2 opacity-70 sm:gap-4">
+        <span className="hidden h-px w-8 shrink bg-current sm:block sm:w-16" />
         <span
-          className="font-mono-label tracking-[0.35em] text-[11px] sm:text-[12px] whitespace-nowrap"
+          className="min-w-0 truncate font-mono-label tracking-[0.2em] text-[9px] sm:tracking-[0.35em] sm:text-[12px]"
           style={{ fontFamily: "JetBrains Mono, monospace" }}
         >
           ESTRATÉGIA JURÍDICA · EB-2 NIW
         </span>
-        <span className="h-px w-16 bg-current" />
+        <span className="hidden h-px w-8 shrink bg-current sm:block sm:w-16" />
       </div>
     </div>
+
   );
 }

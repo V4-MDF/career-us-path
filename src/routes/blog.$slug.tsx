@@ -153,9 +153,10 @@ function PostPage() {
               <div className="liquid-card mt-10 rounded-2xl p-6">
                 <h2 className="font-display text-2xl">Pronto para iniciar a triagem do seu caso?</h2>
                 <p className="mt-2 text-foreground/75">Análise individual e gratuita em até 48h.</p>
-                <a href={avaliacaoHref(`blog_${post.slug}`)} className="mt-5 inline-block">
-                  <Button size="lg" className="btn-label btn-sweep h-12 px-7">Iniciar triagem do meu caso</Button>
+                <a href={avaliacaoHref(`blog_${post.slug}`)} className="mt-5 block sm:inline-block">
+                  <Button size="lg" className="btn-label btn-sweep h-12 w-full px-7 sm:w-auto">Iniciar triagem do meu caso</Button>
                 </a>
+
               </div>
             </div>
           </div>
