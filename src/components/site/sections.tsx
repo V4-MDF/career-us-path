@@ -710,29 +710,13 @@ export function LegacySection() {
           </div>
         </div>
 
-        {/* Mobile: carrossel horizontal com snap */}
-        <div className="mt-12 md:hidden -mx-4 px-4 overflow-x-auto snap-x snap-mandatory scroll-smooth scrollbar-hide">
-          <div className="flex gap-3 pb-2">
-            {pillars.map(({ icon: Icon, t, d }) => (
-              <article
-                key={t}
-                className="liquid-card snap-start shrink-0 w-[76%] gold-tick rounded-2xl p-5"
-              >
-                <Icon className="h-5 w-5 text-gold" />
-                <h3 className="mt-4 font-display text-[17px]">{t}</h3>
-                <p className="mt-2 text-foreground/75 leading-snug text-[13px]">{d}</p>
-              </article>
-            ))}
-          </div>
-          <div className="mt-3 flex justify-center gap-1.5" aria-hidden>
-            {pillars.map((_, i) => (
-              <span key={i} className="h-1 w-6 rounded-full bg-gold/30" />
-            ))}
-          </div>
-        </div>
-
-        {/* Desktop/tablet: grid */}
-        <div className="mt-12 hidden md:grid md:grid-cols-3 gap-4">
+        {/* Mobile: trilha deslizante; md+: grid de 3 colunas. */}
+        <CardRail
+          className="mt-10 md:mt-12"
+          mdClassName="md:grid md:grid-cols-3 md:gap-4"
+          count={pillars.length}
+          ariaLabel="O que você conquista"
+        >
           {pillars.map(({ icon: Icon, t, d }) => (
             <article key={t} className="liquid-card relative gold-tick rounded-2xl p-5 h-full transition-[border-color,box-shadow] hover:border-gold/55 hover:shadow-elevated">
               <Icon className="h-5 w-5 text-gold" />
@@ -740,6 +724,14 @@ export function LegacySection() {
               <p className="mt-2 text-foreground/75 leading-snug text-[13px]">{d}</p>
             </article>
           ))}
+        </CardRail>
+
+        <div className="mt-10 flex justify-center">
+          <a href={avaliacaoHref("home_legado")} className="w-full sm:w-auto">
+            <Button size="lg" variant="cta" className="btn-label btn-sweep h-12 px-7 w-full sm:w-auto">
+              Analisar meu perfil
+            </Button>
+          </a>
         </div>
       </div>
     </Reveal>
