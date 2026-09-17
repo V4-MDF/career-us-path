@@ -304,22 +304,23 @@ function NumerosCredenciais() {
           {title}
         </h2>
 
-        <ul className="mt-10 grid gap-5 grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
+        <ul className="mt-10 grid gap-4 grid-cols-2 sm:gap-5 md:grid-cols-3 lg:grid-cols-5">
           {stats.map((s, i) => (
             <li
               key={i}
-              className="liquid-card rounded-xl p-4 text-center relative"
+              className="liquid-card min-w-0 rounded-xl p-3 text-center relative sm:p-4"
             >
               <span aria-hidden className="absolute inset-x-0 top-0 h-[2px] bg-gold" />
-              <div className="font-display text-[clamp(1.8rem,3.2vw,2.6rem)] leading-none text-gold">
+              <div className="font-display text-[clamp(1.35rem,7vw,2.6rem)] leading-none text-gold break-words">
                 {s.v}
               </div>
-              <div className="mt-2 font-mono-label text-[11px] text-foreground/70 leading-tight">
+              <div className="mt-2 font-mono-label text-[10px] sm:text-[11px] text-foreground/70 leading-tight break-words">
                 {s.l}
               </div>
             </li>
           ))}
         </ul>
+
       </div>
     </section>
   );
