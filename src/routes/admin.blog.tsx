@@ -43,7 +43,7 @@ const emptyPost = (): BlogPost => ({
   id: "", slug: "", titulo: "",
   categoria: "Vida nos EUA",
   capa: "", resumo: "", corpo: "",
-  autor: "Equipe Status na América",
+  autor: "Equipe Status Immigration Law Firm",
   status: "rascunho",
   data_publicacao: new Date().toISOString().slice(0, 10),
   meta_title: "", meta_description: "", og_image: "",

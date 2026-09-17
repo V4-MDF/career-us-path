@@ -23,7 +23,7 @@ export const Route = createFileRoute("/pre-qualificacao/r/$token")({
   component: PublicResultPage,
   head: () => ({
     meta: [
-      { title: "Resultado do teste de pré-qualificação. Status na América" },
+      { title: "Resultado do teste de pré-qualificação. Status Immigration Law Firm" },
       { name: "robots", content: "noindex, nofollow" },
     ],
   }),

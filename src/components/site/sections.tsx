@@ -154,7 +154,7 @@ export function Hero() {
         {!heroVideoHidden && (
           <div className="relative mt-10 lg:mt-0 min-w-0">
             <div className="relative aspect-video w-full overflow-hidden rounded-2xl border border-gold/40 bg-ink-raise shadow-elevated ring-1 ring-gold/10">
-              <VideoPlayer url={heroVideoUrl} title="Vídeo institucional Status na América" />
+              <VideoPlayer url={heroVideoUrl} title="Vídeo institucional Status Immigration Law Firm" />
             </div>
           </div>
         )}
@@ -579,7 +579,7 @@ export function InstitutionalVideo() {
               <span className="font-mono-label text-gold/85">{eyebrow || "VÍDEO INSTITUCIONAL"}</span>
             </div>
             <h2 className="mt-5 font-display text-[clamp(1.8rem,3.6vw,2.8rem)] leading-[1.05] text-parchment">
-              {title || "Conheça a Status na América."}
+              {title || "Conheça a Status Immigration Law Firm."}
             </h2>
             <div className="mt-6 h-px w-16 bg-gold/60" />
             {lead && (
@@ -590,7 +590,7 @@ export function InstitutionalVideo() {
           {/* Coluna do vídeo (moldura dourada, formato horizontal) */}
           <div className="relative">
             <div className="relative aspect-video w-full overflow-hidden rounded-2xl border border-gold/40 bg-ink-raise shadow-elevated ring-1 ring-gold/10">
-              <VideoPlayer url={url} title={title || "Vídeo institucional Status na América"} />
+              <VideoPlayer url={url} title={title || "Vídeo institucional Status Immigration Law Firm"} />
             </div>
           </div>
         </div>
@@ -812,7 +812,7 @@ export function SalaryCompare() {
  *
  * NOTA DE CONTEÚDO (não visível ao usuário):
  * O depoimento âncora em vídeo para o pilar EB-2 é do HELDER (sócio da
- * Status na América que obteve o Green Card por EB-2 NIW). Os demais
+ * Status Immigration Law Firm que obteve o Green Card por EB-2 NIW). Os demais
  * sócios seguiram caminhos migratórios distintos; para on-message do
  * EB-2 usar exclusivamente o caso do Helder. Segundo slot fica
  * reservado para vídeo de cliente real (engenheiro/empresário
@@ -1005,7 +1005,7 @@ export function PartnersBadges() {
 export function FAQ() {
   const faqs = [
     {
-      q: "A Status na América é confiável?",
+      q: "A Status Immigration Law Firm é confiável?",
       a: `Sim. Somos uma empresa registrada nos Estados Unidos (EIN ${EIN}), com sede em Orlando/FL e filial no Brasil (CNPJ ${CNPJ}). Contamos com avaliações 5★ no Google e no Facebook e registro no BBB (${BBB_LABEL}). Transparência é regra: qualquer informação institucional pode ser verificada publicamente.`,
     },
     {

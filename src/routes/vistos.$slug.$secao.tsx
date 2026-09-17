@@ -41,10 +41,10 @@ export const Route = createFileRoute("/vistos/$slug/$secao")({
   head: ({ params, loaderData }) => {
     const d = loaderData;
     if (!d) {
-      return { meta: [{ title: "Seção não encontrada | Status na América" }] };
+      return { meta: [{ title: "Seção não encontrada | Status Immigration Law Firm" }] };
     }
     const { page, section } = d;
-    const title = `${section.label}, ${page.h1} | Status na América`;
+    const title = `${section.label}, ${page.h1} | Status Immigration Law Firm`;
     const description = section.intent ?? page.metaDescription;
     const url = `/vistos/${page.slug}/${section.id}`;
     return {

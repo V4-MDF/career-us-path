@@ -29,8 +29,8 @@ function ldScript(data: object) {
 
 const ORG_BASE = {
   "@type": "LegalService",
-  name: "Status na América",
-  alternateName: "Status na América. Imigração EB",
+  name: "Status Immigration Law Firm",
+  alternateName: "Status Immigration Law Firm. Imigração EB",
   description:
     "Preparação documental dedicada a profissionais brasileiros, vistos EB (EB-2 NIW, EB-1, EB-3) e Green Card por mérito profissional.",
   url: "/",
@@ -59,7 +59,7 @@ export function WebSiteJsonLd() {
   return ldScript({
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: "Status na América",
+    name: "Status Immigration Law Firm",
     url: "/",
     inLanguage: "pt-BR",
     publisher: { ...ORG_BASE },

@@ -32,7 +32,7 @@ function ConversionHeader({ segmentId }: { segmentId: string }) {
     <header className="fixed top-0 inset-x-0 z-50 border-b border-border/40 bg-background/85 backdrop-blur">
       <div className="container-x flex h-16 items-center justify-between">
         <Link to="/" className="font-serif text-xl">
-          Status<span className="text-gold">.</span> na América
+          Status Immigration <span className="text-gold">Law Firm</span>
         </Link>
         <div className="flex items-center gap-2">
           <a href={avaliacaoHref(`lp_${segmentId}_header`, segmentId)}>
@@ -49,7 +49,7 @@ function LpFooter() {
     <footer className="border-t border-border/40 bg-surface py-10">
       <div className="container-x flex flex-col sm:flex-row gap-4 items-center justify-between text-xs text-muted-foreground">
         <p className="max-w-2xl leading-relaxed">
-          © {new Date().getFullYear()} Status na América. A Status na América atua na preparação
+          © {new Date().getFullYear()} Status Immigration Law Firm. A Status Immigration Law Firm atua na preparação
           e organização de documentos imigratórios. Não somos advogados licenciados e não
           prestamos orientação jurídica nem representação legal em processos de imigração.
         </p>

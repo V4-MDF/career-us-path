@@ -16,17 +16,17 @@ import { LandingPageTemplate, useLpState } from "@/components/site/lp/LandingPag
 
 const slugDefaults: Record<string, { title: string; description: string }> = {
   medicos: {
-    title: "Green Card para médicos brasileiros | EB-2 NIW | Status na América",
+    title: "Green Card para médicos brasileiros | EB-2 NIW | Status Immigration Law Firm",
     description:
       "Médico e quer construir carreira nos EUA? Veja como conquistar o Green Card por mérito pelo EB-2 NIW, sem patrocinador. Levantamento inicial de informações gratuito.",
   },
   engenheiros: {
-    title: "Green Card para engenheiros brasileiros | EB-2 NIW | Status na América",
+    title: "Green Card para engenheiros brasileiros | EB-2 NIW | Status Immigration Law Firm",
     description:
       "Engenheiro e quer carreira nos EUA? Conquiste o Green Card por mérito pelo EB-2 NIW, sem patrocinador. Levantamento inicial de informações.",
   },
   empresarios: {
-    title: "Green Card para empresários brasileiros | EB-2 NIW | Status na América",
+    title: "Green Card para empresários brasileiros | EB-2 NIW | Status Immigration Law Firm",
     description:
       "Empresário e quer migrar com a família para os EUA? Green Card por mérito pelo EB-2 NIW. Levantamento inicial de informações.",
   },
@@ -35,7 +35,7 @@ const slugDefaults: Record<string, { title: string; description: string }> = {
 export const Route = createFileRoute("/lp/$slug")({
   head: ({ params }) => {
     const d = slugDefaults[params.slug] ?? {
-      title: "Landing page | Status na América",
+      title: "Landing page | Status Immigration Law Firm",
       description: "Conquiste o Green Card americano pelo mérito da sua carreira.",
     };
     return {

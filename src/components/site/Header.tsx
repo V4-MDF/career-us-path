@@ -14,7 +14,6 @@ import { ChevronDown, Menu, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useAvaliacaoHref } from "@/lib/ctaLinks";
-import logoAsset from "@/assets/logo-status-na-america.webp.asset.json";
 
 
 interface VistoItem {
@@ -69,15 +68,11 @@ export function Header() {
 
       <div className="container-x flex h-[68px] items-center justify-between gap-6">
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-3 group" aria-label="Status na América. Início">
-          <img
-            src={logoAsset.url}
-            alt="Status na América. Mobilidade Imigratória"
-            className="h-11 w-auto md:h-14"
-            width={260}
-            height={56}
-            decoding="async"
-          />
+        <Link to="/" className="flex items-center gap-3 group" aria-label="Status Immigration Law Firm. Início">
+          <span className="flex flex-col leading-none text-foreground">
+            <span className="font-display text-[15px] md:text-[17px] font-semibold uppercase">Status Immigration</span>
+            <span className="mt-1 font-mono-label text-[9px] uppercase text-gold">Law Firm</span>
+          </span>
         </Link>
 
 

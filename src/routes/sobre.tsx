@@ -33,10 +33,10 @@ export const Route = createFileRoute("/sobre")({
   head: ({ loaderData }) => {
     const { meta, links } = buildSeoTags(
       {
-        title: "Sobre | Status na América — assessoria de imigração em Orlando",
+        title: "Sobre | Status Immigration Law Firm — assessoria de imigração em Orlando",
         description:
-          "Conheça a Status na América: assessoria de imigração para brasileiros com sede em Orlando/FL e filial no Brasil. Equipe dedicada à preparação documental de processos EB-1, EB-2 NIW e EB-3.",
-        ogTitle: "Sobre | Status na América",
+          "Conheça a Status Immigration Law Firm: assessoria de imigração para brasileiros com sede em Orlando/FL e filial no Brasil. Equipe dedicada à preparação documental de processos EB-1, EB-2 NIW e EB-3.",
+        ogTitle: "Sobre | Status Immigration Law Firm",
         ogDescription:
           "Assessoria de imigração para brasileiros com equipe presente nos Estados Unidos. Orlando/FL e Barueri/SP.",
         canonical: "/sobre",
@@ -52,8 +52,8 @@ export const Route = createFileRoute("/sobre")({
           children: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "Organization",
-            name: "Status na América",
-            legalName: "Status na America LLC",
+            name: "Status Immigration Law Firm",
+            legalName: "Status Immigration Law Firm LLC",
             url: "https://lp.statusnaamerica.com",
             taxID: "99-4846502",
             sameAs: [
@@ -176,7 +176,7 @@ function NossaHistoria() {
           {image ? (
             <img
               src={image}
-              alt="Equipe Status na América"
+              alt="Equipe Status Immigration Law Firm"
               className="w-full aspect-[4/5] object-cover"
               loading="lazy"
             />
@@ -348,7 +348,7 @@ function OndeEstamos() {
               MATRIZ. ESTADOS UNIDOS
             </div>
             <div className="mt-1 font-display text-lg text-ink-text">
-              Status na America LLC
+              Status Immigration Law Firm LLC
             </div>
             <div className="mt-3 flex items-start gap-2 text-sm text-ink-text/85">
               <MapPin className="h-4 w-4 mt-0.5 shrink-0 text-gold" />

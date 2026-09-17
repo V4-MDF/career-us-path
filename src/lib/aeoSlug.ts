@@ -1,5 +1,5 @@
 /**
- * AEO Slug Utilities. Status na América
+ * AEO Slug Utilities. Status Immigration Law Firm
  * =======================================
  *
  * Slugs otimizados para Answer Engine Optimization (Google + LLMs).

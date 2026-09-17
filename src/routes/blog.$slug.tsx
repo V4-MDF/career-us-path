@@ -21,10 +21,10 @@ export const Route = createFileRoute("/blog/$slug")({
   },
   head: ({ params, loaderData }) => {
     const p = loaderData?.post;
-    if (!p) return { meta: [{ title: "Post não encontrado | Status na América" }] };
+    if (!p) return { meta: [{ title: "Post não encontrado | Status Immigration Law Firm" }] };
     return {
       meta: [
-        { title: `${p.meta_title || p.titulo} | Status na América` },
+        { title: `${p.meta_title || p.titulo} | Status Immigration Law Firm` },
         { name: "description", content: p.meta_description || p.resumo },
         { name: "robots", content: "index,follow" },
         { property: "og:title", content: p.meta_title || p.titulo },

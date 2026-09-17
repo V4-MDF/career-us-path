@@ -10,7 +10,7 @@ import { trackLeadUnqualified } from "@/lib/tracking";
 export const Route = createFileRoute("/avaliacao/obrigado-nao-qualificado")({
   head: () => ({
     meta: [
-      { title: "Perfil recebido | Status na América" },
+      { title: "Perfil recebido | Status Immigration Law Firm" },
       {
         name: "description",
         content:

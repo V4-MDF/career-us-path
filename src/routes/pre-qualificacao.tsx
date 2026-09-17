@@ -27,7 +27,7 @@ export const Route = createFileRoute("/pre-qualificacao")({
   component: PreQualPage,
   head: () => ({
     meta: [
-      { title: "Teste de pré-qualificação. Status na América" },
+      { title: "Teste de pré-qualificação. Status Immigration Law Firm" },
       { name: "description", content: "Veja quais documentos costumam ser exigidos em cada categoria de visto americano (EB-1A, EB-2 NIW, O-1, EB-3)." },
       { name: "robots", content: "noindex, nofollow" },
     ],

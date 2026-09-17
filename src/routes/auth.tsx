@@ -9,7 +9,6 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { login } from "@/lib/admin/auth";
 import { supabase } from "@/integrations/supabase/client";
-import logoAsset from "@/assets/logo-status-na-america.webp.asset.json";
 
 const searchSchema = z.object({
   next: z.string().optional(),
@@ -20,7 +19,7 @@ export const Route = createFileRoute("/auth")({
   component: AuthPage,
   head: () => ({
     meta: [
-      { title: "Entrar · Status na América" },
+      { title: "Entrar · Status Immigration Law Firm" },
       { name: "robots", content: "noindex,nofollow" },
     ],
   }),
@@ -64,13 +63,11 @@ function AuthPage() {
       />
       <div className="w-full max-w-sm relative">
         <div className="text-center mb-8">
-          <img
-            src={logoAsset.url}
-            alt="Status na América"
-            className="mx-auto h-12 w-auto object-contain"
-          />
+          <div aria-hidden className="mx-auto grid h-12 w-12 place-items-center border border-gold/50 font-display text-lg text-gold">
+            SI
+          </div>
           <h1 className="mt-5 font-display text-lg font-bold uppercase tracking-[0.14em] text-parchment">
-            Status na América
+            Status Immigration Law Firm
           </h1>
           <div className="mx-auto mt-3 h-px w-10 bg-gold" />
           <p className="mt-3 font-mono text-[10px] uppercase tracking-[0.28em] text-gold/90">

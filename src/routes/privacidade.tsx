@@ -11,11 +11,11 @@ import { Footer } from "@/components/site/Footer";
 export const Route = createFileRoute("/privacidade")({
   head: () => ({
     meta: [
-      { title: "Política de Privacidade | Status na América" },
+      { title: "Política de Privacidade | Status Immigration Law Firm" },
       {
         name: "description",
         content:
-          "Como a Status na América coleta, usa, armazena e protege os dados pessoais dos usuários do site, em conformidade com a LGPD.",
+          "Como a Status Immigration Law Firm coleta, usa, armazena e protege os dados pessoais dos usuários do site, em conformidade com a LGPD.",
       },
       { name: "robots", content: "noindex,follow" },
     ],
@@ -41,13 +41,13 @@ function PrivacidadePage() {
             <h2 className="font-display text-2xl text-foreground">1. Quem somos</h2>
             <p className="mt-3">
               Esta política se aplica ao site <strong>lp.statusnaamerica.com</strong>{" "}
-              e demais domínios operados por <strong>Status na America LLC</strong>{" "}
+              e demais domínios operados por <strong>Status Immigration Law Firm LLC</strong>{" "}
               (EIN 99-4846502), com sede em 7575 KingsPointe Pkwy #4, Orlando, FL
-              32819, EUA, e por sua filial no Brasil <strong>Status na América</strong>{" "}
+              32819, EUA, e por sua filial no Brasil <strong>Status Immigration Law Firm</strong>{" "}
               (CNPJ 62.917.376/0001-21), em Alameda Araguaia, 2104, Barueri/SP.
             </p>
             <p className="mt-3">
-              A Status na América <strong>não é escritório de advocacia</strong>{" "}
+              A Status Immigration Law Firm <strong>não é escritório de advocacia</strong>{" "}
               e não presta serviços jurídicos. As informações compartilhadas
               conosco <strong>não são protegidas por sigilo advogado-cliente</strong>{" "}
               (attorney-client privilege).
@@ -149,7 +149,7 @@ function PrivacidadePage() {
           <div>
             <h2 className="font-display text-2xl text-foreground">8. Não somos escritório de advocacia</h2>
             <p className="mt-3">
-              A Status na América oferece serviços de <strong>preparação e organização
+              A Status Immigration Law Firm oferece serviços de <strong>preparação e organização
               documental</strong> para processos imigratórios. Não somos escritório de
               advocacia, não emitimos parecer jurídico e as informações compartilhadas
               conosco <strong>não são protegidas por sigilo advogado-cliente</strong>. Para
