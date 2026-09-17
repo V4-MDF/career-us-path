@@ -513,17 +513,21 @@ export function ProcessSteps() {
       <div aria-hidden className="absolute inset-0 text-ink-text/10"><ProcessIconStrip /></div>
       <div className="container-x relative">
         <SectionHead num="05" eyebrow="PROCESSO EB-2 NIW" title="Quatro etapas, conduzidas com rigor." variant="parchment" />
-        <div className="mt-14 grid md:grid-cols-2 lg:grid-cols-4 gap-5 auto-rows-fr items-stretch">
+        <CardRail
+          className="mt-10 md:mt-14"
+          mdClassName="md:grid md:grid-cols-2 lg:grid-cols-4 md:gap-5 md:auto-rows-fr md:items-stretch"
+          count={steps.length}
+          ariaLabel="Etapas do processo"
+        >
           {steps.map(({ n, icon: Icon, t, d }) => (
-              <div key={n} className="relative gold-tick rounded-2xl bg-white/90 border border-gold/15 p-5 flex flex-col h-full shadow-soft">
-              <span className="font-display text-[40px] leading-none text-gold">{n}</span>
+            <div key={n} className="relative gold-tick rounded-2xl bg-white/90 border border-gold/15 p-5 flex flex-col h-full shadow-soft">
+              <span className="font-display text-[36px] sm:text-[40px] leading-none text-gold">{n}</span>
               <Icon className="h-5 w-5 text-ink-text/60 mt-4" />
-              <h3 className="mt-3 font-display text-base text-ink-text min-h-[3rem]">{t}</h3>
+              <h3 className="mt-3 font-display text-base text-ink-text md:min-h-[3rem]">{t}</h3>
               <p className="mt-1 text-ink-text/75 text-[14px] leading-relaxed">{d}</p>
-
             </div>
           ))}
-        </div>
+        </CardRail>
 
         <div className="mt-12 flex justify-center">
           <a href={useAvaliacaoHref("home_processo")}>
