@@ -1011,7 +1011,10 @@ export function PartnersBadges() {
           {title}
         </h2>
 
-        <ul className="mt-7 grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 auto-rows-fr items-stretch">
+        <ul
+          style={{ ["--rail-item" as string]: "46vw" }}
+          className="card-rail mt-7 md:grid md:grid-cols-2 lg:grid-cols-4 md:gap-3 md:auto-rows-fr md:items-stretch"
+        >
           {slots.map((s, idx) => (
             <li
               key={idx}
