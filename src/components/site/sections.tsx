@@ -1281,6 +1281,26 @@ function Reveal({
 }
 
 
+/**
+ * MobileClamp — no mobile, colapsa o texto em 4 linhas com "ler mais".
+ * No desktop (md+) o texto aparece inteiro, sem botão.
+ */
+function MobileClamp({ children, className = "" }: { children: React.ReactNode; className?: string }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className={className}>
+      <p className={open ? "" : "clamp-mobile"}>{children}</p>
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        className="mt-2 font-mono-label text-[11px] text-gold underline-offset-4 hover:underline md:hidden"
+      >
+        {open ? "Ler menos" : "Ler mais"}
+      </button>
+    </div>
+  );
+}
+
 function CountUp({ value, className }: { value: string; className?: string }) {
   return <span className={className}>{value}</span>;
 }
