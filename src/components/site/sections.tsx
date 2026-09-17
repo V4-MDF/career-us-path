@@ -527,7 +527,7 @@ export function WhyUs() {
           </div>
           <ul className="grid sm:grid-cols-2 gap-3">
             {items.map(({ icon: Icon, t, desc }) => (
-              <li key={t} className="flex gap-3 rounded-xl border border-gold/20 bg-ink-raise/50 p-4 items-start">
+              <li key={t} className="liquid-card flex gap-3 rounded-2xl p-4 items-start">
                 <Icon className="h-5 w-5 text-gold shrink-0 mt-0.5" />
                 <span className="min-w-0 text-[15px] leading-snug text-foreground/85">
                   {t}
@@ -569,7 +569,7 @@ export function InstitutionalVideo() {
 
 
   return (
-    <Reveal as="section" id="video-institucional" className="section-pad relative bg-ink">
+    <Reveal as="section" id="video-institucional" className="section-pad relative section-ink-deep">
       <div className="container-x">
         <div className="grid lg:grid-cols-[0.9fr_1.1fr] gap-10 lg:gap-14 items-center">
           {/* Coluna de texto (editorial) */}
@@ -578,18 +578,18 @@ export function InstitutionalVideo() {
               <span aria-hidden className="h-px w-8 bg-gold" />
               <span className="font-mono-label text-gold/85">{eyebrow || "VÍDEO INSTITUCIONAL"}</span>
             </div>
-            <h2 className="mt-5 font-display text-[clamp(1.8rem,3.6vw,2.8rem)] leading-[1.05] text-parchment">
+            <h2 className="mt-5 font-display text-[clamp(1.8rem,3.6vw,2.8rem)] leading-[1.05] text-foreground">
               {title || "Conheça a Status Immigration Law Firm."}
             </h2>
             <div className="mt-6 h-px w-16 bg-gold/60" />
             {lead && (
-              <p className="mt-6 text-parchment/80 leading-relaxed max-w-md">{lead}</p>
+              <p className="mt-6 text-foreground/80 leading-relaxed max-w-md">{lead}</p>
             )}
           </div>
 
           {/* Coluna do vídeo (moldura dourada, formato horizontal) */}
           <div className="relative">
-            <div className="relative aspect-video w-full overflow-hidden rounded-2xl border border-gold/40 bg-ink-raise shadow-elevated ring-1 ring-gold/10">
+            <div className="liquid-glass relative aspect-video w-full overflow-hidden rounded-3xl ring-1 ring-gold/10">
               <VideoPlayer url={url} title={title || "Vídeo institucional Status Immigration Law Firm"} />
             </div>
           </div>
@@ -621,7 +621,7 @@ export function LegacySection() {
           width={1600}
           height={1024}
           loading="lazy"
-          className="w-[120%] max-w-none opacity-[0.07] mix-blend-screen select-none"
+          className="w-[120%] max-w-none opacity-[0.05] mix-blend-multiply select-none"
         />
       </div>
       <div aria-hidden className="absolute inset-0 text-gold"><FamilySealBackdrop /></div>
@@ -643,7 +643,7 @@ export function LegacySection() {
             width={1600}
             height={1000}
           />
-          <div className="relative rounded-2xl border border-gold/25 bg-[#16223A] p-6 md:p-8 shadow-soft">
+          <div className="liquid-card relative rounded-2xl p-6 md:p-8">
             <span className="font-mono-label text-gold">FUTURO DOS FILHOS</span>
             <p className="mt-3 font-display text-xl md:text-2xl leading-tight text-foreground">
               A decisão que muda três gerações.
@@ -664,7 +664,7 @@ export function LegacySection() {
             {pillars.map(({ icon: Icon, t, d }) => (
               <article
                 key={t}
-                className="snap-start shrink-0 w-[76%] gold-tick rounded-2xl border border-gold/25 bg-ink-raise/50 p-5 shadow-soft"
+                className="liquid-card snap-start shrink-0 w-[76%] gold-tick rounded-2xl p-5"
               >
                 <Icon className="h-5 w-5 text-gold" />
                 <h3 className="mt-4 font-display text-[17px]">{t}</h3>
@@ -682,7 +682,7 @@ export function LegacySection() {
         {/* Desktop/tablet: grid */}
         <div className="mt-12 hidden md:grid md:grid-cols-3 gap-4">
           {pillars.map(({ icon: Icon, t, d }) => (
-            <article key={t} className="relative gold-tick rounded-2xl border border-gold/25 bg-ink-raise/50 p-5 h-full shadow-soft transition-[border-color,box-shadow] hover:border-gold/55 hover:shadow-elevated">
+            <article key={t} className="liquid-card relative gold-tick rounded-2xl p-5 h-full transition-[border-color,box-shadow] hover:border-gold/55 hover:shadow-elevated">
               <Icon className="h-5 w-5 text-gold" />
               <h3 className="mt-4 font-display text-[17px]">{t}</h3>
               <p className="mt-2 text-foreground/75 leading-snug text-[13px]">{d}</p>
@@ -721,10 +721,10 @@ export function SalaryCompare() {
         />
 
         {/* Tabela (md+) */}
-        <div className="mt-14 hidden md:block rounded-2xl border border-gold/25 overflow-hidden shadow-soft bg-white/70">
-          <div className="grid grid-cols-[1.6fr_1fr_1fr] bg-[#16223A] px-6 py-4">
-            <span className="font-mono-label text-parchment/90">PROFISSÃO</span>
-            <span className="font-mono-label text-parchment/90">NO BRASIL · POR ANO</span>
+        <div className="liquid-card mt-14 hidden md:block rounded-2xl overflow-hidden">
+          <div className="grid grid-cols-[1.6fr_1fr_1fr] bg-parchment-deep px-6 py-4">
+            <span className="font-mono-label text-ink-text/70">PROFISSÃO</span>
+            <span className="font-mono-label text-ink-text/70">NO BRASIL · POR ANO</span>
             <span className="font-mono-label text-gold">NOS EUA · POR ANO</span>
           </div>
           {rows.map((r, i) => (
@@ -1090,7 +1090,7 @@ export function CtaBanner() {
 
         <div className="mt-12 grid lg:grid-cols-2 gap-6 lg:gap-8 items-stretch">
           {/* Oferta principal. Levantamento inicial de informações */}
-          <div className="relative min-w-0 rounded-2xl border border-gold/40 bg-ink-raise/60 p-5 sm:p-7 lg:p-9 shadow-elevated flex flex-col">
+          <div className="liquid-card relative min-w-0 rounded-3xl border-gold/40 p-5 sm:p-7 lg:p-9 flex flex-col">
             <span className="absolute -top-3 left-5 sm:left-6 rounded-full bg-gold px-3 py-1 font-mono-label text-[10px] text-ink">
               RECOMENDADO
             </span>
@@ -1125,7 +1125,7 @@ export function CtaBanner() {
           </div>
 
           {/* Oferta secundária. Pré-qualificação */}
-          <div className="min-w-0 rounded-2xl border border-gold/20 bg-ink-raise/30 p-5 sm:p-7 lg:p-9 flex flex-col">
+          <div className="liquid-card min-w-0 rounded-3xl p-5 sm:p-7 lg:p-9 flex flex-col">
             <div className="flex items-center gap-2 text-gold/80">
               <Sparkles className="h-4 w-4 shrink-0" />
               <p className="font-mono-label text-gold/80">RESPOSTA NA HORA</p>

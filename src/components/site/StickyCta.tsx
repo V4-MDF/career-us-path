@@ -74,7 +74,7 @@ export function StickyCta() {
       <Link
         to={href}
         aria-label="Iniciar pré-qualificação documental"
-        className="btn-label btn-sweep inline-flex h-12 items-center gap-2 rounded-full border border-gold/40 bg-gold px-6 text-[13px] text-ink shadow-elevated hover:bg-gold/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
+        className="btn-cta btn-label btn-sweep inline-flex h-12 items-center gap-2 rounded-full px-6 text-[13px] shadow-elevated focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-background"
       >
         Pré-qualificação documental
         <span aria-hidden>→</span>
