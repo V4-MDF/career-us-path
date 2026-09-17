@@ -9,7 +9,7 @@
 - [x] Atualizar avisos legais, formulários, páginas institucionais, vistos e SEO.
 - [x] Atualizar conteúdo público salvo e validar as páginas principais.
 
-- [ ] Criar contraste champagne visível entre as dobras da Home.
-- [ ] Compactar cartões e informações institucionais com pouco conteúdo.
-- [ ] Tornar o movimento Velaris perceptível e respeitar movimento reduzido.
-- [ ] Validar a Home no computador e no celular.
+- [x] Criar contraste champagne visível entre as dobras da Home.
+- [x] Compactar cartões e informações institucionais com pouco conteúdo.
+- [x] Tornar o movimento Velaris perceptível e respeitar movimento reduzido.
+- [x] Validar a Home no computador e no celular.

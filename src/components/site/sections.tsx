@@ -1108,16 +1108,16 @@ export function CtaBanner() {
     <section
       id="avaliacao-gratuita"
       aria-label="Duas formas de começar"
-      className="section-anchor section-ink-deep section-pad relative border-t border-gold/15"
+      className="section-anchor section-champagne-deep section-pad relative border-t border-gold/20"
     >
       <div className="container-x">
         <div className="max-w-3xl">
           <SectionHead num="11" eyebrow="DUAS FORMAS DE COMEÇAR" title={title} kicker={sub} />
         </div>
 
-        <div className="mt-12 grid lg:grid-cols-2 gap-6 lg:gap-8 items-stretch">
+        <div className="mt-10 grid lg:grid-cols-2 gap-4 lg:gap-5 items-stretch">
           {/* Oferta principal. Levantamento inicial de informações */}
-          <div className="liquid-card relative min-w-0 rounded-3xl border-gold/40 p-5 sm:p-7 lg:p-9 flex flex-col">
+          <div className="liquid-card relative min-w-0 rounded-2xl border-gold/40 p-5 sm:p-6 flex flex-col">
             <span className="absolute -top-3 left-5 sm:left-6 rounded-full bg-gold px-3 py-1 font-mono-label text-[10px] text-ink">
               RECOMENDADO
             </span>
@@ -1152,7 +1152,7 @@ export function CtaBanner() {
           </div>
 
           {/* Oferta secundária. Pré-qualificação */}
-          <div className="liquid-card min-w-0 rounded-3xl p-5 sm:p-7 lg:p-9 flex flex-col">
+          <div className="liquid-card min-w-0 rounded-2xl p-5 sm:p-6 flex flex-col">
             <div className="flex items-center gap-2 text-gold/80">
               <Sparkles className="h-4 w-4 shrink-0" />
               <p className="font-mono-label text-gold/80">RESPOSTA NA HORA</p>
