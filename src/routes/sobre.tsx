@@ -53,9 +53,9 @@ export const Route = createFileRoute("/sobre")({
             "@context": "https://schema.org",
             "@type": "LegalService",
             name: "Status Immigration Law Firm",
-            legalName: "Status Immigration Law Firm LLC",
+            legalName: "Status Immigration Law Firm PLLC",
             url: "https://lp.statusnaamerica.com",
-            taxID: "99-4846502",
+            taxID: "42-4745152",
             description: "Escritório de advocacia especializado em imigração federal. Licensed in NY and AZ.",
             sameAs: [
               "https://instagram.com/status_america",
@@ -351,14 +351,14 @@ function OndeEstamos() {
               MATRIZ. ESTADOS UNIDOS
             </div>
             <div className="mt-1 font-display text-lg text-ink-text">
-              Status Immigration Law Firm LLC
+              Status Immigration Law Firm PLLC
             </div>
             <div className="mt-3 flex items-start gap-2 text-sm text-ink-text/85">
               <MapPin className="h-4 w-4 mt-0.5 shrink-0 text-gold" />
               <span>{usaAddress}</span>
             </div>
             <div className="mt-3 font-mono-label text-[11px] text-ink-text/60">
-              EIN 99-4846502
+              EIN 42-4745152
             </div>
             <a
               href={mapsUrl}

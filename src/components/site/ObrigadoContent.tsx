@@ -68,7 +68,7 @@ function ObrigadoShell({ children }: { children: React.ReactNode }) {
             Licensed in NY and AZ. Federal immigration practice only.
           </p>
           <p className="mt-3 font-mono-label text-foreground/80">
-            © {new Date().getFullYear()} STATUS IMMIGRATION LAW FIRM LLC · EIN 99-4846502
+            © {new Date().getFullYear()} STATUS IMMIGRATION LAW FIRM PLLC · EIN 42-4745152
           </p>
         </div>
       </footer>

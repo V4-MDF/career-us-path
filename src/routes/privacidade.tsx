@@ -41,8 +41,8 @@ function PrivacidadePage() {
             <h2 className="font-display text-2xl text-foreground">1. Quem somos</h2>
             <p className="mt-3">
               Esta política se aplica ao site <strong>lp.statusnaamerica.com</strong>{" "}
-              e demais domínios operados por <strong>Status Immigration Law Firm LLC</strong>{" "}
-              (EIN 99-4846502), com sede em 7575 KingsPointe Pkwy #4, Orlando, FL
+              e demais domínios operados por <strong>Status Immigration Law Firm PLLC</strong>{" "}
+              (EIN 42-4745152), com sede em 7575 KingsPointe Pkwy #4, Orlando, FL
               32819, EUA, e por sua filial no Brasil <strong>Status Immigration Law Firm</strong>{" "}
               (CNPJ 62.917.376/0001-21), em Alameda Araguaia, 2104, Barueri/SP.
             </p>
