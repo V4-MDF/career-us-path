@@ -131,7 +131,7 @@ function PostPage() {
                   width={1200}
                   height={630}
                   loading="eager"
-                  className="w-full aspect-[16/9] object-cover rounded-3xl border border-gold/20 shadow-elevated"
+                  className="w-full aspect-[16/9] object-cover rounded-2xl border border-gold/20 shadow-soft"
                 />
               </div>
             </div>
@@ -150,7 +150,7 @@ function PostPage() {
               <ShareRow url={`/blog/${post.slug}`} title={post.titulo} />
 
               {/* CTA final */}
-              <div className="liquid-card mt-12 rounded-3xl p-8">
+              <div className="liquid-card mt-10 rounded-2xl p-6">
                 <h2 className="font-display text-2xl">Pronto para iniciar a triagem do seu caso?</h2>
                 <p className="mt-2 text-foreground/75">Análise individual e gratuita em até 48h.</p>
                 <a href={avaliacaoHref(`blog_${post.slug}`)} className="mt-5 inline-block">
@@ -162,7 +162,7 @@ function PostPage() {
 
           {/* Relacionados */}
           {related.length > 0 && (
-            <section className="section-parchment">
+            <section className="section-champagne">
               <div className="container-x py-16">
                 <div className="flex items-center gap-3">
                   <span aria-hidden className="h-px w-10 bg-gold/70" />

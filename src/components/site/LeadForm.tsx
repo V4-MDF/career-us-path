@@ -152,9 +152,9 @@ export function LeadForm({ segmentId, defaultProfissao, onSubmitted, submitLabel
 
   if (done) {
     return (
-      <div className="rounded-2xl border border-gold/30 bg-surface p-8 text-center">
+      <div className="liquid-card rounded-2xl p-6 text-center">
         <CheckCircle2 className="mx-auto h-12 w-12 text-gold" />
-        <h3 className="mt-4 font-serif text-2xl">Recebemos seu perfil.</h3>
+        <h3 className="mt-4 font-display text-2xl">Recebemos seu perfil.</h3>
         <p className="mt-2 text-muted-foreground">
           Nossa equipe vai analisar e entrar em contato em até 48h pelo canal informado.
         </p>
@@ -163,7 +163,7 @@ export function LeadForm({ segmentId, defaultProfissao, onSubmitted, submitLabel
   }
 
   return (
-    <div className="rounded-2xl border border-border bg-surface p-6 md:p-8 shadow-soft">
+    <div className="liquid-card rounded-2xl p-5 md:p-6">
       {/* Stepper */}
       <div className="flex items-center gap-2 mb-6">
         {[0, 1, 2].map((i) => (
@@ -181,7 +181,7 @@ export function LeadForm({ segmentId, defaultProfissao, onSubmitted, submitLabel
 
       {step === 0 && (
         <div className="space-y-4">
-          <h3 className="font-serif text-2xl">Vamos começar pelo básico</h3>
+          <h3 className="font-display text-2xl">Vamos começar pelo básico</h3>
           <div>
             <Label htmlFor="nome">Nome completo</Label>
             <Input id="nome" value={data.nome} onChange={(e) => update("nome", e.target.value)} placeholder="Como devemos te chamar" />
@@ -201,7 +201,7 @@ export function LeadForm({ segmentId, defaultProfissao, onSubmitted, submitLabel
 
       {step === 1 && (
         <div className="space-y-4">
-          <h3 className="font-serif text-2xl">Sua trajetória profissional</h3>
+          <h3 className="font-display text-2xl">Sua trajetória profissional</h3>
           <div>
             <Label>Profissão / área de atuação</Label>
             <Select value={data.profissao} onValueChange={(v) => update("profissao", v)}>

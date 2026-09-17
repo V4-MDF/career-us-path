@@ -19,9 +19,9 @@ interface Props {
 }
 
 const VERDICT_STYLES: Record<Verdict, { label: string; cls: string; icon: typeof Check }> = {
-  apto:           { label: "Perfil apto",        cls: "border-emerald-400/40 bg-emerald-500/10 text-emerald-200", icon: Check },
-  parcial:        { label: "Perfil parcial",     cls: "border-amber-400/40 bg-amber-500/10 text-amber-200", icon: AlertTriangle },
-  nao_elegivel:   { label: "Perfil ainda não atende os critérios", cls: "border-rose-400/40 bg-rose-500/10 text-rose-200", icon: ShieldAlert },
+  apto:           { label: "Perfil apto",        cls: "border-gold/45 bg-gold/10 text-foreground", icon: Check },
+  parcial:        { label: "Perfil parcial",     cls: "border-gold/30 bg-champagne text-foreground", icon: AlertTriangle },
+  nao_elegivel:   { label: "Perfil ainda não atende os critérios", cls: "border-border bg-muted text-foreground/80", icon: ShieldAlert },
 };
 
 function ScoreBar({ value }: { value: number }) {
@@ -64,7 +64,7 @@ function VisaCard({ v, primary }: { v: VisaScore; primary?: boolean }) {
           <p className="font-mono-label text-[10px] text-foreground/80">CRITÉRIOS QUE VOCÊ JÁ ATENDE</p>
           <ul className="mt-2 space-y-1.5 text-[13px] text-foreground/85">
             {v.metCriteria.map((c) => (
-              <li key={c} className="flex gap-2"><Check className="h-3.5 w-3.5 mt-0.5 text-emerald-400 shrink-0" />{c}</li>
+               <li key={c} className="flex gap-2"><Check className="h-3.5 w-3.5 mt-0.5 text-gold shrink-0" />{c}</li>
             ))}
           </ul>
         </div>
@@ -75,7 +75,7 @@ function VisaCard({ v, primary }: { v: VisaScore; primary?: boolean }) {
           <p className="font-mono-label text-[10px] text-foreground/80">A DESENVOLVER</p>
           <ul className="mt-2 space-y-1.5 text-[13px] text-foreground/70">
             {v.gaps.map((c) => (
-              <li key={c} className="flex gap-2"><AlertTriangle className="h-3.5 w-3.5 mt-0.5 text-amber-300 shrink-0" />{c}</li>
+               <li key={c} className="flex gap-2"><AlertTriangle className="h-3.5 w-3.5 mt-0.5 text-gold/70 shrink-0" />{c}</li>
             ))}
           </ul>
         </div>
@@ -114,7 +114,7 @@ export function PreQualResult({ record, variant }: Props) {
             : "Esta triagem é uma fotografia inicial. Vale conhecer os critérios de cada categoria e voltar quando puder responder com mais documentação em mãos."}
         </p>
         {result.blocker && (
-          <div className="mt-4 border border-amber-400/40 bg-amber-500/10 text-amber-200 px-4 py-3 text-[14px]">
+          <div className="mt-4 rounded-lg border border-gold/30 bg-gold/5 text-foreground/80 px-4 py-3 text-[14px]">
             <strong className="font-medium">Atenção:</strong> {result.blocker}
           </div>
         )}
@@ -132,7 +132,7 @@ export function PreQualResult({ record, variant }: Props) {
 
       {/* Próximo passo: copiar link do mapeamento */}
       {qualified && (
-        <section className="liquid-card rounded-3xl p-6 sm:p-7">
+        <section className="liquid-card rounded-2xl p-5 sm:p-6">
           <p className="font-mono-label text-gold/80">PRÓXIMO PASSO</p>
           <h2 className="mt-2 font-display text-2xl text-foreground">
             Guarde ou compartilhe o seu mapeamento
@@ -161,7 +161,7 @@ export function PreQualResult({ record, variant }: Props) {
 
       {/* Sem afinidade clara: convida a conhecer o conteúdo */}
       {!qualified && (
-        <section className="liquid-card rounded-3xl p-6 sm:p-7">
+        <section className="liquid-card rounded-2xl p-5 sm:p-6">
           <p className="font-mono-label text-gold/80">CONTINUE EXPLORANDO</p>
           <h2 className="mt-2 font-display text-2xl text-foreground">
             Aprofunde-se nas categorias EB enquanto organiza a sua documentação.
