@@ -14,6 +14,7 @@ import { Facebook, Instagram, Youtube } from "lucide-react";
 import { getSiteSettings, type SiteSettings } from "@/lib/admin/settings";
 import { FlagBR, FlagUS } from "./flags";
 import { LegalDisclaimer } from "@/components/legal/LegalDisclaimer";
+import { BrandLogo } from "@/components/site/BrandLogo";
 
 export function Footer() {
   const [s, setS] = useState<SiteSettings | null>(null);
@@ -34,10 +35,7 @@ export function Footer() {
         {/* Marca + redes */}
         <div className="md:col-span-4">
           <Link to="/" aria-label="Status Immigration Law Firm — página inicial" className="inline-block">
-            <span className="flex flex-col leading-none text-foreground">
-              <span className="font-display text-lg font-semibold uppercase">Status Immigration</span>
-              <span className="mt-1.5 font-mono-label text-[10px] uppercase text-gold">Law Firm</span>
-            </span>
+            <BrandLogo className="h-28 w-28" />
           </Link>
           <p className="mt-6 max-w-sm text-sm text-foreground/80 leading-relaxed">
             Equipe dedicada à preparação documental para mobilidade migratória, para

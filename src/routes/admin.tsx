@@ -14,6 +14,7 @@ import {
 
 import { Button } from "@/components/ui/button";
 import { Toaster } from "@/components/ui/sonner";
+import { BrandLogo } from "@/components/site/BrandLogo";
 import {
   getCurrentSession, isAuthenticated, isReady, initAuthListener, logout, subscribeAuth,
 } from "@/lib/admin/auth";
@@ -112,9 +113,7 @@ function AdminLayout() {
         }`}
       >
         <div className="px-5 py-5 border-b border-gold/15 flex items-center gap-3">
-          <div aria-hidden className="grid h-9 w-9 shrink-0 place-items-center border border-gold/50 font-display text-sm text-gold">
-            SI
-          </div>
+          <BrandLogo priority className="h-10 w-10" />
           <div className="min-w-0">
             <div className="font-display text-xs font-bold uppercase tracking-[0.14em] leading-tight text-parchment truncate">
               Status Immigration Law Firm

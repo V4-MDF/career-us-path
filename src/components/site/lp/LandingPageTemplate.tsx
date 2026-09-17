@@ -20,6 +20,7 @@ import type { Segment, HeroVariant } from "@/lib/segments";
 import { avaliacaoHref } from "@/lib/ctaLinks";
 import { VisaPageBody } from "@/components/site/visa/VisaPageBody";
 import { VISA_PAGES, type VisaSlug, type VisaPage } from "@/lib/visaPages";
+import { BrandLogo } from "@/components/site/BrandLogo";
 
 interface Props {
   segment: Segment;
@@ -31,8 +32,8 @@ function ConversionHeader({ segmentId }: { segmentId: string }) {
   return (
     <header className="fixed top-0 inset-x-0 z-50 border-b border-border/40 bg-background/85 backdrop-blur">
       <div className="container-x flex h-16 items-center justify-between">
-        <Link to="/" className="font-serif text-xl">
-          Status Immigration <span className="text-gold">Law Firm</span>
+        <Link to="/" aria-label="Status Immigration Law Firm. Início">
+          <BrandLogo priority className="h-12 w-12" />
         </Link>
         <div className="flex items-center gap-2">
           <a href={avaliacaoHref(`lp_${segmentId}_header`, segmentId)}>

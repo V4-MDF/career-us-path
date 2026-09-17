@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { login } from "@/lib/admin/auth";
 import { supabase } from "@/integrations/supabase/client";
+import { BrandLogo } from "@/components/site/BrandLogo";
 
 const searchSchema = z.object({
   next: z.string().optional(),
@@ -63,9 +64,7 @@ function AuthPage() {
       />
       <div className="w-full max-w-sm relative">
         <div className="text-center mb-8">
-          <div aria-hidden className="mx-auto grid h-12 w-12 place-items-center border border-gold/50 font-display text-lg text-gold">
-            SI
-          </div>
+          <BrandLogo priority className="mx-auto h-20 w-20" />
           <h1 className="mt-5 font-display text-lg font-bold uppercase tracking-[0.14em] text-parchment">
             Status Immigration Law Firm
           </h1>
