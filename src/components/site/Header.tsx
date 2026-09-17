@@ -141,7 +141,7 @@ export function Header() {
         {/* CTA */}
         <div className="flex items-center gap-3">
           <a href={avaliacaoHeaderHref} className="hidden sm:block">
-            <Button size="sm" className="btn-label btn-sweep h-10 px-5">Iniciar pré-qualificação documental</Button>
+            <Button size="sm" className="btn-label btn-sweep h-10 px-5">Iniciar triagem</Button>
           </a>
           <button
             type="button"
@@ -195,7 +195,7 @@ export function Header() {
               </Link>
             ))}
             <a href={avaliacaoMobileHref} onClick={() => setOpen(false)} className="mt-4">
-              <Button className="btn-label w-full btn-sweep min-h-11">Iniciar pré-qualificação documental</Button>
+              <Button className="btn-label w-full btn-sweep min-h-11">Iniciar triagem do meu caso</Button>
             </a>
           </div>
         </nav>

@@ -60,7 +60,7 @@ export const defaultContent = {
   "niw.lead":
     "O National Interest Waiver permite que profissionais altamente qualificados solicitem a residência permanente nos EUA sem patrocinador, demonstrando que a atuação proposta tem mérito substancial e importância nacional para os Estados Unidos.",
 
-  "process.title": "Um método. Três passos. Acompanhamento até a aprovação.",
+  "process.title": "Um método. Quatro etapas. Acompanhamento jurídico.",
 
   "why.title": "Por que a Status Immigration Law Firm",
   // COMPLIANCE: "duas décadas" removido — sem lastro documental (FTC/FDUTPA).

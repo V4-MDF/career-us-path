@@ -1048,8 +1048,8 @@ export function PartnersBadges() {
 export function FAQ() {
   const faqs = [
     {
-      q: "A Status Immigration Law Firm é confiável?",
-      a: `Sim. Somos uma empresa registrada nos Estados Unidos (EIN ${EIN}), com sede em Orlando/FL e filial no Brasil (CNPJ ${CNPJ}). Contamos com avaliações 5★ no Google e no Facebook e registro no BBB (${BBB_LABEL}). Transparência é regra: qualquer informação institucional pode ser verificada publicamente.`,
+      q: "A Status Immigration Law Firm é um escritório de advocacia?",
+      a: `Sim. A prática jurídica é conduzida por Meagan Zabadal, advogada licenciada em Nova York e Arizona, exclusivamente em matéria federal de imigração. O escritório mantém sede em Orlando e operação de atendimento no Brasil. EIN ${EIN} · CNPJ ${CNPJ}.`,
     },
     {
       q: "Qual a experiência de vocês?",
