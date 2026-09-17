@@ -61,7 +61,7 @@ function BlogIndex() {
 
       <main className="pt-28">
         <section className="bg-background">
-          <div className="container-x py-16 md:py-20">
+          <div className="container-x py-14 md:py-16">
             <SectionHead
               eyebrow="BLOG"
               title="Artigos para quem está construindo um plano sério de imigração."
@@ -101,7 +101,7 @@ function BlogIndex() {
               <Link
                 to="/blog/$slug"
                 params={{ slug: featured.slug }}
-                className="liquid-card grid lg:grid-cols-12 gap-8 group rounded-3xl overflow-hidden transition-[border-color,box-shadow] hover:border-gold/45"
+                className="liquid-card grid lg:grid-cols-12 gap-5 group rounded-2xl overflow-hidden transition-[border-color,box-shadow,transform] hover:-translate-y-0.5 hover:border-gold/45"
               >
                 <div className="lg:col-span-7 aspect-[16/10] lg:aspect-auto bg-parchment-deep overflow-hidden">
                   <img
@@ -113,7 +113,7 @@ function BlogIndex() {
                     className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                 </div>
-                <div className="lg:col-span-5 p-8 md:p-10 flex flex-col justify-center">
+                <div className="lg:col-span-5 p-6 md:p-7 flex flex-col justify-center">
                   <div className="flex items-center gap-3 font-mono-label text-gold">
                     <span>DESTAQUE</span>
                     <span className="text-foreground/80">·</span>
@@ -136,12 +136,12 @@ function BlogIndex() {
         )}
 
         {/* Grid */}
-        <section className="bg-background pb-24">
+        <section className="section-champagne pb-20 pt-12 border-t border-gold/10">
           <div className="container-x">
             {rest.length === 0 ? (
               <p className="text-foreground/80">Nenhum post nesta categoria.</p>
             ) : (
-              <ul className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+              <ul className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
                 {rest.map((p) => (
                   <li key={p.id}>
                     <Link

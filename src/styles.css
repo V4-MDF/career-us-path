@@ -894,6 +894,36 @@
   &:hover::before { background: var(--gold); }
 }
 
+@utility page-hero {
+  position: relative;
+  overflow: hidden;
+  padding-top: 8rem;
+  padding-bottom: 4rem;
+  border-bottom: 1px solid color-mix(in oklab, var(--gold) 18%, transparent);
+  background:
+    linear-gradient(140deg, color-mix(in oklab, white 96%, transparent), color-mix(in oklab, var(--champagne) 76%, transparent));
+}
+
+@utility compact-panel {
+  border-radius: var(--radius-lg);
+  border: 1px solid color-mix(in oklab, var(--gold) 20%, transparent);
+  background: color-mix(in oklab, white 88%, transparent);
+  box-shadow: var(--shadow-soft);
+}
+
+@utility legal-sheet {
+  border-radius: var(--radius-lg);
+  border: 1px solid color-mix(in oklab, var(--gold) 16%, transparent);
+  background: color-mix(in oklab, white 92%, transparent);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-soft);
+}
+
+@media (min-width: 768px) {
+  .page-hero { padding-top: 10rem; padding-bottom: 5rem; }
+  .legal-sheet { padding: 2rem; }
+}
+
 .hero-glass-halo {
   background: radial-gradient(ellipse at center, color-mix(in oklab, white 78%, transparent) 0%, transparent 72%);
   backdrop-filter: blur(2px);

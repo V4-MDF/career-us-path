@@ -158,7 +158,7 @@ export function Header() {
 
       {/* Menu mobile */}
       {open && (
-        <nav id="mobile-menu" aria-label="Navegação móvel" className="liquid-glass mx-auto mt-3 max-w-6xl rounded-3xl lg:hidden">
+        <nav id="mobile-menu" aria-label="Navegação móvel" className="liquid-glass mx-auto mt-3 max-w-6xl rounded-2xl lg:hidden">
           <div className="flex flex-col gap-1 px-6 py-5">
             {NAV.slice(0, 1).map((n) => (
               <Link key={n.to} to={n.to} onClick={() => setOpen(false)} className="min-h-11 flex items-center text-foreground border-b border-gold/10" activeProps={{ "aria-current": "page" }}>

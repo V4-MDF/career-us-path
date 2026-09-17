@@ -77,12 +77,12 @@ export function VisaPageBody({ page, hideHero = false }: { page: VisaPage; hideH
 
 
       {/* 2. Critérios do USCIS */}
-      <section id="criterios" aria-label="Critérios do USCIS" className="section-anchor section-ink-deep">
+      <section id="criterios" aria-label="Critérios do USCIS" className="section-anchor section-champagne-deep border-y border-gold/10">
         <div className="container-x section-pad">
           <SectionHead num="02" eyebrow="CRITÉRIOS DO USCIS" title={page.qualifies.title} kicker={page.qualifies.intro} />
-          <ul className="mt-12 grid gap-5 md:grid-cols-2">
+          <ul className="mt-10 grid gap-4 md:grid-cols-2">
             {page.qualifies.items.map((it) => (
-              <li key={it.title} className="liquid-card gold-tick rounded-2xl p-7 pt-9 transition-[border-color,box-shadow] hover:border-gold/45 hover:shadow-elevated">
+              <li key={it.title} className="liquid-card glass-interactive gold-tick rounded-2xl p-5 pt-7 transition-[border-color,box-shadow] hover:border-gold/45">
                 <h3 className="font-display text-2xl text-foreground">{it.title}</h3>
                 <p className="mt-3 text-foreground/80 leading-relaxed">{it.body}</p>
               </li>
@@ -97,9 +97,9 @@ export function VisaPageBody({ page, hideHero = false }: { page: VisaPage; hideH
       <section id="processo" aria-label="Processo" className="section-anchor section-parchment">
         <div className="container-x section-pad">
           <SectionHead num="03" eyebrow="PROCESSO" variant="parchment" title={page.process.title} />
-          <ol className="mt-12 grid gap-6 md:grid-cols-3">
+          <ol className="mt-10 grid gap-4 md:grid-cols-3">
             {page.process.steps.map((s) => (
-              <li key={s.num} className="rounded-2xl border border-ink-text/15 bg-white p-7 shadow-soft">
+              <li key={s.num} className="compact-info-card block p-5">
                 <div className="font-mono-label text-gold">ETAPA {s.num}</div>
                 <h3 className="mt-3 font-display text-2xl text-ink-text">{s.title}</h3>
                 <p className="mt-3 text-ink-text/75 leading-relaxed">{s.body}</p>
@@ -114,7 +114,7 @@ export function VisaPageBody({ page, hideHero = false }: { page: VisaPage; hideH
 
       {/* 4. Família, dobra emocional. Foto grande da família (coração do
           "futuro dos filhos / legado"), texto ao lado com peso reduzido. */}
-      <section id="familia" aria-label="Família" className="section-anchor section-ink-deep">
+      <section id="familia" aria-label="Família" className="section-anchor section-champagne border-y border-gold/10">
         <div className="container-x section-pad grid md:grid-cols-12 gap-10 items-center">
           <div className="md:col-span-7 order-2 md:order-1">
             <PhotoFrame
@@ -143,7 +143,7 @@ export function VisaPageBody({ page, hideHero = false }: { page: VisaPage; hideH
             title="EB-2 NIW vs EB-1 vs O-1"
             kicker="Três caminhos legítimos, três perfis distintos."
           />
-          <div className="mt-10 overflow-x-auto rounded-2xl border border-ink-text/15 bg-white shadow-soft">
+          <div className="mt-10 overflow-x-auto rounded-xl border border-gold/20 bg-white/85 shadow-soft">
             <table className="w-full text-sm">
               <thead>
                 <tr className="bg-parchment-deep">
@@ -187,7 +187,7 @@ export function VisaPageBody({ page, hideHero = false }: { page: VisaPage; hideH
       </section>
 
       {/* 6. Dúvidas frequentes */}
-      <section id="duvidas-frequentes" aria-label="Dúvidas frequentes" className="section-anchor bg-background">
+      <section id="duvidas-frequentes" aria-label="Dúvidas frequentes" className="section-anchor section-champagne">
         <div className="container-x section-pad max-w-4xl">
           <SectionHead num="06" eyebrow="PERGUNTAS FREQUENTES" title="O que mais perguntam sobre este visto" />
           <Accordion type="single" collapsible className="mt-10 border-t border-gold/20">
@@ -206,7 +206,7 @@ export function VisaPageBody({ page, hideHero = false }: { page: VisaPage; hideH
       </section>
 
       {/* 7. Levantamento inicial de informações (CTA) */}
-      <section id="avaliacao-gratuita" aria-label="Levantamento inicial de informações" className="section-anchor section-parchment">
+      <section id="avaliacao-gratuita" aria-label="Levantamento inicial de informações" className="section-anchor section-champagne-deep border-y border-gold/10">
         <div className="container-x section-pad grid lg:grid-cols-12 gap-10 items-start">
           <div className="lg:col-span-7">
             <SectionHead num="07" eyebrow="LEVANTAMENTO INICIAL DE INFORMAÇÕES" variant="parchment" title={page.ctaTitle} kicker={page.ctaSubtitle} />
@@ -226,7 +226,7 @@ export function VisaPageBody({ page, hideHero = false }: { page: VisaPage; hideH
             </p>
           </div>
           <div className="lg:col-span-5">
-            <div className="rounded-2xl border border-ink-text/15 bg-white p-8 shadow-elevated">
+            <div className="liquid-card rounded-2xl p-6">
               <p className="font-mono-label text-gold">PRÓXIMO PASSO</p>
               <h3 className="mt-3 font-display text-2xl text-ink-text">
                 Comece pelo levantamento inicial de informações.

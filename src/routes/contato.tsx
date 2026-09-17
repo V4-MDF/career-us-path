@@ -126,7 +126,7 @@ function ContatoPage() {
   return (
     <>
       <Header />
-      <main className="bg-parchment text-ink-text">
+      <main className="bg-background text-foreground">
         <ContatoHero eyebrow={eyebrow} title={title} subtitle={subtitle} />
         <CanaisDiretos settings={settings} />
         <ContatoForm />
@@ -151,7 +151,7 @@ function ContatoHero({
   subtitle: string;
 }) {
   return (
-    <section className="relative bg-background text-foreground pt-32 pb-16 md:pt-40 md:pb-20 border-b border-gold/25">
+    <section className="page-hero text-foreground">
       <div className="container-x max-w-3xl">
         <div className="flex items-center gap-3">
           <span aria-hidden className="h-px w-10 bg-gold" />
@@ -198,7 +198,7 @@ function CanaisDiretos({
   const email = settings.email;
 
   return (
-    <section className="bg-parchment py-16 md:py-24 border-b border-gold/20">
+    <section className="section-champagne section-pad border-b border-gold/15">
       <div className="container-x">
         <div className="flex items-center gap-3">
           <span aria-hidden className="h-px w-10 bg-gold" />
@@ -228,7 +228,7 @@ function CanaisDiretos({
           )}
 
           {/* Matriz EUA */}
-          <div className="rounded-xl border border-gold/40 bg-white p-6 shadow-soft">
+          <div className="compact-info-card block">
             <span aria-hidden className="block h-[2px] w-10 bg-gold mb-4" />
             <div className="font-mono-label text-oxblood text-xs">{usaTitle.toUpperCase()}</div>
             <div className="mt-1 font-display text-lg text-ink-text">{usaCompany}</div>
@@ -252,7 +252,7 @@ function CanaisDiretos({
           </div>
 
           {/* Filial Brasil */}
-          <div className="rounded-xl border border-gold/40 bg-white p-6 shadow-soft">
+          <div className="compact-info-card block">
             <span aria-hidden className="block h-[2px] w-10 bg-gold mb-4" />
             <div className="font-mono-label text-oxblood text-xs">{brTitle.toUpperCase()}</div>
             <div className="mt-1 font-display text-lg text-ink-text">{brCompany}</div>
@@ -270,7 +270,7 @@ function CanaisDiretos({
           </div>
 
           {/* Expansão */}
-          <div className="rounded-xl border border-dashed border-gold/40 bg-parchment/60 p-6">
+          <div className="compact-info-card block border-dashed">
             <span aria-hidden className="block h-[2px] w-10 bg-gold mb-4" />
             <div className="font-mono-label text-oxblood text-xs">
               {expansaoTitle.toUpperCase()}
@@ -282,7 +282,7 @@ function CanaisDiretos({
           </div>
 
           {/* Redes sociais */}
-          <div className="rounded-xl border border-gold/40 bg-white p-6 shadow-soft lg:col-span-2">
+          <div className="compact-info-card block lg:col-span-2">
             <span aria-hidden className="block h-[2px] w-10 bg-gold mb-4" />
             <div className="font-mono-label text-oxblood text-xs">REDES SOCIAIS</div>
             <div className="mt-1 font-display text-lg text-ink-text">
@@ -343,7 +343,7 @@ function ContactCard({
     </>
   );
   const cls =
-    "rounded-xl border border-gold/40 bg-white p-6 shadow-soft transition hover:border-gold";
+    "compact-info-card block transition hover:border-gold";
   return href ? (
     <a href={href} className={cls}>
       {inner}
@@ -447,9 +447,9 @@ function ContatoForm() {
 
   if (status === "sent") {
     return (
-      <section className="section-ink-deep py-16 md:py-24 border-b border-gold/25">
+      <section className="section-champagne-deep section-pad border-b border-gold/15">
         <div className="container-x max-w-2xl">
-          <div className="rounded-xl border border-gold/40 bg-white/5 p-8 text-center">
+          <div className="liquid-card rounded-2xl p-6 text-center">
             <CheckCircle2 className="h-10 w-10 text-gold mx-auto" />
             <h2 className="mt-4 font-display text-2xl">{successMsg}</h2>
             <p className="mt-3 text-foreground/70">
@@ -470,7 +470,7 @@ function ContatoForm() {
   }
 
   return (
-    <section className="bg-background text-foreground py-16 md:py-24 border-b border-gold/25">
+    <section className="section-parchment section-pad border-b border-gold/15">
       <div className="container-x grid gap-10 lg:grid-cols-[1fr_1.2fr] items-start">
         <div>
           <div className="flex items-center gap-3">
@@ -494,7 +494,7 @@ function ContatoForm() {
 
         <form
           onSubmit={handleSubmit}
-          className="rounded-xl border border-gold/40 bg-white text-ink-text p-6 md:p-8 shadow-soft"
+          className="liquid-card rounded-2xl p-5 md:p-6"
           noValidate
         >
           <div className="grid gap-4 md:grid-cols-2">
@@ -629,7 +629,7 @@ function MapaDiscreto() {
     address
   )}`;
   return (
-    <section className="bg-parchment py-14 border-b border-gold/20">
+    <section className="section-champagne py-10 border-b border-gold/15">
       <div className="container-x flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div>
           <div className="font-mono-label text-oxblood text-xs">SEDE ORLANDO</div>

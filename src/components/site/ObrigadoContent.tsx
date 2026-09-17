@@ -36,8 +36,8 @@ export function readQualificationResult(): QualificationResult | null {
 function ObrigadoShell({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col">
-      <header className="sticky top-0 z-20 border-b border-gold/15 bg-background/75 backdrop-blur-xl">
-        <div className="container-x flex h-[64px] items-center justify-between">
+      <header className="sticky top-0 z-20 px-3 pt-3">
+        <div className="liquid-glass container-x flex h-[64px] items-center justify-between rounded-full">
           <Link to="/" className="flex items-center gap-3" aria-label="Status Immigration Law Firm">
             <BrandLogo priority className="h-12 w-12" />
           </Link>
@@ -56,12 +56,12 @@ function ObrigadoShell({ children }: { children: React.ReactNode }) {
               "radial-gradient(ellipse at 50% 0%, color-mix(in oklab, var(--gold) 6%, transparent) 0%, transparent 70%)",
           }}
         />
-        <div className="relative mx-auto w-full max-w-[720px] px-5 md:px-6 py-14 md:py-20">
+        <div className="relative mx-auto w-full max-w-[720px] px-5 md:px-6 py-12 md:py-16">
           {children}
         </div>
       </main>
 
-      <footer className="border-t border-gold/15 bg-ink-deep">
+      <footer className="border-t border-gold/15 bg-champagne">
         <div className="container-x py-8 text-xs text-foreground/80 leading-relaxed max-w-4xl">
           <p>
             Status Immigration Law Firm é um escritório de advocacia especializado em imigração federal.
@@ -120,13 +120,13 @@ export function ObrigadoQualificado() {
           </Link>
         </div>
 
-        <div className="mt-14 grid sm:grid-cols-3 gap-5 text-left">
+        <div className="mt-12 grid sm:grid-cols-3 gap-4 text-left">
           {[
             { n: "01", t: "Análise individual", d: "Olhamos o seu histórico, formação, impacto e contexto familiar." },
             { n: "02", t: "Sugestão de caminho", d: "Sinalizamos a categoria EB mais coerente com o seu perfil." },
             { n: "03", t: "Próximos passos", d: "Se fizer sentido, agendamos uma conversa para encaminhar a análise jurídica do caso." },
           ].map((s) => (
-            <div key={s.n} className="liquid-card p-5 rounded-2xl">
+            <div key={s.n} className="liquid-card p-4 rounded-xl">
               <div className="font-display text-3xl text-gold leading-none">{s.n}</div>
               <h3 className="mt-3 font-display text-base">{s.t}</h3>
               <p className="mt-2 text-sm text-foreground/70 leading-relaxed">{s.d}</p>

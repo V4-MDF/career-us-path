@@ -110,7 +110,7 @@ function SignInForm({ nextUrl }: { nextUrl: string }) {
   return (
     <form
       onSubmit={onSubmit}
-      className="liquid-card relative rounded-3xl text-ink-text p-6 space-y-4"
+      className="liquid-card relative rounded-2xl text-ink-text p-6 space-y-4"
     >
       {/* Filete dourado no topo */}
       <div aria-hidden className="absolute top-0 inset-x-6 h-px bg-gold/60" />

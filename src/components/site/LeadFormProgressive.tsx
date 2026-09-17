@@ -362,9 +362,9 @@ export function LeadFormProgressive({
 
   if (done) {
     return (
-      <div className="liquid-card rounded-2xl p-8 text-center">
+      <div className="liquid-card rounded-2xl p-6 text-center">
         <CheckCircle2 className="mx-auto h-12 w-12 text-gold" />
-        <h3 className="mt-4 font-serif text-2xl">Recebemos seu perfil.</h3>
+        <h3 className="mt-4 font-display text-2xl">Recebemos seu perfil.</h3>
         <p className="mt-2 text-muted-foreground">
           Nossa equipe vai analisar e entrar em contato em até 48h pelo canal informado.
         </p>
@@ -373,7 +373,7 @@ export function LeadFormProgressive({
   }
 
   return (
-    <div className="liquid-card rounded-3xl overflow-hidden" ref={containerRef}>
+    <div className="liquid-card rounded-2xl overflow-hidden" ref={containerRef}>
       {/* progresso, sticky no topo do card */}
       <div className="sticky top-0 z-10 px-6 md:px-8 pt-5 pb-4 bg-background/80 backdrop-blur-xl border-b border-border/40">
         <div className="flex items-center justify-between mb-2">
@@ -404,7 +404,7 @@ export function LeadFormProgressive({
         </div>
       )}
 
-      <div className="px-6 md:px-8 py-8 space-y-5">
+      <div className="px-5 md:px-7 py-6 space-y-5">
 
         {steps.map((f, i) => {
           const visible = i <= stepIndex;

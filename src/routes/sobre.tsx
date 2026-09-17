@@ -92,7 +92,7 @@ function SobrePage() {
   return (
     <>
       <Header />
-      <main className="bg-parchment text-ink-text">
+      <main className="bg-background text-foreground">
         <SobreHero />
         <NossaHistoria />
         <DiferencialEUA />
@@ -115,7 +115,7 @@ function SobreHero() {
   const image = useContent("sobre.hero.image");
 
   return (
-    <section className="relative bg-background text-foreground pt-32 pb-16 md:pt-40 md:pb-24 border-b border-gold/25 overflow-hidden">
+    <section className="page-hero text-foreground">
       {image && (
         <div
           aria-hidden
@@ -157,7 +157,7 @@ function NossaHistoria() {
   const image = useContent("sobre.historia.image");
 
   return (
-    <section className="bg-parchment py-16 md:py-24 border-b border-gold/20">
+    <section className="section-parchment section-pad border-b border-gold/15">
       <div className="container-x grid gap-10 lg:grid-cols-[1.2fr_1fr] items-start">
         <div>
           <div className="flex items-center gap-3">
@@ -173,7 +173,7 @@ function NossaHistoria() {
             ))}
           </div>
         </div>
-        <div className="rounded-xl border border-gold/40 bg-white shadow-soft overflow-hidden">
+        <div className="compact-panel overflow-hidden">
           {image ? (
             <img
               src={image}
@@ -229,7 +229,7 @@ function DiferencialEUA() {
   ];
 
   return (
-    <section className="section-ink-deep py-16 md:py-24 border-b border-gold/25">
+    <section className="section-champagne-deep section-pad border-b border-gold/15">
       <div className="container-x">
         <div className="max-w-3xl">
           <div className="flex items-center gap-3">
@@ -240,11 +240,11 @@ function DiferencialEUA() {
           <p className="mt-4 text-foreground/80 leading-relaxed">{lead}</p>
         </div>
 
-        <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
           {pontos.map((p, i) => (
             <div
               key={i}
-              className="liquid-card rounded-2xl p-6 relative"
+              className="liquid-card glass-interactive rounded-2xl p-5 relative"
             >
               <span aria-hidden className="absolute inset-x-0 top-0 h-[2px] bg-gold" />
               <div className="rounded-lg border border-gold/40 bg-gold/10 w-10 h-10 flex items-center justify-center">
@@ -293,7 +293,7 @@ function NumerosCredenciais() {
   ];
 
   return (
-    <section className="bg-background text-foreground py-16 md:py-24 border-b border-gold/25">
+    <section className="section-parchment section-pad border-b border-gold/15">
       <div className="container-x">
         <div className="flex items-center gap-3">
           <span aria-hidden className="h-px w-10 bg-gold" />
@@ -307,7 +307,7 @@ function NumerosCredenciais() {
           {stats.map((s, i) => (
             <li
               key={i}
-              className="liquid-card rounded-2xl p-5 text-center relative"
+              className="liquid-card rounded-xl p-4 text-center relative"
             >
               <span aria-hidden className="absolute inset-x-0 top-0 h-[2px] bg-gold" />
               <div className="font-display text-[clamp(1.8rem,3.2vw,2.6rem)] leading-none text-gold">
@@ -332,7 +332,7 @@ function OndeEstamos() {
     usaAddress
   )}`;
   return (
-    <section className="bg-parchment py-16 md:py-24 border-b border-gold/20">
+    <section className="section-champagne section-pad border-b border-gold/15">
       <div className="container-x">
         <div className="flex items-center gap-3">
           <span aria-hidden className="h-px w-10 bg-gold" />
@@ -343,7 +343,7 @@ function OndeEstamos() {
         </h2>
 
         <div className="mt-10 grid gap-6 lg:grid-cols-3">
-          <div className="rounded-xl border border-gold/40 bg-white p-6 shadow-soft lg:col-span-1">
+          <div className="compact-info-card block lg:col-span-1">
             <span aria-hidden className="block h-[2px] w-10 bg-gold mb-4" />
             <div className="font-mono-label text-oxblood text-xs">
               MATRIZ. ESTADOS UNIDOS
@@ -368,7 +368,7 @@ function OndeEstamos() {
             </a>
           </div>
 
-          <div className="rounded-xl border border-gold/40 bg-white p-6 shadow-soft lg:col-span-1">
+          <div className="compact-info-card block lg:col-span-1">
             <span aria-hidden className="block h-[2px] w-10 bg-gold mb-4" />
             <div className="font-mono-label text-oxblood text-xs">FILIAL. BRASIL</div>
             <div className="mt-1 font-display text-lg text-ink-text">
@@ -385,7 +385,7 @@ function OndeEstamos() {
             </div>
           </div>
 
-          <div className="rounded-xl border border-dashed border-gold/40 bg-parchment/60 p-6 lg:col-span-1">
+          <div className="compact-info-card block border-dashed lg:col-span-1">
             <span aria-hidden className="block h-[2px] w-10 bg-gold mb-4" />
             <div className="font-mono-label text-oxblood text-xs">EXPANSÃO</div>
             <div className="mt-1 font-display text-lg text-ink-text">
@@ -411,7 +411,7 @@ function CtaFinal() {
   const title = useContent("sobre.cta.title");
   const subtitle = useContent("sobre.cta.subtitle");
   return (
-    <section className="section-ink-deep py-20 border-b border-gold/25">
+    <section className="section-champagne-deep section-pad border-b border-gold/15">
       <div className="container-x max-w-3xl text-center">
         <ShieldCheck className="h-8 w-8 text-gold mx-auto" />
         <h2 className="mt-4 font-display display-2 text-foreground">{title}</h2>

@@ -28,20 +28,20 @@ export function Footer() {
   return (
     <>
       <LegalDisclaimer />
-      <footer className="bg-ink-deep text-foreground/85">
+      <footer className="section-champagne-deep text-foreground/85">
         <div className="h-px w-full bg-gold/40" />
 
-      <div className="container-x py-16 grid gap-12 md:grid-cols-12">
+      <div className="container-x py-12 grid gap-10 md:grid-cols-12">
         {/* Marca + redes */}
         <div className="md:col-span-4">
           <Link to="/" aria-label="Status Immigration Law Firm — página inicial" className="inline-block">
-            <BrandLogo className="h-28 w-28" />
+            <BrandLogo className="h-20 w-20" />
           </Link>
-          <p className="mt-6 max-w-sm text-sm text-foreground/80 leading-relaxed">
+          <p className="mt-4 max-w-sm text-sm text-foreground/80 leading-relaxed">
             Escritório de advocacia especializado em imigração federal, com análise jurídica,
             construção de dossiês e acompanhamento para profissionais e famílias brasileiras.
           </p>
-          <div className="mt-7 flex gap-3 text-foreground/80">
+          <div className="mt-5 flex gap-3 text-foreground/80">
             {[
               { Icon: Instagram, href: ig, label: "Instagram" },
               { Icon: Youtube, href: yt, label: "YouTube" },

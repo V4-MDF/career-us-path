@@ -105,8 +105,8 @@ function AvaliacaoPage() {
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col">
       {/* Header sticky compacto */}
-      <header className="sticky top-0 z-20 border-b border-gold/15 bg-background/75 backdrop-blur-xl">
-        <div className="container-x flex h-[64px] items-center justify-between">
+      <header className="sticky top-0 z-20 px-3 pt-3">
+        <div className="liquid-glass container-x flex h-[64px] items-center justify-between rounded-full">
           <Link to="/" className="flex items-center" aria-label="Status Immigration Law Firm. Início">
             <BrandLogo priority className="h-12 w-12" />
           </Link>
@@ -130,20 +130,20 @@ function AvaliacaoPage() {
             alt=""
             width={1920}
             height={1280}
-            className="w-full h-full object-cover opacity-[0.12] brightness-110 saturate-50"
+            className="w-full h-full object-cover opacity-[0.07] brightness-110 saturate-50"
           />
-          {/* Vinheta + fade para o ink sólido abaixo, overlay reforçado (AA) */}
+          {/* Véu claro e champagne para manter legibilidade sem escurecer a jornada. */}
           <div
             className="absolute inset-0"
             style={{
               background:
-                "linear-gradient(to bottom, color-mix(in oklab, var(--ink) 75%, transparent) 0%, color-mix(in oklab, var(--ink) 88%, transparent) 45%, var(--ink) 100%), radial-gradient(ellipse at 50% 0%, color-mix(in oklab, var(--gold) 10%, transparent) 0%, transparent 65%)",
+                "linear-gradient(to bottom, color-mix(in oklab, white 76%, transparent) 0%, color-mix(in oklab, var(--champagne) 88%, transparent) 55%, var(--background) 100%), radial-gradient(ellipse at 50% 0%, color-mix(in oklab, var(--gold) 12%, transparent) 0%, transparent 65%)",
             }}
           />
         </div>
 
 
-        <div className="relative mx-auto w-full max-w-[680px] px-5 md:px-6 py-10 md:py-14">
+        <div className="relative mx-auto w-full max-w-[680px] px-5 md:px-6 py-10 md:py-12">
           {/* Intro */}
           <div className="text-center">
             <h1 className="display-2 text-foreground">
@@ -183,7 +183,7 @@ function AvaliacaoPage() {
         </div>
       </main>
 
-      <footer className="border-t border-gold/15 bg-ink-deep">
+      <footer className="border-t border-gold/15 bg-champagne">
         <div className="container-x py-8 text-xs text-foreground/80 leading-relaxed max-w-4xl">
           <p className="font-mono-label text-foreground/80">
             © {new Date().getFullYear()} STATUS IMMIGRATION LAW FIRM LLC · EIN 99-4846502
