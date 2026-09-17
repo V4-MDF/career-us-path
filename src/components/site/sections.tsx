@@ -955,7 +955,7 @@ function CredentialDescription({ label }: { label: string }) {
   const l = (label || "").toLowerCase();
   if (l.includes("bbb")) {
     return (
-      <span className="mt-1 block w-full break-words font-body text-ink-text/60 text-[11px] leading-snug">
+      <span className="block w-full break-words font-body text-ink-text/60 text-[10.5px] sm:text-[11px] leading-snug">
         Órgão privado dos EUA/Canadá que avalia a confiabilidade e ética empresarial.
       </span>
     );
@@ -991,11 +991,11 @@ export function PartnersBadges() {
           {title}
         </h2>
 
-        <ul className="mt-7 grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 items-start">
+        <ul className="mt-7 grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 auto-rows-fr items-stretch">
           {slots.map((s, idx) => (
             <li
               key={idx}
-              className="group relative min-w-0 rounded-xl border border-gold/30 bg-white/75 p-3 sm:p-4 flex min-h-0 items-center justify-center shadow-soft transition-transform duration-300 hover:-translate-y-0.5"
+              className="group relative h-full min-w-0 rounded-xl border border-gold/30 bg-white/75 p-3 sm:p-4 flex flex-col items-center justify-center gap-2 text-center shadow-soft transition-transform duration-300 hover:-translate-y-0.5"
               style={{
                 boxShadow: "inset 0 0 0 1px rgba(196,161,72,0.25)",
               }}
@@ -1012,18 +1012,28 @@ export function PartnersBadges() {
                   loading="lazy"
                 />
               ) : (
-                <div className="min-w-0 text-center px-1 sm:px-2 flex flex-col items-center">
-                  <PatchIcon label={s.label} />
-                  <span className="mt-2 block w-full break-words font-mono-label text-ink-text/70 text-[12px] sm:text-[13px] leading-tight">
+                <>
+                  <span className="shrink-0">
+                    <PatchIcon label={s.label} />
+                  </span>
+                  <span
+                    className={`block w-full break-words font-mono-label text-ink-text/70 leading-tight tabular-nums ${
+                      (s.label || "").length > 14
+                        ? "text-[9.5px] tracking-normal sm:text-[11px]"
+                        : "text-[11px] sm:text-[12.5px]"
+                    }`}
+                  >
                     {s.label}
                   </span>
+
                   <CredentialDescription label={s.label} />
-                </div>
+                </>
               )}
 
             </li>
           ))}
         </ul>
+
       </div>
     </section>
   );
