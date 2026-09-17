@@ -31,17 +31,18 @@ interface Props {
 function ConversionHeader({ segmentId }: { segmentId: string }) {
   return (
     <header className="fixed top-0 inset-x-0 z-50 px-3 pt-3 md:px-6">
-      <div className="liquid-glass mx-auto flex h-16 max-w-6xl items-center justify-between rounded-full px-5 md:px-8">
-        <Link to="/" aria-label="Status Immigration Law Firm. Início">
-          <BrandLogo priority className="h-12 w-12" />
+      <div className="liquid-glass mx-auto flex h-16 max-w-6xl items-center justify-between gap-3 rounded-full px-4 md:px-8">
+        <Link to="/" aria-label="Status Immigration Law Firm. Início" className="shrink-0">
+          <BrandLogo priority className="h-11 w-11 md:h-12 md:w-12" />
         </Link>
-        <div className="flex items-center gap-2">
-          <a href={avaliacaoHref(`lp_${segmentId}_header`, segmentId)}>
-            <Button className="btn-label" size="sm">Iniciar triagem do meu caso</Button>
+        <div className="flex min-w-0 items-center gap-2">
+          <a href={avaliacaoHref(`lp_${segmentId}_header`, segmentId)} className="min-w-0">
+            <Button className="btn-label max-w-[190px] sm:max-w-none" size="sm">Iniciar triagem do meu caso</Button>
           </a>
         </div>
       </div>
     </header>
+
   );
 }
 
@@ -90,7 +91,7 @@ export function LandingPageTemplate({ segment, variant }: Props) {
           </div>
 
           <div className="container-x grid lg:grid-cols-[1fr_0.82fr] gap-10 items-center">
-            <div>
+            <div className="min-w-0">
               <p className="inline-flex items-center gap-2 text-[11px] tracking-[0.22em] text-gold">
                 <span className="h-px w-8 bg-gold/60" />
                 {hero.eyebrow}
@@ -102,10 +103,11 @@ export function LandingPageTemplate({ segment, variant }: Props) {
                 {hero.sub}
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
-                <a href={ctaHref}>
-                  <Button size="lg" className="btn-label text-base">{hero.cta_texto}</Button>
+                <a href={ctaHref} className="block w-full sm:inline-block sm:w-auto">
+                  <Button size="lg" className="btn-label w-full text-base sm:w-auto">{hero.cta_texto}</Button>
                 </a>
               </div>
+
               {segment.prova_social && (
                 <div className="mt-10 flex items-start gap-3 text-sm text-muted-foreground border-l-2 border-gold/40 pl-4">
                   <Star className="h-4 w-4 text-gold mt-0.5 shrink-0 fill-gold" />

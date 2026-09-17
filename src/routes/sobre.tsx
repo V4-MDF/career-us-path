@@ -418,12 +418,12 @@ function CtaFinal() {
         <h2 className="mt-4 font-display display-2 text-foreground">{title}</h2>
         <p className="mt-4 text-foreground/75 leading-relaxed">{subtitle}</p>
         <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
-          <Link to="/avaliacao">
+          <Link to="/avaliacao" className="block sm:inline-block">
             <Button size="lg" className="btn-label w-full sm:w-auto">
               Iniciar triagem do meu caso <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </Link>
-          <Link to="/contato">
+          <Link to="/contato" className="block sm:inline-block">
             <Button
               size="lg"
               variant="outline"
@@ -433,6 +433,7 @@ function CtaFinal() {
             </Button>
           </Link>
         </div>
+
       </div>
     </section>
   );
