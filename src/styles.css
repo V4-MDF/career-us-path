@@ -1102,6 +1102,8 @@
     width: var(--rail-item, 82vw);
     max-width: 340px;
     scroll-snap-align: center;
+    align-self: stretch;
+    height: auto;
   }
   /* Texto de apoio longo: colapsado no mobile até o usuário expandir. */
   .clamp-mobile {
