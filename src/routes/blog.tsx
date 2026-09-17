@@ -81,7 +81,7 @@ function BlogIndex() {
                 <button
                   key={c}
                   onClick={() => setFiltro(c)}
-                  className={`px-3 py-1.5 text-xs font-mono-label border transition-colors ${
+                      className={`rounded-full px-4 py-2 text-xs font-mono-label border transition-colors ${
                     active
                       ? "border-gold bg-gold text-ink-deep"
                       : "border-gold/30 text-foreground/70 hover:border-gold/60 hover:text-foreground"
@@ -101,7 +101,7 @@ function BlogIndex() {
               <Link
                 to="/blog/$slug"
                 params={{ slug: featured.slug }}
-                className="grid lg:grid-cols-12 gap-8 group rounded-3xl border border-gold/20 bg-ink-raise/40 overflow-hidden shadow-elevated transition-[border-color,box-shadow] hover:border-gold/45"
+                className="liquid-card grid lg:grid-cols-12 gap-8 group rounded-3xl overflow-hidden transition-[border-color,box-shadow] hover:border-gold/45"
               >
                 <div className="lg:col-span-7 aspect-[16/10] lg:aspect-auto bg-ink-deep overflow-hidden">
                   <img
@@ -147,7 +147,7 @@ function BlogIndex() {
                     <Link
                       to="/blog/$slug"
                       params={{ slug: p.slug }}
-                      className="block group rounded-2xl border border-gold/15 bg-ink-raise/40 h-full overflow-hidden shadow-soft transition-[border-color,box-shadow,transform] hover:border-gold/45 hover:shadow-elevated"
+                      className="liquid-card block group rounded-2xl h-full overflow-hidden transition-[border-color,box-shadow,transform] hover:border-gold/45 hover:shadow-elevated"
                     >
                       <div className="aspect-[16/10] bg-ink-deep overflow-hidden">
                         <img

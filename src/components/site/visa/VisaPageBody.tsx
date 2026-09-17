@@ -76,12 +76,12 @@ export function VisaPageBody({ page, hideHero = false }: { page: VisaPage; hideH
 
 
       {/* 2. Critérios do USCIS */}
-      <section id="criterios" aria-label="Critérios do USCIS" className="section-anchor bg-[#0E1726]">
+      <section id="criterios" aria-label="Critérios do USCIS" className="section-anchor section-ink-deep">
         <div className="container-x section-pad">
           <SectionHead num="02" eyebrow="CRITÉRIOS DO USCIS" title={page.qualifies.title} kicker={page.qualifies.intro} />
           <ul className="mt-12 grid gap-5 md:grid-cols-2">
             {page.qualifies.items.map((it) => (
-              <li key={it.title} className="gold-tick rounded-2xl border border-gold/20 bg-[#16223A] p-7 pt-9 shadow-soft transition-[border-color,box-shadow] hover:border-gold/45 hover:shadow-elevated">
+              <li key={it.title} className="liquid-card gold-tick rounded-2xl p-7 pt-9 transition-[border-color,box-shadow] hover:border-gold/45 hover:shadow-elevated">
                 <h3 className="font-display text-2xl text-foreground">{it.title}</h3>
                 <p className="mt-3 text-foreground/80 leading-relaxed">{it.body}</p>
               </li>
@@ -113,7 +113,7 @@ export function VisaPageBody({ page, hideHero = false }: { page: VisaPage; hideH
 
       {/* 4. Família, dobra emocional. Foto grande da família (coração do
           "futuro dos filhos / legado"), texto ao lado com peso reduzido. */}
-      <section id="familia" aria-label="Família" className="section-anchor bg-ink-deep">
+      <section id="familia" aria-label="Família" className="section-anchor section-ink-deep">
         <div className="container-x section-pad grid md:grid-cols-12 gap-10 items-center">
           <div className="md:col-span-7 order-2 md:order-1">
             <PhotoFrame
@@ -145,7 +145,7 @@ export function VisaPageBody({ page, hideHero = false }: { page: VisaPage; hideH
           <div className="mt-10 overflow-x-auto rounded-2xl border border-ink-text/15 bg-white shadow-soft">
             <table className="w-full text-sm">
               <thead>
-                <tr className="bg-ink">
+                <tr className="bg-parchment-deep">
                   {COMPARISON.headers.map((h, i) => (
                     <th key={i} className="px-5 py-4 text-left font-mono-label text-gold">{h}</th>
                   ))}
@@ -186,7 +186,7 @@ export function VisaPageBody({ page, hideHero = false }: { page: VisaPage; hideH
       </section>
 
       {/* 6. Dúvidas frequentes */}
-      <section id="duvidas-frequentes" aria-label="Dúvidas frequentes" className="section-anchor bg-ink">
+      <section id="duvidas-frequentes" aria-label="Dúvidas frequentes" className="section-anchor bg-background">
         <div className="container-x section-pad max-w-4xl">
           <SectionHead num="06" eyebrow="PERGUNTAS FREQUENTES" title="O que mais perguntam sobre este visto" />
           <Accordion type="single" collapsible className="mt-10 border-t border-gold/20">
@@ -280,7 +280,7 @@ function VisaHero({ page }: { page: VisaPage }) {
     <section
       id="abertura"
       aria-label="Abertura"
-      className="section-anchor bg-ink relative overflow-hidden flex items-center min-h-[86vh]"
+      className="section-anchor bg-background relative overflow-hidden flex items-center min-h-[86vh]"
     >
       {/* Foto de fundo full-bleed com tratamento padrão. Imagem POR visto,
           editável no admin via `visa.<slug>.heroImage`. */}
@@ -294,13 +294,12 @@ function VisaHero({ page }: { page: VisaPage }) {
         focal={page.slug === "eb1" ? "60% 25%" : page.slug === "eb3" ? "55% 30%" : "65% 30%"}
         className="!rounded-none"
       />
-      {/* Overlay navy sólido, 88% (esq.) → 40% (dir.). Sem padrões sobre a foto. */}
+      {/* Véu branco óptico: preserva a fotografia e sustenta o contraste do texto. */}
       <div
         aria-hidden
-        className="absolute inset-0 bg-gradient-to-r from-[#0A111C]/92 via-[#0A111C]/72 to-[#0A111C]/40"
+        className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/82 to-background/52"
       />
-      {/* Reforço vertical inferior para AA em telas curtas. */}
-      <div aria-hidden className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#0A111C]/70 to-transparent" />
+      <div aria-hidden className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-background/90 to-transparent" />
 
       <div className="container-x section-pad relative w-full">
         <div className="grid gap-10 lg:gap-14 lg:grid-cols-12 items-center">
@@ -323,7 +322,7 @@ function VisaHero({ page }: { page: VisaPage }) {
               )}
             </div>
 
-            <h1 className="mt-5 font-display text-[36px] md:text-[52px] lg:text-[56px] leading-[1.05] text-foreground drop-shadow-[0_2px_20px_rgba(0,0,0,0.5)]">
+            <h1 className="mt-5 font-display text-[36px] md:text-[52px] lg:text-[56px] leading-[1.05] text-foreground">
               {page.h1}
             </h1>
             <p className="mt-5 text-base md:text-lg text-foreground/90 leading-relaxed max-w-xl">
@@ -346,7 +345,7 @@ function VisaHero({ page }: { page: VisaPage }) {
               {/* Filete dourado (assinatura credencial) — dentro do quadro no
                   mobile para não estourar a largura da tela. */}
               <div aria-hidden className="absolute inset-0 sm:-inset-2 rounded-2xl border border-gold/25 pointer-events-none" />
-              <div className="relative w-full overflow-hidden rounded-xl ring-1 ring-gold/40 shadow-elevated bg-ink-raise aspect-video">
+              <div className="liquid-glass relative w-full overflow-hidden rounded-2xl ring-1 ring-gold/30 aspect-video">
                 {hasVideo ? (
 
                   <VideoPlayer
@@ -356,7 +355,7 @@ function VisaHero({ page }: { page: VisaPage }) {
                     poster={videoThumb}
                   />
                 ) : (
-                  <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-gradient-to-br from-[#16223A] to-[#0A111C]">
+                  <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-gradient-to-br from-parchment to-parchment-deep">
                     <PlayCircle className="h-16 w-16 text-gold/70" aria-hidden />
                     <span className="font-mono-label text-gold/80 text-[10px] tracking-[0.2em]">
                       VÍDEO EM BREVE
