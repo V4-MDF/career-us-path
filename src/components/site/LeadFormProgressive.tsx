@@ -362,7 +362,7 @@ export function LeadFormProgressive({
 
   if (done) {
     return (
-      <div className="liquid-card rounded-2xl p-8 text-center">
+      <div className="liquid-card rounded-2xl p-6 text-center">
         <CheckCircle2 className="mx-auto h-12 w-12 text-gold" />
         <h3 className="mt-4 font-display text-2xl">Recebemos seu perfil.</h3>
         <p className="mt-2 text-muted-foreground">

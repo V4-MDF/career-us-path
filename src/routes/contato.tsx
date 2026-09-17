@@ -126,7 +126,7 @@ function ContatoPage() {
   return (
     <>
       <Header />
-      <main className="bg-parchment text-ink-text">
+      <main className="bg-background text-foreground">
         <ContatoHero eyebrow={eyebrow} title={title} subtitle={subtitle} />
         <CanaisDiretos settings={settings} />
         <ContatoForm />

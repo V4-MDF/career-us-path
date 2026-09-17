@@ -92,7 +92,7 @@ function SobrePage() {
   return (
     <>
       <Header />
-      <main className="bg-parchment text-ink-text">
+      <main className="bg-background text-foreground">
         <SobreHero />
         <NossaHistoria />
         <DiferencialEUA />

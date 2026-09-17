@@ -14,8 +14,8 @@
 - [x] Tornar o movimento Velaris perceptível e respeitar movimento reduzido.
 - [x] Validar a Home no computador e no celular.
 
-- [ ] Aplicar o Minimalist Gold Elegance às páginas de vistos e landing pages.
-- [ ] Reformular Sobre, Contato, Blog e páginas legais.
-- [ ] Reformular avaliação, pré-qualificação, resultados e agradecimentos.
-- [ ] Uniformizar cabeçalhos, rodapés, cartões, formulários e transições públicas.
+- [x] Aplicar o Minimalist Gold Elegance às páginas de vistos e landing pages.
+- [x] Reformular Sobre, Contato, Blog e páginas legais.
+- [x] Reformular avaliação, pré-qualificação, resultados e agradecimentos.
+- [x] Uniformizar cabeçalhos, rodapés, cartões, formulários e transições públicas.
 - [ ] Validar todas as páginas públicas no computador e no celular.
