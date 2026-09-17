@@ -115,7 +115,7 @@ export const CONTATO_SECTIONS: SectionDef[] = [
 export const BLOG_POST_SECTIONS: SectionDef[] = [
   { id: "introducao",  label: "Introdução" },
   { id: "conteudo",    label: "Conteúdo" },
-  { id: "avaliacao",   label: "Pré-qualificação documental" },
+  { id: "avaliacao",   label: "Triagem inicial" },
 ];
 
 // ============================================================

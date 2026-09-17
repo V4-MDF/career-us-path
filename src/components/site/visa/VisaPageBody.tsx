@@ -19,7 +19,7 @@ import {
   Accordion, AccordionContent, AccordionItem, AccordionTrigger,
 } from "@/components/ui/accordion";
 
-import { avaliacaoHref } from "@/lib/ctaLinks";
+import { useAvaliacaoHref } from "@/lib/ctaLinks";
 import { COMPARISON, type VisaPage } from "@/lib/visaPages";
 import { PhotoFrame } from "@/components/site/visa/PhotoFrame";
 import { VideoPlayer } from "@/components/site/VideoPlayer";
@@ -35,6 +35,7 @@ import familyFuture from "@/assets/visa-family-future.jpg";
 
 
 export function VisaPageBody({ page, hideHero = false }: { page: VisaPage; hideHero?: boolean }) {
+  const ctaHref = useAvaliacaoHref(`visto_${page.slug}_cta`);
   // Dobra "01 Definição" — imagem editável por visto (chave
   // `visa.<slug>.definitionImage`). Mérito da carreira = mostrar o
   // profissional beneficiário no exercício da sua competência, NÃO uma
@@ -220,8 +221,8 @@ export function VisaPageBody({ page, hideHero = false }: { page: VisaPage; hideH
                 </li>
               ))}
             </ul>
-            <p className="mt-6 text-xs text-ink-text/60 leading-relaxed max-w-md">
-              O valor da assessoria é separado das taxas oficiais do governo americano (USCIS), que são pagas diretamente ao órgão e podem variar. Apresentamos o panorama de custos no levantamento inicial de informações.
+             <p className="mt-6 text-xs text-ink-text/60 leading-relaxed max-w-md">
+               Os honorários profissionais são separados das taxas oficiais do governo americano, que são pagas diretamente aos órgãos e podem variar. O escopo e os custos são apresentados antes da contratação.
             </p>
           </div>
           <div className="lg:col-span-5">
@@ -231,11 +232,11 @@ export function VisaPageBody({ page, hideHero = false }: { page: VisaPage; hideH
                 Comece pelo levantamento inicial de informações.
               </h3>
               <p className="mt-3 text-ink-text/70 text-[15px] leading-relaxed">
-                Em poucos minutos enviamos sua análise para a equipe dedicada à preparação
-                documental para vistos EB. Resposta em até 48h por e-mail.
+                 Em poucos minutos você envia suas informações para a triagem inicial.
+                 Quando houver aderência, o caso poderá seguir para análise jurídica individualizada.
               </p>
-              <a href={avaliacaoHref(`visto_${page.slug}_cta`)} className="mt-7 inline-block">
-                <Button size="lg" className="btn-label btn-sweep h-12 px-7">Iniciar pré-qualificação documental</Button>
+               <a href={ctaHref} className="mt-7 inline-block">
+                 <Button size="lg" className="btn-label btn-sweep h-12 px-7">Iniciar triagem do meu caso</Button>
               </a>
             </div>
           </div>
@@ -251,6 +252,7 @@ export function VisaPageBody({ page, hideHero = false }: { page: VisaPage; hideH
    por página (site_content: visa.<slug>.heroVideoUrl / heroSubtitle). */
 /* ------------------------------------------------------------------ */
 function VisaHero({ page }: { page: VisaPage }) {
+  const heroHref = useAvaliacaoHref(`visto_${page.slug}_hero`);
   const subtitleKey = `visa.${page.slug}.heroSubtitle` as const;
   const videoKey = `visa.${page.slug}.heroVideoUrl` as const;
   const thumbKey = `visa.${page.slug}.heroVideoThumb` as const;
@@ -329,9 +331,9 @@ function VisaHero({ page }: { page: VisaPage }) {
               {heroSubtitle}
             </p>
             <div className="mt-8">
-              <a href={avaliacaoHref(`visto_${page.slug}_hero`)} className="block sm:inline-block">
+               <a href={heroHref} className="block sm:inline-block">
                 <Button size="lg" className="btn-label btn-sweep h-auto min-h-12 w-full sm:w-auto whitespace-normal px-5 py-3 text-sm leading-snug sm:px-7 sm:text-base">
-                  Iniciar pré-qualificação documental
+                  Iniciar triagem do meu caso
                 </Button>
               </a>
             </div>

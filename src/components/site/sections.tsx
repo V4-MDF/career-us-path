@@ -32,7 +32,7 @@ import {
   CLAIM_SATISFACAO,
   CLAIM_AVALIACOES,
   BBB_LABEL,
-  GOOGLE_RATING_LABEL,
+  BBB_PENDING,
   EIN,
   CNPJ,
 } from "@/config/credentials";
@@ -113,7 +113,7 @@ export function Hero() {
           </p>
 
           <div className={`mt-10 grid gap-3 sm:flex sm:flex-wrap ${heroVideoHidden ? "sm:justify-center" : ""}`}>
-            <Link to={useAvaliacaoHref("home_hero")} aria-label="Ir para o formulário de pré-qualificação documental">
+            <Link to={useAvaliacaoHref("home_hero")} aria-label="Ir para o formulário de triagem inicial">
                <Button size="lg" variant="cta" className="btn-label btn-sweep h-12 w-full px-7 text-[13px] sm:w-auto sm:text-[15px] active:scale-[0.98]">
                 {cta}
               </Button>
@@ -171,22 +171,22 @@ export function CompanyIntroduction() {
     {
       icon: Building2,
       eyebrow: "QUEM SOMOS",
-      title: "Presença nos EUA e no Brasil.",
-      text: "A Status Immigration Law Firm é uma empresa de preparação documental com sede em Orlando e filial em Barueri, atendendo brasileiros nos Estados Unidos e no Brasil.",
+      title: "Advocacia de imigração, dos EUA para o Brasil.",
+      text: "A Status Immigration Law Firm é um escritório de advocacia especializado exclusivamente em imigração federal, com sede em Orlando e atendimento em português no Brasil e nos Estados Unidos.",
       className: "md:col-span-2",
     },
     {
       icon: FileText,
       eyebrow: "O QUE FAZEMOS",
-      title: "Documentação clara e organizada.",
-      text: "Auxiliamos na organização, revisão e preparação dos documentos exigidos em processos imigratórios, sempre com transparência sobre cada etapa.",
+      title: "Estratégia jurídica e dossiê completo.",
+      text: "Atuamos do enquadramento jurídico à construção do dossiê, incluindo formulários, business plan, respostas a RFE e acompanhamento até a decisão.",
       className: "",
     },
     {
       icon: Award,
       eyebrow: "ESPECIALIDADES",
       title: "EB-1, EB-2 NIW e O-1.",
-      text: "Nossa atuação é concentrada em categorias baseadas em mérito e trajetória profissional, conforme os critérios publicados pelo USCIS.",
+      text: "Nossa atuação para brasileiros é concentrada em EB-1, EB-2 NIW e O-1, conforme os requisitos publicados pelo USCIS.",
       className: "",
     },
   ];
@@ -197,9 +197,9 @@ export function CompanyIntroduction() {
       <div className="container-x">
         <div className="mx-auto max-w-3xl text-center">
           <span className="font-mono-label text-gold">STATUS IMMIGRATION LAW FIRM</span>
-          <h2 className="display-2 mt-5 text-balance">Preparação documental para projetos de imigração aos Estados Unidos.</h2>
+          <h2 className="display-2 mt-5 text-balance">Segurança jurídica para a sua mobilidade imigratória.</h2>
           <p className="lead mx-auto mt-6 max-w-2xl text-balance">
-            Estrutura, organização e acompanhamento documental para profissionais brasileiros que desejam construir um plano migratório consistente.
+            Entenda suas possibilidades ainda no Brasil com um escritório dedicado exclusivamente à imigração federal.
           </p>
         </div>
 
@@ -420,7 +420,7 @@ export function VisaCards() {
       <div aria-hidden className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold/50 to-transparent" />
       <div className="container-x relative">
 
-        <SectionHead num="03" eyebrow="VISTOS EB" title="Três caminhos. Uma preparação documental para cada perfil." />
+        <SectionHead num="03" eyebrow="CAMINHOS IMIGRATÓRIOS" title="Três caminhos. Uma estratégia jurídica para cada perfil." />
         <div className="mt-14 grid md:grid-cols-3 gap-5">
           {visas.map((v) => (
             <Link key={v.slug} to="/vistos/$slug" params={{ slug: v.slug }} className="group block">
@@ -500,14 +500,14 @@ export function PersonaCards() {
  * ============================================================ */
 export function ProcessSteps() {
   const steps = [
-    { n: "01", icon: GraduationCap, t: "Análise Criteriosa",
-      d: "Organizamos e revisamos histórico, formação e evidências de impacto para o EB-2 NIW." },
+    { n: "01", icon: GraduationCap, t: "Análise Jurídica",
+      d: "A advogada avalia histórico, formação, objetivos e evidências para definir o enquadramento possível." },
     { n: "02", icon: Layers, t: "Organização Documental",
       d: "Organizamos a documentação que demonstra mérito substancial e importância nacional da atuação proposta." },
-    { n: "03", icon: FileText, t: "Preparação Documental",
-      d: "Auxiliamos na organização e revisão da documentação e das cartas apresentadas por você, sem assumir autoria do conteúdo." },
-    { n: "04", icon: Briefcase, t: "Revisão Final",
-      d: "Organização completa e criteriosa do seu processo, dentro dos padrões exigidos pelo USCIS." },
+    { n: "03", icon: FileText, t: "Construção do Dossiê",
+      d: "Preparamos formulários, evidências, cartas e demais peças necessárias para apresentar o caso com clareza." },
+    { n: "04", icon: Briefcase, t: "Protocolo e Acompanhamento",
+      d: "Revisamos o conjunto final e acompanhamos o processo, inclusive em eventual solicitação de evidências." },
   ];
   return (
     <Reveal as="section" id="processo-eb-2-niw" className="section-parchment section-pad relative overflow-hidden">
@@ -547,17 +547,14 @@ export function WhyUs() {
 
   // COMPLIANCE (FTC §5 / FDUTPA): números vêm de src/config/credentials.ts
   // e estão PENDENTES DE VALIDAÇÃO até o cliente enviar documento de lastro.
-  const stats = [
-    { value: CLAIM_PROCESSOS.value, label: CLAIM_PROCESSOS.label.toUpperCase() },
-    { value: CLAIM_SATISFACAO.value, label: CLAIM_SATISFACAO.label.toUpperCase() },
-    { value: CLAIM_FAMILIAS.value, label: CLAIM_FAMILIAS.label.toUpperCase() },
-  ];
+  const stats = [CLAIM_PROCESSOS, CLAIM_SATISFACAO, CLAIM_FAMILIAS]
+    .filter((claim) => !claim.pending)
+    .map((claim) => ({ value: claim.value, label: claim.label.toUpperCase() }));
   const items = [
     { icon: MapPin, t: `Sede própria em Orlando, Flórida (EIN ${EIN})` },
     { icon: Users, t: `Filial no Brasil em Barueri/SP (CNPJ ${CNPJ})` },
-    // PENDENTE (cliente): confirmar "BBB Accredited Business" vs "BBB Rating A".
-    { icon: ShieldCheck, t: BBB_LABEL, desc: "Better Business Bureau: órgão privado dos EUA/Canadá que avalia a ética e confiabilidade das empresas." },
-    { icon: Star, t: `${CLAIM_AVALIACOES.value} ${CLAIM_AVALIACOES.label} no Google e Facebook` },
+    ...(!BBB_PENDING ? [{ icon: ShieldCheck, t: BBB_LABEL, desc: "Better Business Bureau: órgão privado dos EUA/Canadá que avalia a ética e confiabilidade das empresas." }] : []),
+    ...(!CLAIM_AVALIACOES.pending ? [{ icon: Star, t: `${CLAIM_AVALIACOES.value} ${CLAIM_AVALIACOES.label} no Google e Facebook` }] : []),
   ];
   return (
     <Reveal as="section" id="por-que-status" className="section-pad relative">
@@ -581,7 +578,7 @@ export function WhyUs() {
           </ul>
         </div>
 
-        <div className="mt-16 border-y border-gold/30">
+        {stats.length > 0 && <div className="mt-16 border-y border-gold/30">
           <div className="grid grid-cols-2 md:grid-cols-4">
             {stats.map((s, i) => (
               <div key={s.label} className={`relative py-10 px-6 ${i > 0 ? "md:border-l border-gold/15" : ""}`}>
@@ -591,7 +588,7 @@ export function WhyUs() {
               </div>
             ))}
           </div>
-        </div>
+        </div>}
       </div>
     </Reveal>
   );
@@ -1048,12 +1045,12 @@ export function PartnersBadges() {
 export function FAQ() {
   const faqs = [
     {
-      q: "A Status Immigration Law Firm é confiável?",
-      a: `Sim. Somos uma empresa registrada nos Estados Unidos (EIN ${EIN}), com sede em Orlando/FL e filial no Brasil (CNPJ ${CNPJ}). Contamos com avaliações 5★ no Google e no Facebook e registro no BBB (${BBB_LABEL}). Transparência é regra: qualquer informação institucional pode ser verificada publicamente.`,
+      q: "A Status Immigration Law Firm é um escritório de advocacia?",
+      a: `Sim. A prática jurídica é conduzida por Meagan Zabadal, advogada licenciada em Nova York e Arizona, exclusivamente em matéria federal de imigração. O escritório mantém sede em Orlando e operação de atendimento no Brasil. EIN ${EIN} · CNPJ ${CNPJ}.`,
     },
     {
       q: "Qual a experiência de vocês?",
-      a: "Atuamos exclusivamente na preparação de documentação para vistos de emprego por mérito. EB-1, EB-2 NIW e O-1. Esse foco gera profundidade nos critérios do USCIS. Não somos generalistas: cada caso é construído por uma equipe que já estruturou centenas de processos semelhantes.",
+      a: "Somos um escritório de advocacia especializado exclusivamente em imigração federal, com foco em EB-1, EB-2 NIW e O-1. A análise jurídica é conduzida por Meagan Zabadal, licenciada em Nova York e Arizona.",
     },
     {
       q: "Posso confiar mesmo sem ir presencialmente?",
@@ -1061,7 +1058,7 @@ export function FAQ() {
     },
     {
       q: "Já fui enganado antes. Como sei que não é mais uma promessa?",
-      a: "Não prometemos o que não podemos garantir. Somos honestos sobre requisitos, sobre as chances reais do seu perfil e sobre os prazos do USCIS e dos consulados, que não dependem de nenhum escritório. Nosso compromisso é com a qualidade da estruturação, não com retórica.",
+      a: "Não prometemos o que nenhum escritório pode garantir. Explicamos requisitos, limites e riscos com clareza; prazos e decisões pertencem ao USCIS e aos consulados. Nosso compromisso é com a análise jurídica e a qualidade do dossiê.",
     },
     {
       q: "Meu caso é complicado, vale tentar?",
@@ -1069,11 +1066,11 @@ export function FAQ() {
     },
     {
       q: "Não tenho dinheiro sobrando, compensa?",
-      a: "É um investimento significativo, e por isso a análise inicial é gratuita: para que a decisão seja informada. Valores são apresentados com clareza após a pré-qualificação documental, sem pressão e sem letras miúdas. Não trabalhamos com promessas de ganho garantido.",
+      a: "É um investimento significativo, e por isso a análise inicial é gratuita: para que a decisão seja informada. Valores são apresentados com clareza após a triagem inicial, sem pressão e sem letras miúdas. Não trabalhamos com promessas de ganho garantido.",
     },
     {
-      q: "As taxas do governo americano estão incluídas no valor da assessoria?",
-      a: "Não. Existem duas coisas diferentes: (1) as taxas oficiais do governo americano (USCIS), pagas diretamente ao órgão; e (2) o valor da nossa assessoria, que cobre a preparação e organização documental do seu processo. São separados. As taxas do USCIS são definidas pelo próprio governo, podem mudar e são pagas por formulário. Na fase final (Green Card), parte das taxas é individual — ou seja, cônjuge e filhos têm suas próprias taxas. No levantamento inicial de informações, explicamos quais taxas costumam se aplicar ao seu perfil e à sua família.",
+      q: "As taxas do governo americano estão incluídas nos honorários?",
+      a: "Não. As taxas oficiais do governo americano são pagas separadamente e podem mudar. Os honorários profissionais cobrem o escopo jurídico definido no contrato. Na triagem inicial, explicamos quais custos costumam se aplicar ao perfil e à família.",
     },
     {
       q: "Preciso pagar taxas separadas para minha família?",
@@ -1159,11 +1156,11 @@ export function CtaBanner() {
             </ul>
             <a href={useAvaliacaoHref("home_cta_final")} className="mt-7 block sm:inline-block">
               <Button size="lg" variant="cta" className="btn-label btn-sweep h-12 px-4 sm:px-7 w-full sm:w-auto whitespace-normal text-center leading-tight">
-                Iniciar pré-qualificação documental
+                Iniciar triagem do meu caso
               </Button>
             </a>
             <p className="mt-3 text-[12px] text-foreground/80">
-              Para quem quer uma pré-qualificação documental completa do perfil.
+              Para quem quer uma triagem inicial completa do perfil.
             </p>
           </div>
 
@@ -1198,7 +1195,7 @@ export function CtaBanner() {
                 variant="outline"
                 className="btn-label h-12 px-4 sm:px-7 w-full sm:w-auto whitespace-normal text-center leading-tight border-gold/50 text-gold hover:bg-gold/10 hover:text-gold"
               >
-                Iniciar pré-qualificação documental
+                Iniciar triagem do meu caso
               </Button>
             </Link>
             <p className="mt-3 text-[12px] text-foreground/80">
@@ -1292,7 +1289,7 @@ export function HeroAssessment() {
             {[
               "Sem compromisso, 100% confidencial",
               "Mapa das categorias com maior afinidade (EB-2 NIW, EB-1, O-1)",
-              "Análise feita por equipe dedicada à preparação documental para vistos EB",
+              "Triagem inicial com possibilidade de encaminhamento para análise jurídica",
             ].map((i) => (
               <li key={i} className="flex gap-3 border-l border-gold/40 pl-3">
                 <CheckCircle2 aria-hidden className="h-4 w-4 text-gold mt-0.5 shrink-0" />

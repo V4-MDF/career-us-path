@@ -18,12 +18,12 @@ import heroFamilyUrl from "@/assets/hero-family.webp";
 const OG_IMAGE = "https://lp.statusnaamerica.com/__l5e/assets-v1/db6af206-dff3-4b36-b8f2-a6d534ba74a4/og-home.jpg";
 
 const HOME_FAQS = [
-  { q: "A Status Immigration Law Firm é confiável?", a: "Sim. Empresa registrada nos EUA (EIN 99-4846502), sede em Orlando/FL e filial no Brasil (CNPJ 62.917.376/0001-21), com avaliações 5★ no Google e Facebook e registro no BBB." },
-  { q: "Qual a experiência de vocês?", a: "Atuamos exclusivamente na preparação de documentação para vistos de emprego por mérito: EB-1, EB-2 NIW e EB-3. Foco gera profundidade nos critérios do USCIS." },
+  { q: "A Status Immigration Law Firm é um escritório de advocacia?", a: "Sim. A prática jurídica é conduzida por Meagan Zabadal, advogada licenciada em Nova York e Arizona, exclusivamente em matéria federal de imigração." },
+  { q: "Qual a atuação de vocês?", a: "Somos um escritório de advocacia especializado exclusivamente em imigração federal, com foco em EB-1, EB-2 NIW e O-1. Licensed in NY and AZ. Federal immigration practice only." },
   { q: "Posso confiar mesmo sem ir presencialmente?", a: "Sim. A empresa é verificável por EIN, Google Business, BBB e avaliações reais. Atendimento 100% documentado e remoto, em todo o Brasil e nos EUA." },
-  { q: "Já fui enganado antes. Como sei que não é mais uma promessa?", a: "Não prometemos o que não podemos garantir. Somos honestos sobre requisitos, chances reais e prazos do USCIS e consulados." },
-  { q: "Meu perfil tem pontos sensíveis, vale tentar?", a: "Perfis com pontos sensíveis exigem documentação mais bem organizada. No levantamento inicial de informações mostramos quais documentos costumam ser exigidos e quais serviços de preparação documental estão disponíveis, com a mesma transparência quando não houver aderência." },
-  { q: "Não tenho dinheiro sobrando, compensa?", a: "É um investimento significativo, e por isso a análise inicial é gratuita. Valores são apresentados com clareza após a pré-qualificação documental, sem pressão." },
+  { q: "Já fui enganado antes. Como sei que não é mais uma promessa?", a: "Não prometemos aprovação, prazo ou resultado. Explicamos requisitos, limites e riscos, e formalizamos o escopo profissional em contrato." },
+  { q: "Meu perfil tem pontos sensíveis, vale tentar?", a: "A triagem inicial identifica se há elementos para encaminhar o caso à análise jurídica. Quando não houver caminho consistente, a equipe informa isso com transparência." },
+  { q: "Como funcionam os custos?", a: "Os honorários e o escopo profissional são apresentados com clareza antes da contratação. As taxas oficiais do governo são separadas e podem mudar." },
 ];
 
 export const Route = createFileRoute("/")({
@@ -32,7 +32,7 @@ export const Route = createFileRoute("/")({
       {
         title: "Status Immigration Law Firm | Mobilidade Imigratória para brasileiros",
         description:
-          "Imigração legal aos EUA por mérito profissional. Levantamento inicial de informações para vistos EB-2 NIW, EB-1 e EB-3, com Green Card para cônjuge e filhos, junto do requerente principal.",
+          "Escritório de advocacia especializado em imigração federal para brasileiros. Análise jurídica e acompanhamento de casos EB-1, EB-2 NIW e O-1.",
         canonical: "/",
         ogImage: OG_IMAGE,
         ogType: "website",

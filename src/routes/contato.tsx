@@ -61,8 +61,9 @@ export const Route = createFileRoute("/contato")({
           type: "application/ld+json",
           children: JSON.stringify({
             "@context": "https://schema.org",
-            "@type": "Organization",
+            "@type": "LegalService",
             name: "Status Immigration Law Firm",
+            description: "Escritório de advocacia especializado em imigração federal. Licensed in NY and AZ.",
             url: "https://lp.statusnaamerica.com",
             sameAs: [
               "https://instagram.com/status_america",
@@ -162,7 +163,7 @@ function ContatoHero({
         <div className="mt-8">
           <Link to="/avaliacao" className="inline-flex">
             <Button size="lg" className="btn-label w-full sm:w-auto">
-              Iniciar pré-qualificação documental
+              Iniciar triagem do meu caso
             </Button>
           </Link>
         </div>
@@ -458,7 +459,7 @@ function ContatoForm() {
             <div className="mt-6">
               <Link to="/avaliacao">
                 <Button size="lg" className="btn-label">
-                  Iniciar pré-qualificação documental
+                  Iniciar triagem do meu caso
                 </Button>
               </Link>
             </div>
@@ -484,7 +485,7 @@ function ContatoForm() {
             <div className="mt-3">
               <Link to="/avaliacao">
                 <Button size="sm" className="btn-label">
-                  Iniciar pré-qualificação documental
+                  Iniciar triagem do meu caso
                 </Button>
               </Link>
             </div>

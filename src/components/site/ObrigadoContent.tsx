@@ -64,9 +64,8 @@ function ObrigadoShell({ children }: { children: React.ReactNode }) {
       <footer className="border-t border-gold/15 bg-ink-deep">
         <div className="container-x py-8 text-xs text-foreground/80 leading-relaxed max-w-4xl">
           <p>
-            A Status Immigration Law Firm atua na preparação e organização de documentos imigratórios.
-            Não somos advogados licenciados e não prestamos orientação jurídica nem
-            representação legal em processos de imigração.
+            Status Immigration Law Firm é um escritório de advocacia especializado em imigração federal.
+            Licensed in NY and AZ. Federal immigration practice only.
           </p>
           <p className="mt-3 font-mono-label text-foreground/80">
             © {new Date().getFullYear()} STATUS IMMIGRATION LAW FIRM LLC · EIN 99-4846502
@@ -125,7 +124,7 @@ export function ObrigadoQualificado() {
           {[
             { n: "01", t: "Análise individual", d: "Olhamos o seu histórico, formação, impacto e contexto familiar." },
             { n: "02", t: "Sugestão de caminho", d: "Sinalizamos a categoria EB mais coerente com o seu perfil." },
-            { n: "03", t: "Próximos passos", d: "Se fizer sentido, agendamos uma conversa sobre a preparação documental." },
+            { n: "03", t: "Próximos passos", d: "Se fizer sentido, agendamos uma conversa para encaminhar a análise jurídica do caso." },
           ].map((s) => (
             <div key={s.n} className="liquid-card p-5 rounded-2xl">
               <div className="font-display text-3xl text-gold leading-none">{s.n}</div>

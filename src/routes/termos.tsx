@@ -51,22 +51,20 @@ function TermosPage() {
           <div>
             <h2 className="font-display text-2xl text-foreground">2. Natureza do serviço</h2>
             <p className="mt-3">
-              A Status Immigration Law Firm presta serviços de <strong>preparação e organização
-              documental</strong> para processos imigratórios americanos, incluindo
-              vistos EB-1, EB-2 NIW, EB-3 e O-1.
+              A Status Immigration Law Firm é um <strong>escritório de advocacia especializado
+              em imigração federal</strong>. Sua atuação inclui análise jurídica, enquadramento
+              do caso, construção do dossiê, formulários, respostas a solicitações de evidências
+              e acompanhamento de processos imigratórios, com foco em EB-1, EB-2 NIW e O-1.
             </p>
             <p className="mt-3">
-              A Status Immigration Law Firm <strong>não é escritório de advocacia</strong>, não
-              possui advogados licenciados nos EUA em seu quadro operacional e não presta
-              consultoria ou aconselhamento jurídico. As informações fornecidas no site,
-              em materiais, redes sociais e comunicações têm <strong>caráter meramente
-              informativo</strong> e não substituem parecer jurídico individual de
-              advogado de imigração licenciado.
+              A análise jurídica é conduzida por advogada licenciada em Nova York e Arizona.
+              A atuação é limitada à prática federal de imigração e não implica licença para
+              prestar serviços jurídicos sobre matérias estaduais da Flórida.
             </p>
             <p className="mt-3">
-              As informações compartilhadas com a Status Immigration Law Firm{" "}
-              <strong>não são protegidas por sigilo advogado-cliente</strong>
-              (attorney-client privilege).
+              O uso do site e o envio de um formulário não criam, por si só, uma relação
+              advogado-cliente. A contratação somente se formaliza após a aceitação do caso
+              pelo escritório e a assinatura do contrato aplicável.
             </p>
           </div>
 
@@ -120,8 +118,7 @@ function TermosPage() {
             <p className="mt-3">
               A Status Immigration Law Firm não se responsabiliza por decisões tomadas pelo usuário
               com base apenas em conteúdo informativo do site, sem contratação formal do
-              serviço de preparação documental e sem orientação jurídica individualizada
-              por advogado licenciado.
+               escritório, sem análise jurídica individualizada e contratação formal.
             </p>
           </div>
 

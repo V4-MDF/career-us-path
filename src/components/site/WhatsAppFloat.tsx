@@ -16,7 +16,7 @@ export function WhatsAppFloat() {
         utm_medium: "floating_button",
         utm_campaign: "home",
       }}
-      aria-label="Iniciar pré-qualificação documental pelo WhatsApp"
+      aria-label="Iniciar triagem pelo WhatsApp"
       className="fixed bottom-6 right-6 z-50 inline-flex items-center justify-center gap-2 rounded-full bg-[#25D366] px-4 py-3.5 text-white shadow-lg shadow-[#25D366]/25 transition-transform hover:scale-105 hover:shadow-[#25D366]/40 focus:outline-none focus:ring-2 focus:ring-white/50 animate-pulse-slow"
     >
       <svg

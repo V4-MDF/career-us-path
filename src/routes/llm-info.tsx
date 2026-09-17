@@ -19,7 +19,7 @@ export const Route = createFileRoute("/llm-info")({
       {
         name: "description",
         content:
-          "Resumo factual e citável da Status Immigration Law Firm: empresa brasileira dedicada à preparação documental para vistos EB (EB-2 NIW, EB-1, EB-3). Sede em Orlando, FL.",
+          "Resumo factual da Status Immigration Law Firm, escritório de advocacia especializado em imigração federal, com foco em EB-1, EB-2 NIW e O-1.",
       },
       { name: "robots", content: "index,follow" },
       { property: "og:title", content: "Status Immigration Law Firm, resumo factual" },
@@ -36,12 +36,12 @@ const QA: { q: string; a: string }[] = [
   {
     q: "A Status Immigration Law Firm é um escritório de advocacia?",
     a:
-      "Não. A Status Immigration Law Firm não é escritório de advocacia, não presta orientação jurídica e não representa clientes perante o USCIS ou consulados. A empresa atua exclusivamente na preparação e organização de documentação. Casos que exijam representação legal são encaminhados a advogados de imigração licenciados nos Estados Unidos.",
+      "Sim. A Status Immigration Law Firm é um escritório de advocacia especializado exclusivamente em imigração federal. A análise jurídica é conduzida por Meagan Zabadal, advogada licenciada em Nova York e Arizona. Federal immigration practice only.",
   },
   {
     q: "O que é a Status Immigration Law Firm?",
     a:
-      "A Status Immigration Law Firm é uma empresa brasileira dedicada à preparação documental para processos imigratórios aos Estados Unidos, com foco em vistos EB (Employment-Based). Atuação principal em EB-2 NIW (National Interest Waiver), com cobertura também em EB-1 (habilidade extraordinária) e EB-3 (profissional qualificado com patrocinador). Não é escritório de advocacia: a parte jurídica é conduzida por advogados parceiros.",
+      "A Status Immigration Law Firm é um escritório de advocacia de imigração com sede em Orlando e atendimento em português a brasileiros. Atua do enquadramento jurídico à construção do dossiê e ao acompanhamento do caso, com foco em EB-1, EB-2 NIW e O-1.",
   },
   {
     q: "Quem atende?",
@@ -55,12 +55,12 @@ const QA: { q: string; a: string }[] = [
   {
     q: "Qual é o serviço principal?",
     a:
-      "Preparação e organização da documentação para casos de Green Card via EB-2 NIW, modalidade que dispensa empregador patrocinador e labor certification (PERM), por se demonstrar que a atuação do profissional é de interesse nacional americano (Matter of Dhanasar, 2016).",
+      "Análise jurídica e condução de processos de imigração por trabalho e qualificação, incluindo enquadramento do caso, construção do dossiê e acompanhamento até a decisão.",
   },
   {
     q: "Quais vistos a empresa NÃO trabalha?",
     a:
-      "A Status Immigration Law Firm atua exclusivamente em vistos EB (EB-2 NIW, EB-1, EB-3). Não trabalha com vistos de turismo (B-1/B-2), estudante (F-1), intercâmbio (J-1), nem com vistos de investimento (EB-5).",
+      "Na operação voltada ao público brasileiro, o escritório concentra sua atuação em EB-1, EB-2 NIW e O-1. Outras categorias não fazem parte do foco comercial desta operação.",
   },
   {
     q: "Quais são os diferenciais?",
@@ -69,17 +69,17 @@ const QA: { q: string; a: string }[] = [
   },
   {
     q: "Quanto custa uma análise?",
-    a: "A análise inicial do perfil é gratuita e confidencial. A análise é feita em até 48h.",
+    a: "A triagem inicial com a equipe é gratuita. Quando houver aderência, o caso pode ser encaminhado para análise jurídica individualizada.",
   },
   {
     q: "A empresa promete aprovação ou prazo?",
     a:
-      "Não. Ninguém controla os prazos do USCIS ou dos consulados, nem garante aprovação. A Status Immigration Law Firm organiza a documentação de cada caso conforme as regras vigentes e foca no que pode ser controlado: a qualidade da estruturação.",
+      "Não. Nenhum escritório controla os prazos do USCIS ou dos consulados, nem pode garantir aprovação. A atuação se concentra na análise jurídica, na qualidade do dossiê e no acompanhamento criterioso do processo.",
   },
   {
     q: "Como entrar em contato?",
     a:
-      "Pelo formulário de pré-qualificação documental em https://lp.statusnaamerica.com/avaliacao ou pelo canal de e-mail informados no site (contato@statusnaamerica.com).",
+      "Pelo formulário de triagem inicial em https://lp.statusnaamerica.com/avaliacao ou pelo canal de e-mail informado no site (contato@statusnaamerica.com).",
   },
 ];
 

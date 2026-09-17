@@ -47,10 +47,9 @@ function PrivacidadePage() {
               (CNPJ 62.917.376/0001-21), em Alameda Araguaia, 2104, Barueri/SP.
             </p>
             <p className="mt-3">
-              A Status Immigration Law Firm <strong>não é escritório de advocacia</strong>{" "}
-              e não presta serviços jurídicos. As informações compartilhadas
-              conosco <strong>não são protegidas por sigilo advogado-cliente</strong>{" "}
-              (attorney-client privilege).
+              A Status Immigration Law Firm é um escritório de advocacia especializado em
+              imigração federal. A prática jurídica é conduzida por advogada licenciada em
+              Nova York e Arizona. <em>Federal immigration practice only.</em>
             </p>
           </div>
 
@@ -147,14 +146,13 @@ function PrivacidadePage() {
           </div>
 
           <div>
-            <h2 className="font-display text-2xl text-foreground">8. Não somos escritório de advocacia</h2>
+            <h2 className="font-display text-2xl text-foreground">8. Contato inicial e relação profissional</h2>
             <p className="mt-3">
-              A Status Immigration Law Firm oferece serviços de <strong>preparação e organização
-              documental</strong> para processos imigratórios. Não somos escritório de
-              advocacia, não emitimos parecer jurídico e as informações compartilhadas
-              conosco <strong>não são protegidas por sigilo advogado-cliente</strong>. Para
-              orientação jurídica individualizada, consulte um advogado de imigração
-              licenciado.
+              O envio de informações por este site permite uma triagem inicial pela equipe,
+              mas não cria, por si só, uma relação advogado-cliente. Essa relação somente é
+              formalizada após a aceitação do caso pelo escritório e a celebração do contrato
+              aplicável. Até essa formalização, evite enviar informações que não sejam
+              necessárias para a triagem solicitada.
             </p>
           </div>
 

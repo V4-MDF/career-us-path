@@ -33,12 +33,12 @@ export const Route = createFileRoute("/sobre")({
   head: ({ loaderData }) => {
     const { meta, links } = buildSeoTags(
       {
-        title: "Sobre | Status Immigration Law Firm — assessoria de imigração em Orlando",
+        title: "Sobre | Status Immigration Law Firm — advocacia de imigração",
         description:
-          "Conheça a Status Immigration Law Firm: assessoria de imigração para brasileiros com sede em Orlando/FL e filial no Brasil. Equipe dedicada à preparação documental de processos EB-1, EB-2 NIW e EB-3.",
+          "Conheça a Status Immigration Law Firm, escritório de advocacia especializado em imigração federal, com sede em Orlando e atendimento a brasileiros.",
         ogTitle: "Sobre | Status Immigration Law Firm",
         ogDescription:
-          "Assessoria de imigração para brasileiros com equipe presente nos Estados Unidos. Orlando/FL e Barueri/SP.",
+          "Advocacia de imigração federal para brasileiros, com sede em Orlando e atendimento no Brasil e nos Estados Unidos.",
         canonical: "/sobre",
       },
       loaderData,
@@ -51,11 +51,12 @@ export const Route = createFileRoute("/sobre")({
           type: "application/ld+json",
           children: JSON.stringify({
             "@context": "https://schema.org",
-            "@type": "Organization",
+            "@type": "LegalService",
             name: "Status Immigration Law Firm",
             legalName: "Status Immigration Law Firm LLC",
             url: "https://lp.statusnaamerica.com",
             taxID: "99-4846502",
+            description: "Escritório de advocacia especializado em imigração federal. Licensed in NY and AZ.",
             sameAs: [
               "https://instagram.com/status_america",
               "https://facebook.com/statusnaamerica",
@@ -138,7 +139,7 @@ function SobreHero() {
         <div className="mt-8">
           <Link to="/avaliacao">
             <Button size="lg" className="btn-label">
-              Iniciar pré-qualificação documental <ArrowRight className="ml-2 h-4 w-4" />
+              Iniciar triagem do meu caso <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </Link>
         </div>
@@ -418,7 +419,7 @@ function CtaFinal() {
         <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
           <Link to="/avaliacao">
             <Button size="lg" className="btn-label w-full sm:w-auto">
-              Iniciar pré-qualificação documental <ArrowRight className="ml-2 h-4 w-4" />
+              Iniciar triagem do meu caso <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </Link>
           <Link to="/contato">

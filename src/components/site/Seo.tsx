@@ -14,7 +14,7 @@
  *  - ArticleJsonLd        → posts do blog
  *
  * Observação: usamos LegalService como @type principal, mais preciso
- * que "Organization" genérico para nosso ramo de atuação documental.
+ * que "Organization" genérico para um escritório de imigração.
  */
 
 function ldScript(data: object) {
@@ -32,7 +32,7 @@ const ORG_BASE = {
   name: "Status Immigration Law Firm",
   alternateName: "Status Immigration Law Firm. Imigração EB",
   description:
-    "Preparação documental dedicada a profissionais brasileiros, vistos EB (EB-2 NIW, EB-1, EB-3) e Green Card por mérito profissional.",
+    "Escritório de advocacia especializado em imigração federal para profissionais e famílias brasileiras, com foco em EB-1, EB-2 NIW e O-1.",
   url: "/",
   logo: "/og-image.jpg",
   image: "/og-image.jpg",
@@ -47,7 +47,13 @@ const ORG_BASE = {
     { "@type": "Country", name: "Estados Unidos" },
   ],
   knowsLanguage: ["pt-BR", "en"],
-  serviceType: ["EB-2 NIW", "EB-1", "EB-3", "Green Card"],
+  serviceType: ["Federal immigration law", "EB-2 NIW", "EB-1", "O-1", "Green Card"],
+  employee: {
+    "@type": "Person",
+    name: "Meagan Zabadal",
+    jobTitle: "Immigration Attorney",
+    description: "Licensed in New York and Arizona. Federal immigration practice only.",
+  },
   // contactPoint e sameAs são adicionados pelo admin quando os números/URLs forem validados
 };
 

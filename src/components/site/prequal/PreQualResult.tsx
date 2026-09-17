@@ -178,9 +178,9 @@ export function PreQualResult({ record, variant }: Props) {
       )}
 
       <p className="text-[13px] text-foreground/80 leading-relaxed border-t border-gold/15 pt-5">
-        Este é um mapeamento informativo baseado nas suas respostas. Não é análise jurídica
-        e não determina qualificação. Somente um advogado de imigração licenciado pode
-        avaliar o seu caso.
+        Este é um mapeamento informativo baseado nas suas respostas. Não é parecer jurídico
+        e não determina qualificação. Quando houver aderência, o escritório poderá encaminhar
+        o caso para análise jurídica individualizada.
       </p>
     </div>
   );

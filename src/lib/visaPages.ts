@@ -132,31 +132,31 @@ const eb2niw: VisaPage = {
 
   },
   process: {
-    title: "Como preparamos a sua documentação",
+    title: "Como conduzimos o seu caso",
     steps: [
       {
         num: "01",
-        title: "Análise Criteriosa",
+        title: "Análise Jurídica",
         body:
-          "Organizamos e revisamos histórico, formação e evidências de impacto para o EB-2 NIW, pré-qualificação documental antes de qualquer compromisso.",
+          "A advogada avalia o histórico, a formação, os objetivos e as evidências disponíveis antes de qualquer contratação.",
       },
       {
         num: "02",
-        title: "Organização Documental",
+        title: "Estratégia e Evidências",
         body:
           "Organizamos a documentação demonstrando que a atuação proposta tem mérito substancial e importância nacional para os Estados Unidos.",
       },
       {
         num: "03",
-        title: "Preparação Documental",
+        title: "Construção do Dossiê",
         body:
           "Auxiliamos na organização, revisão e preparação das cartas de recomendação fornecidas pelo cliente e por seus recomendadores, garantindo que estejam completas e no formato adequado para envio.",
       },
       {
         num: "04",
-        title: "Revisão Final",
+        title: "Protocolo e Acompanhamento",
         body:
-          "Organização completa e criteriosa do seu processo, dentro dos padrões exigidos pelo USCIS.",
+          "Revisão jurídica do conjunto final, protocolo e acompanhamento do processo, inclusive em eventual RFE.",
       },
     ],
     note:
@@ -181,7 +181,7 @@ const eb2niw: VisaPage = {
     {
       q: "Inglês fluente é obrigatório para começar?",
       a:
-        "Não é requisito para o EB-2 NIW. A documentação é instruída em inglês pela equipe jurídica parceira; o profissional não precisa ser fluente para iniciar. A fluência, no entanto, é um diferencial relevante para a vida e a carreira nos EUA.",
+        "Não é requisito para o EB-2 NIW. A documentação é instruída em inglês pelo escritório; o profissional não precisa ser fluente para iniciar. A fluência, no entanto, é um diferencial relevante para a vida e a carreira nos EUA.",
     },
     {
       q: "Quanto tempo leva o processo?",
@@ -196,12 +196,12 @@ const eb2niw: VisaPage = {
     {
       q: "Quanto custa?",
       a:
-        "A análise inicial do perfil é gratuita. O investimento da preparação documental varia conforme a composição da família, a complexidade da documentação e o estágio do caso. O valor da assessoria é separado das taxas oficiais do governo americano (USCIS), que são pagas diretamente ao órgão e podem variar. Apresentamos a proposta e o panorama completo de custos após a pré-qualificação documental.",
+        "A análise inicial do perfil é gratuita. Os honorários profissionais variam conforme a composição da família, a complexidade da documentação e o estágio do caso. Os honorários profissionais são separados das taxas oficiais do governo americano (USCIS), que são pagas diretamente ao órgão e podem variar. Apresentamos a proposta e o panorama completo de custos após a triagem inicial.",
     },
     {
-      q: "As taxas do governo americano estão incluídas no valor da assessoria?",
+      q: "As taxas do governo americano estão incluídas nos honorários?",
       a:
-        "Não. Existem duas coisas diferentes: (1) as taxas oficiais do governo americano (USCIS), pagas diretamente ao órgão; e (2) o valor da nossa assessoria, que cobre a preparação e organização documental do seu processo. São separados. As taxas do USCIS são definidas pelo próprio governo, podem mudar e são pagas por formulário. Na fase final (Green Card), parte das taxas é individual — ou seja, cônjuge e filhos têm suas próprias taxas. No levantamento inicial de informações, explicamos quais taxas costumam se aplicar ao seu perfil e à sua família.",
+        "Não. Existem duas coisas diferentes: (1) as taxas oficiais do governo americano (USCIS), pagas diretamente ao órgão; e (2) os honorários profissionais, que cobrem o escopo jurídico definido no contrato. São separados. As taxas do USCIS são definidas pelo próprio governo, podem mudar e são pagas por formulário. Na fase final (Green Card), parte das taxas é individual — ou seja, cônjuge e filhos têm suas próprias taxas. No levantamento inicial de informações, explicamos quais taxas costumam se aplicar ao seu perfil e à sua família.",
     },
     {
       q: "Preciso pagar taxas separadas para minha família?",
@@ -244,9 +244,9 @@ const eb1: VisaPage = {
     ],
   },
   process: {
-    title: "Como funciona o processo",
+    title: "Como conduzimos o processo",
     steps: [
-      { num: "01", title: "Pré-qualificação documental de critérios", body: "Mapeamento de evidências objetivas em pelo menos 3 dos critérios oficiais." },
+      { num: "01", title: "Triagem inicial de critérios", body: "Mapeamento de evidências objetivas em pelo menos 3 dos critérios oficiais." },
       { num: "02", title: "Processo I-140", body: "Protocolo da petição perante o USCIS." },
       { num: "03", title: "Decisão do USCIS", body: "A continuidade do processo depende da aprovação do USCIS e do cumprimento de todos os requisitos legais. Não há garantia de aprovação." },
     ],
@@ -273,11 +273,11 @@ const eb1: VisaPage = {
     },
     {
       q: "Quanto custa?",
-      a: "A análise inicial é gratuita. A proposta de preparação documental varia conforme complexidade do caso e composição da família. O valor da assessoria é separado das taxas oficiais do governo americano (USCIS), que são pagas diretamente ao órgão e podem variar.",
+      a: "A análise inicial é gratuita. A proposta de honorários varia conforme complexidade do caso e composição da família. Os honorários profissionais são separados das taxas oficiais do governo americano (USCIS), que são pagas diretamente ao órgão e podem variar.",
     },
     {
-      q: "As taxas do governo americano estão incluídas no valor da assessoria?",
-      a: "Não. Existem duas coisas diferentes: (1) as taxas oficiais do governo americano (USCIS), pagas diretamente ao órgão; e (2) o valor da nossa assessoria, que cobre a preparação e organização documental do seu processo. São separados. As taxas do USCIS são definidas pelo próprio governo, podem mudar e são pagas por formulário. Na fase final (Green Card), parte das taxas é individual — cônjuge e filhos têm suas próprias taxas. No levantamento inicial de informações, explicamos quais taxas costumam se aplicar ao seu perfil e à sua família.",
+      q: "As taxas do governo americano estão incluídas nos honorários?",
+      a: "Não. Existem duas coisas diferentes: (1) as taxas oficiais do governo americano (USCIS), pagas diretamente ao órgão; e (2) os honorários profissionais, que cobrem o escopo jurídico definido no contrato. São separados. As taxas do USCIS são definidas pelo próprio governo, podem mudar e são pagas por formulário. Na fase final (Green Card), parte das taxas é individual — cônjuge e filhos têm suas próprias taxas. No levantamento inicial de informações, explicamos quais taxas costumam se aplicar ao seu perfil e à sua família.",
     },
     {
       q: "Preciso pagar taxas separadas para minha família?",
@@ -315,7 +315,7 @@ const eb3: VisaPage = {
     ],
   },
   process: {
-    title: "Como funciona o processo",
+    title: "Como conduzimos o processo",
     steps: [
       { num: "01", title: "PERM (Labor Certification)", body: "O empregador comprova ao DOL que não há trabalhador americano disponível e qualificado para a vaga, seguindo recrutamento formal regulado." },
       { num: "02", title: "Processo I-140", body: "Aprovado o PERM, o empregador submete a I-140 ao USCIS em favor do profissional." },
@@ -343,8 +343,8 @@ const eb3: VisaPage = {
       a: "É a categoria mais dependente de terceiros, o PERM costuma ser a etapa mais longa. Não trabalhamos com prazos garantidos.",
     },
     {
-      q: "As taxas do governo americano estão incluídas no valor da assessoria?",
-      a: "Não. Existem duas coisas diferentes: (1) as taxas oficiais do governo americano (USCIS), pagas diretamente ao órgão; e (2) o valor da nossa assessoria, que cobre a preparação e organização documental do seu processo. São separados. As taxas do USCIS são definidas pelo próprio governo, podem mudar e são pagas por formulário. Na fase final (Green Card), parte das taxas é individual — cônjuge e filhos têm suas próprias taxas. No levantamento inicial de informações, explicamos quais taxas costumam se aplicar ao seu perfil e à sua família.",
+      q: "As taxas do governo americano estão incluídas nos honorários?",
+      a: "Não. Existem duas coisas diferentes: (1) as taxas oficiais do governo americano (USCIS), pagas diretamente ao órgão; e (2) os honorários profissionais, que cobrem o escopo jurídico definido no contrato. São separados. As taxas do USCIS são definidas pelo próprio governo, podem mudar e são pagas por formulário. Na fase final (Green Card), parte das taxas é individual — cônjuge e filhos têm suas próprias taxas. No levantamento inicial de informações, explicamos quais taxas costumam se aplicar ao seu perfil e à sua família.",
     },
     {
       q: "Preciso pagar taxas separadas para minha família?",
@@ -387,9 +387,9 @@ const o1: VisaPage = {
     ],
   },
   process: {
-    title: "Como preparamos a sua documentação",
+    title: "Como conduzimos o seu caso",
     steps: [
-      { num: "01", title: "Pré-qualificação documental", body: "Mapeamento das evidências disponíveis, identificação do peticionário viável (empregador ou agente) e do enquadramento O-1A ou O-1B." },
+      { num: "01", title: "Triagem inicial", body: "Mapeamento das evidências disponíveis, identificação do peticionário viável (empregador ou agente) e do enquadramento O-1A ou O-1B." },
       { num: "02", title: "Organização documental", body: "Preparação das evidências, cartas de consulta (advisory opinion) da associação da área e do dossiê de suporte." },
       { num: "03", title: "Processo I-129", body: "Organização do conjunto documental para protocolo, conduzido pelo peticionário nos EUA. Premium Processing disponível." },
       { num: "04", title: "Emissão do visto", body: "Aprovada a petição, o profissional obtém o visto no consulado; cônjuge e filhos entram com O-3." },
@@ -421,11 +421,11 @@ const o1: VisaPage = {
     },
     {
       q: "Quanto tempo leva?",
-      a: "A preparação documental leva algumas semanas a alguns meses, conforme a complexidade das evidências. O USCIS costuma decidir a I-129 em prazos que podem ser encurtados por Premium Processing. Depois vem o processamento consular. Não trabalhamos com prazos garantidos.",
+      a: "A construção do caso leva algumas semanas a alguns meses, conforme a complexidade das evidências. O USCIS costuma decidir a I-129 em prazos que podem ser encurtados por Premium Processing. Depois vem o processamento consular. Não trabalhamos com prazos garantidos.",
     },
     {
-      q: "As taxas do governo americano estão incluídas no valor da assessoria?",
-      a: "Não. Existem duas coisas diferentes: (1) as taxas oficiais do governo americano (USCIS), pagas diretamente ao órgão; e (2) o valor da nossa assessoria, que cobre a preparação e organização documental do seu processo. São separados. As taxas do USCIS são definidas pelo próprio governo, podem mudar e são pagas por formulário. No levantamento inicial de informações, explicamos quais taxas costumam se aplicar ao seu perfil e à sua família.",
+      q: "As taxas do governo americano estão incluídas nos honorários?",
+      a: "Não. Existem duas coisas diferentes: (1) as taxas oficiais do governo americano (USCIS), pagas diretamente ao órgão; e (2) os honorários profissionais, que cobrem o escopo jurídico definido no contrato. São separados. As taxas do USCIS são definidas pelo próprio governo, podem mudar e são pagas por formulário. No levantamento inicial de informações, explicamos quais taxas costumam se aplicar ao seu perfil e à sua família.",
     },
   ],
   ctaTitle: "Entenda quais documentos costumam ser exigidos pelo USCIS em cada categoria, incluindo o O-1.",

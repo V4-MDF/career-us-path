@@ -188,14 +188,14 @@ function BlogIndex() {
           <div className="container-x py-16 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
             <div className="max-w-2xl">
               <h2 className="font-display text-3xl text-ink-text">
-                Pronto para iniciar a pré-qualificação documental?
+                Pronto para iniciar a triagem do seu caso?
               </h2>
               <p className="mt-2 text-ink-text/75">
                 Análise individual e gratuita em até 48h.
               </p>
             </div>
             <Link to="/" hash="avaliacao">
-              <Button size="lg" className="btn-label btn-sweep h-12 px-7">Iniciar pré-qualificação documental</Button>
+              <Button size="lg" className="btn-label btn-sweep h-12 px-7">Iniciar triagem do meu caso</Button>
             </Link>
           </div>
         </section>

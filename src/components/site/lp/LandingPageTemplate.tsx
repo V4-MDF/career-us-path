@@ -37,7 +37,7 @@ function ConversionHeader({ segmentId }: { segmentId: string }) {
         </Link>
         <div className="flex items-center gap-2">
           <a href={avaliacaoHref(`lp_${segmentId}_header`, segmentId)}>
-            <Button className="btn-label" size="sm">Iniciar pré-qualificação documental</Button>
+            <Button className="btn-label" size="sm">Iniciar triagem do meu caso</Button>
           </a>
         </div>
       </div>
@@ -50,9 +50,8 @@ function LpFooter() {
     <footer className="border-t border-border/40 bg-surface py-10">
       <div className="container-x flex flex-col sm:flex-row gap-4 items-center justify-between text-xs text-muted-foreground">
         <p className="max-w-2xl leading-relaxed">
-          © {new Date().getFullYear()} Status Immigration Law Firm. A Status Immigration Law Firm atua na preparação
-          e organização de documentos imigratórios. Não somos advogados licenciados e não
-          prestamos orientação jurídica nem representação legal em processos de imigração.
+          © {new Date().getFullYear()} Status Immigration Law Firm. Escritório de advocacia
+          especializado em imigração federal. Licensed in NY and AZ. Federal immigration practice only.
         </p>
         <div className="flex gap-5 shrink-0">
           <Link to="/sobre" className="hover:text-gold">Sobre</Link>

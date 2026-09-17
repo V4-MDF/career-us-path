@@ -128,7 +128,7 @@ const SEED_SEGMENTS: Segment[] = [
       eyebrow: "PARA MÉDICOS BRASILEIROS",
       h1: "Você é médico e quer construir sua carreira nos Estados Unidos?",
       sub: "Conquiste o Green Card pelo mérito da sua trajetória, pelo EB-2 NIW, sem patrocinador e sem loteria. Green Card também para cônjuge e filhos.",
-      cta_texto: "Iniciar pré-qualificação documental",
+      cta_texto: "Iniciar triagem do meu caso",
     },
   },
   {
@@ -178,7 +178,7 @@ const SEED_SEGMENTS: Segment[] = [
       eyebrow: "PARA ENGENHEIROS BRASILEIROS",
       h1: "Você é engenheiro e quer levar sua carreira para os Estados Unidos?",
       sub: "Conquiste o Green Card pelo mérito da sua trajetória em engenharia, pelo EB-2 NIW, sem patrocinador e sem loteria. Green Card também para cônjuge e filhos.",
-      cta_texto: "Iniciar pré-qualificação documental",
+      cta_texto: "Iniciar triagem do meu caso",
     },
   },
   {
@@ -231,7 +231,7 @@ const SEED_SEGMENTS: Segment[] = [
       eyebrow: "PARA EMPRESÁRIOS BRASILEIROS",
       h1: "Você empresário quer construir seu futuro com segurança nos Estados Unidos?",
       sub: "Leve sua família, seu patrimônio e sua experiência empreendedora para um ambiente de negócio estável e em dólar, com o Green Card pelo EB-2 NIW.",
-      cta_texto: "Iniciar pré-qualificação documental",
+      cta_texto: "Iniciar triagem do meu caso",
     },
   },
 ];
