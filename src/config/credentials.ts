@@ -75,5 +75,5 @@ export const BBB_PENDING = true;
 
 // ==== Identificadores públicos (verificáveis) =====================
 // Não são "claims"; são registros públicos confirmáveis.
-export const EIN = "99-4846502";
+export const EIN = "42-4745152";
 export const CNPJ = "62.917.376/0001-21";

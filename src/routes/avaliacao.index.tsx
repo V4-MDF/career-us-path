@@ -176,7 +176,7 @@ function AvaliacaoPage() {
           <div className="mt-8 flex items-start gap-3 text-xs text-foreground/80 border-l border-gold/40 pl-4">
             <ShieldCheck className="h-4 w-4 text-gold mt-0.5 shrink-0" />
             <span>
-              Empresa registrada nos EUA (EIN 99-4846502) e no Brasil (CNPJ 62.917.376/0001-21).
+              Empresa registrada nos EUA (EIN 42-4745152) e no Brasil (CNPJ 62.917.376/0001-21).
               Sede em Orlando, FL · Filial em Barueri/SP.
             </span>
           </div>
@@ -186,7 +186,7 @@ function AvaliacaoPage() {
       <footer className="border-t border-gold/15 bg-champagne">
         <div className="container-x py-8 text-xs text-foreground/80 leading-relaxed max-w-4xl">
           <p className="font-mono-label text-foreground/80">
-            © {new Date().getFullYear()} STATUS IMMIGRATION LAW FIRM LLC · EIN 99-4846502
+            © {new Date().getFullYear()} STATUS IMMIGRATION LAW FIRM PLLC · EIN 42-4745152
           </p>
         </div>
       </footer>

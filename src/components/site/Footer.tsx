@@ -73,11 +73,12 @@ export function Footer() {
             Matriz · Estados Unidos
           </h4>
           <div className="mt-4 space-y-1.5 text-sm text-foreground/75 leading-relaxed">
-            <p className="font-display text-foreground">Status Immigration Law Firm LLC</p>
+            <p className="font-display text-foreground">Status Immigration Law Firm PLLC</p>
             <p className="text-xs text-gold">Licensed in NY and AZ · Federal immigration practice only</p>
             <p>7575 KingsPointe Pkwy #4</p>
             <p>Orlando, FL 32819</p>
-            <p className="font-mono text-xs text-foreground/80 mt-2">EIN 99-4846502</p>
+            <p className="font-mono text-xs text-foreground/80 mt-2">EIN 42-4745152</p>
+            <p className="font-mono text-xs text-foreground/70">Meagan Zabadal · NY Bar 5797303 · AZ Bar 040403</p>
             <p className="mt-3">+1 689 251-0985</p>
             <p>+1 689 220-9691</p>
           </div>
