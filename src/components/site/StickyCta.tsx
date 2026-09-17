@@ -3,7 +3,7 @@ import { Link, useRouterState } from "@tanstack/react-router";
 import { useAvaliacaoHref } from "@/lib/ctaLinks";
 
 /**
- * CTA sticky (rodapé) para a pré-qualificação documental. Aparece após o usuário rolar
+ * CTA sticky (rodapé) para a triagem inicial. Aparece após o usuário rolar
  * ~ 60% da viewport e some quando ele chega perto do rodapé ou já está numa
  * página onde o CTA seria redundante (/avaliacao, /pre-qualificacao, /admin, /auth).
  *

@@ -5,6 +5,6 @@
 - [x] Adicionar após a primeira dobra uma apresentação breve da empresa, atuação e especialidades.
 - [x] Validar a Home no computador e no celular.
 
-- [ ] Reposicionar todo o site como escritório de advocacia de imigração.
-- [ ] Atualizar avisos legais, formulários, páginas institucionais, vistos e SEO.
-- [ ] Atualizar conteúdo público salvo e validar as páginas principais.
+- [x] Reposicionar todo o site como escritório de advocacia de imigração.
+- [x] Atualizar avisos legais, formulários, páginas institucionais, vistos e SEO.
+- [x] Atualizar conteúdo público salvo e validar as páginas principais.
