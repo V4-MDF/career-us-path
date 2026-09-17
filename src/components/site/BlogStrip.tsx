@@ -67,7 +67,7 @@ export function BlogStrip() {
     <section
       id="blog-em-destaque"
       aria-label="Blog em destaque"
-      className="section-anchor section-ink-deep border-t border-gold/15"
+      className="section-anchor section-parchment border-t border-gold/15"
     >
       <div className="container-x section-pad">
         <div className="flex flex-wrap items-end justify-between gap-6">
@@ -136,7 +136,7 @@ export function BlogStrip() {
                 </div>
 
                 {/* Conteúdo */}
-                <div className="flex flex-1 flex-col p-6">
+                  <div className="flex flex-1 flex-col p-5">
                   <div className="flex items-center gap-2 font-mono-label text-gold/80">
                     <BookOpen className="h-3 w-3" /> {p.categoria}
                   </div>

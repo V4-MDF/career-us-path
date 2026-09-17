@@ -179,8 +179,7 @@ export function CompanyIntroduction() {
   ];
 
   return (
-    <Reveal as="section" id="quem-somos" className="relative overflow-hidden border-y border-gold/10 py-16 md:py-24">
-      <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-b from-background via-parchment/70 to-parchment-deep/45" />
+    <Reveal as="section" id="quem-somos" className="section-champagne relative overflow-hidden border-y border-gold/15 py-12 md:py-16">
       <div className="container-x">
         <div className="mx-auto max-w-3xl text-center">
           <span className="font-mono-label text-gold">STATUS IMMIGRATION LAW FIRM</span>
@@ -190,17 +189,17 @@ export function CompanyIntroduction() {
           </p>
         </div>
 
-        <div className="mx-auto mt-12 grid max-w-5xl gap-4 md:grid-cols-2">
+        <div className="mx-auto mt-10 grid max-w-5xl gap-4 md:grid-cols-2">
           {pillars.map(({ icon: Icon, eyebrow, title: pillarTitle, text, className }, index) => (
             <article
               key={eyebrow}
-              className={`liquid-card glass-interactive group rounded-3xl p-6 text-center sm:p-8 md:text-left ${className}`}
+              className={`liquid-card glass-interactive group rounded-2xl p-5 text-center md:text-left ${className}`}
               style={{ transitionDelay: `${index * 55}ms` }}
             >
               <div className="mx-auto grid h-11 w-11 place-items-center rounded-2xl border border-gold/25 bg-white/65 text-gold shadow-soft md:mx-0">
                 <Icon className="h-5 w-5" aria-hidden />
               </div>
-              <p className="font-mono-label mt-6 text-gold">{eyebrow}</p>
+              <p className="font-mono-label mt-4 text-gold">{eyebrow}</p>
               <h3 className="mt-3 font-display text-xl font-semibold leading-snug text-foreground sm:text-2xl">{pillarTitle}</h3>
               <p className="mx-auto mt-4 max-w-2xl text-[15px] leading-relaxed text-foreground/72 md:mx-0">{text}</p>
             </article>
@@ -342,7 +341,7 @@ export function NiwSection() {
     { icon: Sparkles, t: "Após cinco anos como residente permanente, é possível solicitar a naturalização, cumpridos os requisitos de residência contínua, presença física e demais exigências do USCIS." },
   ];
   return (
-    <Reveal as="section" id="eb-2-niw" className="section-pad relative">
+    <Reveal as="section" id="eb-2-niw" className="section-champagne-deep section-pad relative border-y border-gold/10">
 
       <div className="container-x grid lg:grid-cols-2 gap-10 lg:gap-12 items-center">
         <div>
@@ -350,7 +349,7 @@ export function NiwSection() {
           <p className="mt-6 text-[17px] text-foreground/80 leading-relaxed max-w-xl">{lead}</p>
           <ul className="mt-9 grid sm:grid-cols-2 gap-3">
             {bullets.map(({ icon: Icon, t }) => (
-              <li key={t} className="relative gold-tick rounded-xl border border-gold/25 bg-ink-raise/50 p-5">
+               <li key={t} className="relative gold-tick rounded-xl border border-gold/25 bg-ink-raise/50 p-4">
                 <Icon className="h-5 w-5 text-gold mb-3" />
                 <span className="text-sm leading-snug text-foreground/90">{t}</span>
               </li>
@@ -411,7 +410,7 @@ export function VisaCards() {
         <div className="mt-14 grid md:grid-cols-3 gap-5">
           {visas.map((v) => (
             <Link key={v.slug} to="/vistos/$slug" params={{ slug: v.slug }} className="group block">
-              <article className={`liquid-card relative gold-tick h-full rounded-2xl p-8 transition-colors ${
+              <article className={`liquid-card relative gold-tick h-full rounded-2xl p-6 transition-colors ${
                 v.featured ? "border-gold" : "hover:border-gold/60"
               }`}>
                 <span className="font-mono-label text-gold">{v.tag}</span>
@@ -538,13 +537,13 @@ export function WhyUs() {
     .filter((claim) => !claim.pending)
     .map((claim) => ({ value: claim.value, label: claim.label.toUpperCase() }));
   const items = [
-    { icon: MapPin, t: `Sede própria em Orlando, Flórida (EIN ${EIN})` },
-    { icon: Users, t: `Filial no Brasil em Barueri/SP (CNPJ ${CNPJ})` },
-    ...(!BBB_PENDING ? [{ icon: ShieldCheck, t: BBB_LABEL, desc: "Better Business Bureau: órgão privado dos EUA/Canadá que avalia a ética e confiabilidade das empresas." }] : []),
-    ...(!CLAIM_AVALIACOES.pending ? [{ icon: Star, t: `${CLAIM_AVALIACOES.value} ${CLAIM_AVALIACOES.label} no Google e Facebook` }] : []),
+     { icon: MapPin, title: "Sede própria em Orlando, Flórida", meta: `EIN ${EIN}` },
+     { icon: Users, title: "Filial no Brasil em Barueri/SP", meta: `CNPJ ${CNPJ}` },
+     ...(!BBB_PENDING ? [{ icon: ShieldCheck, title: BBB_LABEL, desc: "Better Business Bureau: órgão privado dos EUA/Canadá que avalia a ética e confiabilidade das empresas." }] : []),
+     ...(!CLAIM_AVALIACOES.pending ? [{ icon: Star, title: `${CLAIM_AVALIACOES.value} ${CLAIM_AVALIACOES.label} no Google e Facebook` }] : []),
   ];
   return (
-    <Reveal as="section" id="por-que-status" className="section-pad relative">
+    <Reveal as="section" id="por-que-status" className="section-champagne-deep section-pad relative border-y border-gold/10">
       <div className="container-x">
 
         <div className="grid lg:grid-cols-[0.9fr_1.1fr] gap-12">
@@ -552,13 +551,14 @@ export function WhyUs() {
             <SectionHead num="06" eyebrow="POR QUE A STATUS" title={title} />
             <p className="mt-6 text-foreground/80 leading-relaxed max-w-md">{lead}</p>
           </div>
-          <ul className="grid sm:grid-cols-2 gap-3">
-            {items.map(({ icon: Icon, t, desc }) => (
-              <li key={t} className="liquid-card flex gap-3 rounded-2xl p-4 items-start">
+          <ul className="grid self-start sm:grid-cols-2 gap-3">
+            {items.map(({ icon: Icon, title: itemTitle, meta, desc }) => (
+              <li key={itemTitle} className="compact-info-card">
                 <Icon className="h-5 w-5 text-gold shrink-0 mt-0.5" />
-                <span className="min-w-0 text-[15px] leading-snug text-foreground/85">
-                  {t}
-                  {desc && <span className="mt-2 block text-sm leading-relaxed text-foreground/60">{desc}</span>}
+                <span className="min-w-0 text-[14px] leading-snug text-foreground/85">
+                  <strong className="block font-medium">{itemTitle}</strong>
+                  {meta && <span className="mt-1 block text-xs text-foreground/55">{meta}</span>}
+                  {desc && <span className="mt-2 block text-xs leading-relaxed text-foreground/60">{desc}</span>}
                 </span>
               </li>
             ))}
@@ -639,7 +639,7 @@ export function LegacySection() {
       d: "Educação de qualidade e universidade a custo de residente, com os mesmos direitos de quem já mora nos EUA." },
   ];
   return (
-    <Reveal as="section" id="legado" className="section-verde-brasil section-pad border-y border-gold/25 relative overflow-hidden">
+    <Reveal as="section" id="legado" className="section-verde-brasil section-pad border-y border-gold/20 relative overflow-hidden">
       {/* Backdrops sobrepostos: mapa dos EUA gravado + selo de família. */}
       <div aria-hidden className="absolute inset-0 flex items-center justify-center pointer-events-none">
         <img
@@ -670,7 +670,7 @@ export function LegacySection() {
             width={1600}
             height={1000}
           />
-          <div className="liquid-card relative rounded-2xl p-6 md:p-8">
+          <div className="liquid-card relative rounded-2xl p-5 md:p-6">
             <span className="font-mono-label text-gold">FUTURO DOS FILHOS</span>
             <p className="mt-3 font-display text-xl md:text-2xl leading-tight text-foreground">
               A decisão que muda três gerações.
@@ -976,7 +976,7 @@ export function PartnersBadges() {
     <section
       id="selos-parceiros"
       aria-label="Credenciais e parceiros"
-      className="section-anchor section-parchment border-y border-gold/25 py-12 relative"
+      className="section-anchor section-parchment border-y border-gold/20 py-10 relative"
     >
       <div aria-hidden className="tricolor-rule absolute inset-x-0 top-0" />
       <div className="container-x">
@@ -988,11 +988,11 @@ export function PartnersBadges() {
           {title}
         </h2>
 
-        <ul className="mt-8 grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 auto-rows-fr items-stretch">
+        <ul className="mt-7 grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 items-start">
           {slots.map((s, idx) => (
             <li
               key={idx}
-              className="group relative h-full min-h-[196px] rounded-xl border border-gold/50 bg-white/70 p-5 flex items-center justify-center shadow-soft"
+              className="group relative rounded-xl border border-gold/30 bg-white/75 p-4 flex min-h-0 items-center justify-center shadow-soft transition-transform duration-300 hover:-translate-y-0.5"
               style={{
                 boxShadow: "inset 0 0 0 1px rgba(196,161,72,0.25)",
               }}
@@ -1065,7 +1065,7 @@ export function FAQ() {
     },
   ];
   return (
-    <Reveal as="section" id="duvidas-frequentes" className="section-ink section-pad border-t border-gold/10">
+    <Reveal as="section" id="duvidas-frequentes" className="section-champagne section-pad border-t border-gold/15">
       <div className="container-x max-w-3xl">
         <SectionHead num="10" eyebrow="DÚVIDAS FREQUENTES" title="Antes que você pergunte." />
         <Accordion type="single" collapsible className="mt-12">
@@ -1108,16 +1108,16 @@ export function CtaBanner() {
     <section
       id="avaliacao-gratuita"
       aria-label="Duas formas de começar"
-      className="section-anchor section-ink-deep section-pad relative border-t border-gold/15"
+      className="section-anchor section-champagne-deep section-pad relative border-t border-gold/20"
     >
       <div className="container-x">
         <div className="max-w-3xl">
           <SectionHead num="11" eyebrow="DUAS FORMAS DE COMEÇAR" title={title} kicker={sub} />
         </div>
 
-        <div className="mt-12 grid lg:grid-cols-2 gap-6 lg:gap-8 items-stretch">
+        <div className="mt-10 grid lg:grid-cols-2 gap-4 lg:gap-5 items-stretch">
           {/* Oferta principal. Levantamento inicial de informações */}
-          <div className="liquid-card relative min-w-0 rounded-3xl border-gold/40 p-5 sm:p-7 lg:p-9 flex flex-col">
+          <div className="liquid-card relative min-w-0 rounded-2xl border-gold/40 p-5 sm:p-6 flex flex-col">
             <span className="absolute -top-3 left-5 sm:left-6 rounded-full bg-gold px-3 py-1 font-mono-label text-[10px] text-ink">
               RECOMENDADO
             </span>
@@ -1152,7 +1152,7 @@ export function CtaBanner() {
           </div>
 
           {/* Oferta secundária. Pré-qualificação */}
-          <div className="liquid-card min-w-0 rounded-3xl p-5 sm:p-7 lg:p-9 flex flex-col">
+          <div className="liquid-card min-w-0 rounded-2xl p-5 sm:p-6 flex flex-col">
             <div className="flex items-center gap-2 text-gold/80">
               <Sparkles className="h-4 w-4 shrink-0" />
               <p className="font-mono-label text-gold/80">RESPOSTA NA HORA</p>

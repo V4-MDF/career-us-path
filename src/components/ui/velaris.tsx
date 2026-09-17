@@ -54,10 +54,10 @@ void main() {
   vec2 p = uv - 0.5;
   p.x *= ratio;
 
-  float t = u_time * 0.1;
-  float n1 = snoise(p * 0.4 + vec2(t * 0.2, -t * 0.3));
-  float n2 = snoise(p * 0.55 + vec2(-t * 0.15, t * 0.25) + n1 * 0.25);
-  float n3 = snoise(p * 0.75 + vec2(t * 0.1, -t * 0.2) + n2 * 0.2);
+  float t = u_time * 0.32;
+  float n1 = snoise(p * 0.52 + vec2(t * 0.42, -t * 0.28));
+  float n2 = snoise(p * 0.68 + vec2(-t * 0.3, t * 0.38) + n1 * 0.25);
+  float n3 = snoise(p * 0.88 + vec2(t * 0.24, -t * 0.34) + n2 * 0.2);
 
   vec3 col = u_bg;
   float dist = length(p) * 1.5;
@@ -87,7 +87,7 @@ export interface VelarisProps {
   children?: ReactNode;
 }
 
-const DEFAULT_COLORS = ["#FFFFFF", "#EADFBF", "#B7934F", "#DAD7CF"];
+const DEFAULT_COLORS = ["--velaris-light", "--velaris-soft", "--velaris-gold", "--velaris-mist"];
 
 function hexToRgb(hex: string): [number, number, number] {
   const normalized = hex.replace("#", "").padEnd(6, "0").slice(0, 6);
@@ -98,10 +98,15 @@ function hexToRgb(hex: string): [number, number, number] {
   ];
 }
 
+function resolveColor(value: string, styles: CSSStyleDeclaration): string {
+  if (!value.startsWith("--")) return value;
+  return styles.getPropertyValue(value).trim() || "#FFFFFF";
+}
+
 export default function Velaris({
-  bg = "#FCFCFB",
+  bg = "--velaris-bg",
   colors = DEFAULT_COLORS,
-  speed = 1.35,
+  speed = 2.4,
   grain = 0.16,
   className,
   children,
@@ -163,8 +168,10 @@ export default function Velaris({
     const grainLocation = gl.getUniformLocation(program, "u_grain");
     const colorsLocation = gl.getUniformLocation(program, "u_colors");
     const backgroundLocation = gl.getUniformLocation(program, "u_bg");
+    const styles = getComputedStyle(container);
     const palette = Array.from({ length: 4 }, (_, index) => colors[index] ?? DEFAULT_COLORS[index] ?? "#FFFFFF");
-    const flatColors = new Float32Array(palette.flatMap(hexToRgb));
+    const flatColors = new Float32Array(palette.flatMap((color) => hexToRgb(resolveColor(color, styles))));
+    const resolvedBackground = resolveColor(bg, styles);
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     const resize = () => {
@@ -187,7 +194,7 @@ export default function Velaris({
       gl.uniform2f(resolutionLocation, canvas.width, canvas.height);
       gl.uniform1f(timeLocation, reducedMotion ? 0 : time * 0.001 * speed);
       gl.uniform1f(grainLocation, grain);
-      gl.uniform3f(backgroundLocation, ...hexToRgb(bg));
+      gl.uniform3f(backgroundLocation, ...hexToRgb(resolvedBackground));
       gl.uniform3fv(colorsLocation, flatColors);
       gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
       if (!reducedMotion) animationFrame = requestAnimationFrame(render);
