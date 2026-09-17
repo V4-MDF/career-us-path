@@ -566,7 +566,7 @@ export function WhyUs() {
         <div className="grid lg:grid-cols-[0.9fr_1.1fr] gap-12">
           <div>
             <SectionHead num="06" eyebrow="POR QUE A STATUS" title={title} />
-            <p className="mt-6 text-foreground/80 leading-relaxed max-w-md">{lead}</p>
+            <MobileClamp className="mt-6 text-foreground/80 leading-relaxed max-w-md">{lead}</MobileClamp>
           </div>
           <ul className="grid self-start sm:grid-cols-2 gap-3">
             {items.map(({ icon: Icon, title: itemTitle, meta, desc }) => (
