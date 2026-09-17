@@ -903,7 +903,12 @@ export function Testimonials() {
             {videoTitle}
           </h3>
 
-          <div className="mt-8 grid md:grid-cols-2 gap-6">
+          <CardRail
+            className="mt-8"
+            mdClassName="md:grid md:grid-cols-2 md:gap-6"
+            count={videoSlots.length}
+            ariaLabel="Depoimentos em vídeo"
+          >
             {videoSlots.map((v) => (
               <article
                 key={v.caption + v.name}
@@ -920,13 +925,13 @@ export function Testimonials() {
                     </span>
                   )}
                 </div>
-                <div className="p-5">
+                <div className="p-4 sm:p-5">
                   <p className="font-mono-label text-oxblood text-[11px]">{v.caption}</p>
                   <p className="mt-2 font-display text-ink-text text-lg">{v.name}</p>
                 </div>
               </article>
             ))}
-          </div>
+          </CardRail>
         </div>
 
         <div className="mt-12 flex justify-center">
