@@ -2,11 +2,12 @@
 @source "../src";
 @import "tw-animate-css";
 /* Fontes auto-hospedadas (legibilidade superior, sem FOUT de CDN). */
-@import "@fontsource/montserrat/400.css";
-@import "@fontsource/montserrat/600.css";
-@import "@fontsource/montserrat/700.css";
-@import "@fontsource/montserrat/800.css";
-@import "@fontsource-variable/inter";
+@import "@fontsource/sora/400.css";
+@import "@fontsource/sora/600.css";
+@import "@fontsource/sora/700.css";
+@import "@fontsource/manrope/400.css";
+@import "@fontsource/manrope/500.css";
+@import "@fontsource/manrope/600.css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -85,8 +86,8 @@
    * e Inter para corpo. Trocada de Bodoni+Hanken por demanda de
    * legibilidade, a identidade "Dossiê" agora vive em estrutura
    * (ink + parchment + gold + filetes), não na serifa. */
-  --font-display: "Montserrat", "Inter Variable", system-ui, sans-serif;
-  --font-sans: "Inter Variable", "Inter", system-ui, sans-serif;
+  --font-display: "Sora", system-ui, sans-serif;
+  --font-sans: "Manrope", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", "JetBrains Mono Variable", ui-monospace, monospace;
   --font-serif: Georgia, "Times New Roman", serif;
 }
@@ -805,17 +806,49 @@
 
 /* Superfície óptica reutilizável, inspirada em vidro polido. */
 @utility liquid-glass {
-  background: color-mix(in oklab, white 76%, transparent);
-  backdrop-filter: blur(24px) saturate(140%);
-  border: 1px solid color-mix(in oklab, white 72%, var(--gold) 28%);
-  box-shadow: var(--shadow-elevated);
+  background: linear-gradient(145deg, color-mix(in oklab, white 88%, transparent), color-mix(in oklab, white 58%, transparent));
+  backdrop-filter: blur(30px) saturate(155%);
+  border: 1px solid color-mix(in oklab, white 68%, var(--gold) 32%);
+  box-shadow: 0 24px 70px -38px rgba(24, 24, 22, 0.38), inset 0 1px 0 rgba(255,255,255,0.95), inset 0 -1px 0 rgba(178,138,59,0.08);
 }
 
 @utility liquid-card {
-  background: color-mix(in oklab, white 84%, transparent);
-  backdrop-filter: blur(18px) saturate(125%);
-  border: 1px solid color-mix(in oklab, var(--gold) 22%, transparent);
-  box-shadow: var(--shadow-soft);
+  background: linear-gradient(145deg, color-mix(in oklab, white 88%, transparent), color-mix(in oklab, white 66%, transparent));
+  backdrop-filter: blur(24px) saturate(145%);
+  border: 1px solid color-mix(in oklab, var(--gold) 24%, white 76%);
+  box-shadow: 0 18px 48px -34px rgba(24, 24, 22, 0.3), inset 0 1px 0 rgba(255,255,255,0.95);
+}
+
+@keyframes glass-glint {
+  0%, 12% { transform: translateX(-160%) skewX(-18deg); opacity: 0; }
+  24% { opacity: 0.55; }
+  48%, 100% { transform: translateX(260%) skewX(-18deg); opacity: 0; }
+}
+
+@utility glass-interactive {
+  position: relative;
+  overflow: hidden;
+  transition: transform 420ms cubic-bezier(0.16, 1, 0.3, 1), border-color 420ms ease, box-shadow 420ms ease;
+  &::after {
+    content: "";
+    pointer-events: none;
+    position: absolute;
+    inset: -30% auto -30% -35%;
+    width: 24%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.82), transparent);
+    transform: translateX(-160%) skewX(-18deg);
+  }
+  &:hover {
+    transform: translateY(-5px);
+    border-color: color-mix(in oklab, var(--gold) 48%, white 52%);
+    box-shadow: 0 28px 70px -38px rgba(24, 24, 22, 0.42), inset 0 1px 0 rgba(255,255,255,1);
+  }
+  &:hover::after { animation: glass-glint 1.15s ease-out; }
+}
+
+.hero-glass-halo {
+  background: radial-gradient(ellipse at center, color-mix(in oklab, white 78%, transparent) 0%, transparent 72%);
+  backdrop-filter: blur(2px);
 }
 
 /* Compatibilidade visual: classes históricas escuras agora apontam para luz. */
