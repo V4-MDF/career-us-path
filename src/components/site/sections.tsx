@@ -21,6 +21,7 @@ import {
   Sparkles, Star, Stamp, Star as StarIcon, Stethoscope, TrendingUp, Users, Wrench, XCircle,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Velaris from "@/components/ui/velaris";
 import {
   Accordion, AccordionContent, AccordionItem, AccordionTrigger,
 } from "@/components/ui/accordion";
@@ -37,7 +38,6 @@ import {
   CNPJ,
 } from "@/config/credentials";
 import { SectionHead } from "./SectionHead";
-import { BrUsRouteBackdrop } from "./visuals/BrUsRouteBackdrop";
 import { VideoPlayer } from "./VideoPlayer";
 import { FamilySealBackdrop } from "./visuals/FamilySealBackdrop";
 import { ProcessIconStrip } from "./visuals/ProcessIconStrip";
@@ -48,8 +48,6 @@ import { PatchBBB, PatchGoogle, PatchEIN, PatchCNPJ } from "./credentialPatches"
 
 import { FlagsBRUSDual } from "./visuals/DualFlagIcons";
 
-
-import { HeroBackgroundMedia } from "./HeroBackgroundMedia";
 
 import passportDocuments from "@/assets/passport-documents.jpg";
 import usMapEngraving from "@/assets/us-map-engraving.webp";
@@ -70,7 +68,6 @@ export function Hero() {
   const cta = useContent("hero.cta");
   const proof = useContent("hero.proof");
   const heroVideoUrl = useContent("hero.videoUrl");
-  const heroPosterUrl = useContent("hero.posterUrl");
   // Só renderiza o slot depois que o conteúdo foi resolvido: enquanto não
   // sabemos, o vídeo NÃO aparece (evita o flash do slot oculto).
   const showHeroVideo = useVisibleSlot("hero.videoHidden");
@@ -81,18 +78,8 @@ export function Hero() {
       aria-label="Abertura"
       className="section-anchor relative overflow-hidden pt-32 md:pt-44 pb-16 md:pb-28 min-h-[92vh] flex items-center"
     >
-      {/* Fundo da hero: vídeo (desktop, sem reduced-motion) ou poster estático.
-          Fallback silencioso para hero-skyline se não houver configuração no admin. */}
-      <HeroBackgroundMedia videoUrl={heroVideoUrl} posterUrl={heroPosterUrl} />
-      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-parchment/70 via-parchment/65 to-background/95" />
-      <div className="absolute inset-0 -z-10 bg-gradient-to-r from-background/95 via-background/72 to-background/55" />
-
-      {/* Grão fino global para unificar a hero com o tratamento das fotos. */}
-      <div aria-hidden className="absolute inset-0 -z-10 opacity-[0.06] mix-blend-overlay [background-image:radial-gradient(rgba(255,255,255,0.6)_1px,transparent_1px)] [background-size:3px_3px]" />
-      {/* Motivo geográfico BR→USA, dot-grid + rota tracejada estática. */}
-      <div aria-hidden className="absolute inset-0 -z-10 text-gold/70">
-        <BrUsRouteBackdrop />
-      </div>
+      <Velaris className="pointer-events-none absolute inset-0 -z-10" />
+      <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-background/20 via-transparent to-background/85" />
 
       <div className={`container-x grid gap-10 md:gap-16 lg:gap-12 items-center ${heroVideoHidden ? "" : "lg:grid-cols-[1fr_1.1fr]"}`}>
         <div className={`relative min-w-0 ${heroVideoHidden ? "hero-glass-halo mx-auto w-full max-w-5xl px-2 py-8 text-center sm:px-8 md:py-12" : ""}`}>
