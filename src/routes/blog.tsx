@@ -60,7 +60,7 @@ function BlogIndex() {
       <BreadcrumbJsonLd items={[{ name: "Início", url: "/" }, { name: "Blog", url: "/blog" }]} />
 
       <main className="pt-28">
-        <section className="bg-ink">
+        <section className="bg-background">
           <div className="container-x py-16 md:py-20">
             <SectionHead
               eyebrow="BLOG"
@@ -71,7 +71,7 @@ function BlogIndex() {
         </section>
 
         {/* Filtros */}
-        <section className="bg-ink-deep border-y border-gold/15">
+        <section className="bg-parchment-deep/70 border-y border-gold/15">
           <div className="container-x py-5 flex flex-wrap items-center gap-2">
             <Filter className="h-4 w-4 text-gold/70" />
             <span className="font-mono-label text-foreground/80 mr-3">FILTRAR</span>
@@ -83,7 +83,7 @@ function BlogIndex() {
                   onClick={() => setFiltro(c)}
                       className={`rounded-full px-4 py-2 text-xs font-mono-label border transition-colors ${
                     active
-                      ? "border-gold bg-gold text-ink-deep"
+                      ? "border-gold bg-gold text-primary-foreground"
                       : "border-gold/30 text-foreground/70 hover:border-gold/60 hover:text-foreground"
                   }`}
                 >
@@ -96,14 +96,14 @@ function BlogIndex() {
 
         {/* Destaque */}
         {featured && filtro === "Todos" && (
-          <section className="bg-ink">
+          <section className="bg-background">
             <div className="container-x py-14">
               <Link
                 to="/blog/$slug"
                 params={{ slug: featured.slug }}
                 className="liquid-card grid lg:grid-cols-12 gap-8 group rounded-3xl overflow-hidden transition-[border-color,box-shadow] hover:border-gold/45"
               >
-                <div className="lg:col-span-7 aspect-[16/10] lg:aspect-auto bg-ink-deep overflow-hidden">
+                <div className="lg:col-span-7 aspect-[16/10] lg:aspect-auto bg-parchment-deep overflow-hidden">
                   <img
                     src={featured.capa}
                     alt={featured.titulo}
@@ -136,7 +136,7 @@ function BlogIndex() {
         )}
 
         {/* Grid */}
-        <section className="bg-ink pb-24">
+        <section className="bg-background pb-24">
           <div className="container-x">
             {rest.length === 0 ? (
               <p className="text-foreground/80">Nenhum post nesta categoria.</p>
@@ -149,7 +149,7 @@ function BlogIndex() {
                       params={{ slug: p.slug }}
                       className="liquid-card block group rounded-2xl h-full overflow-hidden transition-[border-color,box-shadow,transform] hover:border-gold/45 hover:shadow-elevated"
                     >
-                      <div className="aspect-[16/10] bg-ink-deep overflow-hidden">
+                      <div className="aspect-[16/10] bg-parchment-deep overflow-hidden">
                         <img
                           src={p.capa}
                           alt={p.titulo}

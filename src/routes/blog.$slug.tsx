@@ -93,7 +93,7 @@ function PostPage() {
       <main className="pt-28">
         <article>
           {/* Header do post */}
-          <header className="bg-ink">
+          <header className="bg-background">
             <div className="container-x max-w-3xl py-12 md:py-16">
               <nav aria-label="Breadcrumb" className="font-mono-label text-foreground/80 flex items-center gap-2 flex-wrap">
                 <Link to="/" className="hover:text-gold">Início</Link>
@@ -123,7 +123,7 @@ function PostPage() {
 
           {/* Capa */}
           {post.capa && (
-            <div className="bg-ink-deep">
+            <div className="bg-parchment-deep/70">
               <div className="container-x max-w-5xl py-8">
                 <img
                   src={post.capa}
@@ -138,7 +138,7 @@ function PostPage() {
           )}
 
           {/* Corpo */}
-          <div className="bg-ink">
+          <div className="bg-background">
             <div className="container-x max-w-3xl py-12 md:py-16">
               <div className="prose-dossie">
                 <ReactMarkdown remarkPlugins={[remarkGfm]}>

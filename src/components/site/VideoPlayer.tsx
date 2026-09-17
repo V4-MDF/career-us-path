@@ -29,7 +29,7 @@ export function VideoPlayer({ url, title, className, facade = false, poster }: V
 
   if (!parsed) {
     return (
-      <div className={`${wrapper} flex flex-col items-center justify-center gap-3 bg-gradient-to-br from-ink to-ink-raise text-foreground/70`}>
+      <div className={`${wrapper} flex flex-col items-center justify-center gap-3 bg-gradient-to-br from-parchment to-parchment-deep text-foreground/70`}>
         <PlayCircle className="h-14 w-14 text-gold/80" aria-hidden />
         <span className="font-mono-label text-gold/80 text-xs">VÍDEO EM BREVE</span>
       </div>
@@ -51,7 +51,7 @@ export function VideoPlayer({ url, title, className, facade = false, poster }: V
         type="button"
         onClick={() => setPlaying(true)}
         aria-label={`Assistir vídeo: ${title}`}
-        className={`${wrapper} group h-full w-full overflow-hidden bg-ink-raise focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold`}
+        className={`${wrapper} group h-full w-full overflow-hidden bg-parchment-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold`}
       >
         {cover ? (
           <img
@@ -65,9 +65,9 @@ export function VideoPlayer({ url, title, className, facade = false, poster }: V
             className="absolute inset-0 h-full w-full object-cover"
           />
         ) : (
-          <div aria-hidden className="absolute inset-0 bg-gradient-to-br from-[#16223A] to-[#0A111C]" />
+          <div aria-hidden className="absolute inset-0 bg-gradient-to-br from-parchment to-parchment-deep" />
         )}
-        <div aria-hidden className="absolute inset-0 bg-black/25" />
+        <div aria-hidden className="absolute inset-0 bg-ink-text/25" />
         <div className="absolute inset-0 flex flex-col items-center justify-center gap-2">
           <PlayCircle
             className="h-12 w-12 sm:h-16 sm:w-16 text-gold drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)] transition-transform group-hover:scale-105"

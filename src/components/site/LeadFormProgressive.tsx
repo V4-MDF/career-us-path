@@ -528,7 +528,7 @@ function CollapsedAnswer({
   return (
     <button
       type="button" onClick={onEdit}
-      className="w-full flex items-center justify-between gap-3 rounded-lg border border-border/50 px-4 py-2.5 text-left hover:border-gold/50 hover:bg-ink-deep/30 transition-colors"
+      className="w-full flex items-center justify-between gap-3 rounded-lg border border-border/50 px-4 py-2.5 text-left hover:border-gold/50 hover:bg-parchment-deep/60 transition-colors"
     >
       <div className="flex items-center gap-2.5 min-w-0">
         <span className={`h-1.5 w-1.5 rounded-full shrink-0 ${valid ? "bg-gold" : "bg-border"}`} />
