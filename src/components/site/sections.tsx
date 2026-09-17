@@ -47,6 +47,7 @@ import { FlagsBRUS, FlagBR, FlagUS } from "./flags";
 import { PatchBBB, PatchGoogle, PatchEIN, PatchCNPJ } from "./credentialPatches";
 
 import { FlagsBRUSDual } from "./visuals/DualFlagIcons";
+import { CardRail } from "./CardRail";
 
 
 import passportDocuments from "@/assets/passport-documents.jpg";
@@ -409,22 +410,27 @@ export function VisaCards() {
       <div className="container-x relative">
 
         <SectionHead num="03" eyebrow="CAMINHOS IMIGRATÓRIOS" title="Três caminhos. Uma estratégia jurídica para cada perfil." />
-        <div className="mt-14 grid md:grid-cols-3 gap-5">
+        <CardRail
+          className="mt-10 md:mt-14"
+          mdClassName="md:grid md:grid-cols-3 md:gap-5"
+          count={visas.length}
+          ariaLabel="Caminhos imigratórios"
+        >
           {visas.map((v) => (
             <Link key={v.slug} to="/vistos/$slug" params={{ slug: v.slug }} className="group block">
-              <article className={`liquid-card relative gold-tick h-full rounded-2xl p-6 transition-colors ${
+              <article className={`liquid-card relative gold-tick h-full rounded-2xl p-5 sm:p-6 transition-colors ${
                 v.featured ? "border-gold" : "hover:border-gold/60"
               }`}>
                 <span className="font-mono-label text-gold">{v.tag}</span>
-                <h3 className="mt-4 font-display text-[40px] leading-none">{v.title}</h3>
-                <p className="mt-5 text-sm text-foreground/75 leading-relaxed">{v.desc}</p>
-                <span className="mt-7 inline-flex items-center text-sm text-gold">
+                <h3 className="mt-4 font-display text-[34px] sm:text-[40px] leading-none">{v.title}</h3>
+                <p className="mt-4 text-sm text-foreground/75 leading-relaxed">{v.desc}</p>
+                <span className="mt-6 inline-flex items-center text-sm text-gold">
                   Conhecer este visto <span aria-hidden className="ml-2 transition-transform group-hover:translate-x-1">→</span>
                 </span>
               </article>
             </Link>
           ))}
-        </div>
+        </CardRail>
 
         <div className="mt-12 flex justify-center">
           <a href={useAvaliacaoHref("home_vistos")}>
@@ -457,27 +463,32 @@ export function PersonaCards() {
     <Reveal as="section" id="perfis-atendidos" className="section-pad">
       <div className="container-x">
         <SectionHead num="04" eyebrow="PERFIS QUE ATENDEMOS" title="Profissões consolidadas têm caminho mais curto pelo EB-2 NIW." />
-        <div className="mt-14 grid md:grid-cols-3 gap-5">
+        <CardRail
+          className="mt-10 md:mt-14"
+          mdClassName="md:grid md:grid-cols-3 md:gap-5"
+          count={personas.length}
+          ariaLabel="Perfis atendidos"
+        >
           {personas.map((p) => {
             const Icon = p.icon;
             return (
-              <article key={p.title} className={`liquid-card glass-interactive relative rounded-2xl border-t-2 p-6 transition-[border-color,box-shadow,transform] ${p.accent}`}>
-                <span className="grid h-12 w-12 place-items-center rounded-lg border border-current/50">
-                  <Icon className="h-6 w-6" />
+              <article key={p.title} className={`liquid-card glass-interactive relative h-full rounded-2xl border-t-2 p-5 sm:p-6 transition-[border-color,box-shadow,transform] ${p.accent}`}>
+                <span className="grid h-11 w-11 place-items-center rounded-lg border border-current/50">
+                  <Icon className="h-5 w-5" />
                 </span>
-                <h3 className="mt-6 font-display text-2xl text-foreground">{p.title}</h3>
+                <h3 className="mt-5 font-display text-2xl text-foreground">{p.title}</h3>
                 <p className="mt-3 text-foreground/75 leading-relaxed">{p.headline}</p>
                 {/* CTA leva à LP /avaliacao com seg + src, preserva utms da URL atual. */}
                 <a
                   href={avaliacaoHref(`home_persona_${p.seg}`, p.seg)}
-                  className="mt-7 inline-flex items-center text-sm text-gold hover:text-gold"
+                  className="mt-6 inline-flex items-center text-sm text-gold hover:text-gold"
                 >
                   Analisar meu perfil <span aria-hidden className="ml-2">→</span>
                 </a>
               </article>
             );
           })}
-        </div>
+        </CardRail>
       </div>
     </Reveal>
   );
@@ -502,17 +513,21 @@ export function ProcessSteps() {
       <div aria-hidden className="absolute inset-0 text-ink-text/10"><ProcessIconStrip /></div>
       <div className="container-x relative">
         <SectionHead num="05" eyebrow="PROCESSO EB-2 NIW" title="Quatro etapas, conduzidas com rigor." variant="parchment" />
-        <div className="mt-14 grid md:grid-cols-2 lg:grid-cols-4 gap-5 auto-rows-fr items-stretch">
+        <CardRail
+          className="mt-10 md:mt-14"
+          mdClassName="md:grid md:grid-cols-2 lg:grid-cols-4 md:gap-5 md:auto-rows-fr md:items-stretch"
+          count={steps.length}
+          ariaLabel="Etapas do processo"
+        >
           {steps.map(({ n, icon: Icon, t, d }) => (
-              <div key={n} className="relative gold-tick rounded-2xl bg-white/90 border border-gold/15 p-5 flex flex-col h-full shadow-soft">
-              <span className="font-display text-[40px] leading-none text-gold">{n}</span>
+            <div key={n} className="relative gold-tick rounded-2xl bg-white/90 border border-gold/15 p-5 flex flex-col h-full shadow-soft">
+              <span className="font-display text-[36px] sm:text-[40px] leading-none text-gold">{n}</span>
               <Icon className="h-5 w-5 text-ink-text/60 mt-4" />
-              <h3 className="mt-3 font-display text-base text-ink-text min-h-[3rem]">{t}</h3>
+              <h3 className="mt-3 font-display text-base text-ink-text md:min-h-[3rem]">{t}</h3>
               <p className="mt-1 text-ink-text/75 text-[14px] leading-relaxed">{d}</p>
-
             </div>
           ))}
-        </div>
+        </CardRail>
 
         <div className="mt-12 flex justify-center">
           <a href={useAvaliacaoHref("home_processo")}>
@@ -551,7 +566,7 @@ export function WhyUs() {
         <div className="grid lg:grid-cols-[0.9fr_1.1fr] gap-12">
           <div>
             <SectionHead num="06" eyebrow="POR QUE A STATUS" title={title} />
-            <p className="mt-6 text-foreground/80 leading-relaxed max-w-md">{lead}</p>
+            <MobileClamp className="mt-6 text-foreground/80 leading-relaxed max-w-md">{lead}</MobileClamp>
           </div>
           <ul className="grid self-start sm:grid-cols-2 gap-3">
             {items.map(({ icon: Icon, title: itemTitle, meta, desc }) => (
@@ -578,6 +593,14 @@ export function WhyUs() {
             ))}
           </div>
         </div>}
+
+        <div className="mt-10 flex justify-center">
+          <a href={useAvaliacaoHref("home_por_que_status")} className="w-full sm:w-auto">
+            <Button size="lg" variant="cta" className="btn-label btn-sweep h-12 px-7 w-full sm:w-auto">
+              Falar com a nossa equipe
+            </Button>
+          </a>
+        </div>
       </div>
     </Reveal>
   );
@@ -677,39 +700,23 @@ export function LegacySection() {
             <p className="mt-3 font-display text-xl md:text-2xl leading-tight text-foreground">
               A decisão que muda três gerações.
             </p>
-            <p className="mt-3 text-foreground/75 text-[15px] leading-relaxed">
+            <MobileClamp className="mt-3 text-foreground/75 text-[15px] leading-relaxed">
               Green Card para cônjuge e filhos solteiros menores de 21, junto do requerente
               principal. A idade é protegida pelo Child Status Protection Act, que pode preservar
               o benefício mesmo após os 21 anos — o tempo de processamento influencia esse cálculo.
               Escola pública de qualidade, universidade a custo de residente e, após cinco anos,
               é possível solicitar a naturalização, cumpridos os requisitos do USCIS.
-            </p>
+            </MobileClamp>
           </div>
         </div>
 
-        {/* Mobile: carrossel horizontal com snap */}
-        <div className="mt-12 md:hidden -mx-4 px-4 overflow-x-auto snap-x snap-mandatory scroll-smooth scrollbar-hide">
-          <div className="flex gap-3 pb-2">
-            {pillars.map(({ icon: Icon, t, d }) => (
-              <article
-                key={t}
-                className="liquid-card snap-start shrink-0 w-[76%] gold-tick rounded-2xl p-5"
-              >
-                <Icon className="h-5 w-5 text-gold" />
-                <h3 className="mt-4 font-display text-[17px]">{t}</h3>
-                <p className="mt-2 text-foreground/75 leading-snug text-[13px]">{d}</p>
-              </article>
-            ))}
-          </div>
-          <div className="mt-3 flex justify-center gap-1.5" aria-hidden>
-            {pillars.map((_, i) => (
-              <span key={i} className="h-1 w-6 rounded-full bg-gold/30" />
-            ))}
-          </div>
-        </div>
-
-        {/* Desktop/tablet: grid */}
-        <div className="mt-12 hidden md:grid md:grid-cols-3 gap-4">
+        {/* Mobile: trilha deslizante; md+: grid de 3 colunas. */}
+        <CardRail
+          className="mt-10 md:mt-12"
+          mdClassName="md:grid md:grid-cols-3 md:gap-4"
+          count={pillars.length}
+          ariaLabel="O que você conquista"
+        >
           {pillars.map(({ icon: Icon, t, d }) => (
             <article key={t} className="liquid-card relative gold-tick rounded-2xl p-5 h-full transition-[border-color,box-shadow] hover:border-gold/55 hover:shadow-elevated">
               <Icon className="h-5 w-5 text-gold" />
@@ -717,6 +724,14 @@ export function LegacySection() {
               <p className="mt-2 text-foreground/75 leading-snug text-[13px]">{d}</p>
             </article>
           ))}
+        </CardRail>
+
+        <div className="mt-10 flex justify-center">
+          <a href={useAvaliacaoHref("home_legado")} className="w-full sm:w-auto">
+            <Button size="lg" variant="cta" className="btn-label btn-sweep h-12 px-7 w-full sm:w-auto">
+              Analisar meu perfil
+            </Button>
+          </a>
         </div>
       </div>
     </Reveal>
@@ -888,7 +903,12 @@ export function Testimonials() {
             {videoTitle}
           </h3>
 
-          <div className="mt-8 grid md:grid-cols-2 gap-6">
+          <CardRail
+            className="mt-8"
+            mdClassName="md:grid md:grid-cols-2 md:gap-6"
+            count={videoSlots.length}
+            ariaLabel="Depoimentos em vídeo"
+          >
             {videoSlots.map((v) => (
               <article
                 key={v.caption + v.name}
@@ -905,13 +925,13 @@ export function Testimonials() {
                     </span>
                   )}
                 </div>
-                <div className="p-5">
+                <div className="p-4 sm:p-5">
                   <p className="font-mono-label text-oxblood text-[11px]">{v.caption}</p>
                   <p className="mt-2 font-display text-ink-text text-lg">{v.name}</p>
                 </div>
               </article>
             ))}
-          </div>
+          </CardRail>
         </div>
 
         <div className="mt-12 flex justify-center">
@@ -991,7 +1011,10 @@ export function PartnersBadges() {
           {title}
         </h2>
 
-        <ul className="mt-7 grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 auto-rows-fr items-stretch">
+        <ul
+          style={{ ["--rail-item" as string]: "46vw" }}
+          className="card-rail mt-7 md:grid md:grid-cols-2 lg:grid-cols-4 md:gap-3 md:auto-rows-fr md:items-stretch"
+        >
           {slots.map((s, idx) => (
             <li
               key={idx}
@@ -1257,6 +1280,26 @@ function Reveal({
   );
 }
 
+
+/**
+ * MobileClamp — no mobile, colapsa o texto em 4 linhas com "ler mais".
+ * No desktop (md+) o texto aparece inteiro, sem botão.
+ */
+function MobileClamp({ children, className = "" }: { children: React.ReactNode; className?: string }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className={className}>
+      <p className={open ? "" : "clamp-mobile"}>{children}</p>
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        className="mt-2 font-mono-label text-[11px] text-gold underline-offset-4 hover:underline md:hidden"
+      >
+        {open ? "Ler menos" : "Ler mais"}
+      </button>
+    </div>
+  );
+}
 
 function CountUp({ value, className }: { value: string; className?: string }) {
   return <span className={className}>{value}</span>;

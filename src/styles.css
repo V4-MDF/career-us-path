@@ -1077,3 +1077,40 @@
   -ms-overflow-style: none;
   &::-webkit-scrollbar { display: none; }
 }
+
+/*
+ * card-rail — trilha deslizante de cards no mobile (swipe lateral com snap).
+ * Só existe abaixo de 768px; a partir de md a grade original (md:grid…) volta
+ * a valer, sem conflito de especificidade.
+ */
+@media (max-width: 767px) {
+  .card-rail {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    overscroll-behavior-x: contain;
+    margin-inline: -1.25rem;
+    padding-inline: 1.25rem;
+    padding-bottom: 0.5rem;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .card-rail::-webkit-scrollbar { display: none; }
+  .card-rail > * {
+    flex: 0 0 auto;
+    width: var(--rail-item, 82vw);
+    max-width: 340px;
+    scroll-snap-align: center;
+    align-self: stretch;
+    height: auto;
+  }
+  /* Texto de apoio longo: colapsado no mobile até o usuário expandir. */
+  .clamp-mobile {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+    overflow: hidden;
+  }
+}
+
