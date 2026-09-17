@@ -43,10 +43,10 @@ export const Route = createFileRoute("/contato")({
   head: ({ loaderData }) => {
     const { meta, links } = buildSeoTags(
       {
-        title: "Contato | Status na América",
+        title: "Contato | Status Immigration Law Firm",
         description:
-          "Fale com a Status na América. WhatsApp, e-mail e endereços da matriz em Orlando e filial no Brasil. Levantamento inicial de informações para imigração legal aos EUA.",
-        ogTitle: "Contato | Status na América",
+          "Fale com a Status Immigration Law Firm. WhatsApp, e-mail e endereços da matriz em Orlando e filial no Brasil. Levantamento inicial de informações para imigração legal aos EUA.",
+        ogTitle: "Contato | Status Immigration Law Firm",
         ogDescription:
           "WhatsApp, e-mail e endereços. Matriz em Orlando/FL e filial em Barueri/SP.",
         canonical: "/contato",
@@ -62,7 +62,7 @@ export const Route = createFileRoute("/contato")({
           children: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "Organization",
-            name: "Status na América",
+            name: "Status Immigration Law Firm",
             url: "https://lp.statusnaamerica.com",
             sameAs: [
               "https://instagram.com/status_america",
@@ -204,7 +204,7 @@ function CanaisDiretos({
           <span className="font-mono-label text-oxblood">CANAIS DIRETOS</span>
         </div>
         <h2 className="mt-3 font-display display-2 text-ink-text max-w-2xl">
-          Como falar com a Status na América.
+          Como falar com a Status Immigration Law Firm.
         </h2>
 
         <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
@@ -551,7 +551,7 @@ function ContatoForm() {
               className="mt-0.5"
             />
             <span>
-              Autorizo a Status na América a entrar em contato comigo por e-mail ou
+              Autorizo a Status Immigration Law Firm a entrar em contato comigo por e-mail ou
               WhatsApp para responder esta mensagem (LGPD).
             </span>
           </label>

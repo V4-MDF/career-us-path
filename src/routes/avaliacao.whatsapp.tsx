@@ -52,7 +52,7 @@ export const Route = createFileRoute("/avaliacao/whatsapp")({
   },
   head: () => ({
     meta: [
-      { title: "Análise pelo WhatsApp | Status na América" },
+      { title: "Análise pelo WhatsApp | Status Immigration Law Firm" },
       {
         name: "description",
         content:
@@ -158,10 +158,10 @@ function AvaliacaoWhatsAppPage() {
     <div className="min-h-screen bg-ink text-foreground flex flex-col">
       <header className="sticky top-0 z-20 border-b border-gold/15 bg-ink/85 backdrop-blur">
         <div className="container-x flex h-[64px] items-center justify-between">
-          <Link to="/" className="flex items-center" aria-label="Status na América. Início">
+          <Link to="/" className="flex items-center" aria-label="Status Immigration Law Firm. Início">
             <img
               src={logoAsset.url}
-              alt="Status na América"
+              alt="Status Immigration Law Firm"
               className="h-10 md:h-12 w-auto"
               width={240}
               height={48}
@@ -260,12 +260,12 @@ function AvaliacaoWhatsAppPage() {
       <footer className="border-t border-gold/15 bg-ink-deep">
         <div className="container-x py-8 text-xs text-foreground/80 leading-relaxed max-w-4xl">
           <p>
-            A Status na América atua na preparação e organização de documentos imigratórios.
+            A Status Immigration Law Firm atua na preparação e organização de documentos imigratórios.
             Não somos advogados licenciados e não prestamos orientação jurídica nem
             representação legal em processos de imigração.
           </p>
           <p className="mt-3 font-mono-label text-foreground/80">
-            © {new Date().getFullYear()} STATUS NA AMÉRICA LLC · EIN 99-4846502
+            © {new Date().getFullYear()} STATUS IMMIGRATION LAW FIRM LLC · EIN 99-4846502
           </p>
         </div>
       </footer>

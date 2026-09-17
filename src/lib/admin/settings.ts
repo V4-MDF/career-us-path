@@ -46,7 +46,7 @@ export interface TrackingSettings {
 }
 
 export const defaultSettings: SiteSettings = {
-  site_name: "Status na América",
+  site_name: "Status Immigration Law Firm",
   site_tagline: "Green Card EB-2 NIW para profissionais brasileiros",
   primary_color: "#C9A24B",
   accent_color: "#0B0B0C",

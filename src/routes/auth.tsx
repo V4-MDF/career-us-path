@@ -20,7 +20,7 @@ export const Route = createFileRoute("/auth")({
   component: AuthPage,
   head: () => ({
     meta: [
-      { title: "Entrar · Status na América" },
+      { title: "Entrar · Status Immigration Law Firm" },
       { name: "robots", content: "noindex,nofollow" },
     ],
   }),
@@ -66,11 +66,11 @@ function AuthPage() {
         <div className="text-center mb-8">
           <img
             src={logoAsset.url}
-            alt="Status na América"
+            alt="Status Immigration Law Firm"
             className="mx-auto h-12 w-auto object-contain"
           />
           <h1 className="mt-5 font-display text-lg font-bold uppercase tracking-[0.14em] text-parchment">
-            Status na América
+            Status Immigration Law Firm
           </h1>
           <div className="mx-auto mt-3 h-px w-10 bg-gold" />
           <p className="mt-3 font-mono text-[10px] uppercase tracking-[0.28em] text-gold/90">

@@ -57,7 +57,7 @@ export const Route = createFileRoute("/avaliacao/")({
   },
   head: () => ({
     meta: [
-      { title: "Levantamento inicial de informações EB-2 NIW | Status na América" },
+      { title: "Levantamento inicial de informações EB-2 NIW | Status Immigration Law Firm" },
       {
         name: "description",
         content:
@@ -107,10 +107,10 @@ function AvaliacaoPage() {
       {/* Header sticky compacto */}
       <header className="sticky top-0 z-20 border-b border-gold/15 bg-ink/85 backdrop-blur">
         <div className="container-x flex h-[64px] items-center justify-between">
-          <Link to="/" className="flex items-center" aria-label="Status na América. Início">
+          <Link to="/" className="flex items-center" aria-label="Status Immigration Law Firm. Início">
             <img
               src={logoAsset.url}
-              alt="Status na América"
+              alt="Status Immigration Law Firm"
               className="h-10 md:h-12 w-auto"
               width={240}
               height={48}
@@ -193,7 +193,7 @@ function AvaliacaoPage() {
       <footer className="border-t border-gold/15 bg-ink-deep">
         <div className="container-x py-8 text-xs text-foreground/80 leading-relaxed max-w-4xl">
           <p className="font-mono-label text-foreground/80">
-            © {new Date().getFullYear()} STATUS NA AMÉRICA LLC · EIN 99-4846502
+            © {new Date().getFullYear()} STATUS IMMIGRATION LAW FIRM LLC · EIN 99-4846502
           </p>
         </div>
       </footer>

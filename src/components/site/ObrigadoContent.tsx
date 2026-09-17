@@ -37,7 +37,7 @@ function ObrigadoShell({ children }: { children: React.ReactNode }) {
     <div className="min-h-screen bg-ink text-foreground flex flex-col">
       <header className="sticky top-0 z-20 border-b border-gold/15 bg-ink/85 backdrop-blur">
         <div className="container-x flex h-[64px] items-center justify-between">
-          <Link to="/" className="flex items-center gap-3" aria-label="Status na América">
+          <Link to="/" className="flex items-center gap-3" aria-label="Status Immigration Law Firm">
             <span className="grid h-9 w-9 place-items-center rounded-lg border border-gold/60 text-gold font-display text-lg">S</span>
             <span className="font-display text-[16px]">Status<span className="text-gold">.</span> na América</span>
           </Link>
@@ -64,12 +64,12 @@ function ObrigadoShell({ children }: { children: React.ReactNode }) {
       <footer className="border-t border-gold/15 bg-ink-deep">
         <div className="container-x py-8 text-xs text-foreground/80 leading-relaxed max-w-4xl">
           <p>
-            A Status na América atua na preparação e organização de documentos imigratórios.
+            A Status Immigration Law Firm atua na preparação e organização de documentos imigratórios.
             Não somos advogados licenciados e não prestamos orientação jurídica nem
             representação legal em processos de imigração.
           </p>
           <p className="mt-3 font-mono-label text-foreground/80">
-            © {new Date().getFullYear()} STATUS NA AMÉRICA LLC · EIN 99-4846502
+            © {new Date().getFullYear()} STATUS IMMIGRATION LAW FIRM LLC · EIN 99-4846502
           </p>
         </div>
       </footer>

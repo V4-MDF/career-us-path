@@ -19,7 +19,7 @@ import {
 export const Route = createFileRoute("/avaliacao/obrigado")({
   head: () => ({
     meta: [
-      { title: "Perfil recebido | Status na América" },
+      { title: "Perfil recebido | Status Immigration Law Firm" },
       { name: "robots", content: "noindex,nofollow" },
     ],
   }),

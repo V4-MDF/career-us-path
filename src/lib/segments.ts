@@ -121,7 +121,7 @@ const SEED_SEGMENTS: Segment[] = [
         a: "São processos distintos; no levantamento inicial de informações explicamos a ordem documental de cada etapa.",
       },
     ],
-    meta_title: "Green Card para médicos brasileiros | EB-2 NIW | Status na América",
+    meta_title: "Green Card para médicos brasileiros | EB-2 NIW | Status Immigration Law Firm",
     meta_description:
       "Médico e quer construir carreira nos EUA? Veja como conquistar o Green Card por mérito pelo EB-2 NIW, sem patrocinador. Levantamento inicial de informações gratuito.",
     hero_default: {
@@ -171,7 +171,7 @@ const SEED_SEGMENTS: Segment[] = [
         a: "A maioria das engenharias tem boa aderência; o levantamento inicial de informações é gratuito e indica os documentos normalmente exigidos.",
       },
     ],
-    meta_title: "Green Card para engenheiros brasileiros | EB-2 NIW | Status na América",
+    meta_title: "Green Card para engenheiros brasileiros | EB-2 NIW | Status Immigration Law Firm",
     meta_description:
       "Engenheiro e quer carreira nos EUA? Conquiste o Green Card por mérito pelo EB-2 NIW, sem patrocinador. Levantamento inicial de informações.",
     hero_default: {
@@ -224,7 +224,7 @@ const SEED_SEGMENTS: Segment[] = [
         a: "Não necessariamente. O EB-2 NIW é por mérito próprio; no levantamento inicial de informações mostramos os documentos normalmente exigidos nessa categoria.",
       },
     ],
-    meta_title: "Green Card para empresários brasileiros | EB-2 NIW | Status na América",
+    meta_title: "Green Card para empresários brasileiros | EB-2 NIW | Status Immigration Law Firm",
     meta_description:
       "Empresário e quer migrar com a família para os EUA? Green Card por mérito pelo EB-2 NIW. Levantamento inicial de informações.",
     hero_default: {

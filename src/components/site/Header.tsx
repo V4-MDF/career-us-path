@@ -69,10 +69,10 @@ export function Header() {
 
       <div className="container-x flex h-[68px] items-center justify-between gap-6">
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-3 group" aria-label="Status na América. Início">
+        <Link to="/" className="flex items-center gap-3 group" aria-label="Status Immigration Law Firm. Início">
           <img
             src={logoAsset.url}
-            alt="Status na América. Mobilidade Imigratória"
+            alt="Status Immigration Law Firm. Mobilidade Imigratória"
             className="h-11 w-auto md:h-14"
             width={260}
             height={56}

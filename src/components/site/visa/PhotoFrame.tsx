@@ -1,5 +1,5 @@
 /**
- * PhotoFrame, moldura fotográfica padrão do site "Status na América".
+ * PhotoFrame, moldura fotográfica padrão do site "Status Immigration Law Firm".
  *
  * Aplica o tratamento visual único a QUALQUER fotografia usada nas páginas
  * de visto: warmth dourada leve, contraste elevado sutil, dessaturação

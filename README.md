@@ -1,12 +1,12 @@
-# Status na América
+# Status Immigration Law Firm
 
-# PROJETO: Status na América — Site Brasil (Imigração EB para os EUA)
+# PROJETO: Status Immigration Law Firm — Site Brasil (Imigração EB para os EUA)
 
 Construa a FUNDAÇÃO + DESIGN SYSTEM + HOME INSTITUCIONAL de um site de captação para o mercado brasileiro. Stack padrão Lovable: React + Vite + Tailwind + shadcn/ui. NÃO conecte Supabase ainda — use a camada de dados em localStorage descrita abaixo, com abstração para migração futura.
 
 ## CONTEXTO DO NEGÓCIO (leia antes de construir)
 
-A Status na América é uma assessoria de mobilidade migratória sediada em Orlando/FL que ajuda brasileiros QUALIFICADOS a imigrar legalmente para os EUA. Carro-chefe: visto EB-2 NIW (National Interest Waiver) — Green Card por mérito, SEM necessidade de patrocinador/empregador, com Green Card estendido a cônjuge e filhos. Coadjuvantes: EB-1 (habilidade extraordinária) e EB-3 (exige patrocinador).
+A Status Immigration Law Firm é uma assessoria de mobilidade migratória sediada em Orlando/FL que ajuda brasileiros QUALIFICADOS a imigrar legalmente para os EUA. Carro-chefe: visto EB-2 NIW (National Interest Waiver) — Green Card por mérito, SEM necessidade de patrocinador/empregador, com Green Card estendido a cônjuge e filhos. Coadjuvantes: EB-1 (habilidade extraordinária) e EB-3 (exige patrocinador).
 
 Público-alvo Brasil: profissionais consolidados, 40+, com pós-graduação/mestrado, em capitais, alto poder aquisitivo. Personas: Médico Consolidado, Engenheiro Consolidado, Empresário Calculista. Ticket alto (USD 15k–30k), ciclo de decisão longo (processo dura ~2 anos).
 
@@ -46,7 +46,7 @@ Tabelas usadas agora:
 
 ## ESTRUTURA DA HOME (/) — dobras em ordem
 
-1. HEADER fixo: logo Status na América (placeholder), menu (Início · Vistos [EB-2 NIW, EB-1, EB-3] · Para quem [Médicos, Engenheiros, Empresários] · Sobre · Conteúdo · Contato), botão CTA "Avaliação gratuita" (dourado) e ícone WhatsApp. Menu hambúrguer no mobile.
+1. HEADER fixo: logo Status Immigration Law Firm (placeholder), menu (Início · Vistos [EB-2 NIW, EB-1, EB-3] · Para quem [Médicos, Engenheiros, Empresários] · Sobre · Conteúdo · Contato), botão CTA "Avaliação gratuita" (dourado) e ícone WhatsApp. Menu hambúrguer no mobile.
 
 2. HERO: fundo dark com vídeo/imagem placeholder (terra→EUA). 
 
@@ -54,7 +54,7 @@ Tabelas usadas agora:
 
    - H1: "Seu Green Card americano baseado no mérito da sua carreira."
 
-   - Sub: "A Status na América ajuda profissionais brasileiros consolidados a conquistar a residência permanente nos EUA pelo EB-2 NIW — sem patrocinador, sem loteria, com Green Card para o cônjuge e os filhos."
+   - Sub: "A Status Immigration Law Firm ajuda profissionais brasileiros consolidados a conquistar a residência permanente nos EUA pelo EB-2 NIW — sem patrocinador, sem loteria, com Green Card para o cônjuge e os filhos."
 
    - CTA primário: "Fazer minha avaliação gratuita" (rola até o formulário)
 
@@ -78,7 +78,7 @@ Tabelas usadas agora:
 
 8. PROCESSO EM 3 PASSOS: 01 Avaliação gratuita do seu perfil · 02 Estratégia e preparação da petição (rigor USCIS) · 03 Acompanhamento até a aprovação e adaptação nos EUA.
 
-9. POR QUE A STATUS NA AMÉRICA: sede própria em Orlando, equipe dedicada, +25 anos de experiência [CONFIRMAR], nota 5,0 no Google, +1.000 famílias [CONFIRMAR], assessoria completa (documentação, tradução, mudança, bancos, escolas).
+9. POR QUE A STATUS IMMIGRATION LAW FIRM: sede própria em Orlando, equipe dedicada, +25 anos de experiência [CONFIRMAR], nota 5,0 no Google, +1.000 famílias [CONFIRMAR], assessoria completa (documentação, tradução, mudança, bancos, escolas).
 
 10. SALÁRIO BRASIL vs EUA (comparativo visual): bloco com números editáveis (ex.: profissão, média Brasil, média EUA) — deixe genérico na home, pois os números específicos por cargo virão no motor de LPs. Marque [CONFIRMAR] nos valores.
 
@@ -144,7 +144,7 @@ Classificação: A (SQL quente) ≥ 80 · B (MQL) 60–79 · C (nutrir) 40–59 
 
 - HTML semântico (header/main/section/footer, h1 único por página).
 
-- `react-helmet-async` (ou equivalente) para title/description por página. Home: title "Status na América | Green Card EB-2 NIW para profissionais brasileiros"; description focada em imigração legal por mérito.
+- `react-helmet-async` (ou equivalente) para title/description por página. Home: title "Status Immigration Law Firm | Green Card EB-2 NIW para profissionais brasileiros"; description focada em imigração legal por mérito.
 
 - Tags Open Graph + Twitter card com imagem placeholder.
 

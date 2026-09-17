@@ -49,7 +49,7 @@ function LpFooter() {
     <footer className="border-t border-border/40 bg-surface py-10">
       <div className="container-x flex flex-col sm:flex-row gap-4 items-center justify-between text-xs text-muted-foreground">
         <p className="max-w-2xl leading-relaxed">
-          © {new Date().getFullYear()} Status na América. A Status na América atua na preparação
+          © {new Date().getFullYear()} Status Immigration Law Firm. A Status Immigration Law Firm atua na preparação
           e organização de documentos imigratórios. Não somos advogados licenciados e não
           prestamos orientação jurídica nem representação legal em processos de imigração.
         </p>

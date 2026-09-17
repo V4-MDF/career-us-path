@@ -94,7 +94,7 @@ const eb2niw: VisaPage = {
   intro:
     "O EB-2 National Interest Waiver é um Green Card concedido a profissionais brasileiros qualificados cuja atuação é de interesse nacional dos Estados Unidos, sem necessidade de empresa patrocinadora e sem oferta de emprego.",
   metaTitle:
-    "EB-2 NIW: Green Card por mérito profissional | Status na América",
+    "EB-2 NIW: Green Card por mérito profissional | Status Immigration Law Firm",
   metaDescription:
     "Entenda o EB-2 National Interest Waiver: critérios, prova de interesse nacional, etapas e prazos. Sem patrocinador. Green Card para cônjuge e filhos, junto do requerente principal.",
   whatIs: {
@@ -221,7 +221,7 @@ const eb1: VisaPage = {
   h1: "EB-1: Green Card para habilidade extraordinária",
   intro:
     "O EB-1A é destinado a quem demonstra estar entre o pequeno percentual que alcançou o topo da sua área. O reconhecimento pode ser nacional ou internacional, desde que devidamente comprovado por documentação. Também dispensa patrocinador e PERM.",
-  metaTitle: "EB-1: Green Card por habilidade extraordinária | Status na América",
+  metaTitle: "EB-1: Green Card por habilidade extraordinária | Status Immigration Law Firm",
   metaDescription:
     "EB-1 é o Green Card para quem está entre o pequeno percentual do topo da sua área, com reconhecimento nacional ou internacional comprovado por documentação. Sem patrocinador, sem PERM.",
   whatIs: {
@@ -295,7 +295,7 @@ const eb3: VisaPage = {
   h1: "EB-3: Green Card para profissionais qualificados com oferta de emprego nos EUA",
   intro:
     "O EB-3 é uma categoria de Green Card que EXIGE oferta formal de emprego nos Estados Unidos e processo de labor certification (PERM). É um caminho secundário, mais dependente de terceiros, quando há vínculo concreto com um empregador americano disposto a patrocinar.",
-  metaTitle: "EB-3: Green Card com patrocínio | Status na América",
+  metaTitle: "EB-3: Green Card com patrocínio | Status Immigration Law Firm",
   metaDescription:
     "EB-3 é o Green Card para profissionais qualificados com oferta de emprego nos EUA. Exige patrocinador e PERM. Entenda o fluxo e quando faz sentido.",
   whatIs: {
@@ -362,7 +362,7 @@ const o1: VisaPage = {
   h1: "O-1: visto temporário para profissionais de habilidade extraordinária",
   intro:
     "O O-1 é um visto de não-imigrante destinado a pessoas com habilidade extraordinária em ciências, artes, educação, negócios ou atletismo (O-1A) ou em cinema e televisão (O-1B). É temporário — não é Green Card — e admite peticionário na forma de empregador OU agente nos EUA, sem exigir oferta de emprego permanente.",
-  metaTitle: "O-1: visto temporário por habilidade extraordinária | Status na América",
+  metaTitle: "O-1: visto temporário por habilidade extraordinária | Status Immigration Law Firm",
   metaDescription:
     "O-1 é o visto de não-imigrante para habilidade extraordinária. Admite empregador ou agente peticionário, sem exigir oferta permanente. Entenda critérios, processo e limites.",
   whatIs: {

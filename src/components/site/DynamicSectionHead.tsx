@@ -15,7 +15,7 @@
  * Recebe:
  *  - `sections`: lista do catálogo (sectionMap).
  *  - `baseTitle`: título "limpo" da página (sem brand).
- *  - `brand`: sufixo (default "Status na América").
+ *  - `brand`: sufixo (default "Status Immigration Law Firm").
  */
 
 import { useEffect, useRef } from "react";
@@ -34,7 +34,7 @@ interface Props {
 export function DynamicSectionHead({
   sections,
   baseTitle,
-  brand = "Status na América",
+  brand = "Status Immigration Law Firm",
   freezeHash = false,
 }: Props) {
   const ids = sections.map((s) => s.id);
@@ -73,7 +73,7 @@ export function DynamicSectionHead({
     const def = sections.find((s) => s.id === activeId);
     if (!def) return;
 
-    // Formato: "<Dobra> · <Página> | Status na América"
+    // Formato: "<Dobra> · <Página> | Status Immigration Law Firm"
     document.title = `${def.label} · ${baseTitle} | ${brand}`;
   }, [activeId, sections, baseTitle, brand]);
 

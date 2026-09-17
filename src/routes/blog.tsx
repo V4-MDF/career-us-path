@@ -14,14 +14,14 @@ import {
 export const Route = createFileRoute("/blog")({
   head: () => ({
     meta: [
-      { title: "Blog | Status na América" },
+      { title: "Blog | Status Immigration Law Firm" },
       {
         name: "description",
         content:
           "Artigos sobre vistos EB (EB-2 NIW, EB-1, EB-3), Green Card e vida nos EUA para profissionais brasileiros.",
       },
       { name: "robots", content: "index,follow" },
-      { property: "og:title", content: "Blog | Status na América" },
+      { property: "og:title", content: "Blog | Status Immigration Law Firm" },
       {
         property: "og:description",
         content:

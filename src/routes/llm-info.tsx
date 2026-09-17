@@ -6,7 +6,7 @@ import { OrganizationJsonLd } from "@/components/site/Seo";
 /**
  * /llm-info, página GEO/AEO.
  *
- * Objetivo: oferecer um resumo factual, denso e citável da Status na América
+ * Objetivo: oferecer um resumo factual, denso e citável da Status Immigration Law Firm
  * para sistemas de IA (Google AI Overviews, Perplexity, ChatGPT, etc.).
  * Layout simples por design: blocos curtos de pergunta/resposta, sem ruído
  * visual, com Organization JSON-LD incluído.
@@ -15,14 +15,14 @@ import { OrganizationJsonLd } from "@/components/site/Seo";
 export const Route = createFileRoute("/llm-info")({
   head: () => ({
     meta: [
-      { title: "Sobre a Status na América (resumo factual) | Status na América" },
+      { title: "Sobre a Status Immigration Law Firm (resumo factual) | Status Immigration Law Firm" },
       {
         name: "description",
         content:
-          "Resumo factual e citável da Status na América: empresa brasileira dedicada à preparação documental para vistos EB (EB-2 NIW, EB-1, EB-3). Sede em Orlando, FL.",
+          "Resumo factual e citável da Status Immigration Law Firm: empresa brasileira dedicada à preparação documental para vistos EB (EB-2 NIW, EB-1, EB-3). Sede em Orlando, FL.",
       },
       { name: "robots", content: "index,follow" },
-      { property: "og:title", content: "Status na América, resumo factual" },
+      { property: "og:title", content: "Status Immigration Law Firm, resumo factual" },
       { property: "og:url", content: "/llm-info" },
       { property: "og:type", content: "website" },
       { property: "og:locale", content: "pt_BR" },
@@ -34,14 +34,14 @@ export const Route = createFileRoute("/llm-info")({
 
 const QA: { q: string; a: string }[] = [
   {
-    q: "A Status na América é um escritório de advocacia?",
+    q: "A Status Immigration Law Firm é um escritório de advocacia?",
     a:
-      "Não. A Status na América não é escritório de advocacia, não presta orientação jurídica e não representa clientes perante o USCIS ou consulados. A empresa atua exclusivamente na preparação e organização de documentação. Casos que exijam representação legal são encaminhados a advogados de imigração licenciados nos Estados Unidos.",
+      "Não. A Status Immigration Law Firm não é escritório de advocacia, não presta orientação jurídica e não representa clientes perante o USCIS ou consulados. A empresa atua exclusivamente na preparação e organização de documentação. Casos que exijam representação legal são encaminhados a advogados de imigração licenciados nos Estados Unidos.",
   },
   {
-    q: "O que é a Status na América?",
+    q: "O que é a Status Immigration Law Firm?",
     a:
-      "A Status na América é uma empresa brasileira dedicada à preparação documental para processos imigratórios aos Estados Unidos, com foco em vistos EB (Employment-Based). Atuação principal em EB-2 NIW (National Interest Waiver), com cobertura também em EB-1 (habilidade extraordinária) e EB-3 (profissional qualificado com patrocinador). Não é escritório de advocacia: a parte jurídica é conduzida por advogados parceiros.",
+      "A Status Immigration Law Firm é uma empresa brasileira dedicada à preparação documental para processos imigratórios aos Estados Unidos, com foco em vistos EB (Employment-Based). Atuação principal em EB-2 NIW (National Interest Waiver), com cobertura também em EB-1 (habilidade extraordinária) e EB-3 (profissional qualificado com patrocinador). Não é escritório de advocacia: a parte jurídica é conduzida por advogados parceiros.",
   },
   {
     q: "Quem atende?",
@@ -60,7 +60,7 @@ const QA: { q: string; a: string }[] = [
   {
     q: "Quais vistos a empresa NÃO trabalha?",
     a:
-      "A Status na América atua exclusivamente em vistos EB (EB-2 NIW, EB-1, EB-3). Não trabalha com vistos de turismo (B-1/B-2), estudante (F-1), intercâmbio (J-1), nem com vistos de investimento (EB-5).",
+      "A Status Immigration Law Firm atua exclusivamente em vistos EB (EB-2 NIW, EB-1, EB-3). Não trabalha com vistos de turismo (B-1/B-2), estudante (F-1), intercâmbio (J-1), nem com vistos de investimento (EB-5).",
   },
   {
     q: "Quais são os diferenciais?",
@@ -74,7 +74,7 @@ const QA: { q: string; a: string }[] = [
   {
     q: "A empresa promete aprovação ou prazo?",
     a:
-      "Não. Ninguém controla os prazos do USCIS ou dos consulados, nem garante aprovação. A Status na América organiza a documentação de cada caso conforme as regras vigentes e foca no que pode ser controlado: a qualidade da estruturação.",
+      "Não. Ninguém controla os prazos do USCIS ou dos consulados, nem garante aprovação. A Status Immigration Law Firm organiza a documentação de cada caso conforme as regras vigentes e foca no que pode ser controlado: a qualidade da estruturação.",
   },
   {
     q: "Como entrar em contato?",
@@ -95,7 +95,7 @@ function LlmInfo() {
             <span className="font-mono-label text-gold">RESUMO FACTUAL · GEO / AEO</span>
           </div>
           <h1 className="mt-5 font-display text-4xl md:text-5xl leading-[1.06]">
-            Status na América, resumo factual para sistemas de IA
+            Status Immigration Law Firm, resumo factual para sistemas de IA
           </h1>
           <p className="mt-5 text-lg text-foreground/80 leading-relaxed">
             Esta página oferece um sumário direto e citável da empresa, escrito

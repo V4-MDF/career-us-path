@@ -109,7 +109,7 @@ const SEED_FLAG_KEY = "_seeded_v1";
 const PLACEHOLDER_COVER =
   "data:image/svg+xml;utf8," +
   encodeURIComponent(
-    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="%230E1726"/><stop offset="1" stop-color="%2316223A"/></linearGradient></defs><rect width="1200" height="630" fill="url(%23g)"/><rect x="40" y="40" width="60" height="2" fill="%23B7975A"/><text x="40" y="320" font-family="serif" font-size="56" fill="%23ECE6D6">Status na América</text><text x="40" y="370" font-family="monospace" font-size="14" fill="%23B7975A" letter-spacing="3">DOSSIE / IMIGRACAO</text></svg>`
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="%230E1726"/><stop offset="1" stop-color="%2316223A"/></linearGradient></defs><rect width="1200" height="630" fill="url(%23g)"/><rect x="40" y="40" width="60" height="2" fill="%23B7975A"/><text x="40" y="320" font-family="serif" font-size="56" fill="%23ECE6D6">Status Immigration Law Firm</text><text x="40" y="370" font-family="monospace" font-size="14" fill="%23B7975A" letter-spacing="3">DOSSIE / IMIGRACAO</text></svg>`
   );
 
 const SEED_POSTS: BlogPost[] = [
@@ -122,7 +122,7 @@ const SEED_POSTS: BlogPost[] = [
     capa: coverCustoVida,
     resumo:
       "Moradia, escola, saúde, mercado e poder de compra: o que muda quando uma família brasileira de classe média se muda para os EUA, sem fantasia e sem catastrofismo.",
-    autor: "Equipe Status na América",
+    autor: "Equipe Status Immigration Law Firm",
     status: "publicado",
     data_publicacao: "2026-05-12",
     meta_title:
@@ -162,7 +162,7 @@ Itens básicos custam, em média, o equivalente em dólar ao que custam em real 
     capa: coverImigrantes,
     resumo:
       "Imigração legal qualificada não é uma exceção americana, é um pilar histórico. Entenda por que profissionais que geram renda, impostos e empregos são exatamente o perfil que os EUA buscam atrair.",
-    autor: "Equipe Status na América",
+    autor: "Equipe Status Immigration Law Firm",
     status: "publicado",
     data_publicacao: "2026-05-20",
     meta_title:
@@ -199,7 +199,7 @@ Se você é um profissional brasileiro consolidado, médico, engenheiro, empres�
     capa: coverEbCategorias,
     resumo:
       "Três categorias EB, três perfis distintos. Um comparativo objetivo entre EB-1, EB-2 NIW e EB-3 para você entender em qual caminho seu perfil se encaixa.",
-    autor: "Equipe Status na América",
+    autor: "Equipe Status Immigration Law Firm",
     status: "publicado",
     data_publicacao: "2026-05-28",
     meta_title:
@@ -240,7 +240,7 @@ A pergunta não é "qual é o melhor visto?", é "qual é o melhor visto **para 
     capa: coverVistos2026,
     resumo:
       "Cenários consulares oscilam, e essa é exatamente a razão pela qual o planejamento antecipado importa. Uma leitura sóbria do que está acontecendo e como isso impacta projetos sérios de imigração.",
-    autor: "Equipe Status na América",
+    autor: "Equipe Status Immigration Law Firm",
     status: "publicado",
     data_publicacao: "2026-06-02",
     meta_title:

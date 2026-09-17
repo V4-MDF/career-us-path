@@ -10,11 +10,11 @@ import { Footer } from "@/components/site/Footer";
 export const Route = createFileRoute("/termos")({
   head: () => ({
     meta: [
-      { title: "Termos de Uso | Status na América" },
+      { title: "Termos de Uso | Status Immigration Law Firm" },
       {
         name: "description",
         content:
-          "Termos de uso do site da Status na América: condições de acesso, natureza do serviço prestado e limites de responsabilidade.",
+          "Termos de uso do site da Status Immigration Law Firm: condições de acesso, natureza do serviço prestado e limites de responsabilidade.",
       },
       { name: "robots", content: "noindex,follow" },
     ],
@@ -40,7 +40,7 @@ function TermosPage() {
             <h2 className="font-display text-2xl text-foreground">1. Aceitação</h2>
             <p className="mt-3">
               Ao acessar o site <strong>lp.statusnaamerica.com</strong> e demais domínios
-              operados pela Status na América, o usuário declara ter lido, compreendido e
+              operados pela Status Immigration Law Firm, o usuário declara ter lido, compreendido e
               aceito integralmente estes Termos de Uso e a{" "}
               <Link to="/privacidade" className="text-gold underline underline-offset-4 hover:text-gold/80">
                 Política de Privacidade
@@ -51,12 +51,12 @@ function TermosPage() {
           <div>
             <h2 className="font-display text-2xl text-foreground">2. Natureza do serviço</h2>
             <p className="mt-3">
-              A Status na América presta serviços de <strong>preparação e organização
+              A Status Immigration Law Firm presta serviços de <strong>preparação e organização
               documental</strong> para processos imigratórios americanos, incluindo
               vistos EB-1, EB-2 NIW, EB-3 e O-1.
             </p>
             <p className="mt-3">
-              A Status na América <strong>não é escritório de advocacia</strong>, não
+              A Status Immigration Law Firm <strong>não é escritório de advocacia</strong>, não
               possui advogados licenciados nos EUA em seu quadro operacional e não presta
               consultoria ou aconselhamento jurídico. As informações fornecidas no site,
               em materiais, redes sociais e comunicações têm <strong>caráter meramente
@@ -64,7 +64,7 @@ function TermosPage() {
               advogado de imigração licenciado.
             </p>
             <p className="mt-3">
-              As informações compartilhadas com a Status na América{" "}
+              As informações compartilhadas com a Status Immigration Law Firm{" "}
               <strong>não são protegidas por sigilo advogado-cliente</strong>
               (attorney-client privilege).
             </p>
@@ -108,7 +108,7 @@ function TermosPage() {
             <h2 className="font-display text-2xl text-foreground">6. Propriedade intelectual</h2>
             <p className="mt-3">
               Todos os textos, imagens, vídeos, marcas, logotipos, layouts e códigos
-              publicados neste site são de titularidade da Status na América ou de seus
+              publicados neste site são de titularidade da Status Immigration Law Firm ou de seus
               licenciantes, e são protegidos pelas leis de direitos autorais e de
               propriedade industrial. Qualquer reprodução exige autorização prévia por
               escrito.
@@ -118,7 +118,7 @@ function TermosPage() {
           <div>
             <h2 className="font-display text-2xl text-foreground">7. Limitação de responsabilidade</h2>
             <p className="mt-3">
-              A Status na América não se responsabiliza por decisões tomadas pelo usuário
+              A Status Immigration Law Firm não se responsabiliza por decisões tomadas pelo usuário
               com base apenas em conteúdo informativo do site, sem contratação formal do
               serviço de preparação documental e sem orientação jurídica individualizada
               por advogado licenciado.

@@ -115,12 +115,12 @@ function AdminLayout() {
         <div className="px-5 py-5 border-b border-gold/15 flex items-center gap-3">
           <img
             src={logoAsset.url}
-            alt="Status na América"
+            alt="Status Immigration Law Firm"
             className="h-9 w-9 rounded-md object-contain bg-parchment/5 p-1"
           />
           <div className="min-w-0">
             <div className="font-display text-xs font-bold uppercase tracking-[0.14em] leading-tight text-parchment truncate">
-              Status na América
+              Status Immigration Law Firm
             </div>
             <div className="mt-0.5 font-mono text-[9px] uppercase tracking-[0.28em] text-gold/80">
               Painel admin

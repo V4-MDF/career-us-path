@@ -37,7 +37,7 @@ export const defaultContent = {
   "hero.eyebrow": "IMIGRAÇÃO PARA OS ESTADOS UNIDOS. EB-2 NIW",
   "hero.title": "Transforme a sua carreira em um Green Card americano.",
   "hero.subtitle":
-    "A Status na América ajuda profissionais brasileiros consolidados a conquistar a residência permanente nos EUA pelo EB-2 NIW, sem patrocinador, sem loteria, com Green Card para o cônjuge e os filhos, junto do requerente principal.",
+    "A Status Immigration Law Firm ajuda profissionais brasileiros consolidados a conquistar a residência permanente nos EUA pelo EB-2 NIW, sem patrocinador, sem loteria, com Green Card para o cônjuge e os filhos, junto do requerente principal.",
   "hero.cta": "Iniciar pré-qualificação documental",
   // COMPLIANCE: números removidos até validação documental (ver src/config/credentials.ts).
   "hero.proof":
@@ -47,7 +47,7 @@ export const defaultContent = {
   "hero.videoHidden": "",
 
   "institutional.eyebrow": "VÍDEO INSTITUCIONAL",
-  "institutional.title": "Conheça a Status na América.",
+  "institutional.title": "Conheça a Status Immigration Law Firm.",
   "institutional.lead": "Em 90 segundos, entenda quem somos, como trabalhamos e por que centenas de famílias brasileiras confiam a construção do seu Green Card à nossa equipe.",
   "institutional.videoUrl": "",
   "institutional.videoHidden": "",
@@ -62,7 +62,7 @@ export const defaultContent = {
 
   "process.title": "Um método. Três passos. Acompanhamento até a aprovação.",
 
-  "why.title": "Por que a Status na América",
+  "why.title": "Por que a Status Immigration Law Firm",
   // COMPLIANCE: "duas décadas" removido — sem lastro documental (FTC/FDUTPA).
   "why.lead":
     "Equipe com trajetória consolidada em processos de imigração, com sede própria em Orlando desde 2022.",
@@ -99,7 +99,7 @@ export const defaultContent = {
   "testimonials.videoTitle": "Quem já passou pelo processo, no vídeo.",
   "testimonials.helderName": "Helder Moreira",
   "testimonials.helderCaption": "Caso real. Green Card EB-2 NIW",
-  "testimonials.helderRole": "Sócio da Status na América",
+  "testimonials.helderRole": "Sócio da Status Immigration Law Firm",
   "testimonials.helderVideoUrl": "",
   "testimonials.secondaryName": "Cliente aprovado",
   "testimonials.secondaryCaption": "Caso de cliente, em breve",
@@ -167,7 +167,7 @@ export const defaultContent = {
   "contato.subtitle":
     "Tire suas dúvidas com nossa equipe ou faça seu levantamento inicial de informações.",
   "contato.usa.title": "Matriz. Estados Unidos",
-  "contato.usa.company": "Status na America LLC",
+  "contato.usa.company": "Status Immigration Law Firm LLC",
   "contato.usa.address": "7575 KingsPointe Pkwy #4, Orlando, FL 32819",
   "contato.usa.phone1": "+1 689 251-0985",
   "contato.usa.phone2": "+1 689 220-9691",
@@ -186,7 +186,7 @@ export const defaultContent = {
 
   // ==== Página Sobre ==============================================
   "sobre.hero.eyebrow": "QUEM SOMOS",
-  "sobre.hero.title": "Status na América. De Orlando para o Brasil.",
+  "sobre.hero.title": "Status Immigration Law Firm. De Orlando para o Brasil.",
   // COMPLIANCE: "duas décadas" removido — sem lastro documental.
   "sobre.hero.subtitle":
     "Equipe com trajetória consolidada em processos de imigração, com sede própria em Orlando desde 2022.",
@@ -195,7 +195,7 @@ export const defaultContent = {
   "sobre.historia.eyebrow": "NOSSA HISTÓRIA",
   "sobre.historia.title": "Um novo modelo de assessoria, feito por quem já viveu o antigo.",
   "sobre.historia.body":
-    "A Status na América nasceu da decisão da fundadora Lia de sair de um modelo antigo de assessoria migratória e construir algo mais próximo, transparente e conectado à realidade do cliente brasileiro. A empresa se estabeleceu em Orlando para acompanhar de perto quem chega aos Estados Unidos, não apenas até a aprovação do processo, mas na adaptação e nos primeiros passos da nova vida.",
+    "A Status Immigration Law Firm nasceu da decisão da fundadora Lia de sair de um modelo antigo de assessoria migratória e construir algo mais próximo, transparente e conectado à realidade do cliente brasileiro. A empresa se estabeleceu em Orlando para acompanhar de perto quem chega aos Estados Unidos, não apenas até a aprovação do processo, mas na adaptação e nos primeiros passos da nova vida.",
   "sobre.historia.image": "",
 
   "sobre.diferencial.eyebrow": "NOSSO DIFERENCIAL",

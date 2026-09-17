@@ -34,10 +34,10 @@ export function Footer() {
       <div className="container-x py-16 grid gap-12 md:grid-cols-12">
         {/* Marca + redes */}
         <div className="md:col-span-4">
-          <Link to="/" aria-label="Status na América — página inicial" className="inline-block">
+          <Link to="/" aria-label="Status Immigration Law Firm — página inicial" className="inline-block">
             <img
               src={logoAsset.url}
-              alt="Status na América"
+              alt="Status Immigration Law Firm"
               width={280}
               height={70}
               loading="lazy"
@@ -76,7 +76,7 @@ export function Footer() {
             Matriz · Estados Unidos
           </h4>
           <div className="mt-4 space-y-1.5 text-sm text-foreground/75 leading-relaxed">
-            <p className="font-display text-foreground">Status na America LLC</p>
+            <p className="font-display text-foreground">Status Immigration Law Firm LLC</p>
             <p>7575 KingsPointe Pkwy #4</p>
             <p>Orlando, FL 32819</p>
             <p className="font-mono text-xs text-foreground/80 mt-2">EIN 99-4846502</p>
@@ -118,7 +118,7 @@ export function Footer() {
         <div className="container-x py-6">
           <div className="flex flex-col sm:flex-row gap-3 items-start sm:items-center justify-between">
             <p className="text-[11px] font-mono-label text-foreground/80">
-              © {new Date().getFullYear()} STATUS NA AMÉRICA · TODOS OS DIREITOS RESERVADOS
+              © {new Date().getFullYear()} STATUS IMMIGRATION LAW FIRM · TODOS OS DIREITOS RESERVADOS
             </p>
             <div className="flex flex-wrap gap-x-6 gap-y-2 font-mono-label text-foreground/80">
               <Link to="/contato" className="hover:text-gold">Contato</Link>

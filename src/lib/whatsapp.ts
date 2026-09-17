@@ -44,7 +44,7 @@ export function whatsappLinkFor(number: string, message: string): string {
  */
 export function defaultWhatsAppMessage(): string {
   return [
-    "Olá! Acabei de enviar meu perfil para análise no site da Status na América.",
+    "Olá! Acabei de enviar meu perfil para análise no site da Status Immigration Law Firm.",
     "",
     "Gostaria de conversar sobre os próximos passos.",
   ].join("\n");
@@ -80,7 +80,7 @@ export function leadWhatsAppMessage(lead: LeadWhatsAppInput): string {
     ? objetivoLabels[lead.objetivo_visto] ?? lead.objetivo_visto
     : "";
   const linhas: string[] = [
-    "Olá! Acabei de enviar meu perfil para análise no site da Status na América.",
+    "Olá! Acabei de enviar meu perfil para análise no site da Status Immigration Law Firm.",
     "",
     "*Meus dados:*",
     lead.nome ? `• Nome: ${lead.nome}` : null,
