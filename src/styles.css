@@ -854,6 +854,14 @@
   box-shadow: 0 24px 70px -38px rgba(24, 24, 22, 0.38), inset 0 1px 0 rgba(255,255,255,0.95), inset 0 -1px 0 rgba(178,138,59,0.08);
 }
 
+/* Variante de alta legibilidade: vidro quase opaco para menus sobre conteúdo. */
+@utility liquid-glass-solid {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.97), rgba(255, 255, 255, 0.93));
+  backdrop-filter: blur(30px) saturate(155%);
+  border: 1px solid color-mix(in oklab, white 55%, var(--gold) 45%);
+  box-shadow: 0 28px 80px -34px rgba(24, 24, 22, 0.45), inset 0 1px 0 rgba(255,255,255,1), inset 0 -1px 0 rgba(178,138,59,0.1);
+}
+
 @utility liquid-card {
   background: linear-gradient(145deg, color-mix(in oklab, white 88%, transparent), color-mix(in oklab, white 66%, transparent));
   backdrop-filter: blur(24px) saturate(145%);
