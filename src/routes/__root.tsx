@@ -12,7 +12,6 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { TrackingInjector } from "../components/site/TrackingInjector";
-import { StickyCta } from "../components/site/StickyCta";
 import { trackRouteChange } from "../lib/origin";
 import { ensureSession } from "../lib/sessions";
 
@@ -143,7 +142,6 @@ function RootComponent() {
       <div key={pathname} id="conteudo" tabIndex={-1} className="route-fade focus:outline-none">
         <Outlet />
       </div>
-      <StickyCta />
     </QueryClientProvider>
   );
 }
