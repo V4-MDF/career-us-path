@@ -14,7 +14,6 @@ import { ChevronDown, Menu, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useAvaliacaoHref } from "@/lib/ctaLinks";
-import { BrandLogo } from "@/components/site/BrandLogo";
 
 
 interface VistoItem {
@@ -70,7 +69,10 @@ export function Header() {
       <div className="container-x flex h-[68px] items-center justify-between gap-6">
         {/* Logo */}
         <Link to="/" className="flex items-center" aria-label="Status Immigration Law Firm. Início">
-          <BrandLogo priority className="h-14 w-14" />
+          <span className="flex flex-col leading-none text-foreground">
+            <span className="font-display text-[15px] md:text-[17px] font-semibold uppercase">Status Immigration</span>
+            <span className="mt-1 font-mono-label text-[9px] uppercase text-gold">Law Firm</span>
+          </span>
         </Link>
 
 
