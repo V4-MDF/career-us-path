@@ -4,7 +4,7 @@ import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { WhatsAppFloat } from "@/components/site/WhatsAppFloat";
 import {
-  ContrastBrasilEUA, CtaBanner, FAQ, Hero, InstitutionalVideo, LegacySection,
+  CompanyIntroduction, ContrastBrasilEUA, CtaBanner, FAQ, Hero, InstitutionalVideo, LegacySection,
   NiwSection, PartnersBadges, ProcessSteps,
   SalaryCompare, Testimonials, VisaCards, WhyUs,
 } from "@/components/site/sections";
@@ -95,6 +95,14 @@ function Home() {
           .map((s) => {
             const Cmp = HOME_REGISTRY[s.id];
             if (!Cmp) return null;
+            if (s.id === "abertura") {
+              return (
+                <div key={s.id}>
+                  <Cmp />
+                  <CompanyIntroduction />
+                </div>
+              );
+            }
             return <Cmp key={s.id} />;
           })}
       </main>

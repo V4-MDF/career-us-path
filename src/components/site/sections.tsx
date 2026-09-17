@@ -75,12 +75,6 @@ export function Hero() {
   // sabemos, o vídeo NÃO aparece (evita o flash do slot oculto).
   const showHeroVideo = useVisibleSlot("hero.videoHidden");
   const heroVideoHidden = !showHeroVideo;
-  const lines = splitHeadline(title);
-
-
-
-
-
   return (
     <section
       id="abertura"
@@ -101,30 +95,26 @@ export function Hero() {
       </div>
 
       <div className={`container-x grid gap-10 md:gap-16 lg:gap-12 items-center ${heroVideoHidden ? "" : "lg:grid-cols-[1fr_1.1fr]"}`}>
-        <div className={`min-w-0 ${heroVideoHidden ? "mx-auto max-w-4xl text-center" : ""}`}>
+        <div className={`relative min-w-0 ${heroVideoHidden ? "hero-glass-halo mx-auto w-full max-w-5xl px-2 py-8 text-center sm:px-8 md:py-12" : ""}`}>
           <div className={`flex items-center gap-3 ${heroVideoHidden ? "justify-center" : ""}`}>
             <FlagsBRUS size={16} />
             <span aria-hidden className="h-px w-6 bg-gold" />
             <span className="font-mono-label text-gold">{eyebrow}</span>
           </div>
 
-          <h1 className="display-1 mt-6 md:mt-8 [overflow-wrap:break-word] [hyphens:auto]">
-            {lines.map((ln, i) => (
-              <span key={i} className="block pb-1">
-                {renderEmphasis(ln)}
-              </span>
-            ))}
+          <h1 className="display-1 mx-auto mt-6 max-w-[19ch] text-balance md:mt-8 [overflow-wrap:normal] [hyphens:none]">
+            {renderEmphasis(title)}
           </h1>
 
-          <div className="mt-10 h-px w-28 bg-gold" />
+          <div className={`mt-10 h-px w-28 bg-gold ${heroVideoHidden ? "mx-auto" : ""}`} />
 
-          <p className="lead mt-7 max-w-xl">
+          <p className={`lead mt-7 max-w-2xl text-balance ${heroVideoHidden ? "mx-auto" : ""}`}>
             {sub}
           </p>
 
-          <div className={`mt-10 flex flex-wrap gap-3 ${heroVideoHidden ? "justify-center" : ""}`}>
+          <div className={`mt-10 grid gap-3 sm:flex sm:flex-wrap ${heroVideoHidden ? "sm:justify-center" : ""}`}>
             <Link to={useAvaliacaoHref("home_hero")} aria-label="Ir para o formulário de pré-qualificação documental">
-              <Button size="lg" variant="cta" className="btn-label btn-sweep h-12 px-7 text-[15px] active:scale-[0.98]">
+               <Button size="lg" variant="cta" className="btn-label btn-sweep h-12 w-full px-7 text-[13px] sm:w-auto sm:text-[15px] active:scale-[0.98]">
                 {cta}
               </Button>
             </Link>
@@ -132,14 +122,14 @@ export function Hero() {
             <a href="#eb-2-niw">
               <Button
                 size="lg" variant="outline"
-                className="btn-label h-12 px-6 text-[15px] border-gold/40 text-foreground hover:border-gold hover:bg-gold/5"
+                 className="liquid-glass btn-label h-12 w-full px-6 text-[13px] border-gold/40 text-foreground hover:border-gold hover:bg-gold/5 sm:w-auto sm:text-[15px]"
               >
                 <PlayCircle className="mr-2 h-4 w-4" /> Entenda o EB-2 NIW
               </Button>
             </a>
           </div>
 
-          <div className={`mt-14 flex items-start gap-3 text-sm text-foreground/80 border-l border-gold/50 pl-4 max-w-md ${heroVideoHidden ? "mx-auto text-left" : ""}`}>
+          <div className={`mt-12 flex items-start gap-3 text-sm text-foreground/80 border-l border-gold/50 pl-4 max-w-md ${heroVideoHidden ? "mx-auto text-left" : ""}`}>
             <Star className="h-4 w-4 text-gold mt-0.5 shrink-0 fill-gold" />
             <span>{proof}</span>
           </div>
@@ -164,20 +154,73 @@ export function Hero() {
   );
 }
 
-
-function splitHeadline(t: string): string[] {
-  const words = t.split(/\s+/);
-  if (words.length <= 6) return [t];
-  const mid = Math.ceil(words.length / 2);
-  return [words.slice(0, mid).join(" "), words.slice(mid).join(" ")];
-}
-
 function renderEmphasis(text: string) {
   const parts = text.split(/(mérito)/i);
   return parts.map((p, i) =>
     /^mérito$/i.test(p)
       ? <span key={i} className="font-display italic text-gold">{p}</span>
       : <span key={i}>{p}</span>
+  );
+}
+
+/* ============================================================
+ * 2. APRESENTAÇÃO DA EMPRESA
+ * ============================================================ */
+export function CompanyIntroduction() {
+  const pillars = [
+    {
+      icon: Building2,
+      eyebrow: "QUEM SOMOS",
+      title: "Presença nos EUA e no Brasil.",
+      text: "A Status Immigration Law Firm é uma empresa de preparação documental com sede em Orlando e filial em Barueri, atendendo brasileiros nos Estados Unidos e no Brasil.",
+      className: "md:col-span-2",
+    },
+    {
+      icon: FileText,
+      eyebrow: "O QUE FAZEMOS",
+      title: "Documentação clara e organizada.",
+      text: "Auxiliamos na organização, revisão e preparação dos documentos exigidos em processos imigratórios, sempre com transparência sobre cada etapa.",
+      className: "",
+    },
+    {
+      icon: Award,
+      eyebrow: "ESPECIALIDADES",
+      title: "EB-1, EB-2 NIW e O-1.",
+      text: "Nossa atuação é concentrada em categorias baseadas em mérito e trajetória profissional, conforme os critérios publicados pelo USCIS.",
+      className: "",
+    },
+  ];
+
+  return (
+    <Reveal as="section" id="quem-somos" className="relative overflow-hidden border-y border-gold/10 py-16 md:py-24">
+      <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-b from-background via-parchment/70 to-parchment-deep/45" />
+      <div className="container-x">
+        <div className="mx-auto max-w-3xl text-center">
+          <span className="font-mono-label text-gold">STATUS IMMIGRATION LAW FIRM</span>
+          <h2 className="display-2 mt-5 text-balance">Preparação documental para projetos de imigração aos Estados Unidos.</h2>
+          <p className="lead mx-auto mt-6 max-w-2xl text-balance">
+            Estrutura, organização e acompanhamento documental para profissionais brasileiros que desejam construir um plano migratório consistente.
+          </p>
+        </div>
+
+        <div className="mx-auto mt-12 grid max-w-5xl gap-4 md:grid-cols-2">
+          {pillars.map(({ icon: Icon, eyebrow, title: pillarTitle, text, className }, index) => (
+            <article
+              key={eyebrow}
+              className={`liquid-card glass-interactive group rounded-3xl p-6 text-center sm:p-8 md:text-left ${className}`}
+              style={{ transitionDelay: `${index * 55}ms` }}
+            >
+              <div className="mx-auto grid h-11 w-11 place-items-center rounded-2xl border border-gold/25 bg-white/65 text-gold shadow-soft md:mx-0">
+                <Icon className="h-5 w-5" aria-hidden />
+              </div>
+              <p className="font-mono-label mt-6 text-gold">{eyebrow}</p>
+              <h3 className="mt-3 font-display text-xl font-semibold leading-snug text-foreground sm:text-2xl">{pillarTitle}</h3>
+              <p className="mx-auto mt-4 max-w-2xl text-[15px] leading-relaxed text-foreground/72 md:mx-0">{text}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </Reveal>
   );
 }
 
