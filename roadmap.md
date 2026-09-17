@@ -18,4 +18,4 @@
 - [x] Reformular Sobre, Contato, Blog e páginas legais.
 - [x] Reformular avaliação, pré-qualificação, resultados e agradecimentos.
 - [x] Uniformizar cabeçalhos, rodapés, cartões, formulários e transições públicas.
-- [ ] Validar todas as páginas públicas no computador e no celular.
+- [x] Validar todas as páginas públicas no computador e no celular.
