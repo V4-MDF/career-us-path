@@ -100,7 +100,7 @@ export function Header() {
                 aria-label="Tipos de visto"
                 className="absolute left-1/2 top-full -translate-x-1/2 pt-4 animate-in fade-in slide-in-from-top-2 duration-200"
               >
-                <div className="liquid-glass relative w-[340px] rounded-2xl p-2">
+                <div className="liquid-glass-solid relative w-[340px] rounded-2xl p-2">
                   {/* Filete superior dourado */}
                   <div aria-hidden className="absolute left-6 right-6 top-0 h-[3px] w-10 bg-gold" />
                   {VISTOS.map((v) => (
