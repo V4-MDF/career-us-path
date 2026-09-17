@@ -1016,9 +1016,16 @@ export function PartnersBadges() {
                   <span className="shrink-0">
                     <PatchIcon label={s.label} />
                   </span>
-                  <span className="block w-full break-words font-mono-label text-ink-text/70 text-[11px] sm:text-[12.5px] leading-tight tabular-nums">
+                  <span
+                    className={`block w-full break-words font-mono-label text-ink-text/70 leading-tight tabular-nums ${
+                      (s.label || "").length > 14
+                        ? "text-[9.5px] tracking-normal sm:text-[11px]"
+                        : "text-[11px] sm:text-[12.5px]"
+                    }`}
+                  >
                     {s.label}
                   </span>
+
                   <CredentialDescription label={s.label} />
                 </>
               )}
