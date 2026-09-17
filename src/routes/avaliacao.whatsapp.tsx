@@ -155,8 +155,8 @@ function AvaliacaoWhatsAppPage() {
 
 
   return (
-    <div className="min-h-screen bg-ink text-foreground flex flex-col">
-      <header className="sticky top-0 z-20 border-b border-gold/15 bg-ink/85 backdrop-blur">
+    <div className="min-h-screen bg-background text-foreground flex flex-col">
+      <header className="sticky top-0 z-20 border-b border-gold/15 bg-background/75 backdrop-blur-xl">
         <div className="container-x flex h-[64px] items-center justify-between">
           <Link to="/" className="flex items-center" aria-label="Status Immigration Law Firm. Início">
             <BrandLogo priority className="h-12 w-12" />
@@ -180,7 +180,7 @@ function AvaliacaoWhatsAppPage() {
             alt=""
             width={1920}
             height={1280}
-            className="w-full h-full object-cover opacity-[0.14]"
+            className="w-full h-full object-cover opacity-[0.12] brightness-110 saturate-50"
           />
           <div
             className="absolute inset-0"
@@ -212,7 +212,7 @@ function AvaliacaoWhatsAppPage() {
 
           <div className="mt-6">
             {waLink ? (
-              <div className="rounded-2xl border border-gold/30 bg-surface p-8 text-center">
+              <div className="liquid-card rounded-3xl p-8 text-center">
                 <MessageCircle className="mx-auto h-12 w-12 text-gold" />
                 <h3 className="mt-4 font-serif text-2xl">Abrimos o WhatsApp em uma nova aba.</h3>
                 <p className="mt-2 text-foreground/80">

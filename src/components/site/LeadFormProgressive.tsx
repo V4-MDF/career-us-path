@@ -362,7 +362,7 @@ export function LeadFormProgressive({
 
   if (done) {
     return (
-      <div className="rounded-2xl border border-gold/30 bg-surface p-8 text-center">
+      <div className="liquid-card rounded-2xl p-8 text-center">
         <CheckCircle2 className="mx-auto h-12 w-12 text-gold" />
         <h3 className="mt-4 font-serif text-2xl">Recebemos seu perfil.</h3>
         <p className="mt-2 text-muted-foreground">
@@ -373,9 +373,9 @@ export function LeadFormProgressive({
   }
 
   return (
-    <div className="rounded-2xl border border-gold/25 bg-ink-raise shadow-soft overflow-hidden" ref={containerRef}>
+    <div className="liquid-card rounded-3xl overflow-hidden" ref={containerRef}>
       {/* progresso, sticky no topo do card */}
-      <div className="sticky top-0 z-10 px-6 md:px-8 pt-5 pb-4 bg-ink-raise/95 backdrop-blur border-b border-border/40">
+      <div className="sticky top-0 z-10 px-6 md:px-8 pt-5 pb-4 bg-background/80 backdrop-blur-xl border-b border-border/40">
         <div className="flex items-center justify-between mb-2">
           <span className="font-mono-label text-xs text-foreground/70">
             {completedCount}/{totalFields} preenchidos
@@ -440,7 +440,7 @@ export function LeadFormProgressive({
             initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
             transition={{ duration: reduce ? 0 : 0.4 }}
             data-step={totalFields}
-            className="rounded-xl border border-gold/30 bg-ink-deep/40 p-5"
+            className="rounded-2xl border border-gold/30 bg-background/65 p-5"
           >
             <h4 className="font-display text-xl">Tudo certo para enviar.</h4>
             <p className="mt-1 text-sm text-foreground/80">

@@ -140,7 +140,7 @@ export function PreQualForm({ onSubmit, submitting }: Props) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-7" noValidate>
+    <form onSubmit={handleSubmit} className="liquid-card space-y-7 rounded-3xl p-6 md:p-9" noValidate>
       {restored && (
         <div className="rounded-xl border border-gold/25 bg-gold/5 px-4 py-3 text-[13px] text-foreground/80">
           Recuperamos as respostas que você havia começado. Pode continuar de onde parou.
@@ -159,7 +159,7 @@ export function PreQualForm({ onSubmit, submitting }: Props) {
             <Input
               id="pq-name" required value={a.fullName}
               onChange={(e) => upd("fullName", e.target.value)}
-              className="mt-1 bg-ink-raise/60 border-gold/25 text-foreground"
+              className="mt-1 bg-background/75 border-gold/25 text-foreground"
             />
           </div>
           <div>
@@ -167,7 +167,7 @@ export function PreQualForm({ onSubmit, submitting }: Props) {
             <Input
               id="pq-email" type="email" required value={a.email}
               onChange={(e) => upd("email", e.target.value)}
-              className="mt-1 bg-ink-raise/60 border-gold/25 text-foreground"
+              className="mt-1 bg-background/75 border-gold/25 text-foreground"
             />
           </div>
           <div className="sm:col-span-2">
@@ -176,7 +176,7 @@ export function PreQualForm({ onSubmit, submitting }: Props) {
               id="pq-wa" type="tel" required value={a.whatsapp}
               onChange={(e) => upd("whatsapp", e.target.value)}
               placeholder="(11) 99999-9999"
-              className="mt-1 bg-ink-raise/60 border-gold/25 text-foreground"
+               className="mt-1 bg-background/75 border-gold/25 text-foreground"
             />
           </div>
         </div>
@@ -222,7 +222,7 @@ export function PreQualForm({ onSubmit, submitting }: Props) {
           <Input
             id="pq-yrs" type="number" min={0} max={60} value={a.experienceYears}
             onChange={(e) => upd("experienceYears", Number(e.target.value) || 0)}
-            className="mt-2 w-32 bg-ink-raise/60 border-gold/25 text-foreground"
+             className="mt-2 w-32 bg-background/75 border-gold/25 text-foreground"
           />
         </div>
 
