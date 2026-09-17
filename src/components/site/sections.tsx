@@ -593,6 +593,14 @@ export function WhyUs() {
             ))}
           </div>
         </div>}
+
+        <div className="mt-10 flex justify-center">
+          <a href={useAvaliacaoHref("home_por_que_status")} className="w-full sm:w-auto">
+            <Button size="lg" variant="cta" className="btn-label btn-sweep h-12 px-7 w-full sm:w-auto">
+              Falar com a nossa equipe
+            </Button>
+          </a>
+        </div>
       </div>
     </Reveal>
   );
