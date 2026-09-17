@@ -13,3 +13,9 @@
 - [x] Compactar cartões e informações institucionais com pouco conteúdo.
 - [x] Tornar o movimento Velaris perceptível e respeitar movimento reduzido.
 - [x] Validar a Home no computador e no celular.
+
+- [ ] Aplicar o Minimalist Gold Elegance às páginas de vistos e landing pages.
+- [ ] Reformular Sobre, Contato, Blog e páginas legais.
+- [ ] Reformular avaliação, pré-qualificação, resultados e agradecimentos.
+- [ ] Uniformizar cabeçalhos, rodapés, cartões, formulários e transições públicas.
+- [ ] Validar todas as páginas públicas no computador e no celular.
