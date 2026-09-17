@@ -39,7 +39,7 @@ function ObrigadoShell({ children }: { children: React.ReactNode }) {
         <div className="container-x flex h-[64px] items-center justify-between">
           <Link to="/" className="flex items-center gap-3" aria-label="Status Immigration Law Firm">
             <span className="grid h-9 w-9 place-items-center rounded-lg border border-gold/60 text-gold font-display text-lg">S</span>
-            <span className="font-display text-[16px]">Status<span className="text-gold">.</span> na América</span>
+            <span className="font-display text-[15px] uppercase">Status Immigration <span className="text-gold">Law Firm</span></span>
           </Link>
           <Link to="/" className="inline-flex items-center gap-1 text-xs font-mono-label text-foreground/70 hover:text-gold">
             <ChevronLeft className="h-3.5 w-3.5" /> Voltar ao site

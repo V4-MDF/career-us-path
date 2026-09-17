@@ -13,7 +13,6 @@ import { Link } from "@tanstack/react-router";
 import { Facebook, Instagram, Youtube } from "lucide-react";
 import { getSiteSettings, type SiteSettings } from "@/lib/admin/settings";
 import { FlagBR, FlagUS } from "./flags";
-import logoAsset from "@/assets/logo-status-na-america.webp.asset.json";
 import { LegalDisclaimer } from "@/components/legal/LegalDisclaimer";
 
 export function Footer() {
@@ -35,14 +34,10 @@ export function Footer() {
         {/* Marca + redes */}
         <div className="md:col-span-4">
           <Link to="/" aria-label="Status Immigration Law Firm — página inicial" className="inline-block">
-            <img
-              src={logoAsset.url}
-              alt="Status Immigration Law Firm"
-              width={280}
-              height={70}
-              loading="lazy"
-              className="h-14 w-auto"
-            />
+            <span className="flex flex-col leading-none text-foreground">
+              <span className="font-display text-lg font-semibold uppercase">Status Immigration</span>
+              <span className="mt-1.5 font-mono-label text-[10px] uppercase text-gold">Law Firm</span>
+            </span>
           </Link>
           <p className="mt-6 max-w-sm text-sm text-foreground/80 leading-relaxed">
             Equipe dedicada à preparação documental para mobilidade migratória, para

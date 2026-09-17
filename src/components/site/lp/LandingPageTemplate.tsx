@@ -32,7 +32,7 @@ function ConversionHeader({ segmentId }: { segmentId: string }) {
     <header className="fixed top-0 inset-x-0 z-50 border-b border-border/40 bg-background/85 backdrop-blur">
       <div className="container-x flex h-16 items-center justify-between">
         <Link to="/" className="font-serif text-xl">
-          Status<span className="text-gold">.</span> na América
+          Status Immigration <span className="text-gold">Law Firm</span>
         </Link>
         <div className="flex items-center gap-2">
           <a href={avaliacaoHref(`lp_${segmentId}_header`, segmentId)}>
