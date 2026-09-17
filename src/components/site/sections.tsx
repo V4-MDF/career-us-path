@@ -344,9 +344,10 @@ export function NiwSection() {
     <Reveal as="section" id="eb-2-niw" className="section-champagne-deep section-pad relative border-y border-gold/10">
 
       <div className="container-x grid lg:grid-cols-2 gap-10 lg:gap-12 items-center">
-        <div>
+        <div className="min-w-0">
           <SectionHead num="02" eyebrow="VISTO EB-2 NIW" title={title} />
           <p className="mt-6 text-[17px] text-foreground/80 leading-relaxed max-w-xl">{lead}</p>
+
           <ul className="mt-9 grid sm:grid-cols-2 gap-3">
             {bullets.map(({ icon: Icon, t }) => (
                <li key={t} className="relative gold-tick rounded-xl border border-gold/25 bg-ink-raise/50 p-4">
@@ -355,12 +356,13 @@ export function NiwSection() {
               </li>
             ))}
           </ul>
-          <a href={useAvaliacaoHref("home_niw")} className="inline-block mt-10">
-            <Button size="lg" className="btn-label btn-sweep h-12 px-7">Quero saber se tenho perfil</Button>
+          <a href={useAvaliacaoHref("home_niw")} className="mt-10 block sm:inline-block">
+            <Button size="lg" className="btn-label btn-sweep h-12 w-full px-7 sm:w-auto">Quero saber se tenho perfil</Button>
           </a>
         </div>
 
-        <div className="relative">
+        <div className="relative min-w-0">
+
           <div className="photo-treatment aspect-[4/3] overflow-hidden rounded-2xl border border-gold/30 bg-champagne relative shadow-soft max-h-[420px]">
             {/* Foto editorial, passaporte brasileiro + documentos sobre mesa de madeira. */}
             <img
@@ -953,13 +955,14 @@ function CredentialDescription({ label }: { label: string }) {
   const l = (label || "").toLowerCase();
   if (l.includes("bbb")) {
     return (
-      <span className="mt-1 block max-w-[95%] font-body text-ink-text/60 text-[11px] leading-snug">
+      <span className="mt-1 block w-full break-words font-body text-ink-text/60 text-[11px] leading-snug">
         Órgão privado dos EUA/Canadá que avalia a confiabilidade e ética empresarial.
       </span>
     );
   }
   return null;
 }
+
 
 
 export function PartnersBadges() {
@@ -992,7 +995,7 @@ export function PartnersBadges() {
           {slots.map((s, idx) => (
             <li
               key={idx}
-              className="group relative rounded-xl border border-gold/30 bg-white/75 p-4 flex min-h-0 items-center justify-center shadow-soft transition-transform duration-300 hover:-translate-y-0.5"
+              className="group relative min-w-0 rounded-xl border border-gold/30 bg-white/75 p-3 sm:p-4 flex min-h-0 items-center justify-center shadow-soft transition-transform duration-300 hover:-translate-y-0.5"
               style={{
                 boxShadow: "inset 0 0 0 1px rgba(196,161,72,0.25)",
               }}
@@ -1009,14 +1012,15 @@ export function PartnersBadges() {
                   loading="lazy"
                 />
               ) : (
-                <div className="text-center px-2 flex flex-col items-center">
+                <div className="min-w-0 text-center px-1 sm:px-2 flex flex-col items-center">
                   <PatchIcon label={s.label} />
-                  <span className="mt-2 block font-mono-label text-ink-text/70 text-[13px] leading-tight">
+                  <span className="mt-2 block w-full break-words font-mono-label text-ink-text/70 text-[12px] sm:text-[13px] leading-tight">
                     {s.label}
                   </span>
                   <CredentialDescription label={s.label} />
                 </div>
               )}
+
             </li>
           ))}
         </ul>

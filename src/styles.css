@@ -434,7 +434,27 @@
   text-transform: uppercase;
   letter-spacing: 0.14em;
   font-size: 12px;
+  max-width: 100%;
 }
+
+/* Mobile: CTAs com rótulos longos quebram em duas linhas centralizadas em vez
+ * de estourar a largura da tela (whitespace-nowrap do botão base). A altura
+ * passa a ser automática, preservando alvo de toque mínimo de 48px. */
+@media (max-width: 639px) {
+  .btn-label {
+    white-space: normal;
+    text-align: center;
+    line-height: 1.25;
+    text-wrap: balance;
+  }
+  button.btn-label,
+  a.btn-label {
+    height: auto;
+    min-height: 3rem;
+    padding-block: 0.625rem;
+  }
+}
+
 
 /* Container com gutters fluidos clamp(20px, 6vw, 120px). */
 @utility container-x {

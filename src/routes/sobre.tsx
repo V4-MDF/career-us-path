@@ -137,11 +137,12 @@ function SobreHero() {
           {subtitle}
         </p>
         <div className="mt-8">
-          <Link to="/avaliacao">
-            <Button size="lg" className="btn-label">
+          <Link to="/avaliacao" className="block sm:inline-block">
+            <Button size="lg" className="btn-label w-full sm:w-auto">
               Iniciar triagem do meu caso <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </Link>
+
         </div>
       </div>
     </section>
