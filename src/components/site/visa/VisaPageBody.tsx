@@ -331,7 +331,7 @@ function VisaHero({ page }: { page: VisaPage }) {
             <div className="mt-8">
               <a href={avaliacaoHref(`visto_${page.slug}_hero`)} className="block sm:inline-block">
                 <Button size="lg" className="btn-label btn-sweep h-auto min-h-12 w-full sm:w-auto whitespace-normal px-5 py-3 text-sm leading-snug sm:px-7 sm:text-base">
-                  Iniciar pré-qualificação documental
+                  Iniciar triagem do meu caso
                 </Button>
               </a>
             </div>

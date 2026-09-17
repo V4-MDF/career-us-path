@@ -36,7 +36,7 @@ const empty = (): Segment => ({
   faq_segmento: [],
   meta_title: "",
   meta_description: "",
-  hero_default: { eyebrow: "", h1: "", sub: "", cta_texto: "Iniciar pré-qualificação documental", imagem: "" },
+  hero_default: { eyebrow: "", h1: "", sub: "", cta_texto: "Iniciar triagem do meu caso", imagem: "" },
 });
 
 function SegmentsPage() {

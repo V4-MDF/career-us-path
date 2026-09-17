@@ -32,7 +32,7 @@ import {
   CLAIM_SATISFACAO,
   CLAIM_AVALIACOES,
   BBB_LABEL,
-  GOOGLE_RATING_LABEL,
+  BBB_PENDING,
   EIN,
   CNPJ,
 } from "@/config/credentials";
@@ -547,17 +547,14 @@ export function WhyUs() {
 
   // COMPLIANCE (FTC §5 / FDUTPA): números vêm de src/config/credentials.ts
   // e estão PENDENTES DE VALIDAÇÃO até o cliente enviar documento de lastro.
-  const stats = [
-    { value: CLAIM_PROCESSOS.value, label: CLAIM_PROCESSOS.label.toUpperCase() },
-    { value: CLAIM_SATISFACAO.value, label: CLAIM_SATISFACAO.label.toUpperCase() },
-    { value: CLAIM_FAMILIAS.value, label: CLAIM_FAMILIAS.label.toUpperCase() },
-  ];
+  const stats = [CLAIM_PROCESSOS, CLAIM_SATISFACAO, CLAIM_FAMILIAS]
+    .filter((claim) => !claim.pending)
+    .map((claim) => ({ value: claim.value, label: claim.label.toUpperCase() }));
   const items = [
     { icon: MapPin, t: `Sede própria em Orlando, Flórida (EIN ${EIN})` },
     { icon: Users, t: `Filial no Brasil em Barueri/SP (CNPJ ${CNPJ})` },
-    // PENDENTE (cliente): confirmar "BBB Accredited Business" vs "BBB Rating A".
-    { icon: ShieldCheck, t: BBB_LABEL, desc: "Better Business Bureau: órgão privado dos EUA/Canadá que avalia a ética e confiabilidade das empresas." },
-    { icon: Star, t: `${CLAIM_AVALIACOES.value} ${CLAIM_AVALIACOES.label} no Google e Facebook` },
+    ...(!BBB_PENDING ? [{ icon: ShieldCheck, t: BBB_LABEL, desc: "Better Business Bureau: órgão privado dos EUA/Canadá que avalia a ética e confiabilidade das empresas." }] : []),
+    ...(!CLAIM_AVALIACOES.pending ? [{ icon: Star, t: `${CLAIM_AVALIACOES.value} ${CLAIM_AVALIACOES.label} no Google e Facebook` }] : []),
   ];
   return (
     <Reveal as="section" id="por-que-status" className="section-pad relative">
@@ -581,7 +578,7 @@ export function WhyUs() {
           </ul>
         </div>
 
-        <div className="mt-16 border-y border-gold/30">
+        {stats.length > 0 && <div className="mt-16 border-y border-gold/30">
           <div className="grid grid-cols-2 md:grid-cols-4">
             {stats.map((s, i) => (
               <div key={s.label} className={`relative py-10 px-6 ${i > 0 ? "md:border-l border-gold/15" : ""}`}>
@@ -591,7 +588,7 @@ export function WhyUs() {
               </div>
             ))}
           </div>
-        </div>
+        </div>}
       </div>
     </Reveal>
   );
