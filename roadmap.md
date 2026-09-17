@@ -20,3 +20,4 @@
 - [x] Uniformizar cabeçalhos, rodapés, cartões, formulários e transições públicas.
 - [x] Validar todas as páginas públicas no computador e no celular.
 - [x] Corrigir o botão flutuante do WhatsApp para acompanhar a rolagem da Home.
+- [x] Exibir a logo em formato circular no rodapé.

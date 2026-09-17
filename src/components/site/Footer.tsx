@@ -34,8 +34,12 @@ export function Footer() {
       <div className="container-x py-12 grid gap-10 md:grid-cols-12">
         {/* Marca + redes */}
         <div className="md:col-span-4">
-          <Link to="/" aria-label="Status Immigration Law Firm — página inicial" className="inline-block">
-            <BrandLogo className="h-20 w-20" />
+          <Link
+            to="/"
+            aria-label="Status Immigration Law Firm — página inicial"
+            className="inline-flex h-20 w-20 items-center justify-center overflow-hidden rounded-full border border-gold/30 bg-background shadow-sm"
+          >
+            <BrandLogo className="h-full w-full rounded-full" />
           </Link>
           <p className="mt-4 max-w-sm text-sm text-foreground/80 leading-relaxed">
             Escritório de advocacia especializado em imigração federal, com análise jurídica,
