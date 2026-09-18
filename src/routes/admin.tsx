@@ -108,22 +108,24 @@ function AdminLayout() {
     <div data-admin-shell className="min-h-screen flex bg-parchment-deep text-ink-text">
       {/* Sidebar */}
       <aside
-        className={`fixed lg:static inset-y-0 left-0 z-40 w-64 bg-ink-deep text-parchment border-r border-gold/20 transform transition-transform lg:translate-x-0 ${
+        className={`admin-sidebar fixed inset-y-0 left-0 z-40 w-72 transform border-r transition-transform lg:static lg:w-64 lg:translate-x-0 ${
           openMobile ? "translate-x-0" : "-translate-x-full"
         }`}
       >
-        <div className="px-5 py-5 border-b border-gold/15 flex items-center gap-3">
-          <BrandLogo priority className="h-10 w-10" />
+        <div className="flex items-center gap-3 border-b border-gold/25 px-5 py-5">
+          <div className="flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-full border border-gold/50 bg-parchment">
+            <BrandLogo priority className="h-full w-full rounded-full" />
+          </div>
           <div className="min-w-0">
-            <div className="font-display text-xs font-bold uppercase tracking-[0.14em] leading-tight text-parchment truncate">
+            <div className="truncate font-display text-xs font-bold uppercase leading-tight tracking-[0.08em] text-parchment">
               Status Immigration Law Firm
             </div>
-            <div className="mt-0.5 font-mono text-[9px] uppercase tracking-[0.28em] text-gold/80">
+            <div className="mt-1 font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-gold">
               Painel admin
             </div>
           </div>
         </div>
-        <nav className="p-3 space-y-0.5">
+        <nav className="admin-sidebar-nav space-y-1 overflow-y-auto p-3 pb-20">
           {NAV.map((item) => {
             const active = item.exact ? pathname === item.to : pathname.startsWith(item.to);
             const Icon = item.icon;
@@ -132,16 +134,16 @@ function AdminLayout() {
                 key={item.to}
                 to={item.to as string}
                 onClick={() => setOpenMobile(false)}
-                className={`flex items-center gap-3 px-3 py-2 rounded-md text-sm transition-colors ${
+                className={`flex min-h-10 items-center gap-3 rounded-md px-3 py-2 text-sm transition-colors ${
                   active
-                    ? "bg-gold text-ink-deep font-semibold"
-                    : "text-parchment/75 hover:bg-ink-raise hover:text-parchment"
+                    ? "admin-nav-active font-semibold"
+                    : "admin-nav-idle"
                 }`}
               >
                 <Icon className="h-4 w-4 shrink-0" />
                 <span className="flex-1 truncate">{item.label}</span>
                 {item.badge && !active && (
-                  <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-gold/70">
+                  <span className="font-mono text-[9px] font-semibold uppercase tracking-[0.12em] text-gold">
                     {item.badge}
                   </span>
                 )}
@@ -149,7 +151,7 @@ function AdminLayout() {
             );
           })}
         </nav>
-        <div className="absolute bottom-0 inset-x-0 p-4 border-t border-gold/15 font-mono text-[10px] uppercase tracking-[0.22em] text-parchment/50 flex items-center gap-2">
+        <div className="admin-sidebar-footer absolute inset-x-0 bottom-0 flex items-center gap-2 border-t border-gold/25 p-4 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-parchment/80">
           <ShieldCheck className="h-3.5 w-3.5 text-gold" />
           <span>Auth · Lovable Cloud</span>
         </div>
@@ -157,20 +159,22 @@ function AdminLayout() {
 
       {/* Backdrop mobile */}
       {openMobile && (
-        <div className="fixed inset-0 bg-ink-deep/60 z-30 lg:hidden" onClick={() => setOpenMobile(false)} />
+        <div className="fixed inset-0 z-30 bg-foreground/45 backdrop-blur-sm lg:hidden" onClick={() => setOpenMobile(false)} />
       )}
 
       {/* Conteúdo */}
       <div className="flex-1 min-w-0 flex flex-col">
-        <header className="h-14 bg-parchment border-b border-gold/25 flex items-center px-4 gap-3 sticky top-0 z-20">
-          <button
-            className="lg:hidden p-2 text-ink-text hover:text-gold transition-colors"
+        <header className="admin-topbar sticky top-0 z-20 flex min-h-16 items-center gap-3 border-b px-4">
+          <Button
+            variant="ghost"
+            size="icon"
+            className="lg:hidden"
             onClick={() => setOpenMobile((o) => !o)}
             aria-label="Menu"
           >
             {openMobile ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </button>
-          <div className="flex-1 min-w-0 font-mono text-[11px] uppercase tracking-[0.22em] text-ink-text/70 truncate">
+          </Button>
+          <div className="min-w-0 flex-1 truncate font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-ink-text/75">
             <span className="text-gold">Admin</span>
             <span className="mx-2 text-ink-text/30">·</span>
             <span>{activeItem?.label ?? "Painel"}</span>
@@ -196,7 +200,7 @@ function AdminLayout() {
             <LogOut className="h-3.5 w-3.5" /> Sair
           </Button>
         </header>
-        <main className="flex-1 p-4 sm:p-6 lg:p-8 max-w-[1400px] w-full mx-auto">
+        <main className="mx-auto w-full max-w-[1400px] flex-1 p-4 sm:p-6 lg:p-8">
           <Outlet />
         </main>
         <Toaster richColors position="top-right" />

@@ -10,17 +10,17 @@ export function PageHeader({
   title, description, actions,
 }: { title: string; description?: ReactNode; actions?: ReactNode }) {
   return (
-    <div className="mb-8 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+    <div className="mb-7 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
       <div className="min-w-0">
-        <div className="text-[10px] font-mono uppercase tracking-[0.28em] text-gold">
+        <div className="text-[11px] font-mono font-semibold uppercase tracking-[0.22em] text-gold">
           Admin
         </div>
-        <h1 className="mt-2 font-display text-2xl sm:text-[26px] font-bold uppercase tracking-[0.02em] text-ink-text">
+        <h1 className="mt-2 font-display text-2xl font-bold uppercase tracking-[0.02em] text-ink-text sm:text-[28px]">
           {title}
         </h1>
-        <div className="mt-3 h-px w-12 bg-gold" />
+        <div className="mt-3 h-0.5 w-12 rounded-full bg-gold" />
         {description && (
-          <p className="mt-3 text-sm text-ink-text/70 max-w-2xl">{description}</p>
+          <p className="mt-3 max-w-2xl text-sm leading-relaxed text-ink-text/80">{description}</p>
         )}
       </div>
       {actions && <div className="flex flex-wrap gap-2 shrink-0">{actions}</div>}
@@ -46,15 +46,15 @@ export function StatCard({
   };
   return (
     <div
-      className={`relative overflow-hidden rounded-lg border border-gold/20 bg-parchment p-5 pl-6 before:absolute before:inset-y-0 before:left-0 before:w-1 ${ring[accent ?? "gold"]}`}
+      className={`admin-stat-card relative overflow-hidden rounded-lg border border-gold/25 bg-parchment p-5 pl-6 before:absolute before:inset-y-0 before:left-0 before:w-1 ${ring[accent ?? "gold"]}`}
     >
-      <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-ink-text/60">
+      <div className="font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-ink-text/75">
         {label}
       </div>
       <div className="mt-2 font-display text-[28px] font-extrabold leading-none tracking-tight text-ink-text">
         {value}
       </div>
-      {hint && <div className="mt-2 text-xs text-ink-text/60">{hint}</div>}
+      {hint && <div className="mt-2 text-xs font-medium text-ink-text/70">{hint}</div>}
     </div>
   );
 }
@@ -68,7 +68,7 @@ export function SectionCard({
   footer?: ReactNode;
 }) {
   return (
-    <div className="rounded-lg border border-gold/20 bg-parchment text-ink-text">
+    <div className="admin-section-card rounded-lg border border-gold/25 bg-parchment text-ink-text">
       {(title || description) && (
         <div className="px-5 py-4 border-b border-gold/25">
           {title && (
@@ -77,7 +77,7 @@ export function SectionCard({
             </h2>
           )}
           {description && (
-            <p className="mt-1 text-xs text-ink-text/65">{description}</p>
+            <p className="mt-1 text-xs leading-relaxed text-ink-text/75">{description}</p>
           )}
         </div>
       )}
