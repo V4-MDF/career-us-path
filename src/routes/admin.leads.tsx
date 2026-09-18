@@ -39,6 +39,8 @@ type StoredLead = LeadInput & {
   segmento?: string;
   variante_ab?: string | null;
   status?: FunnelStatus;
+  qualification?: "qualificado" | "nao_qualificado";
+  qualification_reasons?: string[];
   /** Legado de prompts anteriores (ignorado). */
   score?: number;
   classificacao?: string;
@@ -103,6 +105,22 @@ function LeadsPage() {
     if (!ref) return "";
     try { return new URL(ref).host; } catch { return ref; }
   };
+  const platformOf = (value: string, emptyLabel = "Direto"): string => {
+    const normalized = value.trim().toLowerCase();
+    if (!normalized) return emptyLabel;
+    if (normalized.includes("instagram") || normalized === "ig") return "Instagram";
+    if (normalized.includes("facebook") || normalized.includes("fb") || normalized.includes("meta")) return "Facebook";
+    if (normalized.includes("whatsapp") || normalized.includes("wa.me")) return "WhatsApp";
+    if (normalized.includes("google") || normalized.includes("gclid")) return "Google";
+    if (normalized.includes("youtube") || normalized.includes("youtu.be")) return "YouTube";
+    if (normalized.includes("linkedin")) return "LinkedIn";
+    if (normalized.includes("tiktok")) return "TikTok";
+    if (normalized.includes("bing")) return "Bing";
+    if (["direct", "direto", "(direto)", "none", "(none)"].includes(normalized)) return "Direto";
+    return value.trim();
+  };
+  const isQualified = (r: ScoredRow): boolean =>
+    r.qualification === "qualificado" || r._calc.score >= 70;
   /** Verifica se o lead não tem nenhum rastreamento de origem (UTMs, referrer ou landing). */
   const isOriginIncomplete = (r: StoredLead): boolean => {
     const hasUtm = !!(r.utm?.utm_source || r.origin?.utm?.utm_source);
@@ -169,29 +187,28 @@ function LeadsPage() {
    * Conversão = status === "convertido" / total do grupo.
    * Inclui "(direto)" para leads sem o campo (utm_source vazio / sem referrer externo).
    */
-  type Bucket = { key: string; total: number; convertidos: number; qualificados: number; pctTotal: number; convRate: number };
+  type Bucket = { key: string; total: number; qualificados: number; pctTotal: number; qualificationRate: number };
   function bucketBy(getKey: (r: ScoredRow) => string, emptyLabel: string): Bucket[] {
-    const map = new Map<string, { total: number; convertidos: number; qualificados: number }>();
+    const map = new Map<string, { total: number; qualificados: number }>();
     filtered.forEach((r) => {
       const k = (getKey(r) || "").trim() || emptyLabel;
-      const cur = map.get(k) ?? { total: 0, convertidos: 0, qualificados: 0 };
+      const cur = map.get(k) ?? { total: 0, qualificados: 0 };
       cur.total++;
-      if (r.status === "convertido") cur.convertidos++;
-      if (r.status === "qualificado" || r.status === "proposta" || r.status === "convertido") cur.qualificados++;
+      if (isQualified(r)) cur.qualificados++;
       map.set(k, cur);
     });
     const totalAll = filtered.length || 1;
     return Array.from(map.entries())
       .map(([key, v]) => ({
-        key, total: v.total, convertidos: v.convertidos, qualificados: v.qualificados,
+        key, total: v.total, qualificados: v.qualificados,
         pctTotal: Math.round((v.total / totalAll) * 100),
-        convRate: v.total > 0 ? Math.round((v.convertidos / v.total) * 100) : 0,
+        qualificationRate: v.total > 0 ? Math.round((v.qualificados / v.total) * 100) : 0,
       }))
       .sort((a, b) => b.total - a.total);
   }
 
-  const bySource = useMemo(() => bucketBy((r) => utmOf(r, "utm_source"), "(direto)"), [filtered]);
-  const byRefHost = useMemo(() => bucketBy((r) => referrerHostOf(r), "(sem referrer externo)"), [filtered]);
+  const bySource = useMemo(() => bucketBy((r) => platformOf(utmOf(r, "utm_source")), "Direto"), [filtered]);
+  const byRefHost = useMemo(() => bucketBy((r) => platformOf(referrerHostOf(r), "Sem referrer externo"), "Sem referrer externo"), [filtered]);
 
   async function setStatus(lead: StoredLead, status: FunnelStatus) {
     const next: StoredLead = { ...lead, status };
@@ -219,10 +236,14 @@ function LeadsPage() {
           comp[`f_${c.key}_pontos`] = c.pontos.toFixed(1);
         });
         return {
+          ...flattenForCsv(l, "lead"),
+          id: l.id,
           data: l.createdAt, nome: l.nome, email: l.email, whatsapp: l.whatsapp,
           profissao: l.profissao, faixa_etaria: l.faixaEtaria, formacao: l.formacao,
           cidade: l.cidade, uf: l.uf, renda: l.renda, momento: l.momento,
           pontuacao: l._calc.score, faixa: l._calc.band.label,
+          qualificacao: isQualified(l) ? "qualificado" : "nao_qualificado",
+          qualificacao_taxa_individual: isQualified(l) ? "100%" : "0%",
           status: l.status ?? "novo",
           segmento: l.segmento ?? "", variante_ab: l.variante_ab ?? "",
           utm_source: l.utm?.utm_source ?? l.origin?.utm.utm_source ?? "",
@@ -233,6 +254,8 @@ function LeadsPage() {
           gclid: l.utm?.gclid ?? l.origin?.utm.gclid ?? "",
           fbclid: l.utm?.fbclid ?? l.origin?.utm.fbclid ?? "",
           origem_resumo: originSummary(l),
+          origem_plataforma_utm: platformOf(utmOf(l, "utm_source")),
+          origem_plataforma_referrer: platformOf(referrerHostOf(l), "Sem referrer externo"),
           origem_referrer: l.origin?.internal.referrer ?? "",
           origem_referrer_host: (() => {
             const r = l.origin?.internal.referrer;
@@ -269,7 +292,7 @@ function LeadsPage() {
       </div>
 
       <div className="grid lg:grid-cols-2 gap-3 mb-5">
-        <OriginBreakdown title="Distribuição por utm_source" rows={bySource} emptyHint="Nenhum lead no filtro atual." />
+        <OriginBreakdown title="Distribuição por plataforma (UTM)" rows={bySource} emptyHint="Nenhum lead no filtro atual." />
         <OriginBreakdown title="Distribuição por referrer externo" rows={byRefHost} emptyHint="Nenhum lead no filtro atual." />
       </div>
 
@@ -570,6 +593,22 @@ function Field({ k, v }: { k: string; v: string }) {
   );
 }
 
+/** Preserva no CSV todos os campos, inclusive dados novos adicionados aos formulários. */
+function flattenForCsv(value: unknown, prefix = ""): Record<string, unknown> {
+  if (!value || typeof value !== "object" || Array.isArray(value)) {
+    return prefix ? { [prefix]: value } : {};
+  }
+  return Object.entries(value as Record<string, unknown>).reduce<Record<string, unknown>>((out, [key, child]) => {
+    const path = prefix ? `${prefix}_${key}` : key;
+    if (child && typeof child === "object" && !Array.isArray(child)) {
+      Object.assign(out, flattenForCsv(child, path));
+    } else {
+      out[path] = Array.isArray(child) ? child.join(" | ") : child;
+    }
+    return out;
+  }, {});
+}
+
 /** Resumo compacto de origem para a coluna da tabela. */
 function originSummary(l: { utm?: Record<string, string>; origin?: LeadOrigin }): string {
   const src = l.utm?.utm_source || l.origin?.utm.utm_source;
@@ -601,14 +640,13 @@ function FilterSelect({ label, value, onChange, options }: {
 }
 
 /**
- * Cartão de breakdown de origem com barra de % e taxa de conversão por bucket.
- * Conversão = leads com status "convertido" / total do bucket.
+ * Cartão de origem com volume e qualificação derivada da análise do perfil.
  */
 function OriginBreakdown({
   title, rows, emptyHint,
 }: {
   title: string;
-  rows: { key: string; total: number; convertidos: number; qualificados: number; pctTotal: number; convRate: number }[];
+  rows: { key: string; total: number; qualificados: number; pctTotal: number; qualificationRate: number }[];
   emptyHint: string;
 }) {
   const top = rows.slice(0, 8);
@@ -623,7 +661,7 @@ function OriginBreakdown({
             <div className="col-span-5">Origem</div>
             <div className="col-span-3 text-right">Leads</div>
             <div className="col-span-2 text-right">Qualif.</div>
-            <div className="col-span-2 text-right">Conv.</div>
+            <div className="col-span-2 text-right">Taxa qualif.</div>
           </div>
           {top.map((r) => (
             <div key={r.key} className="grid grid-cols-12 gap-2 items-center text-sm">
@@ -637,7 +675,7 @@ function OriginBreakdown({
                 </div>
               </div>
               <div className="col-span-2 text-right font-mono text-xs text-slate-600">{r.qualificados}</div>
-              <div className="col-span-2 text-right font-mono text-xs font-semibold text-emerald-700">{r.convRate}%</div>
+              <div className="col-span-2 text-right font-mono text-xs font-semibold text-emerald-700">{r.qualificationRate}%</div>
             </div>
           ))}
           {rows.length > top.length && (
