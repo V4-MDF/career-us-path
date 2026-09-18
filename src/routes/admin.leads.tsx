@@ -246,13 +246,13 @@ function LeadsPage() {
           qualificacao_taxa_individual: isQualified(l) ? "100%" : "0%",
           status: l.status ?? "novo",
           segmento: l.segmento ?? "", variante_ab: l.variante_ab ?? "",
-          utm_source: l.utm?.utm_source ?? l.origin?.utm.utm_source ?? "",
-          utm_medium: l.utm?.utm_medium ?? l.origin?.utm.utm_medium ?? "",
-          utm_campaign: l.utm?.utm_campaign ?? l.origin?.utm.utm_campaign ?? "",
-          utm_content: l.utm?.utm_content ?? l.origin?.utm.utm_content ?? "",
-          utm_term: l.utm?.utm_term ?? l.origin?.utm.utm_term ?? "",
-          gclid: l.utm?.gclid ?? l.origin?.utm.gclid ?? "",
-          fbclid: l.utm?.fbclid ?? l.origin?.utm.fbclid ?? "",
+          utm_source: utmOf(l, "utm_source"),
+          utm_medium: utmOf(l, "utm_medium"),
+          utm_campaign: utmOf(l, "utm_campaign"),
+          utm_content: utmOf(l, "utm_content"),
+          utm_term: utmOf(l, "utm_term"),
+          gclid: utmOf(l, "gclid"),
+          fbclid: utmOf(l, "fbclid"),
           origem_resumo: originSummary(l),
           origem_plataforma_utm: platformOf(utmOf(l, "utm_source")),
           origem_plataforma_referrer: platformOf(referrerHostOf(l), "Sem referrer externo"),
@@ -611,8 +611,8 @@ function flattenForCsv(value: unknown, prefix = ""): Record<string, unknown> {
 
 /** Resumo compacto de origem para a coluna da tabela. */
 function originSummary(l: { utm?: Record<string, string>; origin?: LeadOrigin }): string {
-  const src = l.utm?.utm_source || l.origin?.utm.utm_source;
-  const med = l.utm?.utm_medium || l.origin?.utm.utm_medium;
+  const src = l.utm?.utm_source || l.origin?.utm?.utm_source;
+  const med = l.utm?.utm_medium || l.origin?.utm?.utm_medium;
   if (src) return med ? `${src} / ${med}` : src;
   const ref = l.origin?.internal.referrer;
   if (ref) {
