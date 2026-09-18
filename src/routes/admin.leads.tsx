@@ -299,13 +299,13 @@ function LeadsPage() {
 
 
       <SectionCard title="Filtros">
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        <div className="admin-filter-panel grid sm:grid-cols-2 lg:grid-cols-4 gap-x-3 gap-y-2.5">
           <div className="lg:col-span-2">
-            <label className="text-xs text-slate-500 flex justify-between">
+            <label className="admin-filter-label flex justify-between">
               <span>Faixa de pontuação</span>
               <span className="font-mono text-slate-700">{scoreRange[0]} – {scoreRange[1]}</span>
             </label>
-            <div className="mt-3 px-1">
+            <div className="mt-2.5 px-1">
               <Slider
                 value={scoreRange}
                 min={0} max={100} step={5}
@@ -314,10 +314,10 @@ function LeadsPage() {
             </div>
           </div>
           <div>
-            <label className="text-xs text-slate-500">Buscar</label>
+            <label className="admin-filter-label">Buscar</label>
             <div className="relative mt-1">
-              <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-slate-400" />
-              <Input className="pl-8" placeholder="Nome, email, WhatsApp…" value={q} onChange={(e) => setQ(e.target.value)} />
+              <Search className="absolute left-2.5 top-2 h-4 w-4 text-slate-400" />
+              <Input className="admin-filter-control pl-8" placeholder="Nome, email, WhatsApp…" value={q} onChange={(e) => setQ(e.target.value)} />
             </div>
           </div>
           <FilterSelect label="Status" value={fStatus} onChange={setFStatus}
@@ -335,23 +335,23 @@ function LeadsPage() {
           <FilterSelect label="Origem rastreada" value={fOrigin} onChange={setFOrigin}
             options={[["all","Todas"],["complete","Completa (UTM/referrer/landing)"],["incomplete","Incompleta (direto)"]]} />
           <div>
-            <label className="text-xs text-slate-500">Referrer (host ou URL)</label>
-            <Input className="mt-1" placeholder="ex.: instagram.com" value={fReferrer} onChange={(e) => setFReferrer(e.target.value)} />
+            <label className="admin-filter-label">Referrer (host ou URL)</label>
+            <Input className="admin-filter-control mt-1" placeholder="ex.: instagram.com" value={fReferrer} onChange={(e) => setFReferrer(e.target.value)} />
           </div>
           <FilterSelect label="Profissão" value={fProf} onChange={setFProf}
             options={[["all","Todas"], ...profs.map((s) => [s, s] as [string,string])]} />
           <div>
-            <label className="text-xs text-slate-500">De</label>
-            <Input type="date" className="mt-1" value={fFrom} onChange={(e) => setFFrom(e.target.value)} />
+            <label className="admin-filter-label">De</label>
+            <Input type="date" className="admin-filter-control mt-1" value={fFrom} onChange={(e) => setFFrom(e.target.value)} />
           </div>
           <div>
-            <label className="text-xs text-slate-500">Até</label>
-            <Input type="date" className="mt-1" value={fTo} onChange={(e) => setFTo(e.target.value)} />
+            <label className="admin-filter-label">Até</label>
+            <Input type="date" className="admin-filter-control mt-1" value={fTo} onChange={(e) => setFTo(e.target.value)} />
           </div>
           <FilterSelect label="Ordenar por" value={sortBy} onChange={(v) => setSortBy(v as typeof sortBy)}
             options={[["score","Pontuação ↓"],["date","Data ↓"],["status","Status"]]} />
-          <div className="flex items-end">
-            <Button variant="ghost" className="text-slate-600"
+          <div className="flex items-end justify-end">
+            <Button variant="ghost" size="sm" className="admin-filter-clear text-slate-600"
               onClick={() => { setScoreRange([0,100]); setFStatus("all"); setFSeg("all"); setFUtm("all"); setFUtmMedium("all"); setFUtmCampaign("all"); setFGclid("all"); setFReferrer(""); setFProf("all"); setFFrom(""); setFTo(""); setQ(""); setFOrigin("all"); }}>
               Limpar filtros
             </Button>
@@ -628,9 +628,9 @@ function FilterSelect({ label, value, onChange, options }: {
 }) {
   return (
     <div>
-      <label className="text-xs text-slate-500">{label}</label>
+      <label className="admin-filter-label">{label}</label>
       <Select value={value} onValueChange={onChange}>
-        <SelectTrigger className="mt-1"><SelectValue /></SelectTrigger>
+        <SelectTrigger className="admin-filter-control mt-1"><SelectValue /></SelectTrigger>
         <SelectContent>
           {options.map(([v, l]) => <SelectItem key={v} value={v}>{l}</SelectItem>)}
         </SelectContent>
