@@ -149,14 +149,34 @@ export async function get<T = unknown>(table: TableName, id: string): Promise<T 
 }
 
 export async function list<T = unknown>(table: TableName): Promise<Array<T & { id: string }>> {
-  const { data, error } = await supabase
-    .from("kv_records")
-    .select("record_id, data")
-    .eq("table_name", table);
+  // A API retorna no máximo 1.000 linhas por requisição. Sem paginação, métricas
+  // como sessões aparentavam travar exatamente em 1.000 registros.
+  const pageSize = 1000;
+  const rows: Array<{ record_id: string; data: unknown }> = [];
+  let offset = 0;
+  let failed = false;
 
-  if (!error && data) {
+  while (true) {
+    const { data, error } = await supabase
+      .from("kv_records")
+      .select("record_id, data")
+      .eq("table_name", table)
+      .order("record_id", { ascending: true })
+      .range(offset, offset + pageSize - 1);
+
+    if (error || !data) {
+      failed = true;
+      break;
+    }
+
+    rows.push(...data);
+    if (data.length < pageSize) break;
+    offset += pageSize;
+  }
+
+  if (!failed) {
     const map: Record<string, T> = {};
-    for (const row of data) map[row.record_id] = row.data as T;
+    for (const row of rows) map[row.record_id] = row.data as T;
     cacheWrite(table, map);
     return Object.entries(map).map(
       ([id, value]) => ({ ...(value as object), id } as T & { id: string })
