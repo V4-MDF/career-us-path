@@ -1033,26 +1033,87 @@
  * resto do admin (escrito em Tailwind palette).
  * ---------------------------------------------------------------- */
 [data-admin-shell] {
-  --background: #ffffff;
-  --foreground: #0f172a;
+  --background: #fbfaf7;
+  --foreground: #181816;
   --card: #ffffff;
-  --card-foreground: #0f172a;
+  --card-foreground: #181816;
   --popover: #ffffff;
-  --popover-foreground: #0f172a;
-  --primary: #f59e0b;
-  --primary-foreground: #0f172a;
-  --secondary: #f1f5f9;
-  --secondary-foreground: #0f172a;
-  --muted: #f1f5f9;
-  --muted-foreground: #475569;
-  --accent: #fef3c7;
-  --accent-foreground: #92400e;
-  --destructive: #dc2626;
+  --popover-foreground: #181816;
+  --primary: #8a6829;
+  --primary-foreground: #ffffff;
+  --secondary: #f0ece3;
+  --secondary-foreground: #24231f;
+  --muted: #f0eee9;
+  --muted-foreground: #4f4d47;
+  --accent: #eee3cb;
+  --accent-foreground: #5f461c;
+  --destructive: #a32936;
   --destructive-foreground: #ffffff;
-  --border: #e2e8f0;
-  --input: #cbd5e1;
-  --ring: #b45309;
+  --border: #d8d3c8;
+  --input: #bcb5a7;
+  --ring: #8a6829;
+  --gold: #806025;
+  --ink-text: #181816;
+  --parchment: #ffffff;
+  --parchment-deep: #f4f1ea;
+  background: var(--parchment-deep);
 }
+
+[data-admin-shell] .admin-sidebar {
+  color: #f8f5ee;
+  background: linear-gradient(180deg, #20201e 0%, #151514 100%);
+  border-color: rgba(176, 139, 69, 0.38);
+  box-shadow: 12px 0 36px -28px rgba(0, 0, 0, 0.75);
+}
+[data-admin-shell] .admin-sidebar-nav { scrollbar-color: rgba(176, 139, 69, 0.45) transparent; }
+[data-admin-shell] .admin-nav-idle { color: rgba(248, 245, 238, 0.82); }
+[data-admin-shell] .admin-nav-idle:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.09);
+}
+[data-admin-shell] .admin-nav-active {
+  color: #161512;
+  background: #c9a45b;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.45), 0 8px 20px -14px rgba(201, 164, 91, 0.8);
+}
+[data-admin-shell] .admin-sidebar-footer { background: rgba(15, 15, 14, 0.94); }
+[data-admin-shell] .admin-topbar {
+  border-color: #d8d3c8;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(18px) saturate(130%);
+  box-shadow: 0 8px 24px -24px rgba(24, 24, 22, 0.65);
+}
+[data-admin-shell] .admin-stat-card,
+[data-admin-shell] .admin-section-card {
+  box-shadow: 0 12px 34px -28px rgba(24, 24, 22, 0.48);
+}
+[data-admin-shell] .admin-section-card { overflow: hidden; }
+[data-admin-shell] input,
+[data-admin-shell] textarea,
+[data-admin-shell] select,
+[data-admin-shell] [role="combobox"] {
+  color: #181816;
+  background-color: #ffffff;
+  border-color: #aaa294;
+}
+[data-admin-shell] input::placeholder,
+[data-admin-shell] textarea::placeholder { color: #656159; opacity: 1; }
+[data-admin-shell] table thead { color: #45433e; }
+[data-admin-shell] table tbody { color: #24231f; }
+[data-admin-shell] table tbody tr:hover { background-color: #f7f3ea; }
+
+/* Compatibilidade das telas antigas: cinzas claros tornam-se tons AA no admin. */
+[data-admin-shell] .text-slate-300,
+[data-admin-shell] .text-slate-400 { color: #5f5c55; }
+[data-admin-shell] .text-slate-500 { color: #504d47; }
+[data-admin-shell] .text-slate-600 { color: #403e39; }
+[data-admin-shell] .border-slate-100 { border-color: #e1ddd4; }
+[data-admin-shell] .border-slate-200 { border-color: #cec8bb; }
+[data-admin-shell] .bg-slate-50 { background-color: #faf8f3; }
+[data-admin-shell] .bg-slate-100 { background-color: #eeeae2; }
+[data-admin-shell] .text-amber-500,
+[data-admin-shell] .text-amber-600,
+[data-admin-shell] .text-amber-700 { color: #76551b; }
 
 /* Admin: link/texto em primary usa amber-700 para contraste AA sobre branco.
    Não afeta bg-primary (CTAs) que permanecem amber vibrante #f59e0b. */
