@@ -1110,6 +1110,43 @@
 [data-admin-shell] table tbody { color: #24231f; }
 [data-admin-shell] table tbody tr:hover { background-color: #f7f3ea; }
 
+/* Filtros do CRM: controles compactos, discretos e sem volume visual excessivo. */
+[data-admin-shell] .admin-filter-panel {
+  padding: 0.125rem 0;
+}
+[data-admin-shell] .admin-filter-label {
+  display: block;
+  color: var(--muted-foreground);
+  font-size: 0.6875rem;
+  line-height: 1rem;
+  font-weight: 500;
+}
+[data-admin-shell] .admin-filter-control {
+  height: 2.125rem;
+  border-color: color-mix(in oklab, var(--border) 72%, transparent);
+  border-radius: 0.375rem;
+  background: color-mix(in oklab, var(--card) 72%, transparent);
+  box-shadow: none;
+  font-size: 0.75rem;
+  transition: border-color 160ms ease, background-color 160ms ease, box-shadow 160ms ease;
+}
+[data-admin-shell] .admin-filter-control:hover {
+  border-color: var(--input);
+  background: var(--card);
+}
+[data-admin-shell] .admin-filter-control:focus,
+[data-admin-shell] .admin-filter-control:focus-visible,
+[data-admin-shell] .admin-filter-control[data-state="open"] {
+  border-color: var(--primary);
+  background: var(--card);
+  box-shadow: 0 0 0 2px color-mix(in oklab, var(--primary) 14%, transparent);
+}
+[data-admin-shell] .admin-filter-clear {
+  height: 2.125rem;
+  padding-inline: 0.625rem;
+  font-size: 0.75rem;
+}
+
 /* Compatibilidade das telas antigas: cinzas claros tornam-se tons AA no admin. */
 [data-admin-shell] .text-slate-300,
 [data-admin-shell] .text-slate-400 { color: #5f5c55; }
