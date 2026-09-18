@@ -5,9 +5,7 @@
  * (tabela `site_content`) e cai para o default abaixo. Assim o admin pode
  * espelhar/sobrescrever sem alterar componentes.
  *
- * Prompt 3.1: removido o sufixo "[CONFIRMAR]", o site público nunca renderiza
- * esse marcador. Itens pendentes de validação ficam em
- * src/lib/pendingValidation.ts (visível só no admin).
+ * O site público nunca renderiza marcadores internos de revisão editorial.
  */
 
 import { useEffect, useState } from "react";
@@ -233,8 +231,7 @@ export const defaultContent = {
   "sobre.equipe.m4.foto": "",
 
   // COMPLIANCE: números vêm de src/config/credentials.ts (fonte única).
-  // Todos marcados como PENDENTES DE VALIDAÇÃO até o cliente confirmar
-  // com documento (ver pendingValidation.ts).
+  // A exibição pública continua controlada pela fonte de credenciais.
   "sobre.numeros.eyebrow": "NÚMEROS E CREDENCIAIS",
   "sobre.numeros.title": "O que sustenta a nossa operação.",
   "sobre.numeros.n1.valor": CLAIM_FAMILIAS.value,
