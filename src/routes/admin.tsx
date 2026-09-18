@@ -103,6 +103,7 @@ function AdminLayout() {
 
   const session = getCurrentSession();
   const activeItem = NAV.find((n) => (n.exact ? pathname === n.to : pathname.startsWith(n.to)));
+  const userInitial = session?.email?.trim().charAt(0).toUpperCase() || "A";
 
   return (
     <div data-admin-shell className="min-h-screen flex bg-parchment-deep text-ink-text">
@@ -151,9 +152,26 @@ function AdminLayout() {
             );
           })}
         </nav>
-        <div className="admin-sidebar-footer absolute inset-x-0 bottom-0 flex items-center gap-2 border-t border-gold/25 p-4 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-parchment/80">
-          <ShieldCheck className="h-3.5 w-3.5 text-gold" />
-          <span>Auth · Lovable Cloud</span>
+        <div className="admin-sidebar-footer absolute inset-x-0 bottom-0 border-t border-gold/25 p-3">
+          <Link
+            to="/admin/configuracoes"
+            onClick={() => setOpenMobile(false)}
+            className="admin-user-settings flex min-w-0 items-center gap-3 rounded-md px-2 py-2 transition-colors"
+            aria-label="Abrir configurações do usuário"
+          >
+            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-gold/55 bg-gold/15 font-display text-sm font-bold text-gold">
+              {userInitial}
+            </span>
+            <span className="min-w-0 flex-1">
+              <span className="block truncate text-xs font-semibold text-parchment">
+                {session?.email || "Administrador"}
+              </span>
+              <span className="mt-0.5 block font-mono text-[9px] font-semibold uppercase tracking-[0.14em] text-parchment/55">
+                Configurações da conta
+              </span>
+            </span>
+            <Settings className="h-4 w-4 shrink-0 text-gold" aria-hidden="true" />
+          </Link>
         </div>
       </aside>
 
