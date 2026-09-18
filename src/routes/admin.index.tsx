@@ -7,6 +7,7 @@ import { list } from "@/lib/dataStore";
 import { ensureSeed, type AbStats, type HeroVariant, type Segment } from "@/lib/segments";
 import type { LeadInput } from "@/lib/leadScoring";
 import type { PartialLead } from "@/components/site/LeadFormProgressive";
+import type { SessionRecord } from "@/lib/sessions";
 import {
   loadModel, computeScore, TONE_BAR, TONE_CLASS, FUNNEL_LABEL,
   type ScoringModel, type FunnelStatus,
@@ -21,11 +22,13 @@ type StoredLead = LeadInput & {
   createdAt: string;
   segmento?: string;
   status?: FunnelStatus;
+  qualification?: "qualificado" | "nao_qualificado";
 };
 
 function DashboardPage() {
   const [leads, setLeads] = useState<StoredLead[]>([]);
   const [partials, setPartials] = useState<PartialLead[]>([]);
+  const [sessions, setSessions] = useState<SessionRecord[]>([]);
   const [model, setModel] = useState<ScoringModel | null>(null);
   const [segments, setSegments] = useState<Segment[]>([]);
   const [variants, setVariants] = useState<HeroVariant[]>([]);
@@ -33,12 +36,22 @@ function DashboardPage() {
 
   const reload = async () => {
     await ensureSeed();
-    setLeads(await list<StoredLead>("leads"));
-    setPartials(await list<PartialLead>("leads_partial"));
-    setModel(await loadModel());
-    setSegments(await list<Segment>("segments"));
-    setVariants(await list<HeroVariant>("hero_variants"));
-    setStats(await list<AbStats>("ab_stats"));
+    const [allLeads, allPartials, allSessions, scoringModel, allSegments, allVariants, allStats] = await Promise.all([
+      list<StoredLead>("leads"),
+      list<PartialLead>("leads_partial"),
+      list<SessionRecord>("sessions"),
+      loadModel(),
+      list<Segment>("segments"),
+      list<HeroVariant>("hero_variants"),
+      list<AbStats>("ab_stats"),
+    ]);
+    setLeads(allLeads);
+    setPartials(allPartials);
+    setSessions(allSessions);
+    setModel(scoringModel);
+    setSegments(allSegments);
+    setVariants(allVariants);
+    setStats(allStats);
   };
   useEffect(() => { reload(); }, []);
   // Reflete mudanças de /admin/scoring ao voltar para a aba/janela.
@@ -68,6 +81,9 @@ function DashboardPage() {
   const partialsWeek = partials.filter((p) => new Date(p.updatedAt).getTime() >= weekAgo).length;
   const startedTotal = total + partials.length;
   const completionRate = startedTotal > 0 ? Math.round((total / startedTotal) * 100) : 0;
+  const qualifiedTotal = scored.filter((l) => l.qualification === "qualificado" || l.score >= 70).length;
+  const qualificationRate = total > 0 ? Math.round((qualifiedTotal / total) * 100) : 0;
+  const visitorConversionRate = sessions.length > 0 ? Math.round((total / sessions.length) * 1000) / 10 : 0;
 
   const bySeg = new Map<string, number>();
   scored.forEach((l) => { if (l.segmento) bySeg.set(l.segmento, (bySeg.get(l.segmento) ?? 0) + 1); });
@@ -112,6 +128,14 @@ function DashboardPage() {
         <StatCard
           label="Taxa de conclusão" value={`${completionRate}%`} accent="green"
           hint={`${total} de ${startedTotal} iniciados`}
+        />
+        <StatCard
+          label="Taxa de qualificação" value={`${qualificationRate}%`} accent="gold"
+          hint={`${qualifiedTotal} de ${total} leads qualificados`}
+        />
+        <StatCard
+          label="Visitantes → leads" value={`${visitorConversionRate.toLocaleString("pt-BR", { minimumFractionDigits: 1, maximumFractionDigits: 1 })}%`} accent="blue"
+          hint={`${total} leads em ${sessions.length} sessões`}
         />
       </div>
 
