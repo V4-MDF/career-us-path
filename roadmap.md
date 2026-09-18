@@ -23,6 +23,8 @@
 - [x] Exibir a logo em formato circular no rodapé.
 - [x] Corrigir quebras de texto e cortes de layout no celular em todas as páginas públicas.
 - [x] Reformular o painel administrativo com alto contraste e navegação legível.
+- [x] Confirmar o banco ativo para visitantes e formulários, mantendo o painel restrito a administradores.
+- [x] Remover do painel os avisos internos de conteúdo pendente de validação.
 
 
 ## Mobile: trilhas deslizantes (2026-09-17)
