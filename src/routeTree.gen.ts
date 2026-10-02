@@ -9,93 +9,53 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as TermosRouteImport } from './routes/termos'
-import { Route as SobreRouteImport } from './routes/sobre'
-import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
-import { Route as PrivacidadeRouteImport } from './routes/privacidade'
-import { Route as PreQualificacaoRouteImport } from './routes/pre-qualificacao'
-import { Route as LlmInfoRouteImport } from './routes/llm-info'
-import { Route as ContatoRouteImport } from './routes/contato'
-import { Route as BlogRouteImport } from './routes/blog'
-import { Route as AuthRouteImport } from './routes/auth'
-import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as AvaliacaoIndexRouteImport } from './routes/avaliacao.index'
+import { Route as AdminRouteImport } from './routes/admin'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as BlogRouteImport } from './routes/blog'
+import { Route as ContatoRouteImport } from './routes/contato'
+import { Route as LlmInfoRouteImport } from './routes/llm-info'
+import { Route as PreQualificacaoRouteImport } from './routes/pre-qualificacao'
+import { Route as PrivacidadeRouteImport } from './routes/privacidade'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as SobreRouteImport } from './routes/sobre'
+import { Route as TermosRouteImport } from './routes/termos'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
-import { Route as VistosSlugRouteImport } from './routes/vistos.$slug'
-import { Route as LpSlugRouteImport } from './routes/lp.$slug'
-import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
-import { Route as AvaliacaoWhatsappRouteImport } from './routes/avaliacao.whatsapp'
-import { Route as AvaliacaoObrigadoQualificadoRouteImport } from './routes/avaliacao.obrigado-qualificado'
-import { Route as AvaliacaoObrigadoNaoQualificadoRouteImport } from './routes/avaliacao.obrigado-nao-qualificado'
-import { Route as AvaliacaoObrigadoRouteImport } from './routes/avaliacao.obrigado'
-import { Route as AdminUsuariosRouteImport } from './routes/admin.usuarios'
-import { Route as AdminTrackingRouteImport } from './routes/admin.tracking'
-import { Route as AdminSeoRouteImport } from './routes/admin.seo'
-import { Route as AdminSegmentosRouteImport } from './routes/admin.segmentos'
-import { Route as AdminScoringRouteImport } from './routes/admin.scoring'
-import { Route as AdminSalariosRouteImport } from './routes/admin.salarios'
-import { Route as AdminPreQualificacaoRouteImport } from './routes/admin.pre-qualificacao'
-import { Route as AdminOrigensRouteImport } from './routes/admin.origens'
-import { Route as AdminMidiaRouteImport } from './routes/admin.midia'
-import { Route as AdminLoginRouteImport } from './routes/admin.login'
-import { Route as AdminLinksRouteImport } from './routes/admin.links'
-import { Route as AdminLeadsIncompletosRouteImport } from './routes/admin.leads-incompletos'
-import { Route as AdminLeadsRouteImport } from './routes/admin.leads'
-import { Route as AdminEstruturaRouteImport } from './routes/admin.estrutura'
-import { Route as AdminContrasteRouteImport } from './routes/admin.contraste'
-import { Route as AdminConteudoRouteImport } from './routes/admin.conteudo'
-import { Route as AdminConfiguracoesRouteImport } from './routes/admin.configuracoes'
-import { Route as AdminBlogRouteImport } from './routes/admin.blog'
 import { Route as AdminAbRouteImport } from './routes/admin.ab'
+import { Route as AdminBlogRouteImport } from './routes/admin.blog'
+import { Route as AdminConfiguracoesRouteImport } from './routes/admin.configuracoes'
+import { Route as AdminConteudoRouteImport } from './routes/admin.conteudo'
+import { Route as AdminContrasteRouteImport } from './routes/admin.contraste'
+import { Route as AdminEstruturaRouteImport } from './routes/admin.estrutura'
+import { Route as AdminLeadsRouteImport } from './routes/admin.leads'
+import { Route as AdminLeadsIncompletosRouteImport } from './routes/admin.leads-incompletos'
+import { Route as AdminLinksRouteImport } from './routes/admin.links'
+import { Route as AdminLoginRouteImport } from './routes/admin.login'
+import { Route as AdminMidiaRouteImport } from './routes/admin.midia'
+import { Route as AdminOrigensRouteImport } from './routes/admin.origens'
+import { Route as AdminPreQualificacaoRouteImport } from './routes/admin.pre-qualificacao'
+import { Route as AdminSalariosRouteImport } from './routes/admin.salarios'
+import { Route as AdminScoringRouteImport } from './routes/admin.scoring'
+import { Route as AdminSegmentosRouteImport } from './routes/admin.segmentos'
+import { Route as AdminSeoRouteImport } from './routes/admin.seo'
+import { Route as AdminTrackingRouteImport } from './routes/admin.tracking'
+import { Route as AdminUsuariosRouteImport } from './routes/admin.usuarios'
+import { Route as AvaliacaoIndexRouteImport } from './routes/avaliacao.index'
+import { Route as AvaliacaoObrigadoRouteImport } from './routes/avaliacao.obrigado'
+import { Route as AvaliacaoObrigadoNaoQualificadoRouteImport } from './routes/avaliacao.obrigado-nao-qualificado'
+import { Route as AvaliacaoObrigadoQualificadoRouteImport } from './routes/avaliacao.obrigado-qualificado'
+import { Route as AvaliacaoWhatsappRouteImport } from './routes/avaliacao.whatsapp'
+import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
+import { Route as LpSlugRouteImport } from './routes/lp.$slug'
+import { Route as VistosSlugRouteImport } from './routes/vistos.$slug'
+import { Route as ApiPublicLeadWebhookRouteImport } from './routes/api/public/lead-webhook'
+import { Route as PreQualificacaoRTokenRouteImport } from './routes/pre-qualificacao.r.$token'
 import { Route as VistosSlugIndexRouteImport } from './routes/vistos.$slug.index'
 import { Route as VistosSlugSecaoRouteImport } from './routes/vistos.$slug.$secao'
-import { Route as PreQualificacaoRTokenRouteImport } from './routes/pre-qualificacao.r.$token'
-import { Route as ApiPublicLeadWebhookRouteImport } from './routes/api/public/lead-webhook'
 
-const TermosRoute = TermosRouteImport.update({
-  id: '/termos',
-  path: '/termos',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SobreRoute = SobreRouteImport.update({
-  id: '/sobre',
-  path: '/sobre',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
-  id: '/sitemap.xml',
-  path: '/sitemap.xml',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PrivacidadeRoute = PrivacidadeRouteImport.update({
-  id: '/privacidade',
-  path: '/privacidade',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PreQualificacaoRoute = PreQualificacaoRouteImport.update({
-  id: '/pre-qualificacao',
-  path: '/pre-qualificacao',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const LlmInfoRoute = LlmInfoRouteImport.update({
-  id: '/llm-info',
-  path: '/llm-info',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ContatoRoute = ContatoRouteImport.update({
-  id: '/contato',
-  path: '/contato',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BlogRoute = BlogRouteImport.update({
-  id: '/blog',
-  path: '/blog',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AuthRoute = AuthRouteImport.update({
-  id: '/auth',
-  path: '/auth',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminRoute = AdminRouteImport.update({
@@ -103,14 +63,49 @@ const AdminRoute = AdminRouteImport.update({
   path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AvaliacaoIndexRoute = AvaliacaoIndexRouteImport.update({
-  id: '/avaliacao/',
-  path: '/avaliacao/',
+const BlogRoute = BlogRouteImport.update({
+  id: '/blog',
+  path: '/blog',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContatoRoute = ContatoRouteImport.update({
+  id: '/contato',
+  path: '/contato',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LlmInfoRoute = LlmInfoRouteImport.update({
+  id: '/llm-info',
+  path: '/llm-info',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PreQualificacaoRoute = PreQualificacaoRouteImport.update({
+  id: '/pre-qualificacao',
+  path: '/pre-qualificacao',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacidadeRoute = PrivacidadeRouteImport.update({
+  id: '/privacidade',
+  path: '/privacidade',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SobreRoute = SobreRouteImport.update({
+  id: '/sobre',
+  path: '/sobre',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TermosRoute = TermosRouteImport.update({
+  id: '/termos',
+  path: '/termos',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminIndexRoute = AdminIndexRouteImport.update({
@@ -118,126 +113,9 @@ const AdminIndexRoute = AdminIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AdminRoute,
 } as any)
-const VistosSlugRoute = VistosSlugRouteImport.update({
-  id: '/vistos/$slug',
-  path: '/vistos/$slug',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const LpSlugRoute = LpSlugRouteImport.update({
-  id: '/lp/$slug',
-  path: '/lp/$slug',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BlogSlugRoute = BlogSlugRouteImport.update({
-  id: '/$slug',
-  path: '/$slug',
-  getParentRoute: () => BlogRoute,
-} as any)
-const AvaliacaoWhatsappRoute = AvaliacaoWhatsappRouteImport.update({
-  id: '/avaliacao/whatsapp',
-  path: '/avaliacao/whatsapp',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AvaliacaoObrigadoQualificadoRoute =
-  AvaliacaoObrigadoQualificadoRouteImport.update({
-    id: '/avaliacao/obrigado-qualificado',
-    path: '/avaliacao/obrigado-qualificado',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const AvaliacaoObrigadoNaoQualificadoRoute =
-  AvaliacaoObrigadoNaoQualificadoRouteImport.update({
-    id: '/avaliacao/obrigado-nao-qualificado',
-    path: '/avaliacao/obrigado-nao-qualificado',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const AvaliacaoObrigadoRoute = AvaliacaoObrigadoRouteImport.update({
-  id: '/avaliacao/obrigado',
-  path: '/avaliacao/obrigado',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AdminUsuariosRoute = AdminUsuariosRouteImport.update({
-  id: '/usuarios',
-  path: '/usuarios',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminTrackingRoute = AdminTrackingRouteImport.update({
-  id: '/tracking',
-  path: '/tracking',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminSeoRoute = AdminSeoRouteImport.update({
-  id: '/seo',
-  path: '/seo',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminSegmentosRoute = AdminSegmentosRouteImport.update({
-  id: '/segmentos',
-  path: '/segmentos',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminScoringRoute = AdminScoringRouteImport.update({
-  id: '/scoring',
-  path: '/scoring',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminSalariosRoute = AdminSalariosRouteImport.update({
-  id: '/salarios',
-  path: '/salarios',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminPreQualificacaoRoute = AdminPreQualificacaoRouteImport.update({
-  id: '/pre-qualificacao',
-  path: '/pre-qualificacao',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminOrigensRoute = AdminOrigensRouteImport.update({
-  id: '/origens',
-  path: '/origens',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminMidiaRoute = AdminMidiaRouteImport.update({
-  id: '/midia',
-  path: '/midia',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminLoginRoute = AdminLoginRouteImport.update({
-  id: '/login',
-  path: '/login',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminLinksRoute = AdminLinksRouteImport.update({
-  id: '/links',
-  path: '/links',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminLeadsIncompletosRoute = AdminLeadsIncompletosRouteImport.update({
-  id: '/leads-incompletos',
-  path: '/leads-incompletos',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminLeadsRoute = AdminLeadsRouteImport.update({
-  id: '/leads',
-  path: '/leads',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminEstruturaRoute = AdminEstruturaRouteImport.update({
-  id: '/estrutura',
-  path: '/estrutura',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminContrasteRoute = AdminContrasteRouteImport.update({
-  id: '/contraste',
-  path: '/contraste',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminConteudoRoute = AdminConteudoRouteImport.update({
-  id: '/conteudo',
-  path: '/conteudo',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminConfiguracoesRoute = AdminConfiguracoesRouteImport.update({
-  id: '/configuracoes',
-  path: '/configuracoes',
+const AdminAbRoute = AdminAbRouteImport.update({
+  id: '/ab',
+  path: '/ab',
   getParentRoute: () => AdminRoute,
 } as any)
 const AdminBlogRoute = AdminBlogRouteImport.update({
@@ -245,10 +123,142 @@ const AdminBlogRoute = AdminBlogRouteImport.update({
   path: '/blog',
   getParentRoute: () => AdminRoute,
 } as any)
-const AdminAbRoute = AdminAbRouteImport.update({
-  id: '/ab',
-  path: '/ab',
+const AdminConfiguracoesRoute = AdminConfiguracoesRouteImport.update({
+  id: '/configuracoes',
+  path: '/configuracoes',
   getParentRoute: () => AdminRoute,
+} as any)
+const AdminConteudoRoute = AdminConteudoRouteImport.update({
+  id: '/conteudo',
+  path: '/conteudo',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminContrasteRoute = AdminContrasteRouteImport.update({
+  id: '/contraste',
+  path: '/contraste',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminEstruturaRoute = AdminEstruturaRouteImport.update({
+  id: '/estrutura',
+  path: '/estrutura',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminLeadsRoute = AdminLeadsRouteImport.update({
+  id: '/leads',
+  path: '/leads',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminLeadsIncompletosRoute = AdminLeadsIncompletosRouteImport.update({
+  id: '/leads-incompletos',
+  path: '/leads-incompletos',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminLinksRoute = AdminLinksRouteImport.update({
+  id: '/links',
+  path: '/links',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminLoginRoute = AdminLoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminMidiaRoute = AdminMidiaRouteImport.update({
+  id: '/midia',
+  path: '/midia',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminOrigensRoute = AdminOrigensRouteImport.update({
+  id: '/origens',
+  path: '/origens',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminPreQualificacaoRoute = AdminPreQualificacaoRouteImport.update({
+  id: '/pre-qualificacao',
+  path: '/pre-qualificacao',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminSalariosRoute = AdminSalariosRouteImport.update({
+  id: '/salarios',
+  path: '/salarios',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminScoringRoute = AdminScoringRouteImport.update({
+  id: '/scoring',
+  path: '/scoring',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminSegmentosRoute = AdminSegmentosRouteImport.update({
+  id: '/segmentos',
+  path: '/segmentos',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminSeoRoute = AdminSeoRouteImport.update({
+  id: '/seo',
+  path: '/seo',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminTrackingRoute = AdminTrackingRouteImport.update({
+  id: '/tracking',
+  path: '/tracking',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminUsuariosRoute = AdminUsuariosRouteImport.update({
+  id: '/usuarios',
+  path: '/usuarios',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AvaliacaoIndexRoute = AvaliacaoIndexRouteImport.update({
+  id: '/avaliacao/',
+  path: '/avaliacao/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AvaliacaoObrigadoRoute = AvaliacaoObrigadoRouteImport.update({
+  id: '/avaliacao/obrigado',
+  path: '/avaliacao/obrigado',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AvaliacaoObrigadoNaoQualificadoRoute =
+  AvaliacaoObrigadoNaoQualificadoRouteImport.update({
+    id: '/avaliacao/obrigado-nao-qualificado',
+    path: '/avaliacao/obrigado-nao-qualificado',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const AvaliacaoObrigadoQualificadoRoute =
+  AvaliacaoObrigadoQualificadoRouteImport.update({
+    id: '/avaliacao/obrigado-qualificado',
+    path: '/avaliacao/obrigado-qualificado',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const AvaliacaoWhatsappRoute = AvaliacaoWhatsappRouteImport.update({
+  id: '/avaliacao/whatsapp',
+  path: '/avaliacao/whatsapp',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogSlugRoute = BlogSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => BlogRoute,
+} as any)
+const LpSlugRoute = LpSlugRouteImport.update({
+  id: '/lp/$slug',
+  path: '/lp/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VistosSlugRoute = VistosSlugRouteImport.update({
+  id: '/vistos/$slug',
+  path: '/vistos/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicLeadWebhookRoute = ApiPublicLeadWebhookRouteImport.update({
+  id: '/api/public/lead-webhook',
+  path: '/api/public/lead-webhook',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PreQualificacaoRTokenRoute = PreQualificacaoRTokenRouteImport.update({
+  id: '/r/$token',
+  path: '/r/$token',
+  getParentRoute: () => PreQualificacaoRoute,
 } as any)
 const VistosSlugIndexRoute = VistosSlugIndexRouteImport.update({
   id: '/',
@@ -259,16 +269,6 @@ const VistosSlugSecaoRoute = VistosSlugSecaoRouteImport.update({
   id: '/$secao',
   path: '/$secao',
   getParentRoute: () => VistosSlugRoute,
-} as any)
-const PreQualificacaoRTokenRoute = PreQualificacaoRTokenRouteImport.update({
-  id: '/r/$token',
-  path: '/r/$token',
-  getParentRoute: () => PreQualificacaoRoute,
-} as any)
-const ApiPublicLeadWebhookRoute = ApiPublicLeadWebhookRouteImport.update({
-  id: '/api/public/lead-webhook',
-  path: '/api/public/lead-webhook',
-  getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
@@ -565,67 +565,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/termos': {
-      id: '/termos'
-      path: '/termos'
-      fullPath: '/termos'
-      preLoaderRoute: typeof TermosRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/sobre': {
-      id: '/sobre'
-      path: '/sobre'
-      fullPath: '/sobre'
-      preLoaderRoute: typeof SobreRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/sitemap.xml': {
-      id: '/sitemap.xml'
-      path: '/sitemap.xml'
-      fullPath: '/sitemap.xml'
-      preLoaderRoute: typeof SitemapDotxmlRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/privacidade': {
-      id: '/privacidade'
-      path: '/privacidade'
-      fullPath: '/privacidade'
-      preLoaderRoute: typeof PrivacidadeRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/pre-qualificacao': {
-      id: '/pre-qualificacao'
-      path: '/pre-qualificacao'
-      fullPath: '/pre-qualificacao'
-      preLoaderRoute: typeof PreQualificacaoRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/llm-info': {
-      id: '/llm-info'
-      path: '/llm-info'
-      fullPath: '/llm-info'
-      preLoaderRoute: typeof LlmInfoRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/contato': {
-      id: '/contato'
-      path: '/contato'
-      fullPath: '/contato'
-      preLoaderRoute: typeof ContatoRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/blog': {
-      id: '/blog'
-      path: '/blog'
-      fullPath: '/blog'
-      preLoaderRoute: typeof BlogRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/auth': {
-      id: '/auth'
-      path: '/auth'
-      fullPath: '/auth'
-      preLoaderRoute: typeof AuthRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin': {
@@ -635,18 +579,67 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/avaliacao/': {
-      id: '/avaliacao/'
-      path: '/avaliacao'
-      fullPath: '/avaliacao/'
-      preLoaderRoute: typeof AvaliacaoIndexRouteImport
+    '/blog': {
+      id: '/blog'
+      path: '/blog'
+      fullPath: '/blog'
+      preLoaderRoute: typeof BlogRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contato': {
+      id: '/contato'
+      path: '/contato'
+      fullPath: '/contato'
+      preLoaderRoute: typeof ContatoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/llm-info': {
+      id: '/llm-info'
+      path: '/llm-info'
+      fullPath: '/llm-info'
+      preLoaderRoute: typeof LlmInfoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pre-qualificacao': {
+      id: '/pre-qualificacao'
+      path: '/pre-qualificacao'
+      fullPath: '/pre-qualificacao'
+      preLoaderRoute: typeof PreQualificacaoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacidade': {
+      id: '/privacidade'
+      path: '/privacidade'
+      fullPath: '/privacidade'
+      preLoaderRoute: typeof PrivacidadeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sobre': {
+      id: '/sobre'
+      path: '/sobre'
+      fullPath: '/sobre'
+      preLoaderRoute: typeof SobreRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/termos': {
+      id: '/termos'
+      path: '/termos'
+      fullPath: '/termos'
+      preLoaderRoute: typeof TermosRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin/': {
@@ -656,172 +649,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminIndexRouteImport
       parentRoute: typeof AdminRoute
     }
-    '/vistos/$slug': {
-      id: '/vistos/$slug'
-      path: '/vistos/$slug'
-      fullPath: '/vistos/$slug'
-      preLoaderRoute: typeof VistosSlugRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/lp/$slug': {
-      id: '/lp/$slug'
-      path: '/lp/$slug'
-      fullPath: '/lp/$slug'
-      preLoaderRoute: typeof LpSlugRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/blog/$slug': {
-      id: '/blog/$slug'
-      path: '/$slug'
-      fullPath: '/blog/$slug'
-      preLoaderRoute: typeof BlogSlugRouteImport
-      parentRoute: typeof BlogRoute
-    }
-    '/avaliacao/whatsapp': {
-      id: '/avaliacao/whatsapp'
-      path: '/avaliacao/whatsapp'
-      fullPath: '/avaliacao/whatsapp'
-      preLoaderRoute: typeof AvaliacaoWhatsappRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/avaliacao/obrigado-qualificado': {
-      id: '/avaliacao/obrigado-qualificado'
-      path: '/avaliacao/obrigado-qualificado'
-      fullPath: '/avaliacao/obrigado-qualificado'
-      preLoaderRoute: typeof AvaliacaoObrigadoQualificadoRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/avaliacao/obrigado-nao-qualificado': {
-      id: '/avaliacao/obrigado-nao-qualificado'
-      path: '/avaliacao/obrigado-nao-qualificado'
-      fullPath: '/avaliacao/obrigado-nao-qualificado'
-      preLoaderRoute: typeof AvaliacaoObrigadoNaoQualificadoRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/avaliacao/obrigado': {
-      id: '/avaliacao/obrigado'
-      path: '/avaliacao/obrigado'
-      fullPath: '/avaliacao/obrigado'
-      preLoaderRoute: typeof AvaliacaoObrigadoRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/admin/usuarios': {
-      id: '/admin/usuarios'
-      path: '/usuarios'
-      fullPath: '/admin/usuarios'
-      preLoaderRoute: typeof AdminUsuariosRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/admin/tracking': {
-      id: '/admin/tracking'
-      path: '/tracking'
-      fullPath: '/admin/tracking'
-      preLoaderRoute: typeof AdminTrackingRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/admin/seo': {
-      id: '/admin/seo'
-      path: '/seo'
-      fullPath: '/admin/seo'
-      preLoaderRoute: typeof AdminSeoRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/admin/segmentos': {
-      id: '/admin/segmentos'
-      path: '/segmentos'
-      fullPath: '/admin/segmentos'
-      preLoaderRoute: typeof AdminSegmentosRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/admin/scoring': {
-      id: '/admin/scoring'
-      path: '/scoring'
-      fullPath: '/admin/scoring'
-      preLoaderRoute: typeof AdminScoringRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/admin/salarios': {
-      id: '/admin/salarios'
-      path: '/salarios'
-      fullPath: '/admin/salarios'
-      preLoaderRoute: typeof AdminSalariosRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/admin/pre-qualificacao': {
-      id: '/admin/pre-qualificacao'
-      path: '/pre-qualificacao'
-      fullPath: '/admin/pre-qualificacao'
-      preLoaderRoute: typeof AdminPreQualificacaoRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/admin/origens': {
-      id: '/admin/origens'
-      path: '/origens'
-      fullPath: '/admin/origens'
-      preLoaderRoute: typeof AdminOrigensRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/admin/midia': {
-      id: '/admin/midia'
-      path: '/midia'
-      fullPath: '/admin/midia'
-      preLoaderRoute: typeof AdminMidiaRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/admin/login': {
-      id: '/admin/login'
-      path: '/login'
-      fullPath: '/admin/login'
-      preLoaderRoute: typeof AdminLoginRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/admin/links': {
-      id: '/admin/links'
-      path: '/links'
-      fullPath: '/admin/links'
-      preLoaderRoute: typeof AdminLinksRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/admin/leads-incompletos': {
-      id: '/admin/leads-incompletos'
-      path: '/leads-incompletos'
-      fullPath: '/admin/leads-incompletos'
-      preLoaderRoute: typeof AdminLeadsIncompletosRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/admin/leads': {
-      id: '/admin/leads'
-      path: '/leads'
-      fullPath: '/admin/leads'
-      preLoaderRoute: typeof AdminLeadsRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/admin/estrutura': {
-      id: '/admin/estrutura'
-      path: '/estrutura'
-      fullPath: '/admin/estrutura'
-      preLoaderRoute: typeof AdminEstruturaRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/admin/contraste': {
-      id: '/admin/contraste'
-      path: '/contraste'
-      fullPath: '/admin/contraste'
-      preLoaderRoute: typeof AdminContrasteRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/admin/conteudo': {
-      id: '/admin/conteudo'
-      path: '/conteudo'
-      fullPath: '/admin/conteudo'
-      preLoaderRoute: typeof AdminConteudoRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/admin/configuracoes': {
-      id: '/admin/configuracoes'
-      path: '/configuracoes'
-      fullPath: '/admin/configuracoes'
-      preLoaderRoute: typeof AdminConfiguracoesRouteImport
+    '/admin/ab': {
+      id: '/admin/ab'
+      path: '/ab'
+      fullPath: '/admin/ab'
+      preLoaderRoute: typeof AdminAbRouteImport
       parentRoute: typeof AdminRoute
     }
     '/admin/blog': {
@@ -831,12 +663,194 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminBlogRouteImport
       parentRoute: typeof AdminRoute
     }
-    '/admin/ab': {
-      id: '/admin/ab'
-      path: '/ab'
-      fullPath: '/admin/ab'
-      preLoaderRoute: typeof AdminAbRouteImport
+    '/admin/configuracoes': {
+      id: '/admin/configuracoes'
+      path: '/configuracoes'
+      fullPath: '/admin/configuracoes'
+      preLoaderRoute: typeof AdminConfiguracoesRouteImport
       parentRoute: typeof AdminRoute
+    }
+    '/admin/conteudo': {
+      id: '/admin/conteudo'
+      path: '/conteudo'
+      fullPath: '/admin/conteudo'
+      preLoaderRoute: typeof AdminConteudoRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/contraste': {
+      id: '/admin/contraste'
+      path: '/contraste'
+      fullPath: '/admin/contraste'
+      preLoaderRoute: typeof AdminContrasteRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/estrutura': {
+      id: '/admin/estrutura'
+      path: '/estrutura'
+      fullPath: '/admin/estrutura'
+      preLoaderRoute: typeof AdminEstruturaRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/leads': {
+      id: '/admin/leads'
+      path: '/leads'
+      fullPath: '/admin/leads'
+      preLoaderRoute: typeof AdminLeadsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/leads-incompletos': {
+      id: '/admin/leads-incompletos'
+      path: '/leads-incompletos'
+      fullPath: '/admin/leads-incompletos'
+      preLoaderRoute: typeof AdminLeadsIncompletosRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/links': {
+      id: '/admin/links'
+      path: '/links'
+      fullPath: '/admin/links'
+      preLoaderRoute: typeof AdminLinksRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/login': {
+      id: '/admin/login'
+      path: '/login'
+      fullPath: '/admin/login'
+      preLoaderRoute: typeof AdminLoginRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/midia': {
+      id: '/admin/midia'
+      path: '/midia'
+      fullPath: '/admin/midia'
+      preLoaderRoute: typeof AdminMidiaRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/origens': {
+      id: '/admin/origens'
+      path: '/origens'
+      fullPath: '/admin/origens'
+      preLoaderRoute: typeof AdminOrigensRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/pre-qualificacao': {
+      id: '/admin/pre-qualificacao'
+      path: '/pre-qualificacao'
+      fullPath: '/admin/pre-qualificacao'
+      preLoaderRoute: typeof AdminPreQualificacaoRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/salarios': {
+      id: '/admin/salarios'
+      path: '/salarios'
+      fullPath: '/admin/salarios'
+      preLoaderRoute: typeof AdminSalariosRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/scoring': {
+      id: '/admin/scoring'
+      path: '/scoring'
+      fullPath: '/admin/scoring'
+      preLoaderRoute: typeof AdminScoringRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/segmentos': {
+      id: '/admin/segmentos'
+      path: '/segmentos'
+      fullPath: '/admin/segmentos'
+      preLoaderRoute: typeof AdminSegmentosRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/seo': {
+      id: '/admin/seo'
+      path: '/seo'
+      fullPath: '/admin/seo'
+      preLoaderRoute: typeof AdminSeoRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/tracking': {
+      id: '/admin/tracking'
+      path: '/tracking'
+      fullPath: '/admin/tracking'
+      preLoaderRoute: typeof AdminTrackingRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/usuarios': {
+      id: '/admin/usuarios'
+      path: '/usuarios'
+      fullPath: '/admin/usuarios'
+      preLoaderRoute: typeof AdminUsuariosRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/avaliacao/': {
+      id: '/avaliacao/'
+      path: '/avaliacao'
+      fullPath: '/avaliacao/'
+      preLoaderRoute: typeof AvaliacaoIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/avaliacao/obrigado': {
+      id: '/avaliacao/obrigado'
+      path: '/avaliacao/obrigado'
+      fullPath: '/avaliacao/obrigado'
+      preLoaderRoute: typeof AvaliacaoObrigadoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/avaliacao/obrigado-nao-qualificado': {
+      id: '/avaliacao/obrigado-nao-qualificado'
+      path: '/avaliacao/obrigado-nao-qualificado'
+      fullPath: '/avaliacao/obrigado-nao-qualificado'
+      preLoaderRoute: typeof AvaliacaoObrigadoNaoQualificadoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/avaliacao/obrigado-qualificado': {
+      id: '/avaliacao/obrigado-qualificado'
+      path: '/avaliacao/obrigado-qualificado'
+      fullPath: '/avaliacao/obrigado-qualificado'
+      preLoaderRoute: typeof AvaliacaoObrigadoQualificadoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/avaliacao/whatsapp': {
+      id: '/avaliacao/whatsapp'
+      path: '/avaliacao/whatsapp'
+      fullPath: '/avaliacao/whatsapp'
+      preLoaderRoute: typeof AvaliacaoWhatsappRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/$slug': {
+      id: '/blog/$slug'
+      path: '/$slug'
+      fullPath: '/blog/$slug'
+      preLoaderRoute: typeof BlogSlugRouteImport
+      parentRoute: typeof BlogRoute
+    }
+    '/lp/$slug': {
+      id: '/lp/$slug'
+      path: '/lp/$slug'
+      fullPath: '/lp/$slug'
+      preLoaderRoute: typeof LpSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/vistos/$slug': {
+      id: '/vistos/$slug'
+      path: '/vistos/$slug'
+      fullPath: '/vistos/$slug'
+      preLoaderRoute: typeof VistosSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/lead-webhook': {
+      id: '/api/public/lead-webhook'
+      path: '/api/public/lead-webhook'
+      fullPath: '/api/public/lead-webhook'
+      preLoaderRoute: typeof ApiPublicLeadWebhookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pre-qualificacao/r/$token': {
+      id: '/pre-qualificacao/r/$token'
+      path: '/r/$token'
+      fullPath: '/pre-qualificacao/r/$token'
+      preLoaderRoute: typeof PreQualificacaoRTokenRouteImport
+      parentRoute: typeof PreQualificacaoRoute
     }
     '/vistos/$slug/': {
       id: '/vistos/$slug/'
@@ -851,20 +865,6 @@ declare module '@tanstack/react-router' {
       fullPath: '/vistos/$slug/$secao'
       preLoaderRoute: typeof VistosSlugSecaoRouteImport
       parentRoute: typeof VistosSlugRoute
-    }
-    '/pre-qualificacao/r/$token': {
-      id: '/pre-qualificacao/r/$token'
-      path: '/r/$token'
-      fullPath: '/pre-qualificacao/r/$token'
-      preLoaderRoute: typeof PreQualificacaoRTokenRouteImport
-      parentRoute: typeof PreQualificacaoRoute
-    }
-    '/api/public/lead-webhook': {
-      id: '/api/public/lead-webhook'
-      path: '/api/public/lead-webhook'
-      fullPath: '/api/public/lead-webhook'
-      preLoaderRoute: typeof ApiPublicLeadWebhookRouteImport
-      parentRoute: typeof rootRouteImport
     }
   }
 }
