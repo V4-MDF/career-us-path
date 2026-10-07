@@ -182,7 +182,7 @@ function SeoEditor({ page }: { page: { slug: string; label: string; defaults: Pa
       <div className="space-y-4">
         <SectionCard title="Preview. Google">
           <div className="p-3 rounded-md bg-white border border-slate-100">
-            <div className="text-[11px] text-emerald-700">statusnaamerica.com {v.canonical}</div>
+            <div className="text-[11px] text-emerald-700">statusimmigrationlaw.com.br {v.canonical}</div>
             <div className="text-[18px] text-[#1a0dab] leading-snug truncate">{v.meta_title || "-"}</div>
             <div className="text-[13px] text-slate-700 line-clamp-2">{v.meta_description || "-"}</div>
           </div>
@@ -193,7 +193,7 @@ function SeoEditor({ page }: { page: { slug: string; label: string; defaults: Pa
               {v.og_image ? <img src={v.og_image} alt="" className="object-cover w-full h-full" /> : "OG image"}
             </div>
             <div className="p-3 bg-white">
-              <div className="text-[11px] text-slate-500 uppercase">statusnaamerica.com</div>
+              <div className="text-[11px] text-slate-500 uppercase">statusimmigrationlaw.com.br</div>
               <div className="font-semibold text-sm">{v.og_title || v.meta_title}</div>
               <div className="text-xs text-slate-600 line-clamp-2">{v.og_description || v.meta_description}</div>
             </div>

@@ -39,7 +39,7 @@ function TermosPage() {
           <div>
             <h2 className="font-display text-2xl text-foreground">1. Aceitação</h2>
             <p className="mt-3">
-              Ao acessar o site <strong>lp.statusnaamerica.com</strong> e demais domínios
+              Ao acessar o site <strong>statusimmigrationlaw.com.br</strong> e demais domínios
               operados pela Status Immigration Law Firm, o usuário declara ter lido, compreendido e
               aceito integralmente estes Termos de Uso e a{" "}
               <Link to="/privacidade" className="text-gold underline underline-offset-4 hover:text-gold/80">

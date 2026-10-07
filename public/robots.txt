@@ -6,4 +6,4 @@ Disallow: /lp
 Disallow: /lp/
 Disallow: /auth
 
-Sitemap: https://lp.statusnaamerica.com/sitemap.xml
+Sitemap: https://statusimmigrationlaw.com.br/sitemap.xml

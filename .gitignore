@@ -30,3 +30,9 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Variáveis locais
+.env
+
+# Dados exportados do Lovable Cloud (contém dados pessoais de leads)
+migration-data/

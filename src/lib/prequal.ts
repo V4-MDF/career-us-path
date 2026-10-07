@@ -17,7 +17,7 @@
  *    porque não os coletamos aqui.
  */
 
-import { list, set as dsSet } from "@/lib/dataStore";
+import { get, list, set as dsSet } from "@/lib/dataStore";
 import type { LeadOrigin } from "@/lib/origin";
 import type { QualificationResult, VisaCode } from "@/lib/visaQualifier";
 
@@ -163,8 +163,7 @@ export async function listResponses(): Promise<PreQualResponse[]> {
 }
 
 export async function markWhatsAppOpened(id: string): Promise<void> {
-  const all = await listResponses();
-  const found = all.find((r) => r.id === id);
+  const found = await get<PreQualResponse>("prequal_responses", id);
   if (!found) return;
   await dsSet("prequal_responses", id, { ...found, whatsappOpened: true });
 }

@@ -1,8 +1,8 @@
 /**
  * ImageUploader, botão de upload com preview para o admin.
  *
- * Sobe o arquivo direto para o bucket `media` do Supabase Storage (RLS:
- * leitura pública, escrita apenas para admin). Devolve a URL pública via
+ * Sobe o arquivo para o bucket R2 de mídia via POST /api/admin/upload
+ * (só admin logado no painel). Devolve a URL pública via
  * `onChange`, o formato do dado armazenado no `kv_records` continua sendo
  * uma string URL, então o site público não precisa de nenhuma mudança.
  *
@@ -17,7 +17,6 @@ import { Loader2, Upload, X, AlertTriangle } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { supabase } from "@/integrations/supabase/client";
 
 export interface ImageUploaderProps {
   value: string;
@@ -104,17 +103,18 @@ export function ImageUploader({
 
     setBusy(true);
     try {
-      const { error } = await supabase.storage
-        .from("media")
-        .upload(name, file, {
-          contentType: file.type,
-          cacheControl: "31536000, immutable",
-          upsert: false,
-        });
-      if (error) throw error;
-      const { data } = supabase.storage.from("media").getPublicUrl(name);
-      onChange(data.publicUrl);
-      setUrlDraft(data.publicUrl);
+      const form = new FormData();
+      form.append("file", file);
+      form.append("path", name);
+      const res = await fetch("/api/admin/upload", {
+        method: "POST",
+        body: form,
+        credentials: "same-origin",
+      });
+      const data = (await res.json().catch(() => ({}))) as { url?: string; error?: string };
+      if (!res.ok || !data.url) throw new Error(data.error || `Falha no upload (${res.status}).`);
+      onChange(data.url);
+      setUrlDraft(data.url);
       setMeta({ w: 0, h: 0, kb: Math.round(file.size / 1024) });
       toast.success(isVideo ? "Vídeo enviado." : "Imagem enviada.");
     } catch (err: unknown) {

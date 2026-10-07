@@ -7,8 +7,7 @@ import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { login } from "@/lib/admin/auth";
-import { supabase } from "@/integrations/supabase/client";
+import { initAuthListener, isAuthenticated, login, subscribeAuth } from "@/lib/admin/auth";
 import { BrandLogo } from "@/components/site/BrandLogo";
 
 const searchSchema = z.object({
@@ -30,25 +29,15 @@ function AuthPage() {
   const navigate = useNavigate();
   const { next } = useSearch({ from: "/auth" });
 
+  // Já logado (cookie de sessão válido) → vai direto para o painel.
   useEffect(() => {
-    (async () => {
-      const { data } = await supabase.auth.getSession();
-      if (!data.session) return;
-      const { data: roleRow } = await supabase
-        .from("user_roles")
-        .select("role")
-        .eq("user_id", data.session.user.id)
-        .eq("role", "admin")
-        .maybeSingle();
-      const isAdmin = !!roleRow;
-      if (isAdmin) {
-        navigate({ to: (next as string) || "/admin", replace: true });
-      } else {
-        // Sessão existe mas sem role admin, encerra para evitar loop.
-        await supabase.auth.signOut();
-        toast.error("Sua conta não tem acesso admin. Peça a um administrador.");
-      }
-    })();
+    const go = () => {
+      if (isAuthenticated()) navigate({ to: (next as string) || "/admin", replace: true });
+    };
+    const unsub = subscribeAuth(go);
+    initAuthListener();
+    go();
+    return unsub;
   }, [navigate, next]);
 
   return (

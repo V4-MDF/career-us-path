@@ -156,25 +156,13 @@ Classificação: A (SQL quente) ≥ 80 · B (MQL) 60–79 · C (nutrir) 40–59 
 
 Home (/) completa e responsiva, com todas as 14 dobras, design system aplicado, formulário com scoring funcionando e salvando em localStorage via dataStore, textos lendo de site_content com fallback. Rotas /vistos/* , /lp/* , /sobre, /contato, /blog podem ser páginas-stub por enquanto. Deixe o código organizado e comentado para os próximos prompts (motor de LPs, admin, blog).
 
-This project was built with [Lovable](https://lovable.dev).
+## Hospedagem
 
-**Live app**: https://merit-path-usa.lovable.app
-
-## Build with Lovable
-
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/5de380e6-3aa3-4bc3-844b-02836eb26c67).
-
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
-
-## Development
-
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
+O site roda na Cloudflare (Workers + D1 + R2 + Access). Veja `AGENTS.md` e
+`docs/MIGRACAO-CLOUDFLARE.md`.
 
 ```sh
-git clone <this-repository-url>
-cd <repository-name>
 npm i
+npm run db:migrate:local
 npm run dev
 ```
