@@ -12,7 +12,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
 
-const BASE_URL = "https://lp.statusnaamerica.com";
+const BASE_URL = "https://statusimmigrationlaw.com.br";
 
 interface SitemapEntry {
   path: string;

@@ -11,7 +11,6 @@ import {
 import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
-import { reportLovableError } from "../lib/lovable-error-reporting";
 import { TrackingInjector } from "../components/site/TrackingInjector";
 import { trackRouteChange } from "../lib/origin";
 import { ensureSession } from "../lib/sessions";
@@ -41,9 +40,6 @@ function NotFoundComponent() {
 function ErrorComponent({ error, reset }: ErrorComponentProps) {
   console.error(error);
   const router = useRouter();
-  useEffect(() => {
-    reportLovableError(error, { boundary: "tanstack_root_error_component" });
-  }, [error]);
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
@@ -92,8 +88,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "description", content: "Imigração legal aos EUA por mérito profissional. Levantamento inicial de informações para vistos EB-2 NIW, EB-1 e EB-3, com Green Card para cônjuge e filhos, junto do requerente principal." },
       { property: "og:description", content: "Imigração legal aos EUA por mérito profissional. Levantamento inicial de informações para vistos EB-2 NIW, EB-1 e EB-3, com Green Card para cônjuge e filhos, junto do requerente principal." },
       { name: "twitter:description", content: "Imigração legal aos EUA por mérito profissional. Levantamento inicial de informações para vistos EB-2 NIW, EB-1 e EB-3, com Green Card para cônjuge e filhos, junto do requerente principal." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/3dc9a2b6-7e4d-4e9b-a66e-8297b915f696/id-preview-616bc4c1--5de380e6-3aa3-4bc3-844b-02836eb26c67.lovable.app-1784140112299.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/3dc9a2b6-7e4d-4e9b-a66e-8297b915f696/id-preview-616bc4c1--5de380e6-3aa3-4bc3-844b-02836eb26c67.lovable.app-1784140112299.png" },
+      { property: "og:image", content: "https://statusimmigrationlaw.com.br/__l5e/assets-v1/db6af206-dff3-4b36-b8f2-a6d534ba74a4/og-home.jpg" },
+      { name: "twitter:image", content: "https://statusimmigrationlaw.com.br/__l5e/assets-v1/db6af206-dff3-4b36-b8f2-a6d534ba74a4/og-home.jpg" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },

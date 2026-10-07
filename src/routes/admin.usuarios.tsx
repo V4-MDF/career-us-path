@@ -2,7 +2,6 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Plus, Trash2 } from "lucide-react";
 import { toast } from "sonner";
-import { useServerFn } from "@tanstack/react-start";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -21,14 +20,11 @@ import {
   createAdminUser,
   revokeAdmin,
   type AdminListItem,
-} from "@/lib/adminUsers.functions";
+} from "@/lib/admin/users";
 
 export const Route = createFileRoute("/admin/usuarios")({ component: UsersPage });
 
 function UsersPage() {
-  const fetchList = useServerFn(listAdmins);
-  const doCreate = useServerFn(createAdminUser);
-  const doRevoke = useServerFn(revokeAdmin);
 
   const [users, setUsers] = useState<AdminListItem[]>([]);
   const [loading, setLoading] = useState(true);
@@ -41,7 +37,7 @@ function UsersPage() {
   async function reload() {
     setLoading(true);
     try {
-      const rows = await fetchList();
+      const rows = await listAdmins();
       setUsers(rows);
     } catch (e: unknown) {
       toast.error((e as Error).message || "Falha ao carregar admins.");
@@ -52,13 +48,13 @@ function UsersPage() {
   useEffect(() => { reload(); }, []);
 
   async function onCreate() {
-    if (password.length < 8) {
-      toast.error("Senha deve ter no mínimo 8 caracteres.");
+    if (password.length < 10) {
+      toast.error("Senha deve ter no mínimo 10 caracteres.");
       return;
     }
     setSaving(true);
     try {
-      await doCreate({ data: { email, password } });
+      await createAdminUser({ email, password });
       toast.success("Usuário admin criado. Compartilhe as credenciais com segurança.");
       setEmail("");
       setPassword("");
@@ -73,7 +69,7 @@ function UsersPage() {
 
   async function onRevoke(userId: string) {
     try {
-      await doRevoke({ data: { user_id: userId } });
+      await revokeAdmin({ user_id: userId });
       toast.success("Acesso removido.");
       reload();
     } catch (e: unknown) {
@@ -113,12 +109,12 @@ function UsersPage() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     className="mt-1"
-                    placeholder="mínimo 8 caracteres"
+                    placeholder="mínimo 10 caracteres"
                     autoComplete="new-password"
                   />
                   <p className="text-xs text-slate-500 mt-1">
                     Compartilhe com segurança. O usuário pode trocar depois.
-                    Se o email já existir, a senha será redefinida e o role admin concedido.
+                    Se o email já existir, a senha será redefinida e as sessões abertas dele serão encerradas.
                   </p>
                 </div>
               </div>
@@ -139,7 +135,7 @@ function UsersPage() {
             <tr>
               <th className="py-2">Email</th>
               <th className="py-2">Papel</th>
-              <th className="py-2">Concedido em</th>
+              <th className="py-2">Criado em</th>
               <th className="py-2 text-right">Ações</th>
             </tr>
           </thead>
@@ -152,7 +148,7 @@ function UsersPage() {
               <tr key={u.user_id} className="border-b border-slate-100">
                 <td className="py-2 font-medium">
                   {u.email}
-                  {me?.userId === u.user_id && <span className="ml-2 text-[10px] text-amber-600 uppercase">você</span>}
+                  {me?.email === u.email && <span className="ml-2 text-[10px] text-amber-600 uppercase">você</span>}
                 </td>
                 <td className="py-2 text-slate-600">admin</td>
                 <td className="py-2 text-slate-500">
@@ -163,7 +159,7 @@ function UsersPage() {
                     <AlertDialogTrigger asChild>
                       <Button
                         variant="ghost" size="sm" className="text-rose-600"
-                        disabled={me?.userId === u.user_id}
+                        disabled={me?.email === u.email}
                       >
                         <Trash2 className="h-4 w-4" />
                       </Button>
@@ -172,7 +168,7 @@ function UsersPage() {
                       <AlertDialogHeader>
                         <AlertDialogTitle>Remover acesso admin?</AlertDialogTitle>
                         <AlertDialogDescription>
-                          {u.email} perderá acesso ao painel. A conta em si não é excluída.
+                          {u.email} perderá acesso ao painel imediatamente.
                         </AlertDialogDescription>
                       </AlertDialogHeader>
                       <AlertDialogFooter>

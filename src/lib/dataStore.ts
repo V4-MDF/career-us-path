@@ -1,7 +1,11 @@
 /**
  * dataStore, camada única de persistência.
  *
- * IMPLEMENTAÇÃO: Lovable Cloud (Postgres) via tabela genérica `kv_records`.
+ * IMPLEMENTAÇÃO: Cloudflare D1 via tabela genérica `kv_records`.
+ * - No navegador, toda operação passa por POST /api/kv (permissões checadas
+ *   no servidor, ver `kv.server.ts`).
+ * - No SSR, acessamos o D1 direto com permissão de visitante anônimo.
+ *
  * Mantemos um **shadow cache em localStorage** para preservar leituras
  * síncronas em componentes que usam useSyncExternalStore (ex: pageStructure,
  * segments, sessions). A gravação SEMPRE vai para o banco; o cache é
@@ -11,18 +15,12 @@
  * gerenciados por este módulo.
  */
 
-import { createClient } from "@supabase/supabase-js";
-
-import { supabase as authClient } from "@/integrations/supabase/client";
+import type { KvOp, KvResult } from "./kv.server";
 
 /**
- * Cliente anônimo com header `x-client-token`.
- *
- * As policies de UPDATE anônimo em `sessions`, `ab_stats` e `leads_partial`
- * exigem que o header `x-client-token` bata com `data->>'client_token'`.
- * Sem isso, o UPDATE é silenciosamente negado e apenas o primeiro INSERT
- * (ex.: só o nome do lead) fica salvo. Por isso todo acesso ao kv_records
- * passa por este cliente, que envia o token em todas as requisições.
+ * Token anônimo do navegador. Registros de `sessions`, `ab_stats` e
+ * `leads_partial` guardam o `client_token` de quem os criou, e só esse
+ * navegador pode lê-los/atualizá-los depois.
  */
 const CLIENT_TOKEN_KEY = "sna_client_token";
 
@@ -40,56 +38,28 @@ function getClientToken(): string {
   }
 }
 
-const SUPABASE_URL =
-  (import.meta.env.VITE_SUPABASE_URL as string) || (process.env.SUPABASE_URL as string);
-const SUPABASE_KEY =
-  (import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY as string) ||
-  (process.env.SUPABASE_PUBLISHABLE_KEY as string);
-
-function isNewApiKey(v: string) {
-  return v.startsWith("sb_publishable_") || v.startsWith("sb_secret_");
+async function call(req: KvOp): Promise<KvResult> {
+  if (import.meta.env.SSR) {
+    const { runKv } = await import("./kv.server");
+    return runKv(req, { admin: false, token: "ssr" });
+  }
+  try {
+    const res = await fetch("/api/kv", {
+      method: "POST",
+      credentials: "same-origin",
+      headers: { "Content-Type": "application/json", "x-client-token": getClientToken() },
+      body: JSON.stringify(req),
+    });
+    const body = (await res.json().catch(() => ({}))) as { data?: unknown; error?: string };
+    return { status: res.status, data: body.data, error: body.error };
+  } catch (e) {
+    return { status: 0, error: e instanceof Error ? e.message : "falha de rede" };
+  }
 }
 
-// IMPORTANTE: este cliente NÃO gerencia sessão de auth. Dois GoTrueClient com
-// o mesmo storageKey disputam o lock de refresh do token e travam
-// `auth.getSession()` (painel admin ficava preso em "Carregando…").
-// Aqui apenas reaproveitamos o access token do cliente gerado.
-let accessToken: string | null = null;
-if (typeof window !== "undefined") {
-  void authClient.auth.getSession().then(({ data }) => {
-    accessToken = data.session?.access_token ?? null;
-  });
-  authClient.auth.onAuthStateChange((_e, session) => {
-    accessToken = session?.access_token ?? null;
-  });
-}
+const ok = (r: KvResult) => r.status >= 200 && r.status < 300;
 
-const supabase = createClient(SUPABASE_URL, SUPABASE_KEY, {
-  auth: {
-    persistSession: false,
-    autoRefreshToken: false,
-    detectSessionInUrl: false,
-  },
-  global: {
-    headers: { "x-client-token": getClientToken() },
-    fetch: (input, init) => {
-      const headers = new Headers(
-        typeof Request !== "undefined" && input instanceof Request ? input.headers : undefined,
-      );
-      if (init?.headers) new Headers(init.headers).forEach((v, k) => headers.set(k, v));
-      if (isNewApiKey(SUPABASE_KEY) && headers.get("Authorization") === `Bearer ${SUPABASE_KEY}`) {
-        headers.delete("Authorization");
-      }
-      headers.set("apikey", SUPABASE_KEY);
-      headers.set("x-client-token", getClientToken());
-      if (accessToken) headers.set("Authorization", `Bearer ${accessToken}`);
-      return fetch(input, { ...init, headers });
-    },
-  },
-});
-
-
-/** Tabelas cuja policy de UPDATE anônimo exige `client_token` no payload. */
+/** Tabelas cujo registro pertence ao navegador que o criou (`client_token`). */
 const TOKEN_SCOPED: ReadonlyArray<string> = ["sessions", "ab_stats", "leads_partial"];
 
 export type TableName =
@@ -100,7 +70,7 @@ export type TableName =
   | "segments"
   | "hero_variants"
   | "ab_stats"
-  | "admin_users"          // legado, não é mais usado (auth via Supabase)
+  | "admin_users"          // legado, não é mais usado (login fica na tabela D1 admin_users)
   | "settings"
   | "page_seo"
   | "media"
@@ -131,52 +101,24 @@ function cacheWrite<T = unknown>(table: TableName, data: Record<string, T>) {
 }
 
 export async function get<T = unknown>(table: TableName, id: string): Promise<T | null> {
-  const { data, error } = await supabase
-    .from("kv_records")
-    .select("data")
-    .eq("table_name", table)
-    .eq("record_id", id)
-    .maybeSingle();
+  const r = await call({ op: "get", table, id });
 
-  if (!error && data) {
+  if (ok(r) && r.data != null) {
     const cache = cacheRead<T>(table);
-    cache[id] = data.data as T;
+    cache[id] = r.data as T;
     cacheWrite(table, cache);
-    return data.data as T;
+    return r.data as T;
   }
   const cache = cacheRead<T>(table);
   return cache[id] ?? null;
 }
 
 export async function list<T = unknown>(table: TableName): Promise<Array<T & { id: string }>> {
-  // A API retorna no máximo 1.000 linhas por requisição. Sem paginação, métricas
-  // como sessões aparentavam travar exatamente em 1.000 registros.
-  const pageSize = 1000;
-  const rows: Array<{ record_id: string; data: unknown }> = [];
-  let offset = 0;
-  let failed = false;
+  const r = await call({ op: "list", table });
 
-  while (true) {
-    const { data, error } = await supabase
-      .from("kv_records")
-      .select("record_id, data")
-      .eq("table_name", table)
-      .order("record_id", { ascending: true })
-      .range(offset, offset + pageSize - 1);
-
-    if (error || !data) {
-      failed = true;
-      break;
-    }
-
-    rows.push(...data);
-    if (data.length < pageSize) break;
-    offset += pageSize;
-  }
-
-  if (!failed) {
+  if (ok(r) && Array.isArray(r.data)) {
     const map: Record<string, T> = {};
-    for (const row of rows) map[row.record_id] = row.data as T;
+    for (const row of r.data as Array<{ id: string; data: T }>) map[row.id] = row.data;
     cacheWrite(table, map);
     return Object.entries(map).map(
       ([id, value]) => ({ ...(value as object), id } as T & { id: string })
@@ -189,39 +131,16 @@ export async function list<T = unknown>(table: TableName): Promise<Array<T & { i
 }
 
 export async function set<T = unknown>(table: TableName, id: string, value: T): Promise<void> {
-  // Evitamos `.upsert()` porque o PostgREST, ao traduzir para
-  // `INSERT ... ON CONFLICT DO UPDATE`, exige que exista policy de UPDATE para
-  // o role, o que quebra o INSERT anônimo em tabelas como `leads` /
-  // `prequal_responses` (onde por design não há UPDATE para anon).
-  // Estratégia: INSERT; em caso de conflito de unique (23505), UPDATE.
-  //
-  // Em tabelas "rolling" (sessions / ab_stats / leads_partial) o payload precisa
-  // carregar `client_token`, senão a policy de UPDATE anônimo nega a gravação e
-  // só o primeiro INSERT sobrevive.
   const payload = (
     TOKEN_SCOPED.includes(table) && value && typeof value === "object"
       ? { ...(value as object), client_token: getClientToken() }
       : value
   ) as T;
 
-  const insert = await supabase
-    .from("kv_records")
-    .insert({ table_name: table, record_id: id, data: payload as never });
-
-  if (insert.error) {
-    if (insert.error.code === "23505") {
-      const update = await supabase
-        .from("kv_records")
-        .update({ data: payload as never, updated_at: new Date().toISOString() })
-        .eq("table_name", table)
-        .eq("record_id", id);
-      if (update.error) {
-        console.warn("[dataStore] update falhou", table, id, update.error.message);
-      }
-    } else {
-      // Loga mas mantém cache local, evita perder input do usuário em falha transitória.
-      console.warn("[dataStore] insert falhou", table, id, insert.error.message);
-    }
+  const r = await call({ op: "set", table, id, value: payload });
+  if (!ok(r)) {
+    // Loga mas mantém cache local, evita perder input do usuário em falha transitória.
+    console.warn("[dataStore] set falhou", table, id, r.error ?? r.status);
   }
 
   const cache = cacheRead<T>(table);
@@ -230,12 +149,8 @@ export async function set<T = unknown>(table: TableName, id: string, value: T): 
 }
 
 export async function remove(table: TableName, id: string): Promise<void> {
-  const { error } = await supabase
-    .from("kv_records")
-    .delete()
-    .eq("table_name", table)
-    .eq("record_id", id);
-  if (error) console.warn("[dataStore] delete falhou", table, id, error.message);
+  const r = await call({ op: "remove", table, id });
+  if (!ok(r)) console.warn("[dataStore] delete falhou", table, id, r.error ?? r.status);
 
   const cache = cacheRead(table);
   delete cache[id];

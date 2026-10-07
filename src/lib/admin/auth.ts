@@ -1,90 +1,49 @@
 /**
- * Autenticação do painel admin. Supabase Auth (Lovable Cloud).
+ * Autenticação do painel admin: e-mail + senha próprios (usuários no D1).
  *
- * - Login por email/senha ou Google.
- * - Acesso ao /admin depende de o usuário ter a role `admin` na tabela
- *   `public.user_roles` (verificação via RPC `has_role`).
- * - Novos usuários fazem cadastro público em /auth (basta um email válido),
- *   mas nenhum acesso admin é concedido automaticamente. Um admin existente
- *   promove usuários em /admin/usuarios.
- *
- * Bootstrap do primeiro admin:
- *   1. Crie uma conta em /auth com o email desejado.
- *   2. Rode no banco: INSERT INTO public.user_roles(user_id, role)
- *      SELECT id, 'admin' FROM auth.users WHERE email='seu@email.com';
+ * - A sessão fica num cookie HttpOnly definido por POST /api/admin/login;
+ *   o navegador não tem acesso ao token. Aqui só guardamos QUEM está logado,
+ *   lido de GET /api/admin/me.
+ * - Não há cadastro público. Admins são criados em /admin/usuarios ou, o
+ *   primeiro de todos, pelo script `scripts/criar-admin.mjs`.
  */
-
-import { supabase } from "@/integrations/supabase/client";
 
 export interface AdminSession {
   userId: string;
   email: string;
 }
 
-// Cache síncrono da sessão + role para as APIs sync consumidas pelo layout.
+// Cache síncrono da sessão para as APIs sync consumidas pelo layout.
 let cachedSession: AdminSession | null = null;
-let cachedIsAdmin = false;
 let initialized = false;
+let inflight: Promise<void> | null = null;
 const listeners = new Set<() => void>();
 
 function notify() {
   for (const l of listeners) l();
 }
 
-async function refreshRole(userId: string): Promise<boolean> {
-  const { data, error } = await supabase
-    .from("user_roles")
-    .select("role")
-    .eq("user_id", userId)
-    .eq("role", "admin")
-    .maybeSingle();
-  if (error) {
-    console.warn("[auth] user_roles lookup falhou:", error.message);
-    return false;
-  }
-  return !!data;
-}
-
-async function hydrateFromSession() {
-  // Timeout defensivo: se o getSession travar, liberamos a UI em vez de
-  // deixar o painel preso em "Carregando…".
-  const result = await Promise.race([
-    supabase.auth.getSession(),
-    new Promise<{ data: { session: null } }>((r) =>
-      setTimeout(() => r({ data: { session: null } }), 6000),
-    ),
-  ]);
-  const data = result.data;
-  const s = data.session;
-  if (!s?.user) {
-    cachedSession = null;
-    cachedIsAdmin = false;
-  } else {
-    cachedSession = { userId: s.user.id, email: s.user.email ?? "" };
-    cachedIsAdmin = await refreshRole(s.user.id);
-  }
+function setSession(email: string | null) {
+  cachedSession = email ? { userId: email, email } : null;
   initialized = true;
   notify();
+}
+
+async function hydrate() {
+  try {
+    const res = await fetch("/api/admin/me", { credentials: "same-origin", cache: "no-store" });
+    const body = (await res.json().catch(() => ({}))) as { email?: string | null };
+    setSession(res.ok && body.email ? body.email : null);
+  } catch {
+    setSession(null);
+  }
 }
 
 /** Deve ser chamado uma vez pelo layout do admin. Idempotente. */
 export function initAuthListener(): () => void {
   if (typeof window === "undefined") return () => {};
-  void hydrateFromSession();
-  const { data: sub } = supabase.auth.onAuthStateChange(async (event, session) => {
-    if (event === "SIGNED_OUT" || !session?.user) {
-      cachedSession = null;
-      cachedIsAdmin = false;
-      notify();
-      return;
-    }
-    if (event === "SIGNED_IN" || event === "TOKEN_REFRESHED" || event === "USER_UPDATED") {
-      cachedSession = { userId: session.user.id, email: session.user.email ?? "" };
-      cachedIsAdmin = await refreshRole(session.user.id);
-      notify();
-    }
-  });
-  return () => sub.subscription.unsubscribe();
+  if (!inflight) inflight = hydrate();
+  return () => {};
 }
 
 export function subscribeAuth(cb: () => void): () => void {
@@ -101,50 +60,36 @@ export function getCurrentSession(): AdminSession | null {
 }
 
 export function isAuthenticated(): boolean {
-  return !!cachedSession && cachedIsAdmin;
+  return !!cachedSession;
 }
 
 export async function login(
   email: string,
-  password: string
+  password: string,
 ): Promise<{ ok: boolean; error?: string }> {
-  const { data, error } = await supabase.auth.signInWithPassword({
-    email: email.trim(),
-    password,
-  });
-  if (error || !data.session) {
-    return { ok: false, error: error?.message ?? "Credenciais inválidas." };
+  try {
+    const res = await fetch("/api/admin/login", {
+      method: "POST",
+      credentials: "same-origin",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: email.trim(), password }),
+    });
+    const body = (await res.json().catch(() => ({}))) as { email?: string; error?: string };
+    if (!res.ok || !body.email) return { ok: false, error: body.error ?? "Falha no login." };
+    inflight = Promise.resolve();
+    setSession(body.email);
+    return { ok: true };
+  } catch {
+    return { ok: false, error: "Sem conexão. Tente de novo." };
   }
-  cachedSession = { userId: data.session.user.id, email: data.session.user.email ?? "" };
-  cachedIsAdmin = await refreshRole(data.session.user.id);
-  notify();
-  if (!cachedIsAdmin) {
-    return {
-      ok: false,
-      error: "Sua conta ainda não tem acesso admin. Peça a um administrador para liberar.",
-    };
-  }
-  return { ok: true };
-}
-
-export async function signUp(
-  email: string,
-  password: string
-): Promise<{ ok: boolean; error?: string; needsConfirmation?: boolean }> {
-  const redirect = typeof window !== "undefined" ? `${window.location.origin}/auth` : undefined;
-  const { data, error } = await supabase.auth.signUp({
-    email: email.trim(),
-    password,
-    options: { emailRedirectTo: redirect },
-  });
-  if (error) return { ok: false, error: error.message };
-  const needsConfirmation = !data.session;
-  return { ok: true, needsConfirmation };
 }
 
 export async function logout(): Promise<void> {
-  await supabase.auth.signOut();
-  cachedSession = null;
-  cachedIsAdmin = false;
-  notify();
+  try {
+    await fetch("/api/admin/logout", { method: "POST", credentials: "same-origin" });
+  } catch {
+    /* sessão expira sozinha */
+  }
+  inflight = null;
+  setSession(null);
 }

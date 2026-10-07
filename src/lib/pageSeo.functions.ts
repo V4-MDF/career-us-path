@@ -8,7 +8,6 @@
  * default hard-coded na rota deve ser mantido.
  */
 import { createServerFn } from "@tanstack/react-start";
-import { createClient } from "@supabase/supabase-js";
 
 export interface PageSeoOverride {
   meta_title?: string;
@@ -24,20 +23,12 @@ export const getPageSeoFn = createServerFn({ method: "GET" })
   .inputValidator((data: { page: string }) => ({ page: String(data?.page ?? "home") }))
   .handler(async ({ data }): Promise<PageSeoOverride> => {
     try {
-      const url = process.env.SUPABASE_URL;
-      const key = process.env.SUPABASE_PUBLISHABLE_KEY;
-      if (!url || !key) return {};
-      const supabase = createClient(url, key, {
-        auth: { persistSession: false, autoRefreshToken: false, storage: undefined },
-      });
-      const { data: row, error } = await supabase
-        .from("kv_records")
-        .select("data")
-        .eq("table_name", "page_seo")
-        .eq("record_id", data.page)
-        .maybeSingle();
-      if (error || !row) return {};
-      const payload = (row.data ?? {}) as PageSeoOverride;
+      const { runKv } = await import("@/lib/kv.server");
+      const res = await runKv(
+        { op: "get", table: "page_seo", id: data.page },
+        { admin: false, token: "ssr" },
+      );
+      const payload = (res.data ?? {}) as PageSeoOverride;
       // Ignora strings vazias — assim o admin pode "resetar" um campo para o default.
       const clean: PageSeoOverride = {};
       (Object.keys(payload) as Array<keyof PageSeoOverride>).forEach((k) => {
@@ -72,13 +63,14 @@ export function buildSeoTags(defaults: {
   const description = o.meta_description || defaults.description;
   const ogTitle = o.og_title || defaults.ogTitle || title;
   const ogDescription = o.og_description || defaults.ogDescription || description;
-  const ogImage = o.og_image || defaults.ogImage;
+  const ogImageRaw = o.og_image || defaults.ogImage;
+  const ogImage = ogImageRaw?.startsWith("/") ? `https://statusimmigrationlaw.com.br${ogImageRaw}` : ogImageRaw;
   // canonical do admin pode vir como caminho relativo ("/", "/sobre") — resolve
   // contra o domínio de produção só quando começa com "/".
   const canonicalRaw = o.canonical?.trim() || defaults.canonical;
   const canonical = canonicalRaw.startsWith("http")
     ? canonicalRaw
-    : `https://lp.statusnaamerica.com${canonicalRaw.startsWith("/") ? canonicalRaw : `/${canonicalRaw}`}`;
+    : `https://statusimmigrationlaw.com.br${canonicalRaw.startsWith("/") ? canonicalRaw : `/${canonicalRaw}`}`;
   const robots = o.robots || defaults.robots || "index,follow";
 
   const meta: Array<Record<string, string>> = [

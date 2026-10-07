@@ -1,4 +1,4 @@
-import logoAsset from "@/assets/status-immigration-law-firm-logo.png.asset.json";
+import logoUrl from "@/assets/status-immigration-law-firm-logo.png";
 
 type BrandLogoProps = {
   className?: string;
@@ -8,7 +8,7 @@ type BrandLogoProps = {
 export function BrandLogo({ className = "h-12 w-12", priority = false }: BrandLogoProps) {
   return (
     <img
-      src={logoAsset.url}
+      src={logoUrl}
       alt="Status Immigration Law Firm"
       width={627}
       height={627}

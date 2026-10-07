@@ -40,6 +40,7 @@ import { Route as AdminSegmentosRouteImport } from './routes/admin.segmentos'
 import { Route as AdminSeoRouteImport } from './routes/admin.seo'
 import { Route as AdminTrackingRouteImport } from './routes/admin.tracking'
 import { Route as AdminUsuariosRouteImport } from './routes/admin.usuarios'
+import { Route as ApiKvRouteImport } from './routes/api/kv'
 import { Route as AvaliacaoIndexRouteImport } from './routes/avaliacao.index'
 import { Route as AvaliacaoObrigadoRouteImport } from './routes/avaliacao.obrigado'
 import { Route as AvaliacaoObrigadoNaoQualificadoRouteImport } from './routes/avaliacao.obrigado-nao-qualificado'
@@ -47,7 +48,13 @@ import { Route as AvaliacaoObrigadoQualificadoRouteImport } from './routes/avali
 import { Route as AvaliacaoWhatsappRouteImport } from './routes/avaliacao.whatsapp'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as LpSlugRouteImport } from './routes/lp.$slug'
+import { Route as MediaSplatRouteImport } from './routes/media/$'
 import { Route as VistosSlugRouteImport } from './routes/vistos.$slug'
+import { Route as ApiAdminLoginRouteImport } from './routes/api/admin/login'
+import { Route as ApiAdminLogoutRouteImport } from './routes/api/admin/logout'
+import { Route as ApiAdminMeRouteImport } from './routes/api/admin/me'
+import { Route as ApiAdminUploadRouteImport } from './routes/api/admin/upload'
+import { Route as ApiAdminUsersRouteImport } from './routes/api/admin/users'
 import { Route as ApiPublicLeadWebhookRouteImport } from './routes/api/public/lead-webhook'
 import { Route as PreQualificacaoRTokenRouteImport } from './routes/pre-qualificacao.r.$token'
 import { Route as VistosSlugIndexRouteImport } from './routes/vistos.$slug.index'
@@ -208,6 +215,11 @@ const AdminUsuariosRoute = AdminUsuariosRouteImport.update({
   path: '/usuarios',
   getParentRoute: () => AdminRoute,
 } as any)
+const ApiKvRoute = ApiKvRouteImport.update({
+  id: '/api/kv',
+  path: '/api/kv',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AvaliacaoIndexRoute = AvaliacaoIndexRouteImport.update({
   id: '/avaliacao/',
   path: '/avaliacao/',
@@ -245,9 +257,39 @@ const LpSlugRoute = LpSlugRouteImport.update({
   path: '/lp/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MediaSplatRoute = MediaSplatRouteImport.update({
+  id: '/media/$',
+  path: '/media/$',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const VistosSlugRoute = VistosSlugRouteImport.update({
   id: '/vistos/$slug',
   path: '/vistos/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAdminLoginRoute = ApiAdminLoginRouteImport.update({
+  id: '/api/admin/login',
+  path: '/api/admin/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAdminLogoutRoute = ApiAdminLogoutRouteImport.update({
+  id: '/api/admin/logout',
+  path: '/api/admin/logout',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAdminMeRoute = ApiAdminMeRouteImport.update({
+  id: '/api/admin/me',
+  path: '/api/admin/me',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAdminUploadRoute = ApiAdminUploadRouteImport.update({
+  id: '/api/admin/upload',
+  path: '/api/admin/upload',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAdminUsersRoute = ApiAdminUsersRouteImport.update({
+  id: '/api/admin/users',
+  path: '/api/admin/users',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiPublicLeadWebhookRoute = ApiPublicLeadWebhookRouteImport.update({
@@ -302,15 +344,22 @@ export interface FileRoutesByFullPath {
   '/admin/seo': typeof AdminSeoRoute
   '/admin/tracking': typeof AdminTrackingRoute
   '/admin/usuarios': typeof AdminUsuariosRoute
+  '/api/kv': typeof ApiKvRoute
   '/avaliacao/obrigado': typeof AvaliacaoObrigadoRoute
   '/avaliacao/obrigado-nao-qualificado': typeof AvaliacaoObrigadoNaoQualificadoRoute
   '/avaliacao/obrigado-qualificado': typeof AvaliacaoObrigadoQualificadoRoute
   '/avaliacao/whatsapp': typeof AvaliacaoWhatsappRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/lp/$slug': typeof LpSlugRoute
+  '/media/$': typeof MediaSplatRoute
   '/vistos/$slug': typeof VistosSlugRouteWithChildren
   '/admin/': typeof AdminIndexRoute
   '/avaliacao/': typeof AvaliacaoIndexRoute
+  '/api/admin/login': typeof ApiAdminLoginRoute
+  '/api/admin/logout': typeof ApiAdminLogoutRoute
+  '/api/admin/me': typeof ApiAdminMeRoute
+  '/api/admin/upload': typeof ApiAdminUploadRoute
+  '/api/admin/users': typeof ApiAdminUsersRoute
   '/api/public/lead-webhook': typeof ApiPublicLeadWebhookRoute
   '/pre-qualificacao/r/$token': typeof PreQualificacaoRTokenRoute
   '/vistos/$slug/$secao': typeof VistosSlugSecaoRoute
@@ -346,14 +395,21 @@ export interface FileRoutesByTo {
   '/admin/seo': typeof AdminSeoRoute
   '/admin/tracking': typeof AdminTrackingRoute
   '/admin/usuarios': typeof AdminUsuariosRoute
+  '/api/kv': typeof ApiKvRoute
   '/avaliacao/obrigado': typeof AvaliacaoObrigadoRoute
   '/avaliacao/obrigado-nao-qualificado': typeof AvaliacaoObrigadoNaoQualificadoRoute
   '/avaliacao/obrigado-qualificado': typeof AvaliacaoObrigadoQualificadoRoute
   '/avaliacao/whatsapp': typeof AvaliacaoWhatsappRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/lp/$slug': typeof LpSlugRoute
+  '/media/$': typeof MediaSplatRoute
   '/admin': typeof AdminIndexRoute
   '/avaliacao': typeof AvaliacaoIndexRoute
+  '/api/admin/login': typeof ApiAdminLoginRoute
+  '/api/admin/logout': typeof ApiAdminLogoutRoute
+  '/api/admin/me': typeof ApiAdminMeRoute
+  '/api/admin/upload': typeof ApiAdminUploadRoute
+  '/api/admin/users': typeof ApiAdminUsersRoute
   '/api/public/lead-webhook': typeof ApiPublicLeadWebhookRoute
   '/pre-qualificacao/r/$token': typeof PreQualificacaoRTokenRoute
   '/vistos/$slug/$secao': typeof VistosSlugSecaoRoute
@@ -391,15 +447,22 @@ export interface FileRoutesById {
   '/admin/seo': typeof AdminSeoRoute
   '/admin/tracking': typeof AdminTrackingRoute
   '/admin/usuarios': typeof AdminUsuariosRoute
+  '/api/kv': typeof ApiKvRoute
   '/avaliacao/obrigado': typeof AvaliacaoObrigadoRoute
   '/avaliacao/obrigado-nao-qualificado': typeof AvaliacaoObrigadoNaoQualificadoRoute
   '/avaliacao/obrigado-qualificado': typeof AvaliacaoObrigadoQualificadoRoute
   '/avaliacao/whatsapp': typeof AvaliacaoWhatsappRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/lp/$slug': typeof LpSlugRoute
+  '/media/$': typeof MediaSplatRoute
   '/vistos/$slug': typeof VistosSlugRouteWithChildren
   '/admin/': typeof AdminIndexRoute
   '/avaliacao/': typeof AvaliacaoIndexRoute
+  '/api/admin/login': typeof ApiAdminLoginRoute
+  '/api/admin/logout': typeof ApiAdminLogoutRoute
+  '/api/admin/me': typeof ApiAdminMeRoute
+  '/api/admin/upload': typeof ApiAdminUploadRoute
+  '/api/admin/users': typeof ApiAdminUsersRoute
   '/api/public/lead-webhook': typeof ApiPublicLeadWebhookRoute
   '/pre-qualificacao/r/$token': typeof PreQualificacaoRTokenRoute
   '/vistos/$slug/$secao': typeof VistosSlugSecaoRoute
@@ -438,15 +501,22 @@ export interface FileRouteTypes {
     | '/admin/seo'
     | '/admin/tracking'
     | '/admin/usuarios'
+    | '/api/kv'
     | '/avaliacao/obrigado'
     | '/avaliacao/obrigado-nao-qualificado'
     | '/avaliacao/obrigado-qualificado'
     | '/avaliacao/whatsapp'
     | '/blog/$slug'
     | '/lp/$slug'
+    | '/media/$'
     | '/vistos/$slug'
     | '/admin/'
     | '/avaliacao/'
+    | '/api/admin/login'
+    | '/api/admin/logout'
+    | '/api/admin/me'
+    | '/api/admin/upload'
+    | '/api/admin/users'
     | '/api/public/lead-webhook'
     | '/pre-qualificacao/r/$token'
     | '/vistos/$slug/$secao'
@@ -482,14 +552,21 @@ export interface FileRouteTypes {
     | '/admin/seo'
     | '/admin/tracking'
     | '/admin/usuarios'
+    | '/api/kv'
     | '/avaliacao/obrigado'
     | '/avaliacao/obrigado-nao-qualificado'
     | '/avaliacao/obrigado-qualificado'
     | '/avaliacao/whatsapp'
     | '/blog/$slug'
     | '/lp/$slug'
+    | '/media/$'
     | '/admin'
     | '/avaliacao'
+    | '/api/admin/login'
+    | '/api/admin/logout'
+    | '/api/admin/me'
+    | '/api/admin/upload'
+    | '/api/admin/users'
     | '/api/public/lead-webhook'
     | '/pre-qualificacao/r/$token'
     | '/vistos/$slug/$secao'
@@ -526,15 +603,22 @@ export interface FileRouteTypes {
     | '/admin/seo'
     | '/admin/tracking'
     | '/admin/usuarios'
+    | '/api/kv'
     | '/avaliacao/obrigado'
     | '/avaliacao/obrigado-nao-qualificado'
     | '/avaliacao/obrigado-qualificado'
     | '/avaliacao/whatsapp'
     | '/blog/$slug'
     | '/lp/$slug'
+    | '/media/$'
     | '/vistos/$slug'
     | '/admin/'
     | '/avaliacao/'
+    | '/api/admin/login'
+    | '/api/admin/logout'
+    | '/api/admin/me'
+    | '/api/admin/upload'
+    | '/api/admin/users'
     | '/api/public/lead-webhook'
     | '/pre-qualificacao/r/$token'
     | '/vistos/$slug/$secao'
@@ -553,13 +637,20 @@ export interface RootRouteChildren {
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   SobreRoute: typeof SobreRoute
   TermosRoute: typeof TermosRoute
+  ApiKvRoute: typeof ApiKvRoute
   AvaliacaoObrigadoRoute: typeof AvaliacaoObrigadoRoute
   AvaliacaoObrigadoNaoQualificadoRoute: typeof AvaliacaoObrigadoNaoQualificadoRoute
   AvaliacaoObrigadoQualificadoRoute: typeof AvaliacaoObrigadoQualificadoRoute
   AvaliacaoWhatsappRoute: typeof AvaliacaoWhatsappRoute
   LpSlugRoute: typeof LpSlugRoute
+  MediaSplatRoute: typeof MediaSplatRoute
   VistosSlugRoute: typeof VistosSlugRouteWithChildren
   AvaliacaoIndexRoute: typeof AvaliacaoIndexRoute
+  ApiAdminLoginRoute: typeof ApiAdminLoginRoute
+  ApiAdminLogoutRoute: typeof ApiAdminLogoutRoute
+  ApiAdminMeRoute: typeof ApiAdminMeRoute
+  ApiAdminUploadRoute: typeof ApiAdminUploadRoute
+  ApiAdminUsersRoute: typeof ApiAdminUsersRoute
   ApiPublicLeadWebhookRoute: typeof ApiPublicLeadWebhookRoute
 }
 
@@ -782,6 +873,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminUsuariosRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/api/kv': {
+      id: '/api/kv'
+      path: '/api/kv'
+      fullPath: '/api/kv'
+      preLoaderRoute: typeof ApiKvRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/avaliacao/': {
       id: '/avaliacao/'
       path: '/avaliacao'
@@ -831,11 +929,53 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LpSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/media/$': {
+      id: '/media/$'
+      path: '/media/$'
+      fullPath: '/media/$'
+      preLoaderRoute: typeof MediaSplatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/vistos/$slug': {
       id: '/vistos/$slug'
       path: '/vistos/$slug'
       fullPath: '/vistos/$slug'
       preLoaderRoute: typeof VistosSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/admin/login': {
+      id: '/api/admin/login'
+      path: '/api/admin/login'
+      fullPath: '/api/admin/login'
+      preLoaderRoute: typeof ApiAdminLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/admin/logout': {
+      id: '/api/admin/logout'
+      path: '/api/admin/logout'
+      fullPath: '/api/admin/logout'
+      preLoaderRoute: typeof ApiAdminLogoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/admin/me': {
+      id: '/api/admin/me'
+      path: '/api/admin/me'
+      fullPath: '/api/admin/me'
+      preLoaderRoute: typeof ApiAdminMeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/admin/upload': {
+      id: '/api/admin/upload'
+      path: '/api/admin/upload'
+      fullPath: '/api/admin/upload'
+      preLoaderRoute: typeof ApiAdminUploadRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/admin/users': {
+      id: '/api/admin/users'
+      path: '/api/admin/users'
+      fullPath: '/api/admin/users'
+      preLoaderRoute: typeof ApiAdminUsersRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/public/lead-webhook': {
@@ -965,13 +1105,20 @@ const rootRouteChildren: RootRouteChildren = {
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   SobreRoute: SobreRoute,
   TermosRoute: TermosRoute,
+  ApiKvRoute: ApiKvRoute,
   AvaliacaoObrigadoRoute: AvaliacaoObrigadoRoute,
   AvaliacaoObrigadoNaoQualificadoRoute: AvaliacaoObrigadoNaoQualificadoRoute,
   AvaliacaoObrigadoQualificadoRoute: AvaliacaoObrigadoQualificadoRoute,
   AvaliacaoWhatsappRoute: AvaliacaoWhatsappRoute,
   LpSlugRoute: LpSlugRoute,
+  MediaSplatRoute: MediaSplatRoute,
   VistosSlugRoute: VistosSlugRouteWithChildren,
   AvaliacaoIndexRoute: AvaliacaoIndexRoute,
+  ApiAdminLoginRoute: ApiAdminLoginRoute,
+  ApiAdminLogoutRoute: ApiAdminLogoutRoute,
+  ApiAdminMeRoute: ApiAdminMeRoute,
+  ApiAdminUploadRoute: ApiAdminUploadRoute,
+  ApiAdminUsersRoute: ApiAdminUsersRoute,
   ApiPublicLeadWebhookRoute: ApiPublicLeadWebhookRoute,
 }
 export const routeTree = rootRouteImport

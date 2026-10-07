@@ -79,7 +79,7 @@ const QA: { q: string; a: string }[] = [
   {
     q: "Como entrar em contato?",
     a:
-      "Pelo formulário de triagem inicial em https://lp.statusnaamerica.com/avaliacao ou pelo canal de e-mail informado no site (contato@statusnaamerica.com).",
+      "Pelo formulário de triagem inicial em https://statusimmigrationlaw.com.br/avaliacao ou pelo canal de e-mail informado no site (contato@statusnaamerica.com).",
   },
 ];
 

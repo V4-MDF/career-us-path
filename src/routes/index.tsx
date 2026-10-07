@@ -14,7 +14,7 @@ import { primePageSections, useOrderedSections } from "@/lib/pageStructure";
 import { getPageSectionsFn } from "@/lib/pageSections.functions";
 import { getPageSeoFn, buildSeoTags } from "@/lib/pageSeo.functions";
 
-const OG_IMAGE = "https://lp.statusnaamerica.com/__l5e/assets-v1/db6af206-dff3-4b36-b8f2-a6d534ba74a4/og-home.jpg";
+const OG_IMAGE = "https://statusimmigrationlaw.com.br/__l5e/assets-v1/db6af206-dff3-4b36-b8f2-a6d534ba74a4/og-home.jpg";
 
 const HOME_FAQS = [
   { q: "A Status Immigration Law Firm é um escritório de advocacia?", a: "Sim. A prática jurídica é conduzida por Meagan Zabadal, advogada licenciada em Nova York e Arizona, exclusivamente em matéria federal de imigração." },

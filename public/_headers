@@ -1,24 +1,10 @@
-# Cache long-lived, imutáveis para assets com hash gerados pelo Vite/TanStack.
+# Cache long-lived, imutáveis para assets com hash gerados pelo Vite/TanStack
+# (inclui fontes @fontsource e imagens importadas de src/assets).
 # HTML permanece sem cache para deploys refletirem imediatamente.
 
 /assets/*
   Cache-Control: public, max-age=31536000, immutable
 
-/_build/*
-  Cache-Control: public, max-age=31536000, immutable
-
-# Fontes auto-hospedadas via @fontsource, empacotadas em /assets.
-*.woff2
-  Cache-Control: public, max-age=31536000, immutable
-
-# Imagens estáticas do bundle
-*.jpg
-  Cache-Control: public, max-age=31536000, immutable
-*.webp
-  Cache-Control: public, max-age=31536000, immutable
-*.avif
-  Cache-Control: public, max-age=31536000, immutable
-*.png
-  Cache-Control: public, max-age=31536000, immutable
-*.svg
+# Arquivos herdados do armazenamento da Lovable (logo, OG, vídeo do hero).
+/__l5e/*
   Cache-Control: public, max-age=31536000, immutable

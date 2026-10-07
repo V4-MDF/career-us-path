@@ -54,7 +54,7 @@ export const Route = createFileRoute("/sobre")({
             "@type": "LegalService",
             name: "Status Immigration Law Firm",
             legalName: "Status Immigration Law Firm PLLC",
-            url: "https://lp.statusnaamerica.com",
+            url: "https://statusimmigrationlaw.com.br",
             taxID: "42-4745152",
             description: "Escritório de advocacia especializado em imigração federal. Licensed in NY and AZ.",
             sameAs: [
